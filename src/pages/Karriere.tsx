@@ -120,8 +120,8 @@ export default function Karriere() {
         <div className="max-w-7xl mx-auto px-4 sm:px-8 grid grid-cols-1 lg:grid-cols-12 gap-12">
           <div className="lg:col-span-5">
             <SectionHeading
-              eyebrow="Offene Stellen"
-              title="Wir suchen Verstärkung."
+              eyebrow="Gesuchte Profile"
+              title="Diese Verstärkung suchen wir laufend."
               lead="Kein Anschreiben, kein Lebenslauf-Stress: Unsere Bewerbung dauert 2 Minuten — den Rest klären wir im persönlichen Gespräch."
             />
             <Reveal delay={0.2} className="mt-8">

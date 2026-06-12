@@ -1,7 +1,8 @@
-import { motion } from 'motion/react';
-import { MapPin, CheckCircle2, ArrowRight, Phone, Mail, Clock } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { MapPin, CheckCircle2, Phone, Mail, Clock } from 'lucide-react';
 import SEO from '@/components/SEO';
+import PageHero from '@/components/PageHero';
+import CTABand from '@/components/CTABand';
+import { SITE } from '@/lib/site';
 
 export default function StandortStuttgart() {
   const localBusinessSchema = {
@@ -47,41 +48,16 @@ export default function StandortStuttgart() {
         keywords="Gebäudereinigung Stuttgart, Reinigungsservice Stuttgart, Büroreinigung Stuttgart"
         schema={localBusinessSchema}
       />
-      {/* Hero Section */}
-      <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 bg-gray-900 text-white overflow-hidden">
-        <div className="absolute inset-0 opacity-20">
-          <img 
-            src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=1600" 
-            alt="Stuttgart (Schlossplatz)" 
-            className="w-full h-full object-cover"
-            referrerPolicy="no-referrer"
-          />
-        </div>
-        <div className="max-w-7xl mx-auto px-4 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="max-w-3xl"
-          >
-            <span className="inline-block bg-[#0B2341] px-4 py-1 rounded-full text-sm font-bold mb-6">
-              REGION STUTTGART ERSCHLIESSEN
-            </span>
-            <h1 className="text-5xl md:text-6xl font-bold mb-8 leading-tight">
-              Gebäudereinigung in Stuttgart
-            </h1>
-            <p className="text-xl text-gray-300 leading-relaxed mb-10">
-              Von unserem Stuttgarter Standort aus bedienen wir Ludwigsburg, 
-              Esslingen, Böblingen, Sindelfingen, Waiblingen, Leonberg und den 
-              gesamten Großraum Stuttgart.
-            </p>
-            <div className="flex flex-wrap gap-4">
-              <Link to="/kontakt" className="px-8 py-4 bg-[#0B2341] text-white font-bold rounded-xl hover:bg-blue-700 transition-all">
-                Anfrage für Ihren Standort
-              </Link>
-            </div>
-          </motion.div>
-        </div>
-      </section>
+      <PageHero
+        eyebrow="Landeshauptstadt & Umland"
+        title="Gebäudereinigung in Stuttgart"
+        lead="Von unserem Stuttgarter Standort aus bedienen wir Ludwigsburg, Esslingen, Böblingen, Sindelfingen, Waiblingen, Leonberg und den gesamten Großraum Stuttgart."
+        image="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?auto=format&fit=crop&q=80&w=1600"
+        imageAlt="Stuttgart"
+        crumbs={[{ label: 'Standorte', href: '/standorte' }, { label: 'Stuttgart' }]}
+        cta={{ label: 'Kostenloses Angebot anfordern', to: '/angebot' }}
+        secondaryCta={{ label: SITE.phone, href: SITE.phoneHref }}
+      />
 
       {/* Content Section */}
       <section className="py-20 lg:py-32 bg-white">
@@ -104,7 +80,7 @@ export default function StandortStuttgart() {
                   'Qualitätsmanagement nach höchsten Standards'
                 ].map((item) => (
                   <li key={item} className="flex items-center gap-3 text-gray-700 font-medium">
-                    <CheckCircle2 className="text-[#0B2341] w-5 h-5 flex-shrink-0" />
+                    <CheckCircle2 className="text-accent w-5 h-5 flex-shrink-0" />
                     {item}
                   </li>
                 ))}
@@ -171,20 +147,10 @@ export default function StandortStuttgart() {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 lg:py-32 bg-gray-50">
-        <div className="max-w-4xl mx-auto px-4 text-center">
-          <MapPin className="w-16 h-16 text-[#0B2341] mx-auto mb-8" />
-          <h2 className="text-3xl font-bold mb-6">Sie suchen einen Partner in Stuttgart?</h2>
-          <p className="text-xl text-gray-600 mb-10">
-            Gerne besichtigen wir Ihr Objekt vor Ort und erstellen Ihnen ein individuelles Angebot.
-          </p>
-          <Link to="/kontakt" className="inline-flex items-center px-10 py-5 bg-[#0B2341] text-white font-bold rounded-2xl hover:bg-blue-700 transition-all shadow-sm hover:shadow-md hover:-translate-y-[1px]">
-            Anfrage für Ihren Standort
-            <ArrowRight className="ml-2 w-5 h-5" />
-          </Link>
-        </div>
-      </section>
+      <CTABand
+        title="Ihr Objekt im Großraum Stuttgart?"
+        lead="Regionales Team, feste Objektleitung: Besichtigung in 48 Stunden, Angebot in 24 Stunden danach."
+      />
     </div>
   );
 }

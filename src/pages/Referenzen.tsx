@@ -50,7 +50,7 @@ export default function Referenzen() {
             verdient. Täglich.
           </>
         }
-        lead="Konzerne, Mittelstand und öffentliche Hand: Wir sind stolz auf jede Partnerschaft — und darauf, dass die meisten über Empfehlungen entstanden sind."
+        lead="Konzerne, Mittelstand und öffentliche Hand: Diese Unternehmen verlassen sich Tag für Tag auf unsere Arbeit — und wir auf die Verantwortung, die das bedeutet."
         image={IMG.handshake}
         crumbs={[{ label: 'Referenzen' }]}
         cta={{ label: 'Referenzkunde werden', to: '/angebot' }}

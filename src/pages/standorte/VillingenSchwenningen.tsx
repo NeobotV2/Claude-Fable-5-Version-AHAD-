@@ -1,7 +1,8 @@
-import { motion } from 'motion/react';
-import { MapPin, CheckCircle2, ArrowRight, Phone, Mail, Clock } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { MapPin, CheckCircle2, Phone, Mail, Clock } from 'lucide-react';
 import SEO from '@/components/SEO';
+import PageHero from '@/components/PageHero';
+import CTABand from '@/components/CTABand';
+import { SITE } from '@/lib/site';
 
 export default function StandortVS() {
   const localBusinessSchema = {
@@ -47,41 +48,16 @@ export default function StandortVS() {
         keywords="Gebäudereinigung Villingen-Schwenningen, Reinigungsservice VS, Unterhaltsreinigung VS"
         schema={localBusinessSchema}
       />
-      {/* Hero Section */}
-      <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 bg-gray-900 text-white overflow-hidden">
-        <div className="absolute inset-0 opacity-20">
-          <img 
-            src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=1600" 
-            alt="Schwarzwald" 
-            className="w-full h-full object-cover"
-            referrerPolicy="no-referrer"
-          />
-        </div>
-        <div className="max-w-7xl mx-auto px-4 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="max-w-3xl"
-          >
-            <span className="inline-block bg-[#0B2341] px-4 py-1 rounded-full text-sm font-bold mb-6">
-              ZENTRALE & REGION
-            </span>
-            <h1 className="text-5xl md:text-6xl font-bold mb-8 leading-tight">
-              Gebäudereinigung in Villingen-Schwenningen
-            </h1>
-            <p className="text-xl text-gray-300 leading-relaxed mb-10">
-              Von unserem Hauptstandort in Villingen-Schwenningen aus betreuen wir 
-              Unternehmen in der gesamten Region Schwarzwald-Baar, Donaueschingen, Rottweil, 
-              Tuttlingen, Bad Dürrheim, St. Georgen und Trossingen.
-            </p>
-            <div className="flex flex-wrap gap-4">
-              <Link to="/kontakt" className="px-8 py-4 bg-[#0B2341] text-white font-bold rounded-xl hover:bg-blue-700 transition-all">
-                Anfrage für Ihren Standort
-              </Link>
-            </div>
-          </motion.div>
-        </div>
-      </section>
+      <PageHero
+        eyebrow="Zentrale · Schwarzwald-Baar-Kreis"
+        title="Gebäudereinigung in Villingen-Schwenningen"
+        lead="Von unserem Hauptstandort in Villingen-Schwenningen aus betreuen wir Unternehmen in der gesamten Region Schwarzwald-Baar, Donaueschingen, Rottweil, Tuttlingen, Bad Dürrheim, St. Georgen und Trossingen."
+        image="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&q=80&w=1600"
+        imageAlt="Villingen-Schwenningen"
+        crumbs={[{ label: 'Standorte', href: '/standorte' }, { label: 'Villingen-Schwenningen' }]}
+        cta={{ label: 'Kostenloses Angebot anfordern', to: '/angebot' }}
+        secondaryCta={{ label: SITE.phone, href: SITE.phoneHref }}
+      />
 
       {/* Content Section */}
       <section className="py-20 lg:py-32 bg-white">
@@ -105,7 +81,7 @@ export default function StandortVS() {
                   'Regionale Marktkenntnis & Vernetzung'
                 ].map((item) => (
                   <li key={item} className="flex items-center gap-3 text-gray-700 font-medium">
-                    <CheckCircle2 className="text-[#0B2341] w-5 h-5 flex-shrink-0" />
+                    <CheckCircle2 className="text-accent w-5 h-5 flex-shrink-0" />
                     {item}
                   </li>
                 ))}
@@ -129,7 +105,7 @@ export default function StandortVS() {
                   </div>
                   <div>
                     <h4 className="font-bold text-gray-900 mb-1">Telefon</h4>
-                    <p className="text-gray-600">+49 (0) 7721 9447915</p>
+                    <p className="text-gray-600">+49 7721 944 79 15</p>
                   </div>
                 </div>
                 <div className="flex gap-6">
@@ -182,20 +158,10 @@ export default function StandortVS() {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 lg:py-32 bg-gray-50">
-        <div className="max-w-4xl mx-auto px-4 text-center">
-          <MapPin className="w-16 h-16 text-[#0B2341] mx-auto mb-8" />
-          <h2 className="text-3xl font-bold mb-6">Sie suchen einen Partner in VS?</h2>
-          <p className="text-xl text-gray-600 mb-10">
-            Lassen Sie uns gemeinsam über Ihr Objekt in Villingen-Schwenningen sprechen.
-          </p>
-          <Link to="/kontakt" className="inline-flex items-center px-10 py-5 bg-[#0B2341] text-white font-bold rounded-2xl hover:bg-blue-700 transition-all shadow-sm hover:shadow-md hover:-translate-y-[1px]">
-            Anfrage für Ihren Standort
-            <ArrowRight className="ml-2 w-5 h-5" />
-          </Link>
-        </div>
-      </section>
+      <CTABand
+        title="Ihr Objekt in Villingen-Schwenningen?"
+        lead="Kurze Wege ab Zentrale: Besichtigung in 48 Stunden, belastbares Angebot in 24 Stunden danach."
+      />
     </div>
   );
 }

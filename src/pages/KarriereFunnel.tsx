@@ -122,12 +122,12 @@ export default function KarriereFunnel() {
           animate={{ opacity: 1, scale: 1 }}
           className="bg-white p-8 rounded-3xl shadow-xl max-w-md w-full text-center"
         >
-          <div className="w-20 h-20 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
+          <div className="w-20 h-20 bg-accent/10 text-accent rounded-full flex items-center justify-center mx-auto mb-6">
             <Check size={40} />
           </div>
           <h1 className="text-2xl font-black text-[#0B2341] mb-4">{t.successTitle}</h1>
           <p className="text-[#424751] mb-8">{t.successText}</p>
-          <Link to="/" className="block w-full bg-[#0D6B38] text-white py-4 rounded-xl font-bold uppercase tracking-wider hover:bg-green-900 transition-all">
+          <Link to="/" className="block w-full bg-[#0D6B38] text-white py-4 rounded-xl font-bold uppercase tracking-wider hover:bg-accent-dark transition-all">
             {t.backHome}
           </Link>
         </motion.div>
@@ -189,7 +189,7 @@ export default function KarriereFunnel() {
                     }}
                     className={`p-4 text-left rounded-xl border-2 transition-all ${
                       data.jobType === item.title 
-                        ? 'border-[#0D6B38] bg-green-50' 
+                        ? 'border-[#0D6B38] bg-accent/5' 
                         : 'border-white bg-white hover:border-gray-200'
                     } shadow-sm ${isRtl ? 'text-right' : 'text-left'}`}
                   >
@@ -233,7 +233,7 @@ export default function KarriereFunnel() {
                     }}
                     className={`p-4 text-left rounded-xl border-2 transition-all ${
                       data.department === item.title 
-                        ? 'border-[#0D6B38] bg-green-50' 
+                        ? 'border-[#0D6B38] bg-accent/5' 
                         : 'border-white bg-white hover:border-gray-200'
                     } shadow-sm ${isRtl ? 'text-right' : 'text-left'}`}
                   >
@@ -270,7 +270,7 @@ export default function KarriereFunnel() {
                     <button
                       onClick={() => updateData({ experience: 'Ja' })}
                       className={`py-3 rounded-xl border-2 font-bold transition-all ${
-                        data.experience === 'Ja' ? 'border-[#0D6B38] bg-green-50 text-[#0D6B38]' : 'border-white bg-white'
+                        data.experience === 'Ja' ? 'border-[#0D6B38] bg-accent/5 text-[#0D6B38]' : 'border-white bg-white'
                       }`}
                     >
                       {t.expYes}
@@ -278,7 +278,7 @@ export default function KarriereFunnel() {
                     <button
                       onClick={() => updateData({ experience: 'Quereinsteiger' })}
                       className={`py-3 rounded-xl border-2 font-bold transition-all ${
-                        data.experience === 'Quereinsteiger' ? 'border-[#0D6B38] bg-green-50 text-[#0D6B38]' : 'border-white bg-white'
+                        data.experience === 'Quereinsteiger' ? 'border-[#0D6B38] bg-accent/5 text-[#0D6B38]' : 'border-white bg-white'
                       }`}
                     >
                       {t.expNo}
@@ -293,7 +293,7 @@ export default function KarriereFunnel() {
                     <button
                       onClick={() => updateData({ startDate: 'Sofort' })}
                       className={`py-3 rounded-xl border-2 font-bold transition-all ${
-                        data.startDate === 'Sofort' ? 'border-[#0D6B38] bg-green-50 text-[#0D6B38]' : 'border-white bg-white'
+                        data.startDate === 'Sofort' ? 'border-[#0D6B38] bg-accent/5 text-[#0D6B38]' : 'border-white bg-white'
                       }`}
                     >
                       {t.startNow}
@@ -303,7 +303,7 @@ export default function KarriereFunnel() {
                         type="date"
                         onChange={(e) => updateData({ startDate: e.target.value })}
                         className={`w-full py-3 px-4 rounded-xl border-2 font-bold transition-all outline-none ${
-                          data.startDate !== 'Sofort' && data.startDate !== '' ? 'border-[#0D6B38] bg-green-50' : 'border-white bg-white'
+                          data.startDate !== 'Sofort' && data.startDate !== '' ? 'border-[#0D6B38] bg-accent/5' : 'border-white bg-white'
                         }`}
                       />
                     </div>
@@ -356,7 +356,7 @@ export default function KarriereFunnel() {
                 </div>
 
                 {/* Trust Box */}
-                <div className="bg-green-50 p-4 rounded-xl flex gap-3 border border-green-100">
+                <div className="bg-accent/5 p-4 rounded-xl flex gap-3 border border-accent/20">
                   <Info className="text-[#0D6B38] shrink-0" size={20} />
                   <p className="text-xs text-[#0D6B38] leading-relaxed">
                     <strong>{t.trustTitle}</strong> {t.trustText}
@@ -371,7 +371,7 @@ export default function KarriereFunnel() {
                 <button 
                   onClick={nextStep} 
                   disabled={!data.experience || !data.startDate || !data.mobility}
-                  className="flex-[2] py-3 bg-[#0D6B38] text-white rounded-xl font-bold shadow-sm hover:shadow-md hover:-translate-y-[1px] disabled:opacity-50 hover:bg-green-900 transition-all"
+                  className="flex-[2] py-3 bg-[#0D6B38] text-white rounded-xl font-bold shadow-sm hover:shadow-md hover:-translate-y-[1px] disabled:opacity-50 hover:bg-accent-dark transition-all"
                 >
                   {t.next}
                 </button>
@@ -466,7 +466,7 @@ export default function KarriereFunnel() {
                     <button 
                       type="submit"
                       disabled={isSubmitting || !data.privacyAccepted}
-                      className="flex-[2] py-3 bg-[#0D6B38] text-white rounded-xl font-black uppercase tracking-wider shadow-sm hover:shadow-md hover:-translate-y-[1px] disabled:opacity-50 hover:bg-green-900 transition-all flex items-center justify-center gap-2"
+                      className="flex-[2] py-3 bg-[#0D6B38] text-white rounded-xl font-black uppercase tracking-wider shadow-sm hover:shadow-md hover:-translate-y-[1px] disabled:opacity-50 hover:bg-accent-dark transition-all flex items-center justify-center gap-2"
                     >
                       {isSubmitting ? <Loader2 className="animate-spin" /> : <Send size={18} />}
                       {t.submit}

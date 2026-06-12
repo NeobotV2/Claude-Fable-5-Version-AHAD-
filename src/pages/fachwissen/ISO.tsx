@@ -1,7 +1,9 @@
 import { motion } from 'motion/react';
-import { BookOpen, ShieldCheck, Award, ArrowRight, CheckCircle2, ChevronDown, Leaf } from 'lucide-react';
+import { ShieldCheck, Award, CheckCircle2, Leaf } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import SEO from '@/components/SEO';
+import Accordion from '@/components/ui/Accordion';
+import CTABand from '@/components/CTABand';
 
 export default function FachwissenISO() {
   const articleSchema = {
@@ -18,12 +20,12 @@ export default function FachwissenISO() {
       "name": "AHAD Cleaning Company GmbH",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://www.ahad-cleaning.de/logo.png"
+        "url": "https://ahad-cleaning.de/logo.png"
       }
     },
     "mainEntityOfPage": {
       "@type": "WebPage",
-      "@id": "https://www.ahad-cleaning.de/fachwissen/iso-9001-14001"
+      "@id": "https://ahad-cleaning.de/fachwissen/iso-9001-iso-14001-gebaeudereinigung-unternehmen"
     }
   };
 
@@ -68,8 +70,8 @@ export default function FachwissenISO() {
       />
       
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 bg-[#0B2341] text-white overflow-hidden">
-        <div className="absolute inset-0 opacity-20">
+      <section className="relative pt-36 pb-20 lg:pt-44 lg:pb-28 bg-navy text-white overflow-hidden grain">
+        <div className="absolute inset-0 opacity-40">
           <img 
             src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=1600" 
             alt="Qualitätsmanagement und ISO Zertifizierung" 
@@ -77,6 +79,8 @@ export default function FachwissenISO() {
             referrerPolicy="no-referrer"
           />
         </div>
+        <div className="absolute inset-0 bg-gradient-to-r from-navy via-navy/85 to-navy/40" />
+        <div className="absolute inset-0 bg-gradient-to-t from-navy via-transparent to-navy/60" />
         <div className="max-w-7xl mx-auto px-4 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -87,7 +91,7 @@ export default function FachwissenISO() {
               <Award className="w-4 h-4 text-[#9CDDB7]" />
               Fachwissen: Qualität & Umwelt
             </span>
-            <h1 className="text-4xl md:text-6xl font-black mb-8 leading-tight tracking-tight">
+            <h1 className="display-lg text-white mb-8">
               ISO 9001 & 14001 in der Gebäudereinigung
             </h1>
             <p className="text-xl text-blue-100 leading-relaxed mb-10 font-medium">
@@ -209,40 +213,11 @@ export default function FachwissenISO() {
             <span className="text-[#0B2341] font-bold tracking-wider uppercase text-sm mb-4 block">Häufige Fragen</span>
             <h2 className="text-3xl lg:text-4xl font-black tracking-tight text-[#0B2341]">FAQs zu ISO-Zertifizierungen</h2>
           </div>
-          <div className="space-y-4">
-            {faqSchema.mainEntity.map((faq, i) => (
-              <details key={i} className="group bg-white rounded-2xl overflow-hidden border border-gray-100 [&_summary::-webkit-details-marker]:hidden shadow-sm">
-                <summary className="w-full flex justify-between items-center p-6 text-left cursor-pointer hover:bg-gray-50 transition-colors">
-                  <span className="font-bold text-lg text-[#0B2341] pr-8">{faq.name}</span>
-                  <span className="transition group-open:rotate-180 bg-[#f7f9fb] p-2 rounded-full text-[#0B2341]">
-                    <ChevronDown size={20} />
-                  </span>
-                </summary>
-                <div className="p-6 pt-0 text-[#424751] leading-relaxed border-t border-gray-100 mt-2">
-                  <p className="pt-4">{faq.acceptedAnswer.text}</p>
-                </div>
-              </details>
-            ))}
-          </div>
+          <Accordion items={faqSchema.mainEntity.map((q) => ({ question: q.name, answer: q.acceptedAnswer.text }))} />
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 lg:py-32 bg-[#0B2341] text-white text-center">
-        <div className="max-w-3xl mx-auto px-4">
-          <h2 className="text-3xl lg:text-4xl font-black mb-6">Suchen Sie einen zertifizierten Reinigungspartner?</h2>
-          <p className="text-blue-100 mb-10 text-lg">
-            Gerne erläutern wir Ihnen unser Qualitäts- und Umweltmanagement im Detail und erstellen ein Konzept für Ihr Objekt.
-          </p>
-          <Link
-            to="/kontakt"
-            className="inline-flex items-center px-8 py-4 bg-[#0D6B38] text-white font-bold rounded-xl hover:bg-[#0A552C] transition-all shadow-sm hover:shadow-md hover:-translate-y-[1px]"
-          >
-            Jetzt Kontakt aufnehmen
-            <ArrowRight className="ml-2 w-5 h-5" />
-          </Link>
-        </div>
-      </section>
+      <CTABand title="Suchen Sie einen zertifizierten Reinigungspartner?" lead="Gerne erläutern wir Ihnen unser Qualitäts- und Umweltmanagement im Detail und erstellen ein Konzept für Ihr Objekt." />
     </div>
   );
 }
