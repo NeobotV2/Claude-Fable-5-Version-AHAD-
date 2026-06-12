@@ -26,7 +26,7 @@ export default function SectionHeading({
     <Reveal className={cn(align === 'center' && 'text-center', className)}>
       {(eyebrow || index) && (
         <div className={cn('eyebrow mb-5', align === 'center' && 'justify-center', dark ? 'text-mint' : 'text-brand')}>
-          {index && <span className="font-headline opacity-60">{index}</span>}
+          {index && <span className="font-accent opacity-60">{index}</span>}
           <span className={cn('h-px w-8', dark ? 'bg-mint/50' : 'bg-brand/40')} />
           {eyebrow}
         </div>

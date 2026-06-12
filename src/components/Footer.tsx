@@ -73,7 +73,7 @@ export default function Footer() {
         {/* Hauptbereich */}
         <div className="py-16 lg:py-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12">
           <div className="lg:col-span-4 space-y-7">
-            <Logo variant="dark" />
+            <Logo variant="dark" size={42} />
             <p className="text-blue-100/70 leading-relaxed max-w-sm">
               Systematische Gebäudedienstleistungen für Industrie, Verwaltung und Mittelstand. Struktur, Sauberkeit
               und Sicherheit — messbar, dokumentiert, verlässlich.

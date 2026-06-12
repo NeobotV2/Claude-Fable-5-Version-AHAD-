@@ -21,7 +21,6 @@ const UA =
   'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36';
 
 const FAMILIES = [
-  { family: 'Inter', weights: [400, 500, 600, 700, 800, 900] },
   { family: 'Space Grotesk', weights: [400, 500, 600, 700] },
   { family: 'Montserrat', weights: [500, 800, 900] },
 ];

@@ -68,7 +68,7 @@ export default function FachwissenISO() {
       />
       
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 bg-[#001c3b] text-white overflow-hidden">
+      <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 bg-[#0B2341] text-white overflow-hidden">
         <div className="absolute inset-0 opacity-20">
           <img 
             src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=1600" 
@@ -84,7 +84,7 @@ export default function FachwissenISO() {
             className="max-w-3xl"
           >
             <span className="inline-flex items-center gap-2 bg-white/10 px-4 py-2 rounded-full text-sm font-bold mb-6 tracking-wider uppercase border border-white/20">
-              <Award className="w-4 h-4 text-[#8bf8ba]" />
+              <Award className="w-4 h-4 text-[#A9DCBE]" />
               Fachwissen: Qualität & Umwelt
             </span>
             <h1 className="text-4xl md:text-6xl font-black mb-8 leading-tight tracking-tight">
@@ -101,26 +101,26 @@ export default function FachwissenISO() {
       {/* Auf einen Blick (At a glance) - Good for AEO/GEO */}
       <section className="py-16 bg-white border-b border-gray-100">
         <div className="max-w-7xl mx-auto px-4">
-          <h2 className="text-2xl font-black text-[#001c3b] mb-8 text-center">Zertifizierungen auf einen Blick</h2>
+          <h2 className="text-2xl font-black text-[#0B2341] mb-8 text-center">Zertifizierungen auf einen Blick</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="bg-[#f7f9fb] p-8 rounded-2xl border border-gray-100">
-              <ShieldCheck className="w-10 h-10 text-[#004888] mb-4" />
-              <h3 className="font-bold text-xl mb-3 text-[#001c3b]">ISO 9001: Qualitätsmanagement</h3>
+              <ShieldCheck className="w-10 h-10 text-[#0B2341] mb-4" />
+              <h3 className="font-bold text-xl mb-3 text-[#0B2341]">ISO 9001: Qualitätsmanagement</h3>
               <p className="text-[#424751] mb-4">Der internationale Standard für Qualitätsmanagement. Er garantiert strukturierte Abläufe, klare Verantwortlichkeiten und eine kontinuierliche Verbesserung der Dienstleistungsqualität.</p>
               <ul className="space-y-2 text-sm text-[#424751]">
-                <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-[#2ca06a]" /> Standardisierte Prozesse</li>
-                <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-[#2ca06a]" /> Lückenlose Dokumentation</li>
-                <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-[#2ca06a]" /> Aktives Fehlermanagement</li>
+                <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-[#0D6B38]" /> Standardisierte Prozesse</li>
+                <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-[#0D6B38]" /> Lückenlose Dokumentation</li>
+                <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-[#0D6B38]" /> Aktives Fehlermanagement</li>
               </ul>
             </div>
             <div className="bg-[#f7f9fb] p-8 rounded-2xl border border-gray-100">
-              <Leaf className="w-10 h-10 text-[#2ca06a] mb-4" />
-              <h3 className="font-bold text-xl mb-3 text-[#001c3b]">ISO 14001: Umweltmanagement</h3>
+              <Leaf className="w-10 h-10 text-[#0D6B38] mb-4" />
+              <h3 className="font-bold text-xl mb-3 text-[#0B2341]">ISO 14001: Umweltmanagement</h3>
               <p className="text-[#424751] mb-4">Die Norm für systematisches Umweltmanagement. Sie belegt, dass ein Unternehmen ökologische Verantwortung übernimmt und Ressourcen schont.</p>
               <ul className="space-y-2 text-sm text-[#424751]">
-                <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-[#2ca06a]" /> Ökologische Reinigungsmittel</li>
-                <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-[#2ca06a]" /> Exakte Dosiersysteme</li>
-                <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-[#2ca06a]" /> Ressourcenschonung (Wasser/Energie)</li>
+                <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-[#0D6B38]" /> Ökologische Reinigungsmittel</li>
+                <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-[#0D6B38]" /> Exakte Dosiersysteme</li>
+                <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-[#0D6B38]" /> Ressourcenschonung (Wasser/Energie)</li>
               </ul>
             </div>
           </div>
@@ -131,7 +131,7 @@ export default function FachwissenISO() {
       <section className="py-20 lg:py-32 bg-white">
         <div className="max-w-4xl mx-auto px-4">
           <div className="prose prose-lg max-w-none text-[#424751] leading-relaxed">
-            <h2 className="text-3xl font-black text-[#001c3b] mb-6">Qualität durch Struktur: Warum ISO 9001 entscheidend ist</h2>
+            <h2 className="text-3xl font-black text-[#0B2341] mb-6">Qualität durch Struktur: Warum ISO 9001 entscheidend ist</h2>
             <p className="mb-8">
               In der Gebäudereinigung ist Vertrauen gut, Kontrolle und Struktur sind besser. Die ISO 9001 ist der weltweit anerkannte Standard für Qualitätsmanagement. Für Kunden bedeutet die Zusammenarbeit mit einem nach ISO 9001 zertifizierten Dienstleister wie dem <span className="font-logo">AHAD</span> System vor allem eines: <strong>Verlässlichkeit</strong>.
             </p>
@@ -139,18 +139,18 @@ export default function FachwissenISO() {
             {/* Quick Links for SEO & UX */}
             <div className="flex flex-wrap gap-3 mb-8">
               <span className="text-sm font-bold text-gray-400 uppercase tracking-wider w-full mb-1">Passende Leistungen:</span>
-              <Link to="/leistungen/unterhaltsreinigung" className="px-4 py-2 bg-blue-50 text-[#004888] rounded-full text-sm font-bold hover:bg-[#004888] hover:text-white transition-all border border-blue-100">Unterhaltsreinigung</Link>
-              <Link to="/leistungen/industrie-produktionsreinigung" className="px-4 py-2 bg-blue-50 text-[#004888] rounded-full text-sm font-bold hover:bg-[#004888] hover:text-white transition-all border border-blue-100">Industriereinigung</Link>
-              <Link to="/leistungen/medizintechnik-reinigung" className="px-4 py-2 bg-blue-50 text-[#004888] rounded-full text-sm font-bold hover:bg-[#004888] hover:text-white transition-all border border-blue-100">Medizintechnik</Link>
+              <Link to="/leistungen/unterhaltsreinigung" className="px-4 py-2 bg-blue-50 text-[#0B2341] rounded-full text-sm font-bold hover:bg-[#0B2341] hover:text-white transition-all border border-blue-100">Unterhaltsreinigung</Link>
+              <Link to="/leistungen/industrie-produktionsreinigung" className="px-4 py-2 bg-blue-50 text-[#0B2341] rounded-full text-sm font-bold hover:bg-[#0B2341] hover:text-white transition-all border border-blue-100">Industriereinigung</Link>
+              <Link to="/leistungen/medizintechnik-reinigung" className="px-4 py-2 bg-blue-50 text-[#0B2341] rounded-full text-sm font-bold hover:bg-[#0B2341] hover:text-white transition-all border border-blue-100">Medizintechnik</Link>
             </div>
 
             <p className="mb-8">
-              Statt auf Zufall oder das Geschick einzelner Mitarbeiter zu hoffen, basieren alle Abläufe – von der <Link to="/leistungen/unterhaltsreinigung" className="text-[#004888] font-bold hover:underline">Unterhaltsreinigung</Link> bis zur komplexen <Link to="/leistungen/industrie-produktionsreinigung" className="text-[#004888] font-bold hover:underline">Industriereinigung</Link> – auf fest definierten, erprobten und dokumentierten Prozessen.
+              Statt auf Zufall oder das Geschick einzelner Mitarbeiter zu hoffen, basieren alle Abläufe – von der <Link to="/leistungen/unterhaltsreinigung" className="text-[#0B2341] font-bold hover:underline">Unterhaltsreinigung</Link> bis zur komplexen <Link to="/leistungen/industrie-produktionsreinigung" className="text-[#0B2341] font-bold hover:underline">Industriereinigung</Link> – auf fest definierten, erprobten und dokumentierten Prozessen.
             </p>
 
             <div className="bg-[#f7f9fb] p-8 rounded-3xl mb-12 border border-gray-100 shadow-sm">
-              <h3 className="text-2xl font-bold text-[#001c3b] mb-6 flex items-center gap-3">
-                <Award className="text-[#004888] w-8 h-8" />
+              <h3 className="text-2xl font-bold text-[#0B2341] mb-6 flex items-center gap-3">
+                <Award className="text-[#0B2341] w-8 h-8" />
                 Konkrete Vorteile für unsere Kunden
               </h3>
               <ul className="space-y-4 list-none pl-0">
@@ -162,14 +162,14 @@ export default function FachwissenISO() {
                   'Hohe Kundenzufriedenheit durch proaktive Kommunikation und feste Ansprechpartner'
                 ].map((item, i) => (
                   <li key={i} className="flex items-start gap-3">
-                    <CheckCircle2 className="text-[#2ca06a] w-6 h-6 mt-1 flex-shrink-0" />
+                    <CheckCircle2 className="text-[#0D6B38] w-6 h-6 mt-1 flex-shrink-0" />
                     <span className="text-[#424751]">{item}</span>
                   </li>
                 ))}
               </ul>
             </div>
 
-            <h2 className="text-3xl font-black text-[#001c3b] mb-6">Verantwortung für morgen: Umweltmanagement nach ISO 14001</h2>
+            <h2 className="text-3xl font-black text-[#0B2341] mb-6">Verantwortung für morgen: Umweltmanagement nach ISO 14001</h2>
             <p className="mb-8">
               Gebäudereinigung ist ressourcenintensiv. Es werden Wasser, Energie und chemische Produkte verbraucht. Ein Umweltmanagementsystem nach ISO 14001 bedeutet, diese Umweltauswirkungen systematisch zu erfassen, zu bewerten und kontinuierlich zu reduzieren.
             </p>
@@ -177,7 +177,7 @@ export default function FachwissenISO() {
               Für moderne Unternehmen, die eigene Nachhaltigkeitsziele (ESG-Kriterien) verfolgen, ist ein zertifizierter Dienstleister ein wichtiger Baustein in der eigenen Lieferkette (Scope 3 Emissionen).
             </p>
 
-            <h3 className="text-2xl font-bold text-[#001c3b] mb-4">Nachhaltigkeit in der Praxis: Wie wir das umsetzen</h3>
+            <h3 className="text-2xl font-bold text-[#0B2341] mb-4">Nachhaltigkeit in der Praxis: Wie wir das umsetzen</h3>
             <ul className="space-y-4 mb-12 list-none pl-0">
               {[
                 'Einsatz von biologisch abbaubaren und umweltschonenden Reinigungsmitteln (z.B. mit Ecolabel)',
@@ -188,13 +188,13 @@ export default function FachwissenISO() {
                 'CO2-optimierte Fuhrparklogistik und Tourenplanung'
               ].map((item, i) => (
                 <li key={i} className="flex items-start gap-3">
-                  <CheckCircle2 className="text-[#2ca06a] w-6 h-6 flex-shrink-0 mt-0.5" />
+                  <CheckCircle2 className="text-[#0D6B38] w-6 h-6 flex-shrink-0 mt-0.5" />
                   <span>{item}</span>
                 </li>
               ))}
             </ul>
 
-            <h2 className="text-3xl font-black text-[#001c3b] mb-6">Fazit: Zertifizierungen schaffen Vertrauen</h2>
+            <h2 className="text-3xl font-black text-[#0B2341] mb-6">Fazit: Zertifizierungen schaffen Vertrauen</h2>
             <p className="mb-8">
               Zertifizierungen nach ISO 9001 und ISO 14001 sind für uns kein Selbstzweck und keine reinen Marketinginstrumente. Sie bilden das Fundament für eine verlässliche, transparente und zukunftsorientierte Partnerschaft mit unseren Kunden. Sie geben Ihnen die Sicherheit, dass Ihre Immobilien nicht nur sauber, sondern nach höchsten Qualitäts- und Umweltstandards gepflegt werden.
             </p>
@@ -206,15 +206,15 @@ export default function FachwissenISO() {
       <section className="py-20 lg:py-32 bg-[#f7f9fb]">
         <div className="max-w-4xl mx-auto px-4">
           <div className="text-center mb-16">
-            <span className="text-[#004888] font-bold tracking-wider uppercase text-sm mb-4 block">Häufige Fragen</span>
-            <h2 className="text-3xl lg:text-4xl font-black tracking-tight text-[#001c3b]">FAQs zu ISO-Zertifizierungen</h2>
+            <span className="text-[#0B2341] font-bold tracking-wider uppercase text-sm mb-4 block">Häufige Fragen</span>
+            <h2 className="text-3xl lg:text-4xl font-black tracking-tight text-[#0B2341]">FAQs zu ISO-Zertifizierungen</h2>
           </div>
           <div className="space-y-4">
             {faqSchema.mainEntity.map((faq, i) => (
               <details key={i} className="group bg-white rounded-2xl overflow-hidden border border-gray-100 [&_summary::-webkit-details-marker]:hidden shadow-sm">
                 <summary className="w-full flex justify-between items-center p-6 text-left cursor-pointer hover:bg-gray-50 transition-colors">
-                  <span className="font-bold text-lg text-[#001c3b] pr-8">{faq.name}</span>
-                  <span className="transition group-open:rotate-180 bg-[#f7f9fb] p-2 rounded-full text-[#004888]">
+                  <span className="font-bold text-lg text-[#0B2341] pr-8">{faq.name}</span>
+                  <span className="transition group-open:rotate-180 bg-[#f7f9fb] p-2 rounded-full text-[#0B2341]">
                     <ChevronDown size={20} />
                   </span>
                 </summary>
@@ -228,7 +228,7 @@ export default function FachwissenISO() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 lg:py-32 bg-[#001c3b] text-white text-center">
+      <section className="py-20 lg:py-32 bg-[#0B2341] text-white text-center">
         <div className="max-w-3xl mx-auto px-4">
           <h2 className="text-3xl lg:text-4xl font-black mb-6">Suchen Sie einen zertifizierten Reinigungspartner?</h2>
           <p className="text-blue-100 mb-10 text-lg">
@@ -236,7 +236,7 @@ export default function FachwissenISO() {
           </p>
           <Link
             to="/kontakt"
-            className="inline-flex items-center px-8 py-4 bg-[#2ca06a] text-white font-bold rounded-xl hover:bg-[#238054] transition-all shadow-sm hover:shadow-md hover:-translate-y-[1px]"
+            className="inline-flex items-center px-8 py-4 bg-[#0D6B38] text-white font-bold rounded-xl hover:bg-[#0A552C] transition-all shadow-sm hover:shadow-md hover:-translate-y-[1px]"
           >
             Jetzt Kontakt aufnehmen
             <ArrowRight className="ml-2 w-5 h-5" />

@@ -4,33 +4,36 @@
 @plugin "@tailwindcss/typography";
 
 @theme {
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-headline: "Space Grotesk", sans-serif;
+  /* Typografie laut Designbook: Montserrat führt (Black 900 Headlines,
+     Bold 700 Subheads, Regular 400 Fließtext); Space Grotesk nur als
+     digitaler Akzent (Eyebrows, Zahlen, technische Labels). */
+  --font-sans: "Montserrat", ui-sans-serif, system-ui, sans-serif;
+  --font-headline: "Montserrat", sans-serif;
+  --font-accent: "Space Grotesk", sans-serif;
   --font-logo: "Montserrat", sans-serif;
 
-  /* ── AHAD Markenfarben ─────────────────────────────────────────── */
-  /* Hinweis Branding: Soll das finale AHAD-Grün geändert werden (z.B. auf
-     ein tieferes #0d6b38), genügt es, --color-accent und --color-accent-dark
-     hier anzupassen — alle CTAs, Badges und Icons folgen automatisch.
-     Das Logo-Gradient-Grün (#2ca06a) liegt in Logo.tsx/generate-assets.mjs. */
-  --color-navy: #001c3b;        /* Tiefes Marineblau — Autorität */
-  --color-navy-900: #00142b;
-  --color-navy-800: #002a55;
-  --color-navy-700: #003a6e;
-  --color-brand: #004888;       /* Primärblau */
-  --color-brand-light: #1e60a9;
-  --color-accent: #2ca06a;      /* Smaragd — CTA / Aktion */
-  --color-accent-dark: #238054;
-  --color-mint: #97e7bd;        /* Akzent auf dunklen Flächen — bewusst gedämpft */
+  /* ── AHAD Markenfarben (Designbook v2.0, Juni 2026) ───────────────
+     AHAD Navy #0B2341 · AHAD Grün #0D6B38 · Flächen Weiß oder Navy,
+     Grün nur als Akzent. Falztöne (#064B20/#02122A) nur im Bildzeichen.
+     Helle/dunkle Abstufungen sind funktionale Tints der Markenfarben. */
+  --color-navy: #0B2341;        /* AHAD Navy — trägt */
+  --color-navy-900: #02122A;    /* Falz-Dunkelnavy: tiefste Fläche (Footer) */
+  --color-navy-800: #11305A;    /* Hover-Tint auf Navy */
+  --color-navy-700: #18406F;    /* hellerer Navy-Tint */
+  --color-brand: #0B2341;       /* Interaktionsfarbe auf hellem Grund = Navy */
+  --color-brand-light: #1C4576; /* Link-/Hover-Tint des Navy */
+  --color-accent: #0D6B38;      /* AHAD Grün — CTA / Akzent */
+  --color-accent-dark: #0A552C; /* abgedunkeltes AHAD Grün (Hover) */
+  --color-mint: #A9DCBE;        /* heller Tint des AHAD Grün für dunkle Flächen */
   --color-paper: #f7f9fb;       /* Heller Seitenhintergrund */
-  --color-ink: #0e1726;         /* Fließtext dunkel */
+  --color-ink: #101826;         /* Fließtext dunkel */
   --color-slate: #424751;       /* Fließtext gedämpft */
   --color-line: #e6eaef;        /* Hairlines */
 
   /* ── Schatten ──────────────────────────────────────────────────── */
-  --shadow-soft: 0 2px 8px -2px rgb(0 28 59 / 0.08), 0 8px 24px -8px rgb(0 28 59 / 0.10);
-  --shadow-lifted: 0 4px 12px -2px rgb(0 28 59 / 0.10), 0 20px 48px -12px rgb(0 28 59 / 0.18);
-  --shadow-glow: 0 0 0 1px rgb(151 231 189 / 0.25), 0 8px 32px -8px rgb(44 160 106 / 0.45);
+  --shadow-soft: 0 2px 8px -2px rgb(11 35 65 / 0.08), 0 8px 24px -8px rgb(11 35 65 / 0.10);
+  --shadow-lifted: 0 4px 12px -2px rgb(11 35 65 / 0.10), 0 20px 48px -12px rgb(11 35 65 / 0.18);
+  --shadow-glow: 0 0 0 1px rgb(169 220 190 / 0.25), 0 8px 32px -8px rgb(13 107 56 / 0.45);
 
   /* ── Animationen ───────────────────────────────────────────────── */
   --animate-marquee: marquee 42s linear infinite;
@@ -105,20 +108,22 @@
   }
 
   /* ── Editorial-Typografie ─────────────────────────────────────── */
+  /* Headlines in Montserrat Black 900 (Designbook), leicht verdichtet. */
   .display-xl {
-    @apply font-headline font-bold tracking-[-0.035em] leading-[0.98];
-    font-size: clamp(2.75rem, 7.5vw, 6rem);
+    @apply font-headline font-black tracking-[-0.025em] leading-[1.0];
+    font-size: clamp(2.5rem, 7vw, 5.5rem);
   }
   .display-lg {
-    @apply font-headline font-bold tracking-[-0.03em] leading-[1.02];
-    font-size: clamp(2.25rem, 5vw, 4rem);
+    @apply font-headline font-black tracking-[-0.02em] leading-[1.04];
+    font-size: clamp(2.1rem, 4.6vw, 3.6rem);
   }
   .display-md {
-    @apply font-headline font-bold tracking-[-0.02em] leading-[1.08];
-    font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+    @apply font-headline font-extrabold tracking-[-0.015em] leading-[1.1];
+    font-size: clamp(1.65rem, 3.2vw, 2.5rem);
   }
+  /* Digitaler Akzent in Space Grotesk (Designbook: Website-Akzente). */
   .eyebrow {
-    @apply inline-flex items-center gap-2 text-[11px] font-black uppercase tracking-[0.22em];
+    @apply font-accent inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.22em];
   }
 
   /* ── Oberflächen & Effekte ────────────────────────────────────── */
@@ -128,7 +133,7 @@
     -webkit-backdrop-filter: blur(16px) saturate(1.4);
   }
   .glass-dark {
-    background: rgb(0 20 43 / 0.55);
+    background: rgb(2 18 42 / 0.55);
     backdrop-filter: blur(16px) saturate(1.2);
     -webkit-backdrop-filter: blur(16px) saturate(1.2);
   }
@@ -151,16 +156,9 @@
   }
   .blueprint-grid-light {
     background-image:
-      linear-gradient(rgb(0 28 59 / 0.05) 1px, transparent 1px),
-      linear-gradient(90deg, rgb(0 28 59 / 0.05) 1px, transparent 1px);
+      linear-gradient(rgb(11 35 65 / 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(11 35 65 / 0.05) 1px, transparent 1px);
     background-size: 48px 48px;
-  }
-
-  .text-gradient-mint {
-    background: linear-gradient(100deg, #8bf8ba 0%, #4cc88f 45%, #6fb6ff 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
   }
 
   /* Karten-Mikrointeraktion */
@@ -172,13 +170,9 @@
     box-shadow: var(--shadow-lifted);
   }
 
-  /* ── Logo & Marquee ───────────────────────────────────────────── */
-  .logo-hover-effect:hover .logo-icon-svg { transform: rotate(-45deg); }
-  .logo-icon-svg {
-    transition: transform 0.5s ease;
-    transform-origin: center;
-  }
-
+  /* ── Marquee ──────────────────────────────────────────────────── */
+  /* Hinweis: kein Hover-Rotieren des Logos mehr — das Designbook
+     verbietet Drehung des Bildzeichens ausdrücklich. */
   .marquee-container:hover .animate-marquee { animation-play-state: paused; }
 
   .reference-logo {

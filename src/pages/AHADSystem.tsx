@@ -171,7 +171,7 @@ export default function AHADSystem() {
             {outcomes.map((outcome, i) => (
               <Reveal key={outcome.label} delay={i * 0.1}>
                 <div className="bg-white rounded-3xl border border-line p-8 text-center card-lift h-full">
-                  <div className="font-headline text-5xl font-bold text-brand mb-2">{outcome.value}</div>
+                  <div className="font-accent text-5xl font-bold text-brand mb-2">{outcome.value}</div>
                   <div className="text-[11px] font-black uppercase tracking-[0.18em] text-accent mb-4">{outcome.label}</div>
                   <p className="text-sm text-slate leading-relaxed">{outcome.text}</p>
                 </div>

@@ -50,7 +50,7 @@ export default function ServicePage({ service }: { service: ServiceData }) {
           {PROMISES.map((promise, i) => (
             <Reveal key={promise.label} delay={i * 0.08} y={16}>
               <div className="flex items-center gap-4">
-                <span className="font-headline text-3xl font-bold text-brand">{promise.value}</span>
+                <span className="font-accent text-3xl font-bold text-brand">{promise.value}</span>
                 <span className="text-sm font-semibold text-slate leading-snug">{promise.label}</span>
               </div>
             </Reveal>

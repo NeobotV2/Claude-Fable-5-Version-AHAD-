@@ -37,6 +37,19 @@ npm run assets     # Gebrandete Bilder neu generieren (og-image, Icons, Fallback
 | `src/components/StickyCTA.tsx` | Mobile Conversion-Leiste (Anrufen / Angebot) |
 | `scripts/generate-assets.mjs` | Erzeugt og-image.jpg, Icons & Fallback-Bild aus SVG (sharp) |
 
+### Marke (Designbook v2.0, Juni 2026)
+
+- **Farben:** AHAD Navy `#0B2341`, AHAD Grün `#0D6B38`; Falztöne `#064B20`/`#02122A`
+  nur im Bildzeichen. Flächen sind Weiß oder Navy, Grün nur Akzent. Alle Töne als
+  Tokens in `src/index.css` (`@theme`).
+- **Logo:** Originalpfade aus der Druckvorlage in `src/components/logo-paths.ts`
+  (Wortmarke ist pfadkonvertiert — nie als Schrift neu setzen, nicht drehen,
+  keine Effekte). Varianten: Verlauf (digital, helle Flächen) und Negativ Weiß
+  (Navy/dunkle Flächen) über `<Logo variant>`.
+- **Typografie:** Montserrat führt (Black 900 Headlines, Bold 700 Subheads,
+  Regular 400 Fließtext); Space Grotesk nur als digitaler Akzent
+  (Eyebrows, Zahlen — `font-accent`).
+
 ### Design-Prinzipien
 
 - **Conversion zuerst:** „Angebot in 24h“ als durchgängiges Versprechen — Header-CTA,

@@ -68,7 +68,7 @@ const selectableCard = (active: boolean) =>
   cn(
     'rounded-2xl border-2 text-left transition-all duration-200',
     active
-      ? 'border-accent bg-accent/5 shadow-[0_0_0_4px_rgb(44_160_106/0.12)]'
+      ? 'border-accent bg-accent/5 shadow-[0_0_0_4px_rgb(13_107_56/0.12)]'
       : 'border-line bg-white hover:border-brand/40 hover:shadow-soft'
   );
 

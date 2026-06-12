@@ -63,7 +63,7 @@ export default function StandortStuttgart() {
             animate={{ opacity: 1, y: 0 }}
             className="max-w-3xl"
           >
-            <span className="inline-block bg-[#004888] px-4 py-1 rounded-full text-sm font-bold mb-6">
+            <span className="inline-block bg-[#0B2341] px-4 py-1 rounded-full text-sm font-bold mb-6">
               REGION STUTTGART ERSCHLIESSEN
             </span>
             <h1 className="text-5xl md:text-6xl font-bold mb-8 leading-tight">
@@ -75,7 +75,7 @@ export default function StandortStuttgart() {
               gesamten Großraum Stuttgart.
             </p>
             <div className="flex flex-wrap gap-4">
-              <Link to="/kontakt" className="px-8 py-4 bg-[#004888] text-white font-bold rounded-xl hover:bg-blue-700 transition-all">
+              <Link to="/kontakt" className="px-8 py-4 bg-[#0B2341] text-white font-bold rounded-xl hover:bg-blue-700 transition-all">
                 Anfrage für Ihren Standort
               </Link>
             </div>
@@ -104,17 +104,17 @@ export default function StandortStuttgart() {
                   'Qualitätsmanagement nach höchsten Standards'
                 ].map((item) => (
                   <li key={item} className="flex items-center gap-3 text-gray-700 font-medium">
-                    <CheckCircle2 className="text-[#004888] w-5 h-5 flex-shrink-0" />
+                    <CheckCircle2 className="text-[#0B2341] w-5 h-5 flex-shrink-0" />
                     {item}
                   </li>
                 ))}
               </ul>
             </div>
             <div className="bg-gray-50 p-12 rounded-3xl border border-gray-100">
-              <h3 className="text-2xl font-bold mb-8 text-[#004888]">Kontakt Region Stuttgart</h3>
+              <h3 className="text-2xl font-bold mb-8 text-[#0B2341]">Kontakt Region Stuttgart</h3>
               <div className="space-y-8">
                 <div className="flex gap-6">
-                  <div className="w-12 h-12 bg-white rounded-2xl shadow-sm flex items-center justify-center text-[#004888] flex-shrink-0">
+                  <div className="w-12 h-12 bg-white rounded-2xl shadow-sm flex items-center justify-center text-[#0B2341] flex-shrink-0">
                     <MapPin className="w-6 h-6" />
                   </div>
                   <div>
@@ -123,7 +123,7 @@ export default function StandortStuttgart() {
                   </div>
                 </div>
                 <div className="flex gap-6">
-                  <div className="w-12 h-12 bg-white rounded-2xl shadow-sm flex items-center justify-center text-[#004888] flex-shrink-0">
+                  <div className="w-12 h-12 bg-white rounded-2xl shadow-sm flex items-center justify-center text-[#0B2341] flex-shrink-0">
                     <Phone className="w-6 h-6" />
                   </div>
                   <div>
@@ -132,7 +132,7 @@ export default function StandortStuttgart() {
                   </div>
                 </div>
                 <div className="flex gap-6">
-                  <div className="w-12 h-12 bg-white rounded-2xl shadow-sm flex items-center justify-center text-[#004888] flex-shrink-0">
+                  <div className="w-12 h-12 bg-white rounded-2xl shadow-sm flex items-center justify-center text-[#0B2341] flex-shrink-0">
                     <Mail className="w-6 h-6" />
                   </div>
                   <div>
@@ -145,7 +145,7 @@ export default function StandortStuttgart() {
           </div>
 
           {/* Warum AHAD in Stuttgart */}
-          <div className="bg-[#004888] rounded-[2rem] p-12 lg:p-16 text-white relative overflow-hidden">
+          <div className="bg-[#0B2341] rounded-[2rem] p-12 lg:p-16 text-white relative overflow-hidden">
             <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -mr-32 -mt-32"></div>
             <div className="relative z-10">
               <div className="max-w-3xl">
@@ -157,11 +157,11 @@ export default function StandortStuttgart() {
                 </p>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="flex items-start gap-3">
-                    <CheckCircle2 className="text-[#2ca06a] w-6 h-6 flex-shrink-0 mt-1" />
+                    <CheckCircle2 className="text-[#0D6B38] w-6 h-6 flex-shrink-0 mt-1" />
                     <p className="font-medium">Lokale Teams mit Ortskenntnis</p>
                   </div>
                   <div className="flex items-start gap-3">
-                    <CheckCircle2 className="text-[#2ca06a] w-6 h-6 flex-shrink-0 mt-1" />
+                    <CheckCircle2 className="text-[#0D6B38] w-6 h-6 flex-shrink-0 mt-1" />
                     <p className="font-medium">Erfahrung mit Industrie-Standards</p>
                   </div>
                 </div>
@@ -174,12 +174,12 @@ export default function StandortStuttgart() {
       {/* CTA Section */}
       <section className="py-20 lg:py-32 bg-gray-50">
         <div className="max-w-4xl mx-auto px-4 text-center">
-          <MapPin className="w-16 h-16 text-[#004888] mx-auto mb-8" />
+          <MapPin className="w-16 h-16 text-[#0B2341] mx-auto mb-8" />
           <h2 className="text-3xl font-bold mb-6">Sie suchen einen Partner in Stuttgart?</h2>
           <p className="text-xl text-gray-600 mb-10">
             Gerne besichtigen wir Ihr Objekt vor Ort und erstellen Ihnen ein individuelles Angebot.
           </p>
-          <Link to="/kontakt" className="inline-flex items-center px-10 py-5 bg-[#004888] text-white font-bold rounded-2xl hover:bg-blue-700 transition-all shadow-sm hover:shadow-md hover:-translate-y-[1px]">
+          <Link to="/kontakt" className="inline-flex items-center px-10 py-5 bg-[#0B2341] text-white font-bold rounded-2xl hover:bg-blue-700 transition-all shadow-sm hover:shadow-md hover:-translate-y-[1px]">
             Anfrage für Ihren Standort
             <ArrowRight className="ml-2 w-5 h-5" />
           </Link>

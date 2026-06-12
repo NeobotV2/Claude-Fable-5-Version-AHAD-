@@ -32,7 +32,7 @@ export default function StickyCTA() {
           transition={{ type: 'spring', damping: 26, stiffness: 300 }}
           className="fixed bottom-0 inset-x-0 z-40 lg:hidden pb-[env(safe-area-inset-bottom)]"
         >
-          <div className="glass border-t border-line shadow-[0_-8px_32px_rgb(0_28_59/0.12)] px-4 py-3 grid grid-cols-2 gap-3">
+          <div className="glass border-t border-line shadow-[0_-8px_32px_rgb(11_35_65/0.12)] px-4 py-3 grid grid-cols-2 gap-3">
             <a
               href={SITE.phoneHref}
               className="flex items-center justify-center gap-2 py-3.5 rounded-xl bg-navy text-white font-bold text-sm active:scale-[0.98] transition-transform"

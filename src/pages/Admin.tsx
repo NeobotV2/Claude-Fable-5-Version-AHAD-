@@ -206,7 +206,7 @@ export default function Admin() {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#2ca06a]"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#0D6B38]"></div>
       </div>
     );
   }
@@ -220,10 +220,10 @@ export default function Admin() {
           animate={{ opacity: 1, y: 0 }}
           className="bg-white p-8 rounded-3xl shadow-xl max-w-md w-full text-center"
         >
-          <div className="w-20 h-20 bg-blue-50 text-[#004888] rounded-full flex items-center justify-center mx-auto mb-6">
+          <div className="w-20 h-20 bg-blue-50 text-[#0B2341] rounded-full flex items-center justify-center mx-auto mb-6">
             <LayoutDashboard size={40} />
           </div>
-          <h1 className="text-2xl font-black text-[#001c3b] mb-4">Admin Dashboard</h1>
+          <h1 className="text-2xl font-black text-[#0B2341] mb-4">Admin Dashboard</h1>
           <p className="text-[#424751] mb-8">
             Bitte melden Sie sich mit Ihrem autorisierten Google-Konto an, um auf die Anfragen zuzugreifen.
           </p>
@@ -245,14 +245,14 @@ export default function Admin() {
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-12">
           <div>
-            <h1 className="text-3xl font-black text-[#001c3b] mb-2">Dashboard</h1>
+            <h1 className="text-3xl font-black text-[#0B2341] mb-2">Dashboard</h1>
             <p className="text-[#424751]">Willkommen zurück, {user.displayName}</p>
           </div>
           <div className="flex gap-4">
             <button 
               onClick={sendTestEmail}
               disabled={isTestingEmail}
-              className="flex items-center gap-2 bg-white text-[#004888] px-6 py-3 rounded-xl font-bold hover:bg-blue-50 transition-all shadow-sm border border-blue-100 disabled:opacity-50"
+              className="flex items-center gap-2 bg-white text-[#0B2341] px-6 py-3 rounded-xl font-bold hover:bg-blue-50 transition-all shadow-sm border border-blue-100 disabled:opacity-50"
             >
               <Mail size={20} /> {isTestingEmail ? 'Sende...' : 'Test E-Mail'}
             </button>
@@ -268,20 +268,20 @@ export default function Admin() {
         {/* Stats */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
           <div className="bg-white p-8 rounded-3xl shadow-sm border border-gray-100 flex items-center gap-6">
-            <div className="w-16 h-16 bg-green-50 text-[#2ca06a] rounded-2xl flex items-center justify-center">
+            <div className="w-16 h-16 bg-green-50 text-[#0D6B38] rounded-2xl flex items-center justify-center">
               <Users size={32} />
             </div>
             <div>
-              <div className="text-3xl font-black text-[#001c3b]">{jobApplications.length}</div>
+              <div className="text-3xl font-black text-[#0B2341]">{jobApplications.length}</div>
               <div className="text-sm font-bold text-[#424751] uppercase tracking-wider">Bewerbungen</div>
             </div>
           </div>
           <div className="bg-white p-8 rounded-3xl shadow-sm border border-gray-100 flex items-center gap-6">
-            <div className="w-16 h-16 bg-blue-50 text-[#004888] rounded-2xl flex items-center justify-center">
+            <div className="w-16 h-16 bg-blue-50 text-[#0B2341] rounded-2xl flex items-center justify-center">
               <FileText size={32} />
             </div>
             <div>
-              <div className="text-3xl font-black text-[#001c3b]">{offerLeads.length}</div>
+              <div className="text-3xl font-black text-[#0B2341]">{offerLeads.length}</div>
               <div className="text-sm font-bold text-[#424751] uppercase tracking-wider">Angebote</div>
             </div>
           </div>
@@ -290,7 +290,7 @@ export default function Admin() {
               <Mail size={32} />
             </div>
             <div>
-              <div className="text-3xl font-black text-[#001c3b]">{contactLeads.length}</div>
+              <div className="text-3xl font-black text-[#0B2341]">{contactLeads.length}</div>
               <div className="text-sm font-bold text-[#424751] uppercase tracking-wider">Kontakte</div>
             </div>
           </div>
@@ -302,7 +302,7 @@ export default function Admin() {
             onClick={() => setActiveTab('jobs')}
             className={`px-8 py-4 rounded-xl font-bold transition-all ${
               activeTab === 'jobs' 
-                ? 'bg-[#2ca06a] text-white shadow-lg' 
+                ? 'bg-[#0D6B38] text-white shadow-lg' 
                 : 'bg-white text-[#424751] hover:bg-gray-50'
             }`}
           >
@@ -312,7 +312,7 @@ export default function Admin() {
             onClick={() => setActiveTab('offers')}
             className={`px-8 py-4 rounded-xl font-bold transition-all ${
               activeTab === 'offers' 
-                ? 'bg-[#004888] text-white shadow-lg' 
+                ? 'bg-[#0B2341] text-white shadow-lg' 
                 : 'bg-white text-[#424751] hover:bg-gray-50'
             }`}
           >
@@ -348,8 +348,8 @@ export default function Admin() {
                   <div className="flex flex-col md:flex-row justify-between gap-6">
                     <div className="space-y-4">
                       <div className="flex items-center gap-3">
-                        <h3 className="text-xl font-black text-[#001c3b]">{app.name}</h3>
-                        <span className="px-3 py-1 bg-green-100 text-[#2ca06a] text-xs font-bold rounded-full uppercase">
+                        <h3 className="text-xl font-black text-[#0B2341]">{app.name}</h3>
+                        <span className="px-3 py-1 bg-green-100 text-[#0D6B38] text-xs font-bold rounded-full uppercase">
                           {app.jobType}
                         </span>
                       </div>
@@ -380,9 +380,9 @@ export default function Admin() {
                         value={app.status}
                         onChange={(e) => updateStatus('job_applications', app.id, e.target.value)}
                         className={`px-4 py-2 rounded-lg font-bold text-sm border-2 outline-none transition-all ${
-                          app.status === 'new' ? 'border-green-200 bg-green-50 text-[#2ca06a]' :
+                          app.status === 'new' ? 'border-green-200 bg-green-50 text-[#0D6B38]' :
                           app.status === 'rejected' ? 'border-red-200 bg-red-50 text-red-600' :
-                          'border-blue-200 bg-blue-50 text-[#004888]'
+                          'border-blue-200 bg-blue-50 text-[#0B2341]'
                         }`}
                       >
                         <option value="new">Neu</option>
@@ -414,8 +414,8 @@ export default function Admin() {
                   <div className="flex flex-col md:flex-row justify-between gap-6">
                     <div className="space-y-4">
                       <div className="flex items-center gap-3">
-                        <h3 className="text-xl font-black text-[#001c3b]">{lead.companyName}</h3>
-                        <span className="px-3 py-1 bg-blue-100 text-[#004888] text-xs font-bold rounded-full uppercase">
+                        <h3 className="text-xl font-black text-[#0B2341]">{lead.companyName}</h3>
+                        <span className="px-3 py-1 bg-blue-100 text-[#0B2341] text-xs font-bold rounded-full uppercase">
                           {lead.objectType}
                         </span>
                       </div>
@@ -446,9 +446,9 @@ export default function Admin() {
                         value={lead.status}
                         onChange={(e) => updateStatus('offer_leads', lead.id, e.target.value)}
                         className={`px-4 py-2 rounded-lg font-bold text-sm border-2 outline-none transition-all ${
-                          lead.status === 'new' ? 'border-blue-200 bg-blue-50 text-[#004888]' :
+                          lead.status === 'new' ? 'border-blue-200 bg-blue-50 text-[#0B2341]' :
                           lead.status === 'closed' ? 'border-gray-200 bg-gray-50 text-gray-600' :
-                          'border-green-200 bg-green-50 text-[#2ca06a]'
+                          'border-green-200 bg-green-50 text-[#0D6B38]'
                         }`}
                       >
                         <option value="new">Neu</option>
@@ -480,7 +480,7 @@ export default function Admin() {
                   <div className="flex flex-col md:flex-row justify-between gap-6">
                     <div className="space-y-4">
                       <div className="flex items-center gap-3">
-                        <h3 className="text-xl font-black text-[#001c3b]">{lead.contactPerson}</h3>
+                        <h3 className="text-xl font-black text-[#0B2341]">{lead.contactPerson}</h3>
                         <span className="px-3 py-1 bg-purple-100 text-purple-600 text-xs font-bold rounded-full uppercase">
                           {lead.serviceType}
                         </span>
@@ -513,7 +513,7 @@ export default function Admin() {
                         className={`px-4 py-2 rounded-lg font-bold text-sm border-2 outline-none transition-all ${
                           lead.status === 'new' ? 'border-purple-200 bg-purple-50 text-purple-600' :
                           lead.status === 'closed' ? 'border-gray-200 bg-gray-50 text-gray-600' :
-                          'border-green-200 bg-green-50 text-[#2ca06a]'
+                          'border-green-200 bg-green-50 text-[#0D6B38]'
                         }`}
                       >
                         <option value="new">Neu</option>

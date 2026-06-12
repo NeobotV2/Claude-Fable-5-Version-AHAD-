@@ -60,7 +60,7 @@ export default function Kontakt() {
         <div className="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-3xl">
           {PROMISES.map((promise) => (
             <div key={promise.label} className="flex items-center gap-3">
-              <span className="font-headline text-3xl font-bold text-mint">{promise.value}</span>
+              <span className="font-accent text-3xl font-bold text-mint">{promise.value}</span>
               <span className="text-[13px] font-semibold text-blue-100/80 leading-snug">{promise.label}</span>
             </div>
           ))}

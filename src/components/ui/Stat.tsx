@@ -48,8 +48,8 @@ interface StatProps {
 export default function Stat({ value, suffix, label, dark = false, className }: StatProps) {
   return (
     <div className={cn('min-w-0', className)}>
-      {/* Auf dunklem Grund bewusst Weiß statt Mint — wirkt seriöser, Mint bleibt Detailakzent. */}
-      <div className={cn('font-headline text-4xl lg:text-5xl font-bold tracking-tight', dark ? 'text-white' : 'text-brand')}>
+      {/* Zahlen in Space Grotesk (CI: digitaler Akzent); auf Dunkel Weiß statt Tint. */}
+      <div className={cn('font-accent text-4xl lg:text-5xl font-bold tracking-tight', dark ? 'text-white' : 'text-brand')}>
         <CountUp value={value} suffix={suffix} />
       </div>
       <div className={cn('mt-2 text-[11px] font-bold uppercase tracking-[0.18em]', dark ? 'text-blue-100/70' : 'text-slate')}>

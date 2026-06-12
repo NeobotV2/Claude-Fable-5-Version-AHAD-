@@ -1,61 +1,76 @@
 import { Link } from 'react-router-dom';
 import { useId } from 'react';
 import { cn } from '@/lib/utils';
+import { ICON_PATHS, WORDMARK_PATHS, LOGO_VIEWBOX_LOCKUP } from './logo-paths';
 
 interface LogoProps {
+  /** 'light' = Farbversion (Verlauf, digital) für helle Flächen · 'dark' = Negativ Weiß für Navy/dunkle Flächen. */
   variant?: 'light' | 'dark';
+  /** Höhe in px. Mindestbreite laut CI: 140px digital (entspricht ~34px Höhe). */
   size?: number;
   className?: string;
   asLink?: boolean;
   onClick?: () => void;
 }
 
-/** AHAD-Logo — eine Quelle für Header, Footer und Mobile-Menü. */
-export default function Logo({ variant = 'light', size = 34, className, asLink = true, onClick }: LogoProps) {
-  // Doppelpunkte aus useId entfernen — sie brechen url(#)-Referenzen in SVG.
+const RATIO = 303.664 / 72.598; // Lockup-Seitenverhältnis aus dem Designbook
+
+/**
+ * AHAD-Logo (Lockup: Bildzeichen + Wortmarke) nach Markenrichtlinien v2.0.
+ * Verwendet die eingefrorenen Originalpfade — Proportionen sind fix,
+ * keine Rotation, keine Effekte, keine fremden Farben.
+ */
+export default function Logo({ variant = 'light', size = 36, className, asLink = true, onClick }: LogoProps) {
   const id = useId().replace(/[^a-zA-Z0-9-]/g, '');
+  const white = variant === 'dark';
+
   const mark = (
-    <>
-      <svg className="logo-icon-svg flex-shrink-0" height={size} width={size} viewBox="0 0 100 100" aria-hidden>
+    <svg
+      height={size}
+      width={size * RATIO}
+      viewBox={LOGO_VIEWBOX_LOCKUP}
+      role="img"
+      aria-label="AHAD Cleaning"
+      className="flex-shrink-0"
+    >
+      {!white && (
         <defs>
-          <linearGradient id={`grad-${id}`} x1="15%" x2="85%" y1="15%" y2="85%">
-            <stop offset="0%" stopColor="#2ca06a" />
-            <stop offset="100%" stopColor="#1e60a9" />
+          {/* Digitale Verlaufs-Version: dezente Tiefe entlang der Falzdiagonale */}
+          <linearGradient id={`an-${id}`} x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stopColor="#071930" />
+            <stop offset="0.5" stopColor="#0C2747" />
+            <stop offset="1" stopColor="#081D37" />
           </linearGradient>
-          <mask id={`mask-${id}`}>
-            <rect fill="white" height="100" width="100" x="0" y="0" />
-            <rect fill="black" height="36" rx="6" transform="rotate(45 50 50)" width="36" x="32" y="32" />
-          </mask>
+          <linearGradient id={`ag-${id}`} x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stopColor="#085028" />
+            <stop offset="0.5" stopColor="#0E7039" />
+            <stop offset="1" stopColor="#0A572D" />
+          </linearGradient>
         </defs>
-        <rect
-          fill={`url(#grad-${id})`}
-          height="72"
-          mask={`url(#mask-${id})`}
-          rx="16"
-          transform="rotate(45 50 50)"
-          width="72"
-          x="14"
-          y="14"
-        />
-      </svg>
-      <span className="flex flex-col items-start leading-none font-logo">
-        <span
-          className={cn(
-            'text-xl font-[900] tracking-tighter uppercase',
-            variant === 'dark' ? 'text-white' : 'text-brand-light'
-          )}
-        >
-          AHAD
-        </span>
-        <span className="text-[7px] font-[500] text-accent uppercase -mt-1 tracking-[0.35em]">Cleaning</span>
-      </span>
-    </>
+      )}
+
+      {/* Bildzeichen — Navy-Fläche trägt den weißen Kern (evenodd) */}
+      <path d={ICON_PATHS.navy} fillRule="evenodd" fill={white ? '#ffffff' : `url(#an-${id})`} />
+      <path d={ICON_PATHS.green} fill={white ? '#ffffff' : `url(#ag-${id})`} />
+      {/* Falzflächen: nur im Bildzeichen erlaubte Dunkeltöne; negativ entfallen sie optisch */}
+      <path d={ICON_PATHS.falzGreen} fill={white ? '#ffffff' : '#064B20'} />
+      <path d={ICON_PATHS.falzNavy} fill={white ? '#ffffff' : '#02122A'} />
+
+      {/* Wortmarke (pfadkonvertiert, nie als Schrift setzen) */}
+      <path d={WORDMARK_PATHS.ahad} fill={white ? '#ffffff' : '#0B2341'} />
+      <path d={WORDMARK_PATHS.cleaning} fill={white ? '#ffffff' : '#0D6B38'} />
+    </svg>
   );
 
-  if (!asLink) return <span className={cn('flex items-center gap-3', className)}>{mark}</span>;
+  if (!asLink) return <span className={cn('inline-flex items-center', className)}>{mark}</span>;
 
   return (
-    <Link to="/" onClick={onClick} aria-label="AHAD Cleaning — Startseite" className={cn('flex items-center gap-3 logo-hover-effect', className)}>
+    <Link
+      to="/"
+      onClick={onClick}
+      aria-label="AHAD Cleaning — Startseite"
+      className={cn('inline-flex items-center transition-opacity hover:opacity-85', className)}
+    >
       {mark}
     </Link>
   );
