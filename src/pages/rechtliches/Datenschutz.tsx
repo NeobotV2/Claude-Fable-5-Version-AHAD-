@@ -15,7 +15,7 @@ export default function Datenschutz() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="prose prose-blue max-w-none"
+          className="prose prose-slate max-w-none"
         >
 
           <section className="mb-12">
@@ -56,6 +56,33 @@ export default function Datenschutz() {
             <h2 className="text-2xl font-bold mb-4">5. Kontaktformular</h2>
             <p className="text-gray-600">
               Wenn Sie uns per Kontaktformular Anfragen zukommen lassen, werden Ihre Angaben aus dem Anfrageformular inklusive der von Ihnen dort angegebenen Kontaktdaten zwecks Bearbeitung der Anfrage und für den Fall von Anschlussfragen bei uns gespeichert. Diese Daten geben wir nicht ohne Ihre Einwilligung weiter.
+            </p>
+            <p className="text-gray-600 mt-4">
+              Zur technischen Verarbeitung der Formulardaten setzen wir Google Firebase (Cloud Firestore) ein, einen
+              Dienst der Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland. Die Verarbeitung
+              erfolgt auf Grundlage von Art. 6 Abs. 1 lit. b DSGVO (Bearbeitung Ihrer Anfrage) bzw. Ihrer
+              Einwilligung nach Art. 6 Abs. 1 lit. a DSGVO. Weitere Informationen finden Sie in der
+              Datenschutzerklärung von Google: https://policies.google.com/privacy
+            </p>
+          </section>
+
+          <section className="mb-12">
+            <h2 className="text-2xl font-bold mb-4">6. Schriftarten (lokal gehostet)</h2>
+            <p className="text-gray-600">
+              Diese Website nutzt zur einheitlichen Darstellung Schriftarten, die lokal auf unserem Server
+              installiert sind. Eine Verbindung zu Servern von Google oder anderen Drittanbietern findet beim
+              Laden der Schriftarten nicht statt; Ihre IP-Adresse wird hierfür nicht an Dritte übertragen.
+            </p>
+          </section>
+
+          <section className="mb-12">
+            <h2 className="text-2xl font-bold mb-4">7. Externe Bildinhalte</h2>
+            <p className="text-gray-600">
+              Zur Illustration binden wir Bildmaterial von externen Content-Delivery-Netzwerken ein (insbesondere
+              Unsplash, images.unsplash.com, sowie Logodienste für Referenzdarstellungen). Beim Laden dieser
+              Bilder wird Ihre IP-Adresse technisch bedingt an den jeweiligen Anbieter übermittelt. Die Einbindung
+              erfolgt im Interesse einer ansprechenden Darstellung unserer Online-Angebote (berechtigtes Interesse
+              gemäß Art. 6 Abs. 1 lit. f DSGVO). Es werden dabei keine Cookies gesetzt.
             </p>
           </section>
         </motion.div>

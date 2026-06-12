@@ -206,7 +206,7 @@ export default function Admin() {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#005332]"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#2ca06a]"></div>
       </div>
     );
   }
@@ -268,7 +268,7 @@ export default function Admin() {
         {/* Stats */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
           <div className="bg-white p-8 rounded-3xl shadow-sm border border-gray-100 flex items-center gap-6">
-            <div className="w-16 h-16 bg-green-50 text-[#005332] rounded-2xl flex items-center justify-center">
+            <div className="w-16 h-16 bg-green-50 text-[#2ca06a] rounded-2xl flex items-center justify-center">
               <Users size={32} />
             </div>
             <div>
@@ -302,7 +302,7 @@ export default function Admin() {
             onClick={() => setActiveTab('jobs')}
             className={`px-8 py-4 rounded-xl font-bold transition-all ${
               activeTab === 'jobs' 
-                ? 'bg-[#005332] text-white shadow-lg' 
+                ? 'bg-[#2ca06a] text-white shadow-lg' 
                 : 'bg-white text-[#424751] hover:bg-gray-50'
             }`}
           >
@@ -349,7 +349,7 @@ export default function Admin() {
                     <div className="space-y-4">
                       <div className="flex items-center gap-3">
                         <h3 className="text-xl font-black text-[#001c3b]">{app.name}</h3>
-                        <span className="px-3 py-1 bg-green-100 text-[#005332] text-xs font-bold rounded-full uppercase">
+                        <span className="px-3 py-1 bg-green-100 text-[#2ca06a] text-xs font-bold rounded-full uppercase">
                           {app.jobType}
                         </span>
                       </div>
@@ -380,7 +380,7 @@ export default function Admin() {
                         value={app.status}
                         onChange={(e) => updateStatus('job_applications', app.id, e.target.value)}
                         className={`px-4 py-2 rounded-lg font-bold text-sm border-2 outline-none transition-all ${
-                          app.status === 'new' ? 'border-green-200 bg-green-50 text-[#005332]' :
+                          app.status === 'new' ? 'border-green-200 bg-green-50 text-[#2ca06a]' :
                           app.status === 'rejected' ? 'border-red-200 bg-red-50 text-red-600' :
                           'border-blue-200 bg-blue-50 text-[#004888]'
                         }`}
@@ -448,7 +448,7 @@ export default function Admin() {
                         className={`px-4 py-2 rounded-lg font-bold text-sm border-2 outline-none transition-all ${
                           lead.status === 'new' ? 'border-blue-200 bg-blue-50 text-[#004888]' :
                           lead.status === 'closed' ? 'border-gray-200 bg-gray-50 text-gray-600' :
-                          'border-green-200 bg-green-50 text-[#005332]'
+                          'border-green-200 bg-green-50 text-[#2ca06a]'
                         }`}
                       >
                         <option value="new">Neu</option>
@@ -513,7 +513,7 @@ export default function Admin() {
                         className={`px-4 py-2 rounded-lg font-bold text-sm border-2 outline-none transition-all ${
                           lead.status === 'new' ? 'border-purple-200 bg-purple-50 text-purple-600' :
                           lead.status === 'closed' ? 'border-gray-200 bg-gray-50 text-gray-600' :
-                          'border-green-200 bg-green-50 text-[#005332]'
+                          'border-green-200 bg-green-50 text-[#2ca06a]'
                         }`}
                       >
                         <option value="new">Neu</option>

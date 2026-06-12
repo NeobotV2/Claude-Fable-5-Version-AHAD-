@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
-import { FALLBACK_IMAGE } from '@/lib/images';
+import { FALLBACK_IMAGE, unsplashSrcSet } from '@/lib/images';
 
 interface SmartImageProps {
   src: string;
@@ -8,13 +8,15 @@ interface SmartImageProps {
   className?: string;
   imgClassName?: string;
   eager?: boolean;
+  /** sizes-Attribut für responsives Laden, z.B. "(min-width:1024px) 33vw, 100vw". */
+  sizes?: string;
 }
 
 /**
- * Bild mit sanftem Einblenden und gebrandetem Fallback,
- * falls die externe Quelle nicht erreichbar ist.
+ * Bild mit sanftem Einblenden, responsivem srcset und gebrandetem
+ * Fallback, falls die externe Quelle nicht erreichbar ist.
  */
-export default function SmartImage({ src, alt, className, imgClassName, eager = false }: SmartImageProps) {
+export default function SmartImage({ src, alt, className, imgClassName, eager = false, sizes = '100vw' }: SmartImageProps) {
   const [loaded, setLoaded] = useState(false);
   const [failed, setFailed] = useState(false);
 
@@ -22,6 +24,8 @@ export default function SmartImage({ src, alt, className, imgClassName, eager = 
     <div className={cn('relative overflow-hidden bg-navy/5', className)}>
       <img
         src={failed ? FALLBACK_IMAGE : src}
+        srcSet={failed ? undefined : unsplashSrcSet(src)}
+        sizes={failed ? undefined : sizes}
         alt={alt}
         loading={eager ? 'eager' : 'lazy'}
         decoding="async"

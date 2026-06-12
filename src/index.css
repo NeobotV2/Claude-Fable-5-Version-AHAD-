@@ -1,4 +1,5 @@
-/* Fonts werden in index.html via <link> mit preconnect geladen. */
+/* Selbst gehostete Fonts (DSGVO-sauber, kein Google-Request) — siehe scripts/fetch-fonts.mjs */
+@import './styles/fonts.css';
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
@@ -8,6 +9,10 @@
   --font-logo: "Montserrat", sans-serif;
 
   /* ── AHAD Markenfarben ─────────────────────────────────────────── */
+  /* Hinweis Branding: Soll das finale AHAD-Grün geändert werden (z.B. auf
+     ein tieferes #0d6b38), genügt es, --color-accent und --color-accent-dark
+     hier anzupassen — alle CTAs, Badges und Icons folgen automatisch.
+     Das Logo-Gradient-Grün (#2ca06a) liegt in Logo.tsx/generate-assets.mjs. */
   --color-navy: #001c3b;        /* Tiefes Marineblau — Autorität */
   --color-navy-900: #00142b;
   --color-navy-800: #002a55;
@@ -16,7 +21,7 @@
   --color-brand-light: #1e60a9;
   --color-accent: #2ca06a;      /* Smaragd — CTA / Aktion */
   --color-accent-dark: #238054;
-  --color-mint: #8bf8ba;        /* Akzent auf dunklen Flächen */
+  --color-mint: #97e7bd;        /* Akzent auf dunklen Flächen — bewusst gedämpft */
   --color-paper: #f7f9fb;       /* Heller Seitenhintergrund */
   --color-ink: #0e1726;         /* Fließtext dunkel */
   --color-slate: #424751;       /* Fließtext gedämpft */
@@ -25,7 +30,7 @@
   /* ── Schatten ──────────────────────────────────────────────────── */
   --shadow-soft: 0 2px 8px -2px rgb(0 28 59 / 0.08), 0 8px 24px -8px rgb(0 28 59 / 0.10);
   --shadow-lifted: 0 4px 12px -2px rgb(0 28 59 / 0.10), 0 20px 48px -12px rgb(0 28 59 / 0.18);
-  --shadow-glow: 0 0 0 1px rgb(139 248 186 / 0.25), 0 8px 32px -8px rgb(44 160 106 / 0.45);
+  --shadow-glow: 0 0 0 1px rgb(151 231 189 / 0.25), 0 8px 32px -8px rgb(44 160 106 / 0.45);
 
   /* ── Animationen ───────────────────────────────────────────────── */
   --animate-marquee: marquee 42s linear infinite;

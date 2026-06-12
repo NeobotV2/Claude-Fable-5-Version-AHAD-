@@ -15,7 +15,7 @@ export default function Impressum() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="prose prose-blue max-w-none"
+          className="prose prose-slate max-w-none"
         >
 
           <section className="mb-12">
@@ -29,7 +29,7 @@ export default function Impressum() {
 
           <section className="mb-12">
             <h2 className="text-2xl font-bold mb-4">Vertreten durch:</h2>
-            <p className="text-gray-600">Geschäftsführer: Nurhan Yerlikaya</p>
+            <p className="text-gray-600">Geschäftsführerin: Nurhan Yerlikaya</p>
           </section>
 
           <section className="mb-12">
@@ -57,8 +57,9 @@ export default function Impressum() {
             </p>
           </section>
 
+          {/* § 55 Abs. 2 RStV ist seit 2020 durch den Medienstaatsvertrag abgelöst. */}
           <section className="mb-12">
-            <h2 className="text-2xl font-bold mb-4">Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV</h2>
+            <h2 className="text-2xl font-bold mb-4">Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV</h2>
             <p className="text-gray-600">
               Nurhan Yerlikaya<br />
               Max-Planck-Straße 11<br />

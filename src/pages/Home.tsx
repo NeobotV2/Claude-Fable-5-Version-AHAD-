@@ -28,8 +28,18 @@ import BeforeAfter from '@/components/ui/BeforeAfter';
 import Accordion, { faqSchemaFrom, type FAQItem } from '@/components/ui/Accordion';
 import LogoMarquee from '@/components/LogoMarquee';
 import CTABand from '@/components/CTABand';
-import { IMG } from '@/lib/images';
+import { IMG, unsplashSrcSet } from '@/lib/images';
 import { SITE, STATS, TESTIMONIALS, ORGANIZATION_SCHEMA } from '@/lib/site';
+import { SERVICES } from '@/data/services';
+
+const FEATURED_PATHS = [
+  '/leistungen/unterhaltsreinigung',
+  '/leistungen/industrie-produktionsreinigung',
+  '/leistungen/glas-fassadenreinigung',
+];
+
+/** Die übrigen Leistungen — kompakt angeteasert, damit kein Umsatzfeld unsichtbar bleibt. */
+const moreServices = SERVICES.filter((service) => !FEATURED_PATHS.includes(service.path));
 
 const featuredServices = [
   {
@@ -187,11 +197,12 @@ export default function Home() {
         <motion.div className="absolute inset-0" style={{ y: heroImageY }}>
           <img
             src={IMG.heroMain}
+            srcSet={unsplashSrcSet(IMG.heroMain)}
+            sizes="100vw"
             alt="Moderne Glasfassade eines Bürogebäudes"
             className="w-full h-[115%] object-cover opacity-50"
             loading="eager"
             decoding="async"
-            fetchPriority="high"
             referrerPolicy="no-referrer"
           />
         </motion.div>
@@ -217,10 +228,8 @@ export default function Home() {
             <h1 className="display-xl text-white mb-8">
               <RevealWords text="Sauberkeit, die Sie" delay={0.15} />
               <br />
-              <RevealWords text="nie wieder" delay={0.45} />{' '}
-              <span className="relative inline-block">
-                <RevealWords text="managen" className="text-gradient-mint" delay={0.6} />
-              </span>
+              <RevealWords text="nicht mehr" delay={0.45} />{' '}
+              <RevealWords text="nachsteuern" className="text-mint" delay={0.6} />
               <br />
               <RevealWords text="müssen." delay={0.8} />
             </h1>
@@ -231,8 +240,8 @@ export default function Home() {
               transition={{ delay: 0.9, duration: 0.7 }}
               className="text-lg sm:text-xl text-blue-100/90 max-w-2xl font-medium leading-relaxed mb-10"
             >
-              Schluss mit Reklamationen und Nachfassen: Wir steuern Ausführung, Qualität und Nachweise Ihrer
-              Gebäudereinigung als System — damit Ihr Betrieb einfach sauber läuft.
+              Schluss mit Reklamationen und internem Hinterherlaufen: Wir steuern Ausführung, Qualität und
+              Nachweise Ihrer Gebäudereinigung als System — damit Ihr Betrieb einfach sauber läuft.
             </motion.p>
 
             <motion.div
@@ -348,6 +357,7 @@ export default function Home() {
                   <SmartImage
                     src={service.image}
                     alt={service.title}
+                    sizes="(min-width:1024px) 33vw, (min-width:768px) 50vw, 100vw"
                     className="absolute inset-0"
                     imgClassName="opacity-75 transition-transform duration-700 group-hover:scale-105"
                   />
@@ -383,6 +393,32 @@ export default function Home() {
               </Reveal>
             ))}
           </div>
+
+          {/* Zweite Reihe: alle weiteren Leistungen kompakt — nichts bleibt unsichtbar */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-5">
+            {moreServices.map((service, i) => (
+              <Reveal key={service.slug} delay={0.1 + i * 0.06}>
+                <Link
+                  to={service.path}
+                  className="group flex items-center gap-4 bg-white rounded-2xl border border-line p-5 card-lift h-full"
+                >
+                  <span className="w-11 h-11 rounded-xl bg-brand/8 text-brand grid place-items-center flex-shrink-0 group-hover:bg-accent group-hover:text-white transition-colors">
+                    {service.icon}
+                  </span>
+                  <span className="min-w-0 flex-grow">
+                    <span className="block font-headline font-bold text-[15px] text-navy leading-snug">
+                      {service.name}
+                    </span>
+                    <span className="block text-xs text-slate mt-0.5">{service.short}</span>
+                  </span>
+                  <ArrowRight
+                    size={16}
+                    className="flex-shrink-0 text-brand/40 transition-all duration-300 group-hover:text-accent group-hover:translate-x-1"
+                  />
+                </Link>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -399,7 +435,7 @@ export default function Home() {
                 dark
                 title={
                   <>
-                    Sehen Sie selbst, was <span className="text-gradient-mint">System</span> ausmacht.
+                    Sehen Sie selbst, was <span className="text-mint">System</span> ausmacht.
                   </>
                 }
                 lead="Ziehen Sie den Regler: links der Zustand bei Übernahme, rechts unser dokumentierter Standard. Genau diese Differenz liefern wir — jede Woche, in jedem Objekt."
@@ -524,6 +560,7 @@ export default function Home() {
                   <SmartImage
                     src={industry.image}
                     alt={industry.title}
+                    sizes="(min-width:1024px) 33vw, (min-width:640px) 50vw, 100vw"
                     className="absolute inset-0"
                     imgClassName="opacity-70 transition-transform duration-700 group-hover:scale-105"
                   />

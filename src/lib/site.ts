@@ -25,7 +25,12 @@ export const SITE = {
   },
 } as const;
 
-/** Vertriebsversprechen — überall identisch kommuniziert. */
+/**
+ * Vertriebsversprechen — überall identisch kommuniziert.
+ * WICHTIG: Diese Zusagen stehen öffentlich auf der Website und müssen
+ * operativ abgesichert sein (Erreichbarkeit, Besichtigungskapazität,
+ * Angebotsdurchlaufzeit), sonst kippt das Vertrauensargument.
+ */
 export const PROMISES = [
   { value: '24h', label: 'Reaktionszeit garantiert' },
   { value: '48h', label: 'bis zur Objektbesichtigung' },

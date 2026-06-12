@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { ChevronRight } from 'lucide-react';
 import ButtonLink from '@/components/ui/Button';
 import { SITE } from '@/lib/site';
+import { unsplashSrcSet } from '@/lib/images';
 import type { ReactNode } from 'react';
 
 export interface Crumb {
@@ -51,6 +52,8 @@ export default function PageHero({
           <>
             <img
               src={image}
+              srcSet={unsplashSrcSet(image)}
+              sizes="100vw"
               alt={imageAlt}
               className="w-full h-full object-cover opacity-40"
               loading="eager"

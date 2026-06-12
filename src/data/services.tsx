@@ -31,6 +31,8 @@ export interface ServiceData {
   path: string;
   name: string;
   tag: string;
+  /** Ein-Zeilen-Teaser für kompakte Karten (Startseite, Menüs). */
+  short: string;
   heroTitle: string;
   heroLead: string;
   seoTitle: string;
@@ -51,6 +53,7 @@ export interface ServiceData {
 export const SERVICES: ServiceData[] = [
   {
     slug: 'unterhaltsreinigung',
+    short: 'Planbar saubere Büros & Objekte',
     path: '/leistungen/unterhaltsreinigung',
     name: 'Unterhaltsreinigung',
     tag: 'Null Beschwerden',
@@ -114,6 +117,7 @@ export const SERVICES: ServiceData[] = [
   },
   {
     slug: 'industrie-produktionsreinigung',
+    short: 'Reinigung im laufenden Betrieb',
     path: '/leistungen/industrie-produktionsreinigung',
     name: 'Industrie- & Produktionsreinigung',
     tag: 'Prozessintegriert',
@@ -177,6 +181,7 @@ export const SERVICES: ServiceData[] = [
   },
   {
     slug: 'glas-fassadenreinigung',
+    short: 'Werterhalt der Gebäudehülle',
     path: '/leistungen/glas-fassadenreinigung',
     name: 'Glas- & Fassadenreinigung',
     tag: 'Werterhalt garantiert',
@@ -240,6 +245,7 @@ export const SERVICES: ServiceData[] = [
   },
   {
     slug: 'baureinigung',
+    short: 'Termingerechte, bezugsfertige Übergaben',
     path: '/leistungen/baureinigung',
     name: 'Baureinigung',
     tag: 'Terminfest',
@@ -303,6 +309,7 @@ export const SERVICES: ServiceData[] = [
   },
   {
     slug: 'medizintechnik-reinigung',
+    short: 'Dokumentiert & auditfähig',
     path: '/leistungen/medizintechnik-reinigung',
     name: 'Medizintechnik & Reinraum',
     tag: 'Dokumentiert',
@@ -366,6 +373,7 @@ export const SERVICES: ServiceData[] = [
   },
   {
     slug: 'sonderreinigung-stillstandsservice',
+    short: 'Grundreinigung & Stillstandsservice',
     path: '/leistungen/sonderreinigung-stillstandsservice',
     name: 'Sonderreinigung & Stillstandsservice',
     tag: 'Planbar',
@@ -429,6 +437,7 @@ export const SERVICES: ServiceData[] = [
   },
   {
     slug: 'winterdienst-hausmeisterservice',
+    short: 'Verkehrssicher durchs ganze Jahr',
     path: '/leistungen/winterdienst-hausmeisterservice',
     name: 'Winterdienst & Hausmeisterservice',
     tag: 'Verkehrssicher',

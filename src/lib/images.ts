@@ -14,6 +14,18 @@ const u = (id: string, w = 1600, extra = '') =>
 
 export const FALLBACK_IMAGE = `${import.meta.env.BASE_URL}images/fallback.jpg`;
 
+/**
+ * Erzeugt ein responsives srcset für Unsplash-URLs (kleinere Geräte laden
+ * kleinere Varianten — bessere mobile Ladezeit / Core Web Vitals).
+ * `auto=format` liefert dabei automatisch WebP/AVIF an moderne Browser.
+ */
+export function unsplashSrcSet(url: string): string | undefined {
+  if (!url.includes('images.unsplash.com')) return undefined;
+  return [480, 768, 1080, 1600]
+    .map((w) => `${url.replace(/w=\d+/, `w=${w}`)} ${w}w`)
+    .join(', ');
+}
+
 export const IMG = {
   // ── Hero & Stimmung ────────────────────────────────────────────────
   heroMain: u('photo-1486406146926-c627a92ad1ab', 2000),        // Glasfassade, blaue Stunde

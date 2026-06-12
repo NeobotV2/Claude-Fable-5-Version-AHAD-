@@ -57,9 +57,9 @@ function ogImageSvg() {
   <circle cx="120" cy="600" r="380" fill="url(#glowGreen)"/>
   ${logoMark(130, 92, 96)}
   <text x="248" y="172" font-family="DejaVu Sans, Arial, sans-serif" font-weight="bold" font-size="64" letter-spacing="-2" fill="#ffffff">AHAD</text>
-  <text x="251" y="206" font-family="DejaVu Sans, Arial, sans-serif" font-size="24" letter-spacing="14" fill="#8bf8ba">CLEANING</text>
+  <text x="251" y="206" font-family="DejaVu Sans, Arial, sans-serif" font-size="24" letter-spacing="14" fill="#97e7bd">CLEANING</text>
   <text x="96" y="350" font-family="DejaVu Sans, Arial, sans-serif" font-weight="bold" font-size="74" letter-spacing="-2.5" fill="#ffffff">Struktur. Sauberkeit.</text>
-  <text x="96" y="438" font-family="DejaVu Sans, Arial, sans-serif" font-weight="bold" font-size="74" letter-spacing="-2.5" fill="#8bf8ba">Sicherheit.</text>
+  <text x="96" y="438" font-family="DejaVu Sans, Arial, sans-serif" font-weight="bold" font-size="74" letter-spacing="-2.5" fill="#97e7bd">Sicherheit.</text>
   <text x="96" y="502" font-family="DejaVu Sans, Arial, sans-serif" font-size="27" fill="rgba(219,234,254,0.85)">Systematische Gebäudereinigung für Industrie, Verwaltung &amp; Mittelstand</text>
   <g>
     <rect x="96" y="540" width="252" height="44" rx="22" fill="#2ca06a"/>
@@ -78,7 +78,7 @@ function fallbackSvg() {
   <circle cx="180" cy="940" r="500" fill="url(#glowGreen)"/>
   ${logoMark(180, 710, 360)}
   <text x="800" y="640" text-anchor="middle" font-family="DejaVu Sans, Arial, sans-serif" font-weight="bold" font-size="56" letter-spacing="-1" fill="#ffffff">AHAD CLEANING</text>
-  <text x="800" y="690" text-anchor="middle" font-family="DejaVu Sans, Arial, sans-serif" font-size="26" letter-spacing="6" fill="#8bf8ba">STRUKTUR · SAUBERKEIT · SICHERHEIT</text>
+  <text x="800" y="690" text-anchor="middle" font-family="DejaVu Sans, Arial, sans-serif" font-size="26" letter-spacing="6" fill="#97e7bd">STRUKTUR · SAUBERKEIT · SICHERHEIT</text>
 </svg>`;
 }
 
