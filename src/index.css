@@ -24,7 +24,7 @@
   --color-brand-light: #1C4576; /* Link-/Hover-Tint des Navy */
   --color-accent: #0D6B38;      /* AHAD Grün — CTA / Akzent */
   --color-accent-dark: #0A552C; /* abgedunkeltes AHAD Grün (Hover) */
-  --color-mint: #A9DCBE;        /* heller Tint des AHAD Grün für dunkle Flächen */
+  --color-mint: #9CDDB7;        /* heller Tint des AHAD Grün für dunkle Flächen */
   --color-paper: #f7f9fb;       /* Heller Seitenhintergrund */
   --color-ink: #101826;         /* Fließtext dunkel */
   --color-slate: #424751;       /* Fließtext gedämpft */
@@ -33,7 +33,7 @@
   /* ── Schatten ──────────────────────────────────────────────────── */
   --shadow-soft: 0 2px 8px -2px rgb(11 35 65 / 0.08), 0 8px 24px -8px rgb(11 35 65 / 0.10);
   --shadow-lifted: 0 4px 12px -2px rgb(11 35 65 / 0.10), 0 20px 48px -12px rgb(11 35 65 / 0.18);
-  --shadow-glow: 0 0 0 1px rgb(169 220 190 / 0.25), 0 8px 32px -8px rgb(13 107 56 / 0.45);
+  --shadow-glow: 0 0 0 1px rgb(156 221 183 / 0.25), 0 8px 32px -8px rgb(13 107 56 / 0.45);
 
   /* ── Animationen ───────────────────────────────────────────────── */
   --animate-marquee: marquee 42s linear infinite;

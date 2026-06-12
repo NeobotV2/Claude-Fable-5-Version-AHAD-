@@ -143,15 +143,10 @@ export default function Header() {
                 24h Reaktionszeit garantiert
               </span>
             </div>
-            <div className="flex items-center gap-6">
-              <a href={SITE.emailHref} className="hover:text-white transition-colors">
-                {SITE.email}
-              </a>
-              <a href={SITE.phoneHref} className="flex items-center gap-2 text-white hover:text-mint transition-colors">
-                <Phone size={13} />
-                {SITE.phone}
-              </a>
-            </div>
+            {/* Telefon steht prominent in der Hauptleiste — hier nur E-Mail, keine Dopplung */}
+            <a href={SITE.emailHref} className="hover:text-white transition-colors">
+              {SITE.email}
+            </a>
           </div>
         </div>
       </div>

@@ -25,7 +25,7 @@ const contactChannels = [
         {SITE.email}
       </a>
     ),
-    hint: 'Antwort innerhalb von 24h',
+    hint: 'Persönliche Antwort — kein Ticketsystem',
   },
   {
     icon: <MapPin size={22} />,

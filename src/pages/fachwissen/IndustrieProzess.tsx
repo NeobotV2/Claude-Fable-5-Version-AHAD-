@@ -84,7 +84,7 @@ export default function FachwissenIndustrieProzess() {
             className="max-w-3xl"
           >
             <span className="inline-flex items-center gap-2 bg-white/10 px-4 py-2 rounded-full text-sm font-bold mb-6 tracking-wider uppercase border border-white/20">
-              <Settings2 className="w-4 h-4 text-[#A9DCBE]" />
+              <Settings2 className="w-4 h-4 text-[#9CDDB7]" />
               Fachwissen: Industrie-Logik
             </span>
             <h1 className="text-4xl md:text-6xl font-black mb-8 leading-tight tracking-tight">
@@ -134,8 +134,8 @@ export default function FachwissenIndustrieProzess() {
             </p>
 
             <div className="bg-[#0B2341] text-white p-8 rounded-3xl mb-12 shadow-xl">
-              <h3 className="text-2xl font-bold text-[#A9DCBE] mb-6 flex items-center gap-3">
-                <Zap className="text-[#A9DCBE] w-8 h-8" />
+              <h3 className="text-2xl font-bold text-[#9CDDB7] mb-6 flex items-center gap-3">
+                <Zap className="text-[#9CDDB7] w-8 h-8" />
                 Unsere Integrations-Strategie
               </h3>
               <ul className="space-y-4 list-none pl-0">

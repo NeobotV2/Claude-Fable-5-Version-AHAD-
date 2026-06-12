@@ -65,7 +65,7 @@ export default function Standorte() {
         lead="Drei Standorte, ein Qualitätssystem: Wir betreuen Objekte in ganz Süddeutschland — mit regionalen Teams, kurzen Wegen und einer festen Objektleitung vor Ort."
         image={IMG.schwarzwald}
         crumbs={[{ label: 'Standorte' }]}
-        cta={{ label: 'Angebot in 24h anfordern', to: '/angebot' }}
+        cta={{ label: 'Kostenloses Angebot anfordern', to: '/angebot' }}
         secondaryCta={{ label: SITE.phone, href: SITE.phoneHref }}
       />
 

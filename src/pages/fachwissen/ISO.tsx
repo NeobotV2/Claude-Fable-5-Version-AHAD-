@@ -84,7 +84,7 @@ export default function FachwissenISO() {
             className="max-w-3xl"
           >
             <span className="inline-flex items-center gap-2 bg-white/10 px-4 py-2 rounded-full text-sm font-bold mb-6 tracking-wider uppercase border border-white/20">
-              <Award className="w-4 h-4 text-[#A9DCBE]" />
+              <Award className="w-4 h-4 text-[#9CDDB7]" />
               Fachwissen: Qualität & Umwelt
             </span>
             <h1 className="text-4xl md:text-6xl font-black mb-8 leading-tight tracking-tight">

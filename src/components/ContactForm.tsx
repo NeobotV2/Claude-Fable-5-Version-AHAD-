@@ -231,7 +231,9 @@ export default function ContactForm() {
           </>
         )}
       </button>
-      <p className="text-center text-xs text-slate/70 font-medium">Antwort garantiert innerhalb von 24 Stunden.</p>
+      <p className="text-center text-xs text-slate/70 font-medium">
+        Ihre Daten werden ausschließlich zur Bearbeitung Ihrer Anfrage verwendet.
+      </p>
     </form>
   );
 }

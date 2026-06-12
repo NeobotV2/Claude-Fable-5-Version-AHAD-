@@ -16,7 +16,6 @@ import {
   PhoneCall,
   CalendarCheck,
   FileCheck2,
-  ChevronDown,
 } from 'lucide-react';
 import SEO from '@/components/SEO';
 import Reveal, { RevealWords } from '@/components/ui/Reveal';
@@ -192,29 +191,30 @@ export default function Home() {
       />
 
       {/* ── HERO ──────────────────────────────────────────────────────── */}
-      <section ref={heroRef} className="relative min-h-[100svh] flex flex-col bg-navy text-white overflow-hidden grain">
-        {/* Parallax-Bild mit Navy-Duotone */}
+      <section ref={heroRef} className="relative min-h-[92svh] flex flex-col bg-navy text-white overflow-hidden grain">
+        {/* Parallax-Bild mit Navy-Duotone — rechts bewusst heller,
+            damit die Bildhälfte trägt statt schwarz abzusaufen */}
         <motion.div className="absolute inset-0" style={{ y: heroImageY }}>
           <img
             src={IMG.heroMain}
             srcSet={unsplashSrcSet(IMG.heroMain)}
             sizes="100vw"
             alt="Moderne Glasfassade eines Bürogebäudes"
-            className="w-full h-[115%] object-cover opacity-50"
+            className="w-full h-[115%] object-cover opacity-65"
             loading="eager"
             decoding="async"
             referrerPolicy="no-referrer"
           />
         </motion.div>
-        <div className="absolute inset-0 bg-gradient-to-r from-navy via-navy/80 to-navy/30" />
-        <div className="absolute inset-0 bg-gradient-to-t from-navy via-transparent to-navy/70" />
+        <div className="absolute inset-0 bg-gradient-to-r from-navy via-navy/75 to-navy/10" />
+        <div className="absolute inset-0 bg-gradient-to-t from-navy via-transparent to-navy/60" />
         <div className="absolute inset-0 blueprint-grid opacity-40" />
 
         <motion.div
           style={{ opacity: heroFade }}
-          className="relative z-10 flex-grow flex items-center max-w-7xl mx-auto px-4 sm:px-8 w-full pt-36 pb-16 lg:pt-40"
+          className="relative z-10 flex-grow flex items-center max-w-7xl mx-auto px-4 sm:px-8 w-full pt-32 pb-14 gap-12"
         >
-          <div className="max-w-4xl min-w-0">
+          <div className="max-w-3xl min-w-0 flex-1">
             <motion.span
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
@@ -222,7 +222,7 @@ export default function Home() {
               className="eyebrow text-mint mb-7"
             >
               <span className="h-px w-8 bg-mint/50" />
-              Gebäudereinigung für Industrie, Verwaltung & Mittelstand
+              Für Industrie, Verwaltung & Mittelstand in Süddeutschland
             </motion.span>
 
             {/* Keyword im H1 (SEO) + Schmerzpunkt der Zielgruppe (Conversion) */}
@@ -242,7 +242,7 @@ export default function Home() {
               className="text-lg sm:text-xl text-blue-100/90 max-w-2xl font-medium leading-relaxed mb-10"
             >
               Schluss mit Reklamationen und internem Hinterherlaufen: Wir steuern Ausführung, Qualität und
-              Nachweise Ihrer Gebäudereinigung als System — damit Ihr Betrieb einfach sauber läuft.
+              Nachweise als System — damit Ihr Betrieb einfach sauber läuft.
             </motion.p>
 
             <motion.div
@@ -252,14 +252,14 @@ export default function Home() {
               className="flex flex-col sm:flex-row gap-4 mb-12"
             >
               <ButtonLink to="/angebot" size="lg" arrow>
-                Angebot in 24h anfordern
+                Kostenloses Angebot anfordern
               </ButtonLink>
               <ButtonLink to="/ahad-system" variant="outline-light" size="lg">
                 Wie das AHAD System arbeitet
               </ButtonLink>
             </motion.div>
 
-            {/* Trust-Chips */}
+            {/* Trust-Chips — bewusst ohne Zahlen, die die Stats-Leiste doppeln würden */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -268,18 +268,44 @@ export default function Home() {
             >
               <span className="flex items-center gap-2">
                 <CheckCircle2 size={15} className="text-mint" />
-                24h Reaktionszeit garantiert
+                Feste Objektleitung je Objekt
               </span>
               <span className="flex items-center gap-2">
                 <CheckCircle2 size={15} className="text-mint" />
-                Feste Objektleitung
+                Festangestellte, geschulte Teams
               </span>
               <span className="flex items-center gap-2">
                 <CheckCircle2 size={15} className="text-mint" />
-                80+ betreute Objekte — von Allianz bis GOLDBECK
+                Vertraut von Allianz bis GOLDBECK
               </span>
             </motion.div>
           </div>
+
+          {/* Proof-Karte: verankert die rechte Bildhälfte mit neuem Inhalt
+              (Social Proof) statt einer CTA-Dopplung — nur auf großen Screens */}
+          <motion.aside
+            initial={{ opacity: 0, x: 40 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 1.15, duration: 0.8, ease: [0.2, 0.65, 0.3, 1] }}
+            className="hidden xl:block w-[23rem] flex-shrink-0 self-center"
+          >
+            <figure className="glass-dark border border-white/15 rounded-3xl p-7 shadow-lifted">
+              <Quote className="w-8 h-8 text-mint/40 mb-4" aria-hidden />
+              <blockquote className="text-[15px] leading-relaxed text-blue-50 font-medium">
+                „{TESTIMONIALS[0].quote}“
+              </blockquote>
+              <figcaption className="mt-5 pt-5 border-t border-white/10">
+                <div className="font-bold text-white text-sm">{TESTIMONIALS[0].name}</div>
+                <div className="text-[13px] text-blue-100/70 mt-0.5">{TESTIMONIALS[0].company}</div>
+              </figcaption>
+              <Link
+                to="/referenzen"
+                className="mt-5 inline-flex items-center gap-1.5 text-[13px] font-bold text-mint hover:text-white transition-colors"
+              >
+                Alle Referenzen <ArrowRight size={14} />
+              </Link>
+            </figure>
+          </motion.aside>
         </motion.div>
 
         {/* Statistik-Leiste */}
@@ -298,19 +324,6 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Scroll-Hinweis */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.8 }}
-          className="absolute bottom-28 right-8 hidden lg:flex flex-col items-center gap-2 text-blue-100/50"
-          aria-hidden
-        >
-          <span className="text-[10px] font-black uppercase tracking-[0.3em] [writing-mode:vertical-lr]">Scrollen</span>
-          <motion.div animate={reduce ? {} : { y: [0, 8, 0] }} transition={{ repeat: Infinity, duration: 1.8 }}>
-            <ChevronDown size={18} />
-          </motion.div>
-        </motion.div>
       </section>
 
       {/* ── REFERENZEN-MARQUEE ───────────────────────────────────────── */}
@@ -444,7 +457,7 @@ export default function Home() {
               <Reveal delay={0.2} className="mt-10">
                 <div className="flex flex-col sm:flex-row gap-4">
                   <ButtonLink to="/referenzen" variant="white" arrow>
-                    Projekte ansehen
+                    Referenzen ansehen
                   </ButtonLink>
                   <ButtonLink to="/angebot" variant="outline-light">
                     Objekt bewerten lassen
@@ -459,6 +472,11 @@ export default function Home() {
                 beforeLabel="Bei Übernahme"
                 afterLabel="AHAD Standard"
               />
+              {/* Ehrlichkeit schlägt Inszenierung: Symbolbilder als solche kennzeichnen */}
+              <p className="mt-4 text-[13px] text-blue-100/60 font-medium">
+                Beispielhafte Darstellung — echte Vorher/Nachher-Dokumentation aus unseren Objekten zeigen wir
+                Ihnen gern im persönlichen Gespräch.
+              </p>
             </Reveal>
           </div>
         </div>
@@ -606,7 +624,7 @@ export default function Home() {
             index="05"
             eyebrow="Stimmen unserer Kunden"
             align="center"
-            title="Verantwortliche, die nicht mehr nachfassen müssen."
+            title="Das sagen die, die uns beauftragt haben."
             className="mb-16 max-w-3xl mx-auto"
           />
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">

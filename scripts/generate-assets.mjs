@@ -27,7 +27,7 @@ const NAVY = '#0B2341';
 const GREEN = '#0D6B38';
 const FALZ_GREEN = '#064B20';
 const FALZ_NAVY = '#02122A';
-const TINT = '#A9DCBE';
+const TINT = '#9CDDB7';
 
 const vb = (b) => `${b.x1} ${b.y1} ${(b.x2 - b.x1).toFixed(3)} ${(b.y2 - b.y1).toFixed(3)}`;
 

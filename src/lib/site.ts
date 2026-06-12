@@ -39,8 +39,8 @@ export const PROMISES = [
 
 export const STATS = [
   { value: 80, suffix: '+', label: 'Qualifizierte Mitarbeitende' },
-  { value: 80, suffix: '+', label: 'Betreute Objekte' },
   { value: 15, suffix: '+', label: 'Jahre Erfahrung' },
+  { value: 7, suffix: '', label: 'Leistungsbereiche aus einer Hand' },
   { value: 3, suffix: '', label: 'Standorte in Süddeutschland' },
 ] as const;
 
