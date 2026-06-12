@@ -1,0 +1,13 @@
+{
+  "name": "AHAD Cleaning",
+  "short_name": "AHAD",
+  "description": "Systematische Gebäudereinigung für Industrie, Verwaltung und Mittelstand in Süddeutschland.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#001c3b",
+  "theme_color": "#001c3b",
+  "icons": [
+    { "src": "/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" },
+    { "src": "/logo-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

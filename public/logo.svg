@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 110" role="img" aria-label="AHAD Cleaning Logo">
+  <defs>
+    <linearGradient id="g" x1="15%" y1="15%" x2="85%" y2="85%">
+      <stop offset="0%" stop-color="#2ca06a"/>
+      <stop offset="100%" stop-color="#1e60a9"/>
+    </linearGradient>
+    <mask id="m">
+      <rect width="110" height="110" fill="white"/>
+      <rect x="37" y="37" width="36" height="36" rx="6" transform="rotate(45 55 55)" fill="black"/>
+    </mask>
+  </defs>
+  <rect x="19" y="19" width="72" height="72" rx="16" transform="rotate(45 55 55)" fill="url(#g)" mask="url(#m)"/>
+  <text x="124" y="64" font-family="Montserrat, Arial, sans-serif" font-weight="900" font-size="52" letter-spacing="-2" fill="#1e60a9">AHAD</text>
+  <text x="127" y="92" font-family="Montserrat, Arial, sans-serif" font-weight="600" font-size="19" letter-spacing="11" fill="#2ca06a">CLEANING</text>
+</svg>

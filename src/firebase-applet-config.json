@@ -1,0 +1,10 @@
+{
+  "_hinweis": "Platzhalter-Konfiguration. Echte Werte über VITE_FIREBASE_*-Umgebungsvariablen setzen oder diese Datei mit der Firebase-Projektkonfiguration ersetzen.",
+  "apiKey": "demo-api-key",
+  "authDomain": "ahad-cleaning.firebaseapp.com",
+  "projectId": "ahad-cleaning-demo",
+  "storageBucket": "ahad-cleaning-demo.appspot.com",
+  "messagingSenderId": "000000000000",
+  "appId": "1:000000000000:web:0000000000000000000000",
+  "firestoreDatabaseId": "(default)"
+}

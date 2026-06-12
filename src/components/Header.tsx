@@ -1,0 +1,446 @@
+import { Link, useLocation } from 'react-router-dom';
+import { cn } from '@/lib/utils';
+import { motion, AnimatePresence } from 'motion/react';
+import { useState, useEffect } from 'react';
+import {
+  ChevronDown,
+  Menu,
+  X,
+  Phone,
+  Clock,
+  ShieldCheck,
+  LayoutDashboard,
+  Factory,
+  Building2,
+  HardHat,
+  Microscope,
+  Sparkles,
+  Snowflake,
+  ArrowRight,
+} from 'lucide-react';
+import Logo from '@/components/Logo';
+import { SITE } from '@/lib/site';
+
+interface SubLink {
+  name: string;
+  href: string;
+  description?: string;
+  icon?: React.ReactNode;
+}
+
+interface NavItem {
+  name: string;
+  href: string;
+  mega?: boolean;
+  sublinks?: SubLink[];
+}
+
+const navLinks: NavItem[] = [
+  {
+    name: 'Leistungen',
+    href: '/leistungen',
+    mega: true,
+    sublinks: [
+      { name: 'Unterhaltsreinigung', href: '/leistungen/unterhaltsreinigung', description: 'Planbar saubere Büros & Objekte', icon: <LayoutDashboard size={18} /> },
+      { name: 'Industriereinigung', href: '/leistungen/industrie-produktionsreinigung', description: 'Reinigung im laufenden Betrieb', icon: <Factory size={18} /> },
+      { name: 'Glas- & Fassadenreinigung', href: '/leistungen/glas-fassadenreinigung', description: 'Werterhalt der Gebäudehülle', icon: <Building2 size={18} /> },
+      { name: 'Baureinigung', href: '/leistungen/baureinigung', description: 'Termingerechte Übergaben', icon: <HardHat size={18} /> },
+      { name: 'Medizintechnik & Reinraum', href: '/leistungen/medizintechnik-reinigung', description: 'Dokumentiert & auditfähig', icon: <Microscope size={18} /> },
+      { name: 'Sonderreinigung', href: '/leistungen/sonderreinigung-stillstandsservice', description: 'Grundreinigung & Stillstand', icon: <Sparkles size={18} /> },
+      { name: 'Winterdienst & Hausmeister', href: '/leistungen/winterdienst-hausmeisterservice', description: 'Verkehrssicher durchs Jahr', icon: <Snowflake size={18} /> },
+    ],
+  },
+  {
+    name: 'Branchen',
+    href: '/branchen',
+    sublinks: [
+      { name: 'Industrie & Produktion', href: '/branchen/industrie-produktion' },
+      { name: 'Medizintechnik', href: '/branchen/medizintechnik' },
+      { name: 'Büro & Verwaltung', href: '/branchen/buero-verwaltung' },
+      { name: 'Gewerbeobjekte', href: '/branchen/gewerbeobjekte' },
+      { name: 'Hotellerie & Objektbetrieb', href: '/branchen/hotellerie-objektbetrieb' },
+    ],
+  },
+  { name: 'AHAD System', href: '/ahad-system' },
+  { name: 'Referenzen', href: '/referenzen' },
+  {
+    name: 'Unternehmen',
+    href: '/unternehmen',
+    sublinks: [
+      { name: 'Über uns', href: '/unternehmen' },
+      { name: 'Standorte', href: '/standorte' },
+      { name: 'Karriere', href: '/karriere' },
+      { name: 'Fachwissen', href: '/fachwissen' },
+      { name: 'Kontakt', href: '/kontakt' },
+    ],
+  },
+];
+
+/** Routen, deren Seitenanfang hell ist — dort startet der Header direkt im Glas-Modus. */
+const LIGHT_TOP_ROUTES = ['/karriere/bewerbung', '/admin'];
+
+export default function Header() {
+  const location = useLocation();
+  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [mobileActiveDropdown, setMobileActiveDropdown] = useState<string | null>(null);
+  const [scrolledDown, setScrolledDown] = useState(false);
+  const lightTop = LIGHT_TOP_ROUTES.some((route) => location.pathname.startsWith(route));
+  const scrolled = scrolledDown || lightTop;
+
+  // Alle Seiten starten mit dunklem Hero → oben transparent/hell, beim Scrollen Glas-Weiß.
+  useEffect(() => {
+    const onScroll = () => setScrolledDown(window.scrollY > 24);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
+  const closeMobileMenu = () => {
+    setIsMobileMenuOpen(false);
+    setMobileActiveDropdown(null);
+  };
+
+  useEffect(() => {
+    document.body.style.overflow = isMobileMenuOpen ? 'hidden' : '';
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isMobileMenuOpen]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 1024 && isMobileMenuOpen) closeMobileMenu();
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [isMobileMenuOpen]);
+
+  // Bei Routenwechsel Menü schließen
+  useEffect(() => {
+    closeMobileMenu();
+    setActiveDropdown(null);
+  }, [location.pathname]);
+
+  const onDark = !scrolled;
+
+  return (
+    <header className="fixed top-0 left-0 right-0 z-50">
+      {/* Utility-Bar: Erreichbarkeit & Versprechen */}
+      <div
+        className={cn(
+          'hidden lg:block overflow-hidden transition-all duration-500',
+          scrolled ? 'max-h-0 opacity-0' : 'max-h-12 opacity-100'
+        )}
+      >
+        <div className="bg-navy-900/80 backdrop-blur-md text-blue-100/85 text-[12.5px] font-semibold border-b border-white/5">
+          <div className="max-w-7xl mx-auto px-8 py-2 flex items-center justify-between">
+            <div className="flex items-center gap-6">
+              <span className="flex items-center gap-2">
+                <Clock size={13} className="text-mint" />
+                {SITE.hours}
+              </span>
+              <span className="flex items-center gap-2">
+                <ShieldCheck size={13} className="text-mint" />
+                24h Reaktionszeit garantiert
+              </span>
+            </div>
+            <div className="flex items-center gap-6">
+              <a href={SITE.emailHref} className="hover:text-white transition-colors">
+                {SITE.email}
+              </a>
+              <a href={SITE.phoneHref} className="flex items-center gap-2 text-white hover:text-mint transition-colors">
+                <Phone size={13} />
+                {SITE.phone}
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Hauptleiste */}
+      <div
+        className={cn(
+          'transition-all duration-500',
+          scrolled ? 'glass shadow-soft border-b border-line' : 'bg-transparent border-b border-white/10'
+        )}
+      >
+        <nav className="flex justify-between items-center px-4 md:px-8 py-3.5 w-full max-w-7xl mx-auto">
+          <Logo variant={onDark ? 'dark' : 'light'} />
+
+          <div className="hidden lg:flex items-center gap-1">
+            {navLinks.map((link) => (
+              <div
+                key={link.name}
+                className="relative"
+                onMouseEnter={() => setActiveDropdown(link.name)}
+                onMouseLeave={() => setActiveDropdown(null)}
+              >
+                <Link
+                  to={link.href}
+                  className={cn(
+                    'flex items-center gap-1 text-[13.5px] font-headline font-semibold tracking-tight transition-colors py-2.5 px-3.5 rounded-lg',
+                    location.pathname.startsWith(link.href) && link.href !== '/'
+                      ? onDark
+                        ? 'text-mint'
+                        : 'text-brand-light bg-brand/5'
+                      : onDark
+                        ? 'text-white/85 hover:text-white hover:bg-white/10'
+                        : 'text-slate hover:text-brand-light hover:bg-brand/5'
+                  )}
+                >
+                  {link.name}
+                  {link.sublinks && (
+                    <ChevronDown
+                      className={cn('w-3.5 h-3.5 transition-transform duration-300', activeDropdown === link.name && 'rotate-180')}
+                    />
+                  )}
+                </Link>
+
+                <AnimatePresence>
+                  {link.sublinks && activeDropdown === link.name && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 12, scale: 0.98 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, y: 12, scale: 0.98 }}
+                      transition={{ duration: 0.22, ease: [0.2, 0.65, 0.3, 1] }}
+                      className={cn(
+                        'absolute top-full bg-white shadow-lifted rounded-2xl border border-line overflow-hidden z-50',
+                        link.mega ? 'left-0 w-[560px]' : 'left-1/2 -translate-x-1/2 w-72'
+                      )}
+                    >
+                      {link.mega ? (
+                        <div className="grid grid-cols-2">
+                          <div className="p-4 grid gap-0.5 content-start">
+                            {link.sublinks.map((sub) => (
+                              <Link
+                                key={sub.name}
+                                to={sub.href}
+                                onClick={() => setActiveDropdown(null)}
+                                className="group/item flex items-start gap-3 px-3.5 py-3 rounded-xl hover:bg-paper transition-colors"
+                              >
+                                <span className="mt-0.5 w-8 h-8 rounded-lg bg-brand/8 text-brand grid place-items-center group-hover/item:bg-accent group-hover/item:text-white transition-colors flex-shrink-0">
+                                  {sub.icon}
+                                </span>
+                                <span className="min-w-0">
+                                  <span className="block text-[13.5px] font-bold text-navy leading-snug">{sub.name}</span>
+                                  <span className="block text-xs text-slate/80 mt-0.5">{sub.description}</span>
+                                </span>
+                              </Link>
+                            ))}
+                          </div>
+                          <div className="relative bg-navy text-white p-6 flex flex-col justify-end overflow-hidden">
+                            <div className="absolute inset-0 blueprint-grid opacity-60" />
+                            <div className="absolute -top-16 -right-16 w-48 h-48 rounded-full bg-accent/30 blur-3xl" />
+                            <div className="relative z-10">
+                              <span className="eyebrow text-mint mb-3">Express</span>
+                              <p className="font-headline font-bold text-lg leading-snug mb-4">
+                                Angebot in 24h — Besichtigung in 48h.
+                              </p>
+                              <Link
+                                to="/angebot"
+                                onClick={() => setActiveDropdown(null)}
+                                className="inline-flex items-center gap-2 bg-accent hover:bg-accent-dark text-white text-sm font-bold px-4 py-2.5 rounded-lg transition-colors"
+                              >
+                                Jetzt anfragen <ArrowRight size={15} />
+                              </Link>
+                            </div>
+                          </div>
+                        </div>
+                      ) : (
+                        <div className="py-3">
+                          {link.sublinks.map((sub) => (
+                            <Link
+                              key={sub.name}
+                              to={sub.href}
+                              onClick={() => setActiveDropdown(null)}
+                              className="block px-6 py-2.5 text-sm font-semibold text-slate hover:bg-paper hover:text-brand transition-colors"
+                            >
+                              {sub.name}
+                            </Link>
+                          ))}
+                        </div>
+                      )}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            ))}
+          </div>
+
+          <div className="flex items-center gap-3">
+            <a
+              href={SITE.phoneHref}
+              className={cn(
+                'hidden xl:flex items-center gap-2 font-bold text-sm transition-colors',
+                onDark ? 'text-white hover:text-mint' : 'text-brand hover:text-brand-light'
+              )}
+            >
+              <span className={cn('w-9 h-9 rounded-full grid place-items-center', onDark ? 'bg-white/10' : 'bg-brand/8')}>
+                <Phone size={15} />
+              </span>
+              {SITE.phone}
+            </a>
+            <a
+              href={SITE.phoneHref}
+              className={cn(
+                'lg:hidden p-2.5 rounded-xl transition-colors',
+                onDark ? 'text-white hover:bg-white/10' : 'text-brand hover:bg-brand/5'
+              )}
+              aria-label="Anrufen"
+            >
+              <Phone size={20} />
+            </a>
+
+            <Link
+              to="/angebot"
+              className="hidden sm:inline-flex items-center gap-2 bg-accent text-white pl-5 pr-4 py-2.5 font-bold text-[13px] uppercase tracking-wider hover:bg-accent-dark active:scale-95 transition-all rounded-xl shadow-glow focus:outline-none focus-visible:ring-4 focus-visible:ring-accent/40"
+            >
+              Angebot in 24h
+              <ArrowRight size={15} />
+            </Link>
+
+            <button
+              className={cn(
+                'lg:hidden p-2.5 rounded-xl transition-all',
+                onDark ? 'text-white hover:bg-white/10' : 'text-slate hover:bg-gray-100'
+              )}
+              onClick={toggleMobileMenu}
+              aria-label={isMobileMenuOpen ? 'Menü schließen' : 'Menü öffnen'}
+              aria-expanded={isMobileMenuOpen}
+            >
+              {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
+        </nav>
+      </div>
+
+      {/* Mobile-Menü */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 bg-navy/60 backdrop-blur-sm z-[60] lg:hidden"
+              onClick={closeMobileMenu}
+            />
+            <motion.div
+              initial={{ x: '100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '100%' }}
+              transition={{ type: 'spring', damping: 28, stiffness: 240 }}
+              className="fixed inset-y-0 right-0 h-dvh w-[88%] max-w-sm bg-white z-[70] lg:hidden shadow-lifted flex flex-col"
+            >
+              <div className="flex items-center justify-between p-6 border-b border-line flex-shrink-0">
+                <Logo onClick={closeMobileMenu} />
+                <button
+                  onClick={closeMobileMenu}
+                  className="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-lg transition-all"
+                  aria-label="Menü schließen"
+                >
+                  <X size={24} />
+                </button>
+              </div>
+
+              <div className="flex-grow overflow-y-auto px-6 py-4">
+                <div className="flex flex-col">
+                  {navLinks.map((link, i) => (
+                    <motion.div
+                      key={link.name}
+                      initial={{ opacity: 0, x: 24 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.05 + i * 0.05 }}
+                      className="flex flex-col border-b border-line/70 last:border-0"
+                    >
+                      {link.sublinks ? (
+                        <button
+                          onClick={() => setMobileActiveDropdown(mobileActiveDropdown === link.name ? null : link.name)}
+                          className={cn(
+                            'text-lg font-headline font-semibold tracking-tight py-4 text-left flex justify-between items-center',
+                            location.pathname.startsWith(link.href) ? 'text-brand-light' : 'text-navy'
+                          )}
+                          aria-expanded={mobileActiveDropdown === link.name}
+                        >
+                          {link.name}
+                          <ChevronDown
+                            className={cn(
+                              'w-5 h-5 transition-transform duration-300 text-gray-400',
+                              mobileActiveDropdown === link.name && 'rotate-180'
+                            )}
+                          />
+                        </button>
+                      ) : (
+                        <Link
+                          to={link.href}
+                          className={cn(
+                            'text-lg font-headline font-semibold tracking-tight py-4',
+                            location.pathname.startsWith(link.href) ? 'text-brand-light' : 'text-navy'
+                          )}
+                          onClick={closeMobileMenu}
+                        >
+                          {link.name}
+                        </Link>
+                      )}
+
+                      <AnimatePresence>
+                        {link.sublinks && mobileActiveDropdown === link.name && (
+                          <motion.div
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: 'auto', opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            className="overflow-hidden"
+                          >
+                            <div className="flex flex-col pb-3">
+                              <Link
+                                to={link.href}
+                                className="px-4 py-3 text-sm font-bold text-brand-light bg-paper rounded-xl mb-1"
+                                onClick={closeMobileMenu}
+                              >
+                                {link.name} — Übersicht
+                              </Link>
+                              {link.sublinks.map((sub) => (
+                                <Link
+                                  key={sub.name}
+                                  to={sub.href}
+                                  className="px-4 py-3 text-[15px] font-medium text-slate hover:text-brand-light transition-colors"
+                                  onClick={closeMobileMenu}
+                                >
+                                  {sub.name}
+                                </Link>
+                              ))}
+                            </div>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="p-6 border-t border-line bg-paper/60 flex-shrink-0 space-y-3">
+                <Link
+                  to="/angebot"
+                  className="flex items-center justify-center gap-2 w-full bg-accent text-white px-6 py-4 font-bold text-sm uppercase tracking-wider hover:bg-accent-dark shadow-glow transition-all rounded-xl"
+                  onClick={closeMobileMenu}
+                >
+                  Angebot in 24h <ArrowRight size={16} />
+                </Link>
+                <a
+                  href={SITE.phoneHref}
+                  className="flex items-center justify-center gap-2 w-full border-2 border-line bg-white text-navy px-6 py-3.5 font-bold text-sm rounded-xl"
+                >
+                  <Phone size={16} className="text-accent" />
+                  {SITE.phone}
+                </a>
+                <p className="text-center text-xs text-slate/70 font-medium">{SITE.hours}</p>
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
+    </header>
+  );
+}
