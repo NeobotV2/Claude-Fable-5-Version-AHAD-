@@ -1,5 +1,6 @@
 import { motion } from 'motion/react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import { ChevronRight } from 'lucide-react';
 import ButtonLink from '@/components/ui/Button';
 import { SITE } from '@/lib/site';
@@ -40,6 +41,27 @@ export default function PageHero({
   children,
   compact = false,
 }: PageHeroProps) {
+  const { pathname } = useLocation();
+
+  // BreadcrumbList-Schema aus den sichtbaren Brotkrumen — stärkt
+  // Suchergebnis-Darstellung (Sitelinks) und Kontext für LLM-Crawler.
+  const breadcrumbSchema =
+    crumbs && crumbs.length > 0
+      ? {
+          '@context': 'https://schema.org',
+          '@type': 'BreadcrumbList',
+          itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'Start', item: SITE.url },
+            ...crumbs.map((crumb, i) => ({
+              '@type': 'ListItem',
+              position: i + 2,
+              name: crumb.label,
+              item: `${SITE.url}${crumb.href ?? pathname}`,
+            })),
+          ],
+        }
+      : null;
+
   return (
     <section
       className={`relative bg-navy text-white overflow-hidden grain ${
@@ -67,6 +89,12 @@ export default function PageHero({
           <div className="absolute inset-0 blueprint-grid opacity-60" />
         )}
       </div>
+
+      {breadcrumbSchema && (
+        <Helmet>
+          <script type="application/ld+json">{JSON.stringify(breadcrumbSchema)}</script>
+        </Helmet>
+      )}
 
       <div className="max-w-7xl mx-auto px-4 sm:px-8 relative z-10">
         {crumbs && crumbs.length > 0 && (

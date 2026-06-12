@@ -26,7 +26,7 @@ export default function NotFound() {
           <Sparkles size={14} />
           Hier wurde zu gründlich aufgeräumt
         </span>
-        <h1 className="font-headline font-bold text-[clamp(6rem,20vw,12rem)] leading-none tracking-tighter text-white/95">
+        <h1 className="font-logo font-black text-[clamp(6rem,20vw,12rem)] leading-none tracking-tighter text-white/95">
           404
         </h1>
         <p className="text-xl text-blue-100/85 font-medium mt-6 mb-10 max-w-xl mx-auto">

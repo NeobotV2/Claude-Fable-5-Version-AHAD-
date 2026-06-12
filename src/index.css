@@ -4,11 +4,11 @@
 @plugin "@tailwindcss/typography";
 
 @theme {
-  /* Typografie laut Designbook: Montserrat führt (Black 900 Headlines,
-     Bold 700 Subheads, Regular 400 Fließtext); Space Grotesk nur als
-     digitaler Akzent (Eyebrows, Zahlen, technische Labels). */
-  --font-sans: "Montserrat", ui-sans-serif, system-ui, sans-serif;
-  --font-headline: "Montserrat", sans-serif;
+  /* Typografie: Montserrat ausschließlich für Logo & große Statements
+     (display-Klassen), Inter für Fließtext und UI, Space Grotesk nur
+     als digitaler Akzent (Eyebrows, Zahlen, technische Labels). */
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-headline: "Inter", sans-serif;
   --font-accent: "Space Grotesk", sans-serif;
   --font-logo: "Montserrat", sans-serif;
 
@@ -108,18 +108,20 @@
   }
 
   /* ── Editorial-Typografie ─────────────────────────────────────── */
-  /* Headlines in Montserrat Black 900 (Designbook), leicht verdichtet. */
+  /* Statements in Montserrat Black (wie die Wortmarke) — nur hier,
+     nicht im Fließtext. Leicht verdichtet, mit Silbentrennung für
+     lange deutsche Komposita. */
   .display-xl {
-    @apply font-headline font-black tracking-[-0.025em] leading-[1.0];
-    font-size: clamp(2.5rem, 7vw, 5.5rem);
+    @apply font-logo font-black tracking-[-0.025em] leading-[1.02] hyphens-auto;
+    font-size: clamp(2.25rem, 6.5vw, 5rem);
   }
   .display-lg {
-    @apply font-headline font-black tracking-[-0.02em] leading-[1.04];
-    font-size: clamp(2.1rem, 4.6vw, 3.6rem);
+    @apply font-logo font-black tracking-[-0.02em] leading-[1.06] hyphens-auto;
+    font-size: clamp(1.9rem, 4.4vw, 3.3rem);
   }
   .display-md {
-    @apply font-headline font-extrabold tracking-[-0.015em] leading-[1.1];
-    font-size: clamp(1.65rem, 3.2vw, 2.5rem);
+    @apply font-logo font-extrabold tracking-[-0.015em] leading-[1.12];
+    font-size: clamp(1.55rem, 3vw, 2.3rem);
   }
   /* Digitaler Akzent in Space Grotesk (Designbook: Website-Akzente). */
   .eyebrow {

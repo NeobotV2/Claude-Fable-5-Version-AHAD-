@@ -76,21 +76,20 @@ const navLinks: NavItem[] = [
   },
 ];
 
-/** Routen, deren Seitenanfang hell ist — dort startet der Header direkt im Glas-Modus. */
-const LIGHT_TOP_ROUTES = ['/karriere/bewerbung', '/admin'];
-
+/**
+ * Header — bewusst immer hell, damit das farbige Markenlogo
+ * (Verlaufs-Version) auf jeder Seite korrekt steht. Die Utility-Bar
+ * mit Erreichbarkeit kollabiert beim Scrollen.
+ */
 export default function Header() {
   const location = useLocation();
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [mobileActiveDropdown, setMobileActiveDropdown] = useState<string | null>(null);
-  const [scrolledDown, setScrolledDown] = useState(false);
-  const lightTop = LIGHT_TOP_ROUTES.some((route) => location.pathname.startsWith(route));
-  const scrolled = scrolledDown || lightTop;
+  const [scrolled, setScrolled] = useState(false);
 
-  // Alle Seiten starten mit dunklem Hero → oben transparent/hell, beim Scrollen Glas-Weiß.
   useEffect(() => {
-    const onScroll = () => setScrolledDown(window.scrollY > 24);
+    const onScroll = () => setScrolled(window.scrollY > 24);
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
@@ -123,8 +122,6 @@ export default function Header() {
     setActiveDropdown(null);
   }, [location.pathname]);
 
-  const onDark = !scrolled;
-
   return (
     <header className="fixed top-0 left-0 right-0 z-50">
       {/* Utility-Bar: Erreichbarkeit & Versprechen */}
@@ -134,7 +131,7 @@ export default function Header() {
           scrolled ? 'max-h-0 opacity-0' : 'max-h-12 opacity-100'
         )}
       >
-        <div className="bg-navy-900/80 backdrop-blur-md text-blue-100/85 text-[12.5px] font-semibold border-b border-white/5">
+        <div className="bg-navy text-blue-100/90 text-[12.5px] font-semibold border-b border-white/10">
           <div className="max-w-7xl mx-auto px-8 py-2 flex items-center justify-between">
             <div className="flex items-center gap-6">
               <span className="flex items-center gap-2">
@@ -159,15 +156,10 @@ export default function Header() {
         </div>
       </div>
 
-      {/* Hauptleiste */}
-      <div
-        className={cn(
-          'transition-all duration-500',
-          scrolled ? 'glass shadow-soft border-b border-line' : 'bg-transparent border-b border-white/10'
-        )}
-      >
-        <nav className="flex justify-between items-center px-4 md:px-8 py-3.5 w-full max-w-7xl mx-auto">
-          <Logo variant={onDark ? 'dark' : 'light'} />
+      {/* Hauptleiste — immer weiß, Logo in Markenfarben */}
+      <div className={cn('bg-white/95 backdrop-blur-md border-b transition-shadow duration-300', scrolled ? 'shadow-soft border-line' : 'border-line/70')}>
+        <nav className="flex justify-between items-center px-4 md:px-8 py-3 w-full max-w-7xl mx-auto">
+          <Logo size={38} />
 
           <div className="hidden lg:flex items-center gap-1">
             {navLinks.map((link) => (
@@ -180,14 +172,10 @@ export default function Header() {
                 <Link
                   to={link.href}
                   className={cn(
-                    'flex items-center gap-1 text-[13.5px] font-headline font-semibold tracking-tight transition-colors py-2.5 px-3.5 rounded-lg',
+                    'flex items-center gap-1 text-[13.5px] font-semibold tracking-tight transition-colors py-2.5 px-3.5 rounded-lg',
                     location.pathname.startsWith(link.href) && link.href !== '/'
-                      ? onDark
-                        ? 'text-mint'
-                        : 'text-brand-light bg-brand/5'
-                      : onDark
-                        ? 'text-white/85 hover:text-white hover:bg-white/10'
-                        : 'text-slate hover:text-brand-light hover:bg-brand/5'
+                      ? 'text-brand bg-brand/5'
+                      : 'text-slate hover:text-brand hover:bg-brand/5'
                   )}
                 >
                   {link.name}
@@ -235,7 +223,7 @@ export default function Header() {
                             <div className="absolute -top-16 -right-16 w-48 h-48 rounded-full bg-accent/30 blur-3xl" />
                             <div className="relative z-10">
                               <span className="eyebrow text-mint mb-3">Express</span>
-                              <p className="font-headline font-bold text-lg leading-snug mb-4">
+                              <p className="font-logo font-extrabold text-lg leading-snug mb-4">
                                 Angebot in 24h — Besichtigung in 48h.
                               </p>
                               <Link
@@ -272,22 +260,16 @@ export default function Header() {
           <div className="flex items-center gap-3">
             <a
               href={SITE.phoneHref}
-              className={cn(
-                'hidden xl:flex items-center gap-2 font-bold text-sm transition-colors',
-                onDark ? 'text-white hover:text-mint' : 'text-brand hover:text-brand-light'
-              )}
+              className="hidden xl:flex items-center gap-2 font-bold text-sm text-brand hover:text-brand-light transition-colors"
             >
-              <span className={cn('w-9 h-9 rounded-full grid place-items-center', onDark ? 'bg-white/10' : 'bg-brand/8')}>
+              <span className="w-9 h-9 rounded-full bg-brand/8 grid place-items-center">
                 <Phone size={15} />
               </span>
               {SITE.phone}
             </a>
             <a
               href={SITE.phoneHref}
-              className={cn(
-                'lg:hidden p-2.5 rounded-xl transition-colors',
-                onDark ? 'text-white hover:bg-white/10' : 'text-brand hover:bg-brand/5'
-              )}
+              className="lg:hidden p-2.5 rounded-xl text-brand hover:bg-brand/5 transition-colors"
               aria-label="Anrufen"
             >
               <Phone size={20} />
@@ -302,10 +284,7 @@ export default function Header() {
             </Link>
 
             <button
-              className={cn(
-                'lg:hidden p-2.5 rounded-xl transition-all',
-                onDark ? 'text-white hover:bg-white/10' : 'text-slate hover:bg-gray-100'
-              )}
+              className="lg:hidden p-2.5 rounded-xl text-slate hover:bg-gray-100 transition-all"
               onClick={toggleMobileMenu}
               aria-label={isMobileMenuOpen ? 'Menü schließen' : 'Menü öffnen'}
               aria-expanded={isMobileMenuOpen}
@@ -335,7 +314,7 @@ export default function Header() {
               className="fixed inset-y-0 right-0 h-dvh w-[88%] max-w-sm bg-white z-[70] lg:hidden shadow-lifted flex flex-col"
             >
               <div className="flex items-center justify-between p-6 border-b border-line flex-shrink-0">
-                <Logo onClick={closeMobileMenu} />
+                <Logo size={34} onClick={closeMobileMenu} />
                 <button
                   onClick={closeMobileMenu}
                   className="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-lg transition-all"
@@ -359,7 +338,7 @@ export default function Header() {
                         <button
                           onClick={() => setMobileActiveDropdown(mobileActiveDropdown === link.name ? null : link.name)}
                           className={cn(
-                            'text-lg font-headline font-semibold tracking-tight py-4 text-left flex justify-between items-center',
+                            'text-lg font-semibold tracking-tight py-4 text-left flex justify-between items-center',
                             location.pathname.startsWith(link.href) ? 'text-brand-light' : 'text-navy'
                           )}
                           aria-expanded={mobileActiveDropdown === link.name}
@@ -376,7 +355,7 @@ export default function Header() {
                         <Link
                           to={link.href}
                           className={cn(
-                            'text-lg font-headline font-semibold tracking-tight py-4',
+                            'text-lg font-semibold tracking-tight py-4',
                             location.pathname.startsWith(link.href) ? 'text-brand-light' : 'text-navy'
                           )}
                           onClick={closeMobileMenu}

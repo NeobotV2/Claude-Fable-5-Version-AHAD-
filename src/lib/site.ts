@@ -98,6 +98,16 @@ export const TESTIMONIALS = [
   },
 ] as const;
 
+export const WEBSITE_SCHEMA = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  '@id': `${SITE.url}/#website`,
+  url: SITE.url,
+  name: SITE.name,
+  inLanguage: 'de-DE',
+  publisher: { '@id': `${SITE.url}/#organization` },
+};
+
 export const ORGANIZATION_SCHEMA = {
   '@context': 'https://schema.org',
   '@type': ['Organization', 'LocalBusiness'],

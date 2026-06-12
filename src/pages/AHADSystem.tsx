@@ -52,7 +52,7 @@ const steps = [
 ];
 
 const outcomes = [
-  { value: '−80%', label: 'interner Steuerungsaufwand', text: 'Ihre Objektleitung steuert — nicht Ihr Office-Management.' },
+  { value: '1', label: 'feste Objektleitung je Objekt', text: 'Ein Verantwortlicher steuert — nicht Ihr Office-Management.' },
   { value: '24h', label: 'Reaktionszeit garantiert', text: 'Jedes Anliegen hat einen Verantwortlichen und eine Frist.' },
   { value: '100%', label: 'Nachweisbarkeit', text: 'Jede Leistung dokumentiert — für QM, Audit und Ihr Bauchgefühl.' },
 ];
@@ -103,7 +103,7 @@ export default function AHADSystem() {
                   }`}
                 >
                   <span
-                    className={`absolute -top-10 right-2 font-headline font-bold text-[12rem] leading-none select-none pointer-events-none ${
+                    className={`absolute -top-10 right-2 font-logo font-black text-[12rem] leading-none select-none pointer-events-none ${
                       step.highlight ? 'text-white/5' : 'text-navy/5'
                     }`}
                     aria-hidden

@@ -29,7 +29,7 @@ import Accordion, { faqSchemaFrom, type FAQItem } from '@/components/ui/Accordio
 import LogoMarquee from '@/components/LogoMarquee';
 import CTABand from '@/components/CTABand';
 import { IMG, unsplashSrcSet } from '@/lib/images';
-import { SITE, STATS, TESTIMONIALS, ORGANIZATION_SCHEMA } from '@/lib/site';
+import { SITE, STATS, TESTIMONIALS, ORGANIZATION_SCHEMA, WEBSITE_SCHEMA } from '@/lib/site';
 import { SERVICES } from '@/data/services';
 
 const FEATURED_PATHS = [
@@ -188,7 +188,7 @@ export default function Home() {
         title="Gebäudereinigung & Industriereinigung Villingen-Schwenningen | AHAD Cleaning"
         description="AHAD Cleaning ist Ihr Partner für professionelle Gebäudereinigung, Industriereinigung und Unterhaltsreinigung in Villingen-Schwenningen, Stuttgart und Süddeutschland. Angebot in 24h."
         keywords="Gebäudereinigung Villingen-Schwenningen, Industriereinigung Stuttgart, Unterhaltsreinigung, Glasreinigung Konstanz, Gebäudedienstleistungen"
-        schema={[ORGANIZATION_SCHEMA, faqSchemaFrom(faqs)]}
+        schema={[ORGANIZATION_SCHEMA, WEBSITE_SCHEMA, faqSchemaFrom(faqs)]}
       />
 
       {/* ── HERO ──────────────────────────────────────────────────────── */}
@@ -225,12 +225,13 @@ export default function Home() {
               Gebäudereinigung für Industrie, Verwaltung & Mittelstand
             </motion.span>
 
-            <h1 className="display-xl text-white mb-8">
-              <RevealWords text="Sauberkeit, die Sie" delay={0.15} />
+            {/* Keyword im H1 (SEO) + Schmerzpunkt der Zielgruppe (Conversion) */}
+            <h1 className="display-xl text-white mb-8" lang="de">
+              <RevealWords text="Gebäudereinigung," delay={0.15} />
               <br />
-              <RevealWords text="nicht mehr" delay={0.45} />{' '}
-              <RevealWords text="nachsteuern" className="text-mint" delay={0.6} />
+              <RevealWords text="die Sie nicht mehr" delay={0.4} />
               <br />
+              <RevealWords text="nachsteuern" className="text-mint" delay={0.6} />{' '}
               <RevealWords text="müssen." delay={0.8} />
             </h1>
 
@@ -490,7 +491,7 @@ export default function Home() {
                   }`}
                 >
                   <span
-                    className={`absolute -top-7 -right-3 font-headline font-bold text-[9rem] leading-none select-none pointer-events-none ${
+                    className={`absolute -top-7 -right-3 font-logo font-black text-[9rem] leading-none select-none pointer-events-none ${
                       step.highlight ? 'text-white/5' : 'text-navy/5'
                     }`}
                     aria-hidden
