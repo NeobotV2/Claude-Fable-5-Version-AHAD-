@@ -1,5 +1,5 @@
 import { lazy, Suspense } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, HashRouter, Routes, Route } from 'react-router-dom';
 import Layout from './components/Layout';
 import ScrollToTop from './components/ScrollToTop';
 import ErrorBoundary from './components/ErrorBoundary';
@@ -51,8 +51,12 @@ function PageLoader() {
 }
 
 export default function App() {
+  // Single-File-Vorschau (npm run build:file) nutzt HashRouter,
+  // damit Navigation auch beim Öffnen direkt von der Festplatte funktioniert.
+  const useHash = import.meta.env.VITE_HASH_ROUTER === '1';
+  const Router = useHash ? HashRouter : BrowserRouter;
   // Folgt Vites base-Pfad (z.B. /repo-name/ auf GitHub Pages); lokal = ''.
-  const basename = import.meta.env.BASE_URL.replace(/\/$/, '');
+  const basename = useHash ? undefined : import.meta.env.BASE_URL.replace(/\/$/, '');
   return (
     <ErrorBoundary>
       <Router basename={basename}>

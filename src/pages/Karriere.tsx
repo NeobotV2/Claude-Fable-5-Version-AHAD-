@@ -72,7 +72,16 @@ export default function Karriere() {
         image={IMG.karriere}
         crumbs={[{ label: 'Karriere' }]}
         cta={{ label: 'In 2 Minuten bewerben', to: '/karriere/bewerbung' }}
-        secondaryCta={{ label: 'Offene Stellen ansehen', href: '#offene-stellen' }}
+        secondaryCta={{
+          label: 'Offene Stellen ansehen',
+          href: '#offene-stellen',
+          // Sanfter In-Page-Scroll statt Hash-Navigation — funktioniert in
+          // beiden Router-Modi (Browser- und Hash-Router der Datei-Vorschau).
+          onClick: (e) => {
+            e.preventDefault();
+            document.getElementById('offene-stellen')?.scrollIntoView({ behavior: 'smooth' });
+          },
+        }}
       >
         <div className="mt-14 grid grid-cols-2 lg:grid-cols-4 gap-6 max-w-3xl">
           {STATS.map((stat) => (

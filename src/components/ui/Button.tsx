@@ -14,7 +14,7 @@ interface ButtonLinkProps {
   arrow?: boolean;
   className?: string;
   children: ReactNode;
-  onClick?: () => void;
+  onClick?: (e: React.MouseEvent) => void;
 }
 
 const base =

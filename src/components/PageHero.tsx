@@ -18,7 +18,7 @@ interface PageHeroProps {
   imageAlt?: string;
   crumbs?: Crumb[];
   cta?: { label: string; to: string };
-  secondaryCta?: { label: string; to?: string; href?: string };
+  secondaryCta?: { label: string; to?: string; href?: string; onClick?: (e: React.MouseEvent) => void };
   children?: ReactNode;
   compact?: boolean;
 }
@@ -117,6 +117,7 @@ export default function PageHero({
                 <ButtonLink
                   to={secondaryCta.to}
                   href={secondaryCta.href ?? (secondaryCta.to ? undefined : SITE.phoneHref)}
+                  onClick={secondaryCta.onClick}
                   variant="outline-light"
                   size="lg"
                 >
