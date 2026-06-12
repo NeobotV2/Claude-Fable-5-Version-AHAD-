@@ -12,7 +12,7 @@
 const u = (id: string, w = 1600, extra = '') =>
   `https://images.unsplash.com/${id}?auto=format&fit=crop&q=80&w=${w}${extra}`;
 
-export const FALLBACK_IMAGE = '/images/fallback.jpg';
+export const FALLBACK_IMAGE = `${import.meta.env.BASE_URL}images/fallback.jpg`;
 
 export const IMG = {
   // ── Hero & Stimmung ────────────────────────────────────────────────

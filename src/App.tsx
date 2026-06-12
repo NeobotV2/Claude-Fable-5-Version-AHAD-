@@ -51,9 +51,11 @@ function PageLoader() {
 }
 
 export default function App() {
+  // Folgt Vites base-Pfad (z.B. /repo-name/ auf GitHub Pages); lokal = ''.
+  const basename = import.meta.env.BASE_URL.replace(/\/$/, '');
   return (
     <ErrorBoundary>
-      <Router>
+      <Router basename={basename}>
         <ScrollToTop />
         <Suspense fallback={<PageLoader />}>
           <Routes>

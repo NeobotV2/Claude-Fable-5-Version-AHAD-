@@ -5,6 +5,8 @@ import path from 'node:path';
 
 export default defineConfig({
   plugins: [react(), tailwindcss()],
+  // Für Deployments in Unterverzeichnissen (z.B. GitHub Pages) per ENV setzbar.
+  base: process.env.BASE_PATH || '/',
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
