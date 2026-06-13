@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { Phone, Mail, MapPin, Instagram, Linkedin, Clock, ShieldCheck, BadgeCheck, FileCheck2, ArrowRight } from 'lucide-react';
 import Logo from '@/components/Logo';
 import { SITE } from '@/lib/site';
+import { CLAIM } from '@/lib/messaging';
 
 const columns = [
   {
@@ -31,7 +32,6 @@ const columns = [
     links: [
       { label: 'Über uns', href: '/unternehmen' },
       { label: 'Das AHAD System', href: '/ahad-system' },
-      { label: 'Reinigungskonzept', href: '/reinigungskonzept' },
       { label: 'Referenzen', href: '/referenzen' },
       { label: 'Standorte & Regionen', href: '/standorte' },
       { label: 'Karriere', href: '/karriere' },
@@ -78,7 +78,11 @@ export default function Footer() {
         <div className="py-14 lg:py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-x-8 gap-y-12">
           {/* Marke */}
           <div className="md:col-span-2 lg:col-span-3 space-y-6">
-            <Logo variant="dark" size={42} />
+            <div className="space-y-3">
+              <Logo variant="dark" size={42} />
+              {/* Marken-Claim als konsistente Signatur (Designbook: der eine Claim) */}
+              <p className="text-[12px] font-bold uppercase tracking-[0.18em] text-mint">{CLAIM}</p>
+            </div>
             <p className="text-blue-100/70 leading-relaxed">
               Systematische Gebäudedienstleistungen für Industrie, Verwaltung und Mittelstand — messbar,
               dokumentiert, verlässlich.

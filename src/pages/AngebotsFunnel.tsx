@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import {
   Building,
@@ -16,13 +16,11 @@ import {
   BadgeCheck,
   MapPin,
   ClipboardList,
-  Pencil,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Link } from 'react-router-dom';
 import SEO from '@/components/SEO';
 import { SITE } from '@/lib/site';
-import { consumeBedarfsprofil } from '@/lib/bedarfsprofil';
 
 type Step = 1 | 2 | 3 | 4;
 
@@ -31,6 +29,7 @@ interface FormData {
   services: string[];
   areaSize: string;
   frequency: string;
+  anforderungen: string[];
   companyName: string;
   contactPerson: string;
   email: string;
@@ -64,22 +63,21 @@ const FREQUENCIES = [
   { id: 'need', title: 'Nach Bedarf' },
 ];
 
-const STEP_LABELS = ['Objekt', 'Leistungen', 'Umfang', 'Kontakt'];
+/** LV-relevante Anforderungen — optionale Qualifizierung (aus der ehem.
+ *  Bedarfsanalyse in den Funnel integriert). Signalisiert dem Lead die
+ *  Prioritäten von FM/Einkauf. */
+const ANFORDERUNGEN = [
+  'Feste Objektleitung',
+  'Dokumentierte Qualitätskontrollen',
+  'Auditfähige Nachweise',
+  'ISO-konforme Abläufe',
+  'Reinigung im laufenden Betrieb',
+  'Hygieneplan / Desinfektion',
+  'Umweltschonende Verfahren',
+  'Bestehendes Leistungsverzeichnis (LV)',
+];
 
-// Mapping für die Übernahme aus dem Reinigungskonzept-Assistenten.
-const TYP_TO_TITLE: Record<string, string> = {
-  buero: 'Büro & Verwaltung',
-  industrie: 'Industrie & Produktion',
-  medizin: 'Medizintechnik & Sensible Bereiche',
-  gewerbe: 'Gewerbe & Logistik',
-  hotellerie: 'Gewerbe & Logistik',
-};
-const FREQ_TO_TITLE: Record<string, string> = {
-  daily: 'Täglich',
-  thrice: 'Mehrmals wöchentlich',
-  twice: 'Mehrmals wöchentlich',
-  weekly: 'Nach Bedarf',
-};
+const STEP_LABELS = ['Objekt', 'Leistungen', 'Umfang', 'Kontakt'];
 
 const selectableCard = (active: boolean) =>
   cn(
@@ -102,37 +100,24 @@ export default function AngebotsFunnel() {
     services: [],
     areaSize: '',
     frequency: '',
+    anforderungen: [],
     companyName: '',
     contactPerson: '',
     email: '',
     phone: '',
     location: '',
   });
-  const [profilSummary, setProfilSummary] = useState<string | null>(null);
-
-  // Übergabe aus dem Reinigungskonzept-Assistenten: überlappende Schritte
-  // vorbelegen und direkt zum Kontaktschritt springen (keine Doppel-Eingabe).
-  useEffect(() => {
-    const p = consumeBedarfsprofil();
-    if (!p) return;
-    const services: string[] = ['Unterhaltsreinigung'];
-    if (p.sonder.some((s) => /glas|fassade/i.test(s))) services.push('Glas- & Fassadenreinigung');
-    if (p.objektTypId === 'industrie' || p.bereiche.some((b) => /produktion|hallen/i.test(b)))
-      services.push('Industriereinigung / Anlagenpflege');
-    if (p.sonder.some((s) => /außen|winter/i.test(s))) services.push('Sonder- / Grundreinigung');
-    const areaSize = p.sqm < 500 ? 'Unter 500 m²' : p.sqm <= 2000 ? '500 - 2.000 m²' : 'Über 2.000 m²';
-    setFormData((prev) => ({
-      ...prev,
-      objectType: TYP_TO_TITLE[p.objektTypId] ?? '',
-      services,
-      areaSize,
-      frequency: FREQ_TO_TITLE[p.frequenzId] ?? '',
-    }));
-    setProfilSummary(p.summary);
-    setStep(4);
-  }, []);
 
   const progress = (step / 4) * 100;
+
+  const toggleAnforderung = (label: string) => {
+    setFormData((prev) => ({
+      ...prev,
+      anforderungen: prev.anforderungen.includes(label)
+        ? prev.anforderungen.filter((a) => a !== label)
+        : [...prev.anforderungen, label],
+    }));
+  };
 
   const handleNext = () => {
     if (step < 4) setStep((s) => (s + 1) as Step);
@@ -161,7 +146,6 @@ export default function AngebotsFunnel() {
       try {
         await addDoc(collection(db, 'offer_leads'), {
           ...formData,
-          bedarfsprofil: profilSummary ?? '',
           status: 'new',
           createdAt: serverTimestamp(),
         });
@@ -191,9 +175,9 @@ export default function AngebotsFunnel() {
   const shell = (content: React.ReactNode) => (
     <div className="relative min-h-screen bg-navy overflow-hidden grain">
       <SEO
-        title="Express-Angebot in 60 Sekunden | AHAD Cleaning"
-        description="In 60 Sekunden zum Reinigungsangebot: Objekt beschreiben, Leistungen wählen — Antwort garantiert innerhalb von 24 Stunden."
-        keywords="Angebot Gebäudereinigung, Reinigungsangebot anfordern, Express Angebot Reinigung"
+        title="Angebot anfordern — in 60 Sekunden | AHAD Cleaning"
+        description="In 60 Sekunden zum Reinigungsangebot: Objekt, Leistungen und Anforderungen für Ihr Leistungsverzeichnis beschreiben — Antwort garantiert innerhalb von 24 Stunden."
+        keywords="Angebot Gebäudereinigung, Reinigungsangebot anfordern, Reinigungskonzept, Leistungsverzeichnis Gebäudereinigung, Ausschreibung Reinigung"
       />
       <div className="absolute inset-0 blueprint-grid" />
       <div className="absolute -top-48 -right-48 w-[36rem] h-[36rem] rounded-full bg-brand/35 blur-[150px]" />
@@ -249,31 +233,6 @@ export default function AngebotsFunnel() {
         </span>
         <h1 className="display-md text-white">Ihr Express-Angebot</h1>
       </div>
-
-      {/* Übernahme aus dem Reinigungskonzept-Assistenten */}
-      {profilSummary && (
-        <motion.div
-          initial={{ opacity: 0, y: -8 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="mb-6 rounded-2xl bg-mint/10 border border-mint/25 p-4 sm:p-5 text-left"
-        >
-          <div className="flex items-start gap-3">
-            <span className="w-9 h-9 rounded-lg bg-mint/15 text-mint grid place-items-center flex-shrink-0">
-              <ClipboardList size={18} />
-            </span>
-            <div className="min-w-0 flex-grow">
-              <p className="text-sm font-bold text-white">Ihr Bedarfsprofil wurde übernommen</p>
-              <p className="text-[13px] text-blue-100/80 whitespace-pre-line mt-1 leading-relaxed">{profilSummary}</p>
-              <button
-                onClick={() => setStep(1)}
-                className="mt-2 inline-flex items-center gap-1.5 text-[13px] font-bold text-mint hover:text-white transition-colors"
-              >
-                <Pencil size={13} /> Angaben prüfen / ändern
-              </button>
-            </div>
-          </div>
-        </motion.div>
-      )}
 
       {/* Fortschritt */}
       <div className="mb-8">
@@ -447,6 +406,32 @@ export default function AngebotsFunnel() {
                       {freq.title}
                     </button>
                   ))}
+                </div>
+              </div>
+
+              {/* Optionale LV-Qualifizierung (integrierte Bedarfsanalyse) */}
+              <div className="space-y-3">
+                <h3 className="text-[15px] font-bold text-navy flex items-center gap-2">
+                  <ClipboardList className="text-accent" size={18} />
+                  Worauf legen Sie Wert? <span className="font-medium text-slate/70">(optional)</span>
+                </h3>
+                <div className="flex flex-wrap gap-2.5">
+                  {ANFORDERUNGEN.map((label) => {
+                    const active = formData.anforderungen.includes(label);
+                    return (
+                      <button
+                        key={label}
+                        onClick={() => toggleAnforderung(label)}
+                        className={cn(
+                          'inline-flex items-center gap-2 rounded-full border-2 px-4 py-2 text-[13px] font-semibold transition-all text-left',
+                          active ? 'border-accent bg-accent/5 text-navy' : 'border-line text-slate hover:border-brand/40'
+                        )}
+                      >
+                        <Check size={13} className={active ? 'text-accent' : 'text-slate/30'} />
+                        {label}
+                      </button>
+                    );
+                  })}
                 </div>
               </div>
 

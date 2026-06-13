@@ -437,10 +437,10 @@ export default function Home() {
             ))}
           </div>
 
-          {/* Reinigungskonzept-Teaser — B2B-Einstieg: Bedarfsprofil / LV statt Preis */}
+          {/* Anfrage-Teaser — strukturierte Anfrage für FM & Einkauf, führt in den Funnel */}
           <Reveal delay={0.15} className="mt-8">
             <Link
-              to="/reinigungskonzept"
+              to="/angebot"
               className="group flex flex-col sm:flex-row sm:items-center gap-5 bg-navy text-white rounded-3xl p-7 sm:p-8 overflow-hidden relative grain card-lift"
             >
               <div className="absolute -top-20 -right-10 w-64 h-64 rounded-full bg-accent/20 blur-[90px]" />
@@ -448,14 +448,14 @@ export default function Home() {
                 <ClipboardList className="w-7 h-7" />
               </span>
               <div className="relative z-10 flex-grow">
-                <h3 className="font-headline font-bold text-xl mb-1">Reinigungskonzept in 2 Minuten strukturieren</h3>
+                <h3 className="font-headline font-bold text-xl mb-1">In 2 Minuten zur strukturierten Anfrage</h3>
                 <p className="text-blue-100/80 text-sm font-medium">
-                  Für FM &amp; Einkauf: Leistungsumfang und Anforderungen als Bedarfsprofil zusammenstellen — die Basis
-                  für Ihr Leistungsverzeichnis.
+                  Für FM &amp; Einkauf: Objekt, Leistungen und Anforderungen erfassen — als Grundlage für Angebot und
+                  Leistungsverzeichnis. Antwort in 24h.
                 </p>
               </div>
               <span className="relative z-10 inline-flex items-center gap-2 text-sm font-bold text-mint flex-shrink-0">
-                Zum Assistenten
+                Angebot anfordern
                 <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
               </span>
             </Link>

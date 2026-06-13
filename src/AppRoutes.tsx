@@ -12,7 +12,6 @@ const Fachwissen = lazy(() => import('./pages/Fachwissen'));
 const Kontakt = lazy(() => import('./pages/Kontakt'));
 const AHADSystem = lazy(() => import('./pages/AHADSystem'));
 const Leistungen = lazy(() => import('./pages/Leistungen'));
-const Reinigungskonzept = lazy(() => import('./pages/Reinigungskonzept'));
 const Branchen = lazy(() => import('./pages/Branchen'));
 const Standorte = lazy(() => import('./pages/Standorte'));
 const Impressum = lazy(() => import('./pages/rechtliches/Impressum'));
@@ -66,9 +65,9 @@ export default function AppRoutes() {
           <Route path="leistungen/sonderreinigung-stillstandsservice" element={<Sonderreinigung />} />
           <Route path="leistungen/winterdienst-hausmeisterservice" element={<Winterdienst />} />
 
-          <Route path="reinigungskonzept" element={<Reinigungskonzept />} />
-          {/* Alte URL umleiten (B2C-Kostenrechner → B2B-Reinigungskonzept) */}
-          <Route path="kostenrechner" element={<Navigate to="/reinigungskonzept" replace />} />
+          {/* Reinigungskonzept/Kostenrechner sind in den Angebots-Funnel integriert */}
+          <Route path="reinigungskonzept" element={<Navigate to="/angebot" replace />} />
+          <Route path="kostenrechner" element={<Navigate to="/angebot" replace />} />
 
           {/* Branchen */}
           <Route path="branchen" element={<Branchen />} />

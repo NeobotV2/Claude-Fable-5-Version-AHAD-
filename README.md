@@ -51,6 +51,10 @@ npm run assets     # Gebrandete Bilder neu generieren (og-image, Icons, Fallback
 - **Typografie:** Montserrat führt (Black 900 Headlines, Bold 700 Subheads,
   Regular 400 Fließtext); Space Grotesk nur als digitaler Akzent
   (Eyebrows, Zahlen — `font-accent`).
+- **Claim & Messaging:** Genau ein Web-Claim — „Struktur. Sauberkeit. Sicherheit."
+  (Signatur im Footer). Weitere Slogans sind Kanal-Material (Fahrzeug, Kleidung,
+  Anzeige, Social, LV-Deckblatt) und in `src/lib/messaging.ts` mit Kanal-Zuordnung
+  dokumentiert — bewusst NICHT über die Website gestreut.
 
 ### Rendering & SEO/GEO
 
