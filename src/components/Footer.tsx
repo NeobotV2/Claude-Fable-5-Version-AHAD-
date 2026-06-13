@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Phone, Mail, MapPin, Instagram, Linkedin, Clock, ShieldCheck, BadgeCheck, FileCheck2 } from 'lucide-react';
+import { Phone, Mail, MapPin, Instagram, Linkedin, Clock, ShieldCheck, BadgeCheck, FileCheck2, ArrowRight } from 'lucide-react';
 import Logo from '@/components/Logo';
 import { SITE } from '@/lib/site';
 
@@ -39,6 +39,13 @@ const columns = [
   },
 ];
 
+const areas = [
+  { label: 'Villingen-Schwenningen', href: '/standorte/villingen-schwenningen' },
+  { label: 'Stuttgart', href: '/standorte/stuttgart' },
+  { label: 'Konstanz', href: '/standorte/konstanz' },
+  { label: 'Schwarzwald-Baar-Kreis', href: '/standorte' },
+];
+
 export default function Footer() {
   return (
     <footer className="relative bg-navy-900 text-white overflow-hidden grain">
@@ -47,21 +54,16 @@ export default function Footer() {
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-8">
         {/* Standort-Leiste — lokale Relevanz & SEO */}
-        <div className="py-10 border-b border-white/10 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
-          <p className="font-headline font-bold text-lg text-white">
+        <div className="py-8 border-b border-white/10 flex flex-col lg:flex-row lg:items-center justify-between gap-5">
+          <p className="font-bold text-lg text-white">
             Gebäudereinigung für <span className="text-mint">Süddeutschland</span>
           </p>
-          <div className="flex flex-wrap gap-3">
-            {[
-              { label: 'Villingen-Schwenningen', href: '/standorte/villingen-schwenningen' },
-              { label: 'Stuttgart', href: '/standorte/stuttgart' },
-              { label: 'Konstanz', href: '/standorte/konstanz' },
-              { label: 'Schwarzwald-Baar-Kreis', href: '/standorte' },
-            ].map((area) => (
+          <div className="flex flex-wrap gap-2.5">
+            {areas.map((area) => (
               <Link
                 key={area.label}
                 to={area.href}
-                className="flex items-center gap-1.5 text-[13px] font-semibold bg-white/5 hover:bg-white/10 border border-white/10 px-3.5 py-2 rounded-full transition-colors text-blue-100/90"
+                className="flex items-center gap-1.5 text-[13px] font-semibold bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 px-3.5 py-2 rounded-full transition-colors text-blue-100/90"
               >
                 <MapPin size={13} className="text-mint" />
                 {area.label}
@@ -70,19 +72,21 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Hauptbereich */}
-        <div className="py-16 lg:py-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12">
-          <div className="lg:col-span-4 space-y-7">
+        {/* 12-Spalten-Raster: Marke 3 · 3× Nav je 2 · Kontakt 3 —
+            Kontakt bewusst breit, damit Adresse & E-Mail nicht umbrechen. */}
+        <div className="py-14 lg:py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-x-8 gap-y-12">
+          {/* Marke */}
+          <div className="md:col-span-2 lg:col-span-3 space-y-6">
             <Logo variant="dark" size={42} />
-            <p className="text-blue-100/70 leading-relaxed max-w-sm">
-              Systematische Gebäudedienstleistungen für Industrie, Verwaltung und Mittelstand. Struktur, Sauberkeit
-              und Sicherheit — messbar, dokumentiert, verlässlich.
+            <p className="text-blue-100/70 leading-relaxed">
+              Systematische Gebäudedienstleistungen für Industrie, Verwaltung und Mittelstand — messbar,
+              dokumentiert, verlässlich.
             </p>
             <div className="flex flex-wrap gap-2.5">
               {[
                 { icon: <ShieldCheck size={13} />, label: '24h Reaktionszeit' },
                 { icon: <BadgeCheck size={13} />, label: 'Voll versichert' },
-                { icon: <FileCheck2 size={13} />, label: 'Dokumentierte Qualität' },
+                { icon: <FileCheck2 size={13} />, label: 'Dokumentiert' },
               ].map((badge) => (
                 <span
                   key={badge.label}
@@ -93,32 +97,20 @@ export default function Footer() {
                 </span>
               ))}
             </div>
-            <div className="flex gap-3">
-              <a
-                href={SITE.social.instagram}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Instagram"
-                className="w-10 h-10 bg-white/5 border border-white/10 rounded-xl grid place-items-center hover:bg-brand hover:border-brand transition-colors"
-              >
-                <Instagram className="w-4.5 h-4.5" size={18} />
-              </a>
-              <a
-                href={SITE.social.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="LinkedIn"
-                className="w-10 h-10 bg-white/5 border border-white/10 rounded-xl grid place-items-center hover:bg-brand hover:border-brand transition-colors"
-              >
-                <Linkedin size={18} />
-              </a>
-            </div>
+            <Link
+              to="/angebot"
+              className="group inline-flex items-center gap-2 bg-accent hover:bg-accent-dark text-white text-sm font-bold px-5 py-3 rounded-xl transition-colors"
+            >
+              Kostenloses Angebot
+              <ArrowRight size={16} className="transition-transform group-hover:translate-x-0.5" />
+            </Link>
           </div>
 
+          {/* Navigationsspalten */}
           {columns.map((col) => (
             <nav key={col.title} className="lg:col-span-2" aria-label={col.title}>
-              <h4 className="text-[12px] font-black uppercase tracking-[0.2em] text-blue-100/50 mb-6">{col.title}</h4>
-              <ul className="space-y-3.5">
+              <h4 className="text-[12px] font-black uppercase tracking-[0.2em] text-blue-100/50 mb-5">{col.title}</h4>
+              <ul className="space-y-3">
                 {col.links.map((link) => (
                   <li key={link.href}>
                     <Link
@@ -133,11 +125,12 @@ export default function Footer() {
             </nav>
           ))}
 
-          <div className="lg:col-span-2">
-            <h4 className="text-[12px] font-black uppercase tracking-[0.2em] text-blue-100/50 mb-6">Kontakt</h4>
-            <ul className="space-y-5 text-[14px]">
+          {/* Kontakt — breitere Spalte, damit Adresse & E-Mail nicht umbrechen */}
+          <div className="lg:col-span-3">
+            <h4 className="text-[12px] font-black uppercase tracking-[0.2em] text-blue-100/50 mb-5">Kontakt</h4>
+            <ul className="space-y-4 text-[14px] mb-6">
               <li className="flex gap-3">
-                <MapPin className="w-4.5 h-4.5 text-mint flex-shrink-0 mt-0.5" size={18} />
+                <MapPin size={17} className="text-mint flex-shrink-0 mt-0.5" />
                 <span className="text-blue-100/75">
                   {SITE.address.street}
                   <br />
@@ -145,27 +138,49 @@ export default function Footer() {
                 </span>
               </li>
               <li className="flex gap-3">
-                <Phone className="w-4.5 h-4.5 text-mint flex-shrink-0 mt-0.5" size={18} />
+                <Phone size={17} className="text-mint flex-shrink-0 mt-0.5" />
                 <a href={SITE.phoneHref} className="text-white font-bold hover:text-mint transition-colors">
                   {SITE.phone}
                 </a>
               </li>
               <li className="flex gap-3">
-                <Mail className="w-4.5 h-4.5 text-mint flex-shrink-0 mt-0.5" size={18} />
-                <a href={SITE.emailHref} className="text-blue-100/75 hover:text-mint transition-colors break-all">
+                <Mail size={17} className="text-mint flex-shrink-0 mt-0.5" />
+                <a href={SITE.emailHref} className="text-blue-100/75 hover:text-mint transition-colors">
                   {SITE.email}
                 </a>
               </li>
               <li className="flex gap-3">
-                <Clock className="w-4.5 h-4.5 text-mint flex-shrink-0 mt-0.5" size={18} />
+                <Clock size={17} className="text-mint flex-shrink-0 mt-0.5" />
                 <span className="text-blue-100/75">{SITE.hours}</span>
               </li>
             </ul>
+
+            <div className="flex items-center gap-3">
+              <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-blue-100/40">Folgen</span>
+              <a
+                href={SITE.social.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="AHAD Cleaning auf Instagram"
+                className="w-10 h-10 bg-white/5 border border-white/10 rounded-xl grid place-items-center hover:bg-accent hover:border-accent transition-colors"
+              >
+                <Instagram size={18} />
+              </a>
+              <a
+                href={SITE.social.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="AHAD Cleaning auf LinkedIn"
+                className="w-10 h-10 bg-white/5 border border-white/10 rounded-xl grid place-items-center hover:bg-accent hover:border-accent transition-colors"
+              >
+                <Linkedin size={18} />
+              </a>
+            </div>
           </div>
         </div>
 
         {/* Bottom Bar */}
-        <div className="py-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-[13px] text-blue-100/50">
+        <div className="py-7 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-[13px] text-blue-100/50">
           <p>
             © {new Date().getFullYear()} {SITE.legalName}. Alle Rechte vorbehalten.
           </p>
