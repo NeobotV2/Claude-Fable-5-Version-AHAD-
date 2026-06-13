@@ -16,7 +16,8 @@ für Industrie, Verwaltung und Mittelstand in Süddeutschland.
 ```bash
 npm install
 npm run dev        # Entwicklungsserver
-npm run build      # Typprüfung + Produktions-Build nach dist/
+npm run build      # Typprüfung + Client-SPA-Build nach dist/
+npm run build:ssg  # Build + SSR-Prerendering: jede Route als statisches HTML (Produktion)
 npm run preview    # Build lokal testen
 npm run assets     # Gebrandete Bilder neu generieren (og-image, Icons, Fallback)
 ```
@@ -50,6 +51,19 @@ npm run assets     # Gebrandete Bilder neu generieren (og-image, Icons, Fallback
 - **Typografie:** Montserrat führt (Black 900 Headlines, Bold 700 Subheads,
   Regular 400 Fließtext); Space Grotesk nur als digitaler Akzent
   (Eyebrows, Zahlen — `font-accent`).
+
+### Rendering & SEO/GEO
+
+- **Produktion = SSG.** `npm run build:ssg` baut die Client-SPA, kompiliert einen
+  SSR-Renderer (`src/entry-server.tsx` via `vite.ssr.config.ts`) und prerendert
+  jede Route (`scripts/prerender.mjs`) zu statischem HTML mit vollständigem Inhalt,
+  Meta-Tags und JSON-LD — entscheidend für Suchmaschinen und LLM-Fetcher, die kein
+  JavaScript ausführen. Schlägt eine Route fehl, wird die SPA-Hülle geschrieben
+  (Build bricht nie ab). Netlify/Vercel sind bereits auf `build:ssg` gestellt.
+- **Hydration:** `main.tsx` hydriert vorgerendertes HTML, sonst frischer Mount.
+- Routenliste fürs Prerendering steht in `scripts/prerender.mjs` (ohne /admin,
+  /karriere/bewerbung). Firebase wird in Formularen erst beim Absenden dynamisch
+  geladen — hält Prerender und Initial-Bundle schlank.
 
 ### Design-Prinzipien
 

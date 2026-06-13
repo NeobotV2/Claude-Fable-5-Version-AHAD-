@@ -1,10 +1,10 @@
-import { Phone, Mail, MapPin, Clock, FileText, ChevronRight } from 'lucide-react';
+import { Phone, Mail, MapPin, Clock, FileText, ChevronRight, MessageCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import SEO from '@/components/SEO';
 import PageHero from '@/components/PageHero';
 import Reveal from '@/components/ui/Reveal';
 import ContactForm from '@/components/ContactForm';
-import { SITE, PROMISES } from '@/lib/site';
+import { SITE, PROMISES, WHATSAPP_HREF } from '@/lib/site';
 
 const contactChannels = [
   {
@@ -16,6 +16,21 @@ const contactChannels = [
       </a>
     ),
     hint: SITE.hours,
+  },
+  {
+    icon: <MessageCircle size={22} />,
+    title: 'WhatsApp',
+    content: (
+      <a
+        href={WHATSAPP_HREF}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-brand hover:text-brand-light font-bold transition-colors"
+      >
+        Direkt schreiben
+      </a>
+    ),
+    hint: 'Schnelle Rückfrage ohne Formular',
   },
   {
     icon: <Mail size={22} />,

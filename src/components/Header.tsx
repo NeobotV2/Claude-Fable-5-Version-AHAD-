@@ -17,6 +17,7 @@ import {
   Sparkles,
   Snowflake,
   ArrowRight,
+  Calculator,
 } from 'lucide-react';
 import Logo from '@/components/Logo';
 import { SITE } from '@/lib/site';
@@ -227,6 +228,13 @@ export default function Header() {
                                 className="inline-flex items-center gap-2 bg-accent hover:bg-accent-dark text-white text-sm font-bold px-4 py-2.5 rounded-lg transition-colors"
                               >
                                 Jetzt anfragen <ArrowRight size={15} />
+                              </Link>
+                              <Link
+                                to="/kostenrechner"
+                                onClick={() => setActiveDropdown(null)}
+                                className="mt-3 inline-flex items-center gap-2 text-mint text-[13px] font-bold hover:text-white transition-colors"
+                              >
+                                <Calculator size={14} /> Kostenrechner — Preis in 30 Sek.
                               </Link>
                             </div>
                           </div>

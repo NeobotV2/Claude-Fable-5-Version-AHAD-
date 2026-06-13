@@ -23,7 +23,14 @@ export const SITE = {
     instagram: 'https://instagram.com/ahadcleaning',
     linkedin: 'https://linkedin.com/company/ahadcleaning',
   },
+  // WhatsApp Business — Sofortkanal. Nummer = Festnetz im internationalen
+  // Format ohne Sonderzeichen; ggf. auf die echte WhatsApp-Nummer ändern.
+  whatsapp: '4977219447915',
+  whatsappText: 'Hallo AHAD Cleaning, ich interessiere mich für ein Angebot zur Gebäudereinigung.',
 } as const;
+
+/** Fertiger WhatsApp-Deeplink mit vorbefülltem Text. */
+export const WHATSAPP_HREF = `https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(SITE.whatsappText)}`;
 
 /**
  * Vertriebsversprechen — überall identisch kommuniziert.
@@ -77,6 +84,55 @@ export const CLIENT_REFERENCES: ClientReference[] = [
   },
 ];
 
+/**
+ * Das AHAD-Versprechen — benannte Risikoumkehr mit „Zähnen".
+ * Bewusst nur Zusagen, die operativ haltbar sind (Nachbesserung,
+ * Festpreis, faire Laufzeit, Reaktionszeit). Keine erfundenen Werte.
+ */
+export const GUARANTEES = [
+  {
+    title: 'Reaktions-Versprechen',
+    promise: 'Antwort auf jede Meldung innerhalb von 24 Stunden — nachvollziehbar dokumentiert.',
+  },
+  {
+    title: 'Qualitäts-Versprechen',
+    promise: 'Zu Recht beanstandete Leistung bessern wir kostenfrei nach. Ohne Diskussion.',
+  },
+  {
+    title: 'Festpreis-Versprechen',
+    promise: 'Transparentes Leistungsverzeichnis, fester Preis — keine versteckten Nachträge.',
+  },
+  {
+    title: 'Fairness-Versprechen',
+    promise: 'Faire Laufzeiten statt Knebelverträge. Wir binden durch Leistung, nicht durch Vertrag.',
+  },
+] as const;
+
+/**
+ * Belegbare Eckwerte (operative Zusagen, keine fabrizierten Statistiken).
+ * Sobald echte Kennzahlen vorliegen (z. B. gemessene SLA-Quote), hier
+ * ergänzen — bis dahin nur, wofür AHAD vertraglich einsteht.
+ */
+export const PROOF_POINTS = [
+  { value: '24 h', label: 'Reaktionszeit', sub: 'vertraglich zugesichert' },
+  { value: '48 h', label: 'bis Objektbesichtigung', sub: 'in der Regel vor Ort' },
+  { value: '1', label: 'feste Objektleitung', sub: 'pro Objekt, mit Gesicht' },
+  { value: '100 %', label: 'dokumentierte Leistung', sub: 'auditfähig nachweisbar' },
+] as const;
+
+/**
+ * Feste Objektleitung mit Gesicht — der wichtigste menschliche
+ * Vertrauensanker. PLATZHALTER: echten Namen + Foto nachreichen
+ * (Foto nach /public/team/objektleitung.jpg legen).
+ */
+export const OBJEKTLEITUNG = {
+  name: 'Ihre feste Objektleitung',
+  role: 'Direkter Ansprechpartner für Ihr Objekt',
+  photo: '', // z. B. '/team/objektleitung.jpg' — leer => gebrandeter Platzhalter
+  quote:
+    'Sie haben eine Nummer, die abnimmt — und einen Menschen, der Ihr Objekt kennt. Kein Ticketsystem, keine Warteschleife.',
+} as const;
+
 export const TESTIMONIALS = [
   {
     quote:
@@ -97,6 +153,50 @@ export const TESTIMONIALS = [
     company: 'Medizintechnik, Bodenseeregion',
   },
 ] as const;
+
+/**
+ * Echte Kundenbewertungen (z. B. von Google).
+ * LEER lassen, bis verifizierte Bewertungen vorliegen — dann hier eintragen.
+ * Solange leer, wird KEIN AggregateRating-Schema ausgegeben (fake Markup
+ * ist gegen Google-Richtlinien und rechtlich riskant).
+ */
+export interface Review {
+  author: string;
+  role?: string;
+  rating: number; // 1–5
+  date: string; // ISO, z. B. '2026-05-01'
+  text: string;
+}
+
+export const REVIEWS: Review[] = [];
+
+/** Quelle/Profil-Link für „alle Bewertungen ansehen" (z. B. Google-Profil). */
+export const REVIEWS_SOURCE_URL = '';
+
+/** Baut das Review/AggregateRating-Schema — nur wenn echte Reviews da sind. */
+export function reviewSchema() {
+  if (REVIEWS.length === 0) return null;
+  const ratingValue = (REVIEWS.reduce((s, r) => s + r.rating, 0) / REVIEWS.length).toFixed(1);
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    '@id': `${SITE.url}/#organization`,
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue,
+      reviewCount: REVIEWS.length,
+      bestRating: 5,
+      worstRating: 1,
+    },
+    review: REVIEWS.map((r) => ({
+      '@type': 'Review',
+      author: { '@type': 'Person', name: r.author },
+      datePublished: r.date,
+      reviewRating: { '@type': 'Rating', ratingValue: r.rating, bestRating: 5, worstRating: 1 },
+      reviewBody: r.text,
+    })),
+  };
+}
 
 export const WEBSITE_SCHEMA = {
   '@context': 'https://schema.org',

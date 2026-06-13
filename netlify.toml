@@ -1,8 +1,10 @@
+# build:ssg = Client-Build + SSR-Prerender → jede Route als statisches HTML.
 [build]
-  command = "npm run build"
+  command = "npm run build:ssg"
   publish = "dist"
 
-# SPA-Routing: alle Pfade auf index.html, React Router übernimmt.
+# Fallback nur für Pfade ohne vorgerenderte Datei (Netlife prüft Dateien zuerst).
+# Prerenderte Routen (z. B. /kostenrechner/index.html) werden direkt ausgeliefert.
 [[redirects]]
   from = "/*"
   to = "/index.html"

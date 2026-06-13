@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'motion/react';
 import { Send, Loader2, CheckCircle2, Phone } from 'lucide-react';
-import { db, collection, addDoc, serverTimestamp } from '@/firebase';
 import { SITE } from '@/lib/site';
 
 const SERVICES = [
@@ -45,6 +44,8 @@ export default function ContactForm() {
     setIsSubmitting(true);
     setSubmitError(null);
     try {
+      // Firebase erst beim Absenden laden — hält Initial-Bundle & SSG schlank.
+      const { db, collection, addDoc, serverTimestamp } = await import('@/firebase');
       await addDoc(collection(db, 'leads'), {
         ...formData,
         status: 'new',

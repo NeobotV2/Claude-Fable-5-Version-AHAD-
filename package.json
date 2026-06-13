@@ -8,6 +8,8 @@
     "build": "tsc -b && vite build",
     "preview": "vite preview",
     "build:file": "VITE_HASH_ROUTER=1 vite build --config vite.singlefile.config.ts",
+    "build:ssr": "vite build --config vite.ssr.config.ts",
+    "build:ssg": "npm run build && npm run build:ssr && node scripts/prerender.mjs",
     "assets": "node scripts/generate-assets.mjs"
   },
   "dependencies": {

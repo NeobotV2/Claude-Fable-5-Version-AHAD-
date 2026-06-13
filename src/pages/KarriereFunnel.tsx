@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { ChevronLeft, ChevronRight, Check, Send, Smartphone, MapPin, Calendar, Briefcase, User, Info, Loader2, Globe } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
-import { db, collection, addDoc, serverTimestamp, handleFirestoreError, OperationType } from '@/firebase';
 import SEO from '@/components/SEO';
 import { languages, translations, Language } from '@/constants/funnelTranslations';
 
@@ -56,28 +55,32 @@ export default function KarriereFunnel() {
 
     setIsSubmitting(true);
     try {
-      await addDoc(collection(db, 'job_applications'), {
-        ...data,
-        language: lang,
-        createdAt: serverTimestamp(),
-        status: 'new'
-      });
+      // Firebase erst beim Absenden laden — hält Initial-Bundle & SSG schlank.
+      const { db, collection, addDoc, serverTimestamp, handleFirestoreError, OperationType } = await import('@/firebase');
+      try {
+        await addDoc(collection(db, 'job_applications'), {
+          ...data,
+          language: lang,
+          createdAt: serverTimestamp(),
+          status: 'new',
+        });
+      } catch (error) {
+        console.error('Error submitting application:', error);
+        handleFirestoreError(error, OperationType.WRITE, 'job_applications');
+      }
 
       // Send email notification
       try {
         await fetch('/api/send-email', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ type: 'job_application', data: { ...data, language: lang } })
+          body: JSON.stringify({ type: 'job_application', data: { ...data, language: lang } }),
         });
       } catch (emailError) {
         console.error('Error sending email notification:', emailError);
       }
 
       setIsSuccess(true);
-    } catch (error) {
-      console.error('Error submitting application:', error);
-      handleFirestoreError(error, OperationType.WRITE, 'job_applications');
     } finally {
       setIsSubmitting(false);
     }

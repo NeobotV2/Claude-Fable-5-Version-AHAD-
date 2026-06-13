@@ -16,7 +16,6 @@ import {
   BadgeCheck,
   MapPin,
 } from 'lucide-react';
-import { db, collection, addDoc, serverTimestamp, handleFirestoreError, OperationType } from '@/firebase';
 import { cn } from '@/lib/utils';
 import { Link } from 'react-router-dom';
 import SEO from '@/components/SEO';
@@ -116,11 +115,18 @@ export default function AngebotsFunnel() {
     setIsSubmitting(true);
 
     try {
-      await addDoc(collection(db, 'offer_leads'), {
-        ...formData,
-        status: 'new',
-        createdAt: serverTimestamp(),
-      });
+      // Firebase erst beim Absenden laden — hält Initial-Bundle & SSG schlank.
+      const { db, collection, addDoc, serverTimestamp, handleFirestoreError, OperationType } = await import('@/firebase');
+      try {
+        await addDoc(collection(db, 'offer_leads'), {
+          ...formData,
+          status: 'new',
+          createdAt: serverTimestamp(),
+        });
+      } catch (error) {
+        console.error('Error submitting lead:', error);
+        handleFirestoreError(error, OperationType.WRITE, 'offer_leads');
+      }
 
       // E-Mail-Benachrichtigung (optionaler Backend-Endpunkt)
       try {
@@ -135,9 +141,6 @@ export default function AngebotsFunnel() {
 
       setIsSuccess(true);
       window.scrollTo({ top: 0, behavior: 'smooth' });
-    } catch (error) {
-      console.error('Error submitting lead:', error);
-      handleFirestoreError(error, OperationType.WRITE, 'offer_leads');
     } finally {
       setIsSubmitting(false);
     }

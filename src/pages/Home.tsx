@@ -16,6 +16,7 @@ import {
   PhoneCall,
   CalendarCheck,
   FileCheck2,
+  Calculator,
 } from 'lucide-react';
 import SEO from '@/components/SEO';
 import Reveal, { RevealWords } from '@/components/ui/Reveal';
@@ -27,6 +28,8 @@ import BeforeAfter from '@/components/ui/BeforeAfter';
 import Accordion, { faqSchemaFrom, type FAQItem } from '@/components/ui/Accordion';
 import LogoMarquee from '@/components/LogoMarquee';
 import CTABand from '@/components/CTABand';
+import Guarantee from '@/components/Guarantee';
+import Reviews from '@/components/Reviews';
 import { IMG, unsplashSrcSet } from '@/lib/images';
 import { SITE, STATS, TESTIMONIALS, ORGANIZATION_SCHEMA, WEBSITE_SCHEMA } from '@/lib/site';
 import { SERVICES } from '@/data/services';
@@ -433,6 +436,29 @@ export default function Home() {
               </Reveal>
             ))}
           </div>
+
+          {/* Kostenrechner-Teaser — nimmt die Preisfrage direkt nach den Leistungen auf */}
+          <Reveal delay={0.15} className="mt-8">
+            <Link
+              to="/kostenrechner"
+              className="group flex flex-col sm:flex-row sm:items-center gap-5 bg-navy text-white rounded-3xl p-7 sm:p-8 overflow-hidden relative grain card-lift"
+            >
+              <div className="absolute -top-20 -right-10 w-64 h-64 rounded-full bg-accent/20 blur-[90px]" />
+              <span className="relative z-10 w-14 h-14 rounded-2xl bg-white/10 grid place-items-center text-mint flex-shrink-0">
+                <Calculator className="w-7 h-7" />
+              </span>
+              <div className="relative z-10 flex-grow">
+                <h3 className="font-headline font-bold text-xl mb-1">Was kostet das für mein Objekt?</h3>
+                <p className="text-blue-100/80 text-sm font-medium">
+                  Transparenter Richtpreis in 30 Sekunden — nach Fläche, Objekttyp und Intervall. Ohne Anruf.
+                </p>
+              </div>
+              <span className="relative z-10 inline-flex items-center gap-2 text-sm font-bold text-mint flex-shrink-0">
+                Zum Kostenrechner
+                <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
+              </span>
+            </Link>
+          </Reveal>
         </div>
       </section>
 
@@ -646,6 +672,9 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ── BEWERTUNGEN (erscheint mit echten Reviews) ───────────────── */}
+      <Reviews />
+
       {/* ── PROZESS (06) ─────────────────────────────────────────────── */}
       <section className="py-24 lg:py-36 bg-paper">
         <div className="max-w-7xl mx-auto px-4 sm:px-8">
@@ -676,6 +705,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* ── AHAD-VERSPRECHEN (Garantie + Proof + Objektleitung) ──────── */}
+      <Guarantee />
 
       {/* ── FAQ ──────────────────────────────────────────────────────── */}
       <section className="py-24 lg:py-32 bg-white border-t border-line">
