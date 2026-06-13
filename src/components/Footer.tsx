@@ -31,7 +31,7 @@ const columns = [
     links: [
       { label: 'Über uns', href: '/unternehmen' },
       { label: 'Das AHAD System', href: '/ahad-system' },
-      { label: 'Kostenrechner', href: '/kostenrechner' },
+      { label: 'Reinigungskonzept', href: '/reinigungskonzept' },
       { label: 'Referenzen', href: '/referenzen' },
       { label: 'Standorte & Regionen', href: '/standorte' },
       { label: 'Karriere', href: '/karriere' },

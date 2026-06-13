@@ -25,7 +25,7 @@ const ROUTES = [
   '/leistungen/medizintechnik-reinigung',
   '/leistungen/sonderreinigung-stillstandsservice',
   '/leistungen/winterdienst-hausmeisterservice',
-  '/kostenrechner',
+  '/reinigungskonzept',
   '/branchen',
   '/branchen/industrie-produktion',
   '/branchen/medizintechnik',

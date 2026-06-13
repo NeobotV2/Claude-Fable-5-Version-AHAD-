@@ -17,7 +17,7 @@ import {
   Sparkles,
   Snowflake,
   ArrowRight,
-  Calculator,
+  ClipboardList,
 } from 'lucide-react';
 import Logo from '@/components/Logo';
 import { SITE } from '@/lib/site';
@@ -230,11 +230,11 @@ export default function Header() {
                                 Jetzt anfragen <ArrowRight size={15} />
                               </Link>
                               <Link
-                                to="/kostenrechner"
+                                to="/reinigungskonzept"
                                 onClick={() => setActiveDropdown(null)}
                                 className="mt-3 inline-flex items-center gap-2 text-mint text-[13px] font-bold hover:text-white transition-colors"
                               >
-                                <Calculator size={14} /> Kostenrechner — Preis in 30 Sek.
+                                <ClipboardList size={14} /> Reinigungskonzept — Bedarfsprofil
                               </Link>
                             </div>
                           </div>

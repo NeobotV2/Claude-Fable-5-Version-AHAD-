@@ -16,7 +16,7 @@ import {
   PhoneCall,
   CalendarCheck,
   FileCheck2,
-  Calculator,
+  ClipboardList,
 } from 'lucide-react';
 import SEO from '@/components/SEO';
 import Reveal, { RevealWords } from '@/components/ui/Reveal';
@@ -437,24 +437,25 @@ export default function Home() {
             ))}
           </div>
 
-          {/* Kostenrechner-Teaser — nimmt die Preisfrage direkt nach den Leistungen auf */}
+          {/* Reinigungskonzept-Teaser — B2B-Einstieg: Bedarfsprofil / LV statt Preis */}
           <Reveal delay={0.15} className="mt-8">
             <Link
-              to="/kostenrechner"
+              to="/reinigungskonzept"
               className="group flex flex-col sm:flex-row sm:items-center gap-5 bg-navy text-white rounded-3xl p-7 sm:p-8 overflow-hidden relative grain card-lift"
             >
               <div className="absolute -top-20 -right-10 w-64 h-64 rounded-full bg-accent/20 blur-[90px]" />
               <span className="relative z-10 w-14 h-14 rounded-2xl bg-white/10 grid place-items-center text-mint flex-shrink-0">
-                <Calculator className="w-7 h-7" />
+                <ClipboardList className="w-7 h-7" />
               </span>
               <div className="relative z-10 flex-grow">
-                <h3 className="font-headline font-bold text-xl mb-1">Was kostet das für mein Objekt?</h3>
+                <h3 className="font-headline font-bold text-xl mb-1">Reinigungskonzept in 2 Minuten strukturieren</h3>
                 <p className="text-blue-100/80 text-sm font-medium">
-                  Transparenter Richtpreis in 30 Sekunden — nach Fläche, Objekttyp und Intervall. Ohne Anruf.
+                  Für FM &amp; Einkauf: Leistungsumfang und Anforderungen als Bedarfsprofil zusammenstellen — die Basis
+                  für Ihr Leistungsverzeichnis.
                 </p>
               </div>
               <span className="relative z-10 inline-flex items-center gap-2 text-sm font-bold text-mint flex-shrink-0">
-                Zum Kostenrechner
+                Zum Assistenten
                 <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
               </span>
             </Link>

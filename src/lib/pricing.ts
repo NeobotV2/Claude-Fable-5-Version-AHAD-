@@ -12,7 +12,7 @@
  * Objekttyp. Konservativ als Spanne gehalten.
  */
 
-export type ObjektTyp = 'buero' | 'industrie' | 'medizin' | 'gewerbe';
+export type ObjektTyp = 'buero' | 'industrie' | 'medizin' | 'gewerbe' | 'hotellerie';
 export type Frequenz = 'daily' | 'thrice' | 'twice' | 'weekly';
 
 export const OBJEKT_TYPEN: { id: ObjektTyp; label: string; hint: string }[] = [
@@ -20,6 +20,7 @@ export const OBJEKT_TYPEN: { id: ObjektTyp; label: string; hint: string }[] = [
   { id: 'industrie', label: 'Industrie & Produktion', hint: 'Hallen, Anlagen, Sozialräume' },
   { id: 'medizin', label: 'Medizintechnik & Sensibel', hint: 'Dokumentiert, nach Hygieneplan' },
   { id: 'gewerbe', label: 'Gewerbe & Logistik', hint: 'Großflächen, Handel, Lager' },
+  { id: 'hotellerie', label: 'Hotellerie & Objektbetrieb', hint: 'Housekeeping, öffentliche Bereiche' },
 ];
 
 export const FREQUENZEN: { id: Frequenz; label: string; perMonth: number }[] = [
@@ -35,6 +36,7 @@ const RATE: Record<ObjektTyp, { low: number; high: number }> = {
   industrie: { low: 0.18, high: 0.28 },
   medizin: { low: 0.22, high: 0.34 },
   gewerbe: { low: 0.12, high: 0.18 },
+  hotellerie: { low: 0.16, high: 0.26 },
 };
 
 /** Mengenrabatt: große Flächen sind pro m² günstiger. */
