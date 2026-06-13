@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {
   ClipboardList,
   Building,
@@ -16,12 +16,12 @@ import {
 import SEO from '@/components/SEO';
 import PageHero from '@/components/PageHero';
 import Reveal from '@/components/ui/Reveal';
-import ButtonLink from '@/components/ui/Button';
 import Accordion, { faqSchemaFrom, type FAQItem } from '@/components/ui/Accordion';
 import CTABand from '@/components/CTABand';
 import { cn } from '@/lib/utils';
 import { SITE } from '@/lib/site';
 import { estimate, eur, OBJEKT_TYPEN, FREQUENZEN, type ObjektTyp, type Frequenz } from '@/lib/pricing';
+import { saveBedarfsprofil } from '@/lib/bedarfsprofil';
 
 const TYP_ICON: Record<ObjektTyp, React.ReactNode> = {
   buero: <Building size={20} />,
@@ -106,12 +106,44 @@ export default function Reinigungskonzept() {
 
   const budget = useMemo(() => estimate({ objektTyp, sqm, frequenz }), [objektTyp, sqm, frequenz]);
 
+  const navigate = useNavigate();
+
   const typLabel = OBJEKT_TYPEN.find((t) => t.id === objektTyp)!.label;
   const freqLabel = FREQUENZEN.find((f) => f.id === frequenz)!.label;
   const selectedBereiche = BEREICHE.filter((b) => bereiche.includes(b.id));
   const standard = selectedBereiche.filter((b) => !b.sonder);
   const sonder = selectedBereiche.filter((b) => b.sonder);
   const selectedAnf = ANFORDERUNGEN.filter((a) => anforderungen.includes(a.id));
+
+  // Profil an den Funnel übergeben — keine Doppel-Eingabe, der Funnel
+  // springt direkt zum Kontaktschritt und nimmt das Profil mit in den Lead.
+  const uebernehmen = () => {
+    const stdLabels = standard.map((b) => b.label);
+    const sonderLabels = sonder.map((b) => b.label);
+    const anfLabels = selectedAnf.map((a) => a.label);
+    const summary = [
+      `Objekt: ${typLabel} · ${sqm.toLocaleString('de-DE')} m² · Intervall ${freqLabel}`,
+      `Leistungspositionen: ${stdLabels.join(', ') || '—'}`,
+      `Sonderleistungen: ${sonderLabels.join(', ') || '—'}`,
+      `Anforderungen: ${anfLabels.join(', ') || '—'}`,
+      `Budget-Orientierung: ${eur(budget.monthlyLow)}–${eur(budget.monthlyHigh)}/Monat (grobe Indikation)`,
+    ].join('\n');
+
+    saveBedarfsprofil({
+      objektTypId: objektTyp,
+      objektTypLabel: typLabel,
+      sqm,
+      frequenzId: frequenz,
+      frequenzLabel: freqLabel,
+      bereiche: stdLabels,
+      sonder: sonderLabels,
+      anforderungen: anfLabels,
+      budgetLow: budget.monthlyLow,
+      budgetHigh: budget.monthlyHigh,
+      summary,
+    });
+    navigate('/angebot');
+  };
 
   return (
     <div>
@@ -320,9 +352,14 @@ export default function Reinigungskonzept() {
 
                   {/* Aktionen */}
                   <div className="space-y-3 no-print">
-                    <ButtonLink to="/angebot" size="lg" arrow className="w-full">
-                      Reinigungskonzept anfordern
-                    </ButtonLink>
+                    <button
+                      type="button"
+                      onClick={uebernehmen}
+                      className="group/btn w-full inline-flex items-center justify-center gap-2 bg-accent text-white px-8 py-4 rounded-xl font-bold text-[15px] hover:bg-accent-dark shadow-glow hover:-translate-y-0.5 active:scale-[0.98] transition-all"
+                    >
+                      Profil übernehmen &amp; Anfrage abschließen
+                      <ArrowRight size={18} className="transition-transform group-hover/btn:translate-x-1" />
+                    </button>
                     <button
                       type="button"
                       onClick={() => window.print()}
