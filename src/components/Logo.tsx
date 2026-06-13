@@ -35,26 +35,27 @@ export default function Logo({ variant = 'light', size = 36, className, asLink =
     >
       {!white && (
         <defs>
-          {/* Digitale Verlaufs-Version: dezente Tiefe entlang der Falzdiagonale */}
-          <linearGradient id={`an-${id}`} x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0" stopColor="#071930" />
-            <stop offset="0.5" stopColor="#0C2747" />
-            <stop offset="1" stopColor="#081D37" />
+          {/* Designbook v2.3: Hauptflächen solid, Falzflächen als weicher
+              Navy↔Grün-Verlauf entlang der Falzdiagonale */}
+          <linearGradient id={`fg-${id}`} x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stopColor="#0B2341" />
+            <stop offset="0.5" stopColor="#148A49" />
+            <stop offset="1" stopColor="#0D6B38" />
           </linearGradient>
-          <linearGradient id={`ag-${id}`} x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0" stopColor="#085028" />
-            <stop offset="0.5" stopColor="#0E7039" />
-            <stop offset="1" stopColor="#0A572D" />
+          <linearGradient id={`fn-${id}`} x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stopColor="#0B2341" />
+            <stop offset="0.5" stopColor="#123660" />
+            <stop offset="1" stopColor="#0D6B38" />
           </linearGradient>
         </defs>
       )}
 
       {/* Bildzeichen — Navy-Fläche trägt den weißen Kern (evenodd) */}
-      <path d={ICON_PATHS.navy} fillRule="evenodd" fill={white ? '#ffffff' : `url(#an-${id})`} />
-      <path d={ICON_PATHS.green} fill={white ? '#ffffff' : `url(#ag-${id})`} />
-      {/* Falzflächen: nur im Bildzeichen erlaubte Dunkeltöne; negativ entfallen sie optisch */}
-      <path d={ICON_PATHS.falzGreen} fill={white ? '#ffffff' : '#064B20'} />
-      <path d={ICON_PATHS.falzNavy} fill={white ? '#ffffff' : '#02122A'} />
+      <path d={ICON_PATHS.navy} fillRule="evenodd" fill={white ? '#ffffff' : '#0B2341'} />
+      <path d={ICON_PATHS.green} fill={white ? '#ffffff' : '#0D6B38'} />
+      {/* Falzflächen mit Verlauf — negativ entfallen sie optisch */}
+      <path d={ICON_PATHS.falzGreen} fill={white ? '#ffffff' : `url(#fg-${id})`} />
+      <path d={ICON_PATHS.falzNavy} fill={white ? '#ffffff' : `url(#fn-${id})`} />
 
       {/* Wortmarke (pfadkonvertiert, nie als Schrift setzen) */}
       <path d={WORDMARK_PATHS.ahad} fill={white ? '#ffffff' : '#0B2341'} />

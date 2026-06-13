@@ -1,14 +1,15 @@
 /**
  * Erzeugt gebrandete Bild-Assets aus den Original-Logopfaden des Designbooks
  * (scripts/logo-parts.json — extrahiert aus der Druckvorlage):
- *   - public/favicon.svg          Bildzeichen solo (Farbversion)
- *   - public/logo.svg             Lockup, Verlaufs-Version (digital)
+ *   - public/favicon.svg          Bildzeichen solo (Primärversion mit Verlauf)
+ *   - public/logo.svg             Primärlogo — alle Anwendungen (v2.3)
  *   - public/og-image.jpg         Social-Preview 1200×630 (Navy, Logo negativ weiß)
- *   - public/apple-touch-icon.png / logo-512.png / logo.png
+ *   - public/apple-touch-icon.png / logo-512.png / logo.png (Avatar: negativ auf Navy)
  *   - public/images/fallback.jpg  Marken-Fallback für externe Fotos
  *
- * Farben laut Markenrichtlinien v2.0: Navy #0B2341, Grün #0D6B38,
- * Falze #064B20/#02122A (nur im Bildzeichen). Auf Navy: Logo negativ weiß.
+ * Markenrichtlinien v2.3: Navy #0B2341, Grün #0D6B38, Weiß als Grundfläche,
+ * Text-Anthrazit #1C2733 nur im Fließtext. Falzflächen laufen im weichen
+ * Verlauf zwischen Navy und Grün; Flat-Falztöne nur noch für Schneidefolie.
  *
  * Aufruf: npm run assets
  */
@@ -32,11 +33,11 @@ const TINT = '#9CDDB7';
 const vb = (b) => `${b.x1} ${b.y1} ${(b.x2 - b.x1).toFixed(3)} ${(b.y2 - b.y1).toFixed(3)}`;
 
 const gradientDefs = `
-    <linearGradient id="gNavy" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#071930"/><stop offset="0.5" stop-color="#0C2747"/><stop offset="1" stop-color="#081D37"/>
+    <linearGradient id="fGreen" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="${NAVY}"/><stop offset="0.5" stop-color="#148A49"/><stop offset="1" stop-color="${GREEN}"/>
     </linearGradient>
-    <linearGradient id="gGreen" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#085028"/><stop offset="0.5" stop-color="#0E7039"/><stop offset="1" stop-color="#0A572D"/>
+    <linearGradient id="fNavy" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="${NAVY}"/><stop offset="0.5" stop-color="#123660"/><stop offset="1" stop-color="${GREEN}"/>
     </linearGradient>`;
 
 /** Bildzeichen-Pfade. mode: 'flat' | 'gradient' | 'white' */
@@ -45,7 +46,7 @@ function iconPaths(mode) {
     mode === 'white'
       ? { navy: '#fff', green: '#fff', falzGreen: '#fff', falzNavy: '#fff' }
       : mode === 'gradient'
-        ? { navy: 'url(#gNavy)', green: 'url(#gGreen)', falzGreen: FALZ_GREEN, falzNavy: FALZ_NAVY }
+        ? { navy: NAVY, green: GREEN, falzGreen: 'url(#fGreen)', falzNavy: 'url(#fNavy)' }
         : { navy: NAVY, green: GREEN, falzGreen: FALZ_GREEN, falzNavy: FALZ_NAVY };
   return `
     <path d="${parts.navy.d}" fill-rule="evenodd" fill="${fills.navy}"/>
@@ -143,7 +144,7 @@ function appIconSvg(padding = 22) {
 async function run() {
   await mkdir(pub('images'), { recursive: true });
 
-  await writeFile(pub('favicon.svg'), iconSvg('flat') + '\n');
+  await writeFile(pub('favicon.svg'), iconSvg('gradient', gradientDefs) + '\n');
   console.log('✓ public/favicon.svg');
 
   await writeFile(pub('logo.svg'), lockupSvg('gradient', gradientDefs) + '\n');

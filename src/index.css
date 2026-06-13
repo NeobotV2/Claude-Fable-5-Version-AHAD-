@@ -12,12 +12,13 @@
   --font-accent: "Space Grotesk", sans-serif;
   --font-logo: "Montserrat", sans-serif;
 
-  /* ── AHAD Markenfarben (Designbook v2.0, Juni 2026) ───────────────
-     AHAD Navy #0B2341 · AHAD Grün #0D6B38 · Flächen Weiß oder Navy,
-     Grün nur als Akzent. Falztöne (#064B20/#02122A) nur im Bildzeichen.
+  /* ── AHAD Markenfarben (Designbook v2.3, Juni 2026) ───────────────
+     AHAD Navy #0B2341 · AHAD Grün #0D6B38 · Weiß als Grundfläche ·
+     Text-Anthrazit #1C2733 nur für Fließtext (nie im Logo).
+     Falzflächen existieren nur noch als Navy↔Grün-Verlauf im Bildzeichen.
      Helle/dunkle Abstufungen sind funktionale Tints der Markenfarben. */
   --color-navy: #0B2341;        /* AHAD Navy — trägt */
-  --color-navy-900: #02122A;    /* Falz-Dunkelnavy: tiefste Fläche (Footer) */
+  --color-navy-900: #02122A;    /* tiefste Fläche (Footer) */
   --color-navy-800: #11305A;    /* Hover-Tint auf Navy */
   --color-navy-700: #18406F;    /* hellerer Navy-Tint */
   --color-brand: #0B2341;       /* Interaktionsfarbe auf hellem Grund = Navy */
@@ -26,7 +27,7 @@
   --color-accent-dark: #0A552C; /* abgedunkeltes AHAD Grün (Hover) */
   --color-mint: #9CDDB7;        /* heller Tint des AHAD Grün für dunkle Flächen */
   --color-paper: #f7f9fb;       /* Heller Seitenhintergrund */
-  --color-ink: #101826;         /* Fließtext dunkel */
+  --color-ink: #1C2733;         /* Text-Anthrazit (CI-Fließtextfarbe) */
   --color-slate: #424751;       /* Fließtext gedämpft */
   --color-line: #e6eaef;        /* Hairlines */
 
