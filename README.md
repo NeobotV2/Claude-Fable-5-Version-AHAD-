@@ -37,15 +37,19 @@ npm run assets     # Gebrandete Bilder neu generieren (og-image, Icons, Fallback
 | `src/components/StickyCTA.tsx` | Mobile Conversion-Leiste (Anrufen / Angebot) |
 | `scripts/generate-assets.mjs` | Erzeugt og-image.jpg, Icons & Fallback-Bild aus SVG (sharp) |
 
-### Marke (Designbook v2.0, Juni 2026)
+### Marke (Designbook v2.4, Juni 2026)
 
-- **Farben:** AHAD Navy `#0B2341`, AHAD Grün `#0D6B38`; Falztöne `#064B20`/`#02122A`
-  nur im Bildzeichen. Flächen sind Weiß oder Navy, Grün nur Akzent. Alle Töne als
-  Tokens in `src/index.css` (`@theme`).
+- **Farben:** AHAD Navy `#0B2341`, AHAD Grün `#0D6B38`, Weiß als Grundfläche,
+  Text-Anthrazit `#1C2733` (Fließtext, nie im Logo), Mint `#9CDDB7` nur als
+  seltener UI-Zustand. Alle Töne als Tokens in `src/index.css` (`@theme`).
 - **Logo:** Originalpfade aus der Druckvorlage in `src/components/logo-paths.ts`
-  (Wortmarke ist pfadkonvertiert — nie als Schrift neu setzen, nicht drehen,
-  keine Effekte). Varianten: Verlauf (digital, helle Flächen) und Negativ Weiß
-  (Navy/dunkle Flächen) über `<Logo variant>`.
+  (Wortmarke ist pfadkonvertiert — nie als Schrift neu setzen). Hauptflächen
+  solid, Falzflächen als Navy↔Grün-Verlauf (Stops `#148A49`/`#123660` aus der
+  Vorlage gesampelt). Varianten: Verlauf (digital) und Negativ Weiß (auf Navy)
+  über `<Logo variant>`.
+- **Easteregg:** Als Link kippt das Bildzeichen beim Hover nach links auf die
+  Seite (`.logo-fall` / `.logo-icon-mark` in `index.css`) — nur das Icon, nie
+  die Wortmarke; respektiert `prefers-reduced-motion`.
 - **Typografie:** Montserrat führt (Black 900 Headlines, Bold 700 Subheads,
   Regular 400 Fließtext); Space Grotesk nur als digitaler Akzent
   (Eyebrows, Zahlen — `font-accent`).

@@ -173,9 +173,28 @@
     box-shadow: var(--shadow-lifted);
   }
 
+  /* ── Logo-Easteregg ───────────────────────────────────────────── */
+  /* Beim Hover kippt nur das Bildzeichen nach links auf die Seite und
+     richtet sich beim Verlassen wieder auf. Pivot ist der Standpunkt
+     (untere Spitze der Raute); fill-box bezieht den Ursprung auf die
+     Icon-Bounding-Box. easeOutBack gibt das „Umkippen & Setzen". */
+  .logo-icon-mark {
+    transform-box: fill-box;
+    transform-origin: bottom center;
+    transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    will-change: transform;
+  }
+  .logo-fall:hover .logo-icon-mark,
+  .logo-fall:focus-visible .logo-icon-mark {
+    transform: rotate(-45deg);
+  }
+  /* Ruhe für Nutzer mit Bewegungsempfindlichkeit: Raute bleibt stehen. */
+  @media (prefers-reduced-motion: reduce) {
+    .logo-fall:hover .logo-icon-mark,
+    .logo-fall:focus-visible .logo-icon-mark { transform: none; }
+  }
+
   /* ── Marquee ──────────────────────────────────────────────────── */
-  /* Hinweis: kein Hover-Rotieren des Logos mehr — das Designbook
-     verbietet Drehung des Bildzeichens ausdrücklich. */
   .marquee-container:hover .animate-marquee { animation-play-state: paused; }
 
   .reference-logo {
