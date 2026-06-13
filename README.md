@@ -47,9 +47,6 @@ npm run assets     # Gebrandete Bilder neu generieren (og-image, Icons, Fallback
   solid, Falzflächen als Navy↔Grün-Verlauf (Stops `#148A49`/`#123660` aus der
   Vorlage gesampelt). Varianten: Verlauf (digital) und Negativ Weiß (auf Navy)
   über `<Logo variant>`.
-- **Easteregg:** Als Link kippt das Bildzeichen beim Hover nach links auf die
-  Seite (`.logo-fall` / `.logo-icon-mark` in `index.css`) — nur das Icon, nie
-  die Wortmarke; respektiert `prefers-reduced-motion`.
 - **Typografie:** Montserrat führt (Black 900 Headlines, Bold 700 Subheads,
   Regular 400 Fließtext); Space Grotesk nur als digitaler Akzent
   (Eyebrows, Zahlen — `font-accent`).

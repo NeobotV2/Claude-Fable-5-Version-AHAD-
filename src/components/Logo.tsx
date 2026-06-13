@@ -18,11 +18,7 @@ const RATIO = 303.664 / 72.598; // Lockup-Seitenverhältnis aus dem Designbook
 /**
  * AHAD-Logo (Lockup: Bildzeichen + Wortmarke) nach Markenrichtlinien v2.4.
  * Eingefrorene Originalpfade, Verlauf 1:1 aus der „Logo Final"-Vorlage —
- * Proportionen fix, keine fremden Farben.
- *
- * Easteregg: Als Link kippt das Bildzeichen beim Hover spielerisch nach
- * links auf die Seite (Pivot = Standpunkt) und richtet sich beim Verlassen
- * wieder auf — nur das Icon bewegt sich, nie die Wortmarke.
+ * Proportionen fix, keine Rotation, keine Effekte, keine fremden Farben.
  */
 export default function Logo({ variant = 'light', size = 36, className, asLink = true, onClick }: LogoProps) {
   const id = useId().replace(/[^a-zA-Z0-9-]/g, '');
@@ -35,7 +31,7 @@ export default function Logo({ variant = 'light', size = 36, className, asLink =
       viewBox={LOGO_VIEWBOX_LOCKUP}
       role="img"
       aria-label="AHAD Cleaning"
-      className="flex-shrink-0 overflow-visible"
+      className="flex-shrink-0"
     >
       {!white && (
         <defs>
@@ -54,14 +50,12 @@ export default function Logo({ variant = 'light', size = 36, className, asLink =
         </defs>
       )}
 
-      {/* Bildzeichen — eigene Gruppe, damit nur die Raute kippt (Easteregg) */}
-      <g className="logo-icon-mark">
-        <path d={ICON_PATHS.navy} fillRule="evenodd" fill={white ? '#ffffff' : '#0B2341'} />
-        <path d={ICON_PATHS.green} fill={white ? '#ffffff' : '#0D6B38'} />
-        {/* Falzflächen mit Verlauf — negativ entfallen sie optisch */}
-        <path d={ICON_PATHS.falzGreen} fill={white ? '#ffffff' : `url(#fg-${id})`} />
-        <path d={ICON_PATHS.falzNavy} fill={white ? '#ffffff' : `url(#fn-${id})`} />
-      </g>
+      {/* Bildzeichen — Navy-Fläche trägt den weißen Kern (evenodd) */}
+      <path d={ICON_PATHS.navy} fillRule="evenodd" fill={white ? '#ffffff' : '#0B2341'} />
+      <path d={ICON_PATHS.green} fill={white ? '#ffffff' : '#0D6B38'} />
+      {/* Falzflächen mit Verlauf — negativ entfallen sie optisch */}
+      <path d={ICON_PATHS.falzGreen} fill={white ? '#ffffff' : `url(#fg-${id})`} />
+      <path d={ICON_PATHS.falzNavy} fill={white ? '#ffffff' : `url(#fn-${id})`} />
 
       {/* Wortmarke (pfadkonvertiert, nie als Schrift setzen) */}
       <path d={WORDMARK_PATHS.ahad} fill={white ? '#ffffff' : '#0B2341'} />
@@ -76,7 +70,7 @@ export default function Logo({ variant = 'light', size = 36, className, asLink =
       to="/"
       onClick={onClick}
       aria-label="AHAD Cleaning — Startseite"
-      className={cn('logo-fall inline-flex items-center transition-opacity hover:opacity-90', className)}
+      className={cn('inline-flex items-center transition-opacity hover:opacity-90', className)}
     >
       {mark}
     </Link>
