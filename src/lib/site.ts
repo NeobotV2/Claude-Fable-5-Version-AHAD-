@@ -23,9 +23,9 @@ export const SITE = {
     instagram: 'https://instagram.com/ahadcleaning',
     linkedin: 'https://linkedin.com/company/ahadcleaning',
   },
-  // WhatsApp Business — Sofortkanal. Nummer = Festnetz im internationalen
-  // Format ohne Sonderzeichen; ggf. auf die echte WhatsApp-Nummer ändern.
-  whatsapp: '4977219447915',
+  // WhatsApp Business — Sofortkanal. Nummer im internationalen Format
+  // ohne Sonderzeichen (+49 176 20422494 → 4917620422494).
+  whatsapp: '4917620422494',
   whatsappText: 'Hallo AHAD Cleaning, ich interessiere mich für ein Angebot zur Gebäudereinigung.',
 } as const;
 
