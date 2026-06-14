@@ -5,11 +5,12 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build:client": "tsc -b && vite build",
+    "build:ssr": "vite build --config vite.ssr.config.ts",
+    "prerender": "node scripts/prerender.mjs",
+    "build": "npm run build:client && npm run build:ssr && npm run prerender",
     "preview": "vite preview",
     "build:file": "VITE_HASH_ROUTER=1 vite build --config vite.singlefile.config.ts",
-    "build:ssr": "vite build --config vite.ssr.config.ts",
-    "build:ssg": "npm run build && npm run build:ssr && node scripts/prerender.mjs",
     "assets": "node scripts/generate-assets.mjs"
   },
   "dependencies": {

@@ -53,10 +53,13 @@ const ROUTES = [
 const template = await readFile(path.join(dist, 'index.html'), 'utf8');
 const { render } = await import(path.resolve('dist-server/entry-server.js'));
 
-// Statische Default-Tags entfernen, damit Helmet sie nicht dupliziert.
+// Statische Default-Tags entfernen, damit Helmet sie nicht dupliziert
+// (Titel, Description und die Basis-OG/Twitter-Fallbacks aus index.html).
 const base = template
   .replace(/<title>[\s\S]*?<\/title>\s*/i, '')
-  .replace(/<meta\s+name="description"[^>]*>\s*/i, '');
+  .replace(/<meta\s+name="description"[^>]*>\s*/i, '')
+  .replace(/<meta\s+(?:property|name)="(?:og|twitter):[^"]*"[^>]*>\s*/gi, '')
+  .replace(/<!--[^>]*Open-Graph[\s\S]*?-->\s*/i, '');
 
 function injectRoot(tpl, html, head) {
   return tpl

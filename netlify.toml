@@ -1,6 +1,7 @@
-# build:ssg = Client-Build + SSR-Prerender → jede Route als statisches HTML.
+# npm run build = Client-Build + SSR-Prerender → jede Route als statisches HTML
+# (Inhalt, OG-Tags, JSON-LD im ausgelieferten HTML, kein leeres root mehr).
 [build]
-  command = "npm run build:ssg"
+  command = "npm run build"
   publish = "dist"
 
 # Fallback nur für Pfade ohne vorgerenderte Datei (Netlife prüft Dateien zuerst).

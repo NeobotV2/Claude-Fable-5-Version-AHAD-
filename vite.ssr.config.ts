@@ -11,6 +11,9 @@ import path from 'node:path';
  */
 export default defineConfig({
   plugins: [react(), tailwindcss()],
+  // Konsistent mit dem Client-Build (z. B. GitHub-Pages-Unterpfad),
+  // damit import.meta.env.BASE_URL im Prerender stimmt.
+  base: process.env.BASE_PATH || '/',
   resolve: {
     alias: { '@': path.resolve(__dirname, './src') },
   },

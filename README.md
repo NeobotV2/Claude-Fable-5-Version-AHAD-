@@ -15,11 +15,11 @@ für Industrie, Verwaltung und Mittelstand in Süddeutschland.
 
 ```bash
 npm install
-npm run dev        # Entwicklungsserver
-npm run build      # Typprüfung + Client-SPA-Build nach dist/
-npm run build:ssg  # Build + SSR-Prerendering: jede Route als statisches HTML (Produktion)
-npm run preview    # Build lokal testen
-npm run assets     # Gebrandete Bilder neu generieren (og-image, Icons, Fallback)
+npm run dev          # Entwicklungsserver
+npm run build        # Standard-Build = SSG: Client + SSR + Prerender → statisches HTML je Route
+npm run build:client # nur Client-Build (ohne Prerender), selten nötig
+npm run preview      # Build lokal testen
+npm run assets       # Gebrandete Bilder neu generieren (og-image, Icons, Fallback)
 ```
 
 ## Architektur
@@ -58,12 +58,16 @@ npm run assets     # Gebrandete Bilder neu generieren (og-image, Icons, Fallback
 
 ### Rendering & SEO/GEO
 
-- **Produktion = SSG.** `npm run build:ssg` baut die Client-SPA, kompiliert einen
-  SSR-Renderer (`src/entry-server.tsx` via `vite.ssr.config.ts`) und prerendert
-  jede Route (`scripts/prerender.mjs`) zu statischem HTML mit vollständigem Inhalt,
-  Meta-Tags und JSON-LD — entscheidend für Suchmaschinen und LLM-Fetcher, die kein
-  JavaScript ausführen. Schlägt eine Route fehl, wird die SPA-Hülle geschrieben
-  (Build bricht nie ab). Netlify/Vercel sind bereits auf `build:ssg` gestellt.
+- **SSG ist der Standard-Build.** `npm run build` baut den Client, kompiliert einen
+  SSR-Renderer (`src/entry-server.tsx` via `vite.ssr.config.ts`) und prerendert jede
+  Route (`scripts/prerender.mjs`) zu statischem HTML mit vollständigem Inhalt,
+  Meta-/OG-Tags und JSON-LD — entscheidend für Link-Vorschauen (WhatsApp/LinkedIn/
+  Slack), Suchmaschinen und LLM-Fetcher, die kein JavaScript ausführen. Schlägt eine
+  Route fehl, wird die SPA-Hülle geschrieben (Build bricht nie ab). Es gibt keinen
+  separaten SSG-Befehl mehr — jeder Host, der `npm run build` ausführt, liefert
+  prerendertes HTML (Netlify, Vercel, GitHub Pages sind entsprechend gesetzt).
+- **OG-Fallback:** `index.html` enthält Basis-OG/Twitter-Tags; der Prerender ersetzt
+  sie pro Seite durch das seitenspezifische Helmet (kein Duplikat).
 - **Hydration:** `main.tsx` hydriert vorgerendertes HTML, sonst frischer Mount.
 - Routenliste fürs Prerendering steht in `scripts/prerender.mjs` (ohne /admin,
   /karriere/bewerbung). Firebase wird in Formularen erst beim Absenden dynamisch

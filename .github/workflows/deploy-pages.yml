@@ -32,13 +32,11 @@ jobs:
 
       - run: npm ci
 
+      # npm run build = SSG: prerendert jede Route (inkl. dist/404.html).
       - run: npm run build
         env:
           # Pages liefert unter /<repo-name>/ aus — Vite & Router folgen diesem Pfad.
           BASE_PATH: /${{ github.event.repository.name }}/
-
-      # SPA-Fallback: Deep-Links wie /leistungen funktionieren auch bei Reload.
-      - run: cp dist/index.html dist/404.html
 
       - uses: actions/configure-pages@v5
         with:
