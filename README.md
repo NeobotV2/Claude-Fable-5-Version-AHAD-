@@ -41,8 +41,10 @@ npm run assets       # Gebrandete Bilder neu generieren (og-image, Icons, Fallba
 ### Marke (Designbook v2.4, Juni 2026)
 
 - **Farben:** AHAD Navy `#0B2341`, AHAD Grün `#0D6B38`, Weiß als Grundfläche,
-  Text-Anthrazit `#1C2733` (Fließtext, nie im Logo), Mint `#9CDDB7` nur als
-  seltener UI-Zustand. Alle Töne als Tokens in `src/index.css` (`@theme`).
+  Text-Anthrazit `#1C2733` (Fließtext, nie im Logo), Mint `#9CDDB7` nur auf
+  dunklen Flächen — dort darf Mint EIN Schlüsselwort/Akzent hervorheben
+  (Designbook-Ausnahme), auf Weiß nie als Textfarbe. Alle Töne als Tokens
+  in `src/index.css` (`@theme`).
 - **Logo:** Originalpfade aus der Druckvorlage in `src/components/logo-paths.ts`
   (Wortmarke ist pfadkonvertiert — nie als Schrift neu setzen). Hauptflächen
   solid, Falzflächen als Navy↔Grün-Verlauf (Stops `#148A49`/`#123660` aus der

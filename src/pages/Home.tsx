@@ -209,8 +209,8 @@ export default function Home() {
             referrerPolicy="no-referrer"
           />
         </motion.div>
-        <div className="absolute inset-0 bg-gradient-to-r from-navy via-navy/75 to-navy/10" />
-        <div className="absolute inset-0 bg-gradient-to-t from-navy via-transparent to-navy/60" />
+        <div className="absolute inset-0 bg-gradient-to-r from-navy via-navy/85 to-navy/20" />
+        <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/10 to-navy/60" />
         <div className="absolute inset-0 blueprint-grid opacity-40" />
 
         <motion.div
@@ -242,7 +242,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.9, duration: 0.7 }}
-              className="text-lg sm:text-xl text-blue-100/90 max-w-2xl font-medium leading-relaxed mb-10"
+              className="text-lg sm:text-xl text-blue-50 max-w-2xl font-medium leading-relaxed mb-10"
             >
               Schluss mit Reklamationen und internem Hinterherlaufen: Wir steuern Ausführung, Qualität und
               Nachweise als System — damit Ihr Betrieb einfach sauber läuft.

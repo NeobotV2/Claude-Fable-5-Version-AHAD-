@@ -25,7 +25,7 @@
   --color-brand-light: #1C4576; /* Link-/Hover-Tint des Navy */
   --color-accent: #0D6B38;      /* AHAD Grün — CTA / Akzent */
   --color-accent-dark: #0A552C; /* abgedunkeltes AHAD Grün (Hover) */
-  --color-mint: #9CDDB7;        /* heller Tint des AHAD Grün für dunkle Flächen */
+  --color-mint: #9CDDB7;        /* heller Tint des AHAD Grün. Regel: NUR auf dunklen Flächen — dort darf Mint EIN Schlüsselwort/Akzent hervorheben (Designbook-Ausnahme). Auf Weiß nie als Textfarbe. */
   --color-paper: #f7f9fb;       /* Heller Seitenhintergrund */
   --color-ink: #1C2733;         /* Text-Anthrazit (CI-Fließtextfarbe) */
   --color-slate: #424751;       /* Fließtext gedämpft */
@@ -110,14 +110,16 @@
 
   /* ── Editorial-Typografie ─────────────────────────────────────── */
   /* Statements in Montserrat Black (wie die Wortmarke) — nur hier,
-     nicht im Fließtext. Leicht verdichtet, mit Silbentrennung für
-     lange deutsche Komposita. */
+     nicht im Fließtext. Leicht verdichtet. BEWUSST OHNE Silbentrennung:
+     ein Trennstrich mitten im Markenwort („Gebäude-reinigung") wirkt
+     unsauber. Überlange Komposita brechen notfalls am Zeichen
+     (break-words), nie mit Bindestrich. */
   .display-xl {
-    @apply font-logo font-black tracking-[-0.025em] leading-[1.02] hyphens-auto;
+    @apply font-logo font-black tracking-[-0.025em] leading-[1.02] break-words;
     font-size: clamp(2.25rem, 6.5vw, 5rem);
   }
   .display-lg {
-    @apply font-logo font-black tracking-[-0.02em] leading-[1.06] hyphens-auto;
+    @apply font-logo font-black tracking-[-0.02em] leading-[1.06] break-words;
     font-size: clamp(1.9rem, 4.4vw, 3.3rem);
   }
   .display-md {
