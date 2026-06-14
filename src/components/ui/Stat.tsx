@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { useInView, useMotionValue, useSpring, useReducedMotion } from 'motion/react';
+import { useMotionValue, useSpring, useReducedMotion } from 'motion/react';
 import { cn } from '@/lib/utils';
 
 interface CountUpProps {
@@ -18,7 +18,6 @@ interface CountUpProps {
  */
 export function CountUp({ value, suffix = '', className }: CountUpProps) {
   const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true, margin: '-40px' });
   const reduce = useReducedMotion();
   const motionValue = useMotionValue(0);
   const spring = useSpring(motionValue, { stiffness: 60, damping: 18 });
@@ -31,11 +30,43 @@ export function CountUp({ value, suffix = '', className }: CountUpProps) {
     });
   }, [spring, suffix]);
 
-  // Auslösen, sobald sichtbar. Bei reduzierter Bewegung gar nicht animieren —
-  // dann bleibt der echte Wert ohne Umweg stehen.
+  // Hochzählen, sobald sichtbar — eigener IntersectionObserver plus
+  // Sichtbarkeits-Check beim Mount = deterministischer Trigger. (framer
+  // useInView verschluckte mobil vereinzelt das Auslösen, sodass eine Zahl
+  // statisch stehen blieb, während die anderen zählten.)
   useEffect(() => {
-    if (!reduce && inView) motionValue.set(value);
-  }, [inView, reduce, value, motionValue]);
+    if (reduce) return; // reduzierte Bewegung: echter Wert bleibt stehen
+    const el = ref.current;
+    if (!el) return;
+
+    let started = false;
+    const start = () => {
+      if (started) return;
+      started = true;
+      motionValue.set(value);
+    };
+
+    // Schon im Viewport beim Mount? Sofort starten (fängt verpasste
+    // Observer-Callbacks zuverlässig ab).
+    const rect = el.getBoundingClientRect();
+    const vh = window.innerHeight || document.documentElement.clientHeight;
+    if (typeof IntersectionObserver === 'undefined' || (rect.top < vh && rect.bottom > 0)) {
+      start();
+      return;
+    }
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((e) => e.isIntersecting)) {
+          start();
+          io.disconnect();
+        }
+      },
+      { threshold: 0.25 },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, [reduce, value, motionValue]);
 
   return (
     <span ref={ref} className={className}>
