@@ -8,7 +8,14 @@ interface CountUpProps {
   className?: string;
 }
 
-/** Zahl, die beim Erscheinen hochzählt — Beleg statt Behauptung. */
+/**
+ * Zahl, die beim Erscheinen hochzählt — Beleg statt Behauptung.
+ *
+ * Robust by design: Ausgangs- und Fallback-Zustand ist IMMER die echte Zahl
+ * (im JSX gerendert, daher auch im prerenderten HTML korrekt — gut für SEO).
+ * Das Hochzählen ist nur Progressive Enhancement. Löst der In-View-Trigger
+ * mobil mal nicht aus, bleibt der echte Wert stehen — nie eine 0.
+ */
 export function CountUp({ value, suffix = '', className }: CountUpProps) {
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true, margin: '-40px' });
@@ -16,23 +23,24 @@ export function CountUp({ value, suffix = '', className }: CountUpProps) {
   const motionValue = useMotionValue(0);
   const spring = useSpring(motionValue, { stiffness: 60, damping: 18 });
 
+  // Anzeige an den Spring koppeln. Solange nichts ausgelöst wurde, ruht der
+  // Spring bei 0 und sendet kein 'change' — der echte JSX-Wert bleibt stehen.
   useEffect(() => {
-    if (inView) motionValue.set(value);
-  }, [inView, value, motionValue]);
-
-  useEffect(() => {
-    if (reduce) {
-      if (ref.current) ref.current.textContent = `${value}${suffix}`;
-      return;
-    }
     return spring.on('change', (latest) => {
       if (ref.current) ref.current.textContent = `${Math.round(latest)}${suffix}`;
     });
-  }, [spring, suffix, value, reduce]);
+  }, [spring, suffix]);
+
+  // Auslösen, sobald sichtbar. Bei reduzierter Bewegung gar nicht animieren —
+  // dann bleibt der echte Wert ohne Umweg stehen.
+  useEffect(() => {
+    if (!reduce && inView) motionValue.set(value);
+  }, [inView, reduce, value, motionValue]);
 
   return (
     <span ref={ref} className={className}>
-      0{suffix}
+      {value}
+      {suffix}
     </span>
   );
 }
