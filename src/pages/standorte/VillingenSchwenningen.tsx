@@ -3,13 +3,14 @@ import SEO from '@/components/SEO';
 import PageHero from '@/components/PageHero';
 import CTABand from '@/components/CTABand';
 import { SITE } from '@/lib/site';
+import { IMG } from '@/lib/images';
 
 export default function StandortVS() {
   const localBusinessSchema = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     "name": "AHAD Cleaning Company GmbH - Villingen-Schwenningen",
-    "image": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&q=80&w=1600",
+    "image": `${SITE.url}/images/ahad/hero-hq.webp`,
     "@id": "https://ahad-cleaning.de/standorte/villingen-schwenningen",
     "url": "https://ahad-cleaning.de/standorte/villingen-schwenningen",
     "telephone": "+4977219447915",
@@ -52,8 +53,8 @@ export default function StandortVS() {
         eyebrow="Zentrale · Schwarzwald-Baar-Kreis"
         title="Gebäudereinigung in Villingen-Schwenningen"
         lead="Von unserem Hauptstandort in Villingen-Schwenningen aus betreuen wir Unternehmen in der gesamten Region Schwarzwald-Baar, Donaueschingen, Rottweil, Tuttlingen, Bad Dürrheim, St. Georgen und Trossingen."
-        image="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&q=80&w=1600"
-        imageAlt="Villingen-Schwenningen"
+        image={IMG.heroArchitecture}
+        imageAlt="AHAD Cleaning Zentrale in Villingen-Schwenningen"
         crumbs={[{ label: 'Standorte', href: '/standorte' }, { label: 'Villingen-Schwenningen' }]}
         cta={{ label: 'Kostenloses Angebot anfordern', to: '/angebot' }}
         secondaryCta={{ label: SITE.phone, href: SITE.phoneHref }}
