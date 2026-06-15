@@ -1,65 +1,78 @@
 import { Link } from 'react-router-dom';
 import { useId } from 'react';
 import { cn } from '@/lib/utils';
-import { ICON_PATHS, WORDMARK_PATHS, LOGO_VIEWBOX_LOCKUP } from './logo-paths';
+import logoArt from './logo-art.json';
 
 interface LogoProps {
   /** 'light' = Farbversion (Verlauf, digital) für helle Flächen · 'dark' = Negativ Weiß für Navy/dunkle Flächen. */
   variant?: 'light' | 'dark';
-  /** Höhe in px. Mindestbreite laut CI: 140px digital (entspricht ~34px Höhe). */
+  /** Höhe in px. */
   size?: number;
   className?: string;
   asLink?: boolean;
   onClick?: () => void;
 }
 
-const RATIO = 303.664 / 72.598; // Lockup-Seitenverhältnis aus dem Designbook
+const [, , VB_W, VB_H] = logoArt.viewBoxLockup.split(' ').map(Number);
+const RATIO = VB_W / VB_H; // Lockup-Seitenverhältnis aus dem Original-Artwork
 
 /**
- * AHAD-Logo (Lockup: Bildzeichen + Wortmarke) nach Markenrichtlinien v2.4.
- * Eingefrorene Originalpfade, Verlauf 1:1 aus der „Logo Final"-Vorlage —
- * Proportionen fix, keine Rotation, keine Effekte, keine fremden Farben.
+ * AHAD-Logo (Lockup: Bildzeichen + Wortmarke) — exakt das offizielle Artwork
+ * aus der Designbook-Druckvorlage (src/components/logo-art.json, deterministisch
+ * aus den Original-SVGs extrahiert). Inline gerendert: scharf in jeder Größe,
+ * keine externe Datei/Basis-Pfad-Abhängigkeit. Falzflächen mit Original-Verlauf;
+ * Negativvariante (dark) komplett weiß.
  */
 export default function Logo({ variant = 'light', size = 36, className, asLink = true, onClick }: LogoProps) {
   const id = useId().replace(/[^a-zA-Z0-9-]/g, '');
   const white = variant === 'dark';
+  const gG = `gFoldG-${id}`;
+  const gN = `gFoldN-${id}`;
 
   const mark = (
     <svg
       height={size}
       width={size * RATIO}
-      viewBox={LOGO_VIEWBOX_LOCKUP}
+      viewBox={logoArt.viewBoxLockup}
       role="img"
       aria-label="AHAD Cleaning"
       className="flex-shrink-0"
     >
       {!white && (
         <defs>
-          {/* Designbook v2.4: Hauptflächen solid, Falzflächen als weicher
-              Navy↔Grün-Verlauf entlang der Falzdiagonale */}
-          <linearGradient id={`fg-${id}`} x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0" stopColor="#0B2341" />
-            <stop offset="0.5" stopColor="#148A49" />
-            <stop offset="1" stopColor="#0D6B38" />
-          </linearGradient>
-          <linearGradient id={`fn-${id}`} x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0" stopColor="#0B2341" />
-            <stop offset="0.5" stopColor="#123660" />
-            <stop offset="1" stopColor="#0D6B38" />
-          </linearGradient>
+          {/* Original-Falzverläufe (userSpaceOnUse, in lokaler Bildzeichen-Geometrie) */}
+          {(['green', 'navy'] as const).map((key) => {
+            const g = logoArt.gradients[key];
+            return (
+              <linearGradient
+                key={key}
+                id={key === 'green' ? gG : gN}
+                gradientUnits="userSpaceOnUse"
+                x1={g.x1}
+                y1={g.y1}
+                x2={g.x2}
+                y2={g.y2}
+              >
+                {g.stops.map(([offset, color]) => (
+                  <stop key={offset} offset={offset} stopColor={color} />
+                ))}
+              </linearGradient>
+            );
+          })}
         </defs>
       )}
 
-      {/* Bildzeichen — Navy-Fläche trägt den weißen Kern (evenodd) */}
-      <path d={ICON_PATHS.navy} fillRule="evenodd" fill={white ? '#ffffff' : '#0B2341'} />
-      <path d={ICON_PATHS.green} fill={white ? '#ffffff' : '#0D6B38'} />
-      {/* Falzflächen mit Verlauf — negativ entfallen sie optisch */}
-      <path d={ICON_PATHS.falzGreen} fill={white ? '#ffffff' : `url(#fg-${id})`} />
-      <path d={ICON_PATHS.falzNavy} fill={white ? '#ffffff' : `url(#fn-${id})`} />
+      {/* Bildzeichen — Original-Gruppe (Rotation/Skalierung aus der Vorlage) */}
+      <g transform={logoArt.iconTransform}>
+        <path d={logoArt.icon.navy} fillRule="evenodd" fill={white ? '#ffffff' : '#0B2341'} />
+        <path d={logoArt.icon.green} fill={white ? '#ffffff' : '#0D6B38'} />
+        <path d={logoArt.icon.falzGreen} fill={white ? '#ffffff' : `url(#${gG})`} />
+        <path d={logoArt.icon.falzNavy} fill={white ? '#ffffff' : `url(#${gN})`} />
+      </g>
 
       {/* Wortmarke (pfadkonvertiert, nie als Schrift setzen) */}
-      <path d={WORDMARK_PATHS.ahad} fill={white ? '#ffffff' : '#0B2341'} />
-      <path d={WORDMARK_PATHS.cleaning} fill={white ? '#ffffff' : '#0D6B38'} />
+      <path d={logoArt.wordmark.ahad} fill={white ? '#ffffff' : '#0B2341'} />
+      <path d={logoArt.wordmark.cleaning} fill={white ? '#ffffff' : '#0D6B38'} />
     </svg>
   );
 

@@ -1,16 +1,15 @@
 /**
- * Erzeugt gebrandete Bild-Assets aus den Original-Logopfaden des Designbooks
- * (scripts/logo-parts.json — extrahiert aus der Druckvorlage):
- *   - public/favicon.svg          Bildzeichen solo (Primärversion mit Verlauf)
- *   - public/logo.svg             Primärlogo — alle Anwendungen (v2.3)
+ * Erzeugt alle gebrandeten Bild-Assets aus dem OFFIZIELLEN Logo-Artwork
+ * (src/components/logo-art.json — deterministisch aus den Original-SVGs der
+ * Druckvorlage extrahiert; dieselbe Quelle, die auch die <Logo>-Komponente nutzt):
+ *   - public/favicon.svg          Bildzeichen solo (Farbe, Verlauf)
+ *   - public/logo.svg             Primärlogo Lockup (Farbe, Verlauf)
+ *   - public/logo-weiss.svg       Lockup negativ weiß (für dunkle Flächen)
  *   - public/og-image.jpg         Social-Preview 1200×630 (Navy, Logo negativ weiß)
  *   - public/apple-touch-icon.png / logo-512.png / logo.png (Avatar: negativ auf Navy)
  *   - public/images/fallback.jpg  Marken-Fallback für externe Fotos
  *
- * Markenrichtlinien v2.3: Navy #0B2341, Grün #0D6B38, Weiß als Grundfläche,
- * Text-Anthrazit #1C2733 nur im Fließtext. Falzflächen laufen im weichen
- * Verlauf zwischen Navy und Grün; Flat-Falztöne nur noch für Schneidefolie.
- *
+ * Marke: Navy #0B2341, Grün #0D6B38; Falzflächen mit Original-Verlauf.
  * Aufruf: npm run assets
  */
 import sharp from 'sharp';
@@ -22,65 +21,66 @@ const here = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(here, '..');
 const pub = (...parts) => path.join(root, 'public', ...parts);
 
-const { parts, icon, lockup } = JSON.parse(await readFile(path.join(here, 'logo-parts.json'), 'utf8'));
+const A = JSON.parse(await readFile(path.join(root, 'src/components/logo-art.json'), 'utf8'));
 
 const NAVY = '#0B2341';
 const GREEN = '#0D6B38';
-const FALZ_GREEN = '#064B20';
 const FALZ_NAVY = '#02122A';
 const TINT = '#9CDDB7';
 
-const vb = (b) => `${b.x1} ${b.y1} ${(b.x2 - b.x1).toFixed(3)} ${(b.y2 - b.y1).toFixed(3)}`;
+const lockH = Number(A.viewBoxLockup.split(' ')[3]); // 392
+const iconH = Number(A.viewBoxIcon.split(' ')[3]); // 350
+const iconW = Number(A.viewBoxIcon.split(' ')[2]); // 312
 
-const gradientDefs = `
-    <linearGradient id="fGreen" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="${NAVY}"/><stop offset="0.5" stop-color="#148A49"/><stop offset="1" stop-color="${GREEN}"/>
-    </linearGradient>
-    <linearGradient id="fNavy" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="${NAVY}"/><stop offset="0.5" stop-color="#123660"/><stop offset="1" stop-color="${GREEN}"/>
-    </linearGradient>`;
-
-/** Bildzeichen-Pfade. mode: 'flat' | 'gradient' | 'white' */
-function iconPaths(mode) {
-  const fills =
-    mode === 'white'
-      ? { navy: '#fff', green: '#fff', falzGreen: '#fff', falzNavy: '#fff' }
-      : mode === 'gradient'
-        ? { navy: NAVY, green: GREEN, falzGreen: 'url(#fGreen)', falzNavy: 'url(#fNavy)' }
-        : { navy: NAVY, green: GREEN, falzGreen: FALZ_GREEN, falzNavy: FALZ_NAVY };
-  return `
-    <path d="${parts.navy.d}" fill-rule="evenodd" fill="${fills.navy}"/>
-    <path d="${parts.green.d}" fill="${fills.green}"/>
-    <path d="${parts.falzGreen.d}" fill="${fills.falzGreen}"/>
-    <path d="${parts.falzNavy.d}" fill="${fills.falzNavy}"/>`;
+/** Original-Falzverläufe als <defs>-Inhalt (eindeutige IDs je Suffix). */
+function gradientDefs(sfx = '') {
+  const lg = (key, id) => {
+    const g = A.gradients[key];
+    const stops = g.stops.map(([o, c]) => `<stop offset="${o}" stop-color="${c}"/>`).join('');
+    return `<linearGradient id="${id}" gradientUnits="${g.gradientUnits}" x1="${g.x1}" y1="${g.y1}" x2="${g.x2}" y2="${g.y2}">${stops}</linearGradient>`;
+  };
+  return lg('green', `gFoldG${sfx}`) + lg('navy', `gFoldN${sfx}`);
 }
 
-function wordmarkPaths(mode) {
+/** Bildzeichen-Gruppe (Original-Transform). mode: 'color' | 'white' */
+function iconGroup(mode, sfx = '') {
+  const f =
+    mode === 'white'
+      ? { navy: '#fff', green: '#fff', fg: '#fff', fn: '#fff' }
+      : { navy: NAVY, green: GREEN, fg: `url(#gFoldG${sfx})`, fn: `url(#gFoldN${sfx})` };
+  return (
+    `<g transform="${A.iconTransform}">` +
+    `<path d="${A.icon.navy}" fill-rule="evenodd" fill="${f.navy}"/>` +
+    `<path d="${A.icon.green}" fill="${f.green}"/>` +
+    `<path d="${A.icon.falzGreen}" fill="${f.fg}"/>` +
+    `<path d="${A.icon.falzNavy}" fill="${f.fn}"/>` +
+    `</g>`
+  );
+}
+
+function wordmark(mode) {
   const a = mode === 'white' ? '#fff' : NAVY;
   const c = mode === 'white' ? '#fff' : GREEN;
-  return `
-    <path d="${parts.ahad.d}" fill="${a}"/>
-    <path d="${parts.cleaning.d}" fill="${c}"/>`;
+  return `<path d="${A.wordmark.ahad}" fill="${a}"/><path d="${A.wordmark.cleaning}" fill="${c}"/>`;
 }
 
-const lockupSvg = (mode, extraDefs = '') =>
-  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${vb(lockup)}" role="img" aria-label="AHAD Cleaning">
-  <defs>${extraDefs}</defs>${iconPaths(mode)}${wordmarkPaths(mode)}
-</svg>`;
+const lockupSvg = (mode) =>
+  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${A.viewBoxLockup}" role="img" aria-label="AHAD Cleaning">` +
+  `${mode === 'white' ? '' : `<defs>${gradientDefs()}</defs>`}${iconGroup(mode)}${wordmark(mode)}</svg>`;
 
-const iconSvg = (mode, extraDefs = '') =>
-  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${vb(icon)}">
-  <defs>${extraDefs}</defs>${iconPaths(mode)}
-</svg>`;
+const iconSvg = (mode) =>
+  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${A.viewBoxIcon}">` +
+  `${mode === 'white' ? '' : `<defs>${gradientDefs()}</defs>`}${iconGroup(mode)}</svg>`;
 
-/** Lockup als eingebettetes <g> in beliebiger Zielgeometrie platzieren. */
-function placeLockup(mode, x, y, height) {
-  const scale = height / (lockup.y2 - lockup.y1);
-  return `<g transform="translate(${x} ${y}) scale(${scale}) translate(${-lockup.x1} ${-lockup.y1})">${iconPaths(mode)}${wordmarkPaths(mode)}</g>`;
+/** Lockup (Höhe = height) an Zielposition platzieren — für Kompositionen. */
+function placeLockup(mode, x, y, height, sfx = '-lk') {
+  const s = height / lockH;
+  return `<g transform="translate(${x} ${y}) scale(${s})">${iconGroup(mode, sfx)}${wordmark(mode)}</g>`;
 }
-function placeIcon(mode, x, y, height) {
-  const scale = height / (icon.y2 - icon.y1);
-  return `<g transform="translate(${x} ${y}) scale(${scale}) translate(${-icon.x1} ${-icon.y1})">${iconPaths(mode)}</g>`;
+/** Bildzeichen (Höhe = height) an Zielposition platzieren. */
+function placeIcon(mode, x, y, height, sfx = '-ic') {
+  const s = height / iconH;
+  return `<g transform="translate(${x} ${y}) scale(${s})">${iconGroup(mode, sfx)}</g>`;
 }
 
 const bgDefs = `
@@ -108,7 +108,7 @@ function ogImageSvg() {
   <rect width="1200" height="630" fill="url(#grid)"/>
   <circle cx="1080" cy="80" r="420" fill="url(#glowBlue)"/>
   <circle cx="120" cy="600" r="380" fill="url(#glowGreen)"/>
-  ${placeLockup('white', 96, 96, 110)}
+  ${placeLockup('white', 96, 92, 96)}
   <text x="96" y="350" font-family="DejaVu Sans, Arial, sans-serif" font-weight="bold" font-size="74" letter-spacing="-2.5" fill="#ffffff">Struktur. Sauberkeit.</text>
   <text x="96" y="438" font-family="DejaVu Sans, Arial, sans-serif" font-weight="bold" font-size="74" letter-spacing="-2.5" fill="${TINT}">Sicherheit.</text>
   <text x="96" y="502" font-family="DejaVu Sans, Arial, sans-serif" font-size="27" fill="rgba(226,237,247,0.85)">Systematische Gebäudereinigung für Industrie, Verwaltung &amp; Mittelstand</text>
@@ -127,28 +127,35 @@ function fallbackSvg() {
   <rect width="1600" height="1000" fill="url(#grid)"/>
   <circle cx="1400" cy="120" r="560" fill="url(#glowBlue)"/>
   <circle cx="180" cy="940" r="500" fill="url(#glowGreen)"/>
-  ${placeLockup('white', 460, 410, 180)}
+  ${placeLockup('white', 470, 430, 150)}
   <text x="800" y="700" text-anchor="middle" font-family="DejaVu Sans, Arial, sans-serif" font-size="26" letter-spacing="6" fill="${TINT}">STRUKTUR · SAUBERKEIT · SICHERHEIT</text>
 </svg>`;
 }
 
-/** App-Icon: Navy-Kachel, Bildzeichen negativ weiß (CI: auf Navy nur weiß). */
+/** App-Icon: Navy-Kachel, Bildzeichen negativ weiß, zentriert. */
 function appIconSvg(padding = 22) {
   const size = 128;
+  const h = size - padding * 2;
+  const w = (h * iconW) / iconH;
+  const x = (size - w) / 2;
+  const y = (size - h) / 2;
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 ${size} ${size}">
   <rect width="${size}" height="${size}" rx="${size * 0.22}" fill="${NAVY}"/>
-  ${placeIcon('white', padding + 4, padding, size - padding * 2)}
+  ${placeIcon('white', x, y, h)}
 </svg>`;
 }
 
 async function run() {
   await mkdir(pub('images'), { recursive: true });
 
-  await writeFile(pub('favicon.svg'), iconSvg('gradient', gradientDefs) + '\n');
+  await writeFile(pub('favicon.svg'), iconSvg('color') + '\n');
   console.log('✓ public/favicon.svg');
 
-  await writeFile(pub('logo.svg'), lockupSvg('gradient', gradientDefs) + '\n');
+  await writeFile(pub('logo.svg'), lockupSvg('color') + '\n');
   console.log('✓ public/logo.svg');
+
+  await writeFile(pub('logo-weiss.svg'), lockupSvg('white') + '\n');
+  console.log('✓ public/logo-weiss.svg');
 
   await sharp(Buffer.from(ogImageSvg())).jpeg({ quality: 88 }).toFile(pub('og-image.jpg'));
   console.log('✓ public/og-image.jpg');
