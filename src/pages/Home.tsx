@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import {
   ArrowRight,
   CheckCircle2,
+  Star,
   Building2,
   Factory,
   Microscope,
@@ -30,8 +31,9 @@ import LogoMarquee from '@/components/LogoMarquee';
 import CTABand from '@/components/CTABand';
 import Guarantee from '@/components/Guarantee';
 import Reviews from '@/components/Reviews';
+import TrustBand from '@/components/TrustBand';
 import { IMG, unsplashSrcSet } from '@/lib/images';
-import { SITE, STATS, TESTIMONIALS, ORGANIZATION_SCHEMA, WEBSITE_SCHEMA } from '@/lib/site';
+import { SITE, STATS, TESTIMONIALS, ORGANIZATION_SCHEMA, WEBSITE_SCHEMA, GOOGLE_RATING } from '@/lib/site';
 import { SERVICES } from '@/data/services';
 
 const FEATURED_PATHS = [
@@ -255,7 +257,7 @@ export default function Home() {
               className="flex flex-col sm:flex-row gap-4 mb-12"
             >
               <ButtonLink to="/angebot" size="lg" arrow>
-                Kostenloses Angebot anfordern
+                In 60 Sekunden zum Angebot
               </ButtonLink>
               <ButtonLink to="/ahad-system" variant="outline-light" size="lg">
                 Wie das AHAD System arbeitet
@@ -277,10 +279,15 @@ export default function Home() {
                 <CheckCircle2 size={15} className="text-mint" />
                 Festangestellte, geschulte Teams
               </span>
-              <span className="flex items-center gap-2">
-                <CheckCircle2 size={15} className="text-mint" />
-                Vertraut von Allianz bis GOLDBECK
-              </span>
+              <a
+                href={GOOGLE_RATING.url || GOOGLE_RATING.searchFallback}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 hover:text-white transition-colors"
+              >
+                <Star size={15} className="fill-amber-400 text-amber-400" />
+                {GOOGLE_RATING.value.toFixed(1).replace('.', ',')} von 5 · {GOOGLE_RATING.count} Google-Bewertungen
+              </a>
             </motion.div>
           </div>
 
@@ -329,6 +336,9 @@ export default function Home() {
 
       </section>
 
+      {/* ── TRUST-BAND (Google-Bewertung + belegbare Signale) ────────── */}
+      <TrustBand />
+
       {/* ── REFERENZEN-MARQUEE ───────────────────────────────────────── */}
       <section className="py-14 bg-white border-b border-line" aria-label="Referenzen">
         <div className="max-w-7xl mx-auto px-4 sm:px-8 mb-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
@@ -359,7 +369,7 @@ export default function Home() {
             />
             <Reveal delay={0.15}>
               <ButtonLink to="/leistungen" variant="outline" arrow>
-                Alle 7 Leistungen
+                Alle 8 Leistungen
               </ButtonLink>
             </Reveal>
           </div>
@@ -487,7 +497,7 @@ export default function Home() {
                     Referenzen ansehen
                   </ButtonLink>
                   <ButtonLink to="/angebot" variant="outline-light">
-                    Objekt bewerten lassen
+                    Kostenlose Objektbegehung
                   </ButtonLink>
                 </div>
               </Reveal>

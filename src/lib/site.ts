@@ -47,8 +47,36 @@ export const PROMISES = [
 export const STATS = [
   { value: 80, suffix: '+', label: 'Qualifizierte Mitarbeitende' },
   { value: 15, suffix: '+', label: 'Jahre Erfahrung' },
-  { value: 7, suffix: '', label: 'Leistungsbereiche aus einer Hand' },
+  { value: 8, suffix: '', label: 'Leistungsbereiche aus einer Hand' },
   { value: 3, suffix: '', label: 'Standorte in Süddeutschland' },
+] as const;
+
+/**
+ * Öffentliche Google-Bewertung — nur zur Anzeige + Verlinkung. KEIN
+ * self-serving AggregateRating-JSON-LD ohne On-Page-Reviews (Google-Policy).
+ * `url` = euer Google-Unternehmensprofil (bitte exakt eintragen).
+ */
+export const GOOGLE_RATING = {
+  value: 4.8,
+  count: 20,
+  url: '',
+  searchFallback:
+    'https://www.google.com/maps/search/AHAD+Cleaning+Company+GmbH+Villingen-Schwenningen',
+} as const;
+
+/**
+ * Vertrauenssignale fürs Trust-Band unter dem Hero. NUR belegbare Aussagen —
+ * Zertifikate erst freischalten, wenn nachweislich vorhanden (Abmahnrisiko).
+ * `icon` ist ein Schlüssel, der in TrustBand.tsx auf ein Symbol gemappt wird.
+ */
+export const TRUST_BADGES = [
+  { icon: 'users', label: 'Nur festangestellte Teams', sub: 'sozialversichert & sicherheitsüberprüft' },
+  { icon: 'shield', label: 'Umfassend versichert', sub: 'Betriebshaftpflicht' },
+  { icon: 'clock', label: '15+ Jahre Erfahrung', sub: 'über 80 Objekte betreut' },
+  { icon: 'user', label: 'Feste Objektleitung', sub: 'ein Gesicht je Objekt' },
+  // Nach Bestätigung freischalten (erscheinen dann automatisch):
+  // { icon: 'badge', label: 'ISO 9001 & 14001', sub: 'Qualitäts- & Umweltmanagement' },
+  // { icon: 'badge', label: 'Gebäudereiniger-Innung', sub: 'Mitgliedsbetrieb' },
 ] as const;
 
 export interface ClientReference {

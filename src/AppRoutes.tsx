@@ -23,6 +23,7 @@ const Baureinigung = lazy(() => import('./pages/leistungen/Baureinigung'));
 const MedizintechnikReinigung = lazy(() => import('./pages/leistungen/MedizintechnikReinigung'));
 const Sonderreinigung = lazy(() => import('./pages/leistungen/Sonderreinigung'));
 const Winterdienst = lazy(() => import('./pages/leistungen/Winterdienst'));
+const Kuechenabluftreinigung = lazy(() => import('./pages/leistungen/Kuechenabluftreinigung'));
 const IndustrieProduktion = lazy(() => import('./pages/branchen/IndustrieProduktion'));
 const MedizintechnikBranche = lazy(() => import('./pages/branchen/Medizintechnik'));
 const BueroVerwaltung = lazy(() => import('./pages/branchen/BueroVerwaltung'));
@@ -64,6 +65,7 @@ export default function AppRoutes() {
           <Route path="leistungen/medizintechnik-reinigung" element={<MedizintechnikReinigung />} />
           <Route path="leistungen/sonderreinigung-stillstandsservice" element={<Sonderreinigung />} />
           <Route path="leistungen/winterdienst-hausmeisterservice" element={<Winterdienst />} />
+          <Route path="leistungen/kuechenabluftreinigung-vdi-2052" element={<Kuechenabluftreinigung />} />
 
           {/* Reinigungskonzept/Kostenrechner sind in den Angebots-Funnel integriert */}
           <Route path="reinigungskonzept" element={<Navigate to="/angebot" replace />} />

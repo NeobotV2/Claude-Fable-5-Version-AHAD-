@@ -6,6 +6,8 @@ import {
   Microscope,
   Sparkles,
   Snowflake,
+  Wind,
+  Flame,
   Droplets,
   Shield,
   ClipboardCheck,
@@ -498,6 +500,72 @@ export const SERVICES: ServiceData[] = [
     ],
     ctaTitle: 'Der nächste Winter kommt sicher',
     ctaLead: 'Sichern Sie sich Ihre Räumkapazität rechtzeitig — Angebot innerhalb von 24h.',
+  },
+  {
+    slug: 'kuechenabluftreinigung-vdi-2052',
+    short: 'Brandschutzkonform nach VDI 2052',
+    path: '/leistungen/kuechenabluftreinigung-vdi-2052',
+    name: 'Küchenabluftreinigung (VDI 2052)',
+    tag: 'Brandschutz & Hygiene',
+    heroTitle: 'Küchenabluftreinigung nach VDI 2052 — prüffähig dokumentiert',
+    heroLead:
+      'Fett in Hauben, Kanälen und Ventilatoren ist Brandlast und Hygienerisiko. Wir reinigen Ihre komplette Abluftanlage nach VDI 2052 — mit lückenlosem Nachweis für Versicherung und Behörde.',
+    seoTitle: 'Küchenabluftreinigung nach VDI 2052 | AHAD Cleaning',
+    seoDescription:
+      'Professionelle Küchenabluftreinigung nach VDI 2052 für Gastronomie, Hotellerie, Kantinen und Großküchen in Süddeutschland. Brandschutzkonform, hygienisch, mit prüffähigem Nachweis.',
+    keywords:
+      'Küchenabluftreinigung VDI 2052, Abluftreinigung Gastronomie, Dunstabzug reinigen, Lüftungsreinigung Großküche, Fettfilter Reinigung',
+    icon: <Wind className="w-6 h-6" />,
+    image: IMG.industrie,
+    detailImage: IMG.industrieDetail,
+    highlights: [
+      {
+        icon: <Flame className="w-7 h-7 text-accent" />,
+        title: 'Brandlast nachweisbar gesenkt',
+        text: 'Fett in Abluftkanälen ist eine der häufigsten Brandursachen in Großküchen — wir entfernen es zuverlässig.',
+      },
+      {
+        icon: <BadgeCheck className="w-7 h-7 text-brand" />,
+        title: 'Nach VDI 2052',
+        text: 'Die gesamte Anlage — Hauben, Filter, Kanäle, Ventilatoren — nach anerkannter Richtlinie gereinigt.',
+      },
+      {
+        icon: <FileCheck2 className="w-7 h-7 text-accent" />,
+        title: 'Prüffähiger Nachweis',
+        text: 'Foto-Dokumentation und Protokoll für Versicherung, Hygieneaudit und Behörde — auf Knopfdruck.',
+      },
+    ],
+    scopeTitle: 'Die komplette Abluftstrecke — nicht nur die Haube',
+    scopeIntro:
+      'Versicherer und Hygienevorgaben verlangen die regelmäßige Reinigung der gesamten Anlage. Wir übernehmen sie vollständig, dokumentiert und außerhalb Ihrer Betriebszeiten.',
+    scope: [
+      'Abzugshauben und Fettfangfilter',
+      'Komplette Abluftkanäle bis zum Ventilator',
+      'Ventilatoren, Motoren und Brandschutzklappen',
+      'Zu- und Abluftgitter, Lüftungsdecken',
+      'Reinigung oder Austausch der Filtermedien',
+      'Foto-Dokumentation vorher/nachher',
+      'Reinigungsprotokoll mit Datum und Intervallempfehlung',
+    ],
+    faqs: [
+      {
+        question: 'Wie oft muss die Küchenabluft gereinigt werden?',
+        answer:
+          'Die VDI 2052 empfiehlt das Intervall je nach Nutzung — von vierteljährlich bei Dauer-/Fettbetrieb bis jährlich bei geringer Auslastung. Das genaue Intervall legen wir nach einer Begehung fest.',
+      },
+      {
+        question: 'Warum ist das für meine Versicherung wichtig?',
+        answer:
+          'Verfettete Abluftanlagen zählen zu den größten Brandrisiken in Küchen. Viele Versicherer setzen eine dokumentierte Reinigung nach VDI 2052 voraus — fehlt der Nachweis, drohen im Schadensfall Leistungskürzungen.',
+      },
+      {
+        question: 'Stören Sie meinen Betrieb?',
+        answer:
+          'Nein. Wir reinigen außerhalb Ihrer Öffnungs- und Produktionszeiten, auf Wunsch nachts. Ihre Küche ist zum nächsten Service wieder voll einsatzbereit.',
+      },
+    ],
+    ctaTitle: 'Abluftanlage prüfen lassen',
+    ctaLead: 'Wir bewerten Verschmutzungsgrad und Intervall — und liefern den Nachweis, den Ihre Versicherung sehen will.',
   },
 ];
 

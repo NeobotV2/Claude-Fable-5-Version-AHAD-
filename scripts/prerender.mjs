@@ -25,6 +25,7 @@ const ROUTES = [
   '/leistungen/medizintechnik-reinigung',
   '/leistungen/sonderreinigung-stillstandsservice',
   '/leistungen/winterdienst-hausmeisterservice',
+  '/leistungen/kuechenabluftreinigung-vdi-2052',
   '/branchen',
   '/branchen/industrie-produktion',
   '/branchen/medizintechnik',
