@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="312" height="350" viewBox="0 0 312 350">
+<defs>
+<linearGradient id="gFoldG" gradientUnits="userSpaceOnUse" x1="0" y1="-38" x2="0" y2="38">
+<stop offset="0" stop-color="#0B2341"></stop>
+<stop offset="0.08" stop-color="#053A1E"></stop>
+<stop offset="0.3" stop-color="#0C6C39"></stop>
+<stop offset="0.5" stop-color="#148A49"></stop>
+<stop offset="0.7" stop-color="#0F7840"></stop>
+<stop offset="0.88" stop-color="#064120"></stop>
+<stop offset="1" stop-color="#0D6B38"></stop>
+</linearGradient>
+<linearGradient id="gFoldN" gradientUnits="userSpaceOnUse" x1="0" y1="-38" x2="0" y2="38">
+<stop offset="0" stop-color="#0B2341"></stop>
+<stop offset="0.12" stop-color="#041122"></stop>
+<stop offset="0.3" stop-color="#0A2444"></stop>
+<stop offset="0.5" stop-color="#123660"></stop>
+<stop offset="0.7" stop-color="#0E2D51"></stop>
+<stop offset="0.92" stop-color="#051527"></stop>
+<stop offset="1" stop-color="#0D6B38"></stop>
+</linearGradient>
+</defs>
+<g transform="translate(156 175) rotate(45) scale(0.87 1)"><path d="M-141 -107A16 16 0 0 1 -125 -123L73 -123A68 68 0 0 1 141 -55L141 107A16 16 0 0 1 125 123L-73 123A68 68 0 0 1 -141 55Z M-35 -38L35 -38A9 9 0 0 1 44 -29L44 29A9 9 0 0 1 35 38L-35 38A9 9 0 0 1 -44 29L-44 -29A9 9 0 0 1 -35 -38Z" fill="#0B2341" fill-rule="evenodd"></path><path d="M141 38L141 107A16 16 0 0 1 125 123L-73 123A68 68 0 0 1 -141 55L-141 38Z" fill="#0D6B38"></path><path d="M-141 -38L-35 -38A9 9 0 0 0 -44 -29L-44 29A9 9 0 0 0 -35 38L-141 38Z" fill="url(#gFoldG)"></path><path d="M141 38L35 38A9 9 0 0 0 44 29L44 -29A9 9 0 0 0 35 -38L141 -38Z" fill="url(#gFoldN)"></path></g>
+</svg>
