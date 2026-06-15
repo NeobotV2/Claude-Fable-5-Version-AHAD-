@@ -47,7 +47,7 @@ export default function Leistungen() {
         eyebrow="Leistungen"
         title={
           <>
-            Sieben Leistungen.
+            Acht Leistungen.
             <br />
             Ein Qualitätssystem.
           </>
