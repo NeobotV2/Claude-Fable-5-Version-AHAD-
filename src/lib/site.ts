@@ -70,13 +70,11 @@ export const GOOGLE_RATING = {
  * `icon` ist ein Schlüssel, der in TrustBand.tsx auf ein Symbol gemappt wird.
  */
 export const TRUST_BADGES = [
+  { icon: 'badge', label: 'ISO 9001 & 14001 zertifiziert', sub: 'Qualitäts- & Umweltmanagement' },
   { icon: 'users', label: 'Nur festangestellte Teams', sub: 'sozialversichert & sicherheitsüberprüft' },
   { icon: 'shield', label: 'Umfassend versichert', sub: 'Betriebshaftpflicht' },
   { icon: 'clock', label: '15+ Jahre Erfahrung', sub: 'über 80 Objekte betreut' },
   { icon: 'user', label: 'Feste Objektleitung', sub: 'ein Gesicht je Objekt' },
-  // Nach Bestätigung freischalten (erscheinen dann automatisch):
-  // { icon: 'badge', label: 'ISO 9001 & 14001', sub: 'Qualitäts- & Umweltmanagement' },
-  // { icon: 'badge', label: 'Gebäudereiniger-Innung', sub: 'Mitgliedsbetrieb' },
 ] as const;
 
 export interface ClientReference {
