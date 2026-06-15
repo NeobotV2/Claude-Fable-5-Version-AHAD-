@@ -310,5 +310,17 @@ export const ORGANIZATION_SCHEMA = {
     postalCode: SITE.address.zip,
     addressCountry: SITE.address.country,
   },
+  hasCredential: [
+    {
+      '@type': 'EducationalOccupationalCredential',
+      name: 'ISO 9001',
+      credentialCategory: 'Qualitätsmanagement (Zertifizierung)',
+    },
+    {
+      '@type': 'EducationalOccupationalCredential',
+      name: 'ISO 14001',
+      credentialCategory: 'Umweltmanagement (Zertifizierung)',
+    },
+  ],
   sameAs: [SITE.social.instagram, SITE.social.linkedin],
 };
