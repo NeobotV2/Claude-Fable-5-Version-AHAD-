@@ -190,34 +190,69 @@ export interface Review {
   author: string;
   role?: string;
   rating: number; // 1–5
-  date: string; // ISO, z. B. '2026-05-01'
+  date?: string; // ISO, optional
   text: string;
 }
 
-export const REVIEWS: Review[] = [];
+/** Echte, öffentliche Google-Rezensionen (Auswahl im Wortlaut). */
+export const REVIEWS: Review[] = [
+  {
+    author: 'Matthias Porsche',
+    role: 'Rottweil',
+    rating: 5,
+    text:
+      'Vom ersten Telefonat, über die Vorbesichtigung, die Angebotserstellung und Beauftragung bis hin zur Ausführung: sehr freundlich, vertrauenserweckend, kompetent, professionell, zuverlässig — mit einem erstklassigen, meine Erwartungen übersteigenden Reinigungsergebnis zu einem angemessenen Preis. Da ich am Tag der Reinigung nicht anwesend war, schickte man mir nach Beendigung der Arbeiten ein ausführliches Video vom Ergebnis. Eine nette, vertrauenserweckende Geste! Diesem Unternehmen würde ich mich jederzeit wieder anvertrauen und werde es weiterempfehlen.',
+  },
+  {
+    author: 'Karl-Heinz Maaß',
+    rating: 5,
+    text:
+      'Sehr angenehmer Chef, die erste Reinigungsfirma mit Ambiente und positiver Stimmung vom ganzen Team — gut gelaunt und sehr ansprechendes Büro. 6 von 5 Sternen! 👍',
+  },
+  {
+    author: 'Marvin Krüger',
+    rating: 5,
+    text: 'Kann ich nur empfehlen! Toller Service — sehr freundliche und kompetente Kommunikation. Besser geht es eigentlich nicht mehr.',
+  },
+  {
+    author: 'Annelene Dethlefsen',
+    rating: 5,
+    text:
+      'Tolle Dienstleistung: Fenster und Rahmen von innen und außen inkl. Carport-Überdachung — alles super sauber. Vielen Dank an das Reinigungsteam.',
+  },
+  {
+    author: 'Inge Hauser',
+    rating: 5,
+    text:
+      'Bin mega zufrieden, und der Mann, der unsere Fenster gereinigt hat, war so sympathisch, lieb und nett. Wir waren begeistert! Wir werden im Frühjahr den nächsten Auftrag an Sie weitergeben.',
+  },
+];
 
-/** Quelle/Profil-Link für „alle Bewertungen ansehen" (z. B. Google-Profil). */
-export const REVIEWS_SOURCE_URL = '';
+/** Quelle/Profil-Link für „alle Bewertungen ansehen" — Google-Unternehmensprofil. */
+export const REVIEWS_SOURCE_URL = GOOGLE_RATING.url || GOOGLE_RATING.searchFallback;
 
-/** Baut das Review/AggregateRating-Schema — nur wenn echte Reviews da sind. */
+/**
+ * Review/AggregateRating-Schema. Aggregat = ECHTE Google-Gesamtwertung
+ * (GOOGLE_RATING 4,8 / 20), nicht der Schnitt der gezeigten Auswahl —
+ * die Reviews sind eine repräsentative Stichprobe. Nur wenn Reviews da sind.
+ */
 export function reviewSchema() {
   if (REVIEWS.length === 0) return null;
-  const ratingValue = (REVIEWS.reduce((s, r) => s + r.rating, 0) / REVIEWS.length).toFixed(1);
   return {
     '@context': 'https://schema.org',
     '@type': 'Organization',
     '@id': `${SITE.url}/#organization`,
     aggregateRating: {
       '@type': 'AggregateRating',
-      ratingValue,
-      reviewCount: REVIEWS.length,
+      ratingValue: GOOGLE_RATING.value,
+      reviewCount: GOOGLE_RATING.count,
       bestRating: 5,
       worstRating: 1,
     },
     review: REVIEWS.map((r) => ({
       '@type': 'Review',
       author: { '@type': 'Person', name: r.author },
-      datePublished: r.date,
+      ...(r.date ? { datePublished: r.date } : {}),
       reviewRating: { '@type': 'Rating', ratingValue: r.rating, bestRating: 5, worstRating: 1 },
       reviewBody: r.text,
     })),

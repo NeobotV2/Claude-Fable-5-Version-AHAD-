@@ -13,7 +13,6 @@ import {
   Settings2,
   ClipboardCheck,
   Shield,
-  Quote,
   PhoneCall,
   CalendarCheck,
   FileCheck2,
@@ -33,7 +32,7 @@ import Guarantee from '@/components/Guarantee';
 import Reviews from '@/components/Reviews';
 import TrustBand from '@/components/TrustBand';
 import { IMG, unsplashSrcSet } from '@/lib/images';
-import { SITE, STATS, TESTIMONIALS, ORGANIZATION_SCHEMA, WEBSITE_SCHEMA, GOOGLE_RATING } from '@/lib/site';
+import { SITE, STATS, REVIEWS, ORGANIZATION_SCHEMA, WEBSITE_SCHEMA, GOOGLE_RATING } from '@/lib/site';
 import { SERVICES } from '@/data/services';
 
 const FEATURED_PATHS = [
@@ -300,20 +299,28 @@ export default function Home() {
             className="hidden xl:block w-[23rem] flex-shrink-0 self-center"
           >
             <figure className="glass-dark border border-white/15 rounded-3xl p-7 shadow-lifted">
-              <Quote className="w-8 h-8 text-mint/40 mb-4" aria-hidden />
+              <div className="flex gap-0.5 mb-4" aria-hidden>
+                {[1, 2, 3, 4, 5].map((s) => (
+                  <Star key={s} size={16} className="fill-amber-400 text-amber-400" />
+                ))}
+              </div>
               <blockquote className="text-[15px] leading-relaxed text-blue-50 font-medium">
-                „{TESTIMONIALS[0].quote}“
+                „{REVIEWS[2].text}“
               </blockquote>
               <figcaption className="mt-5 pt-5 border-t border-white/10">
-                <div className="font-bold text-white text-sm">{TESTIMONIALS[0].name}</div>
-                <div className="text-[13px] text-blue-100/70 mt-0.5">{TESTIMONIALS[0].company}</div>
+                <div className="font-bold text-white text-sm">{REVIEWS[2].author}</div>
+                <div className="text-[13px] text-blue-100/70 mt-0.5">
+                  Google-Bewertung · ★ {GOOGLE_RATING.value.toFixed(1).replace('.', ',')}
+                </div>
               </figcaption>
-              <Link
-                to="/referenzen"
+              <a
+                href={GOOGLE_RATING.url || GOOGLE_RATING.searchFallback}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="mt-5 inline-flex items-center gap-1.5 text-[13px] font-bold text-mint hover:text-white transition-colors"
               >
-                Alle Referenzen <ArrowRight size={14} />
-              </Link>
+                Alle {GOOGLE_RATING.count} Bewertungen <ArrowRight size={14} />
+              </a>
             </figure>
           </motion.aside>
         </motion.div>
@@ -654,43 +661,14 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── STIMMEN (05) ─────────────────────────────────────────────── */}
-      <section className="py-24 lg:py-36 bg-white border-y border-line">
-        <div className="max-w-7xl mx-auto px-4 sm:px-8">
-          <SectionHeading
-            index="05"
-            eyebrow="Stimmen unserer Kunden"
-            align="center"
-            title="Das sagen die, die uns beauftragt haben."
-            className="mb-16 max-w-3xl mx-auto"
-          />
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {TESTIMONIALS.map((testimonial, i) => (
-              <Reveal key={i} delay={i * 0.12} className="h-full">
-                <figure className="relative h-full bg-paper rounded-3xl p-8 border border-line card-lift flex flex-col">
-                  <Quote className="w-9 h-9 text-brand/15 mb-5" aria-hidden />
-                  <blockquote className="text-navy font-medium leading-relaxed text-[15.5px] flex-grow">
-                    „{testimonial.quote}“
-                  </blockquote>
-                  <figcaption className="mt-7 pt-6 border-t border-line">
-                    <div className="font-bold text-navy text-sm">{testimonial.name}</div>
-                    <div className="text-[13px] text-slate mt-0.5">{testimonial.company}</div>
-                  </figcaption>
-                </figure>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── BEWERTUNGEN (erscheint mit echten Reviews) ───────────────── */}
+      {/* ── BEWERTUNGEN (echte Google-Reviews) ───────────────────────── */}
       <Reviews />
 
       {/* ── PROZESS (06) ─────────────────────────────────────────────── */}
       <section className="py-24 lg:py-36 bg-paper">
         <div className="max-w-7xl mx-auto px-4 sm:px-8">
           <SectionHeading
-            index="06"
+            index="05"
             eyebrow="So einfach starten Sie"
             align="center"
             title="In drei Schritten zum sauberen Betrieb."

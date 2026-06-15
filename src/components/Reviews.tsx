@@ -2,7 +2,7 @@ import { Helmet } from 'react-helmet-async';
 import { Star } from 'lucide-react';
 import Reveal from '@/components/ui/Reveal';
 import SectionHeading from '@/components/ui/SectionHeading';
-import { REVIEWS, REVIEWS_SOURCE_URL, reviewSchema } from '@/lib/site';
+import { REVIEWS, REVIEWS_SOURCE_URL, GOOGLE_RATING, reviewSchema } from '@/lib/site';
 
 function Stars({ rating }: { rating: number }) {
   return (
@@ -15,15 +15,14 @@ function Stars({ rating }: { rating: number }) {
 }
 
 /**
- * Echte Kundenbewertungen + AggregateRating-Schema.
- * Rendert NICHTS, solange keine verifizierten Reviews in site.ts stehen —
- * so entsteht nie fake Markup. Sobald REVIEWS befüllt ist, erscheint die
- * Sektion automatisch inkl. strukturierter Daten (Sterne im Snippet).
+ * Echte Google-Bewertungen. Headline + Schema-Aggregat = reale Google-
+ * Gesamtwertung (4,8 / 20), darunter eine Auswahl im Wortlaut. Rendert nichts,
+ * solange keine Reviews in site.ts stehen.
  */
 export default function Reviews() {
   if (REVIEWS.length === 0) return null;
   const schema = reviewSchema();
-  const avg = (REVIEWS.reduce((s, r) => s + r.rating, 0) / REVIEWS.length).toFixed(1);
+  const value = GOOGLE_RATING.value.toFixed(1).replace('.', ',');
 
   return (
     <section className="py-24 lg:py-32 bg-paper border-y border-line">
@@ -34,10 +33,10 @@ export default function Reviews() {
       )}
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
         <SectionHeading
-          eyebrow="Bewertungen"
+          eyebrow="Google-Bewertungen"
           align="center"
-          title="Was Kunden öffentlich über uns sagen"
-          lead={`Durchschnittlich ${avg.replace('.', ',')} von 5 Sternen aus ${REVIEWS.length} verifizierten Bewertungen.`}
+          title="Was Kundinnen und Kunden öffentlich über uns sagen"
+          lead={`${value} von 5 Sternen aus ${GOOGLE_RATING.count} Google-Bewertungen — eine Auswahl im Wortlaut.`}
           className="mb-14 max-w-2xl mx-auto"
         />
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -48,7 +47,7 @@ export default function Reviews() {
                 <blockquote className="text-navy font-medium leading-relaxed mt-4 flex-grow">„{r.text}“</blockquote>
                 <figcaption className="mt-6 pt-5 border-t border-line">
                   <div className="font-bold text-navy text-sm">{r.author}</div>
-                  {r.role && <div className="text-[13px] text-slate mt-0.5">{r.role}</div>}
+                  <div className="text-[13px] text-slate mt-0.5">{r.role ? `${r.role} · ` : ''}Google-Bewertung</div>
                 </figcaption>
               </figure>
             </Reveal>
@@ -62,7 +61,7 @@ export default function Reviews() {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 text-brand font-bold hover:text-brand-light transition-colors"
             >
-              Alle Bewertungen ansehen
+              Alle {GOOGLE_RATING.count} Bewertungen auf Google ansehen
             </a>
           </div>
         )}
