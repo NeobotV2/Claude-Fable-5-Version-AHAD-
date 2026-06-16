@@ -184,8 +184,9 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="py-7 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-[13px] text-blue-100/50">
+        {/* Bottom Bar — extra Bodenabstand auf Mobile, damit die fixe
+            Sticky-CTA-Leiste die Rechtslinks nicht überdeckt. */}
+        <div className="pt-7 pb-28 lg:pb-7 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-[13px] text-blue-100/50">
           <p>
             © {new Date().getFullYear()} {SITE.legalName}. Alle Rechte vorbehalten.
           </p>
