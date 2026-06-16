@@ -3,13 +3,14 @@ import SEO from '@/components/SEO';
 import PageHero from '@/components/PageHero';
 import CTABand from '@/components/CTABand';
 import { SITE } from '@/lib/site';
+import { IMG } from '@/lib/images';
 
 export default function StandortKonstanz() {
   const localBusinessSchema = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     "name": "AHAD Cleaning Company GmbH - Konstanz",
-    "image": "https://images.unsplash.com/photo-1531366936337-7c912a4589a7?auto=format&fit=crop&q=80&w=1600",
+    "image": `${SITE.url}/images/ahad/konstanz.webp`,
     "@id": "https://ahad-cleaning.de/standorte/konstanz",
     "url": "https://ahad-cleaning.de/standorte/konstanz",
     "telephone": "+4977219441444",
@@ -52,8 +53,8 @@ export default function StandortKonstanz() {
         eyebrow="Bodenseeregion"
         title="Gebäudereinigung in Konstanz"
         lead="Wir sind Ihr Partner für professionelle Gebäudedienstleistungen in der Bodenseeregion – wir betreuen Radolfzell, Singen, Kreuzlingen, Meersburg, Überlingen, Stockach und Umgebung."
-        image="https://images.unsplash.com/photo-1531366936337-7c912a4589a7?auto=format&fit=crop&q=80&w=1600"
-        imageAlt="Konstanz"
+        image={IMG.bodensee}
+        imageAlt="Konstanz am Bodensee — Luftaufnahme der Stadt"
         crumbs={[{ label: 'Standorte', href: '/standorte' }, { label: 'Konstanz' }]}
         cta={{ label: 'Kostenloses Angebot anfordern', to: '/angebot' }}
         secondaryCta={{ label: SITE.phone, href: SITE.phoneHref }}

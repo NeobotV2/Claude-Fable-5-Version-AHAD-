@@ -67,10 +67,10 @@ export const IMG = {
   handshake: u('photo-1600880292203-757bb62b4baf', 1600), // Stock: Partnerschaft
   karriere: local('karriere.webp'),                      // Team mit Reinigungswagen
 
-  // ── Standorte / Region (Stock-Landschaften) ───────────────────────
-  schwarzwald: u('photo-1441974231531-c6227db76b6e', 1600),
-  bodensee: u('photo-1531366936337-7c912a4589a7', 1600),
-  stuttgart: u('photo-1449824913935-59a10b8d2000', 1600),
+  // ── Standorte / Region ────────────────────────────────────────────
+  schwarzwald: u('photo-1441974231531-c6227db76b6e', 1600), // Stock: Schwarzwald (Region)
+  bodensee: local('konstanz.webp'),   // echtes Konstanz-Stadtfoto (Luftaufnahme Bodensee)
+  stuttgart: local('stuttgart.webp'), // echtes Stuttgart-Stadtfoto (Schlossplatz)
 
   // ── Vorher / Nachher (Stock-Symbolbilder) ─────────────────────────
   beforeDirty: u('photo-1504307651254-35680f356dfd', 1400),

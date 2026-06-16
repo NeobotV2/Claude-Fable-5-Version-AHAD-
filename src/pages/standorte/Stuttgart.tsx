@@ -3,13 +3,14 @@ import SEO from '@/components/SEO';
 import PageHero from '@/components/PageHero';
 import CTABand from '@/components/CTABand';
 import { SITE } from '@/lib/site';
+import { IMG } from '@/lib/images';
 
 export default function StandortStuttgart() {
   const localBusinessSchema = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     "name": "AHAD Cleaning Company GmbH - Stuttgart",
-    "image": "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?auto=format&fit=crop&q=80&w=1600",
+    "image": `${SITE.url}/images/ahad/stuttgart.webp`,
     "@id": "https://ahad-cleaning.de/standorte/stuttgart",
     "url": "https://ahad-cleaning.de/standorte/stuttgart",
     "telephone": "+4977219447915",
@@ -52,8 +53,8 @@ export default function StandortStuttgart() {
         eyebrow="Landeshauptstadt & Umland"
         title="Gebäudereinigung in Stuttgart"
         lead="Von unserem Stuttgarter Standort aus bedienen wir Ludwigsburg, Esslingen, Böblingen, Sindelfingen, Waiblingen, Leonberg und den gesamten Großraum Stuttgart."
-        image="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?auto=format&fit=crop&q=80&w=1600"
-        imageAlt="Stuttgart"
+        image={IMG.stuttgart}
+        imageAlt="Stuttgart — Schlossplatz mit Neuem Schloss"
         crumbs={[{ label: 'Standorte', href: '/standorte' }, { label: 'Stuttgart' }]}
         cta={{ label: 'Kostenloses Angebot anfordern', to: '/angebot' }}
         secondaryCta={{ label: SITE.phone, href: SITE.phoneHref }}

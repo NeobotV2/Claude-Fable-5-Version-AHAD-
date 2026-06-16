@@ -30,6 +30,8 @@ const JOBS = [
   ['Bild.jpg', 'team.webp', 1200], // Management-Trio
   ['IMG_5472.jpg', 'meeting.webp', 1400], // Inhaber am Besprechungstisch
   ['IMG_9030.jpg', 'karriere.webp', 1400], // Team mit Reinigungswagen
+  ['stuttgart.jpg', 'stuttgart.webp', 1600], // Stadt Stuttgart — Schlossplatz
+  ['konstanz.jpg', 'konstanz.webp', 1600], // Stadt Konstanz — Luftaufnahme Bodensee
 ];
 
 await mkdir(out(''), { recursive: true });
