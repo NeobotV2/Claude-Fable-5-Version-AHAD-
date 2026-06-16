@@ -11,7 +11,7 @@ interface CTABandProps {
 
 /** Conversion-Band am Seitenende — überall identische Abschlusslogik. */
 export default function CTABand({
-  title = 'In 60 Sekunden zum Express-Angebot',
+  title = 'Ihr Angebot in 24 Stunden.',
   lead = 'Beantworten Sie vier kurze Fragen — wir melden uns innerhalb von 24 Stunden mit einer belastbaren Ersteinschätzung.',
   bullets = ['Antwort innerhalb von 24h', 'Objektbesichtigung in 48h möglich', '100% unverbindlich & kostenfrei'],
 }: CTABandProps) {
@@ -44,7 +44,7 @@ export default function CTABand({
 
               <div className="lg:col-span-5 flex flex-col gap-4">
                 <ButtonLink to="/angebot" size="lg" arrow className="w-full">
-                  Kostenloses Angebot anfordern
+                  Angebot in 24h anfordern
                 </ButtonLink>
                 <a
                   href={SITE.phoneHref}
