@@ -16,7 +16,7 @@ const standorte = [
     region: 'Zentrale · Schwarzwald-Baar-Kreis',
     description:
       'Unsere Zentrale: Von hier steuern wir Einsatzplanung, Qualitätssicherung und die Betreuung des Schwarzwald-Baar-Kreises.',
-    image: IMG.schwarzwald,
+    image: IMG.heroArchitecture,
     badge: 'Hauptsitz',
   },
   {
