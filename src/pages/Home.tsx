@@ -203,7 +203,7 @@ export default function Home() {
             src={IMG.heroMain}
             srcSet={unsplashSrcSet(IMG.heroMain)}
             sizes="100vw"
-            alt="Moderne Glasfassade eines Bürogebäudes"
+            alt="AHAD-Fuhrpark vor der Zentrale in Villingen-Schwenningen"
             className="w-full h-[115%] object-cover opacity-65"
             loading="eager"
             decoding="async"
@@ -351,7 +351,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-8 mb-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <p className="eyebrow text-slate/70">
             <span className="h-px w-8 bg-slate/30" />
-            Vertrauen führender Unternehmen
+            Auswahl betreuter Auftraggeber
           </p>
           <Link to="/referenzen" className="text-sm font-bold text-brand hover:text-brand-light transition-colors inline-flex items-center gap-1.5">
             Alle Referenzen <ArrowRight size={15} />
