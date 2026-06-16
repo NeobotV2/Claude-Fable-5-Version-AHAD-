@@ -216,21 +216,21 @@ export default function Home() {
 
         <motion.div
           style={{ opacity: heroFade }}
-          className="relative z-10 flex-grow flex items-center max-w-7xl mx-auto px-4 sm:px-8 w-full pt-32 pb-14 gap-12"
+          className="relative z-10 flex-grow flex items-center max-w-7xl mx-auto px-4 sm:px-8 w-full pt-24 sm:pt-32 pb-14 gap-12"
         >
           <div className="max-w-3xl min-w-0 flex-1">
             <motion.span
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="eyebrow text-mint mb-7"
+              className="eyebrow text-mint mb-5 sm:mb-7"
             >
               <span className="h-px w-8 bg-mint/50" />
               Für Industrie, Verwaltung & Mittelstand in Süddeutschland
             </motion.span>
 
             {/* Keyword im H1 (SEO) + Schmerzpunkt der Zielgruppe (Conversion) */}
-            <h1 className="display-xl text-white mb-8" lang="de">
+            <h1 className="display-xl text-white mb-5 sm:mb-8" lang="de">
               <RevealWords text="Gebäudereinigung," delay={0.15} />
               <br />
               <RevealWords text="die Sie nicht mehr" delay={0.4} />
@@ -243,7 +243,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.9, duration: 0.7 }}
-              className="text-lg sm:text-xl text-blue-50 max-w-2xl font-medium leading-relaxed mb-10"
+              className="text-lg sm:text-xl text-blue-50 max-w-2xl font-medium leading-relaxed mb-7 sm:mb-10"
             >
               Schluss mit Reklamationen und internem Hinterherlaufen: Wir steuern Ausführung, Qualität und
               Nachweise als System — damit Ihr Betrieb einfach sauber läuft.
@@ -253,7 +253,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1.05, duration: 0.7 }}
-              className="flex flex-col sm:flex-row gap-4 mb-12"
+              className="flex flex-col sm:flex-row gap-4 mb-8 sm:mb-12"
             >
               <ButtonLink to="/angebot" size="lg" arrow>
                 In 60 Sekunden zum Angebot
