@@ -216,21 +216,21 @@ export default function Home() {
 
         <motion.div
           style={{ opacity: heroFade }}
-          className="relative z-10 flex-grow flex items-center max-w-7xl mx-auto px-4 sm:px-8 w-full pt-32 pb-14 gap-12"
+          className="relative z-10 flex-grow flex items-center max-w-7xl mx-auto px-4 sm:px-8 w-full pt-24 sm:pt-32 pb-14 gap-12"
         >
           <div className="max-w-3xl min-w-0 flex-1">
             <motion.span
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="eyebrow text-mint mb-7"
+              className="eyebrow text-mint mb-5 sm:mb-7"
             >
               <span className="h-px w-8 bg-mint/50" />
               Für Industrie, Verwaltung & Mittelstand in Süddeutschland
             </motion.span>
 
             {/* Keyword im H1 (SEO) + Schmerzpunkt der Zielgruppe (Conversion) */}
-            <h1 className="display-xl text-white mb-8" lang="de">
+            <h1 className="display-xl text-white mb-5 sm:mb-8" lang="de">
               <RevealWords text="Gebäudereinigung," delay={0.15} />
               <br />
               <RevealWords text="die Sie nicht mehr" delay={0.4} />
@@ -243,7 +243,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.9, duration: 0.7 }}
-              className="text-lg sm:text-xl text-blue-50 max-w-2xl font-medium leading-relaxed mb-10"
+              className="text-lg sm:text-xl text-blue-50 max-w-2xl font-medium leading-relaxed mb-7 sm:mb-10"
             >
               Schluss mit Reklamationen und internem Hinterherlaufen: Wir steuern Ausführung, Qualität und
               Nachweise als System — damit Ihr Betrieb einfach sauber läuft.
@@ -253,10 +253,10 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1.05, duration: 0.7 }}
-              className="flex flex-col sm:flex-row gap-4 mb-12"
+              className="flex flex-col sm:flex-row gap-4 mb-8 sm:mb-12"
             >
               <ButtonLink to="/angebot" size="lg" arrow>
-                In 60 Sekunden zum Angebot
+                Angebot in 24h anfordern
               </ButtonLink>
               <ButtonLink to="/ahad-system" variant="outline-light" size="lg">
                 Wie das AHAD System arbeitet
@@ -305,10 +305,10 @@ export default function Home() {
                 ))}
               </div>
               <blockquote className="text-[15px] leading-relaxed text-blue-50 font-medium">
-                „{REVIEWS[2].text}“
+                „{REVIEWS[1].text}“
               </blockquote>
               <figcaption className="mt-5 pt-5 border-t border-white/10">
-                <div className="font-bold text-white text-sm">{REVIEWS[2].author}</div>
+                <div className="font-bold text-white text-sm">{REVIEWS[1].author}</div>
                 <div className="text-[13px] text-blue-100/70 mt-0.5">
                   Google-Bewertung · ★ {GOOGLE_RATING.value.toFixed(1).replace('.', ',')}
                 </div>
@@ -465,9 +465,9 @@ export default function Home() {
                 <ClipboardList className="w-7 h-7" />
               </span>
               <div className="relative z-10 flex-grow">
-                <h3 className="font-headline font-bold text-xl mb-1">In 2 Minuten zur strukturierten Anfrage</h3>
+                <h3 className="font-headline font-bold text-xl mb-1">Strukturierte Anfrage für FM &amp; Einkauf</h3>
                 <p className="text-blue-100/80 text-sm font-medium">
-                  Für FM &amp; Einkauf: Objekt, Leistungen und Anforderungen erfassen — als Grundlage für Angebot und
+                  Objekt, Leistungen und Anforderungen erfassen — als Grundlage für Angebot und
                   Leistungsverzeichnis. Antwort in 24h.
                 </p>
               </div>
@@ -504,7 +504,7 @@ export default function Home() {
                     Referenzen ansehen
                   </ButtonLink>
                   <ButtonLink to="/angebot" variant="outline-light">
-                    Kostenlose Objektbegehung
+                    Angebot in 24h anfordern
                   </ButtonLink>
                 </div>
               </Reveal>

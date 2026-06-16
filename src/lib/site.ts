@@ -194,7 +194,13 @@ export interface Review {
   text: string;
 }
 
-/** Echte, öffentliche Google-Rezensionen (Auswahl im Wortlaut). */
+/**
+ * Echte, öffentliche Google-Rezensionen (Auswahl im Wortlaut).
+ * Reihenfolge bewusst nach B2B-Aussagekraft: zuerst die Bewertung, die den
+ * vollständigen Ablauf (Vorbesichtigung, Angebot, Ausführung, Dokumentation)
+ * beschreibt, dann sachliche Empfehlungen; die saloppste Stimme steht zuletzt.
+ * Inhalte unverändert — nur die Anordnung ist kuratiert.
+ */
 export const REVIEWS: Review[] = [
   {
     author: 'Matthias Porsche',
@@ -202,12 +208,6 @@ export const REVIEWS: Review[] = [
     rating: 5,
     text:
       'Vom ersten Telefonat, über die Vorbesichtigung, die Angebotserstellung und Beauftragung bis hin zur Ausführung: sehr freundlich, vertrauenserweckend, kompetent, professionell, zuverlässig — mit einem erstklassigen, meine Erwartungen übersteigenden Reinigungsergebnis zu einem angemessenen Preis. Da ich am Tag der Reinigung nicht anwesend war, schickte man mir nach Beendigung der Arbeiten ein ausführliches Video vom Ergebnis. Eine nette, vertrauenserweckende Geste! Diesem Unternehmen würde ich mich jederzeit wieder anvertrauen und werde es weiterempfehlen.',
-  },
-  {
-    author: 'Karl-Heinz Maaß',
-    rating: 5,
-    text:
-      'Sehr angenehmer Chef, die erste Reinigungsfirma mit Ambiente und positiver Stimmung vom ganzen Team — gut gelaunt und sehr ansprechendes Büro. 6 von 5 Sternen! 👍',
   },
   {
     author: 'Marvin Krüger',
@@ -225,6 +225,12 @@ export const REVIEWS: Review[] = [
     rating: 5,
     text:
       'Bin mega zufrieden, und der Mann, der unsere Fenster gereinigt hat, war so sympathisch, lieb und nett. Wir waren begeistert! Wir werden im Frühjahr den nächsten Auftrag an Sie weitergeben.',
+  },
+  {
+    author: 'Karl-Heinz Maaß',
+    rating: 5,
+    text:
+      'Sehr angenehmer Chef, die erste Reinigungsfirma mit Ambiente und positiver Stimmung vom ganzen Team — gut gelaunt und sehr ansprechendes Büro. 6 von 5 Sternen! 👍',
   },
 ];
 

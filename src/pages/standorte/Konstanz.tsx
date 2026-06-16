@@ -56,7 +56,7 @@ export default function StandortKonstanz() {
         image={IMG.bodensee}
         imageAlt="Konstanz am Bodensee — Luftaufnahme der Stadt"
         crumbs={[{ label: 'Standorte', href: '/standorte' }, { label: 'Konstanz' }]}
-        cta={{ label: 'Kostenloses Angebot anfordern', to: '/angebot' }}
+        cta={{ label: 'Angebot in 24h anfordern', to: '/angebot' }}
         secondaryCta={{ label: SITE.phone, href: SITE.phoneHref }}
       />
 

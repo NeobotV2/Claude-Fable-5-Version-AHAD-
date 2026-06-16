@@ -20,6 +20,11 @@ export interface RenderResult {
   head: string;
 }
 
+// Folgt Vites base-Pfad (z. B. /repo-name auf GitHub Pages; root = '').
+// Muss zum Client-basename in App.tsx passen, damit die vorgerenderten
+// Links denselben Pfad-Präfix tragen wie nach der Hydration.
+const BASENAME = import.meta.env.BASE_URL.replace(/\/$/, '');
+
 /**
  * Rendert eine Route zu statischem HTML (für SSG/Prerendering).
  * renderToPipeableStream + onAllReady löst React.lazy/Suspense vollständig
@@ -27,6 +32,10 @@ export interface RenderResult {
  * nach dem Render aus dem Context gelesen.
  */
 export function render(url: string): Promise<RenderResult> {
+  // StaticRouter erwartet die volle Location inkl. basename und strippt ihn
+  // intern wieder ab. Ohne diesen Präfix würden alle <Link>s im statischen
+  // HTML ohne base-Pfad gerendert → 404 auf GitHub Pages vor der Hydration.
+  const location = `${BASENAME}${url}`;
   return new Promise((resolve, reject) => {
     const helmetContext: HelmetCtx = {};
     let html = '';
@@ -44,7 +53,7 @@ export function render(url: string): Promise<RenderResult> {
     const { pipe, abort } = renderToPipeableStream(
       <ErrorBoundary>
         <HelmetProvider context={helmetContext as never}>
-          <StaticRouter location={url}>
+          <StaticRouter basename={BASENAME || undefined} location={location}>
             <AppRoutes />
           </StaticRouter>
         </HelmetProvider>

@@ -43,10 +43,9 @@ export default function WhatsAppButton() {
           exit={{ opacity: 0, scale: 0.6 }}
           whileHover={{ scale: 1.06 }}
           whileTap={{ scale: 0.95 }}
-          className="fixed right-4 z-40 w-14 h-14 rounded-full bg-[#25D366] text-white grid place-items-center shadow-lifted bottom-[5.5rem] lg:bottom-6"
+          className="fixed right-4 z-40 w-12 h-12 rounded-full bg-[#25D366] text-white grid place-items-center shadow-lifted bottom-[5.5rem] lg:bottom-6"
         >
-          <WhatsAppGlyph />
-          <span className="absolute inset-0 rounded-full bg-[#25D366] animate-ping opacity-20 motion-reduce:hidden" />
+          <WhatsAppGlyph size={22} />
         </motion.a>
       )}
     </AnimatePresence>

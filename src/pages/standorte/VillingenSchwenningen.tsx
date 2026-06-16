@@ -56,7 +56,7 @@ export default function StandortVS() {
         image={IMG.heroArchitecture}
         imageAlt="AHAD Cleaning Zentrale in Villingen-Schwenningen"
         crumbs={[{ label: 'Standorte', href: '/standorte' }, { label: 'Villingen-Schwenningen' }]}
-        cta={{ label: 'Kostenloses Angebot anfordern', to: '/angebot' }}
+        cta={{ label: 'Angebot in 24h anfordern', to: '/angebot' }}
         secondaryCta={{ label: SITE.phone, href: SITE.phoneHref }}
       />
 
