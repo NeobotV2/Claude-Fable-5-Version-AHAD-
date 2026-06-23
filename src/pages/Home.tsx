@@ -19,7 +19,7 @@ import {
   ClipboardList,
 } from 'lucide-react';
 import SEO from '@/components/SEO';
-import Reveal, { RevealWords } from '@/components/ui/Reveal';
+import Reveal from '@/components/ui/Reveal';
 import SectionHeading from '@/components/ui/SectionHeading';
 import ButtonLink from '@/components/ui/Button';
 import Stat from '@/components/ui/Stat';
@@ -206,6 +206,8 @@ export default function Home() {
             alt="AHAD-Fuhrpark vor der Zentrale in Villingen-Schwenningen"
             className="w-full h-[115%] object-cover opacity-65"
             loading="eager"
+            // React 18 reicht nur lowercase `fetchpriority` an das DOM durch
+            {...{ fetchpriority: 'high' }}
             decoding="async"
             referrerPolicy="no-referrer"
           />
@@ -229,25 +231,23 @@ export default function Home() {
               Für Industrie, Verwaltung & Mittelstand in Süddeutschland
             </motion.span>
 
-            {/* Keyword im H1 (SEO) + Schmerzpunkt der Zielgruppe (Conversion) */}
+            {/* Keyword im H1 (SEO) + Schmerzpunkt der Zielgruppe (Conversion).
+                Bewusst statisch (kein Reveal-/Slide-Effekt): so steht die Headline
+                bereits im vorgerenderten HTML sichtbar → schneller LCP, valides ARIA. */}
             <h1 className="display-xl text-white mb-5 sm:mb-8" lang="de">
-              <RevealWords text="Gebäudereinigung," delay={0.15} />
+              Gebäudereinigung,
               <br />
-              <RevealWords text="die Sie nicht mehr" delay={0.4} />
+              die Sie nicht mehr
               <br />
-              <RevealWords text="nachsteuern" className="text-mint" delay={0.6} />{' '}
-              <RevealWords text="müssen." delay={0.8} />
+              <span className="text-mint">nachsteuern</span> müssen.
             </h1>
 
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.9, duration: 0.7 }}
-              className="text-lg sm:text-xl text-blue-50 max-w-2xl font-medium leading-relaxed mb-7 sm:mb-10"
-            >
+            {/* LCP-Element: statisch gerendert, damit es sofort sichtbar ist
+                (keine opacity-0-Einblendung, die den LCP verzögert). */}
+            <p className="text-lg sm:text-xl text-blue-50 max-w-2xl font-medium leading-relaxed mb-7 sm:mb-10">
               Schluss mit Reklamationen und internem Hinterherlaufen: Wir steuern Ausführung, Qualität und
               Nachweise als System — damit Ihr Betrieb einfach sauber läuft.
-            </motion.p>
+            </p>
 
             <motion.div
               initial={{ opacity: 0, y: 20 }}

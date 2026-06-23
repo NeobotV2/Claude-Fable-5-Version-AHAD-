@@ -30,7 +30,7 @@ export function RevealWords({ text, className, delay = 0 }: { text: string; clas
   const reduce = useReducedMotion();
   const words = text.split(' ');
   return (
-    <span className={className} aria-label={text}>
+    <span className={className} role="text" aria-label={text}>
       {words.map((word, i) => (
         <span key={i} className="inline-block overflow-hidden align-bottom">
           <motion.span
