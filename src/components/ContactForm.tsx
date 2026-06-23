@@ -51,6 +51,18 @@ export default function ContactForm() {
         status: 'new',
         createdAt: serverTimestamp(),
       });
+
+      // E-Mail-Benachrichtigung (best effort — blockiert den Erfolg nicht).
+      try {
+        await fetch('/api/send-email', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ type: 'contact', data: formData, website: honeypot }),
+        });
+      } catch (emailError) {
+        console.error('Error sending email notification:', emailError);
+      }
+
       setIsSuccess(true);
     } catch (error) {
       console.error('Error submitting contact form:', error);
