@@ -29,11 +29,14 @@ import fileConfig from './firebase-applet-config.json';
  * Projekt pro Deployment-Umgebung setzen, ohne Code zu ändern.
  */
 const env = import.meta.env;
-/** Env-Wert nur verwenden, wenn er wirklich gesetzt (nicht leer) ist — sonst
- *  greift die echte Projekt-Config aus firebase-applet-config.json. Verhindert,
- *  dass leere/blanke VITE_FIREBASE_*-Variablen die Config kaputt machen. */
-const pick = (envVal: unknown, fileVal: string): string =>
-  typeof envVal === 'string' && envVal.trim() ? envVal : fileVal;
+/** Env-Wert nur verwenden, wenn er (nach Trim) wirklich gesetzt ist — sonst
+ *  greift die echte Projekt-Config aus firebase-applet-config.json. Der Wert
+ *  wird IMMER getrimmt: so machen versehentlich mitkopierte Leerzeichen/Tabs
+ *  (z. B. in einer VITE_FIREBASE_*-Variable) die Config nicht kaputt. */
+const pick = (envVal: unknown, fileVal: string): string => {
+  const v = typeof envVal === 'string' ? envVal.trim() : '';
+  return v || String(fileVal).trim();
+};
 
 const firebaseConfig = {
   apiKey: pick(env.VITE_FIREBASE_API_KEY, fileConfig.apiKey),
