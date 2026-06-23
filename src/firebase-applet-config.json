@@ -1,10 +1,11 @@
 {
-  "_hinweis": "Platzhalter-Konfiguration. Echte Werte über VITE_FIREBASE_*-Umgebungsvariablen setzen oder diese Datei mit der Firebase-Projektkonfiguration ersetzen.",
-  "apiKey": "demo-api-key",
+  "_hinweis": "Firebase-Web-Konfiguration des Projekts 'ahad-cleaning'. Diese Werte sind bauartbedingt öffentlich (im Client-Bundle sichtbar); die Zugriffssicherheit kommt aus den Firestore-Regeln. Per VITE_FIREBASE_*-Umgebungsvariablen überschreibbar.",
+  "apiKey": "AIzaSyC8r3emSxk2XJ1VKGPgaTom7grbBXigrE4",
   "authDomain": "ahad-cleaning.firebaseapp.com",
-  "projectId": "ahad-cleaning-demo",
-  "storageBucket": "ahad-cleaning-demo.appspot.com",
-  "messagingSenderId": "000000000000",
-  "appId": "1:000000000000:web:0000000000000000000000",
+  "projectId": "ahad-cleaning",
+  "storageBucket": "ahad-cleaning.firebasestorage.app",
+  "messagingSenderId": "116967660019",
+  "appId": "1:116967660019:web:9e6e4d5320e7177babda86",
+  "measurementId": "G-PHH4LMBB21",
   "firestoreDatabaseId": "(default)"
 }
