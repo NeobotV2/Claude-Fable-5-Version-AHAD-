@@ -235,7 +235,10 @@ export default function Home() {
                 Bewusst statisch (kein Reveal-/Slide-Effekt): so steht die Headline
                 bereits im vorgerenderten HTML sichtbar → schneller LCP, valides ARIA. */}
             <h1 className="display-xl text-white mb-5 sm:mb-8" lang="de">
-              Gebäudereinigung,
+              {/* inline-block hält das lange Kompositum auf einer Zeile
+                  (bei overflow-wrap:break-word bleibt ein inline-block auf
+                  max-content-Breite) statt am Zeichen umzubrechen. */}
+              <span className="inline-block">Gebäudereinigung,</span>
               <br />
               die Sie nicht mehr
               <br />
