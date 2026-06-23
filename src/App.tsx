@@ -1,4 +1,5 @@
 import { BrowserRouter, HashRouter } from 'react-router-dom';
+import { Analytics } from '@vercel/analytics/react';
 import ScrollToTop from './components/ScrollToTop';
 import ErrorBoundary from './components/ErrorBoundary';
 import AppRoutes from './AppRoutes';
@@ -16,6 +17,7 @@ export default function App() {
         <ScrollToTop />
         <AppRoutes />
       </Router>
+      <Analytics />
     </ErrorBoundary>
   );
 }
