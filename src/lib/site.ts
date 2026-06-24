@@ -88,30 +88,19 @@ export interface ClientReference {
 }
 
 export const CLIENT_REFERENCES: ClientReference[] = [
-  { name: 'Allianz', domain: 'allianz.de' },
-  { name: 'GOLDBECK', domain: 'goldbeck.de' },
-  { name: 'Bundesagentur für Arbeit', domain: 'arbeitsagentur.de' },
-  { name: 'Bareiss', domain: 'bareiss.com' },
-  { name: 'BDT', domain: 'bdt.de' },
-  { name: 'Köster', domain: 'koester-bau.de' },
-  { name: 'Aesthetify by Dr. Rick & Dr. Nick', domain: 'aesthetify.de' },
-  { name: 'Käppelehof', domain: 'kaeppelehof.de' },
-  { name: 'Kur- und Bäder GmbH Bad Dürrheim', domain: 'badduerrheim.de' },
-  {
-    name: 'naturenergie netze',
-    domain: 'naturenergie-netze.de',
-    logoUrl: 'https://www.naturenergie-netze.de/typo3conf/ext/sitecore/Resources/Public/img/naturenergie_netze-logo.svg',
-  },
-  {
-    name: 'Schwarzwald-Baar-Kreis',
-    domain: 'schwarzwald-baar-kreis.de',
-    logoUrl: 'https://www.lrasbk.de/media/custom/2944_1_1_m.png',
-  },
-  {
-    name: 'Südwest Messe',
-    domain: 'suedwest-messe.de',
-    logoUrl: 'https://www.suedwest-messe.de/fileadmin/data/sites/suedwest-messe-vs.de/Logo/suedwestmessevs_logo.png',
-  },
+  { name: 'Allianz', domain: 'allianz.de', logo: '/images/clients/allianz.svg' },
+  { name: 'GOLDBECK', domain: 'goldbeck.de', logo: '/images/clients/goldbeck.svg' },
+  { name: 'Bundesagentur für Arbeit', domain: 'arbeitsagentur.de', logo: '/images/clients/bundesagentur-fuer-arbeit.png' },
+  { name: 'Bareiss', domain: 'bareiss.com', logo: '/images/clients/bareiss.png' },
+  { name: 'BDT', domain: 'bdt.de', logo: '/images/clients/bdt.svg' },
+  { name: 'Köster', domain: 'koester-bau.de', logo: '/images/clients/koester.png' },
+  { name: 'Aesthetify by Dr. Rick & Dr. Nick', domain: 'aesthetify.de', logo: '/images/clients/aesthetify.svg' },
+  { name: 'Käppelehof', domain: 'kaeppelehof.de', logo: '/images/clients/kaeppelehof.png' },
+  { name: 'Kur- und Bäder GmbH Bad Dürrheim', domain: 'badduerrheim.de', logo: '/images/clients/kur-baeder-bad-duerrheim.png' },
+  { name: 'naturenergie netze', domain: 'naturenergie-netze.de', logo: '/images/clients/naturenergie-netze.svg' },
+  // Kein freigegebenes Logo vorhanden -> faellt automatisch auf die Wortmarke zurueck.
+  { name: 'Schwarzwald-Baar-Kreis', domain: 'schwarzwald-baar-kreis.de' },
+  { name: 'Südwest Messe', domain: 'suedwest-messe.de', logo: '/images/clients/suedwest-messe.png' },
 ];
 
 /**
