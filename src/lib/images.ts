@@ -60,7 +60,7 @@ export const IMG = {
   brancheMedizin: u('photo-1582719508461-905c673771fd', 1600),   // Stock: Reinraum
   brancheBuero: local('branche-buero.webp'),                     // Reinigung modernes Foyer (echt)
   brancheGewerbe: local('gewerbe.webp'),                         // Markt/Großfläche (echt)
-  brancheHotel: u('photo-1566073771259-6a8506099945', 1600),     // Stock: Hotel
+  brancheHotel: local('branche-hotel.webp'),                     // Reinigung Lounge-/Gastrobereich am Pool (echt)
 
   // ── Unternehmen / Team / Karriere (echte AHAD-Fotos) ──────────────
   team: local('team.webp'),                              // Geschäftsführung
