@@ -56,6 +56,30 @@ export default function FachwissenAnbieterwechsel() {
           "@type": "Answer",
           "text": "Achten Sie auf Zertifizierungen (ISO 9001), Referenzen in Ihrer Branche, die Qualifikation der Objektleiter und die Transparenz des Angebots. Ein seriöser Anbieter führt immer eine Vor-Ort-Besichtigung durch, bevor er ein Angebot erstellt."
         }
+      },
+      {
+        "@type": "Question",
+        "name": "Welche Kündigungsfristen gelten bei Reinigungsverträgen?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Bei unbefristeten Rahmen- oder Dienstleistungsverträgen sind Kündigungsfristen von 3 Monaten zum Quartalsende üblich, bei Verträgen mit fester Laufzeit (häufig 12 bis 24 Monate) oft 3 bis 6 Monate zum Vertragsende. Maßgeblich ist immer der individuelle Vertrag: Prüfen Sie Laufzeit, Kündigungsfrist und automatische Verlängerungsklauseln. Versäumen Sie die Frist, verlängert sich der Vertrag bei stillschweigender Verlängerung meist um ein weiteres Jahr. Kündigen Sie schriftlich per Einschreiben mit Rückschein und lassen Sie sich den Zugang bestätigen."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Gilt ein Betriebsübergang nach § 613a BGB beim Wechsel der Reinigungsfirma?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Ein Betriebsübergang nach § 613a BGB kann greifen, wenn der neue Dienstleister eine wirtschaftliche Einheit unter Wahrung ihrer Identität übernimmt - in der personalintensiven Gebäudereinigung vor allem dann, wenn ein nach Zahl und Sachkunde wesentlicher Teil der bisherigen Reinigungskräfte vom neuen Anbieter weiterbeschäftigt wird. In diesem Fall gehen die Arbeitsverhältnisse mit allen Rechten und Pflichten auf den neuen Arbeitgeber über. Ob ein Betriebsübergang vorliegt, ist eine Einzelfallbeurteilung; eine rechtliche Prüfung im Vorfeld wird empfohlen, da sie die Kalkulation des neuen Anbieters beeinflusst."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Wie lange dauert die Übergangsphase beim Anbieterwechsel?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Als Orientierungswert sollten Sie zwischen Vertragsunterzeichnung und Reinigungsstart etwa 4 bis 8 Wochen für ein sauberes Onboarding einplanen. In dieser Zeit erfolgen Objektbegehung, Personaleinsatzplanung, Schlüssel- und Zutrittsregelung, Einweisung in Sicherheits- und Hygienevorgaben sowie die Beschaffung von Maschinen und Verbrauchsmaterial. Eine kurze Parallelphase oder ein klar definierter Stichtag mit Übergabeprotokoll vermeidet, dass an einzelnen Tagen niemand reinigt."
+        }
       }
     ]
   };
@@ -189,9 +213,173 @@ export default function FachwissenAnbieterwechsel() {
               </div>
             </div>
 
+            <h2 className="text-3xl font-black text-[#0B2341] mb-6">Der Wechsel in 6 Schritten: Phasenplan im Überblick</h2>
+            <p className="mb-8">
+              Ein strukturierter Wechsel folgt einem klaren Zeitplan. Die folgende Tabelle zeigt die sechs Phasen vom ersten Bedarfscheck bis zur laufenden Qualitätskontrolle - inklusive empfohlener Vorlaufzeit und der wichtigsten Beteiligten. Die Zeitangaben sind Orientierungswerte und hängen von Objektgröße und Vertragslaufzeit ab.
+            </p>
+
+            <div className="overflow-x-auto my-12">
+              <table className="w-full text-left border-collapse text-sm">
+                <thead>
+                  <tr className="bg-[#0B2341] text-white">
+                    <th className="p-4 font-bold rounded-tl-xl">Phase</th>
+                    <th className="p-4 font-bold">Aufgabe</th>
+                    <th className="p-4 font-bold">Vorlauf (Richtwert)</th>
+                    <th className="p-4 font-bold rounded-tr-xl">Beteiligte</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-gray-100">
+                  <tr className="bg-[#f7f9fb]">
+                    <td className="p-4 font-bold text-[#0B2341]">1. Bedarf &amp; Leistungsverzeichnis</td>
+                    <td className="p-4">Flächen, Frequenzen und Hygieneanforderungen erfassen, LV erstellen</td>
+                    <td className="p-4 whitespace-nowrap">ca. 6-9 Monate vorher</td>
+                    <td className="p-4">Facility Management, Hausleitung</td>
+                  </tr>
+                  <tr>
+                    <td className="p-4 font-bold text-[#0B2341]">2. Ausschreibung &amp; Angebote</td>
+                    <td className="p-4">Anbieter ansprechen, Begehung, Angebote auf Leistungswerte vergleichen</td>
+                    <td className="p-4 whitespace-nowrap">ca. 5-6 Monate vorher</td>
+                    <td className="p-4">Einkauf, FM, Anbieter</td>
+                  </tr>
+                  <tr className="bg-[#f7f9fb]">
+                    <td className="p-4 font-bold text-[#0B2341]">3. Kündigung Altvertrag</td>
+                    <td className="p-4">Frist prüfen, schriftlich kündigen (erst nach neuem Vertragsentwurf)</td>
+                    <td className="p-4 whitespace-nowrap">je nach Frist (3-6 Monate)</td>
+                    <td className="p-4">Geschäftsführung, Recht</td>
+                  </tr>
+                  <tr>
+                    <td className="p-4 font-bold text-[#0B2341]">4. Personalübergang (§ 613a BGB)</td>
+                    <td className="p-4">Prüfen, ob Betriebsübergang vorliegt; Personalfragen klären</td>
+                    <td className="p-4 whitespace-nowrap">ca. 2-3 Monate vorher</td>
+                    <td className="p-4">Personal/HR, beide Anbieter</td>
+                  </tr>
+                  <tr className="bg-[#f7f9fb]">
+                    <td className="p-4 font-bold text-[#0B2341]">5. Onboarding &amp; Stichtag</td>
+                    <td className="p-4">Schlüssel, Einweisung, Maschinen, Übergabeprotokoll am Stichtag</td>
+                    <td className="p-4 whitespace-nowrap">ca. 4-8 Wochen vorher</td>
+                    <td className="p-4">Objektleitung neu, FM</td>
+                  </tr>
+                  <tr>
+                    <td className="p-4 font-bold text-[#0B2341] rounded-bl-xl">6. Qualitätskontrolle</td>
+                    <td className="p-4">Regelmäßige Begehungen, Kennzahlen, Feedbackschleifen etablieren</td>
+                    <td className="p-4 whitespace-nowrap">laufend ab Start</td>
+                    <td className="p-4 rounded-br-xl">FM, Objektleitung</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h2 className="text-3xl font-black text-[#0B2341] mb-6">Personalübergang nach § 613a BGB: Was Auftraggeber wissen müssen</h2>
+            <p className="mb-8">
+              In der Gebäudereinigung ist die Frage des Personalübergangs besonders relevant, weil die Branche personalintensiv ist und das Reinigungspersonal das eigentliche "Betriebsmittel" darstellt. Übernimmt der neue Dienstleister einen nach Zahl und Sachkunde wesentlichen Teil der bisherigen Reinigungskräfte, kann ein Betriebsübergang nach § 613a BGB vorliegen. Dann gehen die bestehenden Arbeitsverhältnisse - mit Kündigungsschutz, Betriebszugehörigkeit und bestehenden Ansprüchen - auf den neuen Arbeitgeber über.
+            </p>
+            <p className="mb-8">
+              Für Sie als Auftraggeber hat das praktische Folgen: Die Übernahme von eingearbeitetem, objektkundigem Personal kann die Reinigungsqualität in der Anfangsphase stabil halten und Reibungsverluste reduzieren. Gleichzeitig beeinflusst die Personalfrage die Kalkulation des neuen Anbieters. Klären Sie das Thema deshalb früh und transparent. Ob im Einzelfall tatsächlich ein Betriebsübergang vorliegt, ist eine juristische Einzelfallbeurteilung - ziehen Sie im Zweifel arbeitsrechtliche Beratung hinzu.
+            </p>
+
+            <h2 className="text-3xl font-black text-[#0B2341] mb-6">Angebote richtig vergleichen: ein Rechenbeispiel</h2>
+            <p className="mb-8">
+              Der niedrigste Endpreis ist selten der beste. Entscheidend ist die Plausibilität der kalkulierten Leistungswerte (Quadratmeter pro Stunde). Wird zu eng kalkuliert, kann das Personal die Fläche in der vorgesehenen Zeit nicht ordentlich reinigen - Qualitätsmängel sind vorprogrammiert. Ein vereinfachtes Orientierungsbeispiel für eine Büroreinigung:
+            </p>
+
+            <div className="overflow-x-auto my-12">
+              <table className="w-full text-left border-collapse text-sm">
+                <thead>
+                  <tr className="bg-[#0B2341] text-white">
+                    <th className="p-4 font-bold rounded-tl-xl">Kennzahl</th>
+                    <th className="p-4 font-bold">Anbieter A (Billigangebot)</th>
+                    <th className="p-4 font-bold rounded-tr-xl">Anbieter B (realistisch)</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-gray-100">
+                  <tr className="bg-[#f7f9fb]">
+                    <td className="p-4 font-bold text-[#0B2341]">Reinigungsfläche</td>
+                    <td className="p-4">1.500 m²</td>
+                    <td className="p-4">1.500 m²</td>
+                  </tr>
+                  <tr>
+                    <td className="p-4 font-bold text-[#0B2341]">Leistungswert</td>
+                    <td className="p-4">350 m²/Std. (zu hoch)</td>
+                    <td className="p-4">220 m²/Std. (realistisch)</td>
+                  </tr>
+                  <tr className="bg-[#f7f9fb]">
+                    <td className="p-4 font-bold text-[#0B2341]">Benötigte Zeit/Tag</td>
+                    <td className="p-4">ca. 4,3 Std.</td>
+                    <td className="p-4">ca. 6,8 Std.</td>
+                  </tr>
+                  <tr>
+                    <td className="p-4 font-bold text-[#0B2341] rounded-bl-xl">Realistisches Ergebnis</td>
+                    <td className="p-4">Hetze, Flächen werden ausgelassen</td>
+                    <td className="p-4 rounded-br-xl">Gründliche, gleichbleibende Qualität</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p className="mb-8">
+              Beide Werte sind Richtwerte und je nach Verschmutzungsgrad, Möblierung und Ausstattung unterschiedlich. Die Botschaft bleibt: Wer den Leistungswert künstlich hochrechnet, verkauft Ihnen einen niedrigen Preis, den am Ende die Qualität bezahlt. Fragen Sie im Angebotsgespräch gezielt nach den hinterlegten Leistungswerten und Einsatzzeiten.
+            </p>
+
+            <h2 className="text-3xl font-black text-[#0B2341] mb-6">Die komplette Wechsel-Checkliste</h2>
+            <p className="mb-8">
+              Diese Checkliste führt Sie durch alle wichtigen Punkte - von der Vorbereitung bis zur ersten Qualitätsbegehung nach dem Start. Haken Sie die Punkte ab, um nichts zu übersehen.
+            </p>
+            <ul className="space-y-4 mb-12 list-none pl-0">
+              {[
+                'Aktuellen Vertrag heraussuchen: Laufzeit, Kündigungsfrist und Verlängerungsklausel notieren',
+                'Mängel der bisherigen Reinigung schriftlich und mit Datum dokumentieren',
+                'Leistungsverzeichnis aktualisieren: Flächen, Raumtypen, Frequenzen, Sonderleistungen',
+                'Hygiene- und Sicherheitsanforderungen sowie Glas-/Grundreinigungsintervalle festlegen',
+                'Mindestens drei Anbieter zur Vor-Ort-Begehung einladen',
+                'Angebote anhand von Leistungswerten und Einsatzzeiten vergleichen - nicht nur Endpreis',
+                'Referenzen aus der eigenen Branche einholen und telefonisch prüfen',
+                'Zertifikate (z. B. ISO 9001), Versicherungsnachweis und Tariftreue prüfen',
+                'Personalübergang nach § 613a BGB rechtlich abklären lassen',
+                'Neuen Vertrag erst unterschreiben, dann den Altvertrag fristgerecht schriftlich kündigen',
+                'Kündigung per Einschreiben mit Rückschein versenden und Zugang dokumentieren',
+                'Stichtag festlegen und Onboarding-Plan mit dem neuen Anbieter abstimmen',
+                'Schlüssel-/Zutrittsregelung, Lagerraum und Stromanschlüsse für Maschinen klären',
+                'Übergabeprotokoll am Stichtag erstellen (Zustand, Inventar, Schlüssel)',
+                'Feste Ansprechpartner und Eskalationsweg auf beiden Seiten benennen',
+                'Qualitätskontrolle vereinbaren: regelmäßige Begehungen und Bewertungsbogen'
+              ].map((item, i) => (
+                <li key={i} className="flex items-start gap-3">
+                  <ClipboardCheck className="flex-shrink-0 w-5 h-5 text-[#0D6B38] mt-1" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+
+            <h2 className="text-3xl font-black text-[#0B2341] mb-6">Typische Fehler beim Anbieterwechsel - und wie Sie sie vermeiden</h2>
+            <p className="mb-8">
+              Viele Wechsel scheitern nicht am neuen Anbieter, sondern an vermeidbaren Planungsfehlern. Die häufigsten Stolpersteine in der Praxis:
+            </p>
+            <div className="space-y-6 my-12">
+              <div className="bg-red-50 border-l-4 border-red-400 p-6 rounded-r-xl">
+                <h4 className="font-bold text-[#0B2341] mb-2">Zu früh gekündigt</h4>
+                <p className="text-sm">Wer den Altvertrag kündigt, bevor der neue Vertrag unterschrieben ist, riskiert eine Lücke ohne Reinigung oder muss unter Zeitdruck einen teuren Notdienst beauftragen. Reihenfolge: erst neu binden, dann kündigen.</p>
+              </div>
+              <div className="bg-red-50 border-l-4 border-red-400 p-6 rounded-r-xl">
+                <h4 className="font-bold text-[#0B2341] mb-2">Nur auf den Preis geschaut</h4>
+                <p className="text-sm">Das billigste Angebot kalkuliert oft unrealistische Leistungswerte. Die Folge ist genau die Qualitätslücke, die Sie eigentlich loswerden wollten. Vergleichen Sie Stunden, nicht nur Summen.</p>
+              </div>
+              <div className="bg-red-50 border-l-4 border-red-400 p-6 rounded-r-xl">
+                <h4 className="font-bold text-[#0B2341] mb-2">Personalfrage ignoriert</h4>
+                <p className="text-sm">Wird § 613a BGB nicht früh geprüft, kommt es kurz vor dem Stichtag zu unkalkulierten Personal- und Kostenfragen. Klären Sie den möglichen Betriebsübergang rechtzeitig.</p>
+              </div>
+              <div className="bg-red-50 border-l-4 border-red-400 p-6 rounded-r-xl">
+                <h4 className="font-bold text-[#0B2341] mb-2">Keine Qualitätskontrolle vereinbart</h4>
+                <p className="text-sm">Ohne messbare Kriterien und regelmäßige Begehungen lässt sich Qualität nicht steuern. Legen Sie vor dem Start einen Bewertungsbogen und feste Begehungstermine fest.</p>
+              </div>
+            </div>
+
             <h2 className="text-3xl font-black text-[#0B2341] mb-6">Die Übergabe: Der kritische Moment</h2>
             <p className="mb-8">
               Ein reibungsloser Start mit dem neuen Partner erfordert Planung. Stellen Sie sicher, dass Schlüsselübergaben, Einweisungen in die Objektspezifika und die Bereitstellung von Lagerräumen für Reinigungsmittel rechtzeitig geklärt sind. Wir bei AHAD Cleaning setzen hier auf ein strukturiertes Onboarding-Protokoll.
+            </p>
+
+            <h3 className="text-2xl font-bold text-[#0B2341] mb-6">Regionaler Bezug: Wechsel in Villingen-Schwenningen und der Region</h3>
+            <p className="mb-8">
+              Für Unternehmen in Villingen-Schwenningen und im gesamten Schwarzwald-Baar-Kreis ist die regionale Nähe des Dienstleisters ein wichtiger Qualitätsfaktor. Kurze Wege bedeuten schnelle Reaktionszeiten bei Sonderreinigungen, eine zuverlässige Vertretung bei Personalausfall und persönliche Objektbegehungen statt anonymer Fernbetreuung. Als regional verwurzelter Anbieter aus Baden-Württemberg kennt AHAD Cleaning die Anforderungen von Büro-, Praxis-, Industrie- und Handelsobjekten in der Region und begleitet Sie von der Begehung bis zur laufenden Qualitätssicherung.
             </p>
           </div>
         </div>

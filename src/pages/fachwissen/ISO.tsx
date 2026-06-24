@@ -56,6 +56,38 @@ export default function FachwissenISO() {
           "@type": "Answer",
           "text": "Zertifizierte Unternehmen bieten mehr Sicherheit, Transparenz und Verlässlichkeit. Sie haben nachgewiesen, dass ihre Prozesse funktionieren und regelmäßig von unabhängigen Auditoren überprüft werden. Das minimiert das Risiko von Ausfällen, Qualitätsschwankungen und rechtlichen Problemen (z.B. beim Arbeitsschutz oder der Entsorgung)."
         }
+      },
+      {
+        "@type": "Question",
+        "name": "Was ist der Unterschied zwischen ISO 9001 und ISO 14001?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Die ISO 9001 regelt das Qualitätsmanagement und stellt sicher, dass Reinigungsleistungen gleichbleibend gut und nachvollziehbar erbracht werden. Die ISO 14001 regelt das Umweltmanagement und sorgt dafür, dass Ressourcenverbrauch, Chemikalieneinsatz und Abfall systematisch reduziert werden. Vereinfacht gesagt: ISO 9001 sichert das WIE der Leistung, ISO 14001 sichert deren ökologische Verantwortung. Beide Normen folgen derselben Grundstruktur (High Level Structure) und lassen sich daher in einem integrierten Managementsystem kombinieren."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Wie kann ich als Auftraggeber prüfen, ob ein ISO-Zertifikat echt und gültig ist?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Achten Sie auf drei Punkte: Erstens muss das Zertifikat von einer akkreditierten Zertifizierungsstelle ausgestellt sein (in Deutschland erkennbar am DAkkS-Akkreditierungssymbol). Zweitens muss der Geltungsbereich (Scope) ausdrücklich die Gebäudereinigung umfassen und nicht nur die Verwaltung. Drittens muss das Zertifikat zeitlich gültig sein: Ein ISO-Zertifikat hat eine Laufzeit von drei Jahren und wird in dieser Zeit jährlich durch Überwachungsaudits bestätigt. Lassen Sie sich im Zweifel das aktuelle Zertifikat mit Zertifikatsnummer vorlegen oder fragen Sie bei der Zertifizierungsstelle nach."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Sind ISO-Zertifikate bei öffentlichen Ausschreibungen Pflicht?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "ISO-Zertifikate sind in der Regel keine gesetzliche Pflicht, werden aber bei öffentlichen Ausschreibungen und im professionellen Einkauf sehr häufig als Eignungs- oder Zuschlagskriterium gefordert oder positiv bewertet. Nach Vergaberecht dürfen öffentliche Auftraggeber Qualitäts- und Umweltmanagementsysteme als Nachweis verlangen, müssen aber gleichwertige Nachweise zulassen. Praktisch gilt: Ein gültiges ISO 9001- und ISO 14001-Zertifikat erleichtert die Teilnahme an Ausschreibungen erheblich und verschafft im Bietervergleich einen Vorteil."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Wie oft wird ein zertifiziertes Reinigungsunternehmen auditiert?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Ein zertifiziertes Unternehmen durchläuft zunächst ein Zertifizierungsaudit (Stufe 1 und Stufe 2). Anschließend findet in jedem der beiden Folgejahre ein externes Überwachungsaudit durch die Zertifizierungsstelle statt. Nach drei Jahren ist ein vollständiges Re-Zertifizierungsaudit erforderlich. Zusätzlich führt das Unternehmen interne Audits und ein jährliches Management-Review durch. Für Auftraggeber bedeutet diese Audit-Kadenz, dass die Qualitäts- und Umweltprozesse dauerhaft und nicht nur einmalig überprüft werden."
+        }
       }
     ]
   };
@@ -173,6 +205,55 @@ export default function FachwissenISO() {
               </ul>
             </div>
 
+            <h2 className="text-3xl font-black text-[#0B2341] mb-6">ISO 9001 vs. ISO 14001 im direkten Vergleich</h2>
+            <p className="mb-8">
+              Beide Normen folgen seit der Revision 2015 derselben übergeordneten Grundstruktur (der sogenannten High Level Structure) und lassen sich daher in einem integrierten Managementsystem zusammenführen. Inhaltlich verfolgen sie jedoch unterschiedliche Ziele. Die folgende Übersicht zeigt, was Auftraggeber von der jeweiligen Norm konkret erwarten dürfen und welche Nachweise typischerweise damit verbunden sind.
+            </p>
+
+            <div className="overflow-x-auto mb-12 rounded-2xl border border-gray-200 shadow-sm">
+              <table className="w-full text-left border-collapse text-sm md:text-base">
+                <thead>
+                  <tr className="bg-[#0B2341] text-white">
+                    <th className="px-4 py-4 font-bold align-top">Kriterium</th>
+                    <th className="px-4 py-4 font-bold align-top">ISO 9001 (Qualität)</th>
+                    <th className="px-4 py-4 font-bold align-top">ISO 14001 (Umwelt)</th>
+                  </tr>
+                </thead>
+                <tbody className="text-[#424751]">
+                  <tr className="border-b border-gray-100 bg-white">
+                    <td className="px-4 py-4 font-bold text-[#0B2341] align-top">Fokus</td>
+                    <td className="px-4 py-4 align-top">Gleichbleibende Dienstleistungsqualität und Prozesssicherheit</td>
+                    <td className="px-4 py-4 align-top">Systematische Reduktion der Umweltauswirkungen</td>
+                  </tr>
+                  <tr className="border-b border-gray-100 bg-[#f7f9fb]">
+                    <td className="px-4 py-4 font-bold text-[#0B2341] align-top">Kernfrage</td>
+                    <td className="px-4 py-4 align-top">Wird die Leistung zuverlässig und nachvollziehbar erbracht?</td>
+                    <td className="px-4 py-4 align-top">Wird umwelt- und ressourcenschonend gearbeitet?</td>
+                  </tr>
+                  <tr className="border-b border-gray-100 bg-white">
+                    <td className="px-4 py-4 font-bold text-[#0B2341] align-top">Nutzen für Auftraggeber</td>
+                    <td className="px-4 py-4 align-top">Konstante Reinigungsergebnisse, weniger Reklamationen, klare Ansprechpartner, planbare Abläufe</td>
+                    <td className="px-4 py-4 align-top">Beitrag zu eigenen ESG-Zielen, Reduktion von Scope-3-Emissionen in der Lieferkette, geringeres Haftungsrisiko bei Chemie &amp; Entsorgung</td>
+                  </tr>
+                  <tr className="border-b border-gray-100 bg-[#f7f9fb]">
+                    <td className="px-4 py-4 font-bold text-[#0B2341] align-top">Typische Nachweise</td>
+                    <td className="px-4 py-4 align-top">Prozessbeschreibungen, Leistungsverzeichnisse, Qualitätskontrollen, Reklamationsprotokolle, Schulungsnachweise</td>
+                    <td className="px-4 py-4 align-top">Umweltprogramm, Gefahrstoff- und Sicherheitsdatenblätter, Dosierprotokolle, Entsorgungsnachweise, Verbrauchskennzahlen</td>
+                  </tr>
+                  <tr className="border-b border-gray-100 bg-white">
+                    <td className="px-4 py-4 font-bold text-[#0B2341] align-top">Zentrales Prinzip</td>
+                    <td className="px-4 py-4 align-top">Kontinuierliche Verbesserung (PDCA-Zyklus)</td>
+                    <td className="px-4 py-4 align-top">Kontinuierliche Verbesserung (PDCA-Zyklus)</td>
+                  </tr>
+                  <tr className="bg-[#f7f9fb]">
+                    <td className="px-4 py-4 font-bold text-[#0B2341] align-top">Gültigkeit &amp; Prüfung</td>
+                    <td className="px-4 py-4 align-top">3 Jahre, jährliche Überwachungsaudits</td>
+                    <td className="px-4 py-4 align-top">3 Jahre, jährliche Überwachungsaudits</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
             <h2 className="text-3xl font-black text-[#0B2341] mb-6">Verantwortung für morgen: Umweltmanagement nach ISO 14001</h2>
             <p className="mb-8">
               Gebäudereinigung ist ressourcenintensiv. Es werden Wasser, Energie und chemische Produkte verbraucht. Ein Umweltmanagementsystem nach ISO 14001 bedeutet, diese Umweltauswirkungen systematisch zu erfassen, zu bewerten und kontinuierlich zu reduzieren.
@@ -197,6 +278,61 @@ export default function FachwissenISO() {
                 </li>
               ))}
             </ul>
+
+            <h2 className="text-3xl font-black text-[#0B2341] mb-6">Warum ISO-Zertifikate bei Ausschreibung, Einkauf und Audit zählen</h2>
+            <p className="mb-8">
+              Für professionelle Einkaufsabteilungen, Facility-Manager und öffentliche Auftraggeber sind ISO-Zertifikate weit mehr als ein Aushängeschild. Sie sind ein objektives, von einer unabhängigen Stelle bestätigtes Eignungsmerkmal, das den Auswahl- und Beauftragungsprozess absichert. Gerade in der Region Villingen-Schwenningen und im gesamten Baden-Württemberg, wo viele Industrie-, Gesundheits- und Verwaltungsobjekte hohe Anforderungen stellen, entscheidet die nachgewiesene Prozessreife häufig über den Zuschlag.
+            </p>
+
+            <h3 className="text-2xl font-bold text-[#0B2341] mb-4">Konkreter Nutzen in der Vergabe</h3>
+            <ul className="space-y-4 mb-10 list-none pl-0">
+              {[
+                'Eignungsnachweis: Im Vergaberecht dürfen Auftraggeber Qualitäts- und Umweltmanagementsysteme als Nachweis der Leistungsfähigkeit verlangen. Ein gültiges Zertifikat erleichtert die Teilnahme an Ausschreibungen erheblich.',
+                'Zuschlagskriterium: In vielen Leistungsverzeichnissen fließt eine ISO-Zertifizierung als bewertetes Kriterium in die Angebotswertung ein und verbessert die Position im Bietervergleich.',
+                'Lieferantenaudit: Bei Eigenkontrollen oder Lieferantenaudits des Auftraggebers liefert ein zertifiziertes Unternehmen sofort prüffähige Dokumentation (Prozesse, Schulungen, Gefahrstoffe, Entsorgung).',
+                'Compliance & Haftung: Dokumentierte Prozesse bei Arbeitsschutz, Chemikalieneinsatz und Abfallentsorgung reduzieren das rechtliche Risiko entlang der Lieferkette.',
+                'ESG-Berichterstattung: Die ISO 14001 des Dienstleisters ist ein belastbarer Baustein für die eigene Nachhaltigkeits- und Scope-3-Berichterstattung des Auftraggebers.'
+              ].map((item, i) => (
+                <li key={i} className="flex items-start gap-3">
+                  <CheckCircle2 className="text-[#0D6B38] w-6 h-6 flex-shrink-0 mt-0.5" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+
+            <h3 className="text-2xl font-bold text-[#0B2341] mb-4">Rechenbeispiel: Was Qualitätssicherung in der Praxis bedeutet</h3>
+            <p className="mb-8">
+              Ein Praxisbeispiel verdeutlicht den Wert standardisierter Prozesse. Angenommen, ein Bürogebäude mit 4.000 m&sup2; wird fünfmal pro Woche unterhaltsgereinigt. Bei einem branchenüblichen Orientierungswert von rund 250 bis 350 m&sup2; Reinigungsleistung pro Stunde für Standard-Büroflächen ergibt sich ein täglicher Aufwand von etwa 11 bis 16 Arbeitsstunden. Ohne klar definierte Prozesse schwankt dieser Wert stark je nach eingesetzter Reinigungskraft. Ein ISO-9001-gestütztes Leistungsverzeichnis legt Frequenzen, Methoden und Kontrollpunkte fest, sodass Aufwand, Qualität und Kosten kalkulierbar bleiben. Die genannten Zahlen sind ausdrücklich Richtwerte und ersetzen keine objektbezogene Kalkulation.
+            </p>
+            <p className="mb-12">
+              Ähnlich wirkt die ISO 14001 bei den Verbrauchsmaterialien: Wird Reinigungsmittel über ein automatisches Dosiersystem statt manuell dosiert, lassen sich Überdosierungen vermeiden. In der Praxis bedeutet das je nach Ausgangslage spürbar weniger Chemieverbrauch und Abwasserbelastung. Auch hier handelt es sich um Orientierungswerte, die je nach Objekt, Verschmutzungsgrad und Ausgangssituation variieren.
+            </p>
+
+            <div className="bg-[#f7f9fb] p-8 rounded-3xl mb-12 border border-gray-100 shadow-sm">
+              <h3 className="text-2xl font-bold text-[#0B2341] mb-2 flex items-center gap-3">
+                <ShieldCheck className="text-[#0B2341] w-8 h-8" />
+                Checkliste: Worauf Auftraggeber beim Zertifikat achten sollten
+              </h3>
+              <p className="text-[#424751] mb-6 text-base">
+                Diese Punkte helfen Ihnen, ein ISO-Zertifikat in der Angebotsphase schnell und sicher zu prüfen:
+              </p>
+              <ul className="space-y-4 list-none pl-0">
+                {[
+                  'Akkreditierung prüfen: Wurde das Zertifikat von einer akkreditierten Stelle ausgestellt? In Deutschland erkennbar am DAkkS-Akkreditierungssymbol.',
+                  'Geltungsbereich (Scope) lesen: Deckt der Scope ausdrücklich die Gebäudereinigung ab und nicht nur Verwaltung oder einen anderen Geschäftsbereich?',
+                  'Gültigkeitsdatum kontrollieren: Ist das Zertifikat noch gültig (Laufzeit drei Jahre) und liegen die jährlichen Überwachungsaudits vor?',
+                  'Zertifikatsnummer abgleichen: Lässt sich das Zertifikat über die Zertifizierungsstelle oder ein öffentliches Register verifizieren?',
+                  'Beide Normen abfragen: Liegen sowohl ISO 9001 (Qualität) als auch ISO 14001 (Umwelt) vor, idealerweise als integriertes Managementsystem?',
+                  'Nachweise anfordern: Kann das Unternehmen ergänzend Schulungsnachweise, Gefahrstoff- und Sicherheitsdatenblätter sowie Entsorgungsnachweise vorlegen?',
+                  'Objektbezug herstellen: Werden die zertifizierten Prozesse auch auf Ihr konkretes Objekt angewendet (Leistungsverzeichnis, Qualitätskontrollen, Ansprechpartner)?'
+                ].map((item, i) => (
+                  <li key={i} className="flex items-start gap-3">
+                    <CheckCircle2 className="text-[#0D6B38] w-6 h-6 mt-1 flex-shrink-0" />
+                    <span className="text-[#424751]">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
 
             <h2 className="text-3xl font-black text-[#0B2341] mb-6">Fazit: Zertifizierungen schaffen Vertrauen</h2>
             <p className="mb-8">
