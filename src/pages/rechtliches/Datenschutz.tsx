@@ -46,9 +46,25 @@ export default function Datenschutz() {
           </section>
 
           <section className="mb-12">
-            <h2 className="text-2xl font-bold mb-4">4. Hosting</h2>
+            <h2 className="text-2xl font-bold mb-4">4. Hosting & Content-Delivery-Network</h2>
+            <h3 className="text-xl font-bold mb-2">Vercel (Hosting)</h3>
             <p className="text-gray-600">
-              Wir hosten die Inhalte unserer Website bei folgendem Anbieter: Google Cloud Platform.
+              Wir hosten unsere Website bei der Vercel Inc., 440 N Barranca Ave #4133, Covina, CA 91723, USA. Beim
+              Aufruf der Website verarbeitet Vercel technisch notwendige Daten in Server-Logfiles (u. a. IP-Adresse,
+              Datum/Uhrzeit der Anfrage, abgerufene Datei, Browser-/Gerätedaten), um die Seite auszuliefern und deren
+              Sicherheit und Stabilität zu gewährleisten. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO (berechtigtes
+              Interesse an einer sicheren und effizienten Bereitstellung). Mit Vercel besteht ein Vertrag zur
+              Auftragsverarbeitung (Art. 28 DSGVO); die Übermittlung in die USA erfolgt auf Basis der
+              EU-Standardvertragsklauseln. Details: https://vercel.com/legal/privacy-policy
+            </p>
+            <h3 className="text-xl font-bold mb-2 mt-4">Cloudflare (CDN, DNS &amp; Sicherheit)</h3>
+            <p className="text-gray-600">
+              Zur schnellen und sicheren Auslieferung sowie zum Schutz vor Angriffen nutzen wir das Content-Delivery-
+              und DNS-Netzwerk der Cloudflare, Inc., 101 Townsend St, San Francisco, CA 94107, USA. Cloudflare
+              verarbeitet dabei technisch notwendige Verbindungsdaten (u. a. IP-Adresse und Anfragedaten).
+              Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an Sicherheit und Performance).
+              Es besteht ein Auftragsverarbeitungsvertrag; die Übermittlung in die USA erfolgt auf Basis der
+              EU-Standardvertragsklauseln. Details: https://www.cloudflare.com/privacypolicy/
             </p>
           </section>
 
@@ -63,6 +79,13 @@ export default function Datenschutz() {
               erfolgt auf Grundlage von Art. 6 Abs. 1 lit. b DSGVO (Bearbeitung Ihrer Anfrage) bzw. Ihrer
               Einwilligung nach Art. 6 Abs. 1 lit. a DSGVO. Weitere Informationen finden Sie in der
               Datenschutzerklärung von Google: https://policies.google.com/privacy
+            </p>
+            <p className="text-gray-600 mt-4">
+              Für die E-Mail-Benachrichtigung über eingegangene Anfragen nutzen wir zusätzlich den Versanddienst
+              Resend (Resend, Inc., 2261 Market Street #5039, San Francisco, CA 94114, USA). Dabei werden die im
+              Formular angegebenen Daten zur Zustellung der Benachrichtigung an uns verarbeitet. Rechtsgrundlage ist
+              Art. 6 Abs. 1 lit. b bzw. f DSGVO; die Übermittlung in die USA erfolgt auf Basis der
+              EU-Standardvertragsklauseln. Details: https://resend.com/legal/privacy-policy
             </p>
           </section>
 

@@ -115,9 +115,11 @@
      unsauber. Überlange Komposita brechen notfalls am Zeichen
      (break-words), nie mit Bindestrich. */
   .display-xl {
-    @apply font-logo font-black tracking-[-0.025em] leading-[1.02] break-words;
-    /* Untergrenze bewusst klein, damit lange Komposita ("Gebäudereinigung")
-       auf schmalen Handys in eine Zeile passen statt am Zeichen zu brechen. */
+    @apply font-logo font-black tracking-[-0.025em] leading-[1.1] break-words;
+    /* leading bewusst nicht zu eng (1.1), sonst werden Unterlängen wie das „g"
+       in „Gebäudereinigung" bei mehrzeiligen Titeln optisch abgeschnitten.
+       Untergrenze der Größe klein, damit lange Komposita auf schmalen Handys
+       in eine Zeile passen statt am Zeichen zu brechen. */
     font-size: clamp(1.95rem, 6.5vw, 5rem);
   }
   .display-lg {
