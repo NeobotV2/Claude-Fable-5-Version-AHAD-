@@ -110,7 +110,8 @@ export default async function handler(req: any, res: any) {
       row('Objektart', data.objectType) +
       `<p style="margin:4px 0"><strong>Leistungen:</strong> ${services}</p>` +
       row('Fläche', data.areaSize) +
-      row('Intervall', data.frequency),
+      row('Intervall', data.frequency) +
+      row('Wunschtermin', data.preferredTime),
       'AHAD-Angebots-Funnel');
   } else if (type === 'job_application') {
     if (!data.name || !data.phone) {

@@ -520,7 +520,7 @@ export default function Home() {
                 afterLabel="AHAD Standard"
               />
               {/* Ehrlichkeit schlägt Inszenierung: Symbolbilder als solche kennzeichnen */}
-              <p className="mt-4 text-[13px] text-blue-100/60 font-medium">
+              <p className="mt-4 text-[13px] text-blue-100/80 font-medium">
                 Beispielhafte Darstellung — echte Vorher/Nachher-Dokumentation aus unseren Objekten zeigen wir
                 Ihnen gern im persönlichen Gespräch.
               </p>

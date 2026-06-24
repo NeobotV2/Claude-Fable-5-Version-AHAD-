@@ -35,6 +35,7 @@ interface FormData {
   email: string;
   phone: string;
   location: string;
+  preferredTime: string;
 }
 
 const OBJECT_TYPES = [
@@ -88,7 +89,7 @@ const selectableCard = (active: boolean) =>
   );
 
 const inputClasses =
-  'w-full px-4 py-3.5 rounded-xl border-2 border-line bg-white text-[15px] font-medium text-navy placeholder:text-slate/45 ' +
+  'w-full px-4 py-3.5 rounded-xl border-2 border-line bg-white text-[15px] font-medium text-navy placeholder:text-slate/60 ' +
   'focus:border-accent focus:ring-4 focus:ring-accent/10 transition-all outline-none';
 
 export default function AngebotsFunnel() {
@@ -106,6 +107,7 @@ export default function AngebotsFunnel() {
     email: '',
     phone: '',
     location: '',
+    preferredTime: '',
   });
 
   const progress = (step / 4) * 100;
@@ -242,7 +244,7 @@ export default function AngebotsFunnel() {
               key={label}
               className={cn(
                 'text-[11px] font-black uppercase tracking-[0.14em] transition-colors',
-                i + 1 <= step ? 'text-mint' : 'text-white/35'
+                i + 1 <= step ? 'text-mint' : 'text-white/60'
               )}
             >
               {i + 1}. {label}
@@ -552,6 +554,20 @@ export default function AngebotsFunnel() {
                   />
                 </div>
 
+                <div className="space-y-1.5">
+                  <label htmlFor="af-preferred" className="text-[13px] font-bold text-navy ml-0.5">
+                    Wunschtermin <span className="font-medium text-slate/70">(optional — z. B. „Mo–Fr vormittags")</span>
+                  </label>
+                  <input
+                    id="af-preferred"
+                    type="text"
+                    placeholder="Bevorzugtes Zeitfenster für die Besichtigung"
+                    value={formData.preferredTime}
+                    onChange={(e) => setFormData({ ...formData, preferredTime: e.target.value })}
+                    className={inputClasses}
+                  />
+                </div>
+
                 <div className="bg-brand/5 border border-brand/15 rounded-xl p-4 flex items-center gap-3">
                   <span className="w-9 h-9 bg-white rounded-full grid place-items-center flex-shrink-0 shadow-soft">
                     <Clock className="text-brand" size={16} />
@@ -614,7 +630,7 @@ export default function AngebotsFunnel() {
         ))}
       </div>
 
-      <p className="mt-8 text-center text-sm text-blue-100/60 font-medium">
+      <p className="mt-8 text-center text-sm text-blue-100/80 font-medium">
         Lieber persönlich?{' '}
         <a href={SITE.phoneHref} className="inline-flex items-center gap-1.5 text-white font-bold hover:text-mint transition-colors">
           <Phone size={14} />

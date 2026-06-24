@@ -114,7 +114,7 @@ export default function Footer() {
           {/* Navigationsspalten */}
           {columns.map((col) => (
             <nav key={col.title} className="lg:col-span-2" aria-label={col.title}>
-              <h4 className="text-[12px] font-black uppercase tracking-[0.2em] text-blue-100/50 mb-5">{col.title}</h4>
+              <h4 className="text-[12px] font-black uppercase tracking-[0.2em] text-blue-100/80 mb-5">{col.title}</h4>
               <ul className="space-y-3">
                 {col.links.map((link) => (
                   <li key={link.href}>
@@ -132,7 +132,7 @@ export default function Footer() {
 
           {/* Kontakt — breitere Spalte, damit Adresse & E-Mail nicht umbrechen */}
           <div className="lg:col-span-3">
-            <h4 className="text-[12px] font-black uppercase tracking-[0.2em] text-blue-100/50 mb-5">Kontakt</h4>
+            <h4 className="text-[12px] font-black uppercase tracking-[0.2em] text-blue-100/80 mb-5">Kontakt</h4>
             <ul className="space-y-4 text-[14px] mb-6">
               <li className="flex gap-3">
                 <MapPin size={17} className="text-mint flex-shrink-0 mt-0.5" />
@@ -186,7 +186,7 @@ export default function Footer() {
 
         {/* Bottom Bar — extra Bodenabstand auf Mobile, damit die fixe
             Sticky-CTA-Leiste die Rechtslinks nicht überdeckt. */}
-        <div className="pt-7 pb-28 lg:pb-7 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-[13px] text-blue-100/50">
+        <div className="pt-7 pb-28 lg:pb-7 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-[13px] text-blue-100/80">
           <p>
             © {new Date().getFullYear()} {SITE.legalName}. Alle Rechte vorbehalten.
           </p>

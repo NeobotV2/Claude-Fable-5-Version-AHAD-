@@ -55,7 +55,7 @@ export default function CTABand({
                   </span>
                   {SITE.phone}
                 </a>
-                <p className="text-center text-sm text-blue-100/60 font-medium">{SITE.hours} · Persönlich erreichbar</p>
+                <p className="text-center text-sm text-blue-100/80 font-medium">{SITE.hours} · Persönlich erreichbar</p>
               </div>
             </div>
           </div>
