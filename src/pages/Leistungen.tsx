@@ -55,7 +55,7 @@ export default function Leistungen() {
         lead="Wir verkaufen keine Reinigungsstunden, sondern stabile Prozesse, Werterhalt und Rechtssicherheit — jede Leistung läuft über dasselbe AHAD-System aus Analyse, Handling, Audit und Dokumentation."
         image={IMG.heroLowAngle}
         crumbs={[{ label: 'Leistungen' }]}
-        cta={{ label: 'Angebot in 24h anfordern', to: '/angebot' }}
+        cta={{ label: 'Kostenlose Besichtigung anfragen', to: '/angebot' }}
         secondaryCta={{ label: 'Das AHAD System', to: '/ahad-system' }}
       />
 

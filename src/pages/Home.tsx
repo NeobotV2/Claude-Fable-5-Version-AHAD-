@@ -189,7 +189,7 @@ export default function Home() {
     <div className="overflow-hidden">
       <SEO
         title="Gebäudereinigung & Industriereinigung Villingen-Schwenningen | AHAD Cleaning"
-        description="AHAD Cleaning ist Ihr Partner für professionelle Gebäudereinigung, Industriereinigung und Unterhaltsreinigung in Villingen-Schwenningen, Stuttgart und Süddeutschland. Angebot in 24h."
+        description="AHAD Cleaning ist Ihr Partner für professionelle Gebäudereinigung, Industriereinigung und Unterhaltsreinigung in Villingen-Schwenningen, Stuttgart und Süddeutschland. Kostenlose Vor-Ort-Besichtigung."
         keywords="Gebäudereinigung Villingen-Schwenningen, Industriereinigung Stuttgart, Unterhaltsreinigung, Glasreinigung Konstanz, Gebäudedienstleistungen"
         schema={[ORGANIZATION_SCHEMA, WEBSITE_SCHEMA, faqSchemaFrom(faqs)]}
       />
@@ -259,7 +259,7 @@ export default function Home() {
               className="flex flex-col sm:flex-row gap-4 mb-8 sm:mb-12"
             >
               <ButtonLink to="/angebot" size="lg" arrow>
-                Angebot in 24h anfordern
+                Kostenlose Besichtigung anfragen
               </ButtonLink>
               <ButtonLink to="/ahad-system" variant="outline-light" size="lg">
                 Wie das AHAD System arbeitet
@@ -475,7 +475,7 @@ export default function Home() {
                 </p>
               </div>
               <span className="relative z-10 inline-flex items-center gap-2 text-sm font-bold text-mint flex-shrink-0">
-                Angebot anfordern
+                Besichtigung anfragen
                 <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
               </span>
             </Link>
@@ -507,7 +507,7 @@ export default function Home() {
                     Referenzen ansehen
                   </ButtonLink>
                   <ButtonLink to="/angebot" variant="outline-light">
-                    Angebot in 24h anfordern
+                    Kostenlose Besichtigung anfragen
                   </ButtonLink>
                 </div>
               </Reveal>

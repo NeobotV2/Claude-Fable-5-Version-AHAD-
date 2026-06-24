@@ -30,7 +30,7 @@ export default function Branchen() {
         lead="Schichtbetrieb, Hygienezonen, Publikumsverkehr oder Abnahmetermine: Wir kennen die kritischen Punkte Ihrer Branche — und bauen die Reinigung darum herum, nicht umgekehrt."
         image={IMG.brancheIndustrie}
         crumbs={[{ label: 'Branchen' }]}
-        cta={{ label: 'Angebot in 24h anfordern', to: '/angebot' }}
+        cta={{ label: 'Kostenlose Besichtigung anfragen', to: '/angebot' }}
       />
 
       <section className="py-20 lg:py-32 bg-white">

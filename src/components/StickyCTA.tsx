@@ -45,7 +45,7 @@ export default function StickyCTA() {
               className="flex items-center justify-center gap-2 py-3.5 rounded-xl bg-accent text-white font-bold text-sm shadow-glow active:scale-[0.98] transition-transform"
             >
               <FileText size={17} />
-              Angebot in 24h
+              Besichtigung anfragen
             </Link>
           </div>
         </motion.div>

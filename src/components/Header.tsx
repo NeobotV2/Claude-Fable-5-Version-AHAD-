@@ -219,7 +219,7 @@ export default function Header() {
                             <div className="relative z-10">
                               <span className="eyebrow text-mint mb-3">Express</span>
                               <p className="font-logo font-extrabold text-lg leading-snug mb-4">
-                                Angebot in 24h — Besichtigung in 48h.
+                                Vor-Ort-Termin in 48h · Angebot danach.
                               </p>
                               <Link
                                 to="/angebot"
@@ -274,7 +274,7 @@ export default function Header() {
               to="/angebot"
               className="hidden sm:inline-flex items-center gap-2 bg-accent text-white pl-5 pr-4 py-2.5 font-bold text-[13px] uppercase tracking-wider hover:bg-accent-dark active:scale-95 transition-all rounded-xl shadow-glow focus:outline-none focus-visible:ring-4 focus-visible:ring-accent/40"
             >
-              Angebot in 24h
+              Besichtigung anfragen
               <ArrowRight size={15} />
             </Link>
 
@@ -400,7 +400,7 @@ export default function Header() {
                   className="flex items-center justify-center gap-2 w-full bg-accent text-white px-6 py-4 font-bold text-sm uppercase tracking-wider hover:bg-accent-dark shadow-glow transition-all rounded-xl"
                   onClick={closeMobileMenu}
                 >
-                  Angebot in 24h <ArrowRight size={16} />
+                  Besichtigung anfragen <ArrowRight size={16} />
                 </Link>
                 <a
                   href={SITE.phoneHref}

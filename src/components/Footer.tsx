@@ -106,7 +106,7 @@ export default function Footer() {
               to="/angebot"
               className="group inline-flex items-center gap-2 bg-accent hover:bg-accent-dark text-white text-sm font-bold px-5 py-3 rounded-xl transition-colors"
             >
-              Angebot in 24h anfordern
+              Kostenlose Besichtigung anfragen
               <ArrowRight size={16} className="transition-transform group-hover:translate-x-0.5" />
             </Link>
           </div>

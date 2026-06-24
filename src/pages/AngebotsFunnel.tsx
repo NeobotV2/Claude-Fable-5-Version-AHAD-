@@ -175,8 +175,8 @@ export default function AngebotsFunnel() {
   const shell = (content: React.ReactNode) => (
     <div className="relative min-h-screen bg-navy overflow-hidden grain">
       <SEO
-        title="Angebot anfordern — in 60 Sekunden | AHAD Cleaning"
-        description="In 60 Sekunden zum Reinigungsangebot: Objekt, Leistungen und Anforderungen für Ihr Leistungsverzeichnis beschreiben — Antwort garantiert innerhalb von 24 Stunden."
+        title="Kostenlose Besichtigung — in 60 Sekunden | AHAD Cleaning"
+        description="In 60 Sekunden zur kostenlosen Vor-Ort-Besichtigung: Objekt, Leistungen und Anforderungen beschreiben — wir melden uns innerhalb von 24 Stunden mit einem Terminvorschlag. Das verbindliche Angebot folgt nach der Besichtigung."
         keywords="Angebot Gebäudereinigung, Reinigungsangebot anfordern, Reinigungskonzept, Leistungsverzeichnis Gebäudereinigung, Ausschreibung Reinigung"
       />
       <div className="absolute inset-0 blueprint-grid" />
@@ -231,7 +231,7 @@ export default function AngebotsFunnel() {
           <Clock size={13} />
           60 Sekunden · Antwort in 24h
         </span>
-        <h1 className="display-md text-white">Ihr Express-Angebot</h1>
+        <h1 className="display-md text-white">Kostenlose Vor-Ort-Besichtigung</h1>
       </div>
 
       {/* Fortschritt */}

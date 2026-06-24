@@ -41,7 +41,7 @@ export default function NotFound() {
             </span>
           </ButtonLink>
           <ButtonLink to="/angebot" variant="outline-light" size="lg">
-            Angebot in 24h anfordern
+            Kostenlose Besichtigung anfragen
           </ButtonLink>
         </div>
         <div className="flex flex-wrap justify-center gap-3">

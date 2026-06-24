@@ -44,7 +44,7 @@ export default function CTABand({
 
               <div className="lg:col-span-5 flex flex-col gap-4">
                 <ButtonLink to="/angebot" size="lg" arrow className="w-full">
-                  Angebot in 24h anfordern
+                  Kostenlose Besichtigung anfragen
                 </ButtonLink>
                 <a
                   href={SITE.phoneHref}
