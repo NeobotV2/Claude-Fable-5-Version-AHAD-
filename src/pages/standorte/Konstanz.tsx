@@ -1,53 +1,119 @@
-import { MapPin, CheckCircle2, Phone, Mail, Clock } from 'lucide-react';
+import { MapPin, CheckCircle2, Phone, Mail, ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import SEO from '@/components/SEO';
 import PageHero from '@/components/PageHero';
 import CTABand from '@/components/CTABand';
+import Accordion, { faqSchemaFrom, type FAQItem } from '@/components/ui/Accordion';
 import { SITE } from '@/lib/site';
 import { IMG } from '@/lib/images';
 
+const KONSTANZ_PHONE = '+49 7721 944 14 44';
+const KONSTANZ_PHONE_HREF = 'tel:+4977219441444';
+
+const LOCAL_SERVICES = [
+  {
+    title: 'Unterhaltsreinigung in Konstanz',
+    to: '/leistungen/unterhaltsreinigung',
+    desc: 'Planbar saubere Büros, Praxen und Verwaltungen in Konstanz und am Bodensee — feste Teams, dokumentierte Qualität.',
+  },
+  {
+    title: 'Glas- & Fassadenreinigung in Konstanz',
+    to: '/leistungen/glas-fassadenreinigung',
+    desc: 'Streifenfreie Glasflächen mit Seeblick und repräsentative Fassaden — auch in der Höhe und mit Osmose-Verfahren.',
+  },
+  {
+    title: 'Industrie- & Produktionsreinigung in Konstanz',
+    to: '/leistungen/industrie-produktionsreinigung',
+    desc: 'Reinigung für Gewerbe- und Produktionsbetriebe der Bodenseeregion — im laufenden Betrieb und auditfähig.',
+  },
+  {
+    title: 'Baureinigung in Konstanz',
+    to: '/leistungen/baureinigung',
+    desc: 'Bau-, Zwischen- und Endreinigung für Neubau- und Sanierungsprojekte am Bodensee.',
+  },
+  {
+    title: 'Winterdienst & Hausmeisterservice in Konstanz',
+    to: '/leistungen/winterdienst-hausmeisterservice',
+    desc: 'Sichere Verkehrswege und gepflegte Objekte — Räum- und Streudienst, Kontrollgänge und Kleinreparaturen.',
+  },
+  {
+    title: 'Sonder- & Grundreinigung in Konstanz',
+    to: '/leistungen/sonderreinigung-stillstandsservice',
+    desc: 'Intensiv-, Grund- und Sonderreinigung für Hotellerie, Gastronomie und Unternehmen der Region.',
+  },
+];
+
+const SERVICE_AREAS = [
+  'Konstanz',
+  'Radolfzell',
+  'Singen',
+  'Stockach',
+  'Überlingen',
+  'Meersburg',
+  'Allensbach',
+  'Reichenau',
+  'Engen',
+  'Friedrichshafen',
+];
+
+const LOCAL_FAQS: FAQItem[] = [
+  {
+    question: 'Welche Reinigungsleistungen bietet AHAD in Konstanz?',
+    answer:
+      'In Konstanz und der Bodenseeregion bieten wir das komplette Spektrum: Unterhaltsreinigung, Glas- und Fassadenreinigung, Industrie- und Produktionsreinigung, Baureinigung, Sonder- und Grundreinigung sowie Winterdienst und Hausmeisterservice — aus einer Hand, mit fester Objektleitung.',
+  },
+  {
+    question: 'Reinigen Sie auch Hotellerie und Gastronomie am Bodensee?',
+    answer:
+      'Ja. Wir kennen die hohen Repräsentations- und Hygieneanforderungen im Tourismus-Sektor und arbeiten mit eingespielten Teams, die sich diskret in den laufenden Gästebetrieb einfügen.',
+  },
+  {
+    question: 'In welchem Gebiet rund um Konstanz sind Sie im Einsatz?',
+    answer:
+      'Wir betreuen Kunden von Radolfzell über Singen und Stockach bis Überlingen und Meersburg — inklusive Reichenau, Allensbach und Engen sowie der weiteren Bodenseeregion.',
+  },
+  {
+    question: 'Arbeiten Sie mit umweltschonenden Reinigungsverfahren?',
+    answer:
+      'Ja. Gerade in der sensiblen Bodenseeregion setzen wir auf umweltschonende Mittel und ressourcenschonende Verfahren — dokumentiert und nach ISO 14001 ausgerichtet.',
+  },
+];
+
 export default function StandortKonstanz() {
   const localBusinessSchema = {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "name": "AHAD Cleaning Company GmbH - Konstanz",
-    "image": `${SITE.url}/images/ahad/konstanz.webp`,
-    "@id": "https://ahad-cleaning.de/standorte/konstanz",
-    "url": "https://ahad-cleaning.de/standorte/konstanz",
-    "telephone": "+4977219441444",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "Brückengasse 1b",
-      "addressLocality": "Konstanz",
-      "postalCode": "78462",
-      "addressCountry": "DE"
+    '@context': 'https://schema.org',
+    '@type': 'LocalBusiness',
+    name: 'AHAD Cleaning Company GmbH - Konstanz',
+    image: `${SITE.url}/images/ahad/konstanz.webp`,
+    '@id': 'https://ahad-cleaning.de/standorte/konstanz',
+    url: 'https://ahad-cleaning.de/standorte/konstanz',
+    telephone: KONSTANZ_PHONE,
+    email: SITE.email,
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: 'Brückengasse 1b',
+      addressLocality: 'Konstanz',
+      postalCode: '78462',
+      addressCountry: 'DE',
     },
-    "priceRange": "€€",
-    "geo": {
-      "@type": "GeoCoordinates",
-      "latitude": 47.6603,
-      "longitude": 9.1758
+    areaServed: SERVICE_AREAS.map((name) => ({ '@type': 'City', name })),
+    priceRange: '€€',
+    geo: { '@type': 'GeoCoordinates', latitude: 47.6603, longitude: 9.1758 },
+    openingHoursSpecification: {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+      opens: '08:00',
+      closes: '17:00',
     },
-    "openingHoursSpecification": {
-      "@type": "OpeningHoursSpecification",
-      "dayOfWeek": [
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday"
-      ],
-      "opens": "08:00",
-      "closes": "17:00"
-    }
   };
 
   return (
     <div>
-      <SEO 
-        title="Gebäudereinigung Konstanz" 
-        description="Professionelle Gebäudereinigung in Konstanz und am Bodensee. Wir sind Ihr Partner für Unterhaltsreinigung, Glasreinigung und mehr."
-        keywords="Gebäudereinigung Konstanz, Reinigungsservice Bodensee, Büroreinigung Konstanz"
-        schema={localBusinessSchema}
+      <SEO
+        title="Gebäudereinigung Konstanz | AHAD Cleaning"
+        description="Gebäudereinigung in Konstanz und am Bodensee: Unterhalts-, Glas-, Industrie-, Bau- und Sonderreinigung sowie Winterdienst. Feste Objektleitung, umweltschonende Verfahren, Besichtigung in 48h."
+        keywords="Gebäudereinigung Konstanz, Reinigungsfirma Konstanz, Büroreinigung Konstanz, Gebäudereinigung Bodensee, Unterhaltsreinigung Konstanz"
+        schema={[localBusinessSchema, faqSchemaFrom(LOCAL_FAQS)]}
       />
       <PageHero
         eyebrow="Bodenseeregion"
@@ -57,19 +123,17 @@ export default function StandortKonstanz() {
         imageAlt="Konstanz am Bodensee — Luftaufnahme der Stadt"
         crumbs={[{ label: 'Standorte', href: '/standorte' }, { label: 'Konstanz' }]}
         cta={{ label: 'Kostenlose Besichtigung anfragen', to: '/angebot' }}
-        secondaryCta={{ label: SITE.phone, href: SITE.phoneHref }}
+        secondaryCta={{ label: KONSTANZ_PHONE, href: KONSTANZ_PHONE_HREF }}
       />
 
-      {/* Content Section */}
       <section className="py-20 lg:py-32 bg-white">
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-20">
             <div>
               <h2 className="text-3xl font-bold mb-8 text-gray-900">Sauberkeit am See</h2>
               <p className="text-lg text-gray-600 mb-8 leading-relaxed">
-                Die Bodenseeregion ist geprägt von Tourismus, Bildung und 
-                innovativem Gewerbe. Wir bieten die passende Reinigungslogik 
-                für jede dieser Anforderungen.
+                Die Bodenseeregion ist geprägt von Tourismus, Bildung und innovativem Gewerbe. Wir bieten die passende
+                Reinigungslogik für jede dieser Anforderungen.
               </p>
               <ul className="space-y-4">
                 {[
@@ -78,7 +142,7 @@ export default function StandortKonstanz() {
                   'Glas- & Fassadenreinigung mit Seeblick',
                   'Unterhaltsreinigung für öffentliche Einrichtungen',
                   'Regionale Präsenz & Zuverlässigkeit',
-                  'Umweltschonende Reinigungsmittel'
+                  'Umweltschonende Reinigungsmittel',
                 ].map((item) => (
                   <li key={item} className="flex items-center gap-3 text-gray-700 font-medium">
                     <CheckCircle2 className="text-accent w-5 h-5 flex-shrink-0" />
@@ -105,7 +169,9 @@ export default function StandortKonstanz() {
                   </div>
                   <div>
                     <h4 className="font-bold text-gray-900 mb-1">Telefon</h4>
-                    <p className="text-gray-600">+49 (0) 7721 944 14 44</p>
+                    <a href={KONSTANZ_PHONE_HREF} className="text-gray-600 hover:text-accent transition-colors">
+                      {KONSTANZ_PHONE}
+                    </a>
                   </div>
                 </div>
                 <div className="flex gap-6">
@@ -114,23 +180,68 @@ export default function StandortKonstanz() {
                   </div>
                   <div>
                     <h4 className="font-bold text-gray-900 mb-1">E-Mail</h4>
-                    <p className="text-gray-600">info@ahad-cleaning.de</p>
+                    <a href={SITE.emailHref} className="text-gray-600 hover:text-accent transition-colors">
+                      {SITE.email}
+                    </a>
                   </div>
                 </div>
               </div>
             </div>
           </div>
 
+          {/* Leistungen vor Ort */}
+          <div className="mb-20">
+            <h2 className="text-3xl font-bold mb-3 text-gray-900">Unsere Leistungen in Konstanz &amp; am Bodensee</h2>
+            <p className="text-lg text-gray-600 mb-10 max-w-3xl leading-relaxed">
+              Das komplette Gebäudereinigungs-Spektrum für Unternehmen in Konstanz und der Bodenseeregion — aus einer
+              Hand, mit fester Objektleitung und dokumentierter Qualität.
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+              {LOCAL_SERVICES.map((s) => (
+                <Link
+                  key={s.to}
+                  to={s.to}
+                  className="group block bg-gray-50 hover:bg-white border border-gray-100 hover:border-accent/30 rounded-2xl p-6 transition-all hover:shadow-soft"
+                >
+                  <h3 className="font-bold text-lg text-[#0B2341] mb-2 flex items-start justify-between gap-2">
+                    <span>{s.title}</span>
+                    <ArrowRight className="w-4 h-4 mt-1 text-accent flex-shrink-0 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
+                  </h3>
+                  <p className="text-sm text-gray-600 leading-relaxed">{s.desc}</p>
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          {/* Einsatzgebiete */}
+          <div className="mb-20">
+            <h2 className="text-3xl font-bold mb-3 text-gray-900">Einsatzgebiete rund um Konstanz</h2>
+            <p className="text-lg text-gray-600 mb-8 max-w-3xl leading-relaxed">
+              In der gesamten Bodenseeregion sind wir schnell für Sie im Einsatz:
+            </p>
+            <div className="flex flex-wrap gap-2.5">
+              {SERVICE_AREAS.map((area) => (
+                <span
+                  key={area}
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gray-50 border border-gray-100 text-gray-700 text-sm font-medium"
+                >
+                  <MapPin className="w-3.5 h-3.5 text-accent" />
+                  {area}
+                </span>
+              ))}
+            </div>
+          </div>
+
           {/* Warum AHAD in Konstanz */}
-          <div className="bg-[#0B2341] rounded-[2rem] p-12 lg:p-16 text-white relative overflow-hidden">
+          <div className="bg-[#0B2341] rounded-[2rem] p-12 lg:p-16 text-white relative overflow-hidden mb-20">
             <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -mr-32 -mt-32"></div>
             <div className="relative z-10">
               <div className="max-w-3xl">
                 <h2 className="text-3xl font-bold mb-6">Warum AHAD Cleaning in Konstanz?</h2>
                 <p className="text-xl text-blue-100 mb-8 leading-relaxed">
-                  Konstanz und die Bodenseeregion erfordern einen sensiblen Umgang mit der Umwelt und höchste Standards im 
-                  Tourismus-Sektor. Wir betreuen Kunden von Radolfzell bis Überlingen mit spezialisierten Teams, die 
-                  die logistischen Besonderheiten der Region (z.B. Altstadt-Logistik) genau kennen.
+                  Konstanz und die Bodenseeregion erfordern einen sensiblen Umgang mit der Umwelt und höchste Standards im
+                  Tourismus-Sektor. Wir betreuen Kunden von Radolfzell bis Überlingen mit spezialisierten Teams, die die
+                  logistischen Besonderheiten der Region (z. B. Altstadt-Logistik) genau kennen.
                 </p>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="flex items-start gap-3">
@@ -144,6 +255,12 @@ export default function StandortKonstanz() {
                 </div>
               </div>
             </div>
+          </div>
+
+          {/* Lokale FAQ */}
+          <div className="max-w-3xl">
+            <h2 className="text-3xl font-bold mb-8 text-gray-900">Häufige Fragen — Gebäudereinigung Konstanz</h2>
+            <Accordion items={LOCAL_FAQS} />
           </div>
         </div>
       </section>
