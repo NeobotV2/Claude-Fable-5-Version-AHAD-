@@ -56,6 +56,30 @@ export default function FachwissenIndustrieProzess() {
           "@type": "Answer",
           "text": "Regelmäßige Reinigung verhindert den Aufbau von Schmutz, Spänen oder Ölen, die zu Maschinenverschleiß, Überhitzung oder Sensorfehlern führen können. Sie reduziert ungeplante Ausfallzeiten, verlängert die Lebensdauer der Anlagen und sichert eine konstant hohe Produktqualität."
         }
+      },
+      {
+        "@type": "Question",
+        "name": "Was muss eine professionelle Industriereinigung dokumentieren?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Eine professionelle Industriereinigung dokumentiert mindestens: die durchgeführte Gefährdungsbeurteilung, die LOTO-Freigabe und Wiederinbetriebnahme durch die Produktionsleitung, die verwendeten Reinigungs- und Gefahrstoffe inklusive Sicherheitsdatenblättern, das eingesetzte Verfahren und Equipment, Zeitfenster und Personal, einen Vorher-/Nachher-Nachweis (z. B. Fotos oder Messwerte) sowie die fachgerechte Entsorgung der Reinigungsrückstände. In hygienesensiblen Bereichen kommen Reinigungs- und Desinfektionspläne sowie ggf. Hygienekontrollen (z. B. ATP-Messung) hinzu."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Welche gesetzlichen Vorgaben gelten bei der Industriereinigung in Deutschland?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Relevant sind unter anderem das Arbeitsschutzgesetz (ArbSchG), die DGUV-Vorschrift 1 (Grundsätze der Prävention, ehemals BGV A1), die Betriebssicherheitsverordnung (BetrSichV), die Gefahrstoffverordnung (GefStoffV) mit der zugehörigen TRGS sowie die DGUV-Regeln zu persönlicher Schutzausrüstung. In der Lebensmittelproduktion gelten zusätzlich die EU-Verordnung 852/2004 und HACCP-Grundsätze. Ein seriöser Dienstleister dokumentiert die Einhaltung dieser Vorgaben nachvollziehbar."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Was kostet eine Industriereinigung im laufenden Betrieb in der Region Villingen-Schwenningen?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Belastbare Kosten lassen sich nur nach einer Objektbegehung nennen, da Fläche, Verschmutzungsgrad, Verfahren (z. B. Trockeneisstrahlen), Schichtmodell und Sicherheitsanforderungen den Aufwand bestimmen. Als grobe Orientierungswerte für die Region Villingen-Schwenningen/Baden-Württemberg liegen einfache Hallen- und Unterhaltsreinigungen häufig im Bereich von etwa 0,80 bis 2,50 Euro pro Quadratmeter, Spezial- und Maschinenreinigungen werden meist im Stundensatz von rund 35 bis 70 Euro pro Fachkraft abgerechnet. Diese Spannen sind unverbindliche Richtwerte und ersetzen kein individuelles Angebot."
+        }
       }
     ]
   };
@@ -158,11 +182,122 @@ export default function FachwissenIndustrieProzess() {
               </ul>
             </div>
 
+            <h2 className="text-3xl font-black text-[#0B2341] mb-6">Herausforderung &amp; Lösung im laufenden Betrieb</h2>
+            <p className="mb-6">
+              Die größten Reibungspunkte zwischen Reinigung und Produktion lassen sich vorab planen und
+              vertraglich regeln. Die folgende Übersicht zeigt die typischen Herausforderungen einer
+              Produktionsreinigung im laufenden Betrieb und die jeweils bewährte Lösung, wie wir sie bei
+              Industriekunden in der Region Villingen-Schwenningen und im übrigen Baden-Württemberg umsetzen.
+            </p>
+
+            <div className="overflow-x-auto mb-12 rounded-2xl border border-gray-200 not-prose">
+              <table className="w-full text-left border-collapse text-sm">
+                <thead>
+                  <tr className="bg-[#0B2341] text-white">
+                    <th className="px-4 py-3 font-bold">Herausforderung</th>
+                    <th className="px-4 py-3 font-bold">Risiko ohne Konzept</th>
+                    <th className="px-4 py-3 font-bold">Lösung im laufenden Betrieb</th>
+                  </tr>
+                </thead>
+                <tbody className="text-[#424751]">
+                  <tr className="border-t border-gray-200">
+                    <td className="px-4 py-3 font-semibold text-[#0B2341]">Schichtbetrieb &amp; Verfügbarkeit</td>
+                    <td className="px-4 py-3">Produktionsstillstand, Kollision mit Schichtwechseln</td>
+                    <td className="px-4 py-3">Reinigungsfenster in Pausen, Rüst- und Wartungszeiten; Nacht- bzw. Wochenendeinsätze; abschnittsweises Vorgehen pro Linie</td>
+                  </tr>
+                  <tr className="border-t border-gray-200 bg-[#f7f9fb]">
+                    <td className="px-4 py-3 font-semibold text-[#0B2341]">UVV &amp; Arbeitssicherheit</td>
+                    <td className="px-4 py-3">Unfälle, Bußgelder, Haftungsrisiken</td>
+                    <td className="px-4 py-3">Gefährdungsbeurteilung vor Arbeitsbeginn, PSA gemäß DGUV, Sicherheitsunterweisung, geschultes Fachpersonal</td>
+                  </tr>
+                  <tr className="border-t border-gray-200">
+                    <td className="px-4 py-3 font-semibold text-[#0B2341]">Maschinenfreigabe</td>
+                    <td className="px-4 py-3">Versehentliches Anlaufen, Beschädigung von Anlagen</td>
+                    <td className="px-4 py-3">Lockout/Tagout (LOTO), Permit-to-Work, dokumentierte Freigabe und Wiederinbetriebnahme durch die Produktionsleitung</td>
+                  </tr>
+                  <tr className="border-t border-gray-200 bg-[#f7f9fb]">
+                    <td className="px-4 py-3 font-semibold text-[#0B2341]">Rückstände &amp; Hygiene</td>
+                    <td className="px-4 py-3">Produktkontamination, Sensorfehler, Qualitätsmängel</td>
+                    <td className="px-4 py-3">Trockeneisstrahlen &amp; trockene Verfahren, definierte Reinigungs-/Desinfektionspläne, Hygienenachweise (z. B. ATP-Messung)</td>
+                  </tr>
+                  <tr className="border-t border-gray-200">
+                    <td className="px-4 py-3 font-semibold text-[#0B2341]">Dokumentation</td>
+                    <td className="px-4 py-3">Fehlende Nachweise bei Audits, kein Qualitätsbeleg</td>
+                    <td className="px-4 py-3">Lückenlose Reinigungsprotokolle, Vorher-/Nachher-Nachweis, Gefahrstoff- und Entsorgungsnachweise</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
             <h2 className="text-3xl font-black text-[#0B2341] mb-6">Sicherheit an erster Stelle</h2>
             <p className="mb-6">
-              Industriereinigung ist immer auch Gefahrenabwehr. Wir schulen unsere Mitarbeiter 
-              intensiv in Arbeitssicherheit, dem Umgang mit Gefahrstoffen und 
+              Industriereinigung ist immer auch Gefahrenabwehr. Wir schulen unsere Mitarbeiter
+              intensiv in Arbeitssicherheit, dem Umgang mit Gefahrstoffen und
               den spezifischen Sicherheitsregeln unserer Kunden. Dazu gehört das strikte Befolgen von Lockout/Tagout (LOTO) Richtlinien, um sicherzustellen, dass Maschinen während der Reinigung nicht versehentlich anlaufen können.
+            </p>
+
+            <h3 className="text-2xl font-black text-[#0B2341] mb-4">Sicherheits- &amp; Dokumentationsanforderungen</h3>
+            <p className="mb-6">
+              In Deutschland ist Industriereinigung kein rein operativer Vorgang, sondern an einen klaren
+              rechtlichen Rahmen gebunden. Maßgeblich sind unter anderem das Arbeitsschutzgesetz (ArbSchG),
+              die DGUV-Vorschrift 1 (Grundsätze der Prävention), die Betriebssicherheitsverordnung (BetrSichV)
+              sowie die Gefahrstoffverordnung (GefStoffV) mit den zugehörigen Technischen Regeln für
+              Gefahrstoffe (TRGS). In der Lebensmittel- und Pharmaproduktion kommen die EU-Verordnung
+              852/2004 und die HACCP-Grundsätze hinzu. Eine professionelle Dokumentation ist daher nicht
+              optional, sondern Bestandteil der Auftragsqualität und Voraussetzung für bestandene Audits
+              (z. B. nach IFS, BRC oder ISO 9001).
+            </p>
+
+            <h3 className="text-2xl font-black text-[#0B2341] mb-4">Checkliste: Was eine professionelle Industriereinigung dokumentieren muss</h3>
+            <p className="mb-6">
+              Nutzen Sie die folgende Checkliste, um die Dokumentationsqualität eines Dienstleisters zu
+              prüfen. Fehlt einer dieser Punkte, drohen bei Betriebsprüfungen oder Kundenaudits
+              Nachweislücken.
+            </p>
+            <ul className="space-y-3 list-none pl-0 mb-12">
+              {[
+                'Gefährdungsbeurteilung und Sicherheitsunterweisung vor Arbeitsbeginn',
+                'LOTO-Freigabe sowie dokumentierte Wiederinbetriebnahme durch die Produktionsleitung',
+                'Verwendete Reinigungs- und Gefahrstoffe inkl. aktueller Sicherheitsdatenblätter',
+                'Eingesetztes Verfahren und Equipment (z. B. Trockeneisstrahlen, Hochdruck, manuell)',
+                'Zeitfenster, Dauer und eingesetztes Reinigungspersonal',
+                'Vorher-/Nachher-Nachweis (Fotos, Messwerte oder Hygiene-/ATP-Ergebnisse)',
+                'Reinigungs- und Desinfektionsplan in hygienesensiblen Bereichen',
+                'Nachweis der fach- und umweltgerechten Entsorgung der Reinigungsrückstände',
+                'Abweichungs- bzw. Mängelmeldungen und ergriffene Korrekturmaßnahmen',
+                'Unterschrift bzw. Abnahme durch eine verantwortliche Person beim Kunden'
+              ].map((item, i) => (
+                <li key={i} className="flex items-start gap-3">
+                  <CheckCircle2 className="text-[#0D6B38] w-6 h-6 mt-0.5 flex-shrink-0" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+
+            <h2 className="text-3xl font-black text-[#0B2341] mb-6">Praxisbeispiel: Reinigungsfenster im Schichtbetrieb</h2>
+            <p className="mb-6">
+              Ein vereinfachtes Rechenbeispiel verdeutlicht den wirtschaftlichen Nutzen der
+              Prozessintegration. Angenommen, eine Produktionslinie erwirtschaftet einen
+              Deckungsbeitrag von rund 1.500 Euro pro Betriebsstunde. Wird die Linie für eine
+              klassische Reinigung zwei Stunden angehalten, entstehen allein dadurch
+              Opportunitätskosten von etwa 3.000 Euro &ndash; zusätzlich zu den eigentlichen
+              Reinigungskosten.
+            </p>
+            <p className="mb-6">
+              Verlagert man die Reinigung stattdessen in ein ohnehin geplantes 45-minütiges
+              Rüst- oder Wartungsfenster und ergänzt sie durch staubarmes Trockeneisstrahlen an
+              den benachbarten, weiterlaufenden Linien, sinkt der produktionsbedingte
+              Stillstand gegen null. Selbst wenn das Spezialverfahren pro Einsatz höher
+              bepreist ist, amortisiert sich der Mehraufwand bereits durch die vermiedenen
+              Stillstandkosten. Die genannten Zahlen sind reine Orientierungswerte zur
+              Veranschaulichung und keine garantierten Ergebnisse.
+            </p>
+            <p className="mb-8">
+              Für produzierende Betriebe im Schwarzwald-Baar-Kreis und entlang der Achse
+              Villingen-Schwenningen&ndash;Tuttlingen&ndash;Rottweil ist dieser Ansatz besonders
+              relevant: Viele Zulieferer der Medizintechnik, Metallverarbeitung und
+              Präzisionsfertigung arbeiten im Mehrschichtbetrieb mit hohen Hygiene- und
+              Qualitätsanforderungen, bei denen ungeplante Stillstände kaum tolerierbar sind.
             </p>
 
             <h2 className="text-3xl font-black text-[#0B2341] mb-6">Technik & Know-how für den laufenden Betrieb</h2>
