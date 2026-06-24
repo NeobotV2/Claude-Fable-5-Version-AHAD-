@@ -514,15 +514,13 @@ export default function Home() {
             </div>
             <Reveal delay={0.15} className="lg:col-span-7">
               <BeforeAfter
-                beforeSrc={IMG.beforeDirty}
-                afterSrc={IMG.afterClean}
+                beforeSrc={IMG.vorher}
+                afterSrc={IMG.nachher}
                 beforeLabel="Bei Übernahme"
                 afterLabel="AHAD Standard"
               />
-              {/* Ehrlichkeit schlägt Inszenierung: Symbolbilder als solche kennzeichnen */}
               <p className="mt-4 text-[13px] text-blue-100/80 font-medium">
-                Beispielhafte Darstellung — echte Vorher/Nachher-Dokumentation aus unseren Objekten zeigen wir
-                Ihnen gern im persönlichen Gespräch.
+                Echtes Vorher/Nachher aus einem AHAD-Objekt.
               </p>
             </Reveal>
           </div>
