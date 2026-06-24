@@ -36,6 +36,8 @@ const FachwissenIntervalle = lazy(() => import('./pages/fachwissen/Intervalle'))
 const FachwissenISO = lazy(() => import('./pages/fachwissen/ISO'));
 const FachwissenIndustrieProzess = lazy(() => import('./pages/fachwissen/IndustrieProzess'));
 const FachwissenAnbieterwechsel = lazy(() => import('./pages/fachwissen/Anbieterwechsel'));
+const FachwissenLeistungsverzeichnis = lazy(() => import('./pages/fachwissen/Leistungsverzeichnis'));
+const FachwissenVDI2052 = lazy(() => import('./pages/fachwissen/VDI2052'));
 const Referenzen = lazy(() => import('./pages/Referenzen'));
 const Admin = lazy(() => import('./pages/Admin'));
 const NotFound = lazy(() => import('./pages/NotFound'));
@@ -100,6 +102,8 @@ export default function AppRoutes() {
           <Route path="fachwissen/iso-9001-iso-14001-gebaeudereinigung-unternehmen" element={<FachwissenISO />} />
           <Route path="fachwissen/industrie-produktionsreinigung-ohne-prozessstoerung" element={<FachwissenIndustrieProzess />} />
           <Route path="fachwissen/reinigungsfirma-wechseln-checkliste-tipps" element={<FachwissenAnbieterwechsel />} />
+          <Route path="fachwissen/leistungsverzeichnis-gebaeudereinigung-erstellen" element={<FachwissenLeistungsverzeichnis />} />
+          <Route path="fachwissen/kuechenabluftreinigung-vdi-2052-pflicht-ablauf-nachweis" element={<FachwissenVDI2052 />} />
 
           <Route path="kontakt" element={<Kontakt />} />
           <Route path="impressum" element={<Impressum />} />

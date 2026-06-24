@@ -46,6 +46,8 @@ const ROUTES = [
   '/fachwissen/iso-9001-iso-14001-gebaeudereinigung-unternehmen',
   '/fachwissen/industrie-produktionsreinigung-ohne-prozessstoerung',
   '/fachwissen/reinigungsfirma-wechseln-checkliste-tipps',
+  '/fachwissen/leistungsverzeichnis-gebaeudereinigung-erstellen',
+  '/fachwissen/kuechenabluftreinigung-vdi-2052-pflicht-ablauf-nachweis',
   '/kontakt',
   '/impressum',
   '/datenschutz',

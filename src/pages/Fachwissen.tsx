@@ -44,6 +44,24 @@ const articles = [
     readingTime: '10 Min.',
     image: IMG.handshake,
   },
+  {
+    title: 'Leistungsverzeichnis erstellen: So machen Sie Reinigungsangebote vergleichbar',
+    excerpt:
+      'Aufbau, Bestandteile und der Unterschied zwischen verrichtungs- und ergebnisorientiert — plus Schritt-für-Schritt-Anleitung für ein belastbares LV.',
+    path: '/fachwissen/leistungsverzeichnis-gebaeudereinigung-erstellen',
+    category: 'Entscheiderwissen',
+    readingTime: '9 Min.',
+    image: IMG.teamMeeting,
+  },
+  {
+    title: 'Küchenabluftreinigung nach VDI 2052: Pflicht, Intervalle & Nachweis',
+    excerpt:
+      'Reinigungsintervalle nach Betriebsstunden, Brandschutz, Versicherungsschutz und Dokumentationspflicht — der Leitfaden für Betreiber gewerblicher Küchen.',
+    path: '/fachwissen/kuechenabluftreinigung-vdi-2052-pflicht-ablauf-nachweis',
+    category: 'Hygiene & Brandschutz',
+    readingTime: '8 Min.',
+    image: IMG.kuechenabluft,
+  },
 ];
 
 export default function Fachwissen() {
