@@ -43,6 +43,7 @@ export const IMG = {
   unterhaltDetail: local('unterhalt-detail.webp'),      // Flächenwischen, Brustlogo
   industrie: local('industrie.webp'),                   // Aufsitz-Scheuersaugmaschine
   industrieDetail: local('industrie-detail.webp'),      // Hände am Maschinensteuer
+  kuechenabluft: local('kuechenabluft.webp'),           // Lamellen-/Filterreinigung (echt)
   glasfassade: local('glas.webp'),                      // Glasfassade Atrium
   glasDetail: local('glas-detail.webp'),                // Glasreinigung innen
   baureinigung: local('bau.webp'),                      // Glasreinigung Neubau/Atrium
@@ -55,11 +56,11 @@ export const IMG = {
   hausmeister: u('photo-1581092160562-40aa08e78837', 1200),  // Stock: Techniker
 
   // ── Branchen ───────────────────────────────────────────────────────
-  brancheIndustrie: u('photo-1565043666747-69f6646db940', 1600), // Stock: Produktion
+  brancheIndustrie: local('branche-industrie.webp'),             // Aufsitz-Scheuersaugmaschine (echt)
   brancheMedizin: u('photo-1582719508461-905c673771fd', 1600),   // Stock: Reinraum
-  brancheBuero: u('photo-1497366811353-6870744d04b2', 1600),     // Stock: Büro modern
+  brancheBuero: local('branche-buero.webp'),                     // Reinigung modernes Foyer (echt)
   brancheGewerbe: local('gewerbe.webp'),                         // Markt/Großfläche (echt)
-  brancheHotel: u('photo-1566073771259-6a8506099945', 1600),     // Stock: Hotel
+  brancheHotel: local('branche-hotel.webp'),                     // Reinigung Lounge-/Gastrobereich am Pool (echt)
 
   // ── Unternehmen / Team / Karriere (echte AHAD-Fotos) ──────────────
   team: local('team.webp'),                              // Geschäftsführung

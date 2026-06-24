@@ -516,7 +516,7 @@ export const SERVICES: ServiceData[] = [
     keywords:
       'Küchenabluftreinigung VDI 2052, Abluftreinigung Gastronomie, Dunstabzug reinigen, Lüftungsreinigung Großküche, Fettfilter Reinigung',
     icon: <Wind className="w-6 h-6" />,
-    image: IMG.industrieDetail,
+    image: IMG.kuechenabluft,
     detailImage: IMG.sonderDetail,
     highlights: [
       {
