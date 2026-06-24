@@ -80,6 +80,10 @@ export const TRUST_BADGES = [
 export interface ClientReference {
   name: string;
   domain: string;
+  /** Lokaler Pfad zum freigegebenen Logo, z. B. '/images/clients/goldbeck.svg'.
+   *  Wenn gesetzt, zeigt das Referenz-Band das Logo statt der Wortmarke. */
+  logo?: string;
+  /** @deprecated Externe Hotlinks vermeiden — Logos lokal unter logo ablegen. */
   logoUrl?: string;
 }
 
