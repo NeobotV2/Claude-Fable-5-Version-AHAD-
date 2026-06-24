@@ -1,4 +1,4 @@
-import { MapPin, CheckCircle2, Phone, Mail, ArrowRight } from 'lucide-react';
+import { MapPin, CheckCircle2, Phone, Mail, ArrowRight, Star } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import SEO from '@/components/SEO';
 import PageHero from '@/components/PageHero';
@@ -57,6 +57,35 @@ const SERVICE_AREAS = [
   'Friedrichshafen',
 ];
 
+/** Echte Google-Bewertungen des Standort-Profils Konstanz (5,0 ★ / 4).
+ *  Getrennt von der Zentrale VS — kein Vermischen der beiden Profile. */
+const KONSTANZ_REVIEWS = [
+  {
+    author: 'Britta Zorn',
+    rating: 5,
+    text: 'Unsere Kanzlei sieht nach jedem Einsatz aus wie frisch eröffnet. Danke für die konstante Qualität!',
+  },
+  {
+    author: 'Ingrid Guimaraes',
+    rating: 5,
+    text: 'Das Personal war sehr respektvoll, diskret und fleißig. Ich fühle mich gut aufgehoben.',
+  },
+  {
+    author: 'Sophia Fischer',
+    rating: 5,
+    text: 'Super freundliches Team und blitzsaubere Arbeit! Die Wohnung war danach wie neu. Jederzeit wieder.',
+  },
+  {
+    author: 'Денис Грушка',
+    rating: 5,
+    text: 'Ich hatte kurzfristig eine Grundreinigung benötigt – wurde sofort geholfen. Top!',
+  },
+];
+
+const KONSTANZ_RATING = { value: 5.0, count: KONSTANZ_REVIEWS.length };
+const KONSTANZ_REVIEWS_URL =
+  'https://www.google.com/maps/search/AHAD+Cleaning+Company+GmbH+Konstanz';
+
 const LOCAL_FAQS: FAQItem[] = [
   {
     question: 'Welche Reinigungsleistungen bietet AHAD in Konstanz?',
@@ -106,6 +135,19 @@ export default function StandortKonstanz() {
       opens: '08:00',
       closes: '17:00',
     },
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: KONSTANZ_RATING.value,
+      reviewCount: KONSTANZ_RATING.count,
+      bestRating: 5,
+      worstRating: 1,
+    },
+    review: KONSTANZ_REVIEWS.map((r) => ({
+      '@type': 'Review',
+      author: { '@type': 'Person', name: r.author },
+      reviewRating: { '@type': 'Rating', ratingValue: r.rating, bestRating: 5, worstRating: 1 },
+      reviewBody: r.text,
+    })),
   };
 
   return (
@@ -255,6 +297,51 @@ export default function StandortKonstanz() {
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+
+          {/* Google-Bewertungen Standort Konstanz */}
+          <div className="mb-20">
+            <h2 className="text-3xl font-bold mb-3 text-gray-900">Das sagen Kundinnen und Kunden in Konstanz</h2>
+            <p className="text-lg text-gray-600 mb-10 max-w-3xl leading-relaxed">
+              {KONSTANZ_RATING.value.toFixed(1).replace('.', ',')} von 5 Sternen aus{' '}
+              {KONSTANZ_RATING.count} Google-Bewertungen unseres Standort-Profils Konstanz — eine Auswahl im Wortlaut.
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {KONSTANZ_REVIEWS.map((r) => (
+                <figure
+                  key={r.author}
+                  className="bg-gray-50 rounded-2xl border border-gray-100 p-7 flex flex-col"
+                >
+                  <div className="flex gap-0.5 mb-4" aria-label={`${r.rating} von 5 Sternen`}>
+                    {[1, 2, 3, 4, 5].map((i) => (
+                      <Star
+                        key={i}
+                        size={16}
+                        className={i <= r.rating ? 'fill-amber-400 text-amber-400' : 'text-gray-300'}
+                      />
+                    ))}
+                  </div>
+                  <blockquote className="text-[#0B2341] font-medium leading-relaxed flex-grow">
+                    „{r.text}“
+                  </blockquote>
+                  <figcaption className="mt-6 pt-5 border-t border-gray-200">
+                    <div className="font-bold text-[#0B2341] text-sm">{r.author}</div>
+                    <div className="text-[13px] text-gray-500 mt-0.5">Google-Bewertung · Konstanz</div>
+                  </figcaption>
+                </figure>
+              ))}
+            </div>
+            <div className="mt-8">
+              <a
+                href={KONSTANZ_REVIEWS_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-accent font-bold hover:text-accent-dark transition-colors"
+              >
+                Alle Bewertungen auf Google ansehen
+                <ArrowRight className="w-4 h-4" />
+              </a>
             </div>
           </div>
 

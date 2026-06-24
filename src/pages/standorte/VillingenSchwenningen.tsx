@@ -42,6 +42,45 @@ const LOCAL_SERVICES = [
   },
 ];
 
+/** Branchen vor Ort — verknüpft den Standort mit den Branchenseiten und deckt
+ *  lokale „Reinigung für …"-Suchanfragen in VS ab. */
+const LOCAL_BRANCHEN = [
+  {
+    title: 'Büros, Verwaltung & öffentliche Einrichtungen',
+    to: '/branchen/buero-verwaltung',
+    desc: 'Verwaltungen, Behörden, Kanzleien und Bürogebäude in Villingen-Schwenningen — repräsentativ sauber, diskret im laufenden Betrieb.',
+  },
+  {
+    title: 'Industrie & Produktion',
+    to: '/branchen/industrie-produktion',
+    desc: 'Produktions- und Logistikbetriebe in den VS-Industriegebieten — Hallen-, Maschinen- und Produktionsreinigung UVV-konform und schichtintegriert.',
+  },
+  {
+    title: 'Medizintechnik, Praxen & Kliniken',
+    to: '/branchen/medizintechnik',
+    desc: 'Die Medizintechnik-Region Schwarzwald-Baar verlangt Hygiene auf höchstem Niveau — dokumentiert, validiert und auditfähig.',
+  },
+  {
+    title: 'Handel & Gewerbeobjekte',
+    to: '/branchen/gewerbeobjekte',
+    desc: 'Märkte, Autohäuser, Ausstellungs- und Gewerbeflächen in VS — saubere Kundenbereiche, die den ersten Eindruck tragen.',
+  },
+  {
+    title: 'Hotellerie & Objektbetrieb',
+    to: '/branchen/hotellerie-objektbetrieb',
+    desc: 'Hotels, Gastronomie und Freizeiteinrichtungen in der Region — verlässliche Reinigung mit Gespür für den Gast.',
+  },
+];
+
+/** Industrie- & Gewerbegebiete in VS — gezielte lokale Keyword-Tiefe. */
+const INDUSTRIE_GEBIETE = [
+  'Gewerbegebiet Schwenningen (Salinensee / Neckarstraße)',
+  'Industriegebiet Villingen-Wöschhalde',
+  'Gewerbepark Auf Herdenen',
+  'Gewerbegebiet Marbach / Vockenhausen',
+  'Innenstadt & Verwaltungsstandorte VS',
+];
+
 /** Einsatzgebiete ab Zentrale VS — deckt lokale Suchanfragen der Umgebung ab. */
 const SERVICE_AREAS = [
   'Villingen',
@@ -234,6 +273,30 @@ export default function StandortVS() {
             </div>
           </div>
 
+          {/* Branchen vor Ort */}
+          <div className="mb-20">
+            <h2 className="text-3xl font-bold mb-3 text-gray-900">Branchen, die wir in Villingen-Schwenningen betreuen</h2>
+            <p className="text-lg text-gray-600 mb-10 max-w-3xl leading-relaxed">
+              Vom Verwaltungsgebäude über die Produktionshalle bis zur Praxis: Wir kennen die Anforderungen der
+              Branchen, die die Wirtschaft im Schwarzwald-Baar-Kreis prägen — und reinigen passgenau dazu.
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+              {LOCAL_BRANCHEN.map((b) => (
+                <Link
+                  key={b.to}
+                  to={b.to}
+                  className="group block bg-gray-50 hover:bg-white border border-gray-100 hover:border-accent/30 rounded-2xl p-6 transition-all hover:shadow-soft"
+                >
+                  <h3 className="font-bold text-lg text-[#0B2341] mb-2 flex items-start justify-between gap-2">
+                    <span>{b.title}</span>
+                    <ArrowRight className="w-4 h-4 mt-1 text-accent flex-shrink-0 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
+                  </h3>
+                  <p className="text-sm text-gray-600 leading-relaxed">{b.desc}</p>
+                </Link>
+              ))}
+            </div>
+          </div>
+
           {/* Einsatzgebiete */}
           <div className="mb-20">
             <h2 className="text-3xl font-bold mb-3 text-gray-900">Einsatzgebiete rund um Villingen-Schwenningen</h2>
@@ -250,6 +313,22 @@ export default function StandortVS() {
                   {area}
                 </span>
               ))}
+            </div>
+
+            <div className="mt-10 bg-gray-50 border border-gray-100 rounded-2xl p-8">
+              <h3 className="font-bold text-lg text-[#0B2341] mb-2">Industrie- &amp; Gewerbegebiete in Villingen-Schwenningen</h3>
+              <p className="text-sm text-gray-600 mb-5 leading-relaxed">
+                Besonders häufig sind wir in den Gewerbe- und Industriegebieten von VS im Einsatz — kurze Wege ab
+                unserer Zentrale bedeuten schnelle Reaktionszeiten für Produktion, Logistik und Verwaltung:
+              </p>
+              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-3">
+                {INDUSTRIE_GEBIETE.map((g) => (
+                  <li key={g} className="flex items-start gap-2.5 text-gray-700 text-sm font-medium">
+                    <CheckCircle2 className="text-accent w-4 h-4 flex-shrink-0 mt-0.5" />
+                    {g}
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
 
