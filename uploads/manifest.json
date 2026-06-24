@@ -1,0 +1,139 @@
+[
+  {
+    "reference": "Allianz",
+    "file": "01-allianz.svg",
+    "source_url": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Allianz_logo.svg",
+    "final_url": "https://upload.wikimedia.org/wikipedia/commons/6/6e/Allianz_logo.svg",
+    "content_type": "image/svg+xml",
+    "bytes": 2871
+  },
+  {
+    "reference": "GOLDBECK",
+    "file": "02-goldbeck-favicon-fallback.png",
+    "source_url": "https://www.google.com/s2/favicons?domain=goldbeck.de&sz=512",
+    "final_url": "https://t1.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=http://goldbeck.de&size=512",
+    "content_type": "image/png",
+    "bytes": 252,
+    "note": "fallback favicon only; SVG also provided"
+  },
+  {
+    "reference": "Bundesagentur für Arbeit",
+    "file": "03-bundesagentur-fuer-arbeit.source.jpg",
+    "source_url": "https://web.arbeitsagentur.de/cms-zentrales-portal-produktion-karriereportal/prod/s3fs-public/ba-logo-default.jpg",
+    "final_url": "https://web.arbeitsagentur.de/cms-zentrales-portal-produktion-karriereportal/prod/s3fs-public/ba-logo-default.jpg",
+    "content_type": "image/jpeg",
+    "bytes": 26047
+  },
+  {
+    "reference": "Bareiss",
+    "file": "04-bareiss-white.svg",
+    "source_url": "https://www.bareiss.com/fileadmin/templates/images/bareiss/logo_white.svg",
+    "final_url": "https://www.bareiss.com/fileadmin/templates/images/bareiss/logo_white.svg",
+    "content_type": "image/svg+xml",
+    "bytes": 12709
+  },
+  {
+    "reference": "Bareiss",
+    "file": "04-bareiss-icon.png",
+    "source_url": "https://www.bareiss.com/apple-icon-180x180.png",
+    "final_url": "https://www.bareiss.com/apple-icon-180x180.png",
+    "content_type": "image/png",
+    "bytes": 11631
+  },
+  {
+    "reference": "BDT",
+    "file": "05-bdt.svg",
+    "source_url": "https://www.bdt.de/ (inline header SVG)",
+    "final_url": "inline SVG extracted",
+    "content_type": "image/svg+xml",
+    "bytes": 1871
+  },
+  {
+    "reference": "Köster",
+    "file": "06-koester.png",
+    "source_url": "https://www.koester-bau.de/_Resources/Persistent/e/9/2/8/e9288b09162e497c0d1b2951eef8122e6e216966/Koester-Logo_RGB.png",
+    "final_url": "https://www.koester-bau.de/_Resources/Persistent/e/9/2/8/e9288b09162e497c0d1b2951eef8122e6e216966/Koester-Logo_RGB.png",
+    "content_type": "image/png",
+    "bytes": 5159
+  },
+  {
+    "reference": "Aesthetify by Dr. Rick & Dr. Nick",
+    "file": "07-aesthetify.svg",
+    "source_url": "https://aesthetify.de/wp-content/uploads/2023/02/aesthetify_logo.svg",
+    "final_url": "https://aesthetify.de/wp-content/uploads/2023/02/aesthetify_logo.svg",
+    "content_type": "image/svg+xml",
+    "bytes": 26770
+  },
+  {
+    "reference": "Aesthetify by Dr. Rick & Dr. Nick",
+    "file": "07-aesthetify-dr.svg",
+    "source_url": "https://aesthetify.de/wp-content/uploads/2023/02/logo-aesthetify-dr-new.svg",
+    "final_url": "https://aesthetify.de/wp-content/uploads/2023/02/logo-aesthetify-dr-new.svg",
+    "content_type": "image/svg+xml",
+    "bytes": 13259
+  },
+  {
+    "reference": "Käppelehof",
+    "file": "08-kaeppelehof.png",
+    "source_url": "https://www.kaeppelehof.de/wp-content/uploads/2024/05/Hotel-Kaeppelehof-Logo-Left-RGB.png",
+    "final_url": "https://www.kaeppelehof.de/wp-content/uploads/2024/05/Hotel-Kaeppelehof-Logo-Left-RGB.png",
+    "content_type": "image/png",
+    "bytes": 49462
+  },
+  {
+    "reference": "Kur- und Bäder GmbH Bad Dürrheim",
+    "file": "09-kur-und-baeder-bad-duerrheim.png",
+    "source_url": "https://shop.solemar.de/bundles/workidtheme/assets/images/kur-und-baeder-logo.png",
+    "final_url": "https://shop.solemar.de/bundles/workidtheme/assets/images/kur-und-baeder-logo.png",
+    "content_type": "image/png",
+    "bytes": 9120
+  },
+  {
+    "reference": "Kur- und Bäder GmbH Bad Dürrheim",
+    "file": "09-solemar.png",
+    "source_url": "https://shop.solemar.de/media/7d/73/93/1675760081/logo.png?ts=1747659910",
+    "final_url": "https://shop.solemar.de/media/7d/73/93/1675760081/logo.png?ts=1747659910",
+    "content_type": "image/png",
+    "bytes": 12593
+  },
+  {
+    "reference": "naturenergie netze",
+    "file": "10-naturenergie-netze.svg",
+    "source_url": "https://www.naturenergie-netze.de/typo3conf/ext/sitecore/Resources/Public/img/naturenergie_netze-logo.svg",
+    "final_url": "https://www.naturenergie-netze.de/typo3conf/ext/sitecore/Resources/Public/img/naturenergie_netze-logo.svg",
+    "content_type": "image/svg+xml",
+    "bytes": 9163
+  },
+  {
+    "reference": "Schwarzwald-Baar-Kreis",
+    "file": "11-schwarzwald-baar-kreis.png",
+    "source_url": "https://www.lrasbk.de/layout/_default/assets/img/sbk-sw-logo.png?__ts=1524232520",
+    "final_url": "https://www.lrasbk.de/layout/_default/assets/img/sbk-sw-logo.png?__ts=1524232520",
+    "content_type": "image/png",
+    "bytes": 7290
+  },
+  {
+    "reference": "Südwest Messe",
+    "file": "12-suedwest-messe.png",
+    "source_url": "https://www.suedwest-messe.de/fileadmin/data/sites/suedwest-messe-vs.de/Logo/suedwestmessevs_logo.png",
+    "final_url": "https://www.suedwest-messe.de/fileadmin/data/sites/suedwest-messe-vs.de/Logo/suedwestmessevs_logo.png",
+    "content_type": "image/png",
+    "bytes": 21108
+  },
+  {
+    "reference": "GOLDBECK",
+    "file": "02-goldbeck.svg",
+    "source_url": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Goldbeck-Logo.svg",
+    "final_url": "https://upload.wikimedia.org/wikipedia/commons/4/4d/Goldbeck-Logo.svg",
+    "content_type": "image/svg+xml",
+    "bytes": 3262
+  },
+  {
+    "reference": "Bundesagentur für Arbeit",
+    "file": "03-bundesagentur-fuer-arbeit.png",
+    "source_url": "converted from official OG image in sources/03-bundesagentur-fuer-arbeit.source.jpg",
+    "final_url": "local ffmpeg conversion",
+    "content_type": "image/png",
+    "bytes": 24560
+  }
+]
