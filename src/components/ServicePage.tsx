@@ -40,7 +40,7 @@ export default function ServicePage({ service }: { service: ServiceData }) {
         image={service.image}
         imageAlt={service.name}
         crumbs={[{ label: 'Leistungen', href: '/leistungen' }, { label: service.name }]}
-        cta={{ label: 'Jetzt unverbindlich anfragen', to: '/angebot' }}
+        cta={{ label: 'Kostenlose Besichtigung anfragen', to: '/angebot' }}
         secondaryCta={{ label: SITE.phone, href: SITE.phoneHref }}
       />
 

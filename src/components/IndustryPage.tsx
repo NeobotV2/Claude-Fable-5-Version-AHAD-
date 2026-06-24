@@ -30,7 +30,7 @@ export default function IndustryPage({ branche }: { branche: BrancheData }) {
         image={branche.image}
         imageAlt={branche.name}
         crumbs={[{ label: 'Branchen', href: '/branchen' }, { label: branche.name }]}
-        cta={{ label: 'Angebot in 24h anfordern', to: '/angebot' }}
+        cta={{ label: 'Kostenlose Besichtigung anfragen', to: '/angebot' }}
         secondaryCta={{ label: SITE.phone, href: SITE.phoneHref }}
       />
 

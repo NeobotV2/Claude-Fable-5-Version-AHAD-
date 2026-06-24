@@ -31,7 +31,7 @@ export const translations: Record<Language, any> = {
     jobTypes: {
       vollzeit: { title: "Vollzeit", desc: "39 Stunden pro Woche" },
       teilzeit: { title: "Teilzeit", desc: "Vormittags oder Nachmittags" },
-      minijob: { title: "Minijob", desc: "Bis 538 € im Monat" }
+      minijob: { title: "Minijob", desc: "Bis 603 € im Monat" }
     },
     step2Title: "Was ist dein Fachbereich?",
     departments: {
@@ -83,7 +83,7 @@ export const translations: Record<Language, any> = {
     jobTypes: {
       vollzeit: { title: "Full-time", desc: "39 hours per week" },
       teilzeit: { title: "Part-time", desc: "Morning or afternoon" },
-      minijob: { title: "Minijob", desc: "Up to €538 per month" }
+      minijob: { title: "Minijob", desc: "Up to €603 per month" }
     },
     step2Title: "What is your area of expertise?",
     departments: {
@@ -135,7 +135,7 @@ export const translations: Record<Language, any> = {
     jobTypes: {
       vollzeit: { title: "Tam Zamanlı", desc: "Haftada 39 saat" },
       teilzeit: { title: "Yarı Zamanlı", desc: "Sabah veya öğleden sonra" },
-      minijob: { title: "Minijob", desc: "Ayda 538 €'ya kadar" }
+      minijob: { title: "Minijob", desc: "Ayda 603 €'ya kadar" }
     },
     step2Title: "Uzmanlık alanınız nedir?",
     departments: {
@@ -187,7 +187,7 @@ export const translations: Record<Language, any> = {
     jobTypes: {
       vollzeit: { title: "دوام كامل", desc: "39 ساعة في الأسبوع" },
       teilzeit: { title: "دوام جزئي", desc: "صباحاً أو مساءً" },
-      minijob: { title: "عمل صغير (Minijob)", desc: "حتى 538 يورو شهرياً" }
+      minijob: { title: "عمل صغير (Minijob)", desc: "حتى 603 يورو شهرياً" }
     },
     step2Title: "ما هو مجال تخصصك؟",
     departments: {
@@ -239,7 +239,7 @@ export const translations: Record<Language, any> = {
     jobTypes: {
       vollzeit: { title: "Полный рабочий день", desc: "39 часов в неделю" },
       teilzeit: { title: "Частичная занятость", desc: "Утром или днем" },
-      minijob: { title: "Мини-работа", desc: "До 538 евро в месяц" }
+      minijob: { title: "Мини-работа", desc: "До 603 евро в месяц" }
     },
     step2Title: "Какова ваша специализация?",
     departments: {
@@ -291,7 +291,7 @@ export const translations: Record<Language, any> = {
     jobTypes: {
       vollzeit: { title: "Повний робочий день", desc: "39 годин на тиждень" },
       teilzeit: { title: "Часткова зайнятість", desc: "Вранці або вдень" },
-      minijob: { title: "Міні-робота", desc: "До 538 євро на місяць" }
+      minijob: { title: "Міні-робота", desc: "До 603 євро на місяць" }
     },
     step2Title: "Яка ваша спеціалізація?",
     departments: {
@@ -343,7 +343,7 @@ export const translations: Record<Language, any> = {
     jobTypes: {
       vollzeit: { title: "Pełny etat", desc: "39 godzin tygodniowo" },
       teilzeit: { title: "Część etatu", desc: "Rano lub po południu" },
-      minijob: { title: "Minijob", desc: "Do 538 € miesięcznie" }
+      minijob: { title: "Minijob", desc: "Do 603 € miesięcznie" }
     },
     step2Title: "Jaka jest Twoja specjalizacja?",
     departments: {
@@ -395,7 +395,7 @@ export const translations: Record<Language, any> = {
     jobTypes: {
       vollzeit: { title: "Full-time", desc: "39 ore pe săptămână" },
       teilzeit: { title: "Part-time", desc: "Dimineața sau după-amiaza" },
-      minijob: { title: "Minijob", desc: "Până la 538 € pe lună" }
+      minijob: { title: "Minijob", desc: "Până la 603 € pe lună" }
     },
     step2Title: "Care este domeniul dumneavoastră de expertiză?",
     departments: {
@@ -447,7 +447,7 @@ export const translations: Record<Language, any> = {
     jobTypes: {
       vollzeit: { title: "Full-time", desc: "39 ore a settimana" },
       teilzeit: { title: "Part-time", desc: "Mattina o pomeriggio" },
-      minijob: { title: "Minijob", desc: "Fino a 538 € al mese" }
+      minijob: { title: "Minijob", desc: "Fino a 603 € al mese" }
     },
     step2Title: "Qual è il tuo settore di competenza?",
     departments: {
@@ -499,7 +499,7 @@ export const translations: Record<Language, any> = {
     jobTypes: {
       vollzeit: { title: "Πλήρης απασχόληση", desc: "39 ώρες την εβδομάδα" },
       teilzeit: { title: "Μερική απασχόληση", desc: "Πρωί ή απόγευμα" },
-      minijob: { title: "Minijob", desc: "Έως 538 € το μήνα" }
+      minijob: { title: "Minijob", desc: "Έως 603 € το μήνα" }
     },
     step2Title: "Ποιος είναι ο τομέας εξειδίκευσής σας;",
     departments: {
@@ -551,7 +551,7 @@ export const translations: Record<Language, any> = {
     jobTypes: {
       vollzeit: { title: "Temps plein", desc: "39 heures par semaine" },
       teilzeit: { title: "Temps partiel", desc: "Matin ou après-midi" },
-      minijob: { title: "Minijob", desc: "Jusqu'à 538 € par mois" }
+      minijob: { title: "Minijob", desc: "Jusqu'à 603 € par mois" }
     },
     step2Title: "Quel est votre domaine d'expertise ?",
     departments: {
