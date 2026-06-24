@@ -40,8 +40,30 @@ export default function Datenschutz() {
 
           <section className="mb-12">
             <h2 className="text-2xl font-bold mb-4">3. Analyse-Tools und Tools von Drittanbietern</h2>
+            <h3 className="text-xl font-bold mb-2">Vercel Web Analytics</h3>
             <p className="text-gray-600">
-              Beim Besuch dieser Website kann Ihr Surf-Verhalten statistisch ausgewertet werden. Das geschieht vor allem mit sogenannten Analyseprogrammen.
+              Zur statistischen Auswertung der Websitenutzung verwenden wir Vercel Web Analytics, einen Dienst der
+              Vercel Inc., 440 N Barranca Ave #4133, Covina, CA 91723, USA. Vercel Web Analytics arbeitet
+              <strong> cookielos</strong> und ohne Wiedererkennung einzelner Besucher: Es werden weder Cookies gesetzt
+              noch Daten im Browser gespeichert und kein geräteübergreifendes Tracking durchgeführt. Erfasst werden
+              ausschließlich aggregierte, anonymisierte Nutzungsdaten (z. B. aufgerufene Seiten, Referrer, ungefähre
+              Herkunftsregion, Gerätetyp und Browser). Eine Identifizierung Ihrer Person ist uns dadurch nicht möglich.
+            </p>
+            <p className="text-gray-600 mt-4">
+              Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO. Unser berechtigtes Interesse liegt in der
+              datensparsamen, anonymen Analyse des Nutzungsverhaltens zur Verbesserung unseres Webangebots. Da keine
+              personenbezogenen Profile gebildet und keine Cookies verwendet werden, erfolgt die Reichweitenmessung
+              ohne Einwilligung. Mit Vercel besteht ein Vertrag zur Auftragsverarbeitung (Art. 28 DSGVO). Weitere
+              Informationen:{' '}
+              <a
+                href="https://vercel.com/docs/analytics/privacy-policy"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-brand font-semibold hover:underline"
+              >
+                vercel.com/docs/analytics/privacy-policy
+              </a>
+              .
             </p>
           </section>
 
