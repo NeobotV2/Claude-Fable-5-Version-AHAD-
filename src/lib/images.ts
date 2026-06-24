@@ -72,9 +72,9 @@ export const IMG = {
   bodensee: local('konstanz.webp'),   // echtes Konstanz-Stadtfoto (Luftaufnahme Bodensee)
   stuttgart: local('stuttgart.webp'), // echtes Stuttgart-Stadtfoto (Schlossplatz)
 
-  // ── Vorher / Nachher (Stock-Symbolbilder) ─────────────────────────
-  beforeDirty: u('photo-1504307651254-35680f356dfd', 1400),
-  afterClean: u('photo-1497366754035-f200968a6e72', 1400),
+  // ── Vorher / Nachher (echtes AHAD-Objekt) ─────────────────────────
+  vorher: local('vorher.webp'),
+  nachher: local('nachher.webp'),
 } as const;
 
 export type ImageKey = keyof typeof IMG;
