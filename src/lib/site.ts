@@ -285,7 +285,7 @@ export const ORGANIZATION_SCHEMA = {
   image: `${SITE.url}/og-image.jpg`,
   description:
     'Gebäudereinigung, Industriereinigung und Unterhaltsreinigung für Unternehmen in Villingen-Schwenningen, Stuttgart, Konstanz und Süddeutschland.',
-  telephone: '+49-7721-9447915',
+  telephone: SITE.phone,
   email: SITE.email,
   priceRange: '€€',
   openingHoursSpecification: {
@@ -304,7 +304,7 @@ export const ORGANIZATION_SCHEMA = {
   geo: { '@type': 'GeoCoordinates', latitude: 48.0626, longitude: 8.4937 },
   contactPoint: {
     '@type': 'ContactPoint',
-    telephone: '+49-7721-9447915',
+    telephone: SITE.phone,
     contactType: 'customer service',
     areaServed: 'DE',
     availableLanguage: 'German',
