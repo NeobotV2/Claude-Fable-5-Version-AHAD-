@@ -3,5 +3,24 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "cleanUrls": true,
+  "redirects": [
+    { "source": "/unterhaltsreinigung", "destination": "/leistungen/unterhaltsreinigung", "permanent": true },
+    { "source": "/glasreinigung", "destination": "/leistungen/glas-fassadenreinigung", "permanent": true },
+    { "source": "/fassadenreinigung", "destination": "/leistungen/glas-fassadenreinigung", "permanent": true },
+    { "source": "/glas-und-fassadenreinigung", "destination": "/leistungen/glas-fassadenreinigung", "permanent": true },
+    { "source": "/baureinigung", "destination": "/leistungen/baureinigung", "permanent": true },
+    { "source": "/bauschlussreinigung", "destination": "/leistungen/baureinigung", "permanent": true },
+    { "source": "/industriereinigung", "destination": "/leistungen/industrie-produktionsreinigung", "permanent": true },
+    { "source": "/produktionsreinigung", "destination": "/leistungen/industrie-produktionsreinigung", "permanent": true },
+    { "source": "/maschinenreinigung", "destination": "/leistungen/industrie-produktionsreinigung", "permanent": true },
+    { "source": "/medizintechnik", "destination": "/leistungen/medizintechnik-reinigung", "permanent": true },
+    { "source": "/medizintechnikreinigung", "destination": "/leistungen/medizintechnik-reinigung", "permanent": true },
+    { "source": "/sonderreinigung", "destination": "/leistungen/sonderreinigung-stillstandsservice", "permanent": true },
+    { "source": "/grundreinigung", "destination": "/leistungen/sonderreinigung-stillstandsservice", "permanent": true },
+    { "source": "/winterdienst", "destination": "/leistungen/winterdienst-hausmeisterservice", "permanent": true },
+    { "source": "/hausmeisterservice", "destination": "/leistungen/winterdienst-hausmeisterservice", "permanent": true },
+    { "source": "/lueftungsreinigung", "destination": "/leistungen/kuechenabluftreinigung-vdi-2052", "permanent": true },
+    { "source": "/kuechenabluftreinigung", "destination": "/leistungen/kuechenabluftreinigung-vdi-2052", "permanent": true }
+  ],
   "rewrites": [{ "source": "/((?!api/).*)", "destination": "/index.html" }]
 }
