@@ -4,39 +4,40 @@ import { CLIENT_REFERENCES, type ClientReference } from '@/lib/site';
 /**
  * Endlos-Band der Referenzkunden.
  *
- * Zeigt das echte Logo (lokal unter /images/clients/, einheitliche Höhe,
- * dezent in Graustufen, bei Hover farbig). Ist kein Logo hinterlegt — oder
- * lädt es nicht — wird automatisch auf die Wortmarke (Name als Text)
- * zurückgegriffen. So lassen sich freigegebene Logos nach und nach ergänzen,
- * ohne dass das Band je „kaputt" aussieht.
+ * Zeigt nur Referenzen MIT freigegebenem Logo (Einträge ohne Logo werden
+ * ausgeblendet). Alle Logos werden in eine einheitliche Box normiert
+ * (gleiche Höhe, gedeckelte Breite, zentriert) — so wirken unterschiedlich
+ * proportionierte Logos optisch gleich groß. Dezent in Graustufen, bei Hover
+ * farbig.
  *
  * WICHTIG: Nur Logos von Kunden verwenden, die der Nennung zugestimmt haben.
  */
+const REFERENCES = CLIENT_REFERENCES.filter((r) => r.logo);
+
 function ClientLogo({ item }: { item: ClientReference }) {
   const [failed, setFailed] = useState(false);
-
-  if (item.logo && !failed) {
-    return (
-      <img
-        src={item.logo}
-        alt={item.name}
-        title={item.name}
-        loading="lazy"
-        decoding="async"
-        referrerPolicy="no-referrer"
-        onError={() => setFailed(true)}
-        className="h-7 sm:h-9 w-auto object-contain grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-300 select-none"
-      />
-    );
-  }
-
   return (
-    <span
-      title={item.name}
-      className="font-headline font-bold text-lg sm:text-xl tracking-tight text-navy/40 hover:text-navy transition-colors whitespace-nowrap select-none"
-    >
-      {item.name}
-    </span>
+    <div className="h-10 sm:h-12 w-28 sm:w-36 flex items-center justify-center shrink-0">
+      {item.logo && !failed ? (
+        <img
+          src={item.logo}
+          alt={item.name}
+          title={item.name}
+          loading="lazy"
+          decoding="async"
+          referrerPolicy="no-referrer"
+          onError={() => setFailed(true)}
+          className="max-h-full max-w-full object-contain grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-300 select-none"
+        />
+      ) : (
+        <span
+          title={item.name}
+          className="font-headline font-bold text-sm tracking-tight text-navy/40 text-center leading-tight select-none"
+        >
+          {item.name}
+        </span>
+      )}
+    </div>
   );
 }
 
@@ -46,10 +47,10 @@ export default function LogoMarquee() {
       {[0, 1, 2].map((i) => (
         <div
           key={i}
-          className="flex animate-marquee whitespace-nowrap shrink-0 gap-10 sm:gap-14 px-5 sm:px-7 items-center py-4"
+          className="flex animate-marquee whitespace-nowrap shrink-0 gap-8 sm:gap-12 px-4 sm:px-6 items-center py-4"
           aria-hidden={i > 0}
         >
-          {CLIENT_REFERENCES.map((ref, index) => (
+          {REFERENCES.map((ref, index) => (
             <ClientLogo key={`${i}-${index}`} item={ref} />
           ))}
         </div>

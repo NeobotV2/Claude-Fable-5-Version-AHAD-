@@ -31,7 +31,7 @@ export default function Referenzen() {
         cta={{ label: 'Referenzkunde werden', to: '/angebot' }}
       />
 
-      {/* Referenz-Wand — einheitliche Wortmarken (keine Fremd-API-Logos) */}
+      {/* Referenz-Wand — echte Kundenlogos, einheitlich normiert (nur mit Logo) */}
       <section className="py-20 lg:py-32 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-8">
           <SectionHeading
@@ -41,12 +41,17 @@ export default function Referenzen() {
             className="mb-14"
           />
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
-            {CLIENT_REFERENCES.map((ref, index) => (
+            {CLIENT_REFERENCES.filter((ref) => ref.logo).map((ref, index) => (
               <Reveal key={ref.domain} delay={Math.min(index * 0.05, 0.3)} className="h-full">
-                <div className="flex items-center justify-center text-center h-full min-h-[7rem] bg-paper rounded-3xl border border-line p-7 card-lift">
-                  <span className="font-headline font-bold text-navy text-base md:text-lg leading-snug tracking-tight">
-                    {ref.name}
-                  </span>
+                <div className="flex items-center justify-center h-full min-h-[8rem] bg-paper rounded-3xl border border-line p-7 card-lift">
+                  <img
+                    src={ref.logo}
+                    alt={ref.name}
+                    title={ref.name}
+                    loading="lazy"
+                    decoding="async"
+                    className="max-h-14 max-w-[78%] object-contain"
+                  />
                 </div>
               </Reveal>
             ))}
