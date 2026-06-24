@@ -7,8 +7,9 @@ import Accordion, { faqSchemaFrom, type FAQItem } from '@/components/ui/Accordio
 import { SITE } from '@/lib/site';
 import { IMG } from '@/lib/images';
 
-const KONSTANZ_PHONE = '+49 7721 944 14 44';
-const KONSTANZ_PHONE_HREF = 'tel:+4977219441444';
+// Konstanz nutzt die zentrale Hauptnummer (keine separate Standortnummer).
+const KONSTANZ_PHONE = SITE.phone;
+const KONSTANZ_PHONE_HREF = SITE.phoneHref;
 
 const LOCAL_SERVICES = [
   {
