@@ -118,12 +118,12 @@
     @apply font-logo font-black tracking-[-0.025em] leading-[1.1] break-words;
     /* leading bewusst nicht zu eng (1.1), sonst werden Unterlängen wie das „g"
        in „Gebäudereinigung" bei mehrzeiligen Titeln optisch abgeschnitten.
-       Untergrenze der Größe klein genug (1.7rem), damit „Gebäudereinigung"(,)
-       selbst auf schmalen Handys (≈320–375 px) komplett in EINE Zeile passt –
-       sonst schnappt break-words das letzte Zeichen („g") in die nächste Zeile.
-       Gemessen (Montserrat Black): „Gebäudereinigung," ≈ 247 px @1.7rem < 288 px
-       Innenbreite bei 320-px-Viewport (px-4). */
-    font-size: clamp(1.7rem, 6.5vw, 5rem);
+       Untergrenze 1.6rem: so passt das längste display-xl-Hero-Wort
+       („Küchenabluftreinigung" ≈ 281 px) selbst auf 320-px-Handys (288 px
+       Innenbreite bei px-4) komplett in EINE Zeile – sonst schnappt break-words
+       das letzte Zeichen („g") in die nächste Zeile. Gegen alle 112 gerenderten
+       Überschriften mit Montserrat-Black-Metriken verifiziert. */
+    font-size: clamp(1.6rem, 6.5vw, 5rem);
   }
   .display-lg {
     @apply font-logo font-black tracking-[-0.02em] leading-[1.1] break-words;
