@@ -20,6 +20,38 @@ const TO = process.env.LEAD_TO || 'info@ahad-cleaning.de';
 const FROM = process.env.RESEND_FROM || 'AHAD Cleaning <onboarding@resend.dev>';
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
+/**
+ * Best-Effort-Rate-Limit (In-Memory, pro warmer Function-Instanz):
+ * max. RL_MAX POSTs je IP in RL_WINDOW_MS. Schützt das info@-Postfach und das
+ * Resend-Kontingent vor simplen Fluten.
+ *
+ * Wichtig: Serverless-Instanzen teilen diesen Speicher NICHT global. Für harte,
+ * instanzübergreifende Limits zusätzlich Vercel Firewall / Bot-Schutz aktivieren
+ * (Dashboard) oder Upstash Ratelimit anbinden. Als Defense-in-Depth dennoch
+ * wirksam, da Floods meist aus EINER Quelle auf dieselbe warme Instanz treffen.
+ */
+const RL_WINDOW_MS = 60_000;
+const RL_MAX = 5;
+const rlHits = new Map<string, number[]>();
+
+function rateLimited(ip: string): boolean {
+  const now = Date.now();
+  const cutoff = now - RL_WINDOW_MS;
+  const hits = (rlHits.get(ip) ?? []).filter((t) => t > cutoff);
+  hits.push(now);
+  rlHits.set(ip, hits);
+  if (rlHits.size > 5000) {
+    for (const [k, v] of rlHits) if (v.every((t) => t <= cutoff)) rlHits.delete(k);
+  }
+  return hits.length > RL_MAX;
+}
+
+function clientIp(req: any): string {
+  const xff = req.headers?.['x-forwarded-for'];
+  if (typeof xff === 'string' && xff.length) return xff.split(',')[0].trim();
+  return req.headers?.['x-real-ip'] || req.socket?.remoteAddress || 'unknown';
+}
+
 /** Nutzereingaben für E-Mail-HTML escapen (verhindert HTML-/Script-Injection). */
 function esc(value: unknown): string {
   return String(value ?? '')
@@ -49,6 +81,12 @@ function wrap(title: string, color: string, inner: string, source: string): stri
 export default async function handler(req: any, res: any) {
   if (req.method !== 'POST') {
     res.status(405).json({ error: 'Method not allowed' });
+    return;
+  }
+
+  // Rate-Limit (Best-Effort) — schützt vor Massen-POSTs auf den offenen Endpoint.
+  if (rateLimited(clientIp(req))) {
+    res.status(429).json({ error: 'Zu viele Anfragen. Bitte versuchen Sie es in einer Minute erneut.' });
     return;
   }
 

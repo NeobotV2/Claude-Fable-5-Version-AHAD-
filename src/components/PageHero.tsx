@@ -5,6 +5,7 @@ import { ChevronRight } from 'lucide-react';
 import ButtonLink from '@/components/ui/Button';
 import { SITE } from '@/lib/site';
 import { unsplashSrcSet } from '@/lib/images';
+import { jsonLd } from '@/lib/jsonld';
 import type { ReactNode } from 'react';
 
 export interface Crumb {
@@ -92,7 +93,7 @@ export default function PageHero({
 
       {breadcrumbSchema && (
         <Helmet>
-          <script type="application/ld+json">{JSON.stringify(breadcrumbSchema)}</script>
+          <script type="application/ld+json">{jsonLd(breadcrumbSchema)}</script>
         </Helmet>
       )}
 
