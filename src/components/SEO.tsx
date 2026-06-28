@@ -1,5 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 import { useLocation } from 'react-router-dom';
+import { jsonLd } from '@/lib/jsonld';
 
 interface SEOProps {
   title: string;
@@ -41,7 +42,7 @@ export default function SEO({ title, description, keywords, schema, noindex }: S
 
       {schema && (
         <script type="application/ld+json">
-          {JSON.stringify(schema)}
+          {jsonLd(schema)}
         </script>
       )}
     </Helmet>

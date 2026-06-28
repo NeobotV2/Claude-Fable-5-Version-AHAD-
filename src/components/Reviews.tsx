@@ -3,6 +3,7 @@ import { Star } from 'lucide-react';
 import Reveal from '@/components/ui/Reveal';
 import SectionHeading from '@/components/ui/SectionHeading';
 import { REVIEWS, REVIEWS_SOURCE_URL, GOOGLE_RATING, reviewSchema } from '@/lib/site';
+import { jsonLd } from '@/lib/jsonld';
 
 function Stars({ rating }: { rating: number }) {
   return (
@@ -28,7 +29,7 @@ export default function Reviews() {
     <section className="py-24 lg:py-32 bg-paper border-y border-line">
       {schema && (
         <Helmet>
-          <script type="application/ld+json">{JSON.stringify(schema)}</script>
+          <script type="application/ld+json">{jsonLd(schema)}</script>
         </Helmet>
       )}
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
