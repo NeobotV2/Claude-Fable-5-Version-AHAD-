@@ -45,6 +45,9 @@ export default function KarriereFunnel() {
   const nextStep = () => setStep(prev => Math.min(prev + 1, 4));
   const prevStep = () => setStep(prev => Math.max(prev - 1, 1));
 
+  // Frühestes wählbares Startdatum = heute (kein Datum in der Vergangenheit).
+  const today = new Date().toISOString().slice(0, 10);
+
   const updateData = (fields: Partial<FunnelData>) => {
     setData(prev => ({ ...prev, ...fields }));
   };
@@ -302,13 +305,30 @@ export default function KarriereFunnel() {
                       {t.startNow}
                     </button>
                     <div className="relative">
-                      <input
-                        type="date"
-                        onChange={(e) => updateData({ startDate: e.target.value })}
-                        className={`w-full py-3 px-4 rounded-xl border-2 font-bold transition-all outline-none ${
-                          data.startDate !== 'Sofort' && data.startDate !== '' ? 'border-[#0D6B38] bg-accent/5' : 'border-white bg-white'
-                        }`}
-                      />
+                      {(() => {
+                        const hasDate = data.startDate !== 'Sofort' && data.startDate !== '';
+                        return (
+                          <>
+                            <input
+                              type="date"
+                              min={today}
+                              value={hasDate ? data.startDate : ''}
+                              onChange={(e) => updateData({ startDate: e.target.value })}
+                              aria-label={t.startFrom}
+                              className={`w-full py-3 px-4 rounded-xl border-2 font-bold transition-all outline-none ${
+                                hasDate ? 'border-[#0D6B38] bg-accent/5 text-[#0D6B38]' : 'border-white bg-white text-transparent'
+                              }`}
+                            />
+                            {/* Native Date-Inputs zeigen keinen Placeholder — dieses Label
+                                überlagert das leere Feld und verschwindet, sobald ein Datum gewählt ist. */}
+                            {!hasDate && (
+                              <span className="pointer-events-none absolute inset-y-0 start-4 flex items-center font-bold text-slate/60">
+                                {t.startFrom}
+                              </span>
+                            )}
+                          </>
+                        );
+                      })()}
                     </div>
                   </div>
                 </div>
