@@ -1,7 +1,7 @@
 import { Link, useLocation } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import { motion, AnimatePresence } from 'motion/react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import {
   ChevronDown,
   Menu,
@@ -96,10 +96,12 @@ export default function Header() {
   }, []);
 
   const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
-  const closeMobileMenu = () => {
+  // useCallback: stabile Referenz, damit die Effekte unten sie sauber als
+  // Dependency führen können, ohne bei jedem Render neu zu laufen.
+  const closeMobileMenu = useCallback(() => {
     setIsMobileMenuOpen(false);
     setMobileActiveDropdown(null);
-  };
+  }, []);
 
   useEffect(() => {
     document.body.style.overflow = isMobileMenuOpen ? 'hidden' : '';
@@ -114,13 +116,13 @@ export default function Header() {
     };
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
-  }, [isMobileMenuOpen]);
+  }, [isMobileMenuOpen, closeMobileMenu]);
 
   // Bei Routenwechsel Menü schließen
   useEffect(() => {
     closeMobileMenu();
     setActiveDropdown(null);
-  }, [location.pathname]);
+  }, [location.pathname, closeMobileMenu]);
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50">

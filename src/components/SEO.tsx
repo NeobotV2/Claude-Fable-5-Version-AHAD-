@@ -32,6 +32,9 @@ export default function SEO({ title, description, keywords, schema, noindex }: S
       <meta property="og:title" content={fullTitle} />
       <meta property="og:description" content={description} />
       <meta property="og:image" content={`${baseUrl}/og-image.jpg`} />
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" />
+      <meta property="og:image:alt" content="AHAD Cleaning Company — Gebäudereinigung für Süddeutschland" />
 
       {/* Twitter */}
       <meta name="twitter:card" content="summary_large_image" />

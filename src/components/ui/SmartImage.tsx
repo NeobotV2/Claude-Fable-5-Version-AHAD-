@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
-import { FALLBACK_IMAGE, unsplashSrcSet } from '@/lib/images';
+import { FALLBACK_IMAGE, srcSetFor } from '@/lib/images';
 
 interface SmartImageProps {
   src: string;
@@ -24,7 +24,7 @@ export default function SmartImage({ src, alt, className, imgClassName, eager = 
     <div className={cn('relative overflow-hidden bg-navy/5', className)}>
       <img
         src={failed ? FALLBACK_IMAGE : src}
-        srcSet={failed ? undefined : unsplashSrcSet(src)}
+        srcSet={failed ? undefined : srcSetFor(src)}
         sizes={failed ? undefined : sizes}
         alt={alt}
         loading={eager ? 'eager' : 'lazy'}

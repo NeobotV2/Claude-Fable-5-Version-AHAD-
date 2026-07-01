@@ -136,7 +136,11 @@ export default async function handler(req: any, res: any) {
     }
     replyTo = String(data.email);
     const services = Array.isArray(data.services)
-      ? data.services.slice(0, 20).map(esc).join(', ')
+      ? data.services
+          .filter((s: unknown): s is string => typeof s === 'string')
+          .slice(0, 20)
+          .map((s: string) => esc(s.slice(0, 200)))
+          .join(', ')
       : esc(data.services);
     subject = `Neue Angebotsanfrage: ${esc(data.companyName).slice(0, 80)}`;
     html = wrap('Neue Angebotsanfrage', '#004888',

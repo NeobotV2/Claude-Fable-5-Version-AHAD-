@@ -17,24 +17,33 @@ const inputClasses =
   'w-full bg-white border border-line rounded-xl px-4 py-3.5 text-[15px] text-navy font-medium placeholder:text-slate/50 ' +
   'focus:outline-none focus:border-brand focus:ring-4 focus:ring-brand/10 transition-all';
 
+const INITIAL_FORM = {
+  contactPerson: '',
+  company: '',
+  email: '',
+  phone: '',
+  serviceType: SERVICES[0],
+  message: '',
+  privacyAccepted: false,
+};
+
 export default function ContactForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [honeypot, setHoneypot] = useState('');
-  const [formData, setFormData] = useState({
-    contactPerson: '',
-    company: '',
-    email: '',
-    phone: '',
-    serviceType: SERVICES[0],
-    message: '',
-    privacyAccepted: false,
-  });
+  const [formData, setFormData] = useState({ ...INITIAL_FORM });
+
+  const resetForm = () => {
+    setIsSuccess(false);
+    setSubmitError(null);
+    setFormData({ ...INITIAL_FORM });
+    setHoneypot('');
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.privacyAccepted) return;
+    if (!formData.privacyAccepted || isSubmitting) return;
     // Honeypot: unsichtbares Feld — wenn ausgefüllt, war es ein Bot.
     if (honeypot) {
       setIsSuccess(true);
@@ -43,35 +52,47 @@ export default function ContactForm() {
 
     setIsSubmitting(true);
     setSubmitError(null);
+
+    // 1) E-Mail-Benachrichtigung zuerst — ihr Ergebnis wird im Lead-Datensatz
+    //    festgehalten (emailSent), damit fehlgeschlagene Benachrichtigungen im
+    //    Admin-Bereich sichtbar sind statt unbemerkt verloren zu gehen.
+    let emailSent = false;
     try {
-      // Firebase erst beim Absenden laden — hält Initial-Bundle & SSG schlank.
+      const res = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ type: 'contact', data: formData, website: honeypot }),
+      });
+      emailSent = res.ok;
+    } catch (emailError) {
+      console.error('Error sending email notification:', emailError);
+    }
+
+    // 2) Lead in Firestore sichern (Firebase erst beim Absenden laden —
+    //    hält Initial-Bundle & SSG schlank).
+    let stored = false;
+    try {
       const { db, collection, addDoc, serverTimestamp } = await import('@/firebase');
       await addDoc(collection(db, 'leads'), {
         ...formData,
+        emailSent,
         status: 'new',
         createdAt: serverTimestamp(),
       });
-
-      // E-Mail-Benachrichtigung (best effort — blockiert den Erfolg nicht).
-      try {
-        await fetch('/api/send-email', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ type: 'contact', data: formData, website: honeypot }),
-        });
-      } catch (emailError) {
-        console.error('Error sending email notification:', emailError);
-      }
-
-      setIsSuccess(true);
+      stored = true;
     } catch (error) {
       console.error('Error submitting contact form:', error);
+    }
+
+    // Erfolg, sobald der Lead auf MINDESTENS einem Weg angekommen ist.
+    if (stored || emailSent) {
+      setIsSuccess(true);
+    } else {
       setSubmitError(
         `Die Nachricht konnte nicht gesendet werden. Bitte versuchen Sie es erneut oder rufen Sie uns direkt an: ${SITE.phone}.`
       );
-    } finally {
-      setIsSubmitting(false);
     }
+    setIsSubmitting(false);
   };
 
   if (isSuccess) {
@@ -90,7 +111,7 @@ export default function ContactForm() {
           Ihnen.
         </p>
         <p className="text-sm text-slate/80 mb-8">Eilig? Rufen Sie uns direkt an: {SITE.phone}</p>
-        <button onClick={() => setIsSuccess(false)} className="text-brand font-bold hover:text-brand-light transition-colors">
+        <button onClick={resetForm} className="text-brand font-bold hover:text-brand-light transition-colors">
           Weitere Nachricht senden
         </button>
       </motion.div>
@@ -213,7 +234,7 @@ export default function ContactForm() {
         />
         <span className="text-[13px] text-slate leading-relaxed">
           Ich habe die{' '}
-          <a href="/datenschutz" className="text-brand font-semibold hover:underline" target="_blank" rel="noopener noreferrer">
+          <a href="/datenschutz" className="text-brand font-semibold hover:underline">
             Datenschutzerklärung
           </a>{' '}
           gelesen und stimme der Verarbeitung meiner Daten zur Bearbeitung der Anfrage zu. *

@@ -31,7 +31,7 @@ import CTABand from '@/components/CTABand';
 import Guarantee from '@/components/Guarantee';
 import Reviews from '@/components/Reviews';
 import TrustBand from '@/components/TrustBand';
-import { IMG, unsplashSrcSet } from '@/lib/images';
+import { IMG, srcSetFor } from '@/lib/images';
 import { SITE, STATS, REVIEWS, ORGANIZATION_SCHEMA, WEBSITE_SCHEMA, GOOGLE_RATING } from '@/lib/site';
 import { SERVICES } from '@/data/services';
 
@@ -201,7 +201,7 @@ export default function Home() {
         <motion.div className="absolute inset-0" style={{ y: heroImageY }}>
           <img
             src={IMG.heroMain}
-            srcSet={unsplashSrcSet(IMG.heroMain)}
+            srcSet={srcSetFor(IMG.heroMain)}
             sizes="100vw"
             alt="AHAD-Fuhrpark vor der Zentrale in Villingen-Schwenningen"
             className="w-full h-[115%] object-cover opacity-65"

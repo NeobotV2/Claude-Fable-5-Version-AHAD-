@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { CheckCircle2, ArrowRight, Phone } from 'lucide-react';
+import { CheckCircle2, ArrowRight, Phone, BookOpen } from 'lucide-react';
 import SEO from '@/components/SEO';
 import PageHero from '@/components/PageHero';
 import Reveal from '@/components/ui/Reveal';
@@ -11,9 +11,42 @@ import CTABand from '@/components/CTABand';
 import { SERVICES, type ServiceData } from '@/data/services';
 import { PROMISES, SITE } from '@/lib/site';
 
+/** Passende Fachwissen-Artikel je Leistung — interne Verlinkung in den
+ *  Wissensbereich (SEO + Verweildauer). Bewusst kuratiert statt automatisch. */
+const FACHWISSEN_BY_SLUG: Record<string, { title: string; to: string }[]> = {
+  unterhaltsreinigung: [
+    { title: 'Reinigungsintervalle für Unternehmen: Der praxisnahe Leitfaden', to: '/fachwissen/unterhaltsreinigung-unternehmen-reinigungsintervalle' },
+    { title: 'Leistungsverzeichnis erstellen: So werden Angebote vergleichbar', to: '/fachwissen/leistungsverzeichnis-gebaeudereinigung-erstellen' },
+  ],
+  'industrie-produktionsreinigung': [
+    { title: 'Industriereinigung ohne Prozessstörung: So funktioniert es', to: '/fachwissen/industrie-produktionsreinigung-ohne-prozessstoerung' },
+    { title: 'ISO 9001 & 14001 in der Gebäudereinigung', to: '/fachwissen/iso-9001-iso-14001-gebaeudereinigung-unternehmen' },
+  ],
+  'glas-fassadenreinigung': [
+    { title: 'Reinigungsfirma wechseln: Checkliste & Tipps', to: '/fachwissen/reinigungsfirma-wechseln-checkliste-tipps' },
+  ],
+  baureinigung: [
+    { title: 'Leistungsverzeichnis erstellen: So werden Angebote vergleichbar', to: '/fachwissen/leistungsverzeichnis-gebaeudereinigung-erstellen' },
+  ],
+  'medizintechnik-reinigung': [
+    { title: 'ISO 9001 & 14001 in der Gebäudereinigung', to: '/fachwissen/iso-9001-iso-14001-gebaeudereinigung-unternehmen' },
+    { title: 'Reinigungsintervalle für Unternehmen: Der praxisnahe Leitfaden', to: '/fachwissen/unterhaltsreinigung-unternehmen-reinigungsintervalle' },
+  ],
+  'sonderreinigung-stillstandsservice': [
+    { title: 'Industriereinigung ohne Prozessstörung: So funktioniert es', to: '/fachwissen/industrie-produktionsreinigung-ohne-prozessstoerung' },
+  ],
+  'winterdienst-hausmeisterservice': [
+    { title: 'Reinigungsfirma wechseln: Checkliste & Tipps', to: '/fachwissen/reinigungsfirma-wechseln-checkliste-tipps' },
+  ],
+  'kuechenabluftreinigung-vdi-2052': [
+    { title: 'Küchenabluftreinigung nach VDI 2052: Pflicht, Intervalle & Nachweis', to: '/fachwissen/kuechenabluftreinigung-vdi-2052-pflicht-ablauf-nachweis' },
+  ],
+};
+
 /** Gemeinsames Premium-Layout für alle Leistungs-Detailseiten. */
 export default function ServicePage({ service }: { service: ServiceData }) {
   const related = SERVICES.filter((s) => s.slug !== service.slug).slice(0, 3);
+  const articles = FACHWISSEN_BY_SLUG[service.slug] ?? [];
 
   const serviceSchema = {
     '@context': 'https://schema.org',
@@ -184,6 +217,30 @@ export default function ServicePage({ service }: { service: ServiceData }) {
           </div>
         </div>
       </section>
+
+      {/* Passende Fachwissen-Artikel — interne Verlinkung Leistung -> Wissensbereich */}
+      {articles.length > 0 && (
+        <section className="py-14 bg-paper border-t border-line">
+          <div className="max-w-7xl mx-auto px-4 sm:px-8">
+            <h2 className="font-headline text-xl font-bold text-navy mb-6 flex items-center gap-2.5">
+              <BookOpen size={20} className="text-accent" />
+              Vertiefen Sie das Thema
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {articles.map((a) => (
+                <Link
+                  key={a.to}
+                  to={a.to}
+                  className="group flex items-center justify-between gap-4 bg-white border border-line rounded-2xl px-6 py-5 hover:border-accent/40 hover:shadow-soft transition-all"
+                >
+                  <span className="font-semibold text-navy leading-snug">{a.title}</span>
+                  <ArrowRight size={16} className="text-accent flex-shrink-0 transition-transform group-hover:translate-x-1" />
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       <CTABand title={service.ctaTitle} lead={service.ctaLead} />
     </div>

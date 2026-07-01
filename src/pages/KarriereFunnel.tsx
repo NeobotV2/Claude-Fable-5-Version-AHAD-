@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
+import { Helmet } from 'react-helmet-async';
 import { ChevronLeft, ChevronRight, Check, Send, Smartphone, MapPin, Calendar, Briefcase, User, Info, Loader2, Globe } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import SEO from '@/components/SEO';
@@ -37,13 +38,27 @@ export default function KarriereFunnel() {
   const [data, setData] = useState<FunnelData>(INITIAL_DATA);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [submitError, setSubmitError] = useState(false);
   const navigate = useNavigate();
+  const cardRef = useRef<HTMLDivElement>(null);
+  const isFirstRender = useRef(true);
 
   const t = lang ? translations[lang] : translations.de;
   const isRtl = lang ? languages.find(l => l.id === lang)?.rtl : false;
 
   const nextStep = () => setStep(prev => Math.min(prev + 1, 4));
   const prevStep = () => setStep(prev => Math.max(prev - 1, 1));
+
+  // Barrierefreiheit: Fokus bei Schrittwechsel auf den Funnel-Inhalt setzen,
+  // damit Tastatur-/Screenreader-Nutzer die Position nicht verlieren.
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+    const timer = window.setTimeout(() => cardRef.current?.focus(), 80);
+    return () => window.clearTimeout(timer);
+  }, [step]);
 
   // Frühestes wählbares Startdatum = heute (kein Datum in der Vergangenheit).
   const today = new Date().toISOString().slice(0, 10);
@@ -56,37 +71,49 @@ export default function KarriereFunnel() {
     e.preventDefault();
     if (!data.privacyAccepted) return;
 
+    if (isSubmitting) return;
     setIsSubmitting(true);
+    setSubmitError(false);
+
+    // 1) E-Mail-Benachrichtigung zuerst — Ergebnis wandert als emailSent in den
+    //    Bewerbungs-Datensatz, damit fehlgeschlagene Benachrichtigungen im
+    //    Admin-Bereich auffallen statt unbemerkt verloren zu gehen.
+    let emailSent = false;
     try {
-      // Firebase erst beim Absenden laden — hält Initial-Bundle & SSG schlank.
-      const { db, collection, addDoc, serverTimestamp, handleFirestoreError, OperationType } = await import('@/firebase');
-      try {
-        await addDoc(collection(db, 'job_applications'), {
-          ...data,
-          language: lang,
-          createdAt: serverTimestamp(),
-          status: 'new',
-        });
-      } catch (error) {
-        console.error('Error submitting application:', error);
-        handleFirestoreError(error, OperationType.WRITE, 'job_applications');
-      }
-
-      // Send email notification
-      try {
-        await fetch('/api/send-email', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ type: 'job_application', data: { ...data, language: lang } }),
-        });
-      } catch (emailError) {
-        console.error('Error sending email notification:', emailError);
-      }
-
-      setIsSuccess(true);
-    } finally {
-      setIsSubmitting(false);
+      const res = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ type: 'job_application', data: { ...data, language: lang } }),
+      });
+      emailSent = res.ok;
+    } catch (emailError) {
+      console.error('Error sending email notification:', emailError);
     }
+
+    // 2) Bewerbung in Firestore sichern (Firebase erst beim Absenden laden —
+    //    hält Initial-Bundle & SSG schlank).
+    let stored = false;
+    try {
+      const { db, collection, addDoc, serverTimestamp } = await import('@/firebase');
+      await addDoc(collection(db, 'job_applications'), {
+        ...data,
+        language: lang,
+        emailSent,
+        createdAt: serverTimestamp(),
+        status: 'new',
+      });
+      stored = true;
+    } catch (error) {
+      console.error('Error submitting application:', error);
+    }
+
+    // Erfolg, sobald die Bewerbung auf MINDESTENS einem Weg angekommen ist.
+    if (stored || emailSent) {
+      setIsSuccess(true);
+    } else {
+      setSubmitError(true);
+    }
+    setIsSubmitting(false);
   };
 
   const progress = (step / 4) * 100;
@@ -143,19 +170,37 @@ export default function KarriereFunnel() {
 
   return (
     <div className="min-h-screen bg-[#f7f9fb] pt-24 pb-12 lg:pt-28 lg:pb-16 px-4" dir={isRtl ? 'rtl' : 'ltr'}>
-      <SEO 
-        title={`${t.title} | AHAD Cleaning`} 
+      <SEO
+        title={`${t.title} | AHAD Cleaning`}
         description={t.subtitle}
       />
+      {/* Sprache & Leserichtung fürs Dokument — wichtig für Screenreader & Suche */}
+      <Helmet htmlAttributes={{ lang, dir: isRtl ? 'rtl' : 'ltr' }} />
 
-      <div className="max-w-2xl mx-auto">
-        {/* Progress Bar */}
+      <div
+        ref={cardRef}
+        tabIndex={-1}
+        aria-live="polite"
+        className="max-w-2xl mx-auto outline-none"
+      >
+        {/* Progress Bar + jederzeit sichtbarer Sprachwechsel */}
         <div className="mb-6">
           <div className="flex justify-between items-center mb-2">
             <span className="text-xs font-bold uppercase tracking-widest text-[#0D6B38]">
               {step === 4 ? t.fastDone : `${t.step} ${step} ${t.of} 4`}
             </span>
-            <span className="text-xs font-bold text-[#0D6B38]">{Math.round(progress)}%</span>
+            <span className="flex items-center gap-3">
+              <button
+                type="button"
+                onClick={() => setLang(null)}
+                className="inline-flex items-center gap-1.5 text-xs font-bold text-[#424751] hover:text-[#0D6B38] transition-colors"
+                aria-label={t.langSelect}
+              >
+                <Globe size={13} />
+                {languages.find((l) => l.id === lang)?.flag} {languages.find((l) => l.id === lang)?.label}
+              </button>
+              <span className="text-xs font-bold text-[#0D6B38]">{Math.round(progress)}%</span>
+            </span>
           </div>
           <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
             <motion.div 
@@ -189,13 +234,15 @@ export default function KarriereFunnel() {
                 ].map((item) => (
                   <button
                     key={item.id}
+                    aria-pressed={data.jobType === item.title}
+                    aria-label={`${item.title}: ${item.desc}`}
                     onClick={() => {
                       updateData({ jobType: item.title });
                       nextStep();
                     }}
                     className={`p-4 text-left rounded-xl border-2 transition-all ${
-                      data.jobType === item.title 
-                        ? 'border-[#0D6B38] bg-accent/5' 
+                      data.jobType === item.title
+                        ? 'border-[#0D6B38] bg-accent/5'
                         : 'border-white bg-white hover:border-gray-200'
                     } shadow-sm ${isRtl ? 'text-right' : 'text-left'}`}
                   >
@@ -204,10 +251,6 @@ export default function KarriereFunnel() {
                   </button>
                 ))}
               </div>
-              
-              <button onClick={() => setLang(null)} className="flex items-center gap-2 text-[#424751] font-bold py-3 mx-auto">
-                <Globe size={18} /> {t.langSelect}
-              </button>
             </motion.div>
           )}
 
@@ -233,6 +276,8 @@ export default function KarriereFunnel() {
                 ].map((item) => (
                   <button
                     key={item.id}
+                    aria-pressed={data.department === item.title}
+                    aria-label={`${item.title}: ${item.desc}`}
                     onClick={() => {
                       updateData({ department: item.title });
                       nextStep();
@@ -274,6 +319,7 @@ export default function KarriereFunnel() {
                   <label className="block text-xs font-bold uppercase tracking-widest text-[#0D6B38] mb-2">{t.experienceLabel}</label>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <button
+                      aria-pressed={data.experience === 'Ja'}
                       onClick={() => updateData({ experience: 'Ja' })}
                       className={`py-3 rounded-xl border-2 font-bold transition-all ${
                         data.experience === 'Ja' ? 'border-[#0D6B38] bg-accent/5 text-[#0D6B38]' : 'border-white bg-white'
@@ -282,6 +328,7 @@ export default function KarriereFunnel() {
                       {t.expYes}
                     </button>
                     <button
+                      aria-pressed={data.experience === 'Quereinsteiger'}
                       onClick={() => updateData({ experience: 'Quereinsteiger' })}
                       className={`py-3 rounded-xl border-2 font-bold transition-all ${
                         data.experience === 'Quereinsteiger' ? 'border-[#0D6B38] bg-accent/5 text-[#0D6B38]' : 'border-white bg-white'
@@ -297,6 +344,7 @@ export default function KarriereFunnel() {
                   <label className="block text-xs font-bold uppercase tracking-widest text-[#0D6B38] mb-2">{t.startLabel}</label>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <button
+                      aria-pressed={data.startDate === 'Sofort'}
                       onClick={() => updateData({ startDate: 'Sofort' })}
                       className={`py-3 rounded-xl border-2 font-bold transition-all ${
                         data.startDate === 'Sofort' ? 'border-[#0D6B38] bg-accent/5 text-[#0D6B38]' : 'border-white bg-white'
@@ -481,6 +529,12 @@ export default function KarriereFunnel() {
                       {t.privacyLabel} <Link to="/datenschutz" className="underline">{t.privacyLink}</Link>
                     </span>
                   </label>
+
+                  {submitError && (
+                    <div role="alert" className="bg-red-50 border border-red-100 text-red-700 text-sm font-medium rounded-xl p-4">
+                      {t.submitErrorText}
+                    </div>
+                  )}
 
                   <div className="flex gap-3">
                     <button type="button" onClick={prevStep} className="flex-1 py-3 font-bold text-[#424751] bg-white rounded-xl shadow-sm hover:bg-gray-50 transition-colors">

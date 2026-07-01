@@ -23,13 +23,32 @@ export const FALLBACK_IMAGE = `${import.meta.env.BASE_URL}images/fallback.jpg`;
 /**
  * Erzeugt ein responsives srcset für Unsplash-URLs (kleinere Geräte laden
  * kleinere Varianten — bessere mobile Ladezeit / Core Web Vitals).
- * Lokale Fotos liefern kein srcset (bereits in Zielgröße ausgespielt).
  */
 export function unsplashSrcSet(url: string): string | undefined {
   if (!url.includes('images.unsplash.com')) return undefined;
   return [480, 768, 1080, 1600]
     .map((w) => `${url.replace(/w=\d+/, `w=${w}`)} ${w}w`)
     .join(', ');
+}
+
+/**
+ * Responsives srcset für BELIEBIGE Bildquellen: Unsplash über URL-Parameter,
+ * lokale AHAD-Fotos über die von scripts/gen-image-variants.mjs erzeugten
+ * 480w-/960w-Varianten (Manifest garantiert: nur existierende Dateien).
+ */
+import VARIANTS from './image-variants.json';
+
+export function srcSetFor(url: string): string | undefined {
+  const unsplash = unsplashSrcSet(url);
+  if (unsplash) return unsplash;
+  const match = url.match(/images\/ahad\/([^/?]+\.webp)$/);
+  if (!match) return undefined;
+  const entry = (VARIANTS as Record<string, { width: number; variants: number[] }>)[match[1]];
+  if (!entry || entry.variants.length === 0) return undefined;
+  const stemUrl = url.replace(/\.webp$/, '');
+  const parts = entry.variants.map((w) => `${stemUrl}-${w}.webp ${w}w`);
+  parts.push(`${url} ${entry.width}w`);
+  return parts.join(', ');
 }
 
 export const IMG = {

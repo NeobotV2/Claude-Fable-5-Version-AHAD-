@@ -14,7 +14,7 @@ export const languages: { id: Language; label: string; flag: string; rtl?: boole
   { id: 'fr', label: 'Français', flag: '🇫🇷' },
 ];
 
-export const translations: Record<Language, any> = {
+export const translations = {
   de: {
     title: "Express-Bewerbung",
     subtitle: "Bewirb dich in nur 60 Sekunden – ganz ohne Lebenslauf!",
@@ -49,6 +49,7 @@ export const translations: Record<Language, any> = {
     startLabel: "Wann kannst du starten?",
     startNow: "Ab sofort",
     startFrom: "Ab Wunschdatum",
+    submitErrorText: "Die Bewerbung konnte nicht gesendet werden. Bitte versuche es erneut oder ruf uns an.",
     mobilityLabel: "Wie bist du mobil?",
     mobAuto: "Ich habe ein Auto",
     mobPublic: "Ich nutze Bus & Bahn",
@@ -102,6 +103,7 @@ export const translations: Record<Language, any> = {
     startLabel: "When can you start?",
     startNow: "Immediately",
     startFrom: "From a set date",
+    submitErrorText: "Your application could not be sent. Please try again or call us.",
     mobilityLabel: "How mobile are you?",
     mobAuto: "I have a car",
     mobPublic: "I use bus & train",
@@ -155,6 +157,7 @@ export const translations: Record<Language, any> = {
     startLabel: "Ne zaman başlayabilirsiniz?",
     startNow: "Hemen",
     startFrom: "Belirli tarihten",
+    submitErrorText: "Başvurunuz gönderilemedi. Lütfen tekrar deneyin veya bizi arayın.",
     mobilityLabel: "Ulaşım durumunuz nasıl?",
     mobAuto: "Arabam var",
     mobPublic: "Otobüs ve tren kullanıyorum",
@@ -208,6 +211,7 @@ export const translations: Record<Language, any> = {
     startLabel: "متى يمكنك البدء؟",
     startNow: "فوراً",
     startFrom: "من تاريخ محدد",
+    submitErrorText: "لم يتم إرسال طلبك. يرجى المحاولة مرة أخرى أو الاتصال بنا.",
     mobilityLabel: "كيف تتنقل؟",
     mobAuto: "لدي سيارة",
     mobPublic: "أستخدم الحافلة والقطار",
@@ -261,6 +265,7 @@ export const translations: Record<Language, any> = {
     startLabel: "Когда вы можете приступить?",
     startNow: "Сразу",
     startFrom: "С даты",
+    submitErrorText: "Не удалось отправить заявку. Повторите попытку или позвоните нам.",
     mobilityLabel: "Как вы передвигаетесь?",
     mobAuto: "У меня есть машина",
     mobPublic: "Пользуюсь автобусом и поездом",
@@ -314,6 +319,7 @@ export const translations: Record<Language, any> = {
     startLabel: "Коли ви можете приступити?",
     startNow: "Відразу",
     startFrom: "З певної дати",
+    submitErrorText: "Не вдалося надіслати заявку. Спробуйте ще раз або зателефонуйте нам.",
     mobilityLabel: "Як ви пересуваєтеся?",
     mobAuto: "У мене є машина",
     mobPublic: "Користуюся автобусом та поїздом",
@@ -367,6 +373,7 @@ export const translations: Record<Language, any> = {
     startLabel: "Kiedy możesz zacząć?",
     startNow: "Od zaraz",
     startFrom: "Od konkretnej daty",
+    submitErrorText: "Nie udało się wysłać aplikacji. Spróbuj ponownie lub zadzwoń do nas.",
     mobilityLabel: "Jak się przemieszczasz?",
     mobAuto: "Mam samochód",
     mobPublic: "Korzystam z autobusu i pociągu",
@@ -420,6 +427,7 @@ export const translations: Record<Language, any> = {
     startLabel: "Când puteți începe?",
     startNow: "Imediat",
     startFrom: "De la o dată",
+    submitErrorText: "Aplicația nu a putut fi trimisă. Încercați din nou sau sunați-ne.",
     mobilityLabel: "Cum vă deplasați?",
     mobAuto: "Am mașină",
     mobPublic: "Folosesc autobuzul și trenul",
@@ -473,6 +481,7 @@ export const translations: Record<Language, any> = {
     startLabel: "Quando puoi iniziare?",
     startNow: "Subito",
     startFrom: "Da una data",
+    submitErrorText: "La candidatura non è stata inviata. Riprova o chiamaci.",
     mobilityLabel: "Come ti sposti?",
     mobAuto: "Ho un'auto",
     mobPublic: "Uso bus e treno",
@@ -526,6 +535,7 @@ export const translations: Record<Language, any> = {
     startLabel: "Πότε μπορείτε να ξεκινήσετε;",
     startNow: "Άμεσα",
     startFrom: "Από ημερομηνία",
+    submitErrorText: "Η αίτηση δεν στάλθηκε. Δοκιμάστε ξανά ή καλέστε μας.",
     mobilityLabel: "Πώς μετακινείστε;",
     mobAuto: "Έχω αυτοκίνητο",
     mobPublic: "Χρησιμοποιώ λεωφορείο & τρένο",
@@ -579,6 +589,7 @@ export const translations: Record<Language, any> = {
     startLabel: "Quand pouvez-vous commencer ?",
     startNow: "Immédiatement",
     startFrom: "À partir d'une date",
+    submitErrorText: "Votre candidature n'a pas pu être envoyée. Réessayez ou appelez-nous.",
     mobilityLabel: "Comment vous déplacez-vous ?",
     mobAuto: "J'ai une voiture",
     mobPublic: "J'utilise le bus et le train",
@@ -598,4 +609,7 @@ export const translations: Record<Language, any> = {
     privacyLink: "Politique de confidentialité",
     langSelect: "Choisissez votre langue"
   }
-};
+} satisfies Record<Language, Record<string, unknown>>;
+
+/** Struktur der deutschen Referenz-Übersetzung — alle Sprachen müssen dieselben Schlüssel tragen. */
+export type FunnelTranslation = typeof translations.de;

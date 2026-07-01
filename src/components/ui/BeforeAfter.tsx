@@ -1,7 +1,7 @@
 import { useCallback, useRef, useState } from 'react';
 import { ChevronsLeftRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { unsplashSrcSet } from '@/lib/images';
+import { srcSetFor } from '@/lib/images';
 
 interface BeforeAfterProps {
   beforeSrc: string;
@@ -61,7 +61,7 @@ export default function BeforeAfter({
       {/* Nachher (volle Fläche, Basis) */}
       <img
         src={afterSrc}
-        srcSet={unsplashSrcSet(afterSrc)}
+        srcSet={srcSetFor(afterSrc)}
         sizes="(min-width:1024px) 50vw, 100vw"
         alt={afterLabel}
         draggable={false}
@@ -78,7 +78,7 @@ export default function BeforeAfter({
       >
         <img
           src={beforeSrc}
-          srcSet={unsplashSrcSet(beforeSrc)}
+          srcSet={srcSetFor(beforeSrc)}
           sizes="(min-width:1024px) 50vw, 100vw"
           alt=""
           draggable={false}

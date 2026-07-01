@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import {
   Building,
@@ -16,11 +16,12 @@ import {
   BadgeCheck,
   MapPin,
   ClipboardList,
+  MessageCircle,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Link } from 'react-router-dom';
 import SEO from '@/components/SEO';
-import { SITE } from '@/lib/site';
+import { SITE, WHATSAPP_HREF } from '@/lib/site';
 
 type Step = 1 | 2 | 3 | 4;
 
@@ -92,23 +93,69 @@ const inputClasses =
   'w-full px-4 py-3.5 rounded-xl border-2 border-line bg-white text-[15px] font-medium text-navy placeholder:text-slate/60 ' +
   'focus:border-accent focus:ring-4 focus:ring-accent/10 transition-all outline-none';
 
+const EMPTY_FORM: FormData = {
+  objectType: '',
+  services: [],
+  areaSize: '',
+  frequency: '',
+  anforderungen: [],
+  companyName: '',
+  contactPerson: '',
+  email: '',
+  phone: '',
+  location: '',
+  preferredTime: '',
+};
+
+/** Entwurf im localStorage — B2B-Interessenten unterbrechen häufig (Rückfragen,
+ *  Flächen nachschlagen). Ohne Zwischenspeicher wäre bei Reload alles weg. */
+const DRAFT_KEY = 'ahad-angebot-entwurf';
+
+function loadDraft(): { form: FormData; step: Step } | null {
+  try {
+    const raw = localStorage.getItem(DRAFT_KEY);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw);
+    if (!parsed || typeof parsed !== 'object' || typeof parsed.form !== 'object') return null;
+    const form = { ...EMPTY_FORM, ...parsed.form };
+    // Nur wiederherstellen, wenn wirklich schon etwas eingegeben wurde.
+    if (!form.objectType && form.services.length === 0) return null;
+    const step = [1, 2, 3, 4].includes(parsed.step) ? (parsed.step as Step) : 1;
+    return { form, step };
+  } catch {
+    return null;
+  }
+}
+
 export default function AngebotsFunnel() {
-  const [step, setStep] = useState<Step>(1);
+  const draft = useRef(typeof window !== 'undefined' ? loadDraft() : null).current;
+  const [step, setStep] = useState<Step>(draft?.step ?? 1);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
-  const [formData, setFormData] = useState<FormData>({
-    objectType: '',
-    services: [],
-    areaSize: '',
-    frequency: '',
-    anforderungen: [],
-    companyName: '',
-    contactPerson: '',
-    email: '',
-    phone: '',
-    location: '',
-    preferredTime: '',
-  });
+  const [submitError, setSubmitError] = useState<string | null>(null);
+  const [formData, setFormData] = useState<FormData>(draft?.form ?? { ...EMPTY_FORM });
+  const cardRef = useRef<HTMLDivElement>(null);
+  const isFirstRender = useRef(true);
+
+  // Entwurf fortlaufend sichern (ohne personenbezogene Extras — nur die Formfelder).
+  useEffect(() => {
+    try {
+      localStorage.setItem(DRAFT_KEY, JSON.stringify({ form: formData, step }));
+    } catch {
+      /* Speicher voll/blockiert — Zwischenspeichern ist optional */
+    }
+  }, [formData, step]);
+
+  // Barrierefreiheit: Bei Schrittwechsel den Fokus auf die neue Karte setzen,
+  // damit Tastatur- und Screenreader-Nutzer nicht die Position verlieren.
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+    const t = window.setTimeout(() => cardRef.current?.focus(), 80);
+    return () => window.clearTimeout(t);
+  }, [step]);
 
   const progress = (step / 4) * 100;
 
@@ -140,38 +187,56 @@ export default function AngebotsFunnel() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (isSubmitting) return;
     setIsSubmitting(true);
+    setSubmitError(null);
 
+    // 1) E-Mail-Benachrichtigung zuerst — das Ergebnis wandert als emailSent
+    //    in den Lead-Datensatz, damit fehlgeschlagene Benachrichtigungen im
+    //    Admin-Bereich auffallen statt unbemerkt verloren zu gehen.
+    let emailSent = false;
     try {
-      // Firebase erst beim Absenden laden — hält Initial-Bundle & SSG schlank.
-      const { db, collection, addDoc, serverTimestamp, handleFirestoreError, OperationType } = await import('@/firebase');
-      try {
-        await addDoc(collection(db, 'offer_leads'), {
-          ...formData,
-          status: 'new',
-          createdAt: serverTimestamp(),
-        });
-      } catch (error) {
-        console.error('Error submitting lead:', error);
-        handleFirestoreError(error, OperationType.WRITE, 'offer_leads');
-      }
+      const res = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ type: 'offer_lead', data: formData }),
+      });
+      emailSent = res.ok;
+    } catch (emailError) {
+      console.error('Error sending email notification:', emailError);
+    }
 
-      // E-Mail-Benachrichtigung (optionaler Backend-Endpunkt)
-      try {
-        await fetch('/api/send-email', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ type: 'offer_lead', data: formData }),
-        });
-      } catch (emailError) {
-        console.error('Error sending email notification:', emailError);
-      }
+    // 2) Lead in Firestore sichern (Firebase erst beim Absenden laden —
+    //    hält Initial-Bundle & SSG schlank).
+    let stored = false;
+    try {
+      const { db, collection, addDoc, serverTimestamp } = await import('@/firebase');
+      await addDoc(collection(db, 'offer_leads'), {
+        ...formData,
+        emailSent,
+        status: 'new',
+        createdAt: serverTimestamp(),
+      });
+      stored = true;
+    } catch (error) {
+      console.error('Error submitting lead:', error);
+    }
 
+    // Erfolg, sobald der Lead auf MINDESTENS einem Weg angekommen ist.
+    if (stored || emailSent) {
+      try {
+        localStorage.removeItem(DRAFT_KEY);
+      } catch {
+        /* noop */
+      }
       setIsSuccess(true);
       window.scrollTo({ top: 0, behavior: 'smooth' });
-    } finally {
-      setIsSubmitting(false);
+    } else {
+      setSubmitError(
+        `Die Anfrage konnte nicht übermittelt werden. Bitte versuchen Sie es erneut — oder rufen Sie uns direkt an: ${SITE.phone}.`
+      );
     }
+    setIsSubmitting(false);
   };
 
   const shell = (content: React.ReactNode) => (
@@ -209,16 +274,29 @@ export default function AngebotsFunnel() {
           <strong className="text-navy">innerhalb der nächsten 24 Stunden</strong> bei Ihnen, um die unverbindliche
           Objektbesichtigung zu vereinbaren.
         </p>
-        <p className="text-sm text-slate/80 mb-10">
-          Noch schneller? Rufen Sie direkt an:{' '}
-          <a href={SITE.phoneHref} className="font-bold text-brand hover:underline">
-            {SITE.phone}
+        {/* Aktive Anschlusswege statt passiver Wartezeit */}
+        <div className="flex flex-col sm:flex-row gap-3 justify-center mb-8">
+          <a
+            href={SITE.phoneHref}
+            className="inline-flex items-center justify-center gap-2 bg-accent text-white px-6 py-3.5 rounded-xl font-bold hover:bg-accent-dark transition-all shadow-glow hover:-translate-y-0.5"
+          >
+            <Phone size={17} />
+            Direkt anrufen
           </a>
+          <a
+            href={WHATSAPP_HREF}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center gap-2 bg-[#25D366] text-white px-6 py-3.5 rounded-xl font-bold hover:brightness-95 transition-all shadow-soft hover:-translate-y-0.5"
+          >
+            <MessageCircle size={17} />
+            Per WhatsApp schreiben
+          </a>
+        </div>
+        <p className="text-sm text-slate/80 mb-8">
+          Oder telefonisch: <span className="font-bold text-navy">{SITE.phone}</span> · Mo–Fr 8–17 Uhr
         </p>
-        <Link
-          to="/"
-          className="inline-flex items-center justify-center gap-2 bg-navy text-white px-8 py-4 rounded-xl font-bold hover:bg-navy-800 transition-all shadow-soft hover:-translate-y-0.5"
-        >
+        <Link to="/" className="text-brand font-bold hover:text-brand-light transition-colors">
           Zurück zur Startseite
         </Link>
       </motion.div>
@@ -261,8 +339,13 @@ export default function AngebotsFunnel() {
         </div>
       </div>
 
-      {/* Karte */}
-      <div className="bg-white rounded-[2rem] shadow-lifted p-6 sm:p-10">
+      {/* Karte — tabIndex -1: programmatisches Fokusziel beim Schrittwechsel */}
+      <div
+        ref={cardRef}
+        tabIndex={-1}
+        aria-live="polite"
+        className="bg-white rounded-[2rem] shadow-lifted p-6 sm:p-10 outline-none"
+      >
         <AnimatePresence mode="wait">
           {step === 1 && (
             <motion.div
@@ -283,6 +366,8 @@ export default function AngebotsFunnel() {
                 {OBJECT_TYPES.map((type) => (
                   <button
                     key={type.id}
+                    aria-pressed={formData.objectType === type.title}
+                    aria-label={`${type.title}: ${type.desc}`}
                     onClick={() => {
                       setFormData({ ...formData, objectType: type.title });
                       handleNext();
@@ -328,6 +413,7 @@ export default function AngebotsFunnel() {
                   return (
                     <button
                       key={service.id}
+                      aria-pressed={active}
                       onClick={() => toggleService(service.title)}
                       className={cn('flex items-center gap-3 p-5', selectableCard(active))}
                     >
@@ -385,6 +471,7 @@ export default function AngebotsFunnel() {
                 {AREA_SIZES.map((size) => (
                   <button
                     key={size.id}
+                    aria-pressed={formData.areaSize === size.title}
                     onClick={() => setFormData({ ...formData, areaSize: size.title })}
                     className={cn('p-4 font-bold text-sm text-center text-navy', selectableCard(formData.areaSize === size.title))}
                   >
@@ -402,6 +489,7 @@ export default function AngebotsFunnel() {
                   {FREQUENCIES.map((freq) => (
                     <button
                       key={freq.id}
+                      aria-pressed={formData.frequency === freq.title}
                       onClick={() => setFormData({ ...formData, frequency: freq.title })}
                       className={cn('p-4 font-bold text-sm text-center text-navy', selectableCard(formData.frequency === freq.title))}
                     >
@@ -423,6 +511,7 @@ export default function AngebotsFunnel() {
                     return (
                       <button
                         key={label}
+                        aria-pressed={active}
                         onClick={() => toggleAnforderung(label)}
                         className={cn(
                           'inline-flex items-center gap-2 rounded-full border-2 px-4 py-2 text-[13px] font-semibold transition-all text-left',
@@ -585,6 +674,16 @@ export default function AngebotsFunnel() {
                   </Link>{' '}
                   einverstanden.
                 </p>
+
+                {submitError && (
+                  <div
+                    role="alert"
+                    className="flex items-start gap-3 bg-red-50 border border-red-100 text-red-700 text-sm font-medium rounded-xl p-4"
+                  >
+                    <Phone size={16} className="flex-shrink-0 mt-0.5" />
+                    {submitError}
+                  </div>
+                )}
 
                 <div className="flex flex-col sm:flex-row gap-3 pt-1">
                   <button
