@@ -1,0 +1,54 @@
+rules_version = '2';
+
+// Firestore-Sicherheitsregeln fuer ahad-cleaning.de
+//
+// Prinzip: Website-Besucher duerfen Formulare EINREICHEN (create),
+// aber niemals fremde Eintraege lesen, aendern oder loeschen.
+// Lesen darf ausschliesslich das Admin-Konto (Google-Login im Admin-Panel).
+//
+// WICHTIG: Diese Datei ist die versionierte Referenz. Aktiv wird sie erst
+// durch Deployment: Firebase Console -> Firestore -> Regeln (Inhalt einfuegen)
+// oder `firebase deploy --only firestore:rules`.
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isAdmin() {
+      return request.auth != null
+        && request.auth.token.email != null
+        && request.auth.token.email.lower() in [
+          'yerlikaya288@gmail.com',
+          'm.yerlikaya@ahad-cleaning.de'
+        ];
+    }
+
+    // Ein Formular-Eintrag darf nur neu angelegt werden (kein Update/Delete
+    // durch Besucher) und muss ueberschaubar klein bleiben.
+    function isSaneCreate() {
+      return request.resource.data.size() < 40;
+    }
+
+    match /leads/{doc} {
+      allow create: if isSaneCreate();
+      allow update: if isAdmin();
+      allow read, delete: if isAdmin();
+    }
+
+    match /offer_leads/{doc} {
+      allow create: if isSaneCreate();
+      allow update: if isAdmin();
+      allow read, delete: if isAdmin();
+    }
+
+    match /job_applications/{doc} {
+      allow create: if isSaneCreate();
+      allow update: if isAdmin();
+      allow read, delete: if isAdmin();
+    }
+
+    // Alles andere: komplett gesperrt.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

@@ -14,9 +14,7 @@ import {
   FirebaseUser,
   Timestamp,
   doc,
-  getDoc,
   setDoc,
-  serverTimestamp,
   handleFirestoreError,
   OperationType
 } from '@/firebase';
@@ -51,6 +49,8 @@ interface JobApplication {
   mobility: string;
   location: string;
   status: string;
+  /** false = E-Mail-Benachrichtigung fehlgeschlagen — Eintrag existiert nur hier. */
+  emailSent?: boolean;
   createdAt: Timestamp;
 }
 
@@ -66,6 +66,7 @@ interface OfferLead {
   areaSize: string;
   frequency: string;
   status: string;
+  emailSent?: boolean;
   createdAt: Timestamp;
 }
 
@@ -78,7 +79,37 @@ interface ContactLead {
   serviceType: string;
   message: string;
   status: string;
+  emailSent?: boolean;
   createdAt: Timestamp;
+}
+
+/** Badge für Einträge, deren E-Mail-Benachrichtigung fehlschlug (nur Firestore). */
+function EmailFailedBadge({ emailSent }: { emailSent?: boolean }) {
+  if (emailSent !== false) return null;
+  return (
+    <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-amber-100 text-amber-700 text-xs font-bold rounded-full uppercase">
+      <AlertCircle size={12} />
+      E-Mail fehlgeschlagen
+    </span>
+  );
+}
+
+/** CSV-Export (Semikolon + BOM → öffnet sauber in deutschem Excel). */
+function downloadCsv(filename: string, rows: Record<string, unknown>[]) {
+  if (rows.length === 0) return;
+  const cols = Array.from(new Set(rows.flatMap((r) => Object.keys(r))));
+  const cell = (v: unknown) => {
+    const s = Array.isArray(v) ? v.join(', ') : String(v ?? '');
+    return `"${s.replace(/"/g, '""')}"`;
+  };
+  const csv = [cols.join(';'), ...rows.map((r) => cols.map((c) => cell(r[c])).join(';'))].join('\r\n');
+  const blob = new Blob(['\ufeff' + csv], { type: 'text/csv;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  a.click();
+  URL.revokeObjectURL(url);
 }
 
 export default function Admin() {
@@ -125,29 +156,10 @@ export default function Admin() {
   };
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
-      console.log("Admin Auth State:", firebaseUser ? `Logged in as ${firebaseUser.email}` : "Not logged in");
-      
-      if (firebaseUser) {
-        // Create or update user profile
-        const userRef = doc(db, 'users', firebaseUser.uid);
-        try {
-          const userDoc = await getDoc(userRef);
-          if (!userDoc.exists()) {
-            await setDoc(userRef, {
-              uid: firebaseUser.uid,
-              email: firebaseUser.email,
-              displayName: firebaseUser.displayName,
-              photoURL: firebaseUser.photoURL,
-              role: firebaseUser.email === 'Yerlikaya288@gmail.com' ? 'admin' : 'client',
-              createdAt: serverTimestamp()
-            });
-          }
-        } catch (err) {
-          console.error("Error updating user profile:", err);
-        }
-      }
-      
+    // Zugriffsschutz liegt bewusst NICHT im Client: Welche Konten lesen dürfen,
+    // entscheiden allein die Firestore-Sicherheitsregeln (siehe firestore.rules).
+    // Nicht autorisierte Logins sehen ein leeres Dashboard, keine Daten.
+    const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
       setUser(firebaseUser);
       setLoading(false);
     });
@@ -248,8 +260,19 @@ export default function Admin() {
             <h1 className="text-3xl font-black text-[#0B2341] mb-2">Dashboard</h1>
             <p className="text-[#424751]">Willkommen zurück, {user.displayName}</p>
           </div>
-          <div className="flex gap-4">
-            <button 
+          <div className="flex flex-wrap gap-4">
+            <button
+              onClick={() => {
+                const stamp = new Date().toISOString().slice(0, 10);
+                if (activeTab === 'jobs') downloadCsv(`bewerbungen-${stamp}.csv`, jobApplications.map(({ createdAt, ...r }) => ({ ...r, erstellt: createdAt?.toDate().toLocaleString('de-DE') ?? '' })));
+                if (activeTab === 'offers') downloadCsv(`angebotsanfragen-${stamp}.csv`, offerLeads.map(({ createdAt, ...r }) => ({ ...r, erstellt: createdAt?.toDate().toLocaleString('de-DE') ?? '' })));
+                if (activeTab === 'contacts') downloadCsv(`kontaktanfragen-${stamp}.csv`, contactLeads.map(({ createdAt, ...r }) => ({ ...r, erstellt: createdAt?.toDate().toLocaleString('de-DE') ?? '' })));
+              }}
+              className="flex items-center gap-2 bg-white text-[#0D6B38] px-6 py-3 rounded-xl font-bold hover:bg-green-50 transition-all shadow-sm border border-green-100"
+            >
+              <FileText size={20} /> CSV exportieren
+            </button>
+            <button
               onClick={sendTestEmail}
               disabled={isTestingEmail}
               className="flex items-center gap-2 bg-white text-[#0B2341] px-6 py-3 rounded-xl font-bold hover:bg-blue-50 transition-all shadow-sm border border-blue-100 disabled:opacity-50"
@@ -352,6 +375,7 @@ export default function Admin() {
                         <span className="px-3 py-1 bg-green-100 text-[#0D6B38] text-xs font-bold rounded-full uppercase">
                           {app.jobType}
                         </span>
+                        <EmailFailedBadge emailSent={app.emailSent} />
                       </div>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-3">
                         <div className="flex items-center gap-2 text-[#424751]">
@@ -418,6 +442,7 @@ export default function Admin() {
                         <span className="px-3 py-1 bg-blue-100 text-[#0B2341] text-xs font-bold rounded-full uppercase">
                           {lead.objectType}
                         </span>
+                        <EmailFailedBadge emailSent={lead.emailSent} />
                       </div>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-3">
                         <div className="flex items-center gap-2 text-[#424751]">
@@ -484,6 +509,7 @@ export default function Admin() {
                         <span className="px-3 py-1 bg-purple-100 text-purple-600 text-xs font-bold rounded-full uppercase">
                           {lead.serviceType}
                         </span>
+                        <EmailFailedBadge emailSent={lead.emailSent} />
                       </div>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-3">
                         <div className="flex items-center gap-2 text-[#424751]">

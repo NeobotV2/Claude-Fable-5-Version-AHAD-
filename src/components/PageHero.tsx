@@ -4,7 +4,7 @@ import { Helmet } from 'react-helmet-async';
 import { ChevronRight } from 'lucide-react';
 import ButtonLink from '@/components/ui/Button';
 import { SITE } from '@/lib/site';
-import { unsplashSrcSet } from '@/lib/images';
+import { srcSetFor } from '@/lib/images';
 import { jsonLd } from '@/lib/jsonld';
 import type { ReactNode } from 'react';
 
@@ -75,7 +75,7 @@ export default function PageHero({
           <>
             <img
               src={image}
-              srcSet={unsplashSrcSet(image)}
+              srcSet={srcSetFor(image)}
               sizes="100vw"
               alt={imageAlt}
               className="w-full h-full object-cover opacity-40"

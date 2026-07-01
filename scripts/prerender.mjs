@@ -105,4 +105,25 @@ try {
   fallback++;
 }
 
+// sitemap.xml direkt aus der Routenliste erzeugen — die ROUTES oben sind die
+// einzige Quelle der Wahrheit. Damit kann die Sitemap nie mehr von den echten
+// Seiten abweichen (vorher handgepflegt in public/sitemap.xml).
+const NOINDEX = new Set(['/angebot']); // Funnel bewusst nicht in die Sitemap
+const priorityFor = (route) => {
+  if (route === '/') return '1.0';
+  if (route.startsWith('/leistungen') || route.startsWith('/branchen')) return '0.8';
+  if (route.startsWith('/standorte') || route === '/kontakt') return '0.8';
+  if (route === '/impressum' || route === '/datenschutz') return '0.3';
+  return '0.6';
+};
+const sitemap =
+  '<?xml version="1.0" encoding="UTF-8"?>\n' +
+  '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
+  ROUTES.filter((r) => !NOINDEX.has(r))
+    .map((r) => `  <url><loc>https://ahad-cleaning.de${r === '/' ? '' : r}</loc><priority>${priorityFor(r)}</priority></url>`)
+    .join('\n') +
+  '\n</urlset>\n';
+await writeFile(path.join(dist, 'sitemap.xml'), sitemap);
+console.log(`✓ sitemap.xml generiert (${ROUTES.length - NOINDEX.size} URLs).`);
+
 console.log(`✓ Prerender fertig: ${ok} statisch, ${fallback} Fallback.`);

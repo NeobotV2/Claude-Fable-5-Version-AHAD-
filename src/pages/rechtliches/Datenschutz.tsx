@@ -109,6 +109,15 @@ export default function Datenschutz() {
               Art. 6 Abs. 1 lit. b bzw. f DSGVO; die Übermittlung in die USA erfolgt auf Basis der
               EU-Standardvertragsklauseln. Details: https://resend.com/legal/privacy-policy
             </p>
+            <p className="text-gray-600 mt-4">
+              <strong>Speicherdauer:</strong> Die über Kontakt-, Angebots- und Bewerbungsformulare übermittelten Daten
+              speichern wir nur so lange, wie es für die Bearbeitung Ihres Anliegens erforderlich ist. Anfragedaten
+              löschen wir spätestens nach Abschluss der Bearbeitung und Ablauf etwaiger Anschlussfragen;
+              Bewerbungsdaten löschen wir spätestens sechs Monate nach Abschluss des Bewerbungsverfahrens, sofern
+              keine Einstellung erfolgt und Sie keiner längeren Speicherung zugestimmt haben. Gesetzliche
+              Aufbewahrungspflichten bleiben unberührt. Sie können jederzeit die Löschung Ihrer Daten verlangen
+              (Kontakt: {'info@ahad-cleaning.de'}).
+            </p>
           </section>
 
           <section className="mb-12">
