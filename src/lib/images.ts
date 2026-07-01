@@ -3,10 +3,10 @@
  *
  * Bevorzugt werden ECHTE AHAD-Fotos (web-optimierte WebP unter
  * /images/ahad/, erzeugt via scripts/process-photos.mjs aus uploads/).
- * Wo (noch) kein passendes Eigenfoto existiert (Medizintechnik, Winterdienst,
- * Branchen Produktion/Büro/Hotel, Region, Handshake, Vorher/Nachher), kommen
- * kuratierte, lizenzfreie Unsplash-Aufnahmen zum Einsatz (Unsplash License,
- * Hotlinking über images.unsplash.com erlaubt, CDN-optimiert).
+ * Wo (noch) kein passendes Eigenfoto existiert (Winterdienst, Hausmeister,
+ * Bau-Detail/Baupläne, Region/Schwarzwald, Handshake), kommen kuratierte,
+ * lizenzfreie Unsplash-Aufnahmen zum Einsatz (Unsplash License, Hotlinking
+ * über images.unsplash.com erlaubt, CDN-optimiert).
  *
  * Fällt eine Quelle aus, greift <SmartImage> auf /images/fallback.jpg
  * (lokal generiertes, gebrandetes Bild) zurück.
@@ -48,8 +48,8 @@ export const IMG = {
   glasDetail: local('glas-detail.webp'),                // Glasreinigung innen
   baureinigung: local('bau.webp'),                      // Glasreinigung Neubau/Atrium
   bauDetail: u('photo-1503387762-592deb58ef4e', 1200),  // Stock: Baupläne
-  medizintechnik: u('photo-1551190822-a9333d879b1f', 1600), // Stock: Klinikflur
-  medizinDetail: u('photo-1576091160399-112ba8d25d1d', 1200), // Stock: Medizin digital
+  medizintechnik: local('medizintechnik.webp'),        // Hygienische Flächendesinfektion, Einweghandschuhe (echt)
+  medizinDetail: local('medizin-detail.webp'),          // AHAD-Flächendesinfektion, Nitrilhandschuh (echt)
   sonderreinigung: local('sonder.webp'),                // Sanitär-Grundreinigung
   sonderDetail: local('sonder-detail.webp'),            // Saugdüse auf Teppich
   winterdienst: u('photo-1418985991508-e47386d96a71', 1600), // Stock: Winter (kein Eigenfoto)
@@ -57,7 +57,7 @@ export const IMG = {
 
   // ── Branchen ───────────────────────────────────────────────────────
   brancheIndustrie: local('branche-industrie.webp'),             // Aufsitz-Scheuersaugmaschine (echt)
-  brancheMedizin: u('photo-1582719508461-905c673771fd', 1600),   // Stock: Reinraum
+  brancheMedizin: local('branche-medizin.webp'),                 // Hygiene mit Mundschutz & Handschuhen (echt)
   brancheBuero: local('branche-buero.webp'),                     // Reinigung modernes Foyer (echt)
   brancheGewerbe: local('gewerbe.webp'),                         // Markt/Großfläche (echt)
   brancheHotel: local('branche-hotel.webp'),                     // Reinigung Lounge-/Gastrobereich am Pool (echt)
