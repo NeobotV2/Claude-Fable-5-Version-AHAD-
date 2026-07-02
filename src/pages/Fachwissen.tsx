@@ -9,6 +9,15 @@ import { IMG } from '@/lib/images';
 
 const articles = [
   {
+    title: 'Was kostet Gebäudereinigung? Stundensatz, m²-Preise & Rechenbeispiele',
+    excerpt:
+      'Stundensatz ab 34 €, Leistungswerte je Flächenart und daraus abgeleitete m²-Preise mit Monatsbeispielen — plus Warnzeichen, an denen Sie Dumping-Angebote erkennen.',
+    path: '/fachwissen/was-kostet-gebaeudereinigung-stundensatz-preise',
+    category: 'Kosten & Kalkulation',
+    readingTime: '9 Min.',
+    image: IMG.unterhaltDetail,
+  },
+  {
     title: 'Reinigungsintervalle für Unternehmen: Der praxisnahe Leitfaden',
     excerpt:
       'Wie oft sollten Büro, Sanitär und Verkehrsflächen wirklich gereinigt werden? Intervalle nach Nutzung statt Bauchgefühl — mit Tabellen für typische Objekttypen.',
