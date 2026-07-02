@@ -11,6 +11,8 @@ export default function FachwissenLeistungsverzeichnis() {
     '@context': 'https://schema.org',
     '@type': 'Article',
     headline: 'Leistungsverzeichnis für die Gebäudereinigung erstellen: Anleitung & Vorlage',
+    datePublished: '2026-06-24',
+    dateModified: '2026-06-24',
     description:
       'Wie erstellt man ein belastbares Leistungsverzeichnis (LV) für die Gebäudereinigung? Aufbau, Bestandteile, verrichtungs- vs. ergebnisorientiert und eine Schritt-für-Schritt-Anleitung.',
     author: { '@type': 'Organization', name: 'AHAD Cleaning Company GmbH' },

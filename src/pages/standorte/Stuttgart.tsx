@@ -40,6 +40,36 @@ const LOCAL_SERVICES = [
   },
 ];
 
+/** Branchen vor Ort — verknüpft den Standort mit den Branchenseiten und deckt
+ *  lokale „Reinigung für …"-Suchanfragen ab. */
+const LOCAL_BRANCHEN = [
+  {
+    title: 'Büros, Verwaltung & Kanzleien',
+    to: '/branchen/buero-verwaltung',
+    desc: 'Bürotürme, Verwaltungen und Kanzleien im Großraum Stuttgart — repräsentativ sauber, diskret im laufenden Betrieb.',
+  },
+  {
+    title: 'Industrie & Produktion',
+    to: '/branchen/industrie-produktion',
+    desc: 'Automotive, Maschinenbau und Zulieferer in den Industriegebieten der Region — UVV-konform und schichtintegriert.',
+  },
+  {
+    title: 'Medizintechnik, Praxen & Kliniken',
+    to: '/branchen/medizintechnik',
+    desc: 'Hygienisch sensible Bereiche mit dokumentierter, auditfähiger Reinigung.',
+  },
+  {
+    title: 'Handel & Gewerbeobjekte',
+    to: '/branchen/gewerbeobjekte',
+    desc: 'Autohäuser, Märkte und Ausstellungsflächen — saubere Kundenbereiche für den ersten Eindruck.',
+  },
+  {
+    title: 'Hotellerie & Objektbetrieb',
+    to: '/branchen/hotellerie-objektbetrieb',
+    desc: 'Hotels und Gastronomie in der Landeshauptstadt — verlässliche Reinigung mit Gespür für den Gast.',
+  },
+];
+
 const SERVICE_AREAS = [
   'Stuttgart',
   'Echterdingen / Filderstadt',
@@ -205,6 +235,27 @@ export default function StandortStuttgart() {
                     <ArrowRight className="w-4 h-4 mt-1 text-accent flex-shrink-0 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
                   </h3>
                   <p className="text-sm text-gray-600 leading-relaxed">{s.desc}</p>
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          {/* Branchen vor Ort */}
+          <div className="mb-20">
+            <h2 className="text-3xl font-bold mb-3 text-gray-900">Branchen, die wir in Stuttgart betreuen</h2>
+            <p className="text-lg text-gray-600 mb-10 max-w-3xl leading-relaxed">Vom Verwaltungsturm über die Produktionshalle bis zum Autohaus: Wir kennen die Anforderungen der Branchen, die den Wirtschaftsraum Stuttgart prägen — und reinigen passgenau dazu.</p>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+              {LOCAL_BRANCHEN.map((b) => (
+                <Link
+                  key={b.to}
+                  to={b.to}
+                  className="group block bg-gray-50 hover:bg-white border border-gray-100 hover:border-accent/30 rounded-2xl p-6 transition-all hover:shadow-soft"
+                >
+                  <h3 className="font-bold text-lg text-[#0B2341] mb-2 flex items-start justify-between gap-2">
+                    <span>{b.title}</span>
+                    <ArrowRight className="w-4 h-4 mt-1 text-accent flex-shrink-0 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
+                  </h3>
+                  <p className="text-sm text-gray-600 leading-relaxed">{b.desc}</p>
                 </Link>
               ))}
             </div>

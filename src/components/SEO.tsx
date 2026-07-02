@@ -14,7 +14,11 @@ export default function SEO({ title, description, keywords, schema, noindex }: S
   const location = useLocation();
   const baseUrl = 'https://ahad-cleaning.de';
   const canonicalUrl = `${baseUrl}${location.pathname}`;
-  const fullTitle = title.includes('AHAD Cleaning') ? title : `${title} | AHAD Cleaning`;
+  // Brand-Suffix nur anhängen, wenn der Titel nicht schon mit "| AHAD" bzw.
+  // "| AHAD Cleaning" endet — sonst entsteht "… | AHAD | AHAD Cleaning".
+  const fullTitle = /\|\s*AHAD(\s+Cleaning)?\s*$/.test(title) || title.includes('AHAD Cleaning')
+    ? title
+    : `${title} | AHAD Cleaning`;
   
   return (
     <Helmet>

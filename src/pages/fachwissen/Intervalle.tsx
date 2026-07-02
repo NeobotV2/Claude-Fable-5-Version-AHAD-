@@ -10,6 +10,8 @@ export default function FachwissenIntervalle() {
     "@context": "https://schema.org",
     "@type": "Article",
     "headline": "Reinigungsintervalle in Unternehmen: Ein Leitfaden",
+    "datePublished": "2026-06-12",
+    "dateModified": "2026-06-24",
     "description": "Wie oft muss ein Büro gereinigt werden? Erfahren Sie alles über optimale Reinigungsintervalle für Unterhaltsreinigung, Sanitäranlagen und Büroräume.",
     "author": {
       "@type": "Organization",
