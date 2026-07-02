@@ -10,6 +10,8 @@ export default function FachwissenAnbieterwechsel() {
     "@context": "https://schema.org",
     "@type": "Article",
     "headline": "Reinigungsfirma wechseln: Checkliste & Tipps für Unternehmen",
+    "datePublished": "2026-06-12",
+    "dateModified": "2026-06-24",
     "description": "Wann ist der richtige Zeitpunkt, die Reinigungsfirma zu wechseln? Erfahren Sie alles über Kündigungsfristen, Neu-Ausschreibung und den reibungslosen Übergang.",
     "author": {
       "@type": "Organization",

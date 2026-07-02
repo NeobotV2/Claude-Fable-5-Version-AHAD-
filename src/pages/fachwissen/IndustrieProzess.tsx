@@ -10,6 +10,8 @@ export default function FachwissenIndustrieProzess() {
     "@context": "https://schema.org",
     "@type": "Article",
     "headline": "Industriereinigung ohne Prozessstörung: Strategien für den laufenden Betrieb",
+    "datePublished": "2026-06-12",
+    "dateModified": "2026-06-24",
     "description": "Wie integriert man Industriereinigung in laufende Produktionsprozesse? Erfahren Sie, wie Stillstandzeiten vermieden und die Arbeitssicherheit erhöht werden.",
     "author": {
       "@type": "Organization",

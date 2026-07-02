@@ -11,6 +11,8 @@ export default function FachwissenVDI2052() {
     '@context': 'https://schema.org',
     '@type': 'Article',
     headline: 'Küchenabluftreinigung nach VDI 2052: Pflicht, Intervalle, Ablauf & Nachweis',
+    datePublished: '2026-06-24',
+    dateModified: '2026-06-24',
     description:
       'Was schreibt die VDI 2052 für die Reinigung von Küchenlüftungsanlagen vor? Reinigungsintervalle nach Betriebsstunden, Brandschutz, Versicherungsschutz, Ablauf und Dokumentationspflicht.',
     author: { '@type': 'Organization', name: 'AHAD Cleaning Company GmbH' },

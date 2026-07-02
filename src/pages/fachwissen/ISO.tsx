@@ -10,6 +10,8 @@ export default function FachwissenISO() {
     "@context": "https://schema.org",
     "@type": "Article",
     "headline": "ISO 9001 & 14001 in der Gebäudereinigung: Qualität & Umwelt",
+    "datePublished": "2026-06-12",
+    "dateModified": "2026-06-24",
     "description": "Warum sind ISO-Zertifizierungen (9001 & 14001) in der Gebäudereinigung wichtig? Erfahren Sie, wie Qualitätsmanagement und Umweltschutz die Reinigungsleistung verbessern.",
     "author": {
       "@type": "Organization",

@@ -268,6 +268,19 @@ export const WEBSITE_SCHEMA = {
   publisher: { '@id': `${SITE.url}/#organization` },
 };
 
+/**
+ * Kompakter Organization-Knoten fuer Unterseiten-Schemas (Service/Article):
+ * loest die @id-Referenz AUF DERSELBEN SEITE auf — Schema-Parser lesen nur die
+ * aktuelle Seite, eine reine @id-Referenz auf die Startseite bliebe haengend.
+ */
+export const ORG_REF = {
+  '@type': 'Organization',
+  '@id': `${SITE.url}/#organization`,
+  name: 'AHAD Cleaning Company GmbH',
+  url: SITE.url,
+  telephone: SITE.phone,
+} as const;
+
 export const ORGANIZATION_SCHEMA = {
   '@context': 'https://schema.org',
   '@type': ['Organization', 'LocalBusiness'],

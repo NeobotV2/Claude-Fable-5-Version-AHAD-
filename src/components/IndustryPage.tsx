@@ -8,11 +8,24 @@ import ButtonLink from '@/components/ui/Button';
 import Accordion, { faqSchemaFrom } from '@/components/ui/Accordion';
 import CTABand from '@/components/CTABand';
 import { BRANCHEN, type BrancheData } from '@/data/branchen';
-import { SITE } from '@/lib/site';
+import { SITE, ORG_REF } from '@/lib/site';
 
 /** Gemeinsames Layout für alle Branchen-Seiten: Problem → Lösung → Leistungen. */
 export default function IndustryPage({ branche }: { branche: BrancheData }) {
   const others = BRANCHEN.filter((b) => b.slug !== branche.slug);
+
+  // Service-Schema je Branche — vorher hatten Branchenseiten nur FAQ-Schema
+  // und blieben bei "Reinigung für [Branche]"-Suchen strukturell unsichtbar.
+  const serviceSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: `Gebäudereinigung für ${branche.name}`,
+    serviceType: 'Gebäudereinigung',
+    audience: { '@type': 'BusinessAudience', name: branche.name },
+    provider: ORG_REF,
+    areaServed: 'Süddeutschland',
+    description: branche.seoDescription,
+  };
 
   return (
     <div>
@@ -20,7 +33,7 @@ export default function IndustryPage({ branche }: { branche: BrancheData }) {
         title={branche.seoTitle}
         description={branche.seoDescription}
         keywords={branche.keywords}
-        schema={faqSchemaFrom(branche.faqs)}
+        schema={[serviceSchema, faqSchemaFrom(branche.faqs)]}
       />
 
       <PageHero

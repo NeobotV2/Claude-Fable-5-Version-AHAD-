@@ -9,7 +9,7 @@ import SmartImage from '@/components/ui/SmartImage';
 import Accordion, { faqSchemaFrom } from '@/components/ui/Accordion';
 import CTABand from '@/components/CTABand';
 import { SERVICES, type ServiceData } from '@/data/services';
-import { PROMISES, SITE } from '@/lib/site';
+import { PROMISES, SITE, ORG_REF } from '@/lib/site';
 
 /** Passende Fachwissen-Artikel je Leistung — interne Verlinkung in den
  *  Wissensbereich (SEO + Verweildauer). Bewusst kuratiert statt automatisch. */
@@ -52,7 +52,7 @@ export default function ServicePage({ service }: { service: ServiceData }) {
     '@context': 'https://schema.org',
     '@type': 'Service',
     name: service.name,
-    provider: { '@id': `${SITE.url}/#organization` },
+    provider: ORG_REF,
     areaServed: 'Süddeutschland',
     description: service.seoDescription,
   };
