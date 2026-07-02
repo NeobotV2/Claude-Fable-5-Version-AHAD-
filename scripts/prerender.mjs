@@ -48,6 +48,7 @@ const ROUTES = [
   '/fachwissen/reinigungsfirma-wechseln-checkliste-tipps',
   '/fachwissen/leistungsverzeichnis-gebaeudereinigung-erstellen',
   '/fachwissen/kuechenabluftreinigung-vdi-2052-pflicht-ablauf-nachweis',
+  '/fachwissen/was-kostet-gebaeudereinigung-stundensatz-preise',
   '/kontakt',
   '/impressum',
   '/datenschutz',

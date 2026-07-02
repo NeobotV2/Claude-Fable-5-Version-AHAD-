@@ -15,6 +15,7 @@ import { PROMISES, SITE, ORG_REF } from '@/lib/site';
  *  Wissensbereich (SEO + Verweildauer). Bewusst kuratiert statt automatisch. */
 const FACHWISSEN_BY_SLUG: Record<string, { title: string; to: string }[]> = {
   unterhaltsreinigung: [
+    { title: 'Was kostet Gebäudereinigung? Stundensatz & m²-Preise', to: '/fachwissen/was-kostet-gebaeudereinigung-stundensatz-preise' },
     { title: 'Reinigungsintervalle für Unternehmen: Der praxisnahe Leitfaden', to: '/fachwissen/unterhaltsreinigung-unternehmen-reinigungsintervalle' },
     { title: 'Leistungsverzeichnis erstellen: So werden Angebote vergleichbar', to: '/fachwissen/leistungsverzeichnis-gebaeudereinigung-erstellen' },
   ],
