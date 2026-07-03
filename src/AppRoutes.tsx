@@ -39,6 +39,7 @@ const FachwissenAnbieterwechsel = lazy(() => import('./pages/fachwissen/Anbieter
 const FachwissenLeistungsverzeichnis = lazy(() => import('./pages/fachwissen/Leistungsverzeichnis'));
 const FachwissenVDI2052 = lazy(() => import('./pages/fachwissen/VDI2052'));
 const FachwissenKosten = lazy(() => import('./pages/fachwissen/Kosten'));
+const FachwissenCheckliste = lazy(() => import('./pages/fachwissen/Checkliste'));
 const Referenzen = lazy(() => import('./pages/Referenzen'));
 const Admin = lazy(() => import('./pages/Admin'));
 const NotFound = lazy(() => import('./pages/NotFound'));
@@ -106,6 +107,7 @@ export default function AppRoutes() {
           <Route path="fachwissen/leistungsverzeichnis-gebaeudereinigung-erstellen" element={<FachwissenLeistungsverzeichnis />} />
           <Route path="fachwissen/kuechenabluftreinigung-vdi-2052-pflicht-ablauf-nachweis" element={<FachwissenVDI2052 />} />
           <Route path="fachwissen/was-kostet-gebaeudereinigung-stundensatz-preise" element={<FachwissenKosten />} />
+          <Route path="fachwissen/checkliste-reinigungsangebot" element={<FachwissenCheckliste />} />
 
           <Route path="kontakt" element={<Kontakt />} />
           <Route path="impressum" element={<Impressum />} />

@@ -18,6 +18,15 @@ const articles = [
     image: IMG.unterhaltDetail,
   },
   {
+    title: 'Checkliste: Reinigungsangebot einholen & vergleichen',
+    excerpt:
+      'Die druckbare Arbeitshilfe für Objektverantwortliche: Objektdaten, Leistungsdefinition, Angebotsvergleich, Anbieterprüfung und Vertragsregeln — in 5 Schritten abhaken.',
+    path: '/fachwissen/checkliste-reinigungsangebot',
+    category: 'Arbeitshilfe',
+    readingTime: '4 Min.',
+    image: IMG.teamMeeting,
+  },
+  {
     title: 'Reinigungsintervalle für Unternehmen: Der praxisnahe Leitfaden',
     excerpt:
       'Wie oft sollten Büro, Sanitär und Verkehrsflächen wirklich gereinigt werden? Intervalle nach Nutzung statt Bauchgefühl — mit Tabellen für typische Objekttypen.',

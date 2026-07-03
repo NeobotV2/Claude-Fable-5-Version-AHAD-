@@ -30,6 +30,8 @@ export interface ServiceHighlight {
 
 export interface ServiceData {
   slug: string;
+  /** Zeigt auf der Detailseite einen Telefon-zuerst-Banner für kurzfristige Einsätze. */
+  expressBanner?: boolean;
   path: string;
   name: string;
   tag: string;
@@ -375,6 +377,7 @@ export const SERVICES: ServiceData[] = [
   },
   {
     slug: 'sonderreinigung-stillstandsservice',
+    expressBanner: true,
     short: 'Grundreinigung & Stillstandsservice',
     path: '/leistungen/sonderreinigung-stillstandsservice',
     name: 'Sonderreinigung & Stillstandsservice',
