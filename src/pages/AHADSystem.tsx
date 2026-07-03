@@ -1,4 +1,4 @@
-import { Search, Settings2, ClipboardCheck, Shield, CheckCircle2, FileSearch, Users, Repeat, FileCheck2 } from 'lucide-react';
+import { Search, Settings2, ClipboardCheck, Shield, CheckCircle2, FileSearch, Users, Repeat, FileCheck2, X } from 'lucide-react';
 import SEO from '@/components/SEO';
 import PageHero from '@/components/PageHero';
 import Reveal from '@/components/ui/Reveal';
@@ -55,6 +55,18 @@ const outcomes = [
   { value: '1', label: 'feste Objektleitung je Objekt', text: 'Ein Verantwortlicher steuert — nicht Ihr Office-Management.' },
   { value: '24h', label: 'Reaktionszeit garantiert', text: 'Jedes Anliegen hat einen Verantwortlichen und eine Frist.' },
   { value: '100%', label: 'Nachweisbarkeit', text: 'Jede Leistung dokumentiert — für QM, Audit und Ihr Bauchgefühl.' },
+];
+
+/** Systemvergleich — macht den Unterschied zwischen "irgendeine Reinigungsfirma"
+ *  und dem AHAD-System auf einen Blick greifbar. Bewusst generisch formuliert
+ *  ("Reinigung ohne System"), keine Herabsetzung konkreter Wettbewerber. */
+const VERGLEICH = [
+  { thema: 'Ansprechpartner', ohne: 'Wechselnde Kontakte, niemand fühlt sich zuständig', ahad: 'Feste Objektleitung mit Namen und Gesicht' },
+  { thema: 'Qualität', ohne: 'Fällt erst auf, wenn sich jemand beschwert', ahad: 'Dokumentierte Audits in festen Intervallen' },
+  { thema: 'Angebot', ohne: 'Pauschalpreis ohne definierten Leistungsumfang', ahad: 'Festpreis auf Basis eines Leistungsverzeichnisses' },
+  { thema: 'Reklamation', ohne: 'Diskussion, Vertröstung, Wiederholung', ahad: 'Kostenfreie Nachbesserung, Antwort in 24 h' },
+  { thema: 'Personal', ohne: 'Anonyme Kolonnen, häufige Wechsel', ahad: 'Festangestellte, geschulte und eingespielte Teams' },
+  { thema: 'Nachweise', ohne: 'Keine — Sauberkeit bleibt Bauchgefühl', ahad: 'Auditfähige Leistungs- und Qualitätsnachweise' },
 ];
 
 export default function AHADSystem() {
@@ -182,6 +194,51 @@ export default function AHADSystem() {
             <ButtonLink to="/referenzen" variant="outline" arrow>
               Kunden, die dem System vertrauen
             </ButtonLink>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* Systemvergleich */}
+      <section className="py-20 lg:py-28 bg-white border-t border-line">
+        <div className="max-w-5xl mx-auto px-4 sm:px-8">
+          <SectionHeading
+            eyebrow="Der Unterschied"
+            title="Reinigung ohne System — oder mit."
+            lead="Der Preis pro Stunde sieht oft ähnlich aus. Der Unterschied zeigt sich im Betrieb: wenn etwas schiefgeht, wenn jemand fragt, wer zuständig ist, und wenn ein Audit Nachweise verlangt."
+            align="center"
+            className="mb-12 max-w-2xl mx-auto"
+          />
+          <Reveal>
+            <div className="overflow-x-auto rounded-3xl border border-line shadow-soft">
+              <table className="w-full text-left text-sm border-collapse bg-white">
+                <thead>
+                  <tr>
+                    <th className="px-5 py-4 font-bold text-navy bg-paper w-[22%]">&nbsp;</th>
+                    <th className="px-5 py-4 font-bold text-slate bg-paper w-[39%]">Reinigung ohne System</th>
+                    <th className="px-5 py-4 font-bold text-white bg-navy w-[39%]">Das AHAD System</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-line">
+                  {VERGLEICH.map((row) => (
+                    <tr key={row.thema}>
+                      <td className="px-5 py-4 font-bold text-navy align-top">{row.thema}</td>
+                      <td className="px-5 py-4 text-slate align-top">
+                        <span className="flex items-start gap-2">
+                          <X size={15} className="text-red-400 flex-shrink-0 mt-0.5" />
+                          {row.ohne}
+                        </span>
+                      </td>
+                      <td className="px-5 py-4 text-navy font-medium align-top bg-accent/[0.04]">
+                        <span className="flex items-start gap-2">
+                          <CheckCircle2 size={15} className="text-accent flex-shrink-0 mt-0.5" />
+                          {row.ahad}
+                        </span>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </Reveal>
         </div>
       </section>

@@ -78,6 +78,24 @@ export default function ServicePage({ service }: { service: ServiceData }) {
         secondaryCta={{ label: SITE.phone, href: SITE.phoneHref }}
       />
 
+      {/* Express-Banner: Telefon zuerst — für kurzfristige/dringende Einsätze */}
+      {service.expressBanner && (
+        <section className="bg-accent text-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-8 py-4 flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-6 text-center">
+            <p className="font-bold text-[15px]">
+              Kurzfristiger oder dringender Einsatz? Rufen Sie direkt an — wir disponieren noch heute.
+            </p>
+            <a
+              href={SITE.phoneHref}
+              className="inline-flex items-center gap-2 bg-white text-accent px-5 py-2.5 rounded-xl font-black hover:bg-mint/30 hover:text-white transition-colors flex-shrink-0"
+            >
+              <Phone size={16} />
+              {SITE.phone}
+            </a>
+          </div>
+        </section>
+      )}
+
       {/* Versprechen-Leiste */}
       <section className="bg-white border-b border-line">
         <div className="max-w-7xl mx-auto px-4 sm:px-8 py-8 grid grid-cols-1 sm:grid-cols-3 gap-6">

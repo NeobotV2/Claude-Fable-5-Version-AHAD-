@@ -9,8 +9,10 @@
  * das, damit Marketing eine saubere Quelle hat.
  */
 
-/** Der eine, verbindliche Marken-Claim. Dreiteilig, nie umgestellt/gekürzt. */
-export const CLAIM = 'Struktur. Sauberkeit. Sicherheit.';
+/** Der eine, verbindliche Website-Claim (Positionierung: strukturierter
+ *  B2B-Dienstleister, kein austauschbarer Reinigungsdienst). */
+export const CLAIM = 'Sauberkeit mit System.';
+/** Sekundärer Dreiklang — für LV-Deckblätter/Anzeigen, nie umgestellt/gekürzt. */
 export const CLAIM_PARTS = ['Struktur', 'Sauberkeit', 'Sicherheit'] as const;
 
 export type SloganKanal = 'website' | 'fahrzeug' | 'kleidung' | 'anzeige' | 'social' | 'lv-deckblatt';

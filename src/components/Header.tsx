@@ -136,6 +136,9 @@ export default function Header() {
         <div className="bg-navy text-blue-100/90 text-[12.5px] font-semibold border-b border-white/10">
           <div className="max-w-7xl mx-auto px-8 py-2 flex items-center justify-between">
             <div className="flex items-center gap-6">
+              <span className="font-black uppercase tracking-[0.16em] text-mint text-[11px]">
+                Sauberkeit mit System.
+              </span>
               <span className="flex items-center gap-2">
                 <Clock size={13} className="text-mint" />
                 {SITE.hours}

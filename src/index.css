@@ -216,3 +216,15 @@
   }
   .link-underline:hover { background-size: 100% 2px; }
 }
+
+/* ── Druck: Navigation/CTAs ausblenden, Inhalt sauber aufs Papier ────── */
+@media print {
+  header,
+  footer,
+  .fixed {
+    display: none !important;
+  }
+  main, body {
+    background: #fff !important;
+  }
+}

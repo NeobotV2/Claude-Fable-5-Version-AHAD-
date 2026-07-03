@@ -49,6 +49,7 @@ const ROUTES = [
   '/fachwissen/leistungsverzeichnis-gebaeudereinigung-erstellen',
   '/fachwissen/kuechenabluftreinigung-vdi-2052-pflicht-ablauf-nachweis',
   '/fachwissen/was-kostet-gebaeudereinigung-stundensatz-preise',
+  '/fachwissen/checkliste-reinigungsangebot',
   '/kontakt',
   '/impressum',
   '/datenschutz',
