@@ -59,11 +59,13 @@ export default function FeaturedTestimonial({ dark = true }: { dark?: boolean })
                 />
               </div>
               <div>
-                <div className={`font-bold text-[15px] ${dark ? 'text-white' : 'text-navy'}`}>{T.company}</div>
-                <div className={`text-sm ${dark ? 'text-blue-100/80' : 'text-slate'}`}>{T.location}</div>
+                <div className={`font-bold text-[15px] ${dark ? 'text-white' : 'text-navy'}`}>{T.person}</div>
+                <div className={`text-sm ${dark ? 'text-blue-100/80' : 'text-slate'}`}>
+                  {T.personRole} · {T.company}
+                </div>
                 <div className={`mt-1.5 inline-flex items-center gap-1.5 text-[12px] font-bold ${dark ? 'text-mint' : 'text-accent'}`}>
                   <BadgeCheck size={14} />
-                  {T.relationship}
+                  {T.relationship} · {T.location}
                 </div>
               </div>
             </figcaption>
