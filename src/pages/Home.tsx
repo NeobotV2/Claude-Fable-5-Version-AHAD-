@@ -27,6 +27,7 @@ import SmartImage from '@/components/ui/SmartImage';
 import BeforeAfter from '@/components/ui/BeforeAfter';
 import Accordion, { faqSchemaFrom, type FAQItem } from '@/components/ui/Accordion';
 import LogoMarquee from '@/components/LogoMarquee';
+import FeaturedTestimonial from '@/components/FeaturedTestimonial';
 import CTABand from '@/components/CTABand';
 import Guarantee from '@/components/Guarantee';
 import Reviews from '@/components/Reviews';
@@ -661,6 +662,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* ── KUNDENSTIMME (echtes, namentliches Testimonial) ──────────── */}
+      <FeaturedTestimonial />
 
       {/* ── BEWERTUNGEN (echte Google-Reviews) ───────────────────────── */}
       <Reviews />

@@ -152,26 +152,28 @@ export const OBJEKTLEITUNG = {
     'Sie haben eine Nummer, die abnimmt — und einen Menschen, der Ihr Objekt kennt. Kein Ticketsystem, keine Warteschleife.',
 } as const;
 
-export const TESTIMONIALS = [
-  {
-    quote:
-      'Seit der Umstellung auf AHAD haben wir keine einzige Reklamation mehr eskalieren müssen. Die Objektleitung meldet sich, bevor wir es tun.',
-    name: 'Facility Management',
-    company: 'Industrieunternehmen, Schwarzwald-Baar-Kreis',
-  },
-  {
-    quote:
-      'Die Übernahme im laufenden Betrieb war geräuschlos. Nach zwei Wochen lief alles dokumentiert und planbar — genau das hatten wir gesucht.',
-    name: 'Standortleitung',
-    company: 'Produktionsbetrieb, Region Stuttgart',
-  },
-  {
-    quote:
-      'Audit-Nachweise auf Knopfdruck statt Zettelwirtschaft. Für unsere ISO-Zertifizierung ist AHAD ein echter Vorteil geworden.',
-    name: 'QM-Beauftragte',
-    company: 'Medizintechnik, Bodenseeregion',
-  },
-] as const;
+/**
+ * Hervorgehobene, ECHTE Kundenstimme (mit Freigabe des Kunden inkl. Logo).
+ * Wortlaut unverändert. Das wichtigste Vertrauenselement der Seite:
+ * namentlich, detailliert, von einem langjährigen regionalen Auftraggeber.
+ */
+export const FEATURED_TESTIMONIAL = {
+  quote:
+    'Die Firma AHAD Cleaning Company GmbH ist ein sehr zuverlässiger und flexibler Partner, der auch auf kurzfristigen Reinigungsbedarf schnell reagiert. Die gute Erreichbarkeit und die engagierte Kundenbetreuung machen die Zusammenarbeit besonders angenehm. Neben der Grundreinigung unserer Hallen vor und nach den Veranstaltungen übernimmt das Team während der Veranstaltungen die Toilettenbetreuung und den Reinigungsdienst. Darüber hinaus werden die Unterhaltsreinigung unserer Büroräume sowie Glas- und Sonderreinigungen ganzjährig bei uns durchgeführt.',
+  company: 'SMA Südwest Messe- und Ausstellungs-GmbH',
+  shortName: 'Südwest Messe',
+  location: 'Villingen-Schwenningen',
+  relationship: 'Langjähriger Kunde',
+  logo: '/images/clients/suedwest-messe.png',
+  /** Im Zitat genannte Leistungen — belegen die Breite der Zusammenarbeit. */
+  services: [
+    'Hallen-Grundreinigung',
+    'Veranstaltungsservice',
+    'Unterhaltsreinigung',
+    'Glasreinigung',
+    'Sonderreinigung',
+  ],
+} as const;
 
 /**
  * Echte Kundenbewertungen (z. B. von Google).
