@@ -4,6 +4,7 @@ import Reveal from '@/components/ui/Reveal';
 import SectionHeading from '@/components/ui/SectionHeading';
 import CTABand from '@/components/CTABand';
 import Reviews from '@/components/Reviews';
+import FeaturedTestimonial from '@/components/FeaturedTestimonial';
 import { IMG } from '@/lib/images';
 import { CLIENT_REFERENCES } from '@/lib/site';
 
@@ -58,6 +59,9 @@ export default function Referenzen() {
           </div>
         </div>
       </section>
+
+      {/* Hervorgehobene, echte Kundenstimme (namentlich, mit Freigabe) */}
+      <FeaturedTestimonial />
 
       {/* Echte Google-Bewertungen statt anonymer Zitate */}
       <Reviews />
