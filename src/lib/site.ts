@@ -160,6 +160,8 @@ export const OBJEKTLEITUNG = {
 export const FEATURED_TESTIMONIAL = {
   quote:
     'Die Firma AHAD Cleaning Company GmbH ist ein sehr zuverlässiger und flexibler Partner, der auch auf kurzfristigen Reinigungsbedarf schnell reagiert. Die gute Erreichbarkeit und die engagierte Kundenbetreuung machen die Zusammenarbeit besonders angenehm. Neben der Grundreinigung unserer Hallen vor und nach den Veranstaltungen übernimmt das Team während der Veranstaltungen die Toilettenbetreuung und den Reinigungsdienst. Darüber hinaus werden die Unterhaltsreinigung unserer Büroräume sowie Glas- und Sonderreinigungen ganzjährig bei uns durchgeführt.',
+  person: 'Diana Graupner',
+  personRole: 'Leitung Veranstaltungskoordination',
   company: 'SMA Südwest Messe- und Ausstellungs-GmbH',
   shortName: 'Südwest Messe',
   location: 'Villingen-Schwenningen',
