@@ -109,6 +109,23 @@ export default function Footer() {
               Kostenlose Besichtigung anfragen
               <ArrowRight size={16} className="transition-transform group-hover:translate-x-0.5" />
             </Link>
+
+            {/* Zweites Geschäftsfeld der GmbH — bewusst dezent, kein Ablenken vom
+                Cleaning-Conversion-Ziel. Wechselseitige Verlinkung stärkt beide Marken. */}
+            <a
+              href={SITE.careUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex items-center justify-between gap-3 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 rounded-xl px-4 py-3 transition-colors"
+            >
+              <span className="text-[13px] leading-snug text-blue-100/80">
+                <span className="block text-[10px] font-black uppercase tracking-[0.18em] text-mint mb-0.5">
+                  Unser zweites Geschäftsfeld
+                </span>
+                <span className="font-bold text-white">AHAD Care</span> · ahad-care.de
+              </span>
+              <ArrowRight size={15} className="text-mint flex-shrink-0 transition-transform group-hover:translate-x-0.5" />
+            </a>
           </div>
 
           {/* Navigationsspalten */}

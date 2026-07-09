@@ -25,6 +25,8 @@ export const SITE = {
   },
   // WhatsApp Business — Sofortkanal. Nummer im internationalen Format
   // ohne Sonderzeichen (+49 176 20422494 → 4917620422494).
+  /** Zweites Geschäftsfeld der AHAD Cleaning Company GmbH (eigene Website). */
+  careUrl: 'https://ahad-care.de',
   whatsapp: '4917620422494',
   whatsappText: 'Hallo AHAD Cleaning, ich interessiere mich für ein Angebot zur Gebäudereinigung.',
 } as const;
@@ -338,5 +340,6 @@ export const ORGANIZATION_SCHEMA = {
       credentialCategory: 'Umweltmanagement (Zertifizierung)',
     },
   ],
-  sameAs: [SITE.social.instagram, SITE.social.linkedin],
+  // ahad-care.de gehört zur selben GmbH (zweites Geschäftsfeld) -> selbe Entität.
+  sameAs: [SITE.social.instagram, SITE.social.linkedin, SITE.careUrl],
 };
