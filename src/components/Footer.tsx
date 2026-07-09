@@ -122,7 +122,10 @@ export default function Footer() {
                 <span className="block text-[10px] font-black uppercase tracking-[0.18em] text-mint mb-0.5">
                   Unser zweites Geschäftsfeld
                 </span>
-                <span className="font-bold text-white">AHAD Care</span> · ahad-care.de
+                <span className="font-bold text-white">AHAD Care — Unterstützung im Alltag</span>
+                <span className="block mt-0.5">
+                  Haushaltsnahe Alltagshilfe bei Pflegegrad (§ 45a SGB XI) im Schwarzwald-Baar-Kreis · ahad-care.de
+                </span>
               </span>
               <ArrowRight size={15} className="text-mint flex-shrink-0 transition-transform group-hover:translate-x-0.5" />
             </a>
