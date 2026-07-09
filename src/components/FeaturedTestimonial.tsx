@@ -48,7 +48,7 @@ export default function FeaturedTestimonial({ dark = true }: { dark?: boolean })
             </ul>
 
             <figcaption className={`mt-10 pt-8 flex items-center gap-5 border-t ${dark ? 'border-white/15' : 'border-line'}`}>
-              <div className="w-20 h-20 bg-white rounded-2xl grid place-items-center flex-shrink-0 shadow-soft p-2.5">
+              <div className="h-16 w-44 sm:w-52 bg-white rounded-2xl grid place-items-center flex-shrink-0 shadow-soft px-3 py-2">
                 <img
                   src={T.logo}
                   alt={`${T.shortName} — Logo`}

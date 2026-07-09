@@ -102,7 +102,7 @@ export const CLIENT_REFERENCES: ClientReference[] = [
   { name: 'naturenergie netze', domain: 'naturenergie-netze.de', logo: '/images/clients/naturenergie-netze.svg' },
   // Kein freigegebenes Logo vorhanden -> faellt automatisch auf die Wortmarke zurueck.
   { name: 'Schwarzwald-Baar-Kreis', domain: 'schwarzwald-baar-kreis.de' },
-  { name: 'Südwest Messe', domain: 'suedwest-messe.de', logo: '/images/clients/suedwest-messe.png' },
+  { name: 'SMA Südwest Messe- und Ausstellungs-GmbH', domain: 'suedwest-messe.de', logo: '/images/clients/sma-suedwest-messe.png' },
 ];
 
 /**
@@ -168,7 +168,7 @@ export const FEATURED_TESTIMONIAL = {
   shortName: 'Südwest Messe',
   location: 'Villingen-Schwenningen',
   relationship: 'Langjähriger Kunde',
-  logo: '/images/clients/suedwest-messe.png',
+  logo: '/images/clients/sma-suedwest-messe.png',
   /** Im Zitat genannte Leistungen — belegen die Breite der Zusammenarbeit. */
   services: [
     'Hallen-Grundreinigung',
