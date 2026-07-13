@@ -12,8 +12,8 @@ export default function Referenzen() {
   return (
     <div>
       <SEO
-        title="Referenzen: Auftraggeber, die uns vertrauen | AHAD Cleaning"
-        description="Konzerne, Mittelstand und öffentliche Hand in Süddeutschland setzen auf die Gebäudereinigung von AHAD Cleaning — mit fester Objektleitung und dokumentierter Qualität."
+        title="Kundenstimmen & Referenzen | AHAD Cleaning"
+        description="Erfahrungen mit den Gebäudedienstleistungen von AHAD Cleaning. Namentliche Referenzen veröffentlichen wir nur mit dokumentierter Freigabe."
         keywords="Referenzen Gebäudereinigung, Auftraggeber AHAD Cleaning, Reinigungsfirma Referenzen Süddeutschland"
       />
 
@@ -26,14 +26,14 @@ export default function Referenzen() {
             verdient. Täglich.
           </>
         }
-        lead="Konzerne, Mittelstand und öffentliche Hand: Diese Auftraggeber verlassen sich Tag für Tag auf unsere Arbeit — und wir auf die Verantwortung, die das bedeutet."
+        lead="Erfahrungen aus der Zusammenarbeit geben Orientierung. Namentliche Referenzen und Logos zeigen wir nur mit dokumentierter Freigabe."
         image={IMG.handshake}
         crumbs={[{ label: 'Referenzen' }]}
         cta={{ label: 'Referenzkunde werden', to: '/angebot' }}
       />
 
       {/* Referenz-Wand — echte Kundenlogos, einheitlich normiert (nur mit Logo) */}
-      <section className="py-20 lg:py-32 bg-white">
+      {CLIENT_REFERENCES.length > 0 && <section className="py-20 lg:py-32 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-8">
           <SectionHeading
             eyebrow="Auswahl betreuter Auftraggeber"
@@ -58,7 +58,7 @@ export default function Referenzen() {
             ))}
           </div>
         </div>
-      </section>
+      </section>}
 
       {/* Hervorgehobene, echte Kundenstimme (namentlich, mit Freigabe) */}
       <FeaturedTestimonial />

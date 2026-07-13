@@ -13,11 +13,10 @@ interface SmartImageProps {
 }
 
 /**
- * Bild mit sanftem Einblenden, responsivem srcset und gebrandetem
- * Fallback, falls die externe Quelle nicht erreichbar ist.
+ * Direkt sichtbares Bild mit responsivem srcset und gebrandetem Fallback,
+ * falls die externe Quelle nicht erreichbar ist.
  */
 export default function SmartImage({ src, alt, className, imgClassName, eager = false, sizes = '100vw' }: SmartImageProps) {
-  const [loaded, setLoaded] = useState(false);
   const [failed, setFailed] = useState(false);
 
   return (
@@ -30,13 +29,11 @@ export default function SmartImage({ src, alt, className, imgClassName, eager = 
         loading={eager ? 'eager' : 'lazy'}
         decoding="async"
         referrerPolicy="no-referrer"
-        onLoad={() => setLoaded(true)}
         onError={() => {
           if (!failed) setFailed(true);
         }}
         className={cn(
-          'w-full h-full object-cover transition-all duration-700',
-          loaded ? 'opacity-100 blur-0' : 'opacity-0 blur-sm',
+          'w-full h-full object-cover',
           imgClassName
         )}
       />

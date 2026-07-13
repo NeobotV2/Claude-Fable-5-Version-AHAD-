@@ -100,7 +100,7 @@ export default function PageHero({
       <div className="max-w-7xl mx-auto px-4 sm:px-8 relative z-10">
         {crumbs && crumbs.length > 0 && (
           <motion.nav
-            initial={{ opacity: 0, y: 10 }}
+            initial={false}
             animate={{ opacity: 1, y: 0 }}
             aria-label="Brotkrumen"
             className="flex flex-wrap items-center gap-1.5 text-[13px] font-semibold text-blue-100/70 mb-8"
@@ -124,7 +124,7 @@ export default function PageHero({
         )}
 
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
+          initial={false}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: [0.2, 0.65, 0.3, 1] }}
           className="max-w-3xl"

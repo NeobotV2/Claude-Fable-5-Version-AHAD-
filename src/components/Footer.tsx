@@ -33,7 +33,7 @@ const columns = [
       { label: 'Über uns', href: '/unternehmen' },
       { label: 'Das AHAD System', href: '/ahad-system' },
       { label: 'Referenzen', href: '/referenzen' },
-      { label: 'Standorte & Regionen', href: '/standorte' },
+      { label: 'Einsatzgebiete', href: '/standorte' },
       { label: 'Karriere', href: '/karriere' },
       { label: 'Fachwissen', href: '/fachwissen' },
     ],
@@ -89,8 +89,8 @@ export default function Footer() {
             </p>
             <div className="flex flex-wrap gap-2.5">
               {[
-                { icon: <ShieldCheck size={13} />, label: '24h Reaktionszeit' },
-                { icon: <BadgeCheck size={13} />, label: 'Voll versichert' },
+                { icon: <ShieldCheck size={13} />, label: 'Klare Zuständigkeit' },
+                { icon: <BadgeCheck size={13} />, label: 'B2B ausgerichtet' },
                 { icon: <FileCheck2 size={13} />, label: 'Dokumentiert' },
               ].map((badge) => (
                 <span
@@ -124,7 +124,7 @@ export default function Footer() {
                 </span>
                 <span className="font-bold text-white">AHAD Care — Unterstützung im Alltag</span>
                 <span className="block mt-0.5">
-                  Haushaltsnahe Alltagshilfe bei Pflegegrad (§ 45a SGB XI) im Schwarzwald-Baar-Kreis · ahad-care.de
+                  Informationen zum separaten Angebot finden Sie auf ahad-care.de
                 </span>
               </span>
               <ArrowRight size={15} className="text-mint flex-shrink-0 transition-transform group-hover:translate-x-0.5" />

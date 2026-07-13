@@ -1,8 +1,20 @@
+import type { ReactNode } from 'react';
 import { BrowserRouter, HashRouter } from 'react-router-dom';
 import { Analytics } from '@vercel/analytics/react';
-import ScrollToTop from './components/ScrollToTop';
 import ErrorBoundary from './components/ErrorBoundary';
-import AppRoutes from './AppRoutes';
+import RouterContent from './RouterContent';
+import { stripAnalyticsQuery } from './lib/analytics';
+
+/** Gemeinsamer äußerer App-Baum für Browser-Hydration und statisches Rendering. */
+export function AppFrame({ children }: { children: ReactNode }) {
+  return (
+    <ErrorBoundary>
+      {children}
+      {/* Cookielose Reichweitenmessung; serverseitig rendert die Komponente kein DOM. */}
+      <Analytics beforeSend={(event) => ({ ...event, url: stripAnalyticsQuery(event.url) })} />
+    </ErrorBoundary>
+  );
+}
 
 export default function App() {
   // Single-File-Vorschau (npm run build:file) nutzt HashRouter,
@@ -12,14 +24,10 @@ export default function App() {
   // Folgt Vites base-Pfad (z.B. /repo-name/ auf GitHub Pages); lokal = ''.
   const basename = useHash ? undefined : import.meta.env.BASE_URL.replace(/\/$/, '');
   return (
-    <ErrorBoundary>
+    <AppFrame>
       <Router basename={basename}>
-        <ScrollToTop />
-        <AppRoutes />
+        <RouterContent />
       </Router>
-      {/* Cookielose, DSGVO-freundliche Reichweitenmessung (Vercel Web Analytics).
-          Rendert serverseitig nichts und injiziert das Skript nur clientseitig. */}
-      <Analytics />
-    </ErrorBoundary>
+    </AppFrame>
   );
 }

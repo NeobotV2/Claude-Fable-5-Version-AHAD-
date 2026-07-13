@@ -4,7 +4,7 @@ import SEO from '@/components/SEO';
 import PageHero from '@/components/PageHero';
 import CTABand from '@/components/CTABand';
 import Accordion, { faqSchemaFrom, type FAQItem } from '@/components/ui/Accordion';
-import { SITE } from '@/lib/site';
+import { ORG_REF, SITE } from '@/lib/site';
 import { IMG } from '@/lib/images';
 
 /** Lokale Leistungsblöcke — verknüpfen den Standort mit den Leistungsseiten
@@ -106,7 +106,7 @@ const LOCAL_FAQS: FAQItem[] = [
   {
     question: 'Wie schnell ist AHAD in Villingen-Schwenningen vor Ort?',
     answer:
-      'Da sich unsere Zentrale direkt in Villingen-Schwenningen (Max-Planck-Straße 11) befindet, sind die Wege kurz: In der Regel vereinbaren wir innerhalb von 48 Stunden einen Vor-Ort-Termin zur Besichtigung; auf jede Meldung reagieren wir innerhalb von 24 Stunden.',
+      'Unsere rechtliche Unternehmensadresse liegt in Villingen-Schwenningen (Max-Planck-Straße 11). Den möglichen Termin für eine Vor-Ort-Besichtigung stimmen wir objektbezogen mit Ihnen ab.',
   },
   {
     question: 'Reinigen Sie auch in den Industrie- und Gewerbegebieten rund um Villingen-Schwenningen?',
@@ -126,40 +126,24 @@ const LOCAL_FAQS: FAQItem[] = [
 ];
 
 export default function StandortVS() {
-  const localBusinessSchema = {
+  const regionalServiceSchema = {
     '@context': 'https://schema.org',
-    '@type': 'LocalBusiness',
-    name: 'AHAD Cleaning Company GmbH - Villingen-Schwenningen',
-    image: `${SITE.url}/images/ahad/hero-hq.webp`,
-    '@id': 'https://ahad-cleaning.de/standorte/villingen-schwenningen',
-    url: 'https://ahad-cleaning.de/standorte/villingen-schwenningen',
-    telephone: SITE.phone,
-    email: SITE.email,
-    address: {
-      '@type': 'PostalAddress',
-      streetAddress: 'Max-Planck-Straße 11',
-      addressLocality: 'Villingen-Schwenningen',
-      postalCode: '78052',
-      addressCountry: 'DE',
-    },
+    '@type': 'Service',
+    name: 'Gebäudereinigung in Villingen-Schwenningen',
+    serviceType: 'Gebäudereinigung',
+    '@id': `${SITE.url}/standorte/villingen-schwenningen#service`,
+    url: `${SITE.url}/standorte/villingen-schwenningen`,
+    provider: ORG_REF,
     areaServed: SERVICE_AREAS.map((name) => ({ '@type': 'City', name })),
-    priceRange: '€€',
-    geo: { '@type': 'GeoCoordinates', latitude: 48.0603, longitude: 8.4586 },
-    openingHoursSpecification: {
-      '@type': 'OpeningHoursSpecification',
-      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
-      opens: '08:00',
-      closes: '17:00',
-    },
   };
 
   return (
     <div>
       <SEO
         title="Gebäudereinigung Villingen-Schwenningen | AHAD Cleaning"
-        description="Gebäudereinigung in Villingen-Schwenningen: Unterhalts-, Glas-, Industrie-, Bau- und Sonderreinigung sowie Winterdienst — ab unserer Zentrale für die Region Schwarzwald-Baar. Feste Objektleitung, dokumentierte Qualität, Besichtigung in 48h."
+        description="Gebäudereinigung in Villingen-Schwenningen: Unterhalts-, Glas-, Industrie-, Bau- und Sonderreinigung sowie Winterdienst für die Region Schwarzwald-Baar."
         keywords="Gebäudereinigung Villingen-Schwenningen, Reinigungsfirma Villingen-Schwenningen, Unterhaltsreinigung Villingen-Schwenningen, Industriereinigung Villingen-Schwenningen, Glasreinigung VS, Schwarzwald-Baar-Kreis"
-        schema={[localBusinessSchema, faqSchemaFrom(LOCAL_FAQS)]}
+        schema={[regionalServiceSchema, faqSchemaFrom(LOCAL_FAQS)]}
       />
       <PageHero
         eyebrow="Zentrale · Schwarzwald-Baar-Kreis"
@@ -341,7 +325,7 @@ export default function StandortVS() {
                 <p className="text-xl text-blue-100 mb-8 leading-relaxed">
                   In Villingen-Schwenningen schlägt das Herz unseres Unternehmens. Von hier aus steuern wir unsere
                   Qualitätssicherung für den gesamten süddeutschen Raum. Unsere tiefe Verwurzelung in der Region
-                  Schwarzwald-Baar garantiert Ihnen nicht nur höchste Zuverlässigkeit, sondern auch eine Partnerschaft
+                  Schwarzwald-Baar verbindet klare Zuständigkeiten mit einer Partnerschaft
                   auf Augenhöhe mit Handschlagqualität.
                 </p>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -370,7 +354,7 @@ export default function StandortVS() {
 
       <CTABand
         title="Ihr Objekt in Villingen-Schwenningen?"
-        lead="Kurze Wege ab Zentrale: Besichtigung in 48 Stunden, belastbares Angebot in 24 Stunden danach."
+        lead="Kurze Wege ab Zentrale: Besichtigung nach Abstimmung, belastbares Angebot im Anschluss."
       />
     </div>
   );

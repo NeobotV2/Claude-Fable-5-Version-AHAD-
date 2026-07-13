@@ -187,7 +187,11 @@
   }
 
   /* ── Marquee ──────────────────────────────────────────────────── */
-  .marquee-container:hover .animate-marquee { animation-play-state: paused; }
+  .marquee-container:hover .animate-marquee,
+  .marquee-shell:focus-within .animate-marquee,
+  .marquee-container[data-paused="true"] .animate-marquee {
+    animation-play-state: paused;
+  }
 
   .reference-logo {
     filter: grayscale(100%);
@@ -215,6 +219,30 @@
     transition: background-size 0.3s ease;
   }
   .link-underline:hover { background-size: 100% 2px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-container {
+    overflow-x: auto;
+    mask-image: none;
+    -webkit-mask-image: none;
+  }
+  .marquee-container .animate-marquee {
+    animation: none !important;
+  }
+  .marquee-container .animate-marquee[aria-hidden="true"] {
+    display: none;
+  }
+  .marquee-control {
+    display: none;
+  }
+}
+
+/* Form-Hinweise bleiben auch bei Tailwind-Placeholder-Utilities AA-lesbar. */
+input::placeholder,
+textarea::placeholder {
+  color: #5f6873;
+  opacity: 1;
 }
 
 /* ── Druck: Navigation/CTAs ausblenden, Inhalt sauber aufs Papier ────── */

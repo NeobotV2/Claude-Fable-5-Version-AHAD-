@@ -9,7 +9,7 @@ import CTABand from '@/components/CTABand';
 import { IMG } from '@/lib/images';
 import { SITE } from '@/lib/site';
 
-const standorte = [
+const regionen = [
   {
     name: 'Villingen-Schwenningen',
     path: '/standorte/villingen-schwenningen',
@@ -49,31 +49,31 @@ export default function Standorte() {
     <div>
       <SEO
         title="Standorte & Einsatzgebiete in Süddeutschland | AHAD Cleaning"
-        description="AHAD Cleaning ist mit Standorten in Villingen-Schwenningen, Stuttgart und Konstanz in ganz Süddeutschland für Sie im Einsatz — mit schnellen Reaktionszeiten."
+        description="AHAD Cleaning betreut Einsatzgebiete in Villingen-Schwenningen, Stuttgart und Konstanz. Die Unternehmensadresse befindet sich in Villingen-Schwenningen."
         keywords="Gebäudereinigung Standorte, Reinigungsfirma Villingen-Schwenningen, Gebäudereinigung Stuttgart, Reinigung Konstanz"
       />
 
       <PageHero
-        eyebrow="Standorte & Regionen"
+        eyebrow="Unternehmenssitz & Einsatzgebiete"
         title={
           <>
-            Nah genug für
+            Regional geplant,
             <br />
-            24h-Reaktionszeit.
+            persönlich betreut.
           </>
         }
-        lead="Drei Standorte, ein Qualitätssystem: Wir betreuen Objekte in ganz Süddeutschland — mit regionalen Teams, kurzen Wegen und einer festen Objektleitung vor Ort."
+        lead="Von unserem Unternehmenssitz in Villingen-Schwenningen betreuen wir Objekte in mehreren Regionen Süddeutschlands. Stuttgart und Konstanz sind Einsatzgebiete."
         image={IMG.schwarzwald}
         crumbs={[{ label: 'Standorte' }]}
         cta={{ label: 'Kostenlose Besichtigung anfragen', to: '/angebot' }}
         secondaryCta={{ label: SITE.phone, href: SITE.phoneHref }}
       />
 
-      {/* Standort-Karten */}
+      {/* Regions-Karten */}
       <section className="py-20 lg:py-32 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {standorte.map((standort, i) => (
+            {regionen.map((standort, i) => (
               <Reveal key={standort.name} delay={i * 0.1} className="h-full">
                 <Link
                   to={standort.path}
@@ -82,7 +82,7 @@ export default function Standorte() {
                   <div className="relative">
                     <SmartImage
                       src={standort.image}
-                      alt={`AHAD Cleaning Standort ${standort.name}`}
+                      alt={`AHAD Cleaning Einsatzgebiet ${standort.name}`}
                       className="aspect-[16/10]"
                       imgClassName="transition-transform duration-700 group-hover:scale-105"
                     />
@@ -98,7 +98,7 @@ export default function Standorte() {
                     <h2 className="font-headline text-2xl font-bold text-navy mb-3">{standort.name}</h2>
                     <p className="text-sm text-slate leading-relaxed flex-grow">{standort.description}</p>
                     <span className="mt-6 inline-flex items-center gap-2 text-sm font-bold text-brand group-hover:text-brand-light transition-colors">
-                      Standort ansehen
+                      Einsatzgebiet ansehen
                       <ArrowRight size={15} className="transition-transform group-hover:translate-x-1" />
                     </span>
                   </div>
@@ -116,7 +116,7 @@ export default function Standorte() {
             <SectionHeading
               eyebrow="Einzugsgebiet"
               title="Im Einsatz in ganz Süddeutschland."
-              lead="Auch außerhalb unserer Standorte betreuen wir Objekte zuverlässig — fragen Sie uns einfach an, wir prüfen jede Region."
+              lead="Auch außerhalb der genannten Einsatzgebiete prüfen wir Anfragen individuell. Eine Regionsnennung ist keine Behauptung einer örtlichen Niederlassung."
             />
             <Reveal delay={0.15}>
               <div className="mt-8 flex flex-wrap gap-2.5">
@@ -166,7 +166,7 @@ export default function Standorte() {
 
       <CTABand
         title="Ihr Objekt liegt in unserer Region?"
-        lead="Dann sichern Sie sich jetzt Besichtigung in 48h und Angebot in 24h — unverbindlich und kostenfrei."
+        lead="Dann vereinbaren Sie jetzt eine Besichtigung — unverbindlich, kostenfrei und mit transparentem Angebot im Anschluss."
       />
     </div>
   );

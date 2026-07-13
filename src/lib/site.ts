@@ -1,3 +1,5 @@
+import SITE_CONFIG from '@/site-config.json';
+
 /**
  * Zentrale Site-Konfiguration — einzige Quelle für Kontaktdaten,
  * Vertriebsversprechen und wiederkehrende Inhalte.
@@ -7,7 +9,7 @@
 export const SITE = {
   name: 'AHAD Cleaning',
   legalName: 'AHAD Cleaning Company GmbH',
-  url: 'https://ahad-cleaning.de',
+  url: SITE_CONFIG.canonicalOrigin,
   phone: '+49 7721 944 79 15',
   phoneHref: 'tel:+4977219447915',
   email: 'info@ahad-cleaning.de',
@@ -35,49 +37,182 @@ export const SITE = {
 export const WHATSAPP_HREF = `https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(SITE.whatsappText)}`;
 
 /**
+ * Pruefmetadaten fuer oeffentliche Tatsachenbehauptungen. Ein Eintrag wird nur
+ * publiziert, wenn ein nachvollziehbarer Nachweis vorhanden, die Pruefung
+ * datiert und noch nicht abgelaufen ist. Leere Platzhalter sind fail-closed.
+ */
+export type EvidenceReference =
+  | { kind: 'url'; value: string }
+  | { kind: 'id'; value: string };
+
+export interface PublicationVerification {
+  owner: string;
+  evidence: readonly EvidenceReference[];
+  verifiedAt: string | null;
+  expiresAt: string | null;
+}
+
+export function canPublishVerification(
+  verification: PublicationVerification,
+  now: Date = new Date(),
+): boolean {
+  const verifiedAt = verification.verifiedAt ? Date.parse(verification.verifiedAt) : Number.NaN;
+  const expiresAt = verification.expiresAt ? Date.parse(verification.expiresAt) : Number.NaN;
+  const evidenceIsValid =
+    verification.evidence.length > 0 &&
+    verification.evidence.every((item) => {
+      if (item.kind === 'url') {
+        try {
+          return new URL(item.value).protocol === 'https:';
+        } catch {
+          return false;
+        }
+      }
+      return item.value.trim().length > 0;
+    });
+
+  return (
+    verification.owner.trim().length > 0 &&
+    evidenceIsValid &&
+    Number.isFinite(verifiedAt) &&
+    Number.isFinite(expiresAt) &&
+    verifiedAt <= now.getTime() &&
+    expiresAt > now.getTime()
+  );
+}
+
+const pendingVerification = (owner: string): PublicationVerification => ({
+  owner,
+  evidence: [],
+  verifiedAt: null,
+  expiresAt: null,
+});
+
+/** Zentrales Register der noch nicht extern belegten Claims. */
+export const CLAIM_VERIFICATIONS = {
+  serviceLevels: pendingVerification('Operations'),
+  companyStatistics: pendingVerification('Geschaeftsfuehrung'),
+  googleBusinessProfile: pendingVerification('Marketing'),
+  iso9001: pendingVerification('Qualitaetsmanagement'),
+  iso14001: pendingVerification('Qualitaetsmanagement'),
+  insurance: pendingVerification('Geschaeftsfuehrung'),
+  workforce: pendingVerification('Personal'),
+  clientReferences: pendingVerification('Vertrieb'),
+  featuredTestimonial: pendingVerification('Marketing / Datenschutz'),
+  customerReviews: pendingVerification('Marketing / Datenschutz'),
+  hqGeo: pendingVerification('Operations'),
+  stuttgartBranch: pendingVerification('Operations'),
+  konstanzBranch: pendingVerification('Operations'),
+} satisfies Record<string, PublicationVerification>;
+
+export type LocationPublicationMode = 'legal-headquarters' | 'service-area';
+
+export interface LocationPublication {
+  name: string;
+  path: string;
+  mode: LocationPublicationMode;
+  verification: PublicationVerification;
+  publishLegalAddress: boolean;
+  publishAsLocalBusiness: boolean;
+  publishGeo: boolean;
+}
+
+/**
+ * Rollen der Ortsseiten. Die HQ-Adresse darf als rechtliche
+ * Organization-Adresse erscheinen. Filial- und Geo-Markup bleibt ohne
+ * gesonderten Standortnachweis gesperrt.
+ */
+export const LOCATION_PUBLICATIONS = {
+  villingenSchwenningen: {
+    name: 'Villingen-Schwenningen',
+    path: '/standorte/villingen-schwenningen',
+    mode: 'legal-headquarters',
+    verification: CLAIM_VERIFICATIONS.hqGeo,
+    publishLegalAddress: true,
+    publishAsLocalBusiness: canPublishVerification(CLAIM_VERIFICATIONS.hqGeo),
+    publishGeo: canPublishVerification(CLAIM_VERIFICATIONS.hqGeo),
+  },
+  stuttgart: {
+    name: 'Stuttgart',
+    path: '/standorte/stuttgart',
+    mode: 'service-area',
+    verification: CLAIM_VERIFICATIONS.stuttgartBranch,
+    publishLegalAddress: false,
+    publishAsLocalBusiness: canPublishVerification(CLAIM_VERIFICATIONS.stuttgartBranch),
+    publishGeo: canPublishVerification(CLAIM_VERIFICATIONS.stuttgartBranch),
+  },
+  konstanz: {
+    name: 'Konstanz',
+    path: '/standorte/konstanz',
+    mode: 'service-area',
+    verification: CLAIM_VERIFICATIONS.konstanzBranch,
+    publishLegalAddress: false,
+    publishAsLocalBusiness: canPublishVerification(CLAIM_VERIFICATIONS.konstanzBranch),
+    publishGeo: canPublishVerification(CLAIM_VERIFICATIONS.konstanzBranch),
+  },
+} satisfies Record<string, LocationPublication>;
+
+/**
  * Vertriebsversprechen — überall identisch kommuniziert.
  * WICHTIG: Diese Zusagen stehen öffentlich auf der Website und müssen
  * operativ abgesichert sein (Erreichbarkeit, Besichtigungskapazität,
  * Angebotsdurchlaufzeit), sonst kippt das Vertrauensargument.
  */
-export const PROMISES = [
+const PROMISE_CANDIDATES = [
   { value: '24h', label: 'Reaktionszeit garantiert' },
   { value: '48h', label: 'bis zur Objektbesichtigung' },
   { value: '100%', label: 'dokumentierte Qualität' },
 ] as const;
 
-export const STATS = [
+export const PROMISES = canPublishVerification(CLAIM_VERIFICATIONS.serviceLevels)
+  ? PROMISE_CANDIDATES
+  : [];
+
+const STAT_CANDIDATES = [
   { value: 80, suffix: '+', label: 'Qualifizierte Mitarbeitende' },
   { value: 15, suffix: '+', label: 'Jahre Erfahrung' },
   { value: 8, suffix: '', label: 'Leistungsbereiche aus einer Hand' },
   { value: 3, suffix: '', label: 'Standorte in Süddeutschland' },
 ] as const;
 
+export const STATS = canPublishVerification(CLAIM_VERIFICATIONS.companyStatistics)
+  ? STAT_CANDIDATES
+  : [];
+
 /**
- * Öffentliche Google-Bewertung — nur zur Anzeige + Verlinkung. KEIN
- * self-serving AggregateRating-JSON-LD ohne On-Page-Reviews (Google-Policy).
+ * Öffentliche Google-Bewertung — nur zur sichtbaren Anzeige + Verlinkung.
+ * Kein self-serving AggregateRating-JSON-LD für die eigene Organization.
  * `url` = euer Google-Unternehmensprofil (bitte exakt eintragen).
  */
-export const GOOGLE_RATING = {
+const GOOGLE_RATING_CANDIDATE = {
   value: 4.8,
   count: 20,
   url: '',
-  searchFallback:
-    'https://www.google.com/maps/search/AHAD+Cleaning+Company+GmbH+Villingen-Schwenningen',
 } as const;
+
+/** Nur mit exakt verifiziertem Unternehmensprofil; keine Suchergebnis-URL. */
+export const GOOGLE_RATING =
+  canPublishVerification(CLAIM_VERIFICATIONS.googleBusinessProfile) &&
+  GOOGLE_RATING_CANDIDATE.url.startsWith('https://')
+    ? GOOGLE_RATING_CANDIDATE
+    : null;
 
 /**
  * Vertrauenssignale fürs Trust-Band unter dem Hero. NUR belegbare Aussagen —
  * Zertifikate erst freischalten, wenn nachweislich vorhanden (Abmahnrisiko).
  * `icon` ist ein Schlüssel, der in TrustBand.tsx auf ein Symbol gemappt wird.
  */
-export const TRUST_BADGES = [
-  { icon: 'badge', label: 'ISO 9001 & 14001 zertifiziert', sub: 'Qualitäts- & Umweltmanagement' },
-  { icon: 'users', label: 'Nur festangestellte Teams', sub: 'sozialversichert & sicherheitsüberprüft' },
-  { icon: 'shield', label: 'Umfassend versichert', sub: 'Betriebshaftpflicht' },
-  { icon: 'clock', label: '15+ Jahre Erfahrung', sub: 'über 80 Objekte betreut' },
-  { icon: 'user', label: 'Feste Objektleitung', sub: 'ein Gesicht je Objekt' },
+const TRUST_BADGE_CANDIDATES = [
+  { icon: 'badge', label: 'ISO 9001 zertifiziert', sub: 'Qualitätsmanagement', verification: CLAIM_VERIFICATIONS.iso9001 },
+  { icon: 'badge', label: 'ISO 14001 zertifiziert', sub: 'Umweltmanagement', verification: CLAIM_VERIFICATIONS.iso14001 },
+  { icon: 'users', label: 'Nur festangestellte Teams', sub: 'sozialversichert & sicherheitsüberprüft', verification: CLAIM_VERIFICATIONS.workforce },
+  { icon: 'shield', label: 'Umfassend versichert', sub: 'Betriebshaftpflicht', verification: CLAIM_VERIFICATIONS.insurance },
+  { icon: 'clock', label: '15+ Jahre Erfahrung', sub: 'über 80 Objekte betreut', verification: CLAIM_VERIFICATIONS.companyStatistics },
 ] as const;
+
+export const TRUST_BADGES = TRUST_BADGE_CANDIDATES.filter((badge) =>
+  canPublishVerification(badge.verification),
+);
 
 export interface ClientReference {
   name: string;
@@ -87,30 +222,24 @@ export interface ClientReference {
   logo?: string;
   /** @deprecated Externe Hotlinks vermeiden — Logos lokal unter logo ablegen. */
   logoUrl?: string;
+  verification: PublicationVerification;
 }
 
-export const CLIENT_REFERENCES: ClientReference[] = [
-  { name: 'Allianz', domain: 'allianz.de', logo: '/images/clients/allianz.svg' },
-  { name: 'GOLDBECK', domain: 'goldbeck.de', logo: '/images/clients/goldbeck.svg' },
-  { name: 'Bundesagentur für Arbeit', domain: 'arbeitsagentur.de', logo: '/images/clients/bundesagentur-fuer-arbeit.png' },
-  { name: 'Bareiss', domain: 'bareiss.com', logo: '/images/clients/bareiss.png' },
-  { name: 'BDT', domain: 'bdt.de', logo: '/images/clients/bdt.svg' },
-  { name: 'Köster', domain: 'koester-bau.de', logo: '/images/clients/koester.png' },
-  { name: 'Aesthetify by Dr. Rick & Dr. Nick', domain: 'aesthetify.de', logo: '/images/clients/aesthetify.svg' },
-  { name: 'Käppelehof', domain: 'kaeppelehof.de', logo: '/images/clients/kaeppelehof.png' },
-  { name: 'Kur- und Bäder GmbH Bad Dürrheim', domain: 'badduerrheim.de', logo: '/images/clients/kur-baeder-bad-duerrheim.png' },
-  { name: 'naturenergie netze', domain: 'naturenergie-netze.de', logo: '/images/clients/naturenergie-netze.svg' },
-  // Kein freigegebenes Logo vorhanden -> faellt automatisch auf die Wortmarke zurueck.
-  { name: 'Schwarzwald-Baar-Kreis', domain: 'schwarzwald-baar-kreis.de' },
-  { name: 'SMA Südwest Messe- und Ausstellungs-GmbH', domain: 'suedwest-messe.de', logo: '/images/clients/sma-suedwest-messe.png' },
-];
+// Freigegebene Datensaetze erst nach dokumentierter Einzelpruefung eintragen.
+// Die redaktionelle Warteschlange liegt in docs/content/verification-register.json
+// und wird bewusst nicht in den Client-Bundle aufgenommen.
+const CLIENT_REFERENCE_CANDIDATES: ClientReference[] = [];
+
+export const CLIENT_REFERENCES = CLIENT_REFERENCE_CANDIDATES.filter((reference) =>
+  canPublishVerification(reference.verification),
+);
 
 /**
  * Das AHAD-Versprechen — benannte Risikoumkehr mit „Zähnen".
  * Bewusst nur Zusagen, die operativ haltbar sind (Nachbesserung,
  * Festpreis, faire Laufzeit, Reaktionszeit). Keine erfundenen Werte.
  */
-export const GUARANTEES = [
+const GUARANTEE_CANDIDATES = [
   {
     title: 'Reaktions-Versprechen',
     promise: 'Antwort auf jede Meldung innerhalb von 24 Stunden — nachvollziehbar dokumentiert.',
@@ -129,17 +258,25 @@ export const GUARANTEES = [
   },
 ] as const;
 
+export const GUARANTEES = canPublishVerification(CLAIM_VERIFICATIONS.serviceLevels)
+  ? GUARANTEE_CANDIDATES
+  : [];
+
 /**
  * Belegbare Eckwerte (operative Zusagen, keine fabrizierten Statistiken).
  * Sobald echte Kennzahlen vorliegen (z. B. gemessene SLA-Quote), hier
  * ergänzen — bis dahin nur, wofür AHAD vertraglich einsteht.
  */
-export const PROOF_POINTS = [
+const PROOF_POINT_CANDIDATES = [
   { value: '24 h', label: 'Reaktionszeit', sub: 'vertraglich zugesichert' },
   { value: '48 h', label: 'bis Objektbesichtigung', sub: 'in der Regel vor Ort' },
   { value: '1', label: 'feste Objektleitung', sub: 'pro Objekt, mit Gesicht' },
   { value: '100 %', label: 'dokumentierte Leistung', sub: 'auditfähig nachweisbar' },
 ] as const;
+
+export const PROOF_POINTS = canPublishVerification(CLAIM_VERIFICATIONS.serviceLevels)
+  ? PROOF_POINT_CANDIDATES
+  : [];
 
 /**
  * Feste Objektleitung mit Gesicht — der wichtigste menschliche
@@ -159,31 +296,31 @@ export const OBJEKTLEITUNG = {
  * Wortlaut unverändert. Das wichtigste Vertrauenselement der Seite:
  * namentlich, detailliert, von einem langjährigen regionalen Auftraggeber.
  */
-export const FEATURED_TESTIMONIAL = {
-  quote:
-    'Die Firma AHAD Cleaning Company GmbH ist ein sehr zuverlässiger und flexibler Partner, der auch auf kurzfristigen Reinigungsbedarf schnell reagiert. Die gute Erreichbarkeit und die engagierte Kundenbetreuung machen die Zusammenarbeit besonders angenehm. Neben der Grundreinigung unserer Hallen vor und nach den Veranstaltungen übernimmt das Team während der Veranstaltungen die Toilettenbetreuung und den Reinigungsdienst. Darüber hinaus werden die Unterhaltsreinigung unserer Büroräume sowie Glas- und Sonderreinigungen ganzjährig bei uns durchgeführt.',
-  person: 'Diana Graupner',
-  personRole: 'Leitung Veranstaltungskoordination',
-  company: 'SMA Südwest Messe- und Ausstellungs-GmbH',
-  shortName: 'Südwest Messe',
-  location: 'Villingen-Schwenningen',
-  relationship: 'Langjähriger Kunde',
-  logo: '/images/clients/sma-suedwest-messe.png',
-  /** Im Zitat genannte Leistungen — belegen die Breite der Zusammenarbeit. */
-  services: [
-    'Hallen-Grundreinigung',
-    'Veranstaltungsservice',
-    'Unterhaltsreinigung',
-    'Glasreinigung',
-    'Sonderreinigung',
-  ],
-} as const;
+export interface FeaturedTestimonialData {
+  quote: string;
+  person: string;
+  personRole: string;
+  company: string;
+  shortName: string;
+  location: string;
+  relationship: string;
+  logo: string;
+  services: readonly string[];
+  verification: PublicationVerification;
+}
+
+/** Keine personenbezogenen Rohdaten im Client-Bundle vor der Freigabe. */
+export const FEATURED_TESTIMONIAL: FeaturedTestimonialData | null = null;
+
+const canPublishTestimonial = (testimonial: FeaturedTestimonialData | null): boolean =>
+  testimonial !== null && canPublishVerification(testimonial.verification);
+
+export const FEATURED_TESTIMONIAL_PUBLISHABLE = canPublishTestimonial(FEATURED_TESTIMONIAL);
 
 /**
- * Echte Kundenbewertungen (z. B. von Google).
- * LEER lassen, bis verifizierte Bewertungen vorliegen — dann hier eintragen.
- * Solange leer, wird KEIN AggregateRating-Schema ausgegeben (fake Markup
- * ist gegen Google-Richtlinien und rechtlich riskant).
+ * Echte Kundenbewertungen (z. B. von Google) für die sichtbare Ausgabe.
+ * LEER lassen, bis verifizierte Bewertungen vorliegen. Unabhängig vom Inhalt
+ * dieser Liste wird kein Organization-AggregateRating-Markup ausgegeben.
  */
 export interface Review {
   author: string;
@@ -200,68 +337,24 @@ export interface Review {
  * beschreibt, dann sachliche Empfehlungen; die saloppste Stimme steht zuletzt.
  * Inhalte unverändert — nur die Anordnung ist kuratiert.
  */
-export const REVIEWS: Review[] = [
-  {
-    author: 'Matthias Porsche',
-    role: 'Rottweil',
-    rating: 5,
-    text:
-      'Vom ersten Telefonat, über die Vorbesichtigung, die Angebotserstellung und Beauftragung bis hin zur Ausführung: sehr freundlich, vertrauenserweckend, kompetent, professionell, zuverlässig — mit einem erstklassigen, meine Erwartungen übersteigenden Reinigungsergebnis zu einem angemessenen Preis. Da ich am Tag der Reinigung nicht anwesend war, schickte man mir nach Beendigung der Arbeiten ein ausführliches Video vom Ergebnis. Eine nette, vertrauenserweckende Geste! Diesem Unternehmen würde ich mich jederzeit wieder anvertrauen und werde es weiterempfehlen.',
-  },
-  {
-    author: 'Marvin Krüger',
-    rating: 5,
-    text: 'Kann ich nur empfehlen! Toller Service — sehr freundliche und kompetente Kommunikation. Besser geht es eigentlich nicht mehr.',
-  },
-  {
-    author: 'Annelene Dethlefsen',
-    rating: 5,
-    text:
-      'Tolle Dienstleistung: Fenster und Rahmen von innen und außen inkl. Carport-Überdachung — alles super sauber. Vielen Dank an das Reinigungsteam.',
-  },
-  {
-    author: 'Inge Hauser',
-    rating: 5,
-    text:
-      'Bin mega zufrieden, und der Mann, der unsere Fenster gereinigt hat, war so sympathisch, lieb und nett. Wir waren begeistert! Wir werden im Frühjahr den nächsten Auftrag an Sie weitergeben.',
-  },
-  {
-    author: 'Karl-Heinz Maaß',
-    rating: 5,
-    text:
-      'Sehr angenehmer Chef, die erste Reinigungsfirma mit Ambiente und positiver Stimmung vom ganzen Team — gut gelaunt und sehr ansprechendes Büro. 6 von 5 Sternen! 👍',
-  },
-];
+/** Freigegebene Stimmen erst nach dokumentierter Wiedergabefreigabe eintragen. */
+const REVIEW_CANDIDATES: Review[] = [];
+
+/** Einzelstimmen nur mit dokumentierter Wiedergabe- und Namensfreigabe. */
+export const REVIEWS: Review[] = canPublishVerification(CLAIM_VERIFICATIONS.customerReviews)
+  ? REVIEW_CANDIDATES
+  : [];
 
 /** Quelle/Profil-Link für „alle Bewertungen ansehen" — Google-Unternehmensprofil. */
-export const REVIEWS_SOURCE_URL = GOOGLE_RATING.url || GOOGLE_RATING.searchFallback;
+export const REVIEWS_SOURCE_URL = GOOGLE_RATING?.url ?? null;
 
 /**
- * Review/AggregateRating-Schema. Aggregat = ECHTE Google-Gesamtwertung
- * (GOOGLE_RATING 4,8 / 20), nicht der Schnitt der gezeigten Auswahl —
- * die Reviews sind eine repräsentative Stichprobe. Nur wenn Reviews da sind.
+ * Bewertungen bleiben als sichtbarer, mit der Google-Quelle verlinkter Inhalt
+ * erhalten. Auf der eigenen Organization/LocalBusiness-Website wird bewusst
+ * kein self-serving Review-/AggregateRating-Markup ausgegeben.
  */
 export function reviewSchema() {
-  if (REVIEWS.length === 0) return null;
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'Organization',
-    '@id': `${SITE.url}/#organization`,
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: GOOGLE_RATING.value,
-      reviewCount: GOOGLE_RATING.count,
-      bestRating: 5,
-      worstRating: 1,
-    },
-    review: REVIEWS.map((r) => ({
-      '@type': 'Review',
-      author: { '@type': 'Person', name: r.author },
-      ...(r.date ? { datePublished: r.date } : {}),
-      reviewRating: { '@type': 'Rating', ratingValue: r.rating, bestRating: 5, worstRating: 1 },
-      reviewBody: r.text,
-    })),
-  };
+  return null;
 }
 
 export const WEBSITE_SCHEMA = {
@@ -289,7 +382,7 @@ export const ORG_REF = {
 
 export const ORGANIZATION_SCHEMA = {
   '@context': 'https://schema.org',
-  '@type': ['Organization', 'LocalBusiness'],
+  '@type': 'Organization',
   '@id': `${SITE.url}/#organization`,
   name: SITE.legalName,
   url: SITE.url,
@@ -299,13 +392,6 @@ export const ORGANIZATION_SCHEMA = {
     'Gebäudereinigung, Industriereinigung und Unterhaltsreinigung für Unternehmen in Villingen-Schwenningen, Stuttgart, Konstanz und Süddeutschland.',
   telephone: SITE.phone,
   email: SITE.email,
-  priceRange: '€€',
-  openingHoursSpecification: {
-    '@type': 'OpeningHoursSpecification',
-    dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
-    opens: '08:00',
-    closes: '17:00',
-  },
   areaServed: [
     { '@type': 'City', name: 'Villingen-Schwenningen' },
     { '@type': 'City', name: 'Stuttgart' },
@@ -313,7 +399,6 @@ export const ORGANIZATION_SCHEMA = {
     { '@type': 'AdministrativeArea', name: 'Schwarzwald-Baar-Kreis' },
     { '@type': 'AdministrativeArea', name: 'Baden-Württemberg' },
   ],
-  geo: { '@type': 'GeoCoordinates', latitude: 48.0626, longitude: 8.4937 },
   contactPoint: {
     '@type': 'ContactPoint',
     telephone: SITE.phone,
@@ -328,18 +413,6 @@ export const ORGANIZATION_SCHEMA = {
     postalCode: SITE.address.zip,
     addressCountry: SITE.address.country,
   },
-  hasCredential: [
-    {
-      '@type': 'EducationalOccupationalCredential',
-      name: 'ISO 9001',
-      credentialCategory: 'Qualitätsmanagement (Zertifizierung)',
-    },
-    {
-      '@type': 'EducationalOccupationalCredential',
-      name: 'ISO 14001',
-      credentialCategory: 'Umweltmanagement (Zertifizierung)',
-    },
-  ],
   // ahad-care.de gehört zur selben GmbH (zweites Geschäftsfeld) -> selbe Entität.
   sameAs: [SITE.social.instagram, SITE.social.linkedin, SITE.careUrl],
 };

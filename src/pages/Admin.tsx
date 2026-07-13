@@ -6,6 +6,7 @@ import {
   collection, 
   query, 
   orderBy, 
+  limit,
   onSnapshot, 
   signInWithPopup, 
   googleProvider,
@@ -15,8 +16,8 @@ import {
   Timestamp,
   doc,
   setDoc,
-  handleFirestoreError,
-  OperationType
+  serverTimestamp,
+  writeBatch,
 } from '@/firebase';
 import { 
   LayoutDashboard, 
@@ -24,19 +25,16 @@ import {
   FileText, 
   LogOut, 
   LogIn, 
-  CheckCircle2, 
-  Clock, 
   AlertCircle,
-  ChevronRight,
   Mail,
   Phone,
   MapPin,
   Building,
   Calendar,
   Trash2,
-  Edit3
 } from 'lucide-react';
 import SEO from '@/components/SEO';
+import { buildSemicolonCsv } from '@/lib/csv';
 
 interface JobApplication {
   id: string;
@@ -51,7 +49,7 @@ interface JobApplication {
   status: string;
   /** false = E-Mail-Benachrichtigung fehlgeschlagen — Eintrag existiert nur hier. */
   emailSent?: boolean;
-  createdAt: Timestamp;
+  createdAt: Timestamp | null;
 }
 
 interface OfferLead {
@@ -67,7 +65,7 @@ interface OfferLead {
   frequency: string;
   status: string;
   emailSent?: boolean;
-  createdAt: Timestamp;
+  createdAt: Timestamp | null;
 }
 
 interface ContactLead {
@@ -80,7 +78,7 @@ interface ContactLead {
   message: string;
   status: string;
   emailSent?: boolean;
-  createdAt: Timestamp;
+  createdAt: Timestamp | null;
 }
 
 /** Badge für Einträge, deren E-Mail-Benachrichtigung fehlschlug (nur Firestore). */
@@ -95,14 +93,55 @@ function EmailFailedBadge({ emailSent }: { emailSent?: boolean }) {
 }
 
 /** CSV-Export (Semikolon + BOM → öffnet sauber in deutschem Excel). */
-function downloadCsv(filename: string, rows: Record<string, unknown>[]) {
-  if (rows.length === 0) return;
-  const cols = Array.from(new Set(rows.flatMap((r) => Object.keys(r))));
-  const cell = (v: unknown) => {
-    const s = Array.isArray(v) ? v.join(', ') : String(v ?? '');
-    return `"${s.replace(/"/g, '""')}"`;
+const asString = (value: unknown): string => typeof value === 'string' ? value : '';
+const asBoolean = (value: unknown): boolean | undefined => typeof value === 'boolean' ? value : undefined;
+const asStringArray = (value: unknown): string[] => Array.isArray(value)
+  ? value.filter((item): item is string => typeof item === 'string').slice(0, 20)
+  : [];
+const asTimestamp = (value: unknown): Timestamp | null => value instanceof Timestamp ? value : null;
+
+function formatTimestamp(value: Timestamp | null): string {
+  if (!value) return 'Zeitpunkt unbekannt';
+  try {
+    const date = value.toDate();
+    return Number.isNaN(date.getTime()) ? 'Zeitpunkt unbekannt' : date.toLocaleString('de-DE');
+  } catch {
+    return 'Zeitpunkt unbekannt';
+  }
+}
+
+function normalizeJob(id: string, data: Record<string, unknown>): JobApplication {
+  return {
+    id,
+    name: asString(data.name), phone: asString(data.phone), jobType: asString(data.jobType),
+    department: asString(data.department), experience: asString(data.experience), startDate: asString(data.startDate),
+    mobility: asString(data.mobility), location: asString(data.location), status: asString(data.status) || 'new',
+    emailSent: asBoolean(data.emailSent), createdAt: asTimestamp(data.createdAt),
   };
-  const csv = [cols.join(';'), ...rows.map((r) => cols.map((c) => cell(r[c])).join(';'))].join('\r\n');
+}
+
+function normalizeOffer(id: string, data: Record<string, unknown>): OfferLead {
+  return {
+    id,
+    companyName: asString(data.companyName), contactPerson: asString(data.contactPerson), email: asString(data.email),
+    phone: asString(data.phone), location: asString(data.location), objectType: asString(data.objectType),
+    services: asStringArray(data.services), areaSize: asString(data.areaSize), frequency: asString(data.frequency),
+    status: asString(data.status) || 'new', emailSent: asBoolean(data.emailSent), createdAt: asTimestamp(data.createdAt),
+  };
+}
+
+function normalizeContact(id: string, data: Record<string, unknown>): ContactLead {
+  return {
+    id,
+    contactPerson: asString(data.contactPerson), company: asString(data.company), email: asString(data.email),
+    phone: asString(data.phone), serviceType: asString(data.serviceType), message: asString(data.message),
+    status: asString(data.status) || 'new', emailSent: asBoolean(data.emailSent), createdAt: asTimestamp(data.createdAt),
+  };
+}
+
+function downloadCsv(filename: string, columns: readonly string[], rows: readonly (readonly unknown[])[]) {
+  if (rows.length === 0) return;
+  const csv = buildSemicolonCsv(columns, rows);
   const blob = new Blob(['\ufeff' + csv], { type: 'text/csv;charset=utf-8' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
@@ -119,41 +158,8 @@ export default function Admin() {
   const [offerLeads, setOfferLeads] = useState<OfferLead[]>([]);
   const [contactLeads, setContactLeads] = useState<ContactLead[]>([]);
   const [activeTab, setActiveTab] = useState<'jobs' | 'offers' | 'contacts'>('jobs');
-  const [isTestingEmail, setIsTestingEmail] = useState(false);
-
-  const sendTestEmail = async () => {
-    setIsTestingEmail(true);
-    try {
-      const response = await fetch('/api/send-email', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ 
-          type: 'offer_lead', 
-          data: {
-            companyName: "TEST FIRMA (AI STUDIO)",
-            contactPerson: "Test Person",
-            email: "test@example.com",
-            phone: "0123456789",
-            location: "Test Ort",
-            objectType: "Büro",
-            services: ["Unterhaltsreinigung"],
-            areaSize: "100m2",
-            frequency: "Täglich"
-          } 
-        })
-      });
-      if (response.ok) {
-        alert('Test E-Mail wurde erfolgreich versendet!');
-      } else {
-        alert('Fehler beim Versenden der Test E-Mail.');
-      }
-    } catch (error) {
-      console.error('Test email error:', error);
-      alert('Netzwerkfehler beim Versenden der Test E-Mail.');
-    } finally {
-      setIsTestingEmail(false);
-    }
-  };
+  const [dataError, setDataError] = useState<string | null>(null);
+  const [deletingKey, setDeletingKey] = useState<string | null>(null);
 
   useEffect(() => {
     // Zugriffsschutz liegt bewusst NICHT im Client: Welche Konten lesen dürfen,
@@ -169,19 +175,37 @@ export default function Admin() {
   useEffect(() => {
     if (!user) return;
 
-    console.log("Setting up Firestore listeners for Admin...");
-    
-    const unsubJobs = onSnapshot(query(collection(db, 'job_applications'), orderBy('createdAt', 'desc')), (snapshot) => {
-      setJobApplications(snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as JobApplication)));
-    }, (err) => handleFirestoreError(err, OperationType.LIST, 'job_applications'));
+    const reportListenerError = (collectionName: string) => (error: unknown) => {
+      console.error(`Admin listener failed: ${collectionName}`, error);
+      setDataError('Die Datensätze konnten nicht geladen werden. Bitte Berechtigung und Verbindung prüfen.');
+    };
 
-    const unsubOffers = onSnapshot(query(collection(db, 'offer_leads'), orderBy('createdAt', 'desc')), (snapshot) => {
-      setOfferLeads(snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as OfferLead)));
-    }, (err) => handleFirestoreError(err, OperationType.LIST, 'offer_leads'));
+    const unsubJobs = onSnapshot(
+      query(collection(db, 'job_applications'), orderBy('createdAt', 'desc'), limit(100)),
+      (snapshot) => {
+        setDataError(null);
+        setJobApplications(snapshot.docs.map((snapshotDoc) => normalizeJob(snapshotDoc.id, snapshotDoc.data())));
+      },
+      reportListenerError('job_applications'),
+    );
 
-    const unsubContacts = onSnapshot(query(collection(db, 'leads'), orderBy('createdAt', 'desc')), (snapshot) => {
-      setContactLeads(snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as ContactLead)));
-    }, (err) => handleFirestoreError(err, OperationType.LIST, 'leads'));
+    const unsubOffers = onSnapshot(
+      query(collection(db, 'offer_leads'), orderBy('createdAt', 'desc'), limit(100)),
+      (snapshot) => {
+        setDataError(null);
+        setOfferLeads(snapshot.docs.map((snapshotDoc) => normalizeOffer(snapshotDoc.id, snapshotDoc.data())));
+      },
+      reportListenerError('offer_leads'),
+    );
+
+    const unsubContacts = onSnapshot(
+      query(collection(db, 'leads'), orderBy('createdAt', 'desc'), limit(100)),
+      (snapshot) => {
+        setDataError(null);
+        setContactLeads(snapshot.docs.map((snapshotDoc) => normalizeContact(snapshotDoc.id, snapshotDoc.data())));
+      },
+      reportListenerError('leads'),
+    );
 
     return () => {
       unsubJobs();
@@ -191,11 +215,47 @@ export default function Admin() {
   }, [user]);
 
   const updateStatus = async (collectionName: string, id: string, newStatus: string) => {
+    const statusByCollection: Record<string, readonly string[]> = {
+      leads: ['new', 'contacted', 'closed'],
+      offer_leads: ['new', 'contacted', 'visited', 'offered', 'closed'],
+      job_applications: ['new', 'reviewed', 'contacted', 'rejected', 'hired'],
+    };
+    if (!statusByCollection[collectionName]?.includes(newStatus)) return;
+    const terminal = ['closed', 'rejected', 'hired'].includes(newStatus);
+    const retentionDays = terminal ? (collectionName === 'job_applications' ? 180 : 90) : 365;
     try {
-      await setDoc(doc(db, collectionName, id), { status: newStatus }, { merge: true });
+      await setDoc(doc(db, collectionName, id), {
+        status: newStatus,
+        updatedAt: serverTimestamp(),
+        expiresAt: Timestamp.fromDate(new Date(Date.now() + retentionDays * 86_400_000)),
+      }, { merge: true });
     } catch (err) {
       console.error(`Error updating status in ${collectionName}:`, err);
-      handleFirestoreError(err, OperationType.UPDATE, `${collectionName}/${id}`);
+      setDataError('Der Status konnte nicht gespeichert werden.');
+    }
+  };
+
+  const deleteRecord = async (collectionName: string, id: string, label: string) => {
+    if (!user || !window.confirm(`„${label || 'Datensatz'}“ dauerhaft löschen? Dieser Vorgang wird protokolliert.`)) return;
+    const key = `${collectionName}/${id}`;
+    setDeletingKey(key);
+    try {
+      const batch = writeBatch(db);
+      batch.delete(doc(db, collectionName, id));
+      batch.set(doc(collection(db, 'admin_audit_logs')), {
+        action: 'delete',
+        collection: collectionName,
+        recordId: id,
+        actorUid: user.uid,
+        actorEmail: user.email ?? '',
+        createdAt: serverTimestamp(),
+      });
+      await batch.commit();
+    } catch (error) {
+      console.error('Admin deletion failed', error);
+      setDataError('Der Datensatz konnte nicht gelöscht werden.');
+    } finally {
+      setDeletingKey(null);
     }
   };
 
@@ -264,20 +324,25 @@ export default function Admin() {
             <button
               onClick={() => {
                 const stamp = new Date().toISOString().slice(0, 10);
-                if (activeTab === 'jobs') downloadCsv(`bewerbungen-${stamp}.csv`, jobApplications.map(({ createdAt, ...r }) => ({ ...r, erstellt: createdAt?.toDate().toLocaleString('de-DE') ?? '' })));
-                if (activeTab === 'offers') downloadCsv(`angebotsanfragen-${stamp}.csv`, offerLeads.map(({ createdAt, ...r }) => ({ ...r, erstellt: createdAt?.toDate().toLocaleString('de-DE') ?? '' })));
-                if (activeTab === 'contacts') downloadCsv(`kontaktanfragen-${stamp}.csv`, contactLeads.map(({ createdAt, ...r }) => ({ ...r, erstellt: createdAt?.toDate().toLocaleString('de-DE') ?? '' })));
+                if (activeTab === 'jobs') downloadCsv(
+                  `bewerbungen-${stamp}.csv`,
+                  ['ID', 'Name', 'Telefon', 'Stelle', 'Bereich', 'Erfahrung', 'Start', 'Mobilität', 'Standort', 'Status', 'E-Mail gesendet', 'Erstellt'],
+                  jobApplications.map((item) => [item.id, item.name, item.phone, item.jobType, item.department, item.experience, item.startDate, item.mobility, item.location, item.status, item.emailSent === true ? 'Ja' : 'Nein', formatTimestamp(item.createdAt)]),
+                );
+                if (activeTab === 'offers') downloadCsv(
+                  `angebotsanfragen-${stamp}.csv`,
+                  ['ID', 'Firma', 'Kontakt', 'E-Mail', 'Telefon', 'Standort', 'Objekt', 'Leistungen', 'Fläche', 'Intervall', 'Status', 'E-Mail gesendet', 'Erstellt'],
+                  offerLeads.map((item) => [item.id, item.companyName, item.contactPerson, item.email, item.phone, item.location, item.objectType, item.services, item.areaSize, item.frequency, item.status, item.emailSent === true ? 'Ja' : 'Nein', formatTimestamp(item.createdAt)]),
+                );
+                if (activeTab === 'contacts') downloadCsv(
+                  `kontaktanfragen-${stamp}.csv`,
+                  ['ID', 'Kontakt', 'Firma', 'E-Mail', 'Telefon', 'Leistung', 'Nachricht', 'Status', 'E-Mail gesendet', 'Erstellt'],
+                  contactLeads.map((item) => [item.id, item.contactPerson, item.company, item.email, item.phone, item.serviceType, item.message, item.status, item.emailSent === true ? 'Ja' : 'Nein', formatTimestamp(item.createdAt)]),
+                );
               }}
               className="flex items-center gap-2 bg-white text-[#0D6B38] px-6 py-3 rounded-xl font-bold hover:bg-green-50 transition-all shadow-sm border border-green-100"
             >
               <FileText size={20} /> CSV exportieren
-            </button>
-            <button
-              onClick={sendTestEmail}
-              disabled={isTestingEmail}
-              className="flex items-center gap-2 bg-white text-[#0B2341] px-6 py-3 rounded-xl font-bold hover:bg-blue-50 transition-all shadow-sm border border-blue-100 disabled:opacity-50"
-            >
-              <Mail size={20} /> {isTestingEmail ? 'Sende...' : 'Test E-Mail'}
             </button>
             <button 
               onClick={handleLogout}
@@ -287,6 +352,15 @@ export default function Admin() {
             </button>
           </div>
         </div>
+
+        {dataError && (
+          <div role="alert" className="mb-6 rounded-xl border border-red-200 bg-red-50 p-4 text-sm font-semibold text-red-700">
+            {dataError}
+          </div>
+        )}
+        <p className="mb-6 text-xs font-medium text-gray-500">
+          Aus Performance- und Datenschutzgründen werden je Bereich höchstens die 100 neuesten Datensätze angezeigt.
+        </p>
 
         {/* Stats */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
@@ -398,7 +472,7 @@ export default function Admin() {
                     </div>
                     <div className="flex flex-col justify-between items-end gap-4">
                       <div className="text-xs text-gray-400 font-medium">
-                        {app.createdAt?.toDate().toLocaleString('de-DE')}
+                        {formatTimestamp(app.createdAt)}
                       </div>
                       <select 
                         value={app.status}
@@ -415,6 +489,14 @@ export default function Admin() {
                         <option value="rejected">Abgelehnt</option>
                         <option value="hired">Eingestellt</option>
                       </select>
+                      <button
+                        type="button"
+                        onClick={() => deleteRecord('job_applications', app.id, app.name)}
+                        disabled={deletingKey === `job_applications/${app.id}`}
+                        className="inline-flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-bold text-red-600 hover:bg-red-50 disabled:opacity-50"
+                      >
+                        <Trash2 size={16} /> {deletingKey === `job_applications/${app.id}` ? 'Löscht …' : 'Löschen'}
+                      </button>
                     </div>
                   </div>
                 </motion.div>
@@ -465,7 +547,7 @@ export default function Admin() {
                     </div>
                     <div className="flex flex-col justify-between items-end gap-4">
                       <div className="text-xs text-gray-400 font-medium">
-                        {lead.createdAt?.toDate().toLocaleString('de-DE')}
+                        {formatTimestamp(lead.createdAt)}
                       </div>
                       <select 
                         value={lead.status}
@@ -482,6 +564,14 @@ export default function Admin() {
                         <option value="offered">Angebot erstellt</option>
                         <option value="closed">Abgeschlossen</option>
                       </select>
+                      <button
+                        type="button"
+                        onClick={() => deleteRecord('offer_leads', lead.id, lead.companyName)}
+                        disabled={deletingKey === `offer_leads/${lead.id}`}
+                        className="inline-flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-bold text-red-600 hover:bg-red-50 disabled:opacity-50"
+                      >
+                        <Trash2 size={16} /> {deletingKey === `offer_leads/${lead.id}` ? 'Löscht …' : 'Löschen'}
+                      </button>
                     </div>
                   </div>
                 </motion.div>
@@ -531,7 +621,7 @@ export default function Admin() {
                     </div>
                     <div className="flex flex-col justify-between items-end gap-4">
                       <div className="text-xs text-gray-400 font-medium">
-                        {lead.createdAt?.toDate().toLocaleString('de-DE')}
+                        {formatTimestamp(lead.createdAt)}
                       </div>
                       <select 
                         value={lead.status}
@@ -546,6 +636,14 @@ export default function Admin() {
                         <option value="contacted">Kontaktiert</option>
                         <option value="closed">Abgeschlossen</option>
                       </select>
+                      <button
+                        type="button"
+                        onClick={() => deleteRecord('leads', lead.id, lead.contactPerson)}
+                        disabled={deletingKey === `leads/${lead.id}`}
+                        className="inline-flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-bold text-red-600 hover:bg-red-50 disabled:opacity-50"
+                      >
+                        <Trash2 size={16} /> {deletingKey === `leads/${lead.id}` ? 'Löscht …' : 'Löschen'}
+                      </button>
                     </div>
                   </div>
                 </motion.div>

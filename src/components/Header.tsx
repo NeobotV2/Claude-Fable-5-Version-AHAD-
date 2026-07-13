@@ -1,7 +1,7 @@
 import { Link, useLocation } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import { motion, AnimatePresence } from 'motion/react';
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import {
   ChevronDown,
   Menu,
@@ -87,6 +87,12 @@ export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [mobileActiveDropdown, setMobileActiveDropdown] = useState<string | null>(null);
   const [scrolled, setScrolled] = useState(false);
+  const headerChromeRef = useRef<HTMLDivElement>(null);
+  const mobileDialogRef = useRef<HTMLDivElement>(null);
+  const mobileCloseRef = useRef<HTMLButtonElement>(null);
+  const mobileMenuTriggerRef = useRef<HTMLButtonElement>(null);
+  const restoreFocusOnCloseRef = useRef(true);
+  const desktopToggleRefs = useRef<Record<string, HTMLButtonElement | null>>({});
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -95,7 +101,10 @@ export default function Header() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
+  const openMobileMenu = () => {
+    restoreFocusOnCloseRef.current = true;
+    setIsMobileMenuOpen(true);
+  };
   // useCallback: stabile Referenz, damit die Effekte unten sie sauber als
   // Dependency führen können, ohne bei jedem Render neu zu laufen.
   const closeMobileMenu = useCallback(() => {
@@ -103,12 +112,83 @@ export default function Header() {
     setMobileActiveDropdown(null);
   }, []);
 
+  const closeMobileMenuForNavigation = useCallback(() => {
+    restoreFocusOnCloseRef.current = false;
+    closeMobileMenu();
+  }, [closeMobileMenu]);
+
   useEffect(() => {
-    document.body.style.overflow = isMobileMenuOpen ? 'hidden' : '';
-    return () => {
-      document.body.style.overflow = '';
+    if (!isMobileMenuOpen) return;
+
+    const bodyOverflow = document.body.style.overflow;
+    const menuTrigger = mobileMenuTriggerRef.current;
+    const backgroundElements = [
+      headerChromeRef.current,
+      document.querySelector<HTMLElement>('#main-content'),
+      document.querySelector<HTMLElement>('footer'),
+      ...document.querySelectorAll<HTMLElement>('.skip-link, [data-page-action]'),
+    ].filter((element): element is HTMLElement => Boolean(element));
+    const previousStates = backgroundElements.map((element) => ({
+      element,
+      inert: element.inert,
+      ariaHidden: element.getAttribute('aria-hidden'),
+    }));
+
+    document.body.style.overflow = 'hidden';
+    backgroundElements.forEach((element) => {
+      element.inert = true;
+      element.setAttribute('aria-hidden', 'true');
+    });
+
+    const getFocusableElements = () =>
+      Array.from(
+        mobileDialogRef.current?.querySelectorAll<HTMLElement>(
+          'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+        ) ?? []
+      ).filter((element) => !element.hasAttribute('hidden'));
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        closeMobileMenu();
+        return;
+      }
+      if (event.key !== 'Tab') return;
+
+      const focusable = getFocusableElements();
+      if (focusable.length === 0) {
+        event.preventDefault();
+        mobileDialogRef.current?.focus();
+        return;
+      }
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
     };
-  }, [isMobileMenuOpen]);
+
+    document.addEventListener('keydown', handleKeyDown);
+    const focusFrame = window.requestAnimationFrame(() => mobileCloseRef.current?.focus());
+
+    return () => {
+      window.cancelAnimationFrame(focusFrame);
+      document.removeEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = bodyOverflow;
+      previousStates.forEach(({ element, inert, ariaHidden }) => {
+        element.inert = inert;
+        if (ariaHidden === null) element.removeAttribute('aria-hidden');
+        else element.setAttribute('aria-hidden', ariaHidden);
+      });
+      if (restoreFocusOnCloseRef.current) {
+        window.requestAnimationFrame(() => menuTrigger?.focus());
+      }
+    };
+  }, [isMobileMenuOpen, closeMobileMenu]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -120,14 +200,16 @@ export default function Header() {
 
   // Bei Routenwechsel Menü schließen
   useEffect(() => {
+    restoreFocusOnCloseRef.current = false;
     closeMobileMenu();
     setActiveDropdown(null);
   }, [location.pathname, closeMobileMenu]);
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50">
-      {/* Utility-Bar: Erreichbarkeit & Versprechen */}
-      <div
+      <div ref={headerChromeRef}>
+        {/* Utility-Bar: Erreichbarkeit & Versprechen */}
+        <div
         className={cn(
           'hidden lg:block overflow-hidden transition-all duration-500',
           scrolled ? 'max-h-0 opacity-0' : 'max-h-12 opacity-100'
@@ -145,7 +227,7 @@ export default function Header() {
               </span>
               <span className="flex items-center gap-2">
                 <ShieldCheck size={13} className="text-mint" />
-                24h Reaktionszeit garantiert
+                Persönliche Rückmeldung
               </span>
             </div>
             {/* Telefon steht prominent in der Hauptleiste — hier nur E-Mail, keine Dopplung */}
@@ -154,41 +236,80 @@ export default function Header() {
             </a>
           </div>
         </div>
-      </div>
+        </div>
 
       {/* Hauptleiste — immer weiß, Logo in Markenfarben */}
-      <div className={cn('bg-white/95 backdrop-blur-md border-b transition-shadow duration-300', scrolled ? 'shadow-soft border-line' : 'border-line/70')}>
+        <div className={cn('bg-white/95 backdrop-blur-md border-b transition-shadow duration-300', scrolled ? 'shadow-soft border-line' : 'border-line/70')}>
         <nav className="flex justify-between items-center px-4 md:px-8 py-3 w-full max-w-7xl mx-auto">
           <Logo size={38} />
 
           <div className="hidden lg:flex items-center gap-1">
-            {navLinks.map((link) => (
+            {navLinks.map((link, index) => (
               <div
                 key={link.name}
                 className="relative"
-                onMouseEnter={() => setActiveDropdown(link.name)}
+                onMouseEnter={() => link.sublinks && setActiveDropdown(link.name)}
                 onMouseLeave={() => setActiveDropdown(null)}
+                onBlur={(event) => {
+                  if (!event.currentTarget.contains(event.relatedTarget as Node | null)) {
+                    setActiveDropdown(null);
+                  }
+                }}
+                onKeyDown={(event) => {
+                  if (event.key === 'Escape' && activeDropdown === link.name) {
+                    event.preventDefault();
+                    setActiveDropdown(null);
+                    desktopToggleRefs.current[link.name]?.focus();
+                  }
+                }}
               >
-                <Link
-                  to={link.href}
+                <div
                   className={cn(
-                    'flex items-center gap-1 text-[13.5px] font-semibold tracking-tight transition-colors py-2.5 px-3.5 rounded-lg',
+                    'flex items-stretch text-[13.5px] font-semibold tracking-tight transition-colors rounded-lg',
                     location.pathname.startsWith(link.href) && link.href !== '/'
                       ? 'text-brand bg-brand/5'
                       : 'text-slate hover:text-brand hover:bg-brand/5'
                   )}
                 >
-                  {link.name}
+                  <Link
+                    to={link.href}
+                    className={cn('flex items-center py-2.5', link.sublinks ? 'pl-3.5 pr-1' : 'px-3.5')}
+                  >
+                    {link.name}
+                  </Link>
                   {link.sublinks && (
-                    <ChevronDown
-                      className={cn('w-3.5 h-3.5 transition-transform duration-300', activeDropdown === link.name && 'rotate-180')}
-                    />
+                    <button
+                      ref={(element) => {
+                        desktopToggleRefs.current[link.name] = element;
+                      }}
+                      type="button"
+                      className="flex items-center pl-1 pr-3.5 rounded-r-lg"
+                      aria-label={`${link.name}: Untermenü ${activeDropdown === link.name ? 'schließen' : 'öffnen'}`}
+                      aria-expanded={activeDropdown === link.name}
+                      aria-controls={`desktop-submenu-${index}`}
+                      onClick={() => setActiveDropdown(activeDropdown === link.name ? null : link.name)}
+                      onKeyDown={(event) => {
+                        if (event.key === 'ArrowDown') {
+                          event.preventDefault();
+                          setActiveDropdown(link.name);
+                          window.requestAnimationFrame(() => {
+                            document.querySelector<HTMLElement>(`#desktop-submenu-${index} a`)?.focus();
+                          });
+                        }
+                      }}
+                    >
+                      <ChevronDown
+                        className={cn('w-3.5 h-3.5 transition-transform duration-300', activeDropdown === link.name && 'rotate-180')}
+                        aria-hidden="true"
+                      />
+                    </button>
                   )}
-                </Link>
+                </div>
 
                 <AnimatePresence>
                   {link.sublinks && activeDropdown === link.name && (
                     <motion.div
+                      id={`desktop-submenu-${index}`}
                       initial={{ opacity: 0, y: 12, scale: 0.98 }}
                       animate={{ opacity: 1, y: 0, scale: 1 }}
                       exit={{ opacity: 0, y: 12, scale: 0.98 }}
@@ -213,7 +334,7 @@ export default function Header() {
                                 </span>
                                 <span className="min-w-0">
                                   <span className="block text-[13.5px] font-bold text-navy leading-snug">{sub.name}</span>
-                                  <span className="block text-xs text-slate/80 mt-0.5">{sub.description}</span>
+                                  <span className="block text-xs text-slate mt-0.5">{sub.description}</span>
                                 </span>
                               </Link>
                             ))}
@@ -222,9 +343,9 @@ export default function Header() {
                             <div className="absolute inset-0 blueprint-grid opacity-60" />
                             <div className="absolute -top-16 -right-16 w-48 h-48 rounded-full bg-accent/30 blur-3xl" />
                             <div className="relative z-10">
-                              <span className="eyebrow text-mint mb-3">Express</span>
+                              <span className="eyebrow text-mint mb-3">In vier Schritten</span>
                               <p className="font-logo font-extrabold text-lg leading-snug mb-4">
-                                Vor-Ort-Termin in 48h · Angebot danach.
+                                Anforderungen klären · Besichtigung · Angebot.
                               </p>
                               <Link
                                 to="/angebot"
@@ -284,15 +405,20 @@ export default function Header() {
             </Link>
 
             <button
+              ref={mobileMenuTriggerRef}
+              type="button"
               className="lg:hidden p-2.5 rounded-xl text-slate hover:bg-gray-100 transition-all"
-              onClick={toggleMobileMenu}
+              onClick={isMobileMenuOpen ? closeMobileMenu : openMobileMenu}
               aria-label={isMobileMenuOpen ? 'Menü schließen' : 'Menü öffnen'}
+              aria-haspopup="dialog"
               aria-expanded={isMobileMenuOpen}
+              aria-controls="mobile-navigation-dialog"
             >
               {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
           </div>
         </nav>
+        </div>
       </div>
 
       {/* Mobile-Menü */}
@@ -305,8 +431,15 @@ export default function Header() {
               exit={{ opacity: 0 }}
               className="fixed inset-0 bg-navy/60 backdrop-blur-sm z-[60] lg:hidden"
               onClick={closeMobileMenu}
+              aria-hidden="true"
             />
             <motion.div
+              ref={mobileDialogRef}
+              id="mobile-navigation-dialog"
+              role="dialog"
+              aria-modal="true"
+              aria-label="Hauptnavigation"
+              tabIndex={-1}
               initial={{ x: '100%' }}
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
@@ -314,10 +447,12 @@ export default function Header() {
               className="fixed inset-y-0 right-0 h-dvh w-[88%] max-w-sm bg-white z-[70] lg:hidden shadow-lifted flex flex-col"
             >
               <div className="flex items-center justify-between p-6 border-b border-line flex-shrink-0">
-                <Logo size={34} onClick={closeMobileMenu} />
+                <Logo size={34} onClick={closeMobileMenuForNavigation} />
                 <button
+                  ref={mobileCloseRef}
+                  type="button"
                   onClick={closeMobileMenu}
-                  className="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-lg transition-all"
+                  className="p-2 text-slate hover:text-navy hover:bg-gray-100 rounded-lg transition-all"
                   aria-label="Menü schließen"
                 >
                   <X size={24} />
@@ -336,12 +471,14 @@ export default function Header() {
                     >
                       {link.sublinks ? (
                         <button
+                          type="button"
                           onClick={() => setMobileActiveDropdown(mobileActiveDropdown === link.name ? null : link.name)}
                           className={cn(
                             'text-lg font-semibold tracking-tight py-4 text-left flex justify-between items-center',
                             location.pathname.startsWith(link.href) ? 'text-brand-light' : 'text-navy'
                           )}
                           aria-expanded={mobileActiveDropdown === link.name}
+                          aria-controls={`mobile-submenu-${i}`}
                         >
                           {link.name}
                           <ChevronDown
@@ -358,7 +495,7 @@ export default function Header() {
                             'text-lg font-semibold tracking-tight py-4',
                             location.pathname.startsWith(link.href) ? 'text-brand-light' : 'text-navy'
                           )}
-                          onClick={closeMobileMenu}
+                          onClick={closeMobileMenuForNavigation}
                         >
                           {link.name}
                         </Link>
@@ -367,6 +504,7 @@ export default function Header() {
                       <AnimatePresence>
                         {link.sublinks && mobileActiveDropdown === link.name && (
                           <motion.div
+                            id={`mobile-submenu-${i}`}
                             initial={{ height: 0, opacity: 0 }}
                             animate={{ height: 'auto', opacity: 1 }}
                             exit={{ height: 0, opacity: 0 }}
@@ -376,7 +514,7 @@ export default function Header() {
                               <Link
                                 to={link.href}
                                 className="px-4 py-3 text-sm font-bold text-brand-light bg-paper rounded-xl mb-1"
-                                onClick={closeMobileMenu}
+                                onClick={closeMobileMenuForNavigation}
                               >
                                 {link.name} — Übersicht
                               </Link>
@@ -385,7 +523,7 @@ export default function Header() {
                                   key={sub.name}
                                   to={sub.href}
                                   className="px-4 py-3 text-[15px] font-medium text-slate hover:text-brand-light transition-colors"
-                                  onClick={closeMobileMenu}
+                                  onClick={closeMobileMenuForNavigation}
                                 >
                                   {sub.name}
                                 </Link>
@@ -403,7 +541,7 @@ export default function Header() {
                 <Link
                   to="/angebot"
                   className="flex items-center justify-center gap-2 w-full bg-accent text-white px-6 py-4 font-bold text-sm uppercase tracking-wider hover:bg-accent-dark shadow-glow transition-all rounded-xl"
-                  onClick={closeMobileMenu}
+                  onClick={closeMobileMenuForNavigation}
                 >
                   Besichtigung anfragen <ArrowRight size={16} />
                 </Link>
@@ -414,7 +552,7 @@ export default function Header() {
                   <Phone size={16} className="text-accent" />
                   {SITE.phone}
                 </a>
-                <p className="text-center text-xs text-slate/70 font-medium">{SITE.hours}</p>
+                <p className="text-center text-xs text-slate font-medium">{SITE.hours}</p>
               </div>
             </motion.div>
           </>

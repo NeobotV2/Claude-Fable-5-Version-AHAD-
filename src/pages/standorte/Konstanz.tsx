@@ -4,7 +4,7 @@ import SEO from '@/components/SEO';
 import PageHero from '@/components/PageHero';
 import CTABand from '@/components/CTABand';
 import Accordion, { faqSchemaFrom, type FAQItem } from '@/components/ui/Accordion';
-import { SITE } from '@/lib/site';
+import { CLAIM_VERIFICATIONS, ORG_REF, SITE, canPublishVerification } from '@/lib/site';
 import { IMG } from '@/lib/images';
 
 // Konstanz nutzt die zentrale Hauptnummer (keine separate Standortnummer).
@@ -87,34 +87,12 @@ const SERVICE_AREAS = [
   'Friedrichshafen',
 ];
 
-/** Echte Google-Bewertungen des Standort-Profils Konstanz (5,0 ★ / 4).
- *  Getrennt von der Zentrale VS — kein Vermischen der beiden Profile. */
-const KONSTANZ_REVIEWS = [
-  {
-    author: 'Britta Zorn',
-    rating: 5,
-    text: 'Unsere Kanzlei sieht nach jedem Einsatz aus wie frisch eröffnet. Danke für die konstante Qualität!',
-  },
-  {
-    author: 'Ingrid Guimaraes',
-    rating: 5,
-    text: 'Das Personal war sehr respektvoll, diskret und fleißig. Ich fühle mich gut aufgehoben.',
-  },
-  {
-    author: 'Sophia Fischer',
-    rating: 5,
-    text: 'Super freundliches Team und blitzsaubere Arbeit! Die Wohnung war danach wie neu. Jederzeit wieder.',
-  },
-  {
-    author: 'Денис Грушка',
-    rating: 5,
-    text: 'Ich hatte kurzfristig eine Grundreinigung benötigt – wurde sofort geholfen. Top!',
-  },
-];
+/** Einzelne Stimmen ohne Plattform-Aggregat oder unbestätigte Profilzuordnung. */
+const KONSTANZ_REVIEW_CANDIDATES: Array<{ author: string; rating: number; text: string }> = [];
 
-const KONSTANZ_RATING = { value: 5.0, count: KONSTANZ_REVIEWS.length };
-const KONSTANZ_REVIEWS_URL =
-  'https://www.google.com/maps/search/AHAD+Cleaning+Company+GmbH+Konstanz';
+const KONSTANZ_REVIEWS = canPublishVerification(CLAIM_VERIFICATIONS.customerReviews)
+  ? KONSTANZ_REVIEW_CANDIDATES
+  : [];
 
 const LOCAL_FAQS: FAQItem[] = [
   {
@@ -135,61 +113,32 @@ const LOCAL_FAQS: FAQItem[] = [
   {
     question: 'Arbeiten Sie mit umweltschonenden Reinigungsverfahren?',
     answer:
-      'Ja. Gerade in der sensiblen Bodenseeregion setzen wir auf umweltschonende Mittel und ressourcenschonende Verfahren — dokumentiert und nach ISO 14001 ausgerichtet.',
+      'Die geeigneten Reinigungsmittel und Verfahren legen wir abhängig von Oberfläche, Nutzung, Hygieneanforderungen und den vereinbarten Umweltkriterien fest.',
   },
 ];
 
 export default function StandortKonstanz() {
-  const localBusinessSchema = {
+  const regionalServiceSchema = {
     '@context': 'https://schema.org',
-    '@type': 'LocalBusiness',
-    name: 'AHAD Cleaning Company GmbH - Konstanz',
-    image: `${SITE.url}/images/ahad/konstanz.webp`,
-    '@id': 'https://ahad-cleaning.de/standorte/konstanz',
-    url: 'https://ahad-cleaning.de/standorte/konstanz',
-    telephone: KONSTANZ_PHONE,
-    email: SITE.email,
-    address: {
-      '@type': 'PostalAddress',
-      streetAddress: 'Brückengasse 1b',
-      addressLocality: 'Konstanz',
-      postalCode: '78462',
-      addressCountry: 'DE',
-    },
+    '@type': 'Service',
+    name: 'Gebäudereinigung in Konstanz und der Bodenseeregion',
+    serviceType: 'Gebäudereinigung',
+    '@id': `${SITE.url}/standorte/konstanz#service`,
+    url: `${SITE.url}/standorte/konstanz`,
+    provider: ORG_REF,
     areaServed: SERVICE_AREAS.map((name) => ({ '@type': 'City', name })),
-    priceRange: '€€',
-    geo: { '@type': 'GeoCoordinates', latitude: 47.6603, longitude: 9.1758 },
-    openingHoursSpecification: {
-      '@type': 'OpeningHoursSpecification',
-      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
-      opens: '08:00',
-      closes: '17:00',
-    },
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: KONSTANZ_RATING.value,
-      reviewCount: KONSTANZ_RATING.count,
-      bestRating: 5,
-      worstRating: 1,
-    },
-    review: KONSTANZ_REVIEWS.map((r) => ({
-      '@type': 'Review',
-      author: { '@type': 'Person', name: r.author },
-      reviewRating: { '@type': 'Rating', ratingValue: r.rating, bestRating: 5, worstRating: 1 },
-      reviewBody: r.text,
-    })),
   };
 
   return (
     <div>
       <SEO
         title="Gebäudereinigung Konstanz | AHAD Cleaning"
-        description="Gebäudereinigung in Konstanz und am Bodensee: Unterhalts-, Glas-, Industrie-, Bau- und Sonderreinigung sowie Winterdienst. Feste Objektleitung, umweltschonende Verfahren, Besichtigung in 48h."
+        description="Gebäudereinigung im Einsatzgebiet Konstanz und Bodensee: Unterhalts-, Glas-, Industrie-, Bau- und Sonderreinigung sowie Winterdienst nach objektbezogener Abstimmung."
         keywords="Gebäudereinigung Konstanz, Reinigungsfirma Konstanz, Büroreinigung Konstanz, Gebäudereinigung Bodensee, Unterhaltsreinigung Konstanz"
-        schema={[localBusinessSchema, faqSchemaFrom(LOCAL_FAQS)]}
+        schema={[regionalServiceSchema, faqSchemaFrom(LOCAL_FAQS)]}
       />
       <PageHero
-        eyebrow="Bodenseeregion"
+        eyebrow="Einsatzgebiet · Bodenseeregion"
         title="Gebäudereinigung in Konstanz"
         lead="Wir sind Ihr Partner für professionelle Gebäudedienstleistungen in der Bodenseeregion – wir betreuen Radolfzell, Singen, Kreuzlingen, Meersburg, Überlingen, Stockach und Umgebung."
         image={IMG.bodensee}
@@ -214,7 +163,7 @@ export default function StandortKonstanz() {
                   'Professionelle Büroreinigung für Dienstleister',
                   'Glas- & Fassadenreinigung mit Seeblick',
                   'Unterhaltsreinigung für öffentliche Einrichtungen',
-                  'Regionale Präsenz & Zuverlässigkeit',
+                  'Objektbezogene Einsatz- und Terminplanung',
                   'Umweltschonende Reinigungsmittel',
                 ].map((item) => (
                   <li key={item} className="flex items-center gap-3 text-gray-700 font-medium">
@@ -232,8 +181,8 @@ export default function StandortKonstanz() {
                     <MapPin className="w-6 h-6" />
                   </div>
                   <div>
-                    <h4 className="font-bold text-gray-900 mb-1">Adresse</h4>
-                    <p className="text-gray-600">Brückengasse 1b<br />78462 Konstanz</p>
+                    <h4 className="font-bold text-gray-900 mb-1">Einsatzgebiet</h4>
+                    <p className="text-gray-600">Konstanz und Bodenseeregion nach objektbezogener Abstimmung</p>
                   </div>
                 </div>
                 <div className="flex gap-6">
@@ -351,12 +300,12 @@ export default function StandortKonstanz() {
             </div>
           </div>
 
-          {/* Google-Bewertungen Standort Konstanz */}
-          <div className="mb-20">
+          {/* Einzelne Kundenstimmen nur mit dokumentierter Wiedergabefreigabe */}
+          {KONSTANZ_REVIEWS.length > 0 && <div className="mb-20">
             <h2 className="text-3xl font-bold mb-3 text-gray-900">Das sagen Kundinnen und Kunden in Konstanz</h2>
             <p className="text-lg text-gray-600 mb-10 max-w-3xl leading-relaxed">
-              {KONSTANZ_RATING.value.toFixed(1).replace('.', ',')} von 5 Sternen aus{' '}
-              {KONSTANZ_RATING.count} Google-Bewertungen unseres Standort-Profils Konstanz — eine Auswahl im Wortlaut.
+              Eine Auswahl einzelner Stimmen im Wortlaut. Eine Zuordnung zu einem Plattform-Profil und eine
+              Gesamtwertung veröffentlichen wir erst nach Prüfung des exakten Profils.
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {KONSTANZ_REVIEWS.map((r) => (
@@ -364,7 +313,7 @@ export default function StandortKonstanz() {
                   key={r.author}
                   className="bg-gray-50 rounded-2xl border border-gray-100 p-7 flex flex-col"
                 >
-                  <div className="flex gap-0.5 mb-4" aria-label={`${r.rating} von 5 Sternen`}>
+                  <div className="flex gap-0.5 mb-4" role="img" aria-label={`${r.rating} von 5 Sternen`}>
                     {[1, 2, 3, 4, 5].map((i) => (
                       <Star
                         key={i}
@@ -378,23 +327,12 @@ export default function StandortKonstanz() {
                   </blockquote>
                   <figcaption className="mt-6 pt-5 border-t border-gray-200">
                     <div className="font-bold text-[#0B2341] text-sm">{r.author}</div>
-                    <div className="text-[13px] text-gray-500 mt-0.5">Google-Bewertung · Konstanz</div>
+                    <div className="text-[13px] text-gray-500 mt-0.5">Kundenstimme · Region Konstanz</div>
                   </figcaption>
                 </figure>
               ))}
             </div>
-            <div className="mt-8">
-              <a
-                href={KONSTANZ_REVIEWS_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-accent font-bold hover:text-accent-dark transition-colors"
-              >
-                Alle Bewertungen auf Google ansehen
-                <ArrowRight className="w-4 h-4" />
-              </a>
-            </div>
-          </div>
+          </div>}
 
           {/* Lokale FAQ */}
           <div className="max-w-3xl">
@@ -406,7 +344,7 @@ export default function StandortKonstanz() {
 
       <CTABand
         title="Ihr Objekt am Bodensee?"
-        lead="Vor Ort verwurzelt: Besichtigung in 48 Stunden, belastbares Angebot in 24 Stunden danach."
+        lead="Regional erreichbar: Besichtigung nach Abstimmung, belastbares Angebot im Anschluss."
       />
     </div>
   );

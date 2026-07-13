@@ -1,0 +1,43 @@
+{
+  "version": 1,
+  "policy": {
+    "default": "blocked",
+    "publishRequires": ["owner", "evidence.url-or-id", "verifiedAt", "expiresAt"],
+    "expiryRule": "expiresAt must be later than the build/request time"
+  },
+  "claims": [
+    { "id": "service-levels", "owner": "Operations", "evidence": { "url": null, "id": null }, "verifiedAt": null, "expiresAt": null, "publicState": "blocked" },
+    { "id": "company-statistics", "owner": "Geschaeftsfuehrung", "evidence": { "url": null, "id": null }, "verifiedAt": null, "expiresAt": null, "publicState": "blocked" },
+    { "id": "google-business-profile", "owner": "Marketing", "evidence": { "url": null, "id": null }, "verifiedAt": null, "expiresAt": null, "publicState": "blocked" },
+    { "id": "iso-9001", "owner": "Qualitaetsmanagement", "evidence": { "url": null, "id": null }, "verifiedAt": null, "expiresAt": null, "publicState": "blocked" },
+    { "id": "iso-14001", "owner": "Qualitaetsmanagement", "evidence": { "url": null, "id": null }, "verifiedAt": null, "expiresAt": null, "publicState": "blocked" },
+    { "id": "insurance", "owner": "Geschaeftsfuehrung", "evidence": { "url": null, "id": null }, "verifiedAt": null, "expiresAt": null, "publicState": "blocked" },
+    { "id": "workforce", "owner": "Personal", "evidence": { "url": null, "id": null }, "verifiedAt": null, "expiresAt": null, "publicState": "blocked" },
+    { "id": "featured-testimonial", "owner": "Marketing / Datenschutz", "evidence": { "url": null, "id": null }, "verifiedAt": null, "expiresAt": null, "publicState": "blocked" },
+    { "id": "customer-review-reproduction", "owner": "Marketing / Datenschutz", "evidence": { "url": null, "id": null }, "verifiedAt": null, "expiresAt": null, "publicState": "blocked" }
+  ],
+  "locations": [
+    { "id": "villingen-schwenningen-hq-geo", "mode": "legal-headquarters", "owner": "Operations", "legalAddressMayPublish": true, "localBusinessMayPublish": false, "geoMayPublish": false, "evidence": { "url": null, "id": null }, "verifiedAt": null, "expiresAt": null, "publicState": "service-area-only" },
+    { "id": "stuttgart", "mode": "service-area", "owner": "Operations", "legalAddressMayPublish": false, "localBusinessMayPublish": false, "geoMayPublish": false, "evidence": { "url": null, "id": null }, "verifiedAt": null, "expiresAt": null, "publicState": "service-area-only" },
+    { "id": "konstanz", "mode": "service-area", "owner": "Operations", "legalAddressMayPublish": false, "localBusinessMayPublish": false, "geoMayPublish": false, "evidence": { "url": null, "id": null }, "verifiedAt": null, "expiresAt": null, "publicState": "service-area-only" }
+  ],
+  "clientReferences": [
+    { "id": "allianz", "name": "Allianz", "owner": "Vertrieb / Datenschutz", "evidence": { "url": null, "id": null }, "verifiedAt": null, "expiresAt": null, "publicState": "blocked" },
+    { "id": "goldbeck", "name": "GOLDBECK", "owner": "Vertrieb / Datenschutz", "evidence": { "url": null, "id": null }, "verifiedAt": null, "expiresAt": null, "publicState": "blocked" },
+    { "id": "arbeitsagentur", "name": "Bundesagentur fuer Arbeit", "owner": "Vertrieb / Datenschutz", "evidence": { "url": null, "id": null }, "verifiedAt": null, "expiresAt": null, "publicState": "blocked" },
+    { "id": "bareiss", "name": "Bareiss", "owner": "Vertrieb / Datenschutz", "evidence": { "url": null, "id": null }, "verifiedAt": null, "expiresAt": null, "publicState": "blocked" },
+    { "id": "bdt", "name": "BDT", "owner": "Vertrieb / Datenschutz", "evidence": { "url": null, "id": null }, "verifiedAt": null, "expiresAt": null, "publicState": "blocked" },
+    { "id": "koester", "name": "Koester", "owner": "Vertrieb / Datenschutz", "evidence": { "url": null, "id": null }, "verifiedAt": null, "expiresAt": null, "publicState": "blocked" },
+    { "id": "aesthetify", "name": "Aesthetify", "owner": "Vertrieb / Datenschutz", "evidence": { "url": null, "id": null }, "verifiedAt": null, "expiresAt": null, "publicState": "blocked" },
+    { "id": "kaeppelehof", "name": "Kaeppelehof", "owner": "Vertrieb / Datenschutz", "evidence": { "url": null, "id": null }, "verifiedAt": null, "expiresAt": null, "publicState": "blocked" },
+    { "id": "kur-baeder", "name": "Kur- und Baeder GmbH Bad Duerrheim", "owner": "Vertrieb / Datenschutz", "evidence": { "url": null, "id": null }, "verifiedAt": null, "expiresAt": null, "publicState": "blocked" },
+    { "id": "naturenergie-netze", "name": "naturenergie netze", "owner": "Vertrieb / Datenschutz", "evidence": { "url": null, "id": null }, "verifiedAt": null, "expiresAt": null, "publicState": "blocked" },
+    { "id": "schwarzwald-baar-kreis", "name": "Schwarzwald-Baar-Kreis", "owner": "Vertrieb / Datenschutz", "evidence": { "url": null, "id": null }, "verifiedAt": null, "expiresAt": null, "publicState": "blocked" },
+    { "id": "suedwest-messe", "name": "SMA Suedwest Messe- und Ausstellungs-GmbH", "owner": "Vertrieb / Datenschutz", "evidence": { "url": null, "id": null }, "verifiedAt": null, "expiresAt": null, "publicState": "blocked" }
+  ],
+  "clientReferencePolicy": {
+    "owner": "Vertrieb / Datenschutz",
+    "requiredEvidence": "individuelle schriftliche Namens- und Logofreigabe je Organisation",
+    "publicState": "blocked-until-individual-verification"
+  }
+}

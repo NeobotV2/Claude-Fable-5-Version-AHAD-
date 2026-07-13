@@ -4,7 +4,7 @@ import SEO from '@/components/SEO';
 import PageHero from '@/components/PageHero';
 import Reveal from '@/components/ui/Reveal';
 import ContactForm from '@/components/ContactForm';
-import { SITE, PROMISES, WHATSAPP_HREF } from '@/lib/site';
+import { SITE, WHATSAPP_HREF } from '@/lib/site';
 
 const contactChannels = [
   {
@@ -61,7 +61,7 @@ export default function Kontakt() {
     <div>
       <SEO
         title="Kontakt: Angebot & Beratung | AHAD Cleaning"
-        description="Kontaktieren Sie AHAD Cleaning für ein unverbindliches Angebot oder eine Objektbesichtigung. Antwort innerhalb von 24 Stunden garantiert."
+        description="Kontaktieren Sie AHAD Cleaning für eine unverbindliche Anfrage oder Objektbesichtigung. Wir klären Bedarf, Termin und Angebot persönlich."
         keywords="Kontakt Gebäudereinigung, Angebot anfordern Reinigung, AHAD Cleaning Kontakt"
       />
 
@@ -69,11 +69,15 @@ export default function Kontakt() {
         compact
         eyebrow="Kontakt"
         title="Sprechen wir über Ihr Objekt."
-        lead="Ob unverbindliches Angebot, Objektbesichtigung oder eine kurze Fachfrage: Wir antworten persönlich — und garantiert innerhalb von 24 Stunden."
+        lead="Ob unverbindliche Anfrage, Objektbesichtigung oder eine kurze Fachfrage: Wir klären den Bedarf persönlich und vereinbaren die nächsten Schritte."
         crumbs={[{ label: 'Kontakt' }]}
       >
         <div className="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-3xl">
-          {PROMISES.map((promise) => (
+          {[
+            { value: '1', label: 'Anfrage mit klarem Kontaktweg' },
+            { value: '2', label: 'Besichtigung nach Abstimmung' },
+            { value: '3', label: 'Transparentes Angebot danach' },
+          ].map((promise) => (
             <div key={promise.label} className="flex items-center gap-3">
               <span className="font-accent text-3xl font-bold text-mint">{promise.value}</span>
               <span className="text-[13px] font-semibold text-blue-100/80 leading-snug">{promise.label}</span>
@@ -89,7 +93,7 @@ export default function Kontakt() {
             <Reveal>
               <h2 className="display-md text-navy mb-3">Nachricht schreiben</h2>
               <p className="text-slate text-lg mb-8">
-                Füllen Sie das Formular aus — wir melden uns innerhalb von 24 Stunden.
+                Füllen Sie das Formular aus — wir melden uns persönlich bei Ihnen.
               </p>
             </Reveal>
             <Reveal delay={0.1}>
@@ -109,7 +113,7 @@ export default function Kontakt() {
                   <span className="eyebrow text-mint mb-4">Schneller geht's nicht</span>
                   <h3 className="font-headline text-2xl font-bold mb-3">Express-Angebot</h3>
                   <p className="text-blue-100/85 mb-7 leading-relaxed">
-                    Vier Fragen, 60 Sekunden: Unser digitaler Assistent erfasst Ihr Objekt strukturiert — für ein
+                    Vier Schritte: Unser digitaler Assistent erfasst Ihr Objekt strukturiert — als Grundlage für ein
                     besonders schnelles, präzises Angebot.
                   </p>
                   <Link

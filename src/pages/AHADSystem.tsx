@@ -53,7 +53,7 @@ const steps = [
 
 const outcomes = [
   { value: '1', label: 'feste Objektleitung je Objekt', text: 'Ein Verantwortlicher steuert — nicht Ihr Office-Management.' },
-  { value: '24h', label: 'Reaktionszeit garantiert', text: 'Jedes Anliegen hat einen Verantwortlichen und eine Frist.' },
+  { value: '1', label: 'klarer Meldeweg', text: 'Jedes Anliegen erhält einen Verantwortlichen und einen dokumentierten Status.' },
   { value: '100%', label: 'Nachweisbarkeit', text: 'Jede Leistung dokumentiert — für QM, Audit und Ihr Bauchgefühl.' },
 ];
 
@@ -64,7 +64,7 @@ const VERGLEICH = [
   { thema: 'Ansprechpartner', ohne: 'Wechselnde Kontakte, niemand fühlt sich zuständig', ahad: 'Feste Objektleitung mit Namen und Gesicht' },
   { thema: 'Qualität', ohne: 'Fällt erst auf, wenn sich jemand beschwert', ahad: 'Dokumentierte Audits in festen Intervallen' },
   { thema: 'Angebot', ohne: 'Pauschalpreis ohne definierten Leistungsumfang', ahad: 'Festpreis auf Basis eines Leistungsverzeichnisses' },
-  { thema: 'Reklamation', ohne: 'Diskussion, Vertröstung, Wiederholung', ahad: 'Kostenfreie Nachbesserung, Antwort in 24 h' },
+  { thema: 'Reklamation', ohne: 'Diskussion, Vertröstung, Wiederholung', ahad: 'Dokumentierter Meldeweg und vereinbarte Nachbesserung' },
   { thema: 'Personal', ohne: 'Anonyme Kolonnen, häufige Wechsel', ahad: 'Festangestellte, geschulte und eingespielte Teams' },
   { thema: 'Nachweise', ohne: 'Keine — Sauberkeit bleibt Bauchgefühl', ahad: 'Auditfähige Leistungs- und Qualitätsnachweise' },
 ];
@@ -245,7 +245,7 @@ export default function AHADSystem() {
 
       <CTABand
         title="Erleben Sie das System im eigenen Objekt"
-        lead="Starten Sie mit der Analyse: Objektbesichtigung in 48h, belastbares Angebot in 24h danach."
+        lead="Starten Sie mit der Analyse: Termin nach Abstimmung, belastbares Angebot nach der Objektbesichtigung."
       />
     </div>
   );

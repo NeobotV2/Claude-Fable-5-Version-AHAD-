@@ -1,23 +1,34 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight, BookOpen, Clock } from 'lucide-react';
+import { ArrowRight, BookOpen, CalendarDays, Clock, ShieldCheck } from 'lucide-react';
 import SEO from '@/components/SEO';
 import PageHero from '@/components/PageHero';
 import Reveal from '@/components/ui/Reveal';
 import SmartImage from '@/components/ui/SmartImage';
 import CTABand from '@/components/CTABand';
 import { IMG } from '@/lib/images';
+import { EDITORIAL_ARTICLES, type EditorialArticleSlug } from '@/data/editorial';
+
+const formatEditorialDate = (slug: EditorialArticleSlug) =>
+  new Intl.DateTimeFormat('de-DE', {
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric',
+    timeZone: 'UTC',
+  }).format(new Date(`${EDITORIAL_ARTICLES[slug].dateModified}T00:00:00Z`));
 
 const articles = [
   {
+    slug: 'was-kostet-gebaeudereinigung-stundensatz-preise',
     title: 'Was kostet Gebäudereinigung? Stundensatz, m²-Preise & Rechenbeispiele',
     excerpt:
-      'Stundensatz ab 34 €, Leistungswerte je Flächenart und daraus abgeleitete m²-Preise mit Monatsbeispielen — plus Warnzeichen, an denen Sie Dumping-Angebote erkennen.',
+      'Kostenbestandteile, Leistungswerte und daraus abgeleitete m²-Preise mit offengelegten Rechenannahmen — als Orientierung, nicht als Preisversprechen.',
     path: '/fachwissen/was-kostet-gebaeudereinigung-stundensatz-preise',
     category: 'Kosten & Kalkulation',
     readingTime: '9 Min.',
     image: IMG.unterhaltDetail,
   },
   {
+    slug: 'checkliste-reinigungsangebot',
     title: 'Checkliste: Reinigungsangebot einholen & vergleichen',
     excerpt:
       'Die druckbare Arbeitshilfe für Objektverantwortliche: Objektdaten, Leistungsdefinition, Angebotsvergleich, Anbieterprüfung und Vertragsregeln — in 5 Schritten abhaken.',
@@ -27,6 +38,7 @@ const articles = [
     image: IMG.teamMeeting,
   },
   {
+    slug: 'unterhaltsreinigung-unternehmen-reinigungsintervalle',
     title: 'Reinigungsintervalle für Unternehmen: Der praxisnahe Leitfaden',
     excerpt:
       'Wie oft sollten Büro, Sanitär und Verkehrsflächen wirklich gereinigt werden? Intervalle nach Nutzung statt Bauchgefühl — mit Tabellen für typische Objekttypen.',
@@ -36,6 +48,7 @@ const articles = [
     image: IMG.unterhaltsreinigung,
   },
   {
+    slug: 'iso-9001-iso-14001-gebaeudereinigung-unternehmen',
     title: 'ISO 9001 & ISO 14001 in der Gebäudereinigung: Was Auftraggeber wissen müssen',
     excerpt:
       'Welche Rolle spielen Zertifizierungen bei der Dienstleisterwahl — und woran erkennen Sie, ob ein Anbieter Qualität wirklich systematisch managt?',
@@ -45,6 +58,7 @@ const articles = [
     image: IMG.medizinDetail,
   },
   {
+    slug: 'industrie-produktionsreinigung-ohne-prozessstoerung',
     title: 'Industriereinigung ohne Prozessstörung: So funktioniert es',
     excerpt:
       'Schichtintegration, Sicherheitsunterweisungen, Eskalationswege: Die Erfolgsfaktoren für Reinigung im laufenden Produktionsbetrieb.',
@@ -54,6 +68,7 @@ const articles = [
     image: IMG.industrie,
   },
   {
+    slug: 'reinigungsfirma-wechseln-checkliste-tipps',
     title: 'Reinigungsfirma wechseln: Checkliste & Tipps für den geräuschlosen Übergang',
     excerpt:
       'Wann lohnt der Wechsel, welche Kündigungsfristen gelten, und wie übernimmt der neue Anbieter ohne Chaos? Die komplette Checkliste.',
@@ -63,6 +78,7 @@ const articles = [
     image: IMG.handshake,
   },
   {
+    slug: 'leistungsverzeichnis-gebaeudereinigung-erstellen',
     title: 'Leistungsverzeichnis erstellen: So machen Sie Reinigungsangebote vergleichbar',
     excerpt:
       'Aufbau, Bestandteile und der Unterschied zwischen verrichtungs- und ergebnisorientiert — plus Schritt-für-Schritt-Anleitung für ein belastbares LV.',
@@ -72,22 +88,31 @@ const articles = [
     image: IMG.teamMeeting,
   },
   {
-    title: 'Küchenabluftreinigung nach VDI 2052: Pflicht, Intervalle & Nachweis',
+    slug: 'kuechenabluftreinigung-vdi-2052-pflicht-ablauf-nachweis',
+    title: 'Küchenabluftreinigung nach VDI 2052: Einordnung, Ablauf & Nachweis',
     excerpt:
-      'Reinigungsintervalle nach Betriebsstunden, Brandschutz, Versicherungsschutz und Dokumentationspflicht — der Leitfaden für Betreiber gewerblicher Küchen.',
+      'Wie Nutzung, Belastung und Anlagenzustand in die Intervallplanung einfließen — mit Hinweisen zu Brandschutz, Hygiene und Dokumentation.',
     path: '/fachwissen/kuechenabluftreinigung-vdi-2052-pflicht-ablauf-nachweis',
     category: 'Hygiene & Brandschutz',
     readingTime: '8 Min.',
     image: IMG.kuechenabluft,
   },
-];
+] satisfies Array<{
+  slug: EditorialArticleSlug;
+  title: string;
+  excerpt: string;
+  path: string;
+  category: string;
+  readingTime: string;
+  image: string;
+}>;
 
 export default function Fachwissen() {
   return (
     <div>
       <SEO
         title="Fachwissen Gebäudereinigung: Leitfäden für Entscheider | AHAD Cleaning"
-        description="Praxisnahe Leitfäden rund um Gebäudereinigung: Reinigungsintervalle, ISO-Zertifizierung, Industriereinigung und Anbieterwechsel — von den Experten von AHAD."
+        description="Praxisnahe Leitfäden rund um Gebäudereinigung: mit sichtbarem Aktualisierungsstand, redaktioneller Einordnung und Links zu offiziellen Primärquellen."
         keywords="Fachwissen Gebäudereinigung, Reinigungsintervalle, ISO 9001 Reinigung, Reinigungsfirma wechseln"
       />
 
@@ -100,12 +125,28 @@ export default function Fachwissen() {
             Entscheidungen schafft.
           </>
         }
-        lead="Praxisleitfäden für Facility Manager, Einkäufer und Geschäftsführung — ohne Werbesprech, dafür mit den Zahlen und Checklisten, die Sie für Ihre Entscheidung brauchen."
+        lead="Praxisleitfäden für Facility Manager, Einkauf und Geschäftsführung — mit nachvollziehbarem Aktualisierungsstand, Einordnung veränderlicher Werte und offiziellen Primärquellen."
         crumbs={[{ label: 'Fachwissen' }]}
       />
 
       <section className="py-20 lg:py-32 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-8">
+          <Reveal className="mb-10">
+            <div className="flex items-start gap-4 rounded-2xl border border-line bg-paper p-6">
+              <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-brand/8 text-brand">
+                <ShieldCheck size={21} aria-hidden="true" />
+              </span>
+              <div>
+                <h2 className="font-headline text-lg font-bold text-navy">Unser Redaktionsstandard</h2>
+                <p className="mt-1 max-w-3xl text-sm leading-relaxed text-slate">
+                  Jeder Leitfaden nennt Redaktion, Veröffentlichungs- und Änderungsdatum sowie die verwendeten
+                  Primärquellen. Namentliche Fachprüfer zeigen wir erst nach dokumentierter und noch gültiger Prüfung.
+                  Preis-, Intervall- und Fristangaben sind Orientierung und müssen für den Einzelfall geprüft werden.
+                </p>
+              </div>
+            </div>
+          </Reveal>
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {articles.map((article, i) => (
               <Reveal key={article.path} delay={Math.min(i * 0.08, 0.25)} className="h-full">
@@ -129,10 +170,16 @@ export default function Fachwissen() {
                       {article.title}
                     </h2>
                     <p className="text-sm text-slate leading-relaxed flex-grow">{article.excerpt}</p>
-                    <div className="mt-6 pt-5 border-t border-line flex items-center justify-between">
-                      <span className="flex items-center gap-2 text-[13px] font-semibold text-slate/80">
-                        <Clock size={14} />
-                        {article.readingTime} Lesezeit
+                    <div className="mt-6 pt-5 border-t border-line flex flex-wrap items-center justify-between gap-3">
+                      <span className="flex flex-wrap items-center gap-x-4 gap-y-1 text-[13px] font-semibold text-slate/80">
+                        <span className="flex items-center gap-2">
+                          <Clock size={14} aria-hidden="true" />
+                          {article.readingTime} Lesezeit
+                        </span>
+                        <span className="flex items-center gap-2">
+                          <CalendarDays size={14} aria-hidden="true" />
+                          Aktualisiert {formatEditorialDate(article.slug)}
+                        </span>
                       </span>
                       <span className="inline-flex items-center gap-2 text-sm font-bold text-brand">
                         Lesen

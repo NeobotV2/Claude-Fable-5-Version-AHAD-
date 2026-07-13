@@ -165,7 +165,7 @@ export const BRANCHEN: BrancheData[] = [
       'Empfang & Meetingräume mit Prioritätenlogik',
       'Sanitär-Hygiene mit definierten Standards',
       'Digitale Checklisten & Qualitätsreports',
-      '24h-Reaktion bei jedem Anliegen',
+      'Klare Zuständigkeit bei jedem Anliegen',
     ],
     services: [
       { name: 'Unterhaltsreinigung', path: '/leistungen/unterhaltsreinigung' },
@@ -181,7 +181,7 @@ export const BRANCHEN: BrancheData[] = [
       {
         question: 'Wie schnell reagieren Sie auf Sonderwünsche?',
         answer:
-          'Ihre feste Objektleitung reagiert innerhalb von 24 Stunden — ob Zusatzreinigung nach einem Event oder kurzfristige Änderung der Intervalle.',
+          'Ihre Objektleitung klärt den Bedarf und stimmt die nächsten Schritte mit Ihnen ab — ob Zusatzreinigung nach einem Event oder Änderung der Intervalle.',
       },
     ],
   },

@@ -17,7 +17,7 @@ export const languages: { id: Language; label: string; flag: string; rtl?: boole
 export const translations = {
   de: {
     title: "Express-Bewerbung",
-    subtitle: "Bewirb dich in nur 60 Sekunden – ganz ohne Lebenslauf!",
+    subtitle: "Bewirb dich in vier kurzen Schritten – ganz ohne Lebenslauf!",
     step: "Schritt",
     of: "von",
     fastDone: "Fast geschafft",
@@ -31,7 +31,7 @@ export const translations = {
     jobTypes: {
       vollzeit: { title: "Vollzeit", desc: "39 Stunden pro Woche" },
       teilzeit: { title: "Teilzeit", desc: "Vormittags oder Nachmittags" },
-      minijob: { title: "Minijob", desc: "Bis 603 € im Monat" }
+      minijob: { title: "Minijob", desc: "Arbeitsumfang wird gemeinsam geklärt" }
     },
     step2Title: "Was ist dein Fachbereich?",
     departments: {
@@ -63,15 +63,15 @@ export const translations = {
     phoneLabel: "Handynummer",
     phonePlaceholder: "z.B. 0170 1234567",
     whatsappLabel: "Gerne schnell per WhatsApp kontaktieren",
-    whatsappDesc: "So können wir dir schneller antworten.",
-    trustQuote: "Wir zahlen pünktlich nach Tarif. Du arbeitest in einem festen, tollen Team!",
+    whatsappDesc: "Freiwillig und jederzeit mit Wirkung für die Zukunft widerrufbar.",
+    trustQuote: "Einsatz, Arbeitszeit und Vergütung klären wir transparent mit dir.",
     privacyLabel: "Ich bin mit der Datenschutzerklärung einverstanden.",
     privacyLink: "Datenschutzerklärung",
     langSelect: "Wähle deine Sprache"
   },
   en: {
     title: "Express Application",
-    subtitle: "Apply in just 60 seconds – no CV needed!",
+    subtitle: "Apply in four short steps – no CV needed!",
     step: "Step",
     of: "of",
     fastDone: "Almost there",
@@ -85,7 +85,7 @@ export const translations = {
     jobTypes: {
       vollzeit: { title: "Full-time", desc: "39 hours per week" },
       teilzeit: { title: "Part-time", desc: "Morning or afternoon" },
-      minijob: { title: "Minijob", desc: "Up to €603 per month" }
+      minijob: { title: "Minijob", desc: "We agree the scope together" }
     },
     step2Title: "What is your area of expertise?",
     departments: {
@@ -117,15 +117,15 @@ export const translations = {
     phoneLabel: "Phone Number",
     phonePlaceholder: "e.g. +49 170 1234567",
     whatsappLabel: "Feel free to contact via WhatsApp",
-    whatsappDesc: "This allows us to reply faster.",
-    trustQuote: "We pay punctually according to tariff. You work in a great, permanent team!",
+    whatsappDesc: "Optional and revocable at any time for future contact.",
+    trustQuote: "We explain the assignment, hours and pay transparently.",
     privacyLabel: "I agree to the privacy policy.",
     privacyLink: "Privacy Policy",
     langSelect: "Choose your language"
   },
   tr: {
     title: "Hızlı Başvuru",
-    subtitle: "Sadece 60 saniyede başvurun – özgeçmiş gerekmez!",
+    subtitle: "Dört kısa adımda başvurun – özgeçmiş gerekmez!",
     step: "Adım",
     of: "/",
     fastDone: "Neredeyse bitti",
@@ -139,7 +139,7 @@ export const translations = {
     jobTypes: {
       vollzeit: { title: "Tam Zamanlı", desc: "Haftada 39 saat" },
       teilzeit: { title: "Yarı Zamanlı", desc: "Sabah veya öğleden sonra" },
-      minijob: { title: "Minijob", desc: "Ayda 603 €'ya kadar" }
+      minijob: { title: "Minijob", desc: "Çalışma kapsamını birlikte belirleriz" }
     },
     step2Title: "Uzmanlık alanınız nedir?",
     departments: {
@@ -171,15 +171,15 @@ export const translations = {
     phoneLabel: "Telefon Numaranız",
     phonePlaceholder: "Örn. 0170 1234567",
     whatsappLabel: "WhatsApp üzerinden iletişime geçebilirsiniz",
-    whatsappDesc: "Böylece size daha hızlı cevap verebiliriz.",
-    trustQuote: "Ücretleri tarifeye göre zamanında ödüyoruz. Harika ve kalıcı bir ekipte çalışacaksınız!",
+    whatsappDesc: "İsteğe bağlıdır ve gelecekteki iletişim için her zaman geri çekilebilir.",
+    trustQuote: "Görevi, çalışma saatlerini ve ücreti şeffaf biçimde açıklıyoruz.",
     privacyLabel: "Gizlilik politikasını kabul ediyorum.",
     privacyLink: "Gizlilik Politikası",
     langSelect: "Dilinizi seçin"
   },
   ar: {
     title: "تقديم سريع",
-    subtitle: "قدم في 60 ثانية فقط - لا حاجة لسيرة ذاتية!",
+    subtitle: "قدّم في أربع خطوات قصيرة - لا حاجة لسيرة ذاتية!",
     step: "خطوة",
     of: "من",
     fastDone: "أوشكت على الانتهاء",
@@ -193,7 +193,7 @@ export const translations = {
     jobTypes: {
       vollzeit: { title: "دوام كامل", desc: "39 ساعة في الأسبوع" },
       teilzeit: { title: "دوام جزئي", desc: "صباحاً أو مساءً" },
-      minijob: { title: "عمل صغير (Minijob)", desc: "حتى 603 يورو شهرياً" }
+      minijob: { title: "عمل صغير (Minijob)", desc: "نتفق معاً على نطاق العمل" }
     },
     step2Title: "ما هو مجال تخصصك؟",
     departments: {
@@ -225,15 +225,15 @@ export const translations = {
     phoneLabel: "رقم الهاتف",
     phonePlaceholder: "مثال: 0170 1234567",
     whatsappLabel: "يسعدنا التواصل عبر واتساب",
-    whatsappDesc: "هذا يتيح لنا الرد عليك بشكل أسرع.",
-    trustQuote: "نحن ندفع الرواتب في موعدها حسب التعريفة. ستعمل في فريق رائع ودائم!",
+    whatsappDesc: "اختياري ويمكن سحبه في أي وقت للاتصالات المستقبلية.",
+    trustQuote: "نوضح المهمة وساعات العمل والأجر بشفافية.",
     privacyLabel: "أوافق على سياسة الخصوصية.",
     privacyLink: "سياسة الخصوصية",
     langSelect: "اختر لغتك"
   },
   ru: {
     title: "Экспресс-заявка",
-    subtitle: "Подайте заявку всего за 60 секунд – резюме не требуется!",
+    subtitle: "Подайте заявку за четыре коротких шага – резюме не требуется!",
     step: "Шаг",
     of: "из",
     fastDone: "Почти готово",
@@ -247,7 +247,7 @@ export const translations = {
     jobTypes: {
       vollzeit: { title: "Полный рабочий день", desc: "39 часов в неделю" },
       teilzeit: { title: "Частичная занятость", desc: "Утром или днем" },
-      minijob: { title: "Мини-работа", desc: "До 603 евро в месяц" }
+      minijob: { title: "Мини-работа", desc: "Объём работы согласуем вместе" }
     },
     step2Title: "Какова ваша специализация?",
     departments: {
@@ -279,15 +279,15 @@ export const translations = {
     phoneLabel: "Номер телефона",
     phonePlaceholder: "Например, 0170 1234567",
     whatsappLabel: "Свяжитесь со мной через WhatsApp",
-    whatsappDesc: "Так мы сможем ответить вам быстрее.",
-    trustQuote: "Мы платим вовремя согласно тарифу. Вы будете работать в отличной постоянной команде!",
+    whatsappDesc: "Это добровольно, согласие можно отозвать в любое время на будущее.",
+    trustQuote: "Мы прозрачно объясняем задачи, часы работы и оплату.",
     privacyLabel: "Я согласен с политикой конфиденциальности.",
     privacyLink: "Политика конфиденциальности",
     langSelect: "Выберите язык"
   },
   uk: {
     title: "Експрес-заявка",
-    subtitle: "Подайте заявку всього за 60 секунд – резюме не потрібне!",
+    subtitle: "Подайте заявку за чотири короткі кроки – резюме не потрібне!",
     step: "Крок",
     of: "з",
     fastDone: "Майже готово",
@@ -301,7 +301,7 @@ export const translations = {
     jobTypes: {
       vollzeit: { title: "Повний робочий день", desc: "39 годин на тиждень" },
       teilzeit: { title: "Часткова зайнятість", desc: "Вранці або вдень" },
-      minijob: { title: "Міні-робота", desc: "До 603 євро на місяць" }
+      minijob: { title: "Міні-робота", desc: "Обсяг роботи узгодимо разом" }
     },
     step2Title: "Яка ваша спеціалізація?",
     departments: {
@@ -333,15 +333,15 @@ export const translations = {
     phoneLabel: "Номер телефону",
     phonePlaceholder: "Наприклад, 0170 1234567",
     whatsappLabel: "Зв'яжіться зі мною через WhatsApp",
-    whatsappDesc: "Так ми зможемо відповісти вам швидше.",
-    trustQuote: "Ми платимо вчасно згідно з тарифом. Ви працюватимете у чудовій постійній команді!",
+    whatsappDesc: "Це добровільно, згоду можна відкликати будь-коли на майбутнє.",
+    trustQuote: "Ми прозоро пояснюємо завдання, робочий час і оплату.",
     privacyLabel: "Я згоден з політикою конфіденційності.",
     privacyLink: "Політика конфіденційності",
     langSelect: "Оберіть мову"
   },
   pl: {
     title: "Ekspresowa Aplikacja",
-    subtitle: "Aplikuj w zaledwie 60 sekund – bez CV!",
+    subtitle: "Aplikuj w czterech krótkich krokach – bez CV!",
     step: "Krok",
     of: "z",
     fastDone: "Prawie gotowe",
@@ -355,7 +355,7 @@ export const translations = {
     jobTypes: {
       vollzeit: { title: "Pełny etat", desc: "39 godzin tygodniowo" },
       teilzeit: { title: "Część etatu", desc: "Rano lub po południu" },
-      minijob: { title: "Minijob", desc: "Do 603 € miesięcznie" }
+      minijob: { title: "Minijob", desc: "Zakres pracy ustalamy wspólnie" }
     },
     step2Title: "Jaka jest Twoja specjalizacja?",
     departments: {
@@ -387,15 +387,15 @@ export const translations = {
     phoneLabel: "Numer telefonu",
     phonePlaceholder: "np. 0170 1234567",
     whatsappLabel: "Chętnie skontaktuję się przez WhatsApp",
-    whatsappDesc: "Dzięki temu będziemy mogli odpowiedzieć szybciej.",
-    trustQuote: "Płacimy terminowo zgodnie z taryfą. Będziesz pracować w świetnym, stałym zespole!",
+    whatsappDesc: "Opcjonalne; zgodę można w każdej chwili wycofać na przyszłość.",
+    trustQuote: "Jasno wyjaśniamy zadania, czas pracy i wynagrodzenie.",
     privacyLabel: "Zgadzam się z polityką prywatności.",
     privacyLink: "Polityka prywatności",
     langSelect: "Wybierz język"
   },
   ro: {
     title: "Aplicare Rapidă",
-    subtitle: "Aplică în doar 60 de secunde – fără CV!",
+    subtitle: "Aplică în patru pași scurți – fără CV!",
     step: "Pasul",
     of: "din",
     fastDone: "Aproape gata",
@@ -409,7 +409,7 @@ export const translations = {
     jobTypes: {
       vollzeit: { title: "Full-time", desc: "39 ore pe săptămână" },
       teilzeit: { title: "Part-time", desc: "Dimineața sau după-amiaza" },
-      minijob: { title: "Minijob", desc: "Până la 603 € pe lună" }
+      minijob: { title: "Minijob", desc: "Stabilim împreună volumul de lucru" }
     },
     step2Title: "Care este domeniul dumneavoastră de expertiză?",
     departments: {
@@ -441,15 +441,15 @@ export const translations = {
     phoneLabel: "Număr de telefon",
     phonePlaceholder: "ex. 0170 1234567",
     whatsappLabel: "Doresc să fiu contactat prin WhatsApp",
-    whatsappDesc: "Astfel vă putem răspunde mai rapid.",
-    trustQuote: "Plătim la timp conform tarifului. Veți lucra într-o echipă excelentă și stabilă!",
+    whatsappDesc: "Opțional; consimțământul poate fi retras oricând pentru viitor.",
+    trustQuote: "Explicăm transparent sarcinile, programul și plata.",
     privacyLabel: "Sunt de acord cu politica de confidențialitate.",
     privacyLink: "Politica de confidențialitate",
     langSelect: "Alegeți limba"
   },
   it: {
     title: "Candidatura Rapida",
-    subtitle: "Candidati in soli 60 secondi – senza CV!",
+    subtitle: "Candidati in quattro brevi passaggi – senza CV!",
     step: "Passaggio",
     of: "di",
     fastDone: "Quasi fatto",
@@ -463,7 +463,7 @@ export const translations = {
     jobTypes: {
       vollzeit: { title: "Full-time", desc: "39 ore a settimana" },
       teilzeit: { title: "Part-time", desc: "Mattina o pomeriggio" },
-      minijob: { title: "Minijob", desc: "Fino a 603 € al mese" }
+      minijob: { title: "Minijob", desc: "Concordiamo insieme l'impegno" }
     },
     step2Title: "Qual è il tuo settore di competenza?",
     departments: {
@@ -495,15 +495,15 @@ export const translations = {
     phoneLabel: "Numero di telefono",
     phonePlaceholder: "es. 0170 1234567",
     whatsappLabel: "Contattatemi pure tramite WhatsApp",
-    whatsappDesc: "Così possiamo risponderti più velocemente.",
-    trustQuote: "Paghiamo puntualmente secondo la tariffa. Lavorerai in un team fantastico e stabile!",
+    whatsappDesc: "Facoltativo e revocabile in qualsiasi momento per il futuro.",
+    trustQuote: "Spieghiamo con trasparenza mansioni, orari e retribuzione.",
     privacyLabel: "Accetto l'informativa sulla privacy.",
     privacyLink: "Informativa sulla privacy",
     langSelect: "Scegli la tua lingua"
   },
   el: {
     title: "Γρήγορη Αίτηση",
-    subtitle: "Κάντε αίτηση σε μόλις 60 δευτερόλεπτα – χωρίς βιογραφικό!",
+    subtitle: "Κάντε αίτηση σε τέσσερα σύντομα βήματα – χωρίς βιογραφικό!",
     step: "Βήμα",
     of: "από",
     fastDone: "Σχεδόν έτοιμο",
@@ -517,7 +517,7 @@ export const translations = {
     jobTypes: {
       vollzeit: { title: "Πλήρης απασχόληση", desc: "39 ώρες την εβδομάδα" },
       teilzeit: { title: "Μερική απασχόληση", desc: "Πρωί ή απόγευμα" },
-      minijob: { title: "Minijob", desc: "Έως 603 € το μήνα" }
+      minijob: { title: "Minijob", desc: "Συμφωνούμε μαζί το εύρος εργασίας" }
     },
     step2Title: "Ποιος είναι ο τομέας εξειδίκευσής σας;",
     departments: {
@@ -549,15 +549,15 @@ export const translations = {
     phoneLabel: "Αριθμός τηλεφώνου",
     phonePlaceholder: "π.χ. 0170 1234567",
     whatsappLabel: "Επικοινωνήστε μαζί μου μέσω WhatsApp",
-    whatsappDesc: "Έτσι μπορούμε να σας απαντήσουμε πιο γρήγορα.",
-    trustQuote: "Πληρώνουμε έγκαιρα σύμφωνα με τη σύμβαση. Θα εργαστείτε σε μια εξαιρετική, μόνιμη ομάδα!",
+    whatsappDesc: "Προαιρετικό και ανακλητό ανά πάσα στιγμή για το μέλλον.",
+    trustQuote: "Εξηγούμε με διαφάνεια τα καθήκοντα, το ωράριο και την αμοιβή.",
     privacyLabel: "Συμφωνώ με την πολιτική απορρήτου.",
     privacyLink: "Πολιτική απορρήτου",
     langSelect: "Επιλέξτε τη γλώσσα σας"
   },
   fr: {
     title: "Candidature Express",
-    subtitle: "Postulez en seulement 60 secondes – sans CV !",
+    subtitle: "Postulez en quatre étapes courtes – sans CV !",
     step: "Étape",
     of: "sur",
     fastDone: "Presque fini",
@@ -571,7 +571,7 @@ export const translations = {
     jobTypes: {
       vollzeit: { title: "Temps plein", desc: "39 heures par semaine" },
       teilzeit: { title: "Temps partiel", desc: "Matin ou après-midi" },
-      minijob: { title: "Minijob", desc: "Jusqu'à 603 € par mois" }
+      minijob: { title: "Minijob", desc: "Nous convenons ensemble du volume de travail" }
     },
     step2Title: "Quel est votre domaine d'expertise ?",
     departments: {
@@ -603,8 +603,8 @@ export const translations = {
     phoneLabel: "Numéro de téléphone",
     phonePlaceholder: "ex. 0170 1234567",
     whatsappLabel: "Contactez-moi via WhatsApp",
-    whatsappDesc: "Cela nous permet de vous répondre plus rapidement.",
-    trustQuote: "Nous payons ponctuellement selon le tarif. Vous travaillerez dans une équipe formidable et stable !",
+    whatsappDesc: "Facultatif et révocable à tout moment pour l’avenir.",
+    trustQuote: "Nous expliquons clairement la mission, les horaires et la rémunération.",
     privacyLabel: "J'accepte la politique de confidentialité.",
     privacyLink: "Politique de confidentialité",
     langSelect: "Choisissez votre langue"

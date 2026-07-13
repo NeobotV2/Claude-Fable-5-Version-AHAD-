@@ -5,27 +5,13 @@ import SEO from '@/components/SEO';
 import Accordion from '@/components/ui/Accordion';
 import CTABand from '@/components/CTABand';
 import { IMG } from '@/lib/images';
+import ArticleMeta from '@/components/ArticleMeta';
+import { buildArticleSchema, EDITORIAL_ARTICLES } from '@/data/editorial';
 
 export default function FachwissenKosten() {
-  const articleSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'Article',
-    headline: 'Was kostet Gebäudereinigung? Stundensatz, m²-Preise und Rechenbeispiele',
-    datePublished: '2026-07-02',
-    dateModified: '2026-07-02',
-    description:
-      'Was kostet professionelle Gebäudereinigung? Stundensätze ab 34 €, Leistungswerte je Fläche, daraus abgeleitete m²-Preise und Monatsbeispiele — plus Warnzeichen für unseriöse Billigangebote.',
-    author: { '@type': 'Organization', name: 'AHAD Cleaning Company GmbH' },
-    publisher: {
-      '@type': 'Organization',
-      name: 'AHAD Cleaning Company GmbH',
-      logo: { '@type': 'ImageObject', url: 'https://ahad-cleaning.de/logo.png' },
-    },
-    mainEntityOfPage: {
-      '@type': 'WebPage',
-      '@id': 'https://ahad-cleaning.de/fachwissen/was-kostet-gebaeudereinigung-stundensatz-preise',
-    },
-  };
+  const articleSchema = buildArticleSchema(
+    EDITORIAL_ARTICLES['was-kostet-gebaeudereinigung-stundensatz-preise'],
+  );
 
   const faqSchema = {
     '@context': 'https://schema.org',
@@ -36,7 +22,7 @@ export default function FachwissenKosten() {
         name: 'Was kostet Gebäudereinigung pro Stunde?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: 'Bei AHAD Cleaning beginnt der Stundensatz für professionelle Gebäudereinigung bei 34 € pro Reinigungsstunde. Darin enthalten sind tarifgebundenes, festangestelltes Personal inklusive aller Lohnnebenkosten, Reinigungsmittel und Maschinen, eine feste Objektleitung, dokumentierte Qualitätskontrollen sowie der volle Versicherungsschutz. Marktüblich liegen seriös kalkulierte Stundensätze in der Gebäudereinigung je nach Region und Leistung meist zwischen etwa 30 und 45 €.',
+          text: 'Einen allgemein gültigen Stundensatz gibt es nicht. Er hängt unter anderem von Leistungsumfang, Arbeitsbedingungen, Zeiten, Material, Maschinen und Betreuung ab. Der Artikel nutzt 34 € ausschließlich als transparente Rechenannahme; dies ist weder Marktangabe noch Preisversprechen.',
         },
       },
       {
@@ -44,7 +30,7 @@ export default function FachwissenKosten() {
         name: 'Was kostet Büroreinigung pro Quadratmeter?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: 'Der m²-Preis ergibt sich aus Stundensatz und Leistungswert (wie viele m² eine Kraft pro Stunde schafft). Bei einem Stundensatz ab 34 € und üblichen Leistungswerten von 200 bis 300 m²/h für Büroflächen ergeben sich rund 0,11 bis 0,17 € pro m² und Reinigungsdurchgang. Bei täglicher Reinigung (ca. 21 Arbeitstage) entspricht das grob 2,40 bis 3,60 € pro m² und Monat; bei 2 bis 3 Durchgängen pro Woche entsprechend weniger. Verbindliche Preise erfordern immer eine Objektbesichtigung, da Möblierung, Bodenbelag und Sanitäranteil den Aufwand stark beeinflussen.',
+          text: 'Der m²-Preis lässt sich als Stundensatz geteilt durch den objektbezogenen Leistungswert modellieren. Die Zahlen im Artikel sind illustrative Rechenwerte mit einer angenommenen Stunde zu 34 € und ersetzen keine Kalkulation für ein konkretes Objekt.',
         },
       },
       {
@@ -52,7 +38,7 @@ export default function FachwissenKosten() {
         name: 'Wie setzt sich der Stundensatz in der Gebäudereinigung zusammen?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: 'Den größten Anteil macht der Lohn aus: Der allgemeinverbindliche Branchenmindestlohn (Lohngruppe 1, Innenreinigung) plus Lohnnebenkosten (Sozialversicherung, Umlagen) ergibt bereits rund 18 bis 19 € reine Personalkosten je produktiver Stunde. Hinzu kommen bezahlte Ausfallzeiten (Urlaub, Krankheit, Feiertage), Reinigungsmittel und Maschinen, Anfahrt, Objektleitung und Qualitätskontrolle, Verwaltung, Versicherungen sowie ein angemessener Unternehmergewinn. Seriös kalkulierte Angebote liegen deshalb kaum unter etwa 28 bis 30 € pro Stunde.',
+          text: 'Zu einer Kalkulation gehören der aktuell geltende Branchenmindestlohn, Lohnneben- und Ausfallkosten sowie je nach Auftrag Material, Maschinen, Anfahrt, Objektleitung, Qualitätskontrolle, Verwaltung, Versicherung, Wagnis und Gewinn. Die aktuelle Lohnuntergrenze sollte direkt beim BMAS geprüft werden.',
         },
       },
       {
@@ -60,7 +46,7 @@ export default function FachwissenKosten() {
         name: 'Warum sind sehr billige Reinigungsangebote riskant?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: 'Wer deutlich unter rund 28 € pro Stunde anbietet, kann Tariflohn, Sozialabgaben, Material und Betreuung rechnerisch kaum abdecken. In der Praxis wird dann an Reinigungszeit („Turbo-Reinigung"), an der Betreuung oder an der legalen Beschäftigung gespart — mit Folgen von schleichendem Qualitätsverfall bis zur Auftraggeberhaftung nach § 28e SGB IV, wenn der Dienstleister keine Sozialabgaben abführt. Lassen Sie sich die Kalkulationsgrundlage (Stundensatz, Leistungswert, Tariflohn) immer offenlegen.',
+          text: 'Ein niedriger Preis allein belegt keinen Verstoß. Prüfen Sie stattdessen, ob Leistungsumfang, Zeitansatz, Leistungswert und relevante Nachweise nachvollziehbar sind und ob alle Angebote dieselbe Grundlage verwenden. Rechtliche Haftungsfragen sollten im Einzelfall fachlich geprüft werden.',
         },
       },
       {
@@ -68,7 +54,7 @@ export default function FachwissenKosten() {
         name: 'Festpreis oder Abrechnung nach Stunden — was ist besser?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: 'Für die laufende Unterhaltsreinigung ist ein monatlicher Festpreis auf Basis eines Leistungsverzeichnisses üblich und planbar: Er wird aus Fläche, Intervallen und Leistungswerten kalkuliert und ändert sich nur, wenn sich die Leistung ändert. Stundenabrechnung eignet sich für schwer planbare Einsätze wie Sonderreinigungen, Bauzwischenreinigung oder kurzfristige Zusatzarbeiten. AHAD arbeitet mit transparentem Festpreis plus ausgewiesenem Stundensatz (ab 34 €) für Zusatzleistungen.',
+          text: 'Ein Festpreis kann bei klar definiertem Leistungsverzeichnis Planbarkeit schaffen; Stundenabrechnung kann für noch nicht sicher quantifizierbare Zusatzleistungen sinnvoll sein. Welche Form passt, hängt von Umfang, Änderungsregeln und Risikoverteilung des konkreten Auftrags ab.',
         },
       },
       {
@@ -76,7 +62,7 @@ export default function FachwissenKosten() {
         name: 'Wie bekomme ich einen verbindlichen Preis für mein Objekt?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: 'Über eine kostenlose Objektbesichtigung: Dabei werden Flächen, Bodenbeläge, Nutzung und gewünschte Intervalle aufgenommen und in einem Leistungsverzeichnis festgehalten. Auf dieser Basis erhalten Sie ein belastbares Festpreisangebot — bei AHAD in der Regel innerhalb von 24 Stunden nach der Besichtigung, die meist binnen 48 Stunden stattfindet.',
+          text: 'Über eine Objektbesichtigung: Dabei werden Flächen, Bodenbeläge, Nutzung und gewünschte Intervalle aufgenommen und in einem Leistungsverzeichnis festgehalten. Auf dieser Basis kann anschließend ein belastbares, objektspezifisches Angebot erstellt werden.',
         },
       },
     ],
@@ -86,7 +72,7 @@ export default function FachwissenKosten() {
     <div>
       <SEO
         title="Was kostet Gebäudereinigung? Stundensatz & m²-Preise | AHAD"
-        description="Gebäudereinigung Kosten transparent erklärt: Stundensatz ab 34 €, Leistungswerte je Flächenart, daraus abgeleitete m²-Preise und Monatsbeispiele — plus Warnzeichen für Billigangebote."
+        description="Gebäudereinigung kalkulieren: Kostenbestandteile, Leistungswerte, daraus abgeleitete m²-Preise und illustrative Monatsbeispiele mit offengelegten Annahmen."
         keywords="Was kostet Gebäudereinigung, Gebäudereinigung Kosten, Büroreinigung Kosten pro m², Stundensatz Gebäudereinigung, Unterhaltsreinigung Preis, Reinigung Preise Villingen-Schwenningen, AHAD Cleaning"
         schema={[articleSchema, faqSchema]}
       />
@@ -104,7 +90,7 @@ export default function FachwissenKosten() {
         <div className="absolute inset-0 bg-gradient-to-r from-navy via-navy/85 to-navy/40" />
         <div className="absolute inset-0 bg-gradient-to-t from-navy via-transparent to-navy/60" />
         <div className="max-w-7xl mx-auto px-4 relative z-10">
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="max-w-3xl">
+          <motion.div initial={false} animate={{ opacity: 1, y: 0 }} className="max-w-3xl">
             <span className="inline-flex items-center gap-2 bg-white/10 px-4 py-2 rounded-full text-sm font-bold mb-6 tracking-wider uppercase border border-white/20">
               <BookOpen className="w-4 h-4 text-[#9CDDB7]" />
               Fachwissen: Kosten &amp; Kalkulation
@@ -127,40 +113,41 @@ export default function FachwissenKosten() {
               <Euro className="w-8 h-8 text-[#0D6B38] mb-4" />
               <h3 className="font-bold text-lg mb-2 text-[#0B2341]">Stundensatz</h3>
               <p className="text-[#424751] text-sm">
-                Bei AHAD <strong>ab 34 € je Reinigungsstunde</strong> — inklusive Personal mit Lohnnebenkosten,
-                Material, Maschinen, Objektleitung und Versicherung.
+                Im Artikel als <strong>Rechenannahme 34 € je Stunde</strong>. Das ist kein Preisversprechen; ein
+                Angebot benötigt den konkreten Leistungsumfang.
               </p>
             </div>
             <div className="bg-[#f7f9fb] p-6 rounded-2xl border border-gray-100">
               <Calculator className="w-8 h-8 text-[#0B2341] mb-4" />
               <h3 className="font-bold text-lg mb-2 text-[#0B2341]">m²-Preis</h3>
               <p className="text-[#424751] text-sm">
-                Ergibt sich aus Stundensatz ÷ Leistungswert: für Büroflächen typischerweise{' '}
-                <strong>0,11–0,17 € pro m² und Durchgang</strong>.
+                Ergibt sich aus Stundensatz ÷ Leistungswert. Die Spannen im Artikel sind{' '}
+                <strong>illustrative Rechenwerte</strong>, keine Markt- oder Angebotswerte.
               </p>
             </div>
             <div className="bg-[#f7f9fb] p-6 rounded-2xl border border-gray-100">
               <Clock className="w-8 h-8 text-[#0B2341] mb-4" />
               <h3 className="font-bold text-lg mb-2 text-[#0B2341]">Größter Hebel</h3>
               <p className="text-[#424751] text-sm">
-                Nicht der Stundensatz, sondern das <strong>Reinigungsintervall</strong>: bedarfsorientierte Taktung
-                spart oft 30–40 % gegenüber starrer täglicher Reinigung.
+                Nicht nur der Stundensatz, sondern auch das <strong>Reinigungsintervall</strong>: Eine bedarfsorientierte
+                Taktung kann Stunden reduzieren, sofern Hygiene- und Qualitätsziele eingehalten werden.
               </p>
             </div>
           </div>
         </div>
       </section>
 
+      <ArticleMeta slug="was-kostet-gebaeudereinigung-stundensatz-preise" />
+
       {/* Content */}
       <section className="py-20 lg:py-32 bg-white">
         <div className="max-w-4xl mx-auto px-4">
           <div className="prose prose-lg max-w-none text-[#424751] leading-relaxed">
-            <h2 className="text-3xl font-black text-[#0B2341] mb-6">Der Stundensatz: ab 34 € — und was darin steckt</h2>
+            <h2 className="text-3xl font-black text-[#0B2341] mb-6">Der Stundensatz: Kostenbestandteile transparent machen</h2>
             <p className="mb-6">
-              Bei AHAD Cleaning beginnt der Stundensatz für professionelle Gebäudereinigung bei{' '}
-              <strong>34 € pro Reinigungsstunde</strong>. Marktüblich liegen seriös kalkulierte Sätze in der Branche je
-              nach Region und Leistung meist zwischen etwa 30 und 45 €. Entscheidend ist, was der Satz abdeckt — denn
-              genau hier unterscheiden sich Angebote:
+              Für die folgenden Formeln verwenden wir <strong>34 € pro Reinigungsstunde als illustrative Annahme</strong>.
+              Sie ist weder Marktspanne noch Preisversprechen. Entscheidend ist, welche Leistungen und Kostenbestandteile
+              ein konkret angebotenes Stundenentgelt abdeckt:
             </p>
             <div className="overflow-x-auto mb-8 rounded-2xl border border-gray-200 shadow-sm">
               <table className="w-full text-left text-sm border-collapse bg-white">
@@ -173,7 +160,7 @@ export default function FachwissenKosten() {
                 <tbody className="divide-y divide-gray-200">
                   <tr>
                     <td className="px-4 py-3 font-semibold text-[#0B2341] align-top">Tariflohn + Lohnnebenkosten</td>
-                    <td className="px-4 py-3 align-top">Allgemeinverbindlicher Branchenmindestlohn (Lohngruppe 1) plus Sozialversicherung und Umlagen — bereits rund 18–19 € je produktiver Stunde.</td>
+                    <td className="px-4 py-3 align-top">Aktuell geltender Branchenmindestlohn plus Sozialversicherung und Umlagen; den jeweils aktuellen Wert weist das BMAS aus.</td>
                   </tr>
                   <tr className="bg-[#f7f9fb]">
                     <td className="px-4 py-3 font-semibold text-[#0B2341] align-top">Ausfallzeiten</td>
@@ -195,9 +182,8 @@ export default function FachwissenKosten() {
               </table>
             </div>
             <p className="mb-12">
-              Die Rechnung zeigt: <strong>Unter etwa 28–30 € je Stunde ist eine legale, tarifkonforme Reinigung kaum
-              darstellbar.</strong> Angebote deutlich darunter sparen zwangsläufig an Zeit, Betreuung oder — im
-              schlimmsten Fall — an der legalen Beschäftigung.
+              Die Aufstellung zeigt, warum ein Stundenpreis nur zusammen mit Leistungsumfang, Zeitansatz und
+              Kostenbestandteilen bewertet werden sollte. Ein Preis allein belegt weder Qualität noch einen Verstoß.
             </p>
 
             <h2 className="text-3xl font-black text-[#0B2341] mb-6">Vom Stundensatz zum m²-Preis: der Leistungswert</h2>
@@ -240,8 +226,8 @@ export default function FachwissenKosten() {
               </table>
             </div>
             <p className="mb-12 text-sm text-[#6b7280]">
-              *Richtwerte auf Basis des AHAD-Einstiegssatzes von 34 €/h. Formel: Stundensatz ÷ Leistungswert =
-              Kosten je m² und Reinigungsdurchgang. Verbindlich ist immer die Kalkulation nach Objektbesichtigung.
+              *Illustrative Rechenwerte auf Basis einer angenommenen Stunde zu 34 €. Formel: Stundensatz ÷ Leistungswert =
+              Kosten je m² und Reinigungsdurchgang. Verbindlich ist ausschließlich das konkrete Angebot.
             </p>
 
             <h2 className="text-3xl font-black text-[#0B2341] mb-6">Rechenbeispiel: Büroetage mit 500 m²</h2>
@@ -275,7 +261,7 @@ export default function FachwissenKosten() {
             <h2 className="text-3xl font-black text-[#0B2341] mb-6">Was den Preis nach oben oder unten bewegt</h2>
             <ul className="space-y-4 mb-12 list-none pl-0">
               {[
-                'Reinigungsintervall: der mit Abstand größte Hebel — bedarfsorientiert statt starr spart oft 30–40 %.',
+                'Reinigungsintervall: bedarfsorientierte statt starre Taktung kann Stunden reduzieren, wenn Hygiene- und Qualitätsziele eingehalten werden.',
                 'Sanitäranteil: hygienekritische Flächen brauchen ein Mehrfaches der Zeit pro m².',
                 'Möblierungsgrad & Bodenbelag: Teppich, viele Arbeitsplätze und Hindernisse senken den Leistungswert.',
                 'Reinigungszeiten: Randzeiten mit Zuschlägen vs. Tagdienst im laufenden Betrieb.',
@@ -296,22 +282,20 @@ export default function FachwissenKosten() {
               </h3>
               <ul className="space-y-3 text-sm list-none pl-0">
                 <li className="border-b border-gray-200 pb-3">
-                  <strong className="text-[#0B2341]">Stundensatz deutlich unter ~28 €:</strong> rechnerisch kaum mit
-                  Tariflohn, Sozialabgaben und Betreuung vereinbar.
+                  <strong className="text-[#0B2341]">Nicht erklärte Kalkulation:</strong> Preis, Zeitansatz,
+                  Leistungswert und enthaltene Kostenbestandteile bleiben unklar.
                 </li>
                 <li className="border-b border-gray-200 pb-3">
                   <strong className="text-[#0B2341]">Pauschalpreis ohne Leistungsverzeichnis:</strong> Sie wissen nicht,
                   welche Leistung Sie vergleichen — der „günstigste" Preis versteckt oft die geringste Leistung.
                 </li>
                 <li className="border-b border-gray-200 pb-3">
-                  <strong className="text-[#0B2341]">Keine Nachweise:</strong> Seriöse Anbieter legen Tariflohn-Basis,
-                  Versicherung und Sozialversicherungsnachweise offen. Wichtig wegen der{' '}
-                  <strong>Auftraggeberhaftung (§ 28e SGB IV)</strong>: Führt Ihr Dienstleister keine Sozialabgaben ab,
-                  können Sie als Auftraggeber haften.
+                  <strong className="text-[#0B2341]">Unklare Nachweise:</strong> Relevante Entgelt-, Versicherungs-
+                  und Sozialversicherungsnachweise sollten aktuell, plausibel und auf den Auftrag bezogen sein.
                 </li>
                 <li>
-                  <strong className="text-[#0B2341]">Unrealistische Leistungswerte:</strong> Wer 500 m² Büro pro Stunde
-                  verspricht, reinigt nicht — er wischt drüber.
+                  <strong className="text-[#0B2341]">Nicht begründete Leistungswerte:</strong> Werte müssen zu Fläche,
+                  Möblierung, Tätigkeit, Verfahren und Qualitätsziel passen.
                 </li>
               </ul>
             </div>
@@ -321,17 +305,14 @@ export default function FachwissenKosten() {
               Ob <Link to="/standorte/villingen-schwenningen" className="text-[#0B2341] font-bold hover:underline">Villingen-Schwenningen</Link>,{' '}
               <Link to="/standorte/stuttgart" className="text-[#0B2341] font-bold hover:underline">Stuttgart</Link> oder{' '}
               <Link to="/standorte/konstanz" className="text-[#0B2341] font-bold hover:underline">Konstanz</Link> — der
-              allgemeinverbindliche Tariflohn gilt bundesweit, daher unterscheiden sich seriöse Angebote regional nur
-              moderat (Anfahrt, Zuschläge, Marktdichte). Ein Angebot, das deutlich unter dem Marktniveau liegt, ist
-              deshalb auch in der Region ein Warnsignal und kein Schnäppchen. AHAD kalkuliert mit transparentem
-              Festpreis auf Basis eines Leistungsverzeichnisses — der Stundensatz ab 34 € wird für Zusatzleistungen
-              offen ausgewiesen.
+              Branchenmindestlohn gilt bundesweit. Konkrete Angebote können sich dennoch durch Leistungsumfang,
+              Zuschläge, Anfahrt, Objektbedingungen, Verfahren und Risikoverteilung unterscheiden. Vergleichen Sie
+              deshalb einheitliche Leistungsverzeichnisse statt isolierter Stunden- oder Quadratmeterpreise.
             </p>
 
             <h2 className="text-3xl font-black text-[#0B2341] mb-6">Fazit</h2>
             <p className="mb-8">
-              Gebäudereinigung kostet bei seriöser Kalkulation <strong>ab etwa 34 € pro Stunde</strong> — was zählt,
-              ist die Kombination aus Stundensatz, Leistungswert und vor allem dem richtigen{' '}
+              Eine belastbare Kalkulation verbindet Kostenbestandteile, Leistungswert und das passende{' '}
               <Link to="/fachwissen/unterhaltsreinigung-unternehmen-reinigungsintervalle" className="text-[#0B2341] font-bold hover:underline">
                 Reinigungsintervall
               </Link>
@@ -355,7 +336,7 @@ export default function FachwissenKosten() {
 
       <CTABand
         title="Was kostet die Reinigung Ihres Objekts?"
-        lead="Kostenlose Besichtigung in 48 Stunden, belastbares Festpreisangebot in 24 Stunden danach — transparent kalkuliert, ohne versteckte Nachträge."
+        lead="Objektbesichtigung nach Abstimmung, belastbares Angebot auf Basis des vereinbarten Leistungsumfangs — transparent und nachvollziehbar kalkuliert."
       />
     </div>
   );

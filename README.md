@@ -1,100 +1,86 @@
-# AHAD Cleaning — Website
+# AHAD Cleaning Website
 
-Premium-Webauftritt der AHAD Cleaning Company GmbH: systematische Gebäudereinigung
-für Industrie, Verwaltung und Mittelstand in Süddeutschland.
+React-/TypeScript-Website der AHAD Cleaning Company GmbH für B2B-Gebäudereinigung. Der Produktionsbuild erzeugt für jede öffentliche Route statisches HTML und enthält einen serverseitigen, idempotenten Lead-Workflow.
 
-## Stack
+## Verbindlicher Betrieb
 
-- **React 18 + TypeScript + Vite 6** — SPA mit Code-Splitting pro Route
-- **Tailwind CSS v4** — Designsystem über `@theme`-Tokens in `src/index.css`
-- **motion/react** — Scroll-Reveals, Parallax-Hero, Mikrointeraktionen
-- **react-helmet-async** — SEO/Meta + schema.org (Organization, FAQ, Service)
-- **Firebase (Firestore)** — Lead-Erfassung aus Kontaktformular & Funnels
+- Produktionshost: **Vercel**
+- Kanonische Origin: `https://www.ahad-cleaning.de`
+- Rendering: Vite-Client + SSR-Bundle + fail-closed Prerendering
+- Leadannahme: Vercel Function `/api/send-email` → Firestore-Persistenz → Resend-Benachrichtigung
+- Admin: Firebase Auth/Firestore; öffentliche Browser-Creates sind durch Rules gesperrt
+- Netlify ist höchstens eine technische Vorschau ohne freigegebene produktive Leadannahme. GitHub Pages ist kein Deploymentziel.
 
-## Entwicklung
+Der sichere Rollout inklusive zwingender Reihenfolge für App/API und Firestore-Regeln steht in [docs/operations/production-rollout.md](docs/operations/production-rollout.md).
+
+## Lokale Entwicklung
+
+Voraussetzung: Node.js 22 oder 24.
 
 ```bash
-npm install
-npm run dev          # Entwicklungsserver
-npm run build        # Standard-Build = SSG: Client + SSR + Prerender → statisches HTML je Route
-npm run build:client # nur Client-Build (ohne Prerender), selten nötig
-npm run preview      # Build lokal testen
-npm run assets       # Gebrandete Bilder neu generieren (og-image, Icons, Fallback)
+npm ci
+npm run dev
 ```
+
+Wichtige Prüfungen:
+
+```bash
+npm run lint            # ESLint + React-Hooks
+npm run typecheck       # App, API und Vite-/Testkonfiguration
+npm run test:unit       # Validierung, CSV, Rules, Routing, Claims, Redaktion
+npm run build           # Client, SSR, 39 Routen + 404, 0 Fallbacks, Dist-Budgets
+npm run test:e2e        # Playwright/axe; benötigt Chromium und einen Build
+```
+
+`npm run build` führt über `postbuild` automatisch die Route-, Canonical-, Robots-, Sitemap-, JSON-LD-, No-JavaScript- und gzip-Budgets aus. Ein Prerender-Fallback oder ein öffentliches SSR-Element mit inline `opacity:0` macht den Build rot.
 
 ## Architektur
 
-| Pfad | Zweck |
+| Pfad | Verantwortung |
 | --- | --- |
-| `src/lib/site.ts` | **Single Source of Truth**: Kontaktdaten, Versprechen (24h/48h), Statistiken, Referenzen, Organization-Schema |
-| `src/lib/images.ts` | Zentrale Bild-Bibliothek (kuratierte Unsplash-Fotos + lokaler Marken-Fallback) |
-| `src/data/services.tsx` | Inhalte aller 7 Leistungsseiten (datengetrieben) |
-| `src/data/branchen.tsx` | Inhalte aller 5 Branchenseiten (Problem → Lösung) |
-| `src/components/ui/` | UI-Kit: Button, Reveal, SectionHeading, Stat (CountUp), Accordion, BeforeAfter-Slider, SmartImage |
-| `src/components/ServicePage.tsx` | Template für Leistungs-Detailseiten |
-| `src/components/IndustryPage.tsx` | Template für Branchenseiten |
-| `src/components/PageHero.tsx` | Einheitlicher dunkler Seiten-Hero mit Brotkrumen & CTAs |
-| `src/components/CTABand.tsx` | Conversion-Abschluss (Angebot in 24h + Telefon) auf jeder Seite |
-| `src/components/StickyCTA.tsx` | Mobile Conversion-Leiste (Anrufen / Angebot) |
-| `scripts/generate-assets.mjs` | Erzeugt og-image.jpg, Icons & Fallback-Bild aus SVG (sharp) |
+| `src/route-manifest.json` | Quelle der Wahrheit für Router, Prerender, Sitemap und Indexierung |
+| `src/site-config.json` | Kanonische Origin |
+| `src/lib/site.ts` | Kontaktdaten und fail-closed veröffentlichte Claims/Referenzen |
+| `src/lib/analytics.ts` | PII-freie Event- und Attributionstaxonomie |
+| `src/data/jobs.ts` | Ablaufbares Jobmodell; `JobPosting` nur für verifizierte aktive Vakanzen |
+| `src/data/editorial.ts` | Artikelquellen und Reviewer-Freigabe |
+| `api/send-email.ts` | Server-only Leadannahme, Idempotenz, Rate Limit und Benachrichtigung |
+| `api/_lib/lead-validation.ts` | Strikte Payload-Schemas für Kontakt, Angebot und Bewerbung |
+| `firestore.rules` | Server-only Creates und begrenzte Adminrechte |
+| `scripts/prerender.mjs` | Fail-closed Windows-/Linux-Prerendering |
+| `scripts/check-performance-budget.mjs` | Post-Build-Qualitäts- und Performancebudgets |
+| `tests/` | Unit-, Route-/Claim- und Playwright-/axe-Regressionstests |
 
-### Marke (Designbook v2.4, Juni 2026)
+## Formulare und Datenschutz
 
-- **Farben:** AHAD Navy `#0B2341`, AHAD Grün `#0D6B38`, Weiß als Grundfläche,
-  Text-Anthrazit `#1C2733` (Fließtext, nie im Logo), Mint `#9CDDB7` nur auf
-  dunklen Flächen — dort darf Mint EIN Schlüsselwort/Akzent hervorheben
-  (Designbook-Ausnahme), auf Weiß nie als Textfarbe. Alle Töne als Tokens
-  in `src/index.css` (`@theme`).
-- **Logo:** Originalpfade aus der Druckvorlage in `src/components/logo-paths.ts`
-  (Wortmarke ist pfadkonvertiert — nie als Schrift neu setzen). Hauptflächen
-  solid, Falzflächen als Navy↔Grün-Verlauf (Stops `#148A49`/`#123660` aus der
-  Vorlage gesampelt). Varianten: Verlauf (digital) und Negativ Weiß (auf Navy)
-  über `<Logo variant>`.
-- **Typografie:** Montserrat führt (Black 900 Headlines, Bold 700 Subheads,
-  Regular 400 Fließtext); Space Grotesk nur als digitaler Akzent
-  (Eyebrows, Zahlen — `font-accent`).
-- **Claim & Messaging:** Genau ein Web-Claim — „Struktur. Sauberkeit. Sicherheit."
-  (Signatur im Footer). Weitere Slogans sind Kanal-Material (Fahrzeug, Kleidung,
-  Anzeige, Social, LV-Deckblatt) und in `src/lib/messaging.ts` mit Kanal-Zuordnung
-  dokumentiert — bewusst NICHT über die Website gestreut.
+- Alle Formulare schreiben ausschließlich über die Server-API.
+- `Idempotency-Key`, persistentes globales Rate Limit, Honeypot, Startzeit, Origin- und Größenprüfung reduzieren Dubletten und Missbrauch.
+- E-Mail **oder** Telefon genügt. Im Angebotsfunnel sind Unternehmen und Einsatzort optional.
+- Der Angebotsentwurf liegt höchstens zwei Stunden im `sessionStorage` und enthält keine Kontaktfelder oder Freitexte.
+- WhatsApp ist im Bewerbungsfunnel ein separates, freiwilliges Opt-in; die Bewerbung funktioniert ohne WhatsApp.
+- Vercel-Events enthalten Pfad-/Kampagnenkontext, aber keine Namen, E-Mail-Adressen, Telefonnummern, Nachrichten oder URL-Abfragen.
 
-### Rendering & SEO/GEO
+Servervariablen sind ohne echte Schlüssel in [.env.example](.env.example) dokumentiert. Werte mit `FIREBASE_*`, `RESEND_*` oder `LEAD_RATE_LIMIT_SECRET` gehören ausschließlich in die verschlüsselten Vercel-Projekteinstellungen.
 
-- **SSG ist der Standard-Build.** `npm run build` baut den Client, kompiliert einen
-  SSR-Renderer (`src/entry-server.tsx` via `vite.ssr.config.ts`) und prerendert jede
-  Route (`scripts/prerender.mjs`) zu statischem HTML mit vollständigem Inhalt,
-  Meta-/OG-Tags und JSON-LD — entscheidend für Link-Vorschauen (WhatsApp/LinkedIn/
-  Slack), Suchmaschinen und LLM-Fetcher, die kein JavaScript ausführen. Schlägt eine
-  Route fehl, wird die SPA-Hülle geschrieben (Build bricht nie ab). Es gibt keinen
-  separaten SSG-Befehl mehr — jeder Host, der `npm run build` ausführt, liefert
-  prerendertes HTML (Netlify, Vercel, GitHub Pages sind entsprechend gesetzt).
-- **OG-Fallback:** `index.html` enthält Basis-OG/Twitter-Tags; der Prerender ersetzt
-  sie pro Seite durch das seitenspezifische Helmet (kein Duplikat).
-- **Hydration:** `main.tsx` hydriert vorgerendertes HTML, sonst frischer Mount.
-- Routenliste fürs Prerendering steht in `scripts/prerender.mjs` (ohne /admin,
-  /karriere/bewerbung). Firebase wird in Formularen erst beim Absenden dynamisch
-  geladen — hält Prerender und Initial-Bundle schlank.
+## Claims, Standorte, Referenzen und Jobs
 
-### Design-Prinzipien
+Nicht belegte Aussagen werden nicht als Tatsachen veröffentlicht. Zertifikate, Kennzahlen, Gesamtbewertungen, Kundenlogos/-stimmen, Niederlassungen und Stellen benötigen Quelle, Verantwortlichen, Freigabedatum und Ablaufdatum; der Gate ist standardmäßig geschlossen. Offene Unternehmensnachweise stehen im Register unter `docs/content/`.
 
-- **Conversion zuerst:** „Angebot in 24h“ als durchgängiges Versprechen — Header-CTA,
-  Sticky-Bar (mobil), CTA-Band auf jeder Seite, 4-Schritte-Express-Funnel unter `/angebot`.
-- **Dunkle Heroes überall:** Der Header startet transparent über Navy-Heroes und wechselt
-  beim Scrollen in weißes Glas. Seiten mit hellem Anfang stehen in `LIGHT_TOP_ROUTES`
-  (`src/components/Header.tsx`).
-- **Marken-Tokens statt Hex-Werten:** Farben/Schatten/Animationen kommen aus `@theme`
-  (`navy`, `brand`, `accent`, `mint`, `paper`, …).
+- Villingen-Schwenningen ist die veröffentlichte Unternehmensadresse.
+- Stuttgart und Konstanz werden bis zur externen Verifikation als Einsatzgebiete behandelt, ohne Filialadresse, Geo oder `LocalBusiness`-Schema.
+- Einzelne Reviews oder Fallstimmen erscheinen nur bei dokumentierter Wiedergabefreigabe; ein selbstbezogenes `AggregateRating` wird nie erzeugt.
+- Karriereprofile sind Interessensprofile, solange HR keine aktive, datierte Vakanz freigibt.
 
-## Firebase konfigurieren
+## Bilder und Barrierefreiheit
 
-Echte Projektwerte entweder per Umgebungsvariablen (`VITE_FIREBASE_API_KEY`,
-`VITE_FIREBASE_PROJECT_ID`, …) setzen oder `src/firebase-applet-config.json`
-ersetzen. Ohne echte Konfiguration laufen die Formulare in den dokumentierten
-Fehlerpfad (Hinweis mit Telefonnummer) — die Seite selbst funktioniert vollständig.
+Fotos, Varianten, Fonts und freigegebene Logos werden lokal ausgeliefert; es gibt keine externen Unsplash- oder Logo-CDN-Abrufe. Bilder unter `public/images/ahad/` besitzen nach Möglichkeit 480-/960-Pixel-Varianten.
 
-## Bilder
+Kritische Pfade werden auf Tastaturbedienung, Fokusführung, mobilen Menüdialog, Formularnamen/-fehler, `prefers-reduced-motion`, JavaScript-off-Sichtbarkeit und axe-Verstöße geprüft. Automatisierte Checks ersetzen nicht die ausstehende manuelle NVDA-/VoiceOver- und Realgeräte-Abnahme.
 
-Fotos werden von `images.unsplash.com` (Unsplash-Lizenz, Hotlinking erlaubt) geladen
-und sind in `src/lib/images.ts` kuratiert. Fällt eine Quelle aus, blendet
-`<SmartImage>` automatisch das gebrandete Fallback (`public/images/fallback.jpg`) ein.
-Eigene Fotos einfach dort eintragen — eine Stelle, ganze Site aktualisiert.
+## Audit und Status
+
+- [Phase-1-Audit](docs/audit/2026-07-12-phase-1-audit.md)
+- [Umsetzungsstatus A-01 bis A-34](docs/audit/2026-07-12-implementation-status.csv)
+- [Produktions-Rollout](docs/operations/production-rollout.md)
+
+Externe Aufgaben wie Domainsettings, echte Testleads, Firestore-TTL-Aktivierung, Branch Protection, Zertifikats-/Kunden-/Standortfreigaben, Rechtsprüfung, Feld-CWV und veröffentlichte Fallstudien können nicht aus dem Repository heraus bestätigt werden.

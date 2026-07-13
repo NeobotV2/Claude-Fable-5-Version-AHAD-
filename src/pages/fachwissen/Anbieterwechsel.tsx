@@ -1,35 +1,15 @@
 import { motion } from 'motion/react';
 import { RefreshCw, ClipboardCheck, CheckCircle2, ShieldAlert } from 'lucide-react';
-import { Link } from 'react-router-dom';
 import SEO from '@/components/SEO';
 import Accordion from '@/components/ui/Accordion';
 import CTABand from '@/components/CTABand';
+import ArticleMeta from '@/components/ArticleMeta';
+import { buildArticleSchema, EDITORIAL_ARTICLES } from '@/data/editorial';
 
 export default function FachwissenAnbieterwechsel() {
-  const articleSchema = {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    "headline": "Reinigungsfirma wechseln: Checkliste & Tipps für Unternehmen",
-    "datePublished": "2026-06-12",
-    "dateModified": "2026-06-24",
-    "description": "Wann ist der richtige Zeitpunkt, die Reinigungsfirma zu wechseln? Erfahren Sie alles über Kündigungsfristen, Neu-Ausschreibung und den reibungslosen Übergang.",
-    "author": {
-      "@type": "Organization",
-      "name": "AHAD Cleaning Company GmbH"
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": "AHAD Cleaning Company GmbH",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "https://ahad-cleaning.de/logo.png"
-      }
-    },
-    "mainEntityOfPage": {
-      "@type": "WebPage",
-      "@id": "https://ahad-cleaning.de/fachwissen/reinigungsfirma-wechseln-checkliste-tipps"
-    }
-  };
+  const articleSchema = buildArticleSchema(
+    EDITORIAL_ARTICLES['reinigungsfirma-wechseln-checkliste-tipps'],
+  );
 
   const faqSchema = {
     "@context": "https://schema.org",
@@ -48,7 +28,7 @@ export default function FachwissenAnbieterwechsel() {
         "name": "Worauf muss ich bei der Kündigung des Reinigungsvertrags achten?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Prüfen Sie zuerst die vertraglich vereinbarten Kündigungsfristen und Laufzeiten. Meist liegen diese bei 3 bis 6 Monaten zum Quartalsende. Eine Kündigung sollte immer schriftlich per Einschreiben erfolgen."
+          "text": "Prüfen Sie zuerst den konkreten Vertrag: Laufzeit, Kündigungsfrist, Kündigungstermin, Verlängerung und vereinbarte Form. Wählen Sie einen zum Vertrag passenden, nachweisbaren Zugang. Bei Unsicherheit oder einer außerordentlichen Kündigung ist eine rechtliche Prüfung sinnvoll."
         }
       },
       {
@@ -56,7 +36,7 @@ export default function FachwissenAnbieterwechsel() {
         "name": "Wie finde ich eine bessere Reinigungsfirma?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Achten Sie auf Zertifizierungen (ISO 9001), Referenzen in Ihrer Branche, die Qualifikation der Objektleiter und die Transparenz des Angebots. Ein seriöser Anbieter führt immer eine Vor-Ort-Besichtigung durch, bevor er ein Angebot erstellt."
+          "text": "Vergleichen Sie Leistungsumfang, verantwortliche Objektleitung, dokumentierte Qualitätssicherung, Referenzen und transparente Kalkulationsannahmen. Zertifikate sollten nur berücksichtigt werden, wenn sie aktuell, echt und für den relevanten Geltungsbereich ausgestellt sind. Eine Objektbegehung kann die Vergleichbarkeit der Angebote verbessern."
         }
       },
       {
@@ -64,7 +44,7 @@ export default function FachwissenAnbieterwechsel() {
         "name": "Welche Kündigungsfristen gelten bei Reinigungsverträgen?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Bei unbefristeten Rahmen- oder Dienstleistungsverträgen sind Kündigungsfristen von 3 Monaten zum Quartalsende üblich, bei Verträgen mit fester Laufzeit (häufig 12 bis 24 Monate) oft 3 bis 6 Monate zum Vertragsende. Maßgeblich ist immer der individuelle Vertrag: Prüfen Sie Laufzeit, Kündigungsfrist und automatische Verlängerungsklauseln. Versäumen Sie die Frist, verlängert sich der Vertrag bei stillschweigender Verlängerung meist um ein weiteres Jahr. Kündigen Sie schriftlich per Einschreiben mit Rückschein und lassen Sie sich den Zugang bestätigen."
+          "text": "Eine allgemeingültige Frist lässt sich nicht nennen. Maßgeblich sind der individuelle Vertrag und die darauf anwendbaren Regeln. Prüfen Sie Laufzeit, Kündigungstermin, Frist, Verlängerungsklausel und Form; dokumentieren Sie den Zugang. Diese Orientierung ersetzt keine Rechtsberatung."
         }
       },
       {
@@ -98,18 +78,17 @@ export default function FachwissenAnbieterwechsel() {
       {/* Hero Section */}
       <section className="relative pt-36 pb-20 lg:pt-44 lg:pb-28 bg-navy text-white overflow-hidden grain">
         <div className="absolute inset-0 opacity-40">
-          <img 
-            src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&q=80&w=1600" 
-            alt="Vertragsmanagement und Anbieterwechsel" 
-            className="w-full h-full object-cover"
-            referrerPolicy="no-referrer"
-          />
+          <picture>
+            <source media="(max-width: 640px)" srcSet="/images/ahad/meeting-480.webp" />
+            <source media="(max-width: 1200px)" srcSet="/images/ahad/meeting-960.webp" />
+            <img src="/images/ahad/meeting.webp" alt="Vertragsmanagement und Anbieterwechsel" className="w-full h-full object-cover" width="1600" height="900" />
+          </picture>
         </div>
         <div className="absolute inset-0 bg-gradient-to-r from-navy via-navy/85 to-navy/40" />
         <div className="absolute inset-0 bg-gradient-to-t from-navy via-transparent to-navy/60" />
         <div className="max-w-7xl mx-auto px-4 relative z-10">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={false}
             animate={{ opacity: 1, y: 0 }}
             className="max-w-3xl"
           >
@@ -161,6 +140,8 @@ export default function FachwissenAnbieterwechsel() {
           </div>
         </div>
       </section>
+
+      <ArticleMeta slug="reinigungsfirma-wechseln-checkliste-tipps" />
 
       {/* Main Content */}
       <section className="py-20 lg:py-32 bg-white">
@@ -246,7 +227,7 @@ export default function FachwissenAnbieterwechsel() {
                   <tr className="bg-[#f7f9fb]">
                     <td className="p-4 font-bold text-[#0B2341]">3. Kündigung Altvertrag</td>
                     <td className="p-4">Frist prüfen, schriftlich kündigen (erst nach neuem Vertragsentwurf)</td>
-                    <td className="p-4 whitespace-nowrap">je nach Frist (3-6 Monate)</td>
+                    <td className="p-4 whitespace-nowrap">nach individueller Vertragsfrist</td>
                     <td className="p-4">Geschäftsführung, Recht</td>
                   </tr>
                   <tr>
@@ -334,10 +315,10 @@ export default function FachwissenAnbieterwechsel() {
                 'Mindestens drei Anbieter zur Vor-Ort-Begehung einladen',
                 'Angebote anhand von Leistungswerten und Einsatzzeiten vergleichen - nicht nur Endpreis',
                 'Referenzen aus der eigenen Branche einholen und telefonisch prüfen',
-                'Zertifikate (z. B. ISO 9001), Versicherungsnachweis und Tariftreue prüfen',
+                'Falls relevant: Zertifikate mit Aussteller, Laufzeit und Geltungsbereich sowie Versicherungs- und Entgeltnachweise prüfen',
                 'Personalübergang nach § 613a BGB rechtlich abklären lassen',
                 'Neuen Vertrag erst unterschreiben, dann den Altvertrag fristgerecht schriftlich kündigen',
-                'Kündigung per Einschreiben mit Rückschein versenden und Zugang dokumentieren',
+                'Vertraglich vereinbarte Kündigungsform einhalten und Zugang dokumentieren',
                 'Stichtag festlegen und Onboarding-Plan mit dem neuen Anbieter abstimmen',
                 'Schlüssel-/Zutrittsregelung, Lagerraum und Stromanschlüsse für Maschinen klären',
                 'Übergabeprotokoll am Stichtag erstellen (Zustand, Inventar, Schlüssel)',
