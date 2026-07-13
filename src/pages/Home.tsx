@@ -33,7 +33,17 @@ import Guarantee from '@/components/Guarantee';
 import Reviews from '@/components/Reviews';
 import TrustBand from '@/components/TrustBand';
 import { IMG, srcSetFor } from '@/lib/images';
-import { SITE, STATS, REVIEWS, ORGANIZATION_SCHEMA, WEBSITE_SCHEMA, GOOGLE_RATING } from '@/lib/site';
+import {
+  SITE,
+  STATS,
+  REVIEWS,
+  ORGANIZATION_SCHEMA,
+  WEBSITE_SCHEMA,
+  GOOGLE_RATING,
+  REVIEWS_SOURCE_URL,
+  CLIENT_REFERENCES,
+  FEATURED_TESTIMONIAL_PUBLISHABLE,
+} from '@/lib/site';
 import { SERVICES } from '@/data/services';
 
 const FEATURED_PATHS = [
@@ -50,7 +60,7 @@ const featuredServices = [
     title: 'Unterhaltsreinigung',
     outcome: 'Planbar saubere Flächen — ohne internen Steuerungsaufwand.',
     benefits: ['Feste Teams & Objektleitung', 'Digitale Qualitätskontrolle'],
-    tag: 'Null Beschwerden',
+    tag: 'Planbar sauber',
     icon: <LayoutDashboard className="w-6 h-6" />,
     path: '/leistungen/unterhaltsreinigung',
     image: IMG.unterhaltsreinigung,
@@ -67,8 +77,8 @@ const featuredServices = [
   {
     title: 'Glas- & Fassadenreinigung',
     outcome: 'Repräsentative Gebäudehülle und langfristiger Werterhalt.',
-    benefits: ['Osmose-Verfahren', 'Zertifizierte Höhenzugänge'],
-    tag: 'Werterhalt garantiert',
+    benefits: ['Osmose-Verfahren', 'Geplante Höhenzugänge'],
+    tag: 'Werterhalt im Blick',
     icon: <Building2 className="w-6 h-6" />,
     path: '/leistungen/glas-fassadenreinigung',
     image: IMG.glasfassade,
@@ -119,19 +129,19 @@ const processSteps = [
   {
     icon: <PhoneCall className="w-6 h-6" />,
     title: 'Anfrage stellen',
-    duration: '60 Sekunden',
-    description: 'Vier kurze Fragen im Express-Funnel oder ein Anruf — mehr braucht es nicht für den Start.',
+    duration: 'Schritt 1',
+    description: 'Vier übersichtliche Schritte oder ein Anruf — mehr braucht es nicht für den Start.',
   },
   {
     icon: <CalendarCheck className="w-6 h-6" />,
     title: 'Objektbesichtigung',
-    duration: 'Innerhalb von 48h',
+    duration: 'Nach Abstimmung',
     description: 'Wir erfassen Flächen, Nutzung und Risiken vor Ort und beraten Sie zu sinnvollen Intervallen.',
   },
   {
     icon: <FileCheck2 className="w-6 h-6" />,
     title: 'Verbindliches Angebot',
-    duration: 'Innerhalb von 24h',
+    duration: 'Nach Besichtigung',
     description: 'Transparentes Leistungsverzeichnis mit Festpreis — keine versteckten Kosten, keine Knebelverträge.',
   },
 ];
@@ -160,7 +170,7 @@ const faqs: FAQItem[] = [
   {
     question: 'Wie schnell ist eine Objektbesichtigung möglich?',
     answer:
-      'In der Regel können wir innerhalb von 48 Stunden einen Vor-Ort-Termin vereinbaren, um Ihr Objekt zu besichtigen und ein maßgeschneidertes Angebot zu erstellen.',
+      'Den möglichen Termin für eine Vor-Ort-Besichtigung stimmen wir individuell mit Ihnen ab. Anschließend erstellen wir ein objektbezogenes Angebot.',
   },
   {
     question: 'Arbeiten Sie mit festen Ansprechpartnern?',
@@ -185,6 +195,7 @@ export default function Home() {
   const { scrollYProgress } = useScroll({ target: heroRef, offset: ['start start', 'end start'] });
   const heroImageY = useTransform(scrollYProgress, [0, 1], ['0%', reduce ? '0%' : '18%']);
   const heroFade = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+  const featuredReview = REVIEWS[1] ?? REVIEWS[0];
 
   return (
     <div className="overflow-hidden">
@@ -219,14 +230,14 @@ export default function Home() {
 
         <motion.div
           style={{ opacity: heroFade }}
-          className="relative z-10 flex-grow flex items-center max-w-7xl mx-auto px-4 sm:px-8 w-full pt-24 sm:pt-32 pb-14 gap-12"
+          className="relative z-10 flex-grow flex items-center max-w-7xl mx-auto px-4 sm:px-8 w-full pt-20 sm:pt-32 pb-8 sm:pb-14 gap-12"
         >
-          <div className="max-w-3xl min-w-0 flex-1">
+          <div className="max-w-4xl min-w-0 flex-1">
             <motion.span
-              initial={{ opacity: 0, y: 16 }}
+              initial={false}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="eyebrow text-mint mb-5 sm:mb-7"
+              className="eyebrow text-mint mb-3 sm:mb-7"
             >
               <span className="h-px w-8 bg-mint/50" />
               Für Industrie, Verwaltung & Mittelstand in Süddeutschland
@@ -235,29 +246,30 @@ export default function Home() {
             {/* Keyword im H1 (SEO) + Schmerzpunkt der Zielgruppe (Conversion).
                 Bewusst statisch (kein Reveal-/Slide-Effekt): so steht die Headline
                 bereits im vorgerenderten HTML sichtbar → schneller LCP, valides ARIA. */}
-            <h1 className="display-xl text-white mb-5 sm:mb-8" lang="de">
-              {/* inline-block hält das lange Kompositum auf einer Zeile
-                  (bei overflow-wrap:break-word bleibt ein inline-block auf
-                  max-content-Breite) statt am Zeichen umzubrechen. */}
-              <span className="inline-block">Gebäudereinigung,</span>
-              <br />
-              die Sie nicht mehr
-              <br />
-              <span className="text-mint">nachsteuern</span> müssen.
+            <h1
+              className="display-xl text-white mb-4 sm:mb-8"
+              lang="de"
+              style={{ fontSize: 'clamp(1.35rem, 7.75vw, 5rem)' }}
+            >
+              <span className="whitespace-nowrap">Gebäudereinigung,</span>{' '}
+              die Sie nicht mehr{' '}
+              <span className="whitespace-nowrap">
+                <span className="text-mint">nachsteuern</span> müssen.
+              </span>
             </h1>
 
             {/* LCP-Element: statisch gerendert, damit es sofort sichtbar ist
                 (keine opacity-0-Einblendung, die den LCP verzögert). */}
-            <p className="text-lg sm:text-xl text-blue-50 max-w-2xl font-medium leading-relaxed mb-7 sm:mb-10">
+            <p className="text-[15px] sm:text-xl text-blue-50 max-w-2xl font-medium leading-relaxed mb-5 sm:mb-10">
               Schluss mit Reklamationen und internem Hinterherlaufen: Wir steuern Ausführung, Qualität und
               Nachweise als System — damit Ihr Betrieb einfach sauber läuft.
             </p>
 
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={false}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1.05, duration: 0.7 }}
-              className="flex flex-col sm:flex-row gap-4 mb-8 sm:mb-12"
+              className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-6 sm:mb-12"
             >
               <ButtonLink to="/angebot" size="lg" arrow>
                 Kostenlose Besichtigung anfragen
@@ -269,7 +281,7 @@ export default function Home() {
 
             {/* Trust-Chips — bewusst ohne Zahlen, die die Stats-Leiste doppeln würden */}
             <motion.div
-              initial={{ opacity: 0 }}
+              initial={false}
               animate={{ opacity: 1 }}
               transition={{ delay: 1.25, duration: 0.8 }}
               className="flex flex-wrap items-center gap-x-6 gap-y-3 text-[13px] font-semibold text-blue-100/80"
@@ -280,24 +292,26 @@ export default function Home() {
               </span>
               <span className="flex items-center gap-2">
                 <CheckCircle2 size={15} className="text-mint" />
-                Festangestellte, geschulte Teams
+                Abgestimmte, geschulte Teams
               </span>
-              <a
-                href={GOOGLE_RATING.url || GOOGLE_RATING.searchFallback}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 hover:text-white transition-colors"
-              >
-                <Star size={15} className="fill-amber-400 text-amber-400" />
-                {GOOGLE_RATING.value.toFixed(1).replace('.', ',')} von 5 · {GOOGLE_RATING.count} Google-Bewertungen
-              </a>
+              {GOOGLE_RATING && (
+                <a
+                  href={GOOGLE_RATING.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 hover:text-white transition-colors"
+                >
+                  <Star size={15} className="fill-amber-400 text-amber-400" />
+                  {GOOGLE_RATING.value.toFixed(1).replace('.', ',')} von 5 · {GOOGLE_RATING.count} Google-Bewertungen
+                </a>
+              )}
             </motion.div>
           </div>
 
           {/* Proof-Karte: verankert die rechte Bildhälfte mit neuem Inhalt
               (Social Proof) statt einer CTA-Dopplung — nur auf großen Screens */}
-          <motion.aside
-            initial={{ opacity: 0, x: 40 }}
+          {featuredReview && <motion.aside
+            initial={false}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 1.15, duration: 0.8, ease: [0.2, 0.65, 0.3, 1] }}
             className="hidden xl:block w-[23rem] flex-shrink-0 self-center"
@@ -309,33 +323,35 @@ export default function Home() {
                 ))}
               </div>
               <blockquote className="text-[15px] leading-relaxed text-blue-50 font-medium">
-                „{REVIEWS[1].text}“
+                „{featuredReview.text}“
               </blockquote>
               <figcaption className="mt-5 pt-5 border-t border-white/10">
-                <div className="font-bold text-white text-sm">{REVIEWS[1].author}</div>
+                <div className="font-bold text-white text-sm">{featuredReview.author}</div>
                 <div className="text-[13px] text-blue-100/70 mt-0.5">
-                  Google-Bewertung · ★ {GOOGLE_RATING.value.toFixed(1).replace('.', ',')}
+                  {REVIEWS_SOURCE_URL ? 'Google-Bewertung' : 'Kundenstimme'}
                 </div>
               </figcaption>
-              <a
-                href={GOOGLE_RATING.url || GOOGLE_RATING.searchFallback}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-5 inline-flex items-center gap-1.5 text-[13px] font-bold text-mint hover:text-white transition-colors"
-              >
-                Alle {GOOGLE_RATING.count} Bewertungen <ArrowRight size={14} />
-              </a>
+              {REVIEWS_SOURCE_URL && (
+                <a
+                  href={REVIEWS_SOURCE_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-5 inline-flex items-center gap-1.5 text-[13px] font-bold text-mint hover:text-white transition-colors"
+                >
+                  Quelle ansehen <ArrowRight size={14} />
+                </a>
+              )}
             </figure>
-          </motion.aside>
+          </motion.aside>}
         </motion.div>
 
         {/* Statistik-Leiste */}
-        <div className="relative z-10 border-t border-white/10 glass-dark">
+        {STATS.length > 0 && <div className="relative z-10 border-t border-white/10 glass-dark">
           <div className="max-w-7xl mx-auto px-4 sm:px-8 py-7 grid grid-cols-2 lg:grid-cols-4 gap-6">
             {STATS.map((stat, i) => (
               <motion.div
                 key={stat.label}
-                initial={{ opacity: 0, y: 16 }}
+                initial={false}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 1.2 + i * 0.1 }}
               >
@@ -343,7 +359,7 @@ export default function Home() {
               </motion.div>
             ))}
           </div>
-        </div>
+        </div>}
 
       </section>
 
@@ -351,9 +367,9 @@ export default function Home() {
       <TrustBand />
 
       {/* ── REFERENZEN-MARQUEE ───────────────────────────────────────── */}
-      <section className="py-14 bg-white border-b border-line" aria-label="Referenzen">
+      {CLIENT_REFERENCES.length > 0 && <section className="py-14 bg-white border-b border-line" aria-label="Referenzen">
         <div className="max-w-7xl mx-auto px-4 sm:px-8 mb-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-          <p className="eyebrow text-slate/70">
+          <p className="eyebrow text-slate">
             <span className="h-px w-8 bg-slate/30" />
             Auswahl betreuter Auftraggeber
           </p>
@@ -362,14 +378,13 @@ export default function Home() {
           </Link>
         </div>
         <LogoMarquee />
-      </section>
+      </section>}
 
       {/* ── LEISTUNGEN (01) ──────────────────────────────────────────── */}
       <section className="py-24 lg:py-36 bg-paper">
         <div className="max-w-7xl mx-auto px-4 sm:px-8">
           <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-16 lg:mb-20">
             <SectionHeading
-              index="01"
               eyebrow="Leistungen"
               title={
                 <>
@@ -472,7 +487,7 @@ export default function Home() {
                 <h3 className="font-headline font-bold text-xl mb-1">Strukturierte Anfrage für FM &amp; Einkauf</h3>
                 <p className="text-blue-100/80 text-sm font-medium">
                   Objekt, Leistungen und Anforderungen erfassen — als Grundlage für Angebot und
-                  Leistungsverzeichnis. Antwort in 24h.
+                  Leistungsverzeichnis. Persönliche Terminabstimmung nach Eingang.
                 </p>
               </div>
               <span className="relative z-10 inline-flex items-center gap-2 text-sm font-bold text-mint flex-shrink-0">
@@ -492,7 +507,6 @@ export default function Home() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
             <div className="lg:col-span-5">
               <SectionHeading
-                index="02"
                 eyebrow="Der Unterschied"
                 dark
                 title={
@@ -532,7 +546,6 @@ export default function Home() {
       <section className="py-24 lg:py-36 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-8">
           <SectionHeading
-            index="03"
             eyebrow="Ihr Wettbewerbsvorteil"
             align="center"
             title={
@@ -600,7 +613,6 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-8">
           <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-16">
             <SectionHeading
-              index="04"
               eyebrow="Branchen"
               title="Zuhause in anspruchsvollen Umgebungen."
               lead="Wo Ausfälle, Reklamationen oder fehlende Nachweise teuer werden, zählt stabile Ausführung im laufenden Betrieb."
@@ -664,7 +676,7 @@ export default function Home() {
       </section>
 
       {/* ── KUNDENSTIMME (echtes, namentliches Testimonial) ──────────── */}
-      <FeaturedTestimonial />
+      {FEATURED_TESTIMONIAL_PUBLISHABLE && <FeaturedTestimonial />}
 
       {/* ── BEWERTUNGEN (echte Google-Reviews) ───────────────────────── */}
       <Reviews />
@@ -673,7 +685,6 @@ export default function Home() {
       <section className="py-24 lg:py-36 bg-paper">
         <div className="max-w-7xl mx-auto px-4 sm:px-8">
           <SectionHeading
-            index="05"
             eyebrow="So einfach starten Sie"
             align="center"
             title="In drei Schritten zum sauberen Betrieb."

@@ -11,9 +11,9 @@ interface CTABandProps {
 
 /** Conversion-Band am Seitenende — überall identische Abschlusslogik. */
 export default function CTABand({
-  title = 'Ihr Angebot in 24 Stunden.',
-  lead = 'Beantworten Sie vier kurze Fragen — wir melden uns innerhalb von 24 Stunden mit einer belastbaren Ersteinschätzung.',
-  bullets = ['Antwort innerhalb von 24h', 'Objektbesichtigung in 48h möglich', '100% unverbindlich & kostenfrei'],
+  title = 'In vier Schritten zur Objektbesichtigung.',
+  lead = 'Beschreiben Sie Objekt, Leistung und Umfang. Wir melden uns persönlich zur Terminabstimmung; das belastbare Angebot folgt nach der Besichtigung.',
+  bullets = ['Strukturierte Bedarfserfassung', 'Unverbindliche Terminabstimmung', 'Transparentes Angebot nach Besichtigung'],
 }: CTABandProps) {
   return (
     <section className="py-20 lg:py-28 bg-paper">

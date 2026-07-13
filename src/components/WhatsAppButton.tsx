@@ -34,6 +34,7 @@ export default function WhatsAppButton() {
     <AnimatePresence>
       {shown && !hidden && (
         <motion.a
+          data-page-action="whatsapp"
           href={WHATSAPP_HREF}
           target="_blank"
           rel="noopener noreferrer"
@@ -43,7 +44,7 @@ export default function WhatsAppButton() {
           exit={{ opacity: 0, scale: 0.6 }}
           whileHover={{ scale: 1.06 }}
           whileTap={{ scale: 0.95 }}
-          className="fixed right-4 z-40 w-12 h-12 rounded-full bg-[#25D366] text-white grid place-items-center shadow-lifted bottom-[calc(5.5rem+env(safe-area-inset-bottom))] lg:bottom-6"
+          className="fixed right-4 z-40 w-12 h-12 rounded-full bg-[#187C3B] text-white hidden lg:grid place-items-center shadow-lifted bottom-6"
         >
           <WhatsAppGlyph size={22} />
         </motion.a>

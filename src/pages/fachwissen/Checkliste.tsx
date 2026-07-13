@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import SEO from '@/components/SEO';
 import PageHero from '@/components/PageHero';
 import CTABand from '@/components/CTABand';
+import ArticleMeta from '@/components/ArticleMeta';
+import { buildArticleSchema, EDITORIAL_ARTICLES } from '@/data/editorial';
 
 /**
  * Druckbare Angebots-Checkliste — Lead-Asset für Objektverantwortliche und
@@ -32,8 +34,8 @@ const GRUPPEN = [
     titel: '3. Angebote vergleichbar machen',
     punkte: [
       'Liegt jedem Angebot dasselbe Leistungsverzeichnis zugrunde?',
-      'Stundenverrechnungssatz ausgewiesen? (Seriös kalkuliert: kaum unter 28–30 €)',
-      'Leistungswerte realistisch? (Büro: 200–300 m²/h — wer 500 verspricht, wischt drüber)',
+      'Stundenverrechnungssatz und seine Kostenbestandteile nachvollziehbar ausgewiesen?',
+      'Leistungswerte mit Objekt, Tätigkeit, Verfahren und Qualitätsziel begründet?',
       'Festpreis mit definiertem Umfang statt Pauschale ohne Inhalt?',
     ],
   },
@@ -42,7 +44,8 @@ const GRUPPEN = [
     punkte: [
       'Feste Objektleitung mit Name und Erreichbarkeit zugesagt?',
       'Festangestelltes, tarifgebundenes Personal? (Auftraggeberhaftung § 28e SGB IV!)',
-      'Betriebshaftpflicht + Nachweise (Sozialversicherung, ggf. ISO 9001/14001)?',
+      'Versicherungs- und Sozialversicherungsnachweise aktuell und passend zum Auftrag?',
+      'Genannte Zertifikate: Aussteller, Laufzeit und Geltungsbereich verifiziert?',
       'Dokumentierte Qualitätskontrollen und definierter Reklamationsweg?',
       'Referenzen aus vergleichbaren Objekten oder Branchen?',
     ],
@@ -59,25 +62,7 @@ const GRUPPEN = [
 ];
 
 export default function FachwissenCheckliste() {
-  const schema = {
-    '@context': 'https://schema.org',
-    '@type': 'Article',
-    headline: 'Checkliste: Reinigungsangebot einholen und vergleichen',
-    datePublished: '2026-07-02',
-    dateModified: '2026-07-02',
-    description:
-      'Die kompakte Checkliste für Objektverantwortliche: Objektdaten, Leistungsdefinition, Angebotsvergleich, Anbieterprüfung und Vertragsregeln — zum Ausdrucken oder als PDF speichern.',
-    author: { '@type': 'Organization', name: 'AHAD Cleaning Company GmbH' },
-    publisher: {
-      '@type': 'Organization',
-      name: 'AHAD Cleaning Company GmbH',
-      logo: { '@type': 'ImageObject', url: 'https://ahad-cleaning.de/logo.png' },
-    },
-    mainEntityOfPage: {
-      '@type': 'WebPage',
-      '@id': 'https://ahad-cleaning.de/fachwissen/checkliste-reinigungsangebot',
-    },
-  };
+  const schema = buildArticleSchema(EDITORIAL_ARTICLES['checkliste-reinigungsangebot']);
 
   return (
     <div>
@@ -97,6 +82,8 @@ export default function FachwissenCheckliste() {
           crumbs={[{ label: 'Fachwissen', href: '/fachwissen' }, { label: 'Angebots-Checkliste' }]}
         />
       </div>
+
+      <ArticleMeta slug="checkliste-reinigungsangebot" className="print:mt-8" />
 
       <section className="py-14 lg:py-20 bg-white">
         <div className="max-w-3xl mx-auto px-4">
@@ -143,8 +130,8 @@ export default function FachwissenCheckliste() {
           <div className="print:hidden mt-12 bg-navy rounded-3xl p-8 text-white">
             <h2 className="font-headline text-xl font-bold mb-2">Alle Punkte gesammelt?</h2>
             <p className="text-blue-100/90 text-sm leading-relaxed mb-6">
-              Dann haben Sie in unserem Anfrage-Assistenten alles in 60 Sekunden eingetragen — und erhalten innerhalb
-              von 24 Stunden einen Terminvorschlag für die kostenlose Objektbesichtigung. Wie ein belastbares
+              Dann haben Sie in unserem Anfrage-Assistenten alles strukturiert eingetragen. Wir melden uns zur
+              Terminabstimmung für die kostenlose Objektbesichtigung. Wie ein belastbares
               Leistungsverzeichnis entsteht, zeigt unser{' '}
               <Link to="/fachwissen/leistungsverzeichnis-gebaeudereinigung-erstellen" className="underline font-semibold hover:text-mint">
                 LV-Leitfaden

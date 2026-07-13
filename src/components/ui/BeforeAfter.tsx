@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState } from 'react';
+import { useCallback, useId, useRef, useState } from 'react';
 import { ChevronsLeftRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { srcSetFor } from '@/lib/images';
@@ -23,8 +23,10 @@ export default function BeforeAfter({
   className,
 }: BeforeAfterProps) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const instructionsId = useId();
   const [position, setPosition] = useState(58);
   const [dragging, setDragging] = useState(false);
+  const [rangeFocused, setRangeFocused] = useState(false);
 
   const updateFromClientX = useCallback((clientX: number) => {
     const el = containerRef.current;
@@ -97,15 +99,11 @@ export default function BeforeAfter({
         {afterLabel}
       </span>
 
-      {/* Trennlinie + Griff */}
-      <div className="absolute inset-y-0 pointer-events-none" style={{ left: `${position}%` }} aria-hidden>
-        <div className="absolute inset-y-0 -translate-x-1/2 w-[3px] bg-white shadow-[0_0_24px_rgb(0_0_0/0.45)]" />
-        <div className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-14 h-14 rounded-full bg-white shadow-lifted grid place-items-center text-navy">
-          <ChevronsLeftRight size={24} />
-        </div>
-      </div>
+      <p id={instructionsId} className="sr-only">
+        Mit den Pfeiltasten lässt sich der sichtbare Anteil in Ein-Prozent-Schritten verändern.
+      </p>
 
-      {/* Tastatur-Bedienung */}
+      {/* Tastatur-Bedienung: unsichtbare Bedienfläche, sichtbarer Fokus am Griff. */}
       <input
         type="range"
         min={4}
@@ -113,9 +111,25 @@ export default function BeforeAfter({
         value={Math.round(position)}
         onChange={(e) => setPosition(Number(e.target.value))}
         aria-label="Vorher-Nachher-Vergleich verschieben"
-        className="absolute inset-0 w-full h-full opacity-0"
-        style={{ cursor: 'inherit' }}
+        aria-describedby={instructionsId}
+        aria-valuetext={`${Math.round(position)} Prozent ${beforeLabel}, ${100 - Math.round(position)} Prozent ${afterLabel}`}
+        onFocus={() => setRangeFocused(true)}
+        onBlur={() => setRangeFocused(false)}
+        className="peer absolute inset-0 z-10 w-full h-full opacity-0 cursor-ew-resize focus-visible:outline-none"
       />
+
+      {/* Trennlinie + Griff */}
+      <div className="absolute inset-y-0 pointer-events-none" style={{ left: `${position}%` }} aria-hidden>
+        <div className="absolute inset-y-0 -translate-x-1/2 w-[3px] bg-white shadow-[0_0_24px_rgb(0_0_0/0.45)]" />
+        <div
+          className={cn(
+            'absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-14 h-14 rounded-full bg-white shadow-lifted grid place-items-center text-navy',
+            rangeFocused && 'ring-4 ring-mint ring-offset-4 ring-offset-navy'
+          )}
+        >
+          <ChevronsLeftRight size={24} />
+        </div>
+      </div>
     </div>
   );
 }

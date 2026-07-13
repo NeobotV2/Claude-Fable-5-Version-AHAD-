@@ -4,32 +4,13 @@ import { Link } from 'react-router-dom';
 import SEO from '@/components/SEO';
 import Accordion from '@/components/ui/Accordion';
 import CTABand from '@/components/CTABand';
+import ArticleMeta from '@/components/ArticleMeta';
+import { buildArticleSchema, EDITORIAL_ARTICLES } from '@/data/editorial';
 
 export default function FachwissenIntervalle() {
-  const articleSchema = {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    "headline": "Reinigungsintervalle in Unternehmen: Ein Leitfaden",
-    "datePublished": "2026-06-12",
-    "dateModified": "2026-06-24",
-    "description": "Wie oft muss ein Büro gereinigt werden? Erfahren Sie alles über optimale Reinigungsintervalle für Unterhaltsreinigung, Sanitäranlagen und Büroräume.",
-    "author": {
-      "@type": "Organization",
-      "name": "AHAD Cleaning Company GmbH"
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": "AHAD Cleaning Company GmbH",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "https://ahad-cleaning.de/logo.png"
-      }
-    },
-    "mainEntityOfPage": {
-      "@type": "WebPage",
-      "@id": "https://ahad-cleaning.de/fachwissen/unterhaltsreinigung-unternehmen-reinigungsintervalle"
-    }
-  };
+  const articleSchema = buildArticleSchema(
+    EDITORIAL_ARTICLES['unterhaltsreinigung-unternehmen-reinigungsintervalle'],
+  );
 
   const faqSchema = {
     "@context": "https://schema.org",
@@ -98,18 +79,17 @@ export default function FachwissenIntervalle() {
       {/* Hero Section */}
       <section className="relative pt-36 pb-20 lg:pt-44 lg:pb-28 bg-navy text-white overflow-hidden grain">
         <div className="absolute inset-0 opacity-40">
-          <img 
-            src="https://images.unsplash.com/photo-1551190822-a9333d879b1f?auto=format&fit=crop&q=80&w=1600" 
-            alt="Reinigungsintervalle im modernen Büro" 
-            className="w-full h-full object-cover"
-            referrerPolicy="no-referrer"
-          />
+          <picture>
+            <source media="(max-width: 640px)" srcSet="/images/ahad/unterhalt-detail-480.webp" />
+            <source media="(max-width: 1200px)" srcSet="/images/ahad/unterhalt-detail-960.webp" />
+            <img src="/images/ahad/unterhalt-detail.webp" alt="Reinigungsintervalle im modernen Büro" className="w-full h-full object-cover" width="1600" height="900" />
+          </picture>
         </div>
         <div className="absolute inset-0 bg-gradient-to-r from-navy via-navy/85 to-navy/40" />
         <div className="absolute inset-0 bg-gradient-to-t from-navy via-transparent to-navy/60" />
         <div className="max-w-7xl mx-auto px-4 relative z-10">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={false}
             animate={{ opacity: 1, y: 0 }}
             className="max-w-3xl"
           >
@@ -151,6 +131,8 @@ export default function FachwissenIntervalle() {
           </div>
         </div>
       </section>
+
+      <ArticleMeta slug="unterhaltsreinigung-unternehmen-reinigungsintervalle" />
 
       {/* Content Section */}
       <section className="py-20 lg:py-32 bg-white">
@@ -266,16 +248,16 @@ export default function FachwissenIntervalle() {
             <div className="bg-[#f7f9fb] p-8 rounded-3xl mb-12 border border-gray-100 shadow-sm">
               <h3 className="text-xl font-bold text-[#0B2341] mb-4">Beispiel: Büroetage mit 500 m&sup2;</h3>
               <p className="mb-4 text-sm">
-                Angenommen, eine Reinigungskraft schafft die Unterhaltsreinigung der Büroflächen in rund 1,5 Stunden pro Durchgang. Bei einem Tariflohn von beispielhaft 14,25 &euro;/Stunde (Orientierungswert, Lohngruppe 1) ergibt sich vor Zuschlägen und Gemeinkosten:
+                Angenommen, eine Reinigungskraft schafft die Unterhaltsreinigung der Büroflächen in rund 1,5 Stunden pro Durchgang. Mit beispielhaft 15,00 &euro;/Stunde (Branchenmindestlohn Lohngruppe 1, Stand 2026; aktuelle BMAS-Angabe bitte prüfen) ergibt sich vor Zuschlägen und Gemeinkosten:
               </p>
               <ul className="space-y-2 text-sm list-none pl-0">
                 <li className="flex justify-between border-b border-gray-200 pb-2">
                   <span><strong>Tägliche Reinigung</strong> (5x/Woche): ca. 7,5 Std./Woche</span>
-                  <span className="font-bold text-[#0B2341]">~ 107 &euro;/Woche*</span>
+                  <span className="font-bold text-[#0B2341]">~ 113 &euro;/Woche*</span>
                 </li>
                 <li className="flex justify-between border-b border-gray-200 pb-2">
                   <span><strong>Bedarfsorientiert</strong> (3x/Woche): ca. 4,5 Std./Woche</span>
-                  <span className="font-bold text-[#0D6B38]">~ 64 &euro;/Woche*</span>
+                  <span className="font-bold text-[#0D6B38]">~ 68 &euro;/Woche*</span>
                 </li>
                 <li className="flex justify-between pt-1">
                   <span><strong>Einsparpotenzial Büroflächen</strong></span>

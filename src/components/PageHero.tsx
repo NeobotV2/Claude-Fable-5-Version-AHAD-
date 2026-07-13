@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { ChevronRight } from 'lucide-react';
 import ButtonLink from '@/components/ui/Button';
+import HeadlineText from '@/components/ui/HeadlineText';
 import { SITE } from '@/lib/site';
 import { srcSetFor } from '@/lib/images';
 import { jsonLd } from '@/lib/jsonld';
@@ -100,7 +101,7 @@ export default function PageHero({
       <div className="max-w-7xl mx-auto px-4 sm:px-8 relative z-10">
         {crumbs && crumbs.length > 0 && (
           <motion.nav
-            initial={{ opacity: 0, y: 10 }}
+            initial={false}
             animate={{ opacity: 1, y: 0 }}
             aria-label="Brotkrumen"
             className="flex flex-wrap items-center gap-1.5 text-[13px] font-semibold text-blue-100/70 mb-8"
@@ -124,10 +125,10 @@ export default function PageHero({
         )}
 
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
+          initial={false}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: [0.2, 0.65, 0.3, 1] }}
-          className="max-w-3xl"
+          className="max-w-[66rem]"
         >
           {eyebrow && (
             <span className="eyebrow text-mint mb-6">
@@ -135,7 +136,9 @@ export default function PageHero({
               {eyebrow}
             </span>
           )}
-          <h1 className="display-xl text-white mb-7">{title}</h1>
+          <h1 className="display-xl text-white mb-7">
+            {typeof title === 'string' ? <HeadlineText text={title} /> : title}
+          </h1>
           {lead && <p className="text-lg sm:text-xl text-blue-100/90 leading-relaxed font-medium max-w-2xl">{lead}</p>}
 
           {(cta || secondaryCta) && (

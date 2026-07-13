@@ -4,32 +4,14 @@ import { Link } from 'react-router-dom';
 import SEO from '@/components/SEO';
 import Accordion from '@/components/ui/Accordion';
 import CTABand from '@/components/CTABand';
+import ArticleMeta from '@/components/ArticleMeta';
+import { buildArticleSchema, EDITORIAL_ARTICLES } from '@/data/editorial';
+import { IMG, srcSetFor } from '@/lib/images';
 
 export default function FachwissenISO() {
-  const articleSchema = {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    "headline": "ISO 9001 & 14001 in der Gebäudereinigung: Qualität & Umwelt",
-    "datePublished": "2026-06-12",
-    "dateModified": "2026-06-24",
-    "description": "Warum sind ISO-Zertifizierungen (9001 & 14001) in der Gebäudereinigung wichtig? Erfahren Sie, wie Qualitätsmanagement und Umweltschutz die Reinigungsleistung verbessern.",
-    "author": {
-      "@type": "Organization",
-      "name": "AHAD Cleaning Company GmbH"
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": "AHAD Cleaning Company GmbH",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "https://ahad-cleaning.de/logo.png"
-      }
-    },
-    "mainEntityOfPage": {
-      "@type": "WebPage",
-      "@id": "https://ahad-cleaning.de/fachwissen/iso-9001-iso-14001-gebaeudereinigung-unternehmen"
-    }
-  };
+  const articleSchema = buildArticleSchema(
+    EDITORIAL_ARTICLES['iso-9001-iso-14001-gebaeudereinigung-unternehmen'],
+  );
 
   const faqSchema = {
     "@context": "https://schema.org",
@@ -40,7 +22,7 @@ export default function FachwissenISO() {
         "name": "Was bedeutet ISO 9001 in der Gebäudereinigung?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Die ISO 9001 ist die international anerkannte Norm für Qualitätsmanagement. In der Gebäudereinigung bedeutet das: standardisierte Reinigungsprozesse, lückenlose Dokumentation, regelmäßige Schulungen der Mitarbeiter und ein funktionierendes Fehlermanagement. Dies garantiert dem Kunden eine gleichbleibend hohe Reinigungsqualität."
+          "text": "Die ISO 9001 ist eine international anerkannte Norm für Qualitätsmanagementsysteme. In der Gebäudereinigung können dazu standardisierte Prozesse, dokumentierte Kontrollen, Schulungen und ein geregelter Umgang mit Abweichungen gehören. Das Zertifikat bestätigt das geprüfte Managementsystem im angegebenen Geltungsbereich, nicht automatisch jedes einzelne Reinigungsergebnis."
         }
       },
       {
@@ -98,7 +80,7 @@ export default function FachwissenISO() {
     <div>
       <SEO 
         title="ISO 9001 & 14001 in der Gebäudereinigung | Fachwissen | AHAD" 
-        description="Erfahren Sie, warum ISO-Zertifizierungen (9001 & 14001) in der Gebäudereinigung für Qualität und Umweltschutz stehen. Wir setzen auf zertifizierte Prozesse."
+        description="ISO 9001 und ISO 14001 in der Gebäudereinigung: Bedeutung, Geltungsbereich, typische Nachweise und Prüffragen für Auftraggeber."
         keywords="ISO 9001 Gebäudereinigung, ISO 14001 Reinigung, Qualitätsmanagement Reinigung, Umweltmanagement Gebäudereinigung, zertifizierte Reinigungsfirma"
         schema={[articleSchema, faqSchema]}
       />
@@ -106,10 +88,14 @@ export default function FachwissenISO() {
       {/* Hero Section */}
       <section className="relative pt-36 pb-20 lg:pt-44 lg:pb-28 bg-navy text-white overflow-hidden grain">
         <div className="absolute inset-0 opacity-40">
-          <img 
-            src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=1600" 
-            alt="Qualitätsmanagement und ISO Zertifizierung" 
+          <img
+            src={IMG.medizintechnik}
+            srcSet={srcSetFor(IMG.medizintechnik)}
+            sizes="100vw"
+            alt="Dokumentierte Reinigung einer hygienisch sensiblen Fläche"
             className="w-full h-full object-cover"
+            loading="eager"
+            decoding="async"
             referrerPolicy="no-referrer"
           />
         </div>
@@ -117,7 +103,7 @@ export default function FachwissenISO() {
         <div className="absolute inset-0 bg-gradient-to-t from-navy via-transparent to-navy/60" />
         <div className="max-w-7xl mx-auto px-4 relative z-10">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={false}
             animate={{ opacity: 1, y: 0 }}
             className="max-w-3xl"
           >
@@ -165,13 +151,15 @@ export default function FachwissenISO() {
         </div>
       </section>
 
+      <ArticleMeta slug="iso-9001-iso-14001-gebaeudereinigung-unternehmen" />
+
       {/* Content Section */}
       <section className="py-20 lg:py-32 bg-white">
         <div className="max-w-4xl mx-auto px-4">
           <div className="prose prose-lg max-w-none text-[#424751] leading-relaxed">
             <h2 className="text-3xl font-black text-[#0B2341] mb-6">Qualität durch Struktur: Warum ISO 9001 entscheidend ist</h2>
             <p className="mb-8">
-              In der Gebäudereinigung ist Vertrauen gut, Kontrolle und Struktur sind besser. Die ISO 9001 ist der weltweit anerkannte Standard für Qualitätsmanagement. Für Kunden bedeutet die Zusammenarbeit mit einem nach ISO 9001 zertifizierten Dienstleister wie dem <span className="font-logo">AHAD</span> System vor allem eines: <strong>Verlässlichkeit</strong>.
+              In der Gebäudereinigung ist Vertrauen gut, Kontrolle und Struktur sind besser. Die ISO 9001 beschreibt Anforderungen an ein Qualitätsmanagementsystem. Auftraggeber sollten dabei immer Zertifikat, Geltungsbereich, Zertifizierungsstelle und Gültigkeit prüfen — ein Normbezug allein ist noch kein Nachweis.
             </p>
             
             {/* Quick Links for SEO & UX */}
@@ -183,13 +171,13 @@ export default function FachwissenISO() {
             </div>
 
             <p className="mb-8">
-              Statt auf Zufall oder das Geschick einzelner Mitarbeiter zu hoffen, basieren alle Abläufe – von der <Link to="/leistungen/unterhaltsreinigung" className="text-[#0B2341] font-bold hover:underline">Unterhaltsreinigung</Link> bis zur komplexen <Link to="/leistungen/industrie-produktionsreinigung" className="text-[#0B2341] font-bold hover:underline">Industriereinigung</Link> – auf fest definierten, erprobten und dokumentierten Prozessen.
+              In einem wirksamen Managementsystem basieren Abläufe – von der <Link to="/leistungen/unterhaltsreinigung" className="text-[#0B2341] font-bold hover:underline">Unterhaltsreinigung</Link> bis zur komplexen <Link to="/leistungen/industrie-produktionsreinigung" className="text-[#0B2341] font-bold hover:underline">Industriereinigung</Link> – auf definierten, überprüften und dokumentierten Prozessen.
             </p>
 
             <div className="bg-[#f7f9fb] p-8 rounded-3xl mb-12 border border-gray-100 shadow-sm">
               <h3 className="text-2xl font-bold text-[#0B2341] mb-6 flex items-center gap-3">
                 <Award className="text-[#0B2341] w-8 h-8" />
-                Konkrete Vorteile für unsere Kunden
+                Mögliche Vorteile für Auftraggeber
               </h3>
               <ul className="space-y-4 list-none pl-0">
                 {[
@@ -264,7 +252,7 @@ export default function FachwissenISO() {
               Für moderne Unternehmen, die eigene Nachhaltigkeitsziele (ESG-Kriterien) verfolgen, ist ein zertifizierter Dienstleister ein wichtiger Baustein in der eigenen Lieferkette (Scope 3 Emissionen).
             </p>
 
-            <h3 className="text-2xl font-bold text-[#0B2341] mb-4">Nachhaltigkeit in der Praxis: Wie wir das umsetzen</h3>
+            <h3 className="text-2xl font-bold text-[#0B2341] mb-4">Nachhaltigkeit in der Praxis: typische Maßnahmen</h3>
             <ul className="space-y-4 mb-12 list-none pl-0">
               {[
                 'Einsatz von biologisch abbaubaren und umweltschonenden Reinigungsmitteln (z.B. mit Ecolabel)',
@@ -338,7 +326,7 @@ export default function FachwissenISO() {
 
             <h2 className="text-3xl font-black text-[#0B2341] mb-6">Fazit: Zertifizierungen schaffen Vertrauen</h2>
             <p className="mb-8">
-              Zertifizierungen nach ISO 9001 und ISO 14001 sind für uns kein Selbstzweck und keine reinen Marketinginstrumente. Sie bilden das Fundament für eine verlässliche, transparente und zukunftsorientierte Partnerschaft mit unseren Kunden. Sie geben Ihnen die Sicherheit, dass Ihre Immobilien nicht nur sauber, sondern nach höchsten Qualitäts- und Umweltstandards gepflegt werden.
+              ISO 9001 und ISO 14001 können Auftraggebern helfen, Managementsysteme strukturiert zu bewerten. Entscheidend ist der konkrete Nachweis: Lassen Sie sich ein gültiges Zertifikat zeigen und prüfen Sie Zertifizierungsstelle, Geltungsbereich sowie Ablaufdatum. Ob AHAD oder ein anderer Anbieter zertifiziert ist, darf erst nach dieser Prüfung behauptet werden.
             </p>
           </div>
         </div>
@@ -355,7 +343,7 @@ export default function FachwissenISO() {
         </div>
       </section>
 
-      <CTABand title="Suchen Sie einen zertifizierten Reinigungspartner?" lead="Gerne erläutern wir Ihnen unser Qualitäts- und Umweltmanagement im Detail und erstellen ein Konzept für Ihr Objekt." />
+      <CTABand title="Qualitäts- und Umweltanforderungen abstimmen" lead="Gerne klären wir Ihre Anforderungen und die dafür benötigten Nachweise objektbezogen im Gespräch." />
     </div>
   );
 }

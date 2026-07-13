@@ -1,10 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Helmet } from 'react-helmet-async';
-import { ChevronLeft, ChevronRight, Check, Send, Smartphone, MapPin, Calendar, Briefcase, User, Info, Loader2, Globe } from 'lucide-react';
-import { Link, useNavigate } from 'react-router-dom';
+import { ChevronLeft, ChevronRight, Check, Send, Smartphone, User, Info, Loader2, Globe } from 'lucide-react';
+import { Link, useSearchParams } from 'react-router-dom';
 import SEO from '@/components/SEO';
 import { languages, translations, Language } from '@/constants/funnelTranslations';
+import { jobProfile } from '@/data/jobs';
+import { readAttribution, rememberAttribution, trackEvent, useFunnelAbandonment } from '@/lib/analytics';
+import { SITE } from '@/lib/site';
 
 type FunnelData = {
   jobType: string;
@@ -16,7 +19,9 @@ type FunnelData = {
   name: string;
   phone: string;
   whatsappOptIn: boolean;
-  privacyAccepted: boolean;
+  privacyNoticeAccepted: boolean;
+  jobId: string;
+  sourcePath: string;
 };
 
 const INITIAL_DATA: FunnelData = {
@@ -29,7 +34,9 @@ const INITIAL_DATA: FunnelData = {
   name: '',
   phone: '',
   whatsappOptIn: false,
-  privacyAccepted: false,
+  privacyNoticeAccepted: true,
+  jobId: '',
+  sourcePath: '/karriere/bewerbung',
 };
 
 export default function KarriereFunnel() {
@@ -39,12 +46,28 @@ export default function KarriereFunnel() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [submitError, setSubmitError] = useState(false);
-  const navigate = useNavigate();
+  const [honeypot, setHoneypot] = useState('');
+  const [searchParams] = useSearchParams();
   const cardRef = useRef<HTMLDivElement>(null);
+  const successRef = useRef<HTMLHeadingElement>(null);
+  const idempotencyRef = useRef('');
+  const formStartedAtRef = useRef(Date.now());
   const isFirstRender = useRef(true);
+
+  useFunnelAbandonment('Application Funnel', step, isSuccess, {
+    language: lang || 'unselected',
+    jobId: data.jobId || 'initiative',
+  });
 
   const t = lang ? translations[lang] : translations.de;
   const isRtl = lang ? languages.find(l => l.id === lang)?.rtl : false;
+  const selectedProfile = jobProfile(data.jobId);
+
+  useEffect(() => {
+    const jobId = searchParams.get('profile') || '';
+    setData((current) => ({ ...current, jobId, sourcePath: `${window.location.pathname}${window.location.search}`.slice(0, 180) }));
+    trackEvent('Application Funnel Start', { jobId: jobId || 'initiative' });
+  }, [searchParams]);
 
   const nextStep = () => setStep(prev => Math.min(prev + 1, 4));
   const prevStep = () => setStep(prev => Math.max(prev - 1, 1));
@@ -60,6 +83,14 @@ export default function KarriereFunnel() {
     return () => window.clearTimeout(timer);
   }, [step]);
 
+  useEffect(() => {
+    if (isSuccess) window.setTimeout(() => successRef.current?.focus(), 0);
+  }, [isSuccess]);
+
+  useEffect(() => {
+    if (lang) trackEvent('Application Funnel Step', { step, language: lang, jobId: data.jobId || 'initiative' });
+  }, [data.jobId, lang, step]);
+
   // Frühestes wählbares Startdatum = heute (kein Datum in der Vergangenheit).
   const today = new Date().toISOString().slice(0, 10);
 
@@ -69,51 +100,40 @@ export default function KarriereFunnel() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!data.privacyAccepted) return;
-
     if (isSubmitting) return;
     setIsSubmitting(true);
     setSubmitError(false);
-
-    // 1) E-Mail-Benachrichtigung zuerst — Ergebnis wandert als emailSent in den
-    //    Bewerbungs-Datensatz, damit fehlgeschlagene Benachrichtigungen im
-    //    Admin-Bereich auffallen statt unbemerkt verloren zu gehen.
-    let emailSent = false;
+    idempotencyRef.current ||= typeof crypto?.randomUUID === 'function'
+      ? crypto.randomUUID()
+      : `job-${Date.now()}-${Math.random().toString(36).slice(2)}`;
     try {
-      const res = await fetch('/api/send-email', {
+      const response = await fetch('/api/send-email', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ type: 'job_application', data: { ...data, language: lang } }),
+        headers: { 'Content-Type': 'application/json', 'Idempotency-Key': idempotencyRef.current },
+        body: JSON.stringify({
+          type: 'job_application',
+          data: {
+            ...data,
+            language: lang,
+            attribution: readAttribution() || rememberAttribution(window.location.href),
+          },
+          website: honeypot,
+          formStartedAt: formStartedAtRef.current,
+          idempotencyKey: idempotencyRef.current,
+        }),
       });
-      emailSent = res.ok;
-    } catch (emailError) {
-      console.error('Error sending email notification:', emailError);
-    }
-
-    // 2) Bewerbung in Firestore sichern (Firebase erst beim Absenden laden —
-    //    hält Initial-Bundle & SSG schlank).
-    let stored = false;
-    try {
-      const { db, collection, addDoc, serverTimestamp } = await import('@/firebase');
-      await addDoc(collection(db, 'job_applications'), {
-        ...data,
-        language: lang,
-        emailSent,
-        createdAt: serverTimestamp(),
-        status: 'new',
-      });
-      stored = true;
-    } catch (error) {
-      console.error('Error submitting application:', error);
-    }
-
-    // Erfolg, sobald die Bewerbung auf MINDESTENS einem Weg angekommen ist.
-    if (stored || emailSent) {
+      const result = await response.json().catch(() => null);
+      if (!response.ok || result?.success !== true || result?.accepted !== true) {
+        throw new Error(result?.error?.message ?? 'Übermittlung fehlgeschlagen');
+      }
       setIsSuccess(true);
-    } else {
+      trackEvent('Application Funnel Success', { language: lang || 'de', jobId: data.jobId || 'initiative' });
+    } catch {
       setSubmitError(true);
+      trackEvent('Application Funnel Error', { language: lang || 'de', jobId: data.jobId || 'initiative' });
+    } finally {
+      setIsSubmitting(false);
     }
-    setIsSubmitting(false);
   };
 
   const progress = (step / 4) * 100;
@@ -121,7 +141,7 @@ export default function KarriereFunnel() {
   if (!lang) {
     return (
       <div className="min-h-screen bg-[#f7f9fb] flex items-center justify-center p-4 pt-32 pb-20 lg:pt-40 lg:pb-32">
-        <SEO title="Language Selection | AHAD Cleaning" description="Choose your language for the application." />
+        <SEO title="Language Selection | AHAD Cleaning" description="Choose your language for the application." noindex />
         <div className="max-w-xl w-full">
           <div className="text-center mb-12">
             <div className="w-16 h-16 bg-[#0D6B38] text-white rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg">
@@ -150,20 +170,19 @@ export default function KarriereFunnel() {
   if (isSuccess) {
     return (
       <div className="min-h-screen bg-[#f7f9fb] flex items-center justify-center p-4 pt-32 pb-20 lg:pt-40 lg:pb-32" dir={isRtl ? 'rtl' : 'ltr'}>
-        <motion.div 
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
+        <div
           className="bg-white p-8 rounded-3xl shadow-xl max-w-md w-full text-center"
+          role="status"
         >
           <div className="w-20 h-20 bg-accent/10 text-accent rounded-full flex items-center justify-center mx-auto mb-6">
             <Check size={40} />
           </div>
-          <h1 className="text-2xl font-black text-[#0B2341] mb-4">{t.successTitle}</h1>
+          <h1 ref={successRef} tabIndex={-1} className="text-2xl font-black text-[#0B2341] mb-4 outline-none">{t.successTitle}</h1>
           <p className="text-[#424751] mb-8">{t.successText}</p>
           <Link to="/" className="block w-full bg-[#0D6B38] text-white py-4 rounded-xl font-bold uppercase tracking-wider hover:bg-accent-dark transition-all">
             {t.backHome}
           </Link>
-        </motion.div>
+        </div>
       </div>
     );
   }
@@ -173,6 +192,7 @@ export default function KarriereFunnel() {
       <SEO
         title={`${t.title} | AHAD Cleaning`}
         description={t.subtitle}
+        noindex
       />
       {/* Sprache & Leserichtung fürs Dokument — wichtig für Screenreader & Suche */}
       <Helmet htmlAttributes={{ lang, dir: isRtl ? 'rtl' : 'ltr' }} />
@@ -180,9 +200,14 @@ export default function KarriereFunnel() {
       <div
         ref={cardRef}
         tabIndex={-1}
-        aria-live="polite"
         className="max-w-2xl mx-auto outline-none"
       >
+        <p className="sr-only" role="status">{t.step} {step} {t.of} 4</p>
+        {selectedProfile && (
+          <div className="mb-5 rounded-xl border border-[#0D6B38]/25 bg-[#0D6B38]/8 p-4 text-sm text-[#0B2341]">
+            <strong>Gewähltes Einsatzprofil:</strong> {selectedProfile.title} · {selectedProfile.region}. Die aktuelle Einsatzmöglichkeit bestätigen wir persönlich.
+          </div>
+        )}
         {/* Progress Bar + jederzeit sichtbarer Sprachwechsel */}
         <div className="mb-6">
           <div className="flex justify-between items-center mb-2">
@@ -202,13 +227,8 @@ export default function KarriereFunnel() {
               <span className="text-xs font-bold text-[#0D6B38]">{Math.round(progress)}%</span>
             </span>
           </div>
-          <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
-            <motion.div 
-              className="h-full bg-[#0D6B38]"
-              initial={{ width: 0 }}
-              animate={{ width: `${progress}%` }}
-              transition={{ duration: 0.5 }}
-            />
+          <div className="h-2 bg-gray-200 rounded-full overflow-hidden" role="progressbar" aria-valuemin={1} aria-valuemax={4} aria-valuenow={step} aria-valuetext={`${t.step} ${step} ${t.of} 4`}>
+            <div className="h-full bg-[#0D6B38] transition-[width] duration-200" style={{ width: `${progress}%` }} />
           </div>
         </div>
 
@@ -216,7 +236,7 @@ export default function KarriereFunnel() {
           {step === 1 && (
             <motion.div
               key="step1"
-              initial={{ opacity: 0, x: 20 }}
+              initial={false}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -20 }}
               className="space-y-4"
@@ -257,7 +277,7 @@ export default function KarriereFunnel() {
           {step === 2 && (
             <motion.div
               key="step2"
-              initial={{ opacity: 0, x: 20 }}
+              initial={false}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -20 }}
               className="space-y-4"
@@ -303,7 +323,7 @@ export default function KarriereFunnel() {
           {step === 3 && (
             <motion.div
               key="step3"
-              initial={{ opacity: 0, x: 20 }}
+              initial={false}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -20 }}
               className="space-y-4"
@@ -315,8 +335,8 @@ export default function KarriereFunnel() {
 
               <div className="space-y-4">
                 {/* Erfahrung */}
-                <div>
-                  <label className="block text-xs font-bold uppercase tracking-widest text-[#0D6B38] mb-2">{t.experienceLabel}</label>
+                <fieldset>
+                  <legend className="block text-xs font-bold uppercase tracking-widest text-[#0D6B38] mb-2">{t.experienceLabel}</legend>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <button
                       aria-pressed={data.experience === 'Ja'}
@@ -337,11 +357,11 @@ export default function KarriereFunnel() {
                       {t.expNo}
                     </button>
                   </div>
-                </div>
+                </fieldset>
 
                 {/* Starttermin */}
-                <div>
-                  <label className="block text-xs font-bold uppercase tracking-widest text-[#0D6B38] mb-2">{t.startLabel}</label>
+                <fieldset>
+                  <legend className="block text-xs font-bold uppercase tracking-widest text-[#0D6B38] mb-2">{t.startLabel}</legend>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <button
                       aria-pressed={data.startDate === 'Sofort'}
@@ -379,11 +399,11 @@ export default function KarriereFunnel() {
                       })()}
                     </div>
                   </div>
-                </div>
+                </fieldset>
 
                 {/* Mobilität */}
-                <div>
-                  <label className="block text-xs font-bold uppercase tracking-widest text-[#0D6B38] mb-2">{t.mobilityLabel}</label>
+                <fieldset>
+                  <legend className="block text-xs font-bold uppercase tracking-widest text-[#0D6B38] mb-2">{t.mobilityLabel}</legend>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     {[
                       { id: 'auto', label: t.mobAuto },
@@ -413,7 +433,9 @@ export default function KarriereFunnel() {
                         />
                         <span className="font-bold text-[#0B2341]">{t.mobOnlyIn}</span>
                       </div>
+                      <label htmlFor="career-location" className="sr-only">{t.locationPlaceholder}</label>
                       <input
+                        id="career-location"
                         type="text"
                         placeholder={t.locationPlaceholder}
                         value={data.location}
@@ -424,7 +446,7 @@ export default function KarriereFunnel() {
                       />
                     </div>
                   </div>
-                </div>
+                </fieldset>
 
                 {/* Trust Box */}
                 <div className="bg-accent/5 p-4 rounded-xl flex gap-3 border border-accent/20">
@@ -453,7 +475,7 @@ export default function KarriereFunnel() {
           {step === 4 && (
             <motion.div
               key="step4"
-              initial={{ opacity: 0, x: 20 }}
+              initial={false}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -20 }}
               className="space-y-4"
@@ -462,52 +484,63 @@ export default function KarriereFunnel() {
                 <h1 className="text-2xl md:text-3xl font-black text-[#0B2341] mb-2">{t.step4Title}</h1>
               </div>
 
-              <form onSubmit={handleSubmit} className="space-y-4">
+              <form onSubmit={handleSubmit} className="space-y-4" aria-busy={isSubmitting}>
+                <div className="absolute -left-[10000px]" aria-hidden>
+                  <label htmlFor="career-website">Website</label>
+                  <input id="career-website" tabIndex={-1} autoComplete="off" value={honeypot} onChange={(event) => setHoneypot(event.target.value)} />
+                </div>
                 <div className="space-y-3">
                   <div>
-                    <label className="block text-xs font-bold uppercase tracking-widest text-[#0D6B38] mb-1">{t.nameLabel}</label>
+                    <label htmlFor="career-name" className="block text-xs font-bold uppercase tracking-widest text-[#0D6B38] mb-1">{t.nameLabel}</label>
                     <div className="relative">
                       <User className={`absolute ${isRtl ? 'right-4' : 'left-4'} top-1/2 -translate-y-1/2 text-gray-400`} size={18} />
                       <input
+                        id="career-name"
                         required
                         type="text"
+                        autoComplete="name"
                         placeholder={t.namePlaceholder}
                         value={data.name}
                         onChange={(e) => updateData({ name: e.target.value })}
-                        className={`w-full p-3 ${isRtl ? 'pr-11' : 'pl-11'} bg-white rounded-xl border-2 border-transparent focus:border-[#0D6B38] outline-none shadow-sm`}
+                        className={`w-full p-3 ${isRtl ? 'pr-11' : 'pl-11'} bg-white rounded-xl border-2 border-[#8A96A3] focus:border-[#0D6B38] outline-none shadow-sm`}
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold uppercase tracking-widest text-[#0D6B38] mb-1">{t.phoneLabel}</label>
+                    <label htmlFor="career-phone" className="block text-xs font-bold uppercase tracking-widest text-[#0D6B38] mb-1">{t.phoneLabel}</label>
                     <div className="relative">
                       <Smartphone className={`absolute ${isRtl ? 'right-4' : 'left-4'} top-1/2 -translate-y-1/2 text-gray-400`} size={18} />
                       <input
+                        id="career-phone"
                         required
                         type="tel"
+                        autoComplete="tel"
                         placeholder={t.phonePlaceholder}
                         value={data.phone}
                         onChange={(e) => updateData({ phone: e.target.value })}
-                        className={`w-full p-3 ${isRtl ? 'pr-11' : 'pl-11'} bg-white rounded-xl border-2 border-transparent focus:border-[#0D6B38] outline-none shadow-sm`}
+                        className={`w-full p-3 ${isRtl ? 'pr-11' : 'pl-11'} bg-white rounded-xl border-2 border-[#8A96A3] focus:border-[#0D6B38] outline-none shadow-sm`}
                       />
                     </div>
                   </div>
                 </div>
 
-                <div className="bg-white p-4 rounded-xl shadow-sm border-2 border-transparent has-[:checked]:border-[#0D6B38]">
-                  <label className="flex gap-3 cursor-pointer">
+                <div className="bg-white p-4 rounded-xl shadow-sm border-2 border-[#8A96A3] has-[:checked]:border-[#0D6B38]">
+                  <label htmlFor="career-whatsapp" className="flex gap-3 cursor-pointer">
                     <input
+                      id="career-whatsapp"
                       type="checkbox"
                       checked={data.whatsappOptIn}
                       onChange={(e) => updateData({ whatsappOptIn: e.target.checked })}
+                      aria-describedby="career-whatsapp-help"
                       className="w-5 h-5 accent-[#0D6B38] shrink-0"
                     />
-                    <div className="text-xs">
-                      <span className="font-bold text-[#0B2341] block mb-0.5">{t.whatsappLabel}</span>
-                      <span className="text-gray-500">{t.whatsappDesc}</span>
-                    </div>
+                    <span className="font-bold text-[#0B2341] text-xs">{t.whatsappLabel}</span>
                   </label>
+                  <p id="career-whatsapp-help" className="text-xs text-[#424751] mt-2 ml-8">
+                    {t.whatsappDesc}{' '}
+                    <Link to="/datenschutz" target="_blank" rel="noopener noreferrer" className="font-semibold underline">{t.privacyLink} (↗)</Link>
+                  </p>
                 </div>
 
                 <div className="bg-[#0D6B38]/10 p-4 rounded-xl border border-[#0D6B38]/20">
@@ -517,22 +550,13 @@ export default function KarriereFunnel() {
                 </div>
 
                 <div className="space-y-3">
-                  <label className="flex gap-2 cursor-pointer items-start">
-                    <input
-                      required
-                      type="checkbox"
-                      checked={data.privacyAccepted}
-                      onChange={(e) => updateData({ privacyAccepted: e.target.checked })}
-                      className="w-4 h-4 accent-[#0D6B38] mt-0.5 shrink-0"
-                    />
-                    <span className="text-[11px] text-gray-500 leading-relaxed">
-                      {t.privacyLabel} <Link to="/datenschutz" className="underline">{t.privacyLink}</Link>
-                    </span>
-                  </label>
+                  <p className="text-xs text-gray-600 leading-relaxed">
+                    Wir verwenden die Angaben zur Bearbeitung deiner Bewerbung. <Link to="/datenschutz" target="_blank" rel="noopener noreferrer" className="underline font-semibold">{t.privacyLink} (öffnet neuen Tab)</Link>
+                  </p>
 
                   {submitError && (
-                    <div role="alert" className="bg-red-50 border border-red-100 text-red-700 text-sm font-medium rounded-xl p-4">
-                      {t.submitErrorText}
+                    <div role="alert" className="bg-red-50 border border-red-200 text-red-800 text-sm font-medium rounded-xl p-4">
+                      {t.submitErrorText} <a href={SITE.phoneHref} className="font-bold underline">{SITE.phone}</a>
                     </div>
                   )}
 
@@ -542,7 +566,7 @@ export default function KarriereFunnel() {
                     </button>
                     <button 
                       type="submit"
-                      disabled={isSubmitting || !data.privacyAccepted}
+                      disabled={isSubmitting}
                       className="flex-[2] py-3 bg-[#0D6B38] text-white rounded-xl font-black uppercase tracking-wider shadow-sm hover:shadow-md hover:-translate-y-[1px] disabled:opacity-50 hover:bg-accent-dark transition-all flex items-center justify-center gap-2"
                     >
                       {isSubmitting ? <Loader2 className="animate-spin" /> : <Send size={18} />}

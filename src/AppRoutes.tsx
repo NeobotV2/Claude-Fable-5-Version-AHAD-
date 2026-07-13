@@ -2,6 +2,7 @@ import { lazy, Suspense } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import Layout from './components/Layout';
 import Home from './pages/Home';
+import routeManifest from './route-manifest.json';
 
 // Code-Splitting: nur die Startseite lädt sofort, jede weitere Seite bei Bedarf.
 const Unternehmen = lazy(() => import('./pages/Unternehmen'));
@@ -44,6 +45,53 @@ const Referenzen = lazy(() => import('./pages/Referenzen'));
 const Admin = lazy(() => import('./pages/Admin'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 
+/**
+ * Das Manifest klassifiziert jede öffentliche Route für Router, Prerendering,
+ * Canonical/Robots und Sitemap. Die Komponenten-Zuordnung bleibt bewusst hier,
+ * damit Vite weiterhin saubere Lazy-Chunks erzeugt.
+ */
+const ROUTE_COMPONENTS = {
+  home: Home,
+  unternehmen: Unternehmen,
+  karriere: Karriere,
+  karriereBewerbung: KarriereFunnel,
+  angebot: AngebotsFunnel,
+  fachwissen: Fachwissen,
+  kontakt: Kontakt,
+  ahadSystem: AHADSystem,
+  leistungen: Leistungen,
+  branchen: Branchen,
+  standorte: Standorte,
+  impressum: Impressum,
+  datenschutz: Datenschutz,
+  unterhaltsreinigung: Unterhaltsreinigung,
+  industriereinigung: Industriereinigung,
+  glasFassadenreinigung: GlasFassadenreinigung,
+  baureinigung: Baureinigung,
+  medizintechnikReinigung: MedizintechnikReinigung,
+  sonderreinigung: Sonderreinigung,
+  winterdienst: Winterdienst,
+  kuechenabluftreinigung: Kuechenabluftreinigung,
+  industrieProduktion: IndustrieProduktion,
+  medizintechnikBranche: MedizintechnikBranche,
+  bueroVerwaltung: BueroVerwaltung,
+  gewerbeobjekte: Gewerbeobjekte,
+  hotellerieObjektbetrieb: HotellerieObjektbetrieb,
+  villingenSchwenningen: VillingenSchwenningen,
+  stuttgart: Stuttgart,
+  konstanz: Konstanz,
+  fachwissenIntervalle: FachwissenIntervalle,
+  fachwissenIso: FachwissenISO,
+  fachwissenIndustrieProzess: FachwissenIndustrieProzess,
+  fachwissenAnbieterwechsel: FachwissenAnbieterwechsel,
+  fachwissenLeistungsverzeichnis: FachwissenLeistungsverzeichnis,
+  fachwissenVdi2052: FachwissenVDI2052,
+  fachwissenKosten: FachwissenKosten,
+  fachwissenCheckliste: FachwissenCheckliste,
+  referenzen: Referenzen,
+  admin: Admin,
+} as const;
+
 export function PageLoader() {
   return (
     <div className="min-h-[60vh] flex items-center justify-center" role="status" aria-label="Seite wird geladen">
@@ -58,61 +106,23 @@ export default function AppRoutes() {
     <Suspense fallback={<PageLoader />}>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={<Home />} />
+          {routeManifest.pages.map((route) => {
+            const Component = ROUTE_COMPONENTS[route.component as keyof typeof ROUTE_COMPONENTS];
+            if (!Component) throw new Error(`Unbekannte Route-Komponente: ${route.component}`);
+            return route.path === '/' ? (
+              <Route key={route.path} index element={<Component />} />
+            ) : (
+              <Route key={route.path} path={route.path.slice(1)} element={<Component />} />
+            );
+          })}
 
-          {/* Leistungen */}
-          <Route path="leistungen" element={<Leistungen />} />
-          <Route path="leistungen/unterhaltsreinigung" element={<Unterhaltsreinigung />} />
-          <Route path="leistungen/industrie-produktionsreinigung" element={<Industriereinigung />} />
-          <Route path="leistungen/glas-fassadenreinigung" element={<GlasFassadenreinigung />} />
-          <Route path="leistungen/baureinigung" element={<Baureinigung />} />
-          <Route path="leistungen/medizintechnik-reinigung" element={<MedizintechnikReinigung />} />
-          <Route path="leistungen/sonderreinigung-stillstandsservice" element={<Sonderreinigung />} />
-          <Route path="leistungen/winterdienst-hausmeisterservice" element={<Winterdienst />} />
-          <Route path="leistungen/kuechenabluftreinigung-vdi-2052" element={<Kuechenabluftreinigung />} />
-
-          {/* Reinigungskonzept/Kostenrechner sind in den Angebots-Funnel integriert */}
-          <Route path="reinigungskonzept" element={<Navigate to="/angebot" replace />} />
-          <Route path="kostenrechner" element={<Navigate to="/angebot" replace />} />
-
-          {/* Branchen */}
-          <Route path="branchen" element={<Branchen />} />
-          <Route path="branchen/industrie-produktion" element={<IndustrieProduktion />} />
-          <Route path="branchen/medizintechnik" element={<MedizintechnikBranche />} />
-          <Route path="branchen/buero-verwaltung" element={<BueroVerwaltung />} />
-          <Route path="branchen/gewerbeobjekte" element={<Gewerbeobjekte />} />
-          <Route path="branchen/hotellerie-objektbetrieb" element={<HotellerieObjektbetrieb />} />
-
-          <Route path="ahad-system" element={<AHADSystem />} />
-
-          {/* Unternehmen */}
-          <Route path="unternehmen" element={<Unternehmen />} />
-          <Route path="standorte" element={<Standorte />} />
-          <Route path="standorte/villingen-schwenningen" element={<VillingenSchwenningen />} />
-          <Route path="standorte/stuttgart" element={<Stuttgart />} />
-          <Route path="standorte/konstanz" element={<Konstanz />} />
-          <Route path="referenzen" element={<Referenzen />} />
-
-          {/* Karriere & Funnels */}
-          <Route path="karriere" element={<Karriere />} />
-          <Route path="karriere/bewerbung" element={<KarriereFunnel />} />
-          <Route path="angebot" element={<AngebotsFunnel />} />
-
-          {/* Fachwissen */}
-          <Route path="fachwissen" element={<Fachwissen />} />
-          <Route path="fachwissen/unterhaltsreinigung-unternehmen-reinigungsintervalle" element={<FachwissenIntervalle />} />
-          <Route path="fachwissen/iso-9001-iso-14001-gebaeudereinigung-unternehmen" element={<FachwissenISO />} />
-          <Route path="fachwissen/industrie-produktionsreinigung-ohne-prozessstoerung" element={<FachwissenIndustrieProzess />} />
-          <Route path="fachwissen/reinigungsfirma-wechseln-checkliste-tipps" element={<FachwissenAnbieterwechsel />} />
-          <Route path="fachwissen/leistungsverzeichnis-gebaeudereinigung-erstellen" element={<FachwissenLeistungsverzeichnis />} />
-          <Route path="fachwissen/kuechenabluftreinigung-vdi-2052-pflicht-ablauf-nachweis" element={<FachwissenVDI2052 />} />
-          <Route path="fachwissen/was-kostet-gebaeudereinigung-stundensatz-preise" element={<FachwissenKosten />} />
-          <Route path="fachwissen/checkliste-reinigungsangebot" element={<FachwissenCheckliste />} />
-
-          <Route path="kontakt" element={<Kontakt />} />
-          <Route path="impressum" element={<Impressum />} />
-          <Route path="datenschutz" element={<Datenschutz />} />
-          <Route path="admin" element={<Admin />} />
+          {routeManifest.redirects.map((redirect) => (
+            <Route
+              key={redirect.from}
+              path={redirect.from.slice(1)}
+              element={<Navigate to={redirect.to} replace />}
+            />
+          ))}
 
           {/* 404 — fängt alle unbekannten URLs ab */}
           <Route path="*" element={<NotFound />} />

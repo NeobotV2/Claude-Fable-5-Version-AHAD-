@@ -13,7 +13,7 @@ export default function Datenschutz() {
       <PageHero compact eyebrow="Rechtliches" title="Datenschutzerklärung" crumbs={[{ label: 'Datenschutz' }]} />
       <div className="max-w-4xl mx-auto px-4 py-16 lg:py-24">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={false}
           animate={{ opacity: 1, y: 0 }}
           className="prose prose-slate max-w-none"
         >
@@ -118,6 +118,15 @@ export default function Datenschutz() {
               Aufbewahrungspflichten bleiben unberührt. Sie können jederzeit die Löschung Ihrer Daten verlangen
               (Kontakt: {'info@ahad-cleaning.de'}).
             </p>
+            <p className="text-gray-600 mt-4">
+              <strong>Lokaler Zwischenstand und Herkunftskontext:</strong> Der Angebotsfunnel speichert bis zu zwei
+              Stunden ausschließlich sachliche Auswahlen der ersten drei Schritte im Sitzungsspeicher des Browsers.
+              Freitext, Name, Unternehmen, E-Mail, Telefon und Einsatzort werden nicht als Entwurf gespeichert; nach
+              erfolgreicher Übermittlung wird der Zwischenstand sofort entfernt. Ebenfalls im Sitzungsspeicher
+              merken wir für die Zuordnung einer Anfrage die Landingpage, Leistung, Branche, Region, UTM-Kampagne
+              und ausschließlich den Hostnamen eines Referrers. URL-Abfragen und Kontaktinhalte werden nicht an die
+              Webanalyse übergeben. Der Sitzungsspeicher endet spätestens mit dem Schließen des Browser-Tabs.
+            </p>
           </section>
 
           <section className="mb-12">
@@ -132,11 +141,34 @@ export default function Datenschutz() {
           <section className="mb-12">
             <h2 className="text-2xl font-bold mb-4">7. Externe Bildinhalte</h2>
             <p className="text-gray-600">
-              Zur Illustration binden wir Bildmaterial von externen Content-Delivery-Netzwerken ein (insbesondere
-              Unsplash, images.unsplash.com, sowie Logodienste für Referenzdarstellungen). Beim Laden dieser
-              Bilder wird Ihre IP-Adresse technisch bedingt an den jeweiligen Anbieter übermittelt. Die Einbindung
-              erfolgt im Interesse einer ansprechenden Darstellung unserer Online-Angebote (berechtigtes Interesse
-              gemäß Art. 6 Abs. 1 lit. f DSGVO). Es werden dabei keine Cookies gesetzt.
+              Sämtliche auf dieser Website dargestellten Fotos, Markenbilder und freigegebenen Referenzlogos werden
+              von unserer eigenen Domain geladen. Beim Anzeigen dieser Bilder wird daher keine direkte Verbindung
+              zu einem externen Bild- oder Logodienst aufgebaut.
+            </p>
+          </section>
+
+          <section className="mb-12">
+            <h2 className="text-2xl font-bold mb-4">8. Freiwillige Kontaktaufnahme über WhatsApp</h2>
+            <p className="text-gray-600">
+              Im Bewerbungsformular können Sie getrennt von der Bewerbung freiwillig auswählen, ob wir Sie über
+              WhatsApp kontaktieren dürfen. Ohne diese Auswahl bearbeiten wir Ihre Bewerbung ausschließlich über
+              die sonst angegebenen Kontaktwege. Bei einer WhatsApp-Kontaktaufnahme werden insbesondere Ihre
+              Telefonnummer, Ihre WhatsApp-Profildaten sowie Kommunikations- und Metadaten durch WhatsApp Ireland
+              Limited verarbeitet. Inhalte persönlicher Nachrichten sind Ende-zu-Ende verschlüsselt; WhatsApp
+              verarbeitet daneben eigene Nutzungs-, Geräte- und Verbindungsdaten. Einzelheiten finden Sie in der{' '}
+              <a
+                href="https://www.whatsapp.com/legal/privacy-policy-eea"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-bold text-brand underline underline-offset-4"
+              >
+                Datenschutzrichtlinie von WhatsApp
+              </a>.
+            </p>
+            <p className="text-gray-600 mt-4">
+              Rechtsgrundlage für unsere Kontaktaufnahme ist Ihre freiwillige Einwilligung nach Art. 6 Abs. 1 lit. a
+              DSGVO. Sie können diese jederzeit mit Wirkung für die Zukunft per E-Mail an info@ahad-cleaning.de oder
+              direkt im WhatsApp-Chat widerrufen. Der Widerruf berührt nicht die Bearbeitung Ihrer Bewerbung.
             </p>
           </section>
         </motion.div>

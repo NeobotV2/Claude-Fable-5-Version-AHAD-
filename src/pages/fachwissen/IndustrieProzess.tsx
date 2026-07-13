@@ -4,32 +4,13 @@ import { Link } from 'react-router-dom';
 import SEO from '@/components/SEO';
 import Accordion from '@/components/ui/Accordion';
 import CTABand from '@/components/CTABand';
+import ArticleMeta from '@/components/ArticleMeta';
+import { buildArticleSchema, EDITORIAL_ARTICLES } from '@/data/editorial';
 
 export default function FachwissenIndustrieProzess() {
-  const articleSchema = {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    "headline": "Industriereinigung ohne Prozessstörung: Strategien für den laufenden Betrieb",
-    "datePublished": "2026-06-12",
-    "dateModified": "2026-06-24",
-    "description": "Wie integriert man Industriereinigung in laufende Produktionsprozesse? Erfahren Sie, wie Stillstandzeiten vermieden und die Arbeitssicherheit erhöht werden.",
-    "author": {
-      "@type": "Organization",
-      "name": "AHAD Cleaning Company GmbH"
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": "AHAD Cleaning Company GmbH",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "https://ahad-cleaning.de/logo.png"
-      }
-    },
-    "mainEntityOfPage": {
-      "@type": "WebPage",
-      "@id": "https://ahad-cleaning.de/fachwissen/industrie-produktionsreinigung-ohne-prozessstoerung"
-    }
-  };
+  const articleSchema = buildArticleSchema(
+    EDITORIAL_ARTICLES['industrie-produktionsreinigung-ohne-prozessstoerung'],
+  );
 
   const faqSchema = {
     "@context": "https://schema.org",
@@ -98,18 +79,17 @@ export default function FachwissenIndustrieProzess() {
       {/* Hero Section */}
       <section className="relative pt-36 pb-20 lg:pt-44 lg:pb-28 bg-navy text-white overflow-hidden grain">
         <div className="absolute inset-0 opacity-40">
-          <img 
-            src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&q=80&w=1600" 
-            alt="Industriereinigung in einer modernen Produktionshalle" 
-            className="w-full h-full object-cover"
-            referrerPolicy="no-referrer"
-          />
+          <picture>
+            <source media="(max-width: 640px)" srcSet="/images/ahad/industrie-detail-480.webp" />
+            <source media="(max-width: 1200px)" srcSet="/images/ahad/industrie-detail-960.webp" />
+            <img src="/images/ahad/industrie-detail.webp" alt="Industriereinigung in einer modernen Produktionshalle" className="w-full h-full object-cover" width="1600" height="900" />
+          </picture>
         </div>
         <div className="absolute inset-0 bg-gradient-to-r from-navy via-navy/85 to-navy/40" />
         <div className="absolute inset-0 bg-gradient-to-t from-navy via-transparent to-navy/60" />
         <div className="max-w-7xl mx-auto px-4 relative z-10">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={false}
             animate={{ opacity: 1, y: 0 }}
             className="max-w-3xl"
           >
@@ -151,6 +131,8 @@ export default function FachwissenIndustrieProzess() {
           </div>
         </div>
       </section>
+
+      <ArticleMeta slug="industrie-produktionsreinigung-ohne-prozessstoerung" />
 
       {/* Content Section */}
       <section className="py-20 lg:py-32 bg-white">

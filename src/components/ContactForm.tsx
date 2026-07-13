@@ -1,21 +1,24 @@
-import React, { useState } from 'react';
-import { motion } from 'motion/react';
-import { Send, Loader2, CheckCircle2, Phone } from 'lucide-react';
+import { useEffect, useRef, useState, type FormEvent } from 'react';
+import { CheckCircle2, Loader2, Phone, Send } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { SITE } from '@/lib/site';
+import { readAttribution, rememberAttribution, trackEvent } from '@/lib/analytics';
 
 const SERVICES = [
   'Unterhaltsreinigung',
-  'Industriereinigung',
+  'Industrie- & Produktionsreinigung',
   'Glas- & Fassadenreinigung',
   'Baureinigung',
-  'Sonderreinigung',
-  'Winterdienst',
+  'Medizintechnik- & Reinraumreinigung',
+  'Sonderreinigung & Stillstandsservice',
+  'Winterdienst & Hausmeisterservice',
+  'Küchenabluftreinigung',
   'Sonstiges',
 ];
 
 const inputClasses =
-  'w-full bg-white border border-line rounded-xl px-4 py-3.5 text-[15px] text-navy font-medium placeholder:text-slate/50 ' +
-  'focus:outline-none focus:border-brand focus:ring-4 focus:ring-brand/10 transition-all';
+  'w-full bg-white border-2 border-[#9aa8b8] rounded-xl px-4 py-3.5 text-[15px] text-navy font-medium ' +
+  'placeholder:text-[#596779] focus:outline-none focus:border-brand focus:ring-4 focus:ring-brand/15 transition-colors';
 
 const INITIAL_FORM = {
   contactPerson: '',
@@ -24,250 +27,136 @@ const INITIAL_FORM = {
   phone: '',
   serviceType: SERVICES[0],
   message: '',
-  privacyAccepted: false,
+  privacyNoticeAccepted: true,
 };
 
 export default function ContactForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
+  const [contactError, setContactError] = useState('');
   const [honeypot, setHoneypot] = useState('');
   const [formData, setFormData] = useState({ ...INITIAL_FORM });
+  const successRef = useRef<HTMLHeadingElement>(null);
+  const idempotencyRef = useRef('');
+  const formStartedAtRef = useRef(Date.now());
+
+  useEffect(() => {
+    if (isSuccess) window.setTimeout(() => successRef.current?.focus(), 0);
+  }, [isSuccess]);
 
   const resetForm = () => {
     setIsSuccess(false);
     setSubmitError(null);
+    setContactError('');
     setFormData({ ...INITIAL_FORM });
     setHoneypot('');
+    idempotencyRef.current = '';
+    formStartedAtRef.current = Date.now();
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!formData.privacyAccepted || isSubmitting) return;
-    // Honeypot: unsichtbares Feld — wenn ausgefüllt, war es ein Bot.
-    if (honeypot) {
-      setIsSuccess(true);
+  const handleSubmit = async (event: FormEvent) => {
+    event.preventDefault();
+    if (isSubmitting) return;
+    if (!formData.email.trim() && !formData.phone.trim()) {
+      setContactError('Bitte geben Sie eine E-Mail-Adresse oder Telefonnummer an.');
+      trackEvent('Contact Form Validation Error', { field: 'contact-channel' });
       return;
     }
-
-    setIsSubmitting(true);
+    setContactError('');
     setSubmitError(null);
+    setIsSubmitting(true);
+    idempotencyRef.current ||= typeof crypto?.randomUUID === 'function'
+      ? crypto.randomUUID()
+      : `contact-${Date.now()}-${Math.random().toString(36).slice(2)}`;
 
-    // 1) E-Mail-Benachrichtigung zuerst — ihr Ergebnis wird im Lead-Datensatz
-    //    festgehalten (emailSent), damit fehlgeschlagene Benachrichtigungen im
-    //    Admin-Bereich sichtbar sind statt unbemerkt verloren zu gehen.
-    let emailSent = false;
     try {
-      const res = await fetch('/api/send-email', {
+      const response = await fetch('/api/send-email', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ type: 'contact', data: formData, website: honeypot }),
+        headers: { 'Content-Type': 'application/json', 'Idempotency-Key': idempotencyRef.current },
+        body: JSON.stringify({
+          type: 'contact',
+          data: { ...formData, attribution: readAttribution() || rememberAttribution(window.location.href) },
+          website: honeypot,
+          formStartedAt: formStartedAtRef.current,
+          idempotencyKey: idempotencyRef.current,
+        }),
       });
-      emailSent = res.ok;
-    } catch (emailError) {
-      console.error('Error sending email notification:', emailError);
-    }
-
-    // 2) Lead in Firestore sichern (Firebase erst beim Absenden laden —
-    //    hält Initial-Bundle & SSG schlank).
-    let stored = false;
-    try {
-      const { db, collection, addDoc, serverTimestamp } = await import('@/firebase');
-      await addDoc(collection(db, 'leads'), {
-        ...formData,
-        emailSent,
-        status: 'new',
-        createdAt: serverTimestamp(),
-      });
-      stored = true;
-    } catch (error) {
-      console.error('Error submitting contact form:', error);
-    }
-
-    // Erfolg, sobald der Lead auf MINDESTENS einem Weg angekommen ist.
-    if (stored || emailSent) {
+      const result = await response.json().catch(() => null);
+      if (!response.ok || result?.success !== true || result?.accepted !== true) {
+        throw new Error(result?.error?.message ?? 'Übermittlung fehlgeschlagen');
+      }
       setIsSuccess(true);
-    } else {
-      setSubmitError(
-        `Die Nachricht konnte nicht gesendet werden. Bitte versuchen Sie es erneut oder rufen Sie uns direkt an: ${SITE.phone}.`
-      );
+      trackEvent('Contact Form Success', { service: formData.serviceType });
+    } catch {
+      setSubmitError('Die Nachricht konnte nicht übermittelt werden. Bitte versuchen Sie es erneut oder rufen Sie uns direkt an.');
+      trackEvent('Contact Form Error', { service: formData.serviceType });
+    } finally {
+      setIsSubmitting(false);
     }
-    setIsSubmitting(false);
   };
 
   if (isSuccess) {
     return (
-      <motion.div
-        initial={{ opacity: 0, scale: 0.96 }}
-        animate={{ opacity: 1, scale: 1 }}
-        className="bg-white p-10 lg:p-14 rounded-3xl shadow-lifted text-center border border-line"
-      >
-        <div className="w-20 h-20 bg-accent/10 text-accent rounded-full grid place-items-center mx-auto mb-6">
+      <div className="bg-white p-10 lg:p-14 rounded-3xl shadow-lifted text-center border border-line" role="status">
+        <div className="w-20 h-20 bg-accent/10 text-accent rounded-full grid place-items-center mx-auto mb-6" aria-hidden>
           <CheckCircle2 size={40} />
         </div>
-        <h3 className="font-headline text-2xl font-bold text-navy mb-3">Nachricht gesendet!</h3>
-        <p className="text-slate mb-2 max-w-md mx-auto">
-          Vielen Dank für Ihre Anfrage. Wir melden uns <strong className="text-navy">innerhalb von 24 Stunden</strong> bei
-          Ihnen.
-        </p>
-        <p className="text-sm text-slate/80 mb-8">Eilig? Rufen Sie uns direkt an: {SITE.phone}</p>
-        <button onClick={resetForm} className="text-brand font-bold hover:text-brand-light transition-colors">
-          Weitere Nachricht senden
-        </button>
-      </motion.div>
+        <h3 ref={successRef} tabIndex={-1} className="font-headline text-2xl font-bold text-navy mb-3 outline-none">
+          Nachricht übermittelt
+        </h3>
+        <p className="text-slate mb-4 max-w-md mx-auto">Vielen Dank. Wir prüfen Ihre Anfrage und melden uns persönlich bei Ihnen.</p>
+        <p className="text-sm text-slate mb-8">Eilig? <a href={SITE.phoneHref} className="font-bold text-brand underline">{SITE.phone}</a></p>
+        <button onClick={resetForm} className="text-brand font-bold hover:underline">Weitere Nachricht senden</button>
+      </div>
     );
   }
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white p-7 sm:p-10 rounded-3xl shadow-soft border border-line space-y-5">
-      {/* Honeypot — für Menschen unsichtbar */}
-      <div className="absolute -left-[9999px]" aria-hidden="true">
-        <label>
-          Firma Webseite
-          <input type="text" tabIndex={-1} autoComplete="off" value={honeypot} onChange={(e) => setHoneypot(e.target.value)} />
-        </label>
+    <form onSubmit={handleSubmit} aria-busy={isSubmitting} className="relative bg-white p-7 sm:p-10 rounded-3xl shadow-soft border border-line space-y-5">
+      <div className="absolute -left-[10000px]" aria-hidden>
+        <label htmlFor="cf-website">Firma Webseite</label>
+        <input id="cf-website" type="text" tabIndex={-1} autoComplete="off" value={honeypot} onChange={(event) => setHoneypot(event.target.value)} />
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-        <div>
-          <label htmlFor="cf-name" className="block text-[13px] font-bold text-navy mb-2">
-            Ihr Name *
-          </label>
-          <input
-            id="cf-name"
-            type="text"
-            required
-            autoComplete="name"
-            placeholder="Max Mustermann"
-            className={inputClasses}
-            value={formData.contactPerson}
-            onChange={(e) => setFormData({ ...formData, contactPerson: e.target.value })}
-          />
-        </div>
-        <div>
-          <label htmlFor="cf-company" className="block text-[13px] font-bold text-navy mb-2">
-            Unternehmen *
-          </label>
-          <input
-            id="cf-company"
-            type="text"
-            required
-            autoComplete="organization"
-            placeholder="Muster GmbH"
-            className={inputClasses}
-            value={formData.company}
-            onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-          />
-        </div>
+        <Field id="cf-name" label="Ihr Name" required autoComplete="name" value={formData.contactPerson} onChange={(contactPerson) => setFormData((current) => ({ ...current, contactPerson }))} />
+        <Field id="cf-company" label="Unternehmen" required autoComplete="organization" value={formData.company} onChange={(company) => setFormData((current) => ({ ...current, company }))} />
+        <Field id="cf-email" label="E-Mail" type="email" autoComplete="email" value={formData.email} onChange={(email) => setFormData((current) => ({ ...current, email }))} describedBy="cf-contact-help" invalid={Boolean(contactError)} />
+        <Field id="cf-phone" label="Telefon" type="tel" autoComplete="tel" value={formData.phone} onChange={(phone) => setFormData((current) => ({ ...current, phone }))} describedBy="cf-contact-help" invalid={Boolean(contactError)} />
       </div>
-
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-        <div>
-          <label htmlFor="cf-email" className="block text-[13px] font-bold text-navy mb-2">
-            E-Mail *
-          </label>
-          <input
-            id="cf-email"
-            type="email"
-            required
-            autoComplete="email"
-            placeholder="max@muster.de"
-            className={inputClasses}
-            value={formData.email}
-            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-          />
-        </div>
-        <div>
-          <label htmlFor="cf-phone" className="block text-[13px] font-bold text-navy mb-2">
-            Telefon
-          </label>
-          <input
-            id="cf-phone"
-            type="tel"
-            autoComplete="tel"
-            placeholder="+49 …"
-            className={inputClasses}
-            value={formData.phone}
-            onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-          />
-        </div>
-      </div>
+      <p id="cf-contact-help" role={contactError ? 'alert' : undefined} className={contactError ? 'text-sm text-red-700 font-semibold' : 'text-sm text-slate'}>
+        {contactError || 'Bitte mindestens einen Kontaktweg angeben.'}
+      </p>
 
       <div>
-        <label htmlFor="cf-service" className="block text-[13px] font-bold text-navy mb-2">
-          Gewünschte Leistung
-        </label>
-        <select
-          id="cf-service"
-          className={inputClasses}
-          value={formData.serviceType}
-          onChange={(e) => setFormData({ ...formData, serviceType: e.target.value })}
-        >
-          {SERVICES.map((service) => (
-            <option key={service}>{service}</option>
-          ))}
+        <label htmlFor="cf-service" className="block text-[13px] font-bold text-navy mb-2">Gewünschte Leistung</label>
+        <select id="cf-service" className={inputClasses} value={formData.serviceType} onChange={(event) => setFormData((current) => ({ ...current, serviceType: event.target.value }))}>
+          {SERVICES.map((service) => <option key={service}>{service}</option>)}
         </select>
       </div>
 
       <div>
-        <label htmlFor="cf-message" className="block text-[13px] font-bold text-navy mb-2">
-          Ihre Nachricht *
-        </label>
-        <textarea
-          id="cf-message"
-          required
-          rows={5}
-          placeholder="Beschreiben Sie kurz Ihr Objekt und Ihr Anliegen …"
-          className={`${inputClasses} resize-y min-h-32`}
-          value={formData.message}
-          onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-        />
+        <label htmlFor="cf-message" className="block text-[13px] font-bold text-navy mb-2">Ihre Nachricht *</label>
+        <textarea id="cf-message" required rows={5} className={`${inputClasses} resize-y min-h-32`} value={formData.message} onChange={(event) => setFormData((current) => ({ ...current, message: event.target.value }))} />
       </div>
 
-      <label className="flex items-start gap-3 cursor-pointer select-none">
-        <input
-          type="checkbox"
-          required
-          checked={formData.privacyAccepted}
-          onChange={(e) => setFormData({ ...formData, privacyAccepted: e.target.checked })}
-          className="mt-1 w-4.5 h-4.5 accent-[#0D6B38]"
-        />
-        <span className="text-[13px] text-slate leading-relaxed">
-          Ich habe die{' '}
-          <a href="/datenschutz" className="text-brand font-semibold hover:underline">
-            Datenschutzerklärung
-          </a>{' '}
-          gelesen und stimme der Verarbeitung meiner Daten zur Bearbeitung der Anfrage zu. *
-        </span>
-      </label>
-
-      {submitError && (
-        <div className="flex items-start gap-3 bg-red-50 border border-red-100 text-red-700 text-sm font-medium rounded-xl p-4">
-          <Phone size={16} className="flex-shrink-0 mt-0.5" />
-          {submitError}
-        </div>
-      )}
-
-      <button
-        type="submit"
-        disabled={isSubmitting}
-        className="group w-full inline-flex items-center justify-center gap-2 bg-accent text-white px-8 py-4 rounded-xl font-bold text-[15px] hover:bg-accent-dark shadow-glow hover:-translate-y-0.5 active:scale-[0.98] transition-all disabled:opacity-60 disabled:hover:translate-y-0"
-      >
-        {isSubmitting ? (
-          <>
-            <Loader2 size={18} className="animate-spin" />
-            Wird gesendet …
-          </>
-        ) : (
-          <>
-            Nachricht senden
-            <Send size={17} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-          </>
-        )}
-      </button>
-      <p className="text-center text-xs text-slate/70 font-medium">
-        Ihre Daten werden ausschließlich zur Bearbeitung Ihrer Anfrage verwendet.
+      <p className="text-[13px] text-slate leading-relaxed">
+        Wir verwenden Ihre Angaben ausschließlich zur Bearbeitung der Anfrage. Details finden Sie in der{' '}
+        <Link to="/datenschutz" target="_blank" rel="noopener noreferrer" className="text-brand font-semibold underline">
+          Datenschutzerklärung (öffnet neuen Tab)
+        </Link>.
       </p>
+
+      {submitError && <div role="alert" className="flex items-start gap-3 bg-red-50 border border-red-200 text-red-800 text-sm font-medium rounded-xl p-4"><Phone size={16} className="shrink-0 mt-0.5" /><span>{submitError} <a href={SITE.phoneHref} className="font-bold underline">{SITE.phone}</a></span></div>}
+
+      <button type="submit" disabled={isSubmitting} className="group w-full inline-flex items-center justify-center gap-2 bg-accent text-white px-8 py-4 rounded-xl font-bold text-[15px] hover:bg-accent-dark focus-visible:ring-4 focus-visible:ring-accent/40 disabled:opacity-60">
+        {isSubmitting ? <><Loader2 size={18} className="animate-spin" /> Wird übermittelt</> : <>Nachricht senden <Send size={17} /></>}
+      </button>
     </form>
   );
+}
+
+function Field({ id, label, value, onChange, type = 'text', required = false, autoComplete, describedBy, invalid = false }: { id: string; label: string; value: string; onChange: (value: string) => void; type?: string; required?: boolean; autoComplete?: string; describedBy?: string; invalid?: boolean }) {
+  return <div><label htmlFor={id} className="block text-[13px] font-bold text-navy mb-2">{label}{required && ' *'}</label><input id={id} type={type} required={required} autoComplete={autoComplete} className={inputClasses} value={value} onChange={(event) => onChange(event.target.value)} aria-describedby={describedBy} aria-errormessage={invalid ? describedBy : undefined} aria-invalid={invalid || undefined} /></div>;
 }

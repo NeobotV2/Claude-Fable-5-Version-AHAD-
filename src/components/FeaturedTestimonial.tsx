@@ -1,6 +1,6 @@
 import { Quote, BadgeCheck } from 'lucide-react';
 import Reveal from '@/components/ui/Reveal';
-import { FEATURED_TESTIMONIAL as T } from '@/lib/site';
+import { FEATURED_TESTIMONIAL as T, FEATURED_TESTIMONIAL_PUBLISHABLE } from '@/lib/site';
 
 /**
  * Hervorgehobene, echte Kundenstimme (Südwest Messe) — das stärkste
@@ -9,10 +9,12 @@ import { FEATURED_TESTIMONIAL as T } from '@/lib/site';
  * farbige Wortmarke auf Navy sauber liest.
  */
 export default function FeaturedTestimonial({ dark = true }: { dark?: boolean }) {
+  if (!FEATURED_TESTIMONIAL_PUBLISHABLE || !T) return null;
+
   return (
     <section
       className={dark ? 'py-20 lg:py-28 bg-navy text-white overflow-hidden grain relative' : 'py-20 lg:py-28 bg-paper'}
-      aria-label="Kundenstimme Südwest Messe"
+      aria-label="Hervorgehobene Kundenstimme"
     >
       {dark && <div className="absolute inset-0 blueprint-grid opacity-50" aria-hidden="true" />}
       <div className="max-w-4xl mx-auto px-4 sm:px-8 relative z-10">

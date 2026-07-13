@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /admin
 
-Sitemap: https://ahad-cleaning.de/sitemap.xml
+Sitemap: https://www.ahad-cleaning.de/sitemap.xml

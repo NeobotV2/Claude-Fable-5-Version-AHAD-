@@ -10,13 +10,13 @@ import Stat from '@/components/ui/Stat';
 import LogoMarquee from '@/components/LogoMarquee';
 import CTABand from '@/components/CTABand';
 import { IMG } from '@/lib/images';
-import { STATS } from '@/lib/site';
+import { CLIENT_REFERENCES, STATS } from '@/lib/site';
 
 const values = [
   {
     icon: <Target className="w-6 h-6" />,
     title: 'Verbindlichkeit',
-    text: 'Zusagen sind bei uns Termine, keine Absichtserklärungen. 24h Reaktionszeit ist Vertrag, nicht Marketing.',
+    text: 'Wir stimmen Leistungen, Zuständigkeiten und Termine transparent ab und halten Vereinbarungen nachvollziehbar fest.',
   },
   {
     icon: <ShieldCheck className="w-6 h-6" />,
@@ -37,9 +37,9 @@ const values = [
 
 const milestones = [
   { year: 'Gründung', text: 'Start als regionaler Reinigungsdienst im Schwarzwald-Baar-Kreis — mit dem Anspruch, es besser zu machen.' },
-  { year: 'Wachstum', text: 'Expansion nach Stuttgart und Konstanz; erste Großkunden aus Industrie und öffentlicher Hand.' },
+  { year: 'Wachstum', text: 'Ausbau des Einsatzgebiets für gewerbliche Kunden in Süddeutschland.' },
   { year: 'System', text: 'Entwicklung des AHAD-Systems: Analyse, Handling, Audit, Dokumentation als verbindlicher Standard.' },
-  { year: 'Heute', text: '80+ Mitarbeitende, 80+ betreute Objekte und Referenzen von Allianz bis GOLDBECK.' },
+  { year: 'Heute', text: 'Gebäudedienstleistungen mit klaren Abläufen für Unternehmen und Organisationen.' },
 ];
 
 export default function Unternehmen() {
@@ -47,7 +47,7 @@ export default function Unternehmen() {
     <div>
       <SEO
         title="Über AHAD Cleaning: Das Unternehmen | AHAD Cleaning"
-        description="AHAD Cleaning ist Ihr inhabergeführter Partner für systematische Gebäudereinigung in Süddeutschland — mit 80+ Mitarbeitenden und Referenzen von Allianz bis GOLDBECK."
+        description="AHAD Cleaning ist Ihr Partner für systematische Gebäudereinigung in Süddeutschland — mit klaren Abläufen und persönlicher Betreuung."
         keywords="AHAD Cleaning Unternehmen, Gebäudereinigung Firma Villingen-Schwenningen, Reinigungsunternehmen Süddeutschland"
       />
 
@@ -55,9 +55,8 @@ export default function Unternehmen() {
         eyebrow="Über uns"
         title={
           <>
-            Wir sind die, die
-            <br />
-            Wort halten.
+            <span className="block">Wir sind die,{' '}</span>
+            <span className="block">die Wort halten.</span>
           </>
         }
         lead="AHAD Cleaning ist ein inhabergeführtes Gebäudedienstleistungsunternehmen aus Villingen-Schwenningen. Unser Antrieb: Reinigung so verlässlich machen, dass Sie nie wieder darüber nachdenken müssen."
@@ -68,7 +67,7 @@ export default function Unternehmen() {
       />
 
       {/* Zahlen */}
-      <section className="bg-white border-b border-line">
+      {STATS.length > 0 && <section className="bg-white border-b border-line">
         <div className="max-w-7xl mx-auto px-4 sm:px-8 py-12 grid grid-cols-2 lg:grid-cols-4 gap-8">
           {STATS.map((stat, i) => (
             <Reveal key={stat.label} delay={i * 0.08} y={16}>
@@ -76,7 +75,7 @@ export default function Unternehmen() {
             </Reveal>
           ))}
         </div>
-      </section>
+      </section>}
 
       {/* Story */}
       <section className="py-20 lg:py-32 bg-paper">
@@ -147,9 +146,9 @@ export default function Unternehmen() {
       </section>
 
       {/* Referenzen-Band */}
-      <section className="py-16 bg-paper border-t border-line">
+      {CLIENT_REFERENCES.length > 0 && <section className="py-16 bg-paper border-t border-line">
         <div className="max-w-7xl mx-auto px-4 sm:px-8 mb-8 flex items-center justify-between gap-4">
-          <p className="eyebrow text-slate/70">
+          <p className="eyebrow text-slate">
             <span className="h-px w-8 bg-slate/30" />
             Unternehmen, die uns vertrauen
           </p>
@@ -158,7 +157,7 @@ export default function Unternehmen() {
           </Link>
         </div>
         <LogoMarquee />
-      </section>
+      </section>}
 
       {/* Karriere-Hinweis */}
       <section className="py-20 lg:py-28 bg-white">

@@ -1,65 +1,45 @@
 /**
- * Prerendering (SSG): rendert jede Route mit dem SSR-Bundle zu statischem
- * HTML und schreibt sie nach dist/<route>/index.html. Crawler und
- * LLM-Fetcher sehen damit vollständigen Inhalt + Meta ohne JavaScript.
- *
- * Ablauf (npm run build:ssg):
- *   1. vite build            → dist/ (Client-SPA, Template + Assets)
- *   2. vite build:ssr        → dist-server/entry-server.js
- *   3. node prerender.mjs     → injiziert SSR-HTML in jede Seite
- *
- * Schlägt eine Route fehl, wird die SPA-Hülle geschrieben (Route bleibt als
- * Client-Render funktionsfähig) — der Build bricht nie ab.
+ * Statisches Prerendering aller im zentralen Manifest registrierten Seiten.
+ * Jede Route muss vollständig rendern; ein CSR-Fallback macht den Build rot.
  */
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import path from 'node:path';
+import { pathToFileURL } from 'node:url';
 
 const dist = path.resolve('dist');
-const ROUTES = [
-  '/',
-  '/leistungen',
-  '/leistungen/unterhaltsreinigung',
-  '/leistungen/industrie-produktionsreinigung',
-  '/leistungen/glas-fassadenreinigung',
-  '/leistungen/baureinigung',
-  '/leistungen/medizintechnik-reinigung',
-  '/leistungen/sonderreinigung-stillstandsservice',
-  '/leistungen/winterdienst-hausmeisterservice',
-  '/leistungen/kuechenabluftreinigung-vdi-2052',
-  '/branchen',
-  '/branchen/industrie-produktion',
-  '/branchen/medizintechnik',
-  '/branchen/buero-verwaltung',
-  '/branchen/gewerbeobjekte',
-  '/branchen/hotellerie-objektbetrieb',
-  '/ahad-system',
-  '/unternehmen',
-  '/standorte',
-  '/standorte/villingen-schwenningen',
-  '/standorte/stuttgart',
-  '/standorte/konstanz',
-  '/referenzen',
-  '/karriere',
-  '/angebot',
-  '/fachwissen',
-  '/fachwissen/unterhaltsreinigung-unternehmen-reinigungsintervalle',
-  '/fachwissen/iso-9001-iso-14001-gebaeudereinigung-unternehmen',
-  '/fachwissen/industrie-produktionsreinigung-ohne-prozessstoerung',
-  '/fachwissen/reinigungsfirma-wechseln-checkliste-tipps',
-  '/fachwissen/leistungsverzeichnis-gebaeudereinigung-erstellen',
-  '/fachwissen/kuechenabluftreinigung-vdi-2052-pflicht-ablauf-nachweis',
-  '/fachwissen/was-kostet-gebaeudereinigung-stundensatz-preise',
-  '/fachwissen/checkliste-reinigungsangebot',
-  '/kontakt',
-  '/impressum',
-  '/datenschutz',
-];
+const manifest = JSON.parse(await readFile(path.resolve('src/route-manifest.json'), 'utf8'));
+const siteConfig = JSON.parse(await readFile(path.resolve('src/site-config.json'), 'utf8'));
+const routes = manifest.pages;
+const canonicalOrigin = siteConfig.canonicalOrigin;
 
-const template = await readFile(path.join(dist, 'index.html'), 'utf8');
-const { render } = await import(path.resolve('dist-server/entry-server.js'));
+if (!canonicalOrigin.startsWith('https://www.')) {
+  throw new Error(`Canonical-Origin muss HTTPS und www verwenden: ${canonicalOrigin}`);
+}
 
-// Statische Default-Tags entfernen, damit Helmet sie nicht dupliziert
-// (Titel, Description und die Basis-OG/Twitter-Fallbacks aus index.html).
+const seenPaths = new Set();
+for (const route of routes) {
+  if (!route.path.startsWith('/') || (route.path !== '/' && route.path.endsWith('/'))) {
+    throw new Error(`Ungültiger kanonischer Pfad im Routenmanifest: ${route.path}`);
+  }
+  if (seenPaths.has(route.path)) throw new Error(`Doppelte Route im Manifest: ${route.path}`);
+  seenPaths.add(route.path);
+}
+
+// Der SSR-Build leert dist-server vor jedem vollständigen Build. Dort halten
+// wir die unveränderte Client-Shell fest, damit `npm run prerender` auch bei
+// einem zweiten lokalen Aufruf idempotent bleibt.
+const templateCache = path.resolve('dist-server/client-template.html');
+let template;
+try {
+  template = await readFile(templateCache, 'utf8');
+} catch {
+  template = await readFile(path.join(dist, 'index.html'), 'utf8');
+  await writeFile(templateCache, template);
+}
+const serverEntryUrl = pathToFileURL(path.resolve('dist-server/entry-server.js')).href;
+const { render } = await import(serverEntryUrl);
+
+// Statische Default-Tags entfernen, damit Helmet sie nicht dupliziert.
 const base = template
   .replace(/<title>[\s\S]*?<\/title>\s*/i, '')
   .replace(/<meta\s+name="description"[^>]*>\s*/i, '')
@@ -72,60 +52,88 @@ function injectRoot(tpl, html, head) {
     .replace('</head>', `${head}\n  </head>`);
 }
 
+function validateRender(route, html, head) {
+  if (!html.trim()) throw new Error('SSR lieferte keinen Seiteninhalt');
+  if (route.requireH1 !== false && !/<h1\b/i.test(html)) throw new Error('SSR-Seite enthält keine H1');
+  if (!/<title\b/i.test(head)) throw new Error('Helmet lieferte keinen Title');
+
+  const expectedCanonical = `${canonicalOrigin}${route.path}`;
+  if (!head.includes(`rel="canonical" href="${expectedCanonical}"`)) {
+    throw new Error(`Canonical fehlt oder weicht ab (erwartet: ${expectedCanonical})`);
+  }
+
+  const expectedRobots = route.index ? 'index, follow' : 'noindex, follow';
+  if (!head.includes(`name="robots" content="${expectedRobots}"`)) {
+    throw new Error(`Robots-Entscheidung fehlt (erwartet: ${expectedRobots})`);
+  }
+}
+
 let ok = 0;
-let fallback = 0;
+const failures = [];
 
 async function emit(route, outFile) {
   await mkdir(path.dirname(outFile), { recursive: true });
   try {
-    const { html, head } = await render(route);
+    const rendered = await render(route.path);
+    const html = rendered.html;
+    let head = rendered.head;
+    if (route.allowHeadFallback && !head.includes('rel="canonical"')) {
+      head += `<title>Admin | AHAD Cleaning</title><meta name="description" content="Geschützter Verwaltungsbereich von AHAD Cleaning."><meta name="robots" content="noindex, follow"><link rel="canonical" href="${canonicalOrigin}${route.path}">`;
+    }
+    validateRender(route, html, head);
     await writeFile(outFile, injectRoot(base, html, head));
     ok++;
-    return true;
-  } catch (err) {
-    // Degradiert zur SPA-Hülle — Route funktioniert weiter via Client-Render.
+  } catch (error) {
+    // Artefakt nur zur lokalen Diagnose schreiben; der Build schlägt unten fehl.
     await writeFile(outFile, template);
-    fallback++;
-    console.warn(`  ! ${route} → Fallback (CSR): ${err?.message ?? err}`);
-    return false;
+    failures.push({ route: route.path, error });
+    console.error(`  ✗ ${route.path}: ${error?.message ?? error}`);
   }
 }
 
-console.log(`Prerendering ${ROUTES.length} Routen …`);
-for (const route of ROUTES) {
-  const outFile = route === '/' ? path.join(dist, 'index.html') : path.join(dist, route.slice(1), 'index.html');
+console.log(`Prerendering ${routes.length} Routen …`);
+for (const route of routes) {
+  const outFile = route.path === '/'
+    ? path.join(dist, 'index.html')
+    : path.join(dist, `${route.path.slice(1)}.html`);
   await emit(route, outFile);
 }
 
-// 404-Seite (SPA-Fallback für Hoster) aus der NotFound-Route.
 try {
   const { html, head } = await render('/__not-found__');
+  if (!html.trim() || !/<h1\b/i.test(html) || !head.includes('content="noindex, follow"')) {
+    throw new Error('404-Seite ist unvollständig oder nicht auf noindex gesetzt');
+  }
   await writeFile(path.join(dist, '404.html'), injectRoot(base, html, head));
   ok++;
-} catch {
+} catch (error) {
   await writeFile(path.join(dist, '404.html'), template);
-  fallback++;
+  failures.push({ route: '/__not-found__', error });
+  console.error(`  ✗ /__not-found__: ${error?.message ?? error}`);
 }
 
-// sitemap.xml direkt aus der Routenliste erzeugen — die ROUTES oben sind die
-// einzige Quelle der Wahrheit. Damit kann die Sitemap nie mehr von den echten
-// Seiten abweichen (vorher handgepflegt in public/sitemap.xml).
-const NOINDEX = new Set(['/angebot']); // Funnel bewusst nicht in die Sitemap
-const priorityFor = (route) => {
-  if (route === '/') return '1.0';
-  if (route.startsWith('/leistungen') || route.startsWith('/branchen')) return '0.8';
-  if (route.startsWith('/standorte') || route === '/kontakt') return '0.8';
-  if (route === '/impressum' || route === '/datenschutz') return '0.3';
-  return '0.6';
-};
+const indexableRoutes = routes.filter((route) => route.index);
 const sitemap =
   '<?xml version="1.0" encoding="UTF-8"?>\n' +
   '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
-  ROUTES.filter((r) => !NOINDEX.has(r))
-    .map((r) => `  <url><loc>https://ahad-cleaning.de${r === '/' ? '' : r}</loc><priority>${priorityFor(r)}</priority></url>`)
+  indexableRoutes
+    .map((route) => {
+      const suffix = route.path === '/' ? '/' : route.path;
+      return `  <url><loc>${canonicalOrigin}${suffix}</loc><priority>${route.priority}</priority></url>`;
+    })
     .join('\n') +
   '\n</urlset>\n';
-await writeFile(path.join(dist, 'sitemap.xml'), sitemap);
-console.log(`✓ sitemap.xml generiert (${ROUTES.length - NOINDEX.size} URLs).`);
 
-console.log(`✓ Prerender fertig: ${ok} statisch, ${fallback} Fallback.`);
+const committedSitemap = await readFile(path.resolve('public/sitemap.xml'), 'utf8');
+if (committedSitemap.replace(/\r\n/g, '\n') !== sitemap) {
+  throw new Error('public/sitemap.xml weicht vom Routenmanifest ab und muss synchronisiert werden.');
+}
+
+await writeFile(path.join(dist, 'sitemap.xml'), sitemap);
+console.log(`✓ sitemap.xml generiert (${indexableRoutes.length} indexierbare 200-URLs).`);
+
+if (failures.length > 0) {
+  throw new Error(`Prerender fehlgeschlagen: ${failures.length} Route(n) benötigen CSR-Fallback.`);
+}
+
+console.log(`✓ Prerender fertig: ${ok} statische Dokumente, 0 Fallbacks.`);

@@ -1,0 +1,9 @@
+{
+  "indexes": [],
+  "fieldOverrides": [
+    { "collectionGroup": "leads", "fieldPath": "expiresAt", "ttl": true, "indexes": [] },
+    { "collectionGroup": "offer_leads", "fieldPath": "expiresAt", "ttl": true, "indexes": [] },
+    { "collectionGroup": "job_applications", "fieldPath": "expiresAt", "ttl": true, "indexes": [] },
+    { "collectionGroup": "_lead_rate_limits", "fieldPath": "expiresAt", "ttl": true, "indexes": [] }
+  ]
+}

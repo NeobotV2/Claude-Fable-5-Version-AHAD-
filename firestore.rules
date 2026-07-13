@@ -1,52 +1,86 @@
 rules_version = '2';
 
-// Firestore-Sicherheitsregeln fuer ahad-cleaning.de
-//
-// Prinzip: Website-Besucher duerfen Formulare EINREICHEN (create),
-// aber niemals fremde Eintraege lesen, aendern oder loeschen.
-// Lesen darf ausschliesslich das Admin-Konto (Google-Login im Admin-Panel).
-//
-// WICHTIG: Diese Datei ist die versionierte Referenz. Aktiv wird sie erst
-// durch Deployment: Firebase Console -> Firestore -> Regeln (Inhalt einfuegen)
-// oder `firebase deploy --only firestore:rules`.
-
+// All public lead creation is server-only through /api/send-email. The Admin
+// SDK validates the exact schema and bypasses these client security rules.
 service cloud.firestore {
   match /databases/{database}/documents {
-
     function isAdmin() {
       return request.auth != null
-        && request.auth.token.email != null
-        && request.auth.token.email.lower() in [
-          'yerlikaya288@gmail.com',
-          'm.yerlikaya@ahad-cleaning.de'
-        ];
+        && (
+          request.auth.token.admin == true
+          || (
+            request.auth.token.email_verified == true
+            && request.auth.token.email != null
+            && request.auth.token.email.lower() in [
+              'yerlikaya288@gmail.com',
+              'm.yerlikaya@ahad-cleaning.de'
+            ]
+          )
+        );
     }
 
-    // Ein Formular-Eintrag darf nur neu angelegt werden (kein Update/Delete
-    // durch Besucher) und muss ueberschaubar klein bleiben.
-    function isSaneCreate() {
-      return request.resource.data.size() < 40;
+    function boundedAdminList() {
+      return isAdmin() && request.query.limit != null && request.query.limit <= 100;
     }
 
-    match /leads/{doc} {
-      allow create: if isSaneCreate();
-      allow update: if isAdmin();
-      allow read, delete: if isAdmin();
+    function validManagedUpdate(allowedStatuses) {
+      return request.resource.data.diff(resource.data).affectedKeys()
+          .hasOnly(['status', 'updatedAt', 'expiresAt'])
+        && request.resource.data.status is string
+        && request.resource.data.status in allowedStatuses
+        && request.resource.data.updatedAt == request.time
+        && request.resource.data.expiresAt is timestamp
+        && request.resource.data.expiresAt > request.time
+        && request.resource.data.expiresAt < request.time + duration.value(370, 'd');
     }
 
-    match /offer_leads/{doc} {
-      allow create: if isSaneCreate();
-      allow update: if isAdmin();
-      allow read, delete: if isAdmin();
+    match /leads/{documentId} {
+      allow create: if false;
+      allow get: if isAdmin();
+      allow list: if boundedAdminList();
+      allow update: if isAdmin() && validManagedUpdate(['new', 'contacted', 'closed']);
+      allow delete: if isAdmin();
     }
 
-    match /job_applications/{doc} {
-      allow create: if isSaneCreate();
-      allow update: if isAdmin();
-      allow read, delete: if isAdmin();
+    match /offer_leads/{documentId} {
+      allow create: if false;
+      allow get: if isAdmin();
+      allow list: if boundedAdminList();
+      allow update: if isAdmin() && validManagedUpdate(['new', 'contacted', 'visited', 'offered', 'closed']);
+      allow delete: if isAdmin();
     }
 
-    // Alles andere: komplett gesperrt.
+    match /job_applications/{documentId} {
+      allow create: if false;
+      allow get: if isAdmin();
+      allow list: if boundedAdminList();
+      allow update: if isAdmin() && validManagedUpdate(['new', 'reviewed', 'contacted', 'rejected', 'hired']);
+      allow delete: if isAdmin();
+    }
+
+    // Immutable, admin-visible audit trail for manual deletions in the dashboard.
+    match /admin_audit_logs/{documentId} {
+      allow create: if isAdmin()
+        && request.resource.data.keys().hasOnly([
+          'action', 'collection', 'recordId', 'actorUid', 'actorEmail', 'createdAt'
+        ])
+        && request.resource.data.action == 'delete'
+        && request.resource.data.collection in ['leads', 'offer_leads', 'job_applications']
+        && request.resource.data.recordId is string
+        && request.resource.data.recordId.size() <= 128
+        && request.resource.data.actorUid == request.auth.uid
+        && request.resource.data.actorEmail == request.auth.token.email
+        && request.resource.data.createdAt == request.time;
+      allow get: if isAdmin();
+      allow list: if boundedAdminList();
+      allow update, delete: if false;
+    }
+
+    // Written by the Admin SDK only. Raw IP addresses are never stored.
+    match /_lead_rate_limits/{documentId} {
+      allow read, write: if false;
+    }
+
     match /{document=**} {
       allow read, write: if false;
     }

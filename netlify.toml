@@ -1,12 +1,163 @@
-# npm run build = Client-Build + SSR-Prerender → jede Route als statisches HTML
-# (Inhalt, OG-Tags, JSON-LD im ausgelieferten HTML, kein leeres root mehr).
 [build]
   command = "npm run build"
   publish = "dist"
 
-# Fallback nur für Pfade ohne vorgerenderte Datei (Netlife prüft Dateien zuerst).
-# Prerenderte Routen (z. B. /kostenrechner/index.html) werden direkt ausgeliefert.
+# Die Prerender-Ausgabe nutzt route.html; Netlifys Pretty-URL-Verarbeitung
+# liefert diese unter /route ohne Dateiendung und ohne Verzeichnis-Slash aus.
+[build.processing]
+  skip_processing = false
+
+[build.processing.html]
+  pretty_urls = true
+
+# Legacy-Pfade werden wie auf Vercel permanent auf genau ein kanonisches Ziel
+# geführt. Netlify normalisiert die Quellpfade vor dem Regelabgleich.
 [[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
+  from = "/unterhaltsreinigung"
+  to = "/leistungen/unterhaltsreinigung"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/glas-und-fassadenreinigung"
+  to = "/leistungen/glas-fassadenreinigung"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/glasreinigung"
+  to = "/leistungen/glas-fassadenreinigung"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/fassadenreinigung"
+  to = "/leistungen/glas-fassadenreinigung"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/baureinigung"
+  to = "/leistungen/baureinigung"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/bauschlussreinigung"
+  to = "/leistungen/baureinigung"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/das-sind-wir"
+  to = "/unternehmen"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/industriereinigung"
+  to = "/leistungen/industrie-produktionsreinigung"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/produktionsreinigung"
+  to = "/leistungen/industrie-produktionsreinigung"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/maschinenreinigung"
+  to = "/leistungen/industrie-produktionsreinigung"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/industrie-und-maschinenreinigung"
+  to = "/leistungen/industrie-produktionsreinigung"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/medizintechnik"
+  to = "/leistungen/medizintechnik-reinigung"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/medizintechnikreinigung"
+  to = "/leistungen/medizintechnik-reinigung"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/sonderreinigung"
+  to = "/leistungen/sonderreinigung-stillstandsservice"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/grundreinigung"
+  to = "/leistungen/sonderreinigung-stillstandsservice"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/winterdienst"
+  to = "/leistungen/winterdienst-hausmeisterservice"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/hausmeisterservice"
+  to = "/leistungen/winterdienst-hausmeisterservice"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/lueftungsreinigung"
+  to = "/leistungen/kuechenabluftreinigung-vdi-2052"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/kuechenabluftreinigung"
+  to = "/leistungen/kuechenabluftreinigung-vdi-2052"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/online-buchung"
+  to = "/kontakt"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/reinigungskonzept"
+  to = "/angebot"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/kostenrechner"
+  to = "/angebot"
+  status = 301
+  force = true
+
+# Kein SPA-Catch-all: unbekannte URLs erhalten die vorgerenderte 404.html
+# mit echtem HTTP-404 statt einer indexierbaren Soft-404-Shell.
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Strict-Transport-Security = "max-age=63072000; includeSubDomains"
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "DENY"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+    Content-Security-Policy-Report-Only = "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; script-src 'self' 'unsafe-inline' https://va.vercel-scripts.com; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; connect-src 'self' https://*.googleapis.com https://*.firebaseio.com wss://*.firebaseio.com https://va.vercel-scripts.com https://vitals.vercel-insights.com"

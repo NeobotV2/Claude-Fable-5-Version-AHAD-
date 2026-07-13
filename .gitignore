@@ -3,6 +3,8 @@ dist
 dist-ssr
 dist-file
 dist-server
+test-results
+playwright-report
 *.local
 .DS_Store
 *.log

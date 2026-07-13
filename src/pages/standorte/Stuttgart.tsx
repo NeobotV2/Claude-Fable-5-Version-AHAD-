@@ -4,7 +4,7 @@ import SEO from '@/components/SEO';
 import PageHero from '@/components/PageHero';
 import CTABand from '@/components/CTABand';
 import Accordion, { faqSchemaFrom, type FAQItem } from '@/components/ui/Accordion';
-import { SITE } from '@/lib/site';
+import { ORG_REF, SITE } from '@/lib/site';
 import { IMG } from '@/lib/images';
 
 const LOCAL_SERVICES = [
@@ -92,7 +92,7 @@ const LOCAL_FAQS: FAQItem[] = [
   {
     question: 'Wie schnell ist AHAD im Großraum Stuttgart vor Ort?',
     answer:
-      'Unser Standort in Echterdingen liegt verkehrsgünstig nahe Flughafen und Autobahn. Dadurch erreichen wir die Industriegebiete in Filderstadt, Sindelfingen und Ludwigsburg schnell — in der Regel vereinbaren wir innerhalb von 48 Stunden einen Vor-Ort-Termin, auf Meldungen reagieren wir innerhalb von 24 Stunden.',
+      'Der Großraum Stuttgart gehört zu unserem Einsatzgebiet. Ob und wann eine Vor-Ort-Besichtigung möglich ist, stimmen wir objektbezogen mit Ihnen ab.',
   },
   {
     question: 'Reinigen Sie auch Produktions- und Industriebetriebe im Raum Stuttgart?',
@@ -102,50 +102,34 @@ const LOCAL_FAQS: FAQItem[] = [
   {
     question: 'Übernehmen Sie Büro- und Verwaltungsgebäude in Stuttgart?',
     answer:
-      'Ja. Für Büro- und Verwaltungsgebäude bieten wir planbare Unterhaltsreinigung mit festen Teams, digitaler Qualitätskontrolle und einem festen Ansprechpartner — auch in repräsentativen Innenstadtlagen.',
+      'Ja. Für Büro- und Verwaltungsgebäude bieten wir planbare Unterhaltsreinigung mit abgestimmter Einsatzplanung, dokumentierten Kontrollen und klarer Zuständigkeit — auch in repräsentativen Innenstadtlagen.',
   },
 ];
 
 export default function StandortStuttgart() {
-  const localBusinessSchema = {
+  const regionalServiceSchema = {
     '@context': 'https://schema.org',
-    '@type': 'LocalBusiness',
-    name: 'AHAD Cleaning Company GmbH - Stuttgart',
-    image: `${SITE.url}/images/ahad/stuttgart.webp`,
-    '@id': 'https://ahad-cleaning.de/standorte/stuttgart',
-    url: 'https://ahad-cleaning.de/standorte/stuttgart',
-    telephone: SITE.phone,
-    email: SITE.email,
-    priceRange: '€€',
-    address: {
-      '@type': 'PostalAddress',
-      streetAddress: 'Humboldtstraße 27',
-      addressLocality: 'Echterdingen',
-      postalCode: '70771',
-      addressCountry: 'DE',
-    },
+    '@type': 'Service',
+    name: 'Gebäudereinigung im Großraum Stuttgart',
+    serviceType: 'Gebäudereinigung',
+    '@id': `${SITE.url}/standorte/stuttgart#service`,
+    url: `${SITE.url}/standorte/stuttgart`,
+    provider: ORG_REF,
     areaServed: SERVICE_AREAS.map((name) => ({ '@type': 'City', name })),
-    geo: { '@type': 'GeoCoordinates', latitude: 48.7758, longitude: 9.1829 },
-    openingHoursSpecification: {
-      '@type': 'OpeningHoursSpecification',
-      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
-      opens: '08:00',
-      closes: '17:00',
-    },
   };
 
   return (
     <div>
       <SEO
         title="Gebäudereinigung Stuttgart | AHAD Cleaning"
-        description="Gebäudereinigung in Stuttgart: Unterhalts-, Industrie-, Glas-, Bau- und Sonderreinigung für Industrie, Gewerbe und Verwaltung im Großraum Stuttgart. Feste Objektleitung, dokumentierte Qualität, Besichtigung in 48h."
+        description="Gebäudereinigung im Einsatzgebiet Stuttgart: Unterhalts-, Industrie-, Glas-, Bau- und Sonderreinigung für Industrie, Gewerbe und Verwaltung im Großraum."
         keywords="Gebäudereinigung Stuttgart, Reinigungsfirma Stuttgart, Büroreinigung Stuttgart, Industriereinigung Stuttgart, Unterhaltsreinigung Stuttgart"
-        schema={[localBusinessSchema, faqSchemaFrom(LOCAL_FAQS)]}
+        schema={[regionalServiceSchema, faqSchemaFrom(LOCAL_FAQS)]}
       />
       <PageHero
-        eyebrow="Landeshauptstadt & Umland"
+        eyebrow="Einsatzgebiet · Landeshauptstadt & Umland"
         title="Gebäudereinigung in Stuttgart"
-        lead="Von unserem Stuttgarter Standort aus bedienen wir Ludwigsburg, Esslingen, Böblingen, Sindelfingen, Waiblingen, Leonberg und den gesamten Großraum Stuttgart."
+        lead="Wir bieten Gebäudedienstleistungen in Stuttgart, Ludwigsburg, Esslingen, Böblingen, Sindelfingen, Waiblingen, Leonberg und im weiteren Großraum an."
         image={IMG.stuttgart}
         imageAlt="Stuttgart — Schlossplatz mit Neuem Schloss"
         crumbs={[{ label: 'Standorte', href: '/standorte' }, { label: 'Stuttgart' }]}
@@ -157,7 +141,7 @@ export default function StandortStuttgart() {
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-20">
             <div>
-              <h2 className="text-3xl font-bold mb-8 text-gray-900">Expertise für den Standort Stuttgart</h2>
+              <h2 className="text-3xl font-bold mb-8 text-gray-900">Expertise für das Einsatzgebiet Stuttgart</h2>
               <p className="text-lg text-gray-600 mb-8 leading-relaxed">
                 Stuttgart ist ein Zentrum für Industrie und Verwaltung. Wir bieten maßgeschneiderte Reinigungskonzepte,
                 die den hohen Anforderungen dieser Region gerecht werden.
@@ -168,8 +152,8 @@ export default function StandortStuttgart() {
                   'Professionelle Büroreinigung für Verwaltungsgebäude',
                   'Glas- & Fassadenreinigung für moderne Architektur',
                   'Termingerechte Baureinigung für Neubauprojekte',
-                  'Regionale Präsenz & schnelle Reaktionszeiten',
-                  'Qualitätsmanagement nach höchsten Standards',
+                  'Objektbezogene Einsatz- und Terminplanung',
+                  'Nachvollziehbare Qualitätskontrollen',
                 ].map((item) => (
                   <li key={item} className="flex items-center gap-3 text-gray-700 font-medium">
                     <CheckCircle2 className="text-accent w-5 h-5 flex-shrink-0" />
@@ -186,8 +170,8 @@ export default function StandortStuttgart() {
                     <MapPin className="w-6 h-6" />
                   </div>
                   <div>
-                    <h4 className="font-bold text-gray-900 mb-1">Adresse</h4>
-                    <p className="text-gray-600">Humboldtstraße 27<br />70771 Echterdingen</p>
+                    <h4 className="font-bold text-gray-900 mb-1">Einsatzgebiet</h4>
+                    <p className="text-gray-600">Stuttgart und umliegende Städte nach objektbezogener Abstimmung</p>
                   </div>
                 </div>
                 <div className="flex gap-6">
@@ -265,7 +249,7 @@ export default function StandortStuttgart() {
           <div className="mb-20">
             <h2 className="text-3xl font-bold mb-3 text-gray-900">Einsatzgebiete im Großraum Stuttgart</h2>
             <p className="text-lg text-gray-600 mb-8 max-w-3xl leading-relaxed">
-              Verkehrsgünstig ab Echterdingen sind wir schnell im gesamten Großraum im Einsatz:
+              In diesen Städten und Teilregionen können Einsätze objektbezogen angefragt werden:
             </p>
             <div className="flex flex-wrap gap-2.5">
               {SERVICE_AREAS.map((area) => (
@@ -288,13 +272,13 @@ export default function StandortStuttgart() {
                 <h2 className="text-3xl font-bold mb-6">Warum AHAD Cleaning in Stuttgart?</h2>
                 <p className="text-xl text-blue-100 mb-8 leading-relaxed">
                   Die Region Stuttgart ist geprägt von Weltmarktführern und hochspezialisierten Mittelständlern. Unsere
-                  Nähe zum Flughafen und zur Autobahn ermöglicht uns extrem kurze Reaktionszeiten für Kunden in den
-                  Industriegebieten Filderstadt, Sindelfingen und Ludwigsburg.
+                  Leistungen planen wir passend zu Objekt, Nutzung und vereinbartem Zeitfenster — auch für Industrie-
+                  und Gewerbeobjekte in Filderstadt, Sindelfingen und Ludwigsburg.
                 </p>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="flex items-start gap-3">
                     <CheckCircle2 className="text-[#0D6B38] w-6 h-6 flex-shrink-0 mt-1" />
-                    <p className="font-medium">Lokale Teams mit Ortskenntnis</p>
+                    <p className="font-medium">Einsatzplanung für die Region</p>
                   </div>
                   <div className="flex items-start gap-3">
                     <CheckCircle2 className="text-[#0D6B38] w-6 h-6 flex-shrink-0 mt-1" />
@@ -315,7 +299,7 @@ export default function StandortStuttgart() {
 
       <CTABand
         title="Ihr Objekt im Großraum Stuttgart?"
-        lead="Regionales Team, feste Objektleitung: Besichtigung in 48 Stunden, Angebot in 24 Stunden danach."
+        lead="Regionale Betreuung und feste Objektleitung: Besichtigung nach Abstimmung, Angebot im Anschluss."
       />
     </div>
   );

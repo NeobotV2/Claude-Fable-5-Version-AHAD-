@@ -13,7 +13,7 @@ export default function Impressum() {
       <PageHero compact eyebrow="Rechtliches" title="Impressum" crumbs={[{ label: 'Impressum' }]} />
       <div className="max-w-4xl mx-auto px-4 py-16 lg:py-24">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={false}
           animate={{ opacity: 1, y: 0 }}
           className="prose prose-slate max-w-none"
         >

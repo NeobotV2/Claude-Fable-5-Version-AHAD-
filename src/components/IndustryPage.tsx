@@ -152,7 +152,7 @@ export default function IndustryPage({ branche }: { branche: BrancheData }) {
 
       <CTABand
         title={`Ihr Objekt in besten Händen`}
-        lead={`Lassen Sie uns über die Anforderungen in ${branche.name} sprechen — Ersteinschätzung innerhalb von 24h.`}
+        lead={`Lassen Sie uns über die Anforderungen in ${branche.name} sprechen — wir klären Bedarf und nächste Schritte persönlich.`}
       />
     </div>
   );

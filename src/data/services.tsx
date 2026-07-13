@@ -66,7 +66,7 @@ export const SERVICES: ServiceData[] = [
       'Systematische, kontinuierliche Pflege Ihrer Räumlichkeiten mit festen Teams, klaren Intervallen und dokumentierter Qualität — damit Sauberkeit bei Ihnen kein Thema mehr ist.',
     seoTitle: 'Unterhaltsreinigung für Unternehmen | AHAD Cleaning',
     seoDescription:
-      'Professionelle Unterhaltsreinigung für Büros, Verwaltungen und Gewerbe in Süddeutschland. Feste Teams, digitale Qualitätskontrolle, 24h Reaktionszeit. Jetzt Angebot anfordern.',
+      'Professionelle Unterhaltsreinigung für Büros, Verwaltungen und Gewerbe in Süddeutschland. Klare Zuständigkeiten und dokumentierte Qualitätskontrolle. Jetzt Besichtigung anfragen.',
     keywords: 'Unterhaltsreinigung Unternehmen, Büroreinigung, Gebäudereinigung Villingen-Schwenningen, Reinigungsfirma Büro',
     icon: <LayoutDashboard className="w-6 h-6" />,
     image: IMG.unterhaltsreinigung,
@@ -108,7 +108,7 @@ export const SERVICES: ServiceData[] = [
       {
         question: 'Was passiert bei Reklamationen?',
         answer:
-          'Ihre feste Objektleitung reagiert garantiert innerhalb von 24 Stunden. Durch unsere dokumentierten Kontrollen erkennen wir Abweichungen meist, bevor sie Ihnen auffallen.',
+          'Ihre Objektleitung nimmt die Meldung auf, klärt die Zuständigkeit und dokumentiert die vereinbarte Nachbesserung.',
       },
       {
         question: 'Können Sie unser bestehendes Reinigungsteam übernehmen?',
@@ -117,7 +117,7 @@ export const SERVICES: ServiceData[] = [
       },
     ],
     ctaTitle: 'Saubere Flächen, null Steuerungsaufwand',
-    ctaLead: 'Lassen Sie uns Ihr Objekt besichtigen — in 48h vor Ort, Angebot in 24h danach.',
+    ctaLead: 'Lassen Sie uns Ihr Objekt besichtigen — Termin nach Abstimmung, transparentes Angebot danach.',
   },
   {
     slug: 'industrie-produktionsreinigung',
@@ -181,17 +181,17 @@ export const SERVICES: ServiceData[] = [
       },
     ],
     ctaTitle: 'Produktion läuft. Reinigung auch.',
-    ctaLead: 'Sprechen Sie mit uns über schichtintegrierte Reinigung — Ersteinschätzung innerhalb von 24h.',
+    ctaLead: 'Sprechen Sie mit uns über schichtintegrierte Reinigung — wir klären Anforderungen und nächste Schritte persönlich.',
   },
   {
     slug: 'glas-fassadenreinigung',
     short: 'Werterhalt der Gebäudehülle',
     path: '/leistungen/glas-fassadenreinigung',
     name: 'Glas- & Fassadenreinigung',
-    tag: 'Werterhalt garantiert',
+    tag: 'Werterhalt im Blick',
     heroTitle: 'Glas- und Fassadenreinigung für Gewerbeobjekte',
     heroLead:
-      'Die Gebäudehülle ist die Visitenkarte Ihres Unternehmens. Wir sorgen für streifenfreie Ergebnisse und langfristigen Werterhalt — mit Osmose-Technik und zertifizierten Höhenzugängen.',
+      'Die Gebäudehülle ist die Visitenkarte Ihres Unternehmens. Wir planen streifenfreie Ergebnisse und langfristigen Werterhalt — mit Osmose-Technik und geeigneten Höhenzugängen.',
     seoTitle: 'Glasreinigung & Fassadenreinigung für Gewerbe | AHAD Cleaning',
     seoDescription:
       'Professionelle Glas- und Fassadenreinigung für Gewerbeobjekte in Süddeutschland. Streifenfreie Sauberkeit, Osmose-Technik und Werterhalt. Jetzt anfragen!',
@@ -245,7 +245,7 @@ export const SERVICES: ServiceData[] = [
       },
     ],
     ctaTitle: 'Glänzende Aussichten für Ihr Gebäude',
-    ctaLead: 'Objektbesichtigung in 48h, verbindliches Angebot in 24h — kostenfrei und unverbindlich.',
+    ctaLead: 'Objektbesichtigung nach Abstimmung, transparentes Angebot im Anschluss — kostenfrei und unverbindlich.',
   },
   {
     slug: 'baureinigung',
@@ -253,7 +253,7 @@ export const SERVICES: ServiceData[] = [
     path: '/leistungen/baureinigung',
     name: 'Baureinigung',
     tag: 'Terminfest',
-    heroTitle: 'Baureinigung mit garantierter Termintreue',
+    heroTitle: 'Baureinigung abgestimmt auf Ihren Abnahmetermin',
     heroLead:
       'Von der Baugrob- bis zur Baufeinreinigung: Wir liefern besenreine bis bezugsfertige Übergaben — pünktlich zum Abnahmetermin, auch wenn es auf der Baustelle eng wird.',
     seoTitle: 'Baureinigung: Grob- & Feinreinigung termingerecht | AHAD Cleaning',
@@ -266,8 +266,8 @@ export const SERVICES: ServiceData[] = [
     highlights: [
       {
         icon: <Clock className="w-7 h-7 text-brand" />,
-        title: 'Absolute Termintreue',
-        text: 'Abnahmen verschieben sich nicht — wir planen Kapazitäten mit Puffer und liefern zum vereinbarten Termin.',
+        title: 'Terminorientierte Planung',
+        text: 'Wir stimmen Kapazitäten und Übergabepunkte mit Bauleitung und Gewerken auf den vereinbarten Termin ab.',
       },
       {
         icon: <Users className="w-7 h-7 text-accent" />,
@@ -305,11 +305,11 @@ export const SERVICES: ServiceData[] = [
       {
         question: 'Arbeiten Sie mit Generalunternehmern zusammen?',
         answer:
-          'Ja, wir sind eingespielter Partner von Bauunternehmen und Generalunternehmern wie GOLDBECK oder Köster und kennen die Abläufe, Sicherheitsanforderungen und den Termindruck auf Großbaustellen.',
+          'Ja. Leistungsumfang, Sicherheitsanforderungen, Bauzeitenplan und Übergabepunkte stimmen wir direkt mit Bauleitung und Gewerken ab.',
       },
     ],
     ctaTitle: 'Ihr Abnahmetermin steht? Wir auch.',
-    ctaLead: 'Senden Sie uns Eckdaten und Termin — wir melden uns innerhalb von 24h mit einer belastbaren Zusage.',
+    ctaLead: 'Senden Sie uns Eckdaten und Termin — nach der Prüfung besprechen wir Machbarkeit und nächste Schritte.',
   },
   {
     slug: 'medizintechnik-reinigung',
@@ -322,7 +322,7 @@ export const SERVICES: ServiceData[] = [
       'Wo Hygiene über Produktqualität entscheidet, zählen Disziplin, Schulung und lückenlose Nachweise. Wir reinigen auditnah — nach Ihren Standards und SOPs.',
     seoTitle: 'Medizintechnik-Reinigung & Reinraum | AHAD Cleaning',
     seoDescription:
-      'Spezialisierte Reinigung für Medizintechnik, Labore und sensible Produktionsbereiche. ISO-konforme Prozesse, geschultes Personal, lückenlose Dokumentation.',
+      'Spezialisierte Reinigung für Medizintechnik, Labore und sensible Produktionsbereiche. Prozesse nach Ihren QM-Vorgaben, geschultes Personal und nachvollziehbare Dokumentation.',
     keywords: 'Medizintechnik Reinigung, Reinraumreinigung, ISO Reinigung, Hygienereinigung Produktion',
     icon: <Microscope className="w-6 h-6" />,
     image: IMG.medizintechnik,
@@ -429,7 +429,7 @@ export const SERVICES: ServiceData[] = [
       {
         question: 'Wie schnell können Sie bei akuten Fällen helfen?',
         answer:
-          'Bei akuten Verschmutzungen — etwa nach einem Wasserschaden — sind wir in der Regel innerhalb von 24 bis 48 Stunden einsatzbereit. Rufen Sie uns direkt an.',
+          'Bei akuten Verschmutzungen prüfen wir verfügbare Kapazitäten und den sicheren Einsatzrahmen direkt mit Ihnen. Rufen Sie uns dafür bitte an.',
       },
       {
         question: 'Lohnt sich eine regelmäßige Grundreinigung?',
@@ -438,7 +438,7 @@ export const SERVICES: ServiceData[] = [
       },
     ],
     ctaTitle: 'Ein Sonderfall? Unser Normalfall.',
-    ctaLead: 'Beschreiben Sie uns Ihre Aufgabe — wir melden uns innerhalb von 24h mit Lösung und Festpreis.',
+    ctaLead: 'Beschreiben Sie uns Ihre Aufgabe — wir prüfen den Bedarf und vereinbaren das weitere Vorgehen.',
   },
   {
     slug: 'winterdienst-hausmeisterservice',
@@ -502,7 +502,7 @@ export const SERVICES: ServiceData[] = [
       },
     ],
     ctaTitle: 'Der nächste Winter kommt sicher',
-    ctaLead: 'Sichern Sie sich Ihre Räumkapazität rechtzeitig — Angebot innerhalb von 24h.',
+    ctaLead: 'Sichern Sie sich Ihre Räumkapazität rechtzeitig — Angebot nach Bedarfsklärung und Besichtigung.',
   },
   {
     slug: 'kuechenabluftreinigung-vdi-2052',

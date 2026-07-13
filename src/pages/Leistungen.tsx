@@ -45,13 +45,7 @@ export default function Leistungen() {
 
       <PageHero
         eyebrow="Leistungen"
-        title={
-          <>
-            Acht Leistungen.
-            <br />
-            Ein Qualitätssystem.
-          </>
-        }
+        title="Acht Leistungen. Ein Qualitätssystem."
         lead="Wir verkaufen keine Reinigungsstunden, sondern stabile Prozesse, Werterhalt und Rechtssicherheit — jede Leistung läuft über dasselbe AHAD-System aus Analyse, Handling, Audit und Dokumentation."
         image={IMG.heroLowAngle}
         crumbs={[{ label: 'Leistungen' }]}

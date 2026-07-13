@@ -5,27 +5,13 @@ import SEO from '@/components/SEO';
 import Accordion from '@/components/ui/Accordion';
 import CTABand from '@/components/CTABand';
 import { IMG } from '@/lib/images';
+import ArticleMeta from '@/components/ArticleMeta';
+import { buildArticleSchema, EDITORIAL_ARTICLES } from '@/data/editorial';
 
 export default function FachwissenVDI2052() {
-  const articleSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'Article',
-    headline: 'Küchenabluftreinigung nach VDI 2052: Pflicht, Intervalle, Ablauf & Nachweis',
-    datePublished: '2026-06-24',
-    dateModified: '2026-06-24',
-    description:
-      'Was schreibt die VDI 2052 für die Reinigung von Küchenlüftungsanlagen vor? Reinigungsintervalle nach Betriebsstunden, Brandschutz, Versicherungsschutz, Ablauf und Dokumentationspflicht.',
-    author: { '@type': 'Organization', name: 'AHAD Cleaning Company GmbH' },
-    publisher: {
-      '@type': 'Organization',
-      name: 'AHAD Cleaning Company GmbH',
-      logo: { '@type': 'ImageObject', url: 'https://ahad-cleaning.de/logo.png' },
-    },
-    mainEntityOfPage: {
-      '@type': 'WebPage',
-      '@id': 'https://ahad-cleaning.de/fachwissen/kuechenabluftreinigung-vdi-2052-pflicht-ablauf-nachweis',
-    },
-  };
+  const articleSchema = buildArticleSchema(
+    EDITORIAL_ARTICLES['kuechenabluftreinigung-vdi-2052-pflicht-ablauf-nachweis'],
+  );
 
   const faqSchema = {
     '@context': 'https://schema.org',
@@ -41,10 +27,10 @@ export default function FachwissenVDI2052() {
       },
       {
         '@type': 'Question',
-        name: 'Wie oft muss eine Küchenabluftanlage gereinigt werden?',
+        name: 'Wie wird das Reinigungsintervall einer Küchenabluftanlage festgelegt?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: 'Das Reinigungsintervall richtet sich nach den jährlichen Betriebsstunden der Küche. Als verbreitete Orientierungswerte gelten: bis 2.000 Betriebsstunden pro Jahr eine Reinigung alle 12 Monate, bei 2.000 bis 4.000 Betriebsstunden alle 6 Monate und bei mehr als 4.000 Betriebsstunden alle 3 Monate. Maßgeblich ist immer der tatsächliche Verschmutzungsgrad; bei starker Fettbelastung (z. B. Frittieren, Grillen, Wok) können kürzere Intervalle nötig sein. Verantwortlich für die Festlegung und Einhaltung ist der Betreiber.',
+          text: 'Ein belastbares Intervall wird anhand der Belastung, des Anlagenzustands, der Nutzung, der Herstellerangaben und der für den Betrieb geltenden aktuellen Vorgaben festgelegt. Pauschale Kalenderfristen auf einer Website ersetzen diese objektbezogene Prüfung nicht.',
         },
       },
       {
@@ -60,7 +46,7 @@ export default function FachwissenVDI2052() {
         name: 'Welche Rolle spielt der Versicherungsschutz?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: 'Sachversicherer setzen die regelmäßige, nachweisbare Reinigung der Küchenlüftung häufig als Obliegenheit voraus. Kommt es zu einem Fettbrand und kann der Betreiber keine ordnungsgemäße, dokumentierte Reinigung nachweisen, kann der Versicherungsschutz im Schadensfall gefährdet sein oder gekürzt werden. Ein lückenloses Reinigungsprotokoll ist daher nicht nur Hygiene-, sondern auch Versicherungsnachweis.',
+          text: 'Welche Nachweise und Obliegenheiten gelten, ergibt sich aus dem konkreten Versicherungsvertrag. Betreiber sollten die Anforderungen direkt mit ihrem Versicherer klären und Reinigung, Anlagenzustand sowie festgelegte Folgetermine nachvollziehbar dokumentieren.',
         },
       },
       {
@@ -76,7 +62,7 @@ export default function FachwissenVDI2052() {
         name: 'Wer ist für die Reinigung der Küchenlüftung verantwortlich?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: 'Verantwortlich ist der Betreiber der Küche (z. B. Gastronom, Hotel, Kantinen- oder Klinikbetreiber). Er muss sicherstellen, dass die Anlage in den richtigen Intervallen fachgerecht gereinigt und dies dokumentiert wird. Die Durchführung wird in der Regel an einen spezialisierten Dienstleister vergeben, die Verantwortung für die Einhaltung verbleibt jedoch beim Betreiber.',
+          text: 'Zuständigkeiten sollten Betreiber, Eigentümer, Wartungsunternehmen und gegebenenfalls Versicherer objektbezogen klären und dokumentieren. Welche Pflichten im Einzelfall bestehen, ergibt sich aus den aktuellen gesetzlichen, behördlichen, vertraglichen und technischen Vorgaben.',
         },
       },
     ],
@@ -85,9 +71,9 @@ export default function FachwissenVDI2052() {
   return (
     <div>
       <SEO
-        title="Küchenabluftreinigung nach VDI 2052: Pflicht & Intervalle | AHAD"
-        description="Was schreibt die VDI 2052 für Küchenlüftungsanlagen vor? Reinigungsintervalle nach Betriebsstunden, Brandschutz, Versicherungsschutz, Ablauf und Nachweispflicht — der Leitfaden für Betreiber."
-        keywords="Küchenabluftreinigung VDI 2052, Lüftungsreinigung Küche, Dunstabzug reinigen Pflicht, Reinigungsintervall Küchenabluft, Brandschutz Küchenlüftung, Fettbrand, AHAD Cleaning"
+        title="Küchenabluftreinigung nach VDI 2052: Einordnung & Ablauf | AHAD"
+        description="Orientierung zur Küchenabluftreinigung: VDI-Übersicht, objektbezogene Intervalle, Brandschutz, Hygiene, Ablauf und nachvollziehbare Dokumentation."
+        keywords="Küchenabluftreinigung VDI 2052, Lüftungsreinigung Küche, Reinigungsintervall Küchenabluft, Brandschutz Küchenlüftung, Fettbrand, AHAD Cleaning"
         schema={[articleSchema, faqSchema]}
       />
 
@@ -104,15 +90,15 @@ export default function FachwissenVDI2052() {
         <div className="absolute inset-0 bg-gradient-to-r from-navy via-navy/85 to-navy/40" />
         <div className="absolute inset-0 bg-gradient-to-t from-navy via-transparent to-navy/60" />
         <div className="max-w-7xl mx-auto px-4 relative z-10">
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="max-w-3xl">
+          <motion.div initial={false} animate={{ opacity: 1, y: 0 }} className="max-w-3xl">
             <span className="inline-flex items-center gap-2 bg-white/10 px-4 py-2 rounded-full text-sm font-bold mb-6 tracking-wider uppercase border border-white/20">
               <BookOpen className="w-4 h-4 text-[#9CDDB7]" />
               Fachwissen: Hygiene &amp; Brandschutz
             </span>
-            <h1 className="display-lg text-white mb-8">Küchenabluftreinigung nach VDI 2052: Pflicht, Intervalle &amp; Nachweis</h1>
+            <h1 className="display-lg text-white mb-8">Küchenabluftreinigung nach VDI 2052: Einordnung, Ablauf &amp; Nachweis</h1>
             <p className="text-xl text-blue-100 leading-relaxed mb-10 font-medium">
-              Fettablagerungen in der Küchenlüftung sind Brandlast und Hygienerisiko zugleich. Was die VDI 2052 für
-              Betreiber gewerblicher Küchen bedeutet — und wie Sie auf der sicheren Seite sind.
+              Fettablagerungen in der Küchenlüftung können Brandschutz und Hygiene beeinträchtigen. Wir ordnen ein,
+              welche Faktoren bei Prüfung, Intervallplanung und Dokumentation zu berücksichtigen sind.
             </p>
           </motion.div>
         </div>
@@ -127,14 +113,14 @@ export default function FachwissenVDI2052() {
               <CalendarClock className="w-8 h-8 text-[#0B2341] mb-4" />
               <h3 className="font-bold text-lg mb-2 text-[#0B2341]">Intervall</h3>
               <p className="text-[#424751] text-sm">
-                Nach Betriebsstunden: jährlich, halbjährlich oder vierteljährlich — je nach Nutzung und Fettbelastung.
+                Objektbezogen nach Nutzung, Belastung, Anlagenzustand, Herstellerangaben und geltenden Vorgaben.
               </p>
             </div>
             <div className="bg-[#f7f9fb] p-6 rounded-2xl border border-gray-100">
               <Flame className="w-8 h-8 text-[#0D6B38] mb-4" />
               <h3 className="font-bold text-lg mb-2 text-[#0B2341]">Warum</h3>
               <p className="text-[#424751] text-sm">
-                Fett im Kanal ist Brandlast. Reinigung senkt die Brandgefahr und sichert Hygiene und Versicherungsschutz.
+                Reinigung entfernt Fettablagerungen und unterstützt Brandschutz, Hygiene und einen sicheren Anlagenbetrieb.
               </p>
             </div>
             <div className="bg-[#f7f9fb] p-6 rounded-2xl border border-gray-100">
@@ -147,6 +133,8 @@ export default function FachwissenVDI2052() {
           </div>
         </div>
       </section>
+
+      <ArticleMeta slug="kuechenabluftreinigung-vdi-2052-pflicht-ablauf-nachweis" />
 
       {/* Content */}
       <section className="py-20 lg:py-32 bg-white">
@@ -163,47 +151,24 @@ export default function FachwissenVDI2052() {
               betrieblichen Brandschutzes.
             </p>
 
-            <h2 className="text-3xl font-black text-[#0B2341] mb-6">Reinigungsintervalle nach Betriebsstunden</h2>
+            <h2 className="text-3xl font-black text-[#0B2341] mb-6">Reinigungsintervalle objektbezogen festlegen</h2>
             <p className="mb-6">
-              Die VDI 2052 koppelt das Reinigungsintervall an die <strong>jährlichen Betriebsstunden</strong> der Küche.
-              Je länger und intensiver gekocht wird, desto schneller lagert sich Fett ab — und desto kürzer muss das
-              Intervall sein. Die folgenden, in der Praxis verbreiteten Orientierungswerte fassen das zusammen:
+              Ein belastbarer Reinigungsplan lässt sich nicht allein aus einer pauschalen Kalenderfrist ableiten.
+              Entscheidend sind unter anderem Nutzungsdauer, Art der Speisenzubereitung, Fett- und Aerosolbelastung,
+              Anlagenzustand, Herstellerangaben und die für den konkreten Betrieb geltenden Vorgaben. Die aktuelle
+              Richtlinienfassung und der tatsächliche Zustand der Anlage sind gemeinsam zu prüfen.
             </p>
-            <div className="overflow-x-auto mb-8 rounded-2xl border border-gray-200 shadow-sm">
-              <table className="w-full text-left text-sm border-collapse bg-white">
-                <thead>
-                  <tr className="bg-[#0B2341] text-white">
-                    <th className="px-4 py-3 font-bold">Betriebsstunden pro Jahr</th>
-                    <th className="px-4 py-3 font-bold">Empfohlenes Reinigungsintervall</th>
-                    <th className="px-4 py-3 font-bold">Typische Nutzung</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-gray-200">
-                  <tr>
-                    <td className="px-4 py-3 font-semibold text-[#0B2341] align-top">bis 2.000 h</td>
-                    <td className="px-4 py-3 align-top">jährlich (alle 12 Monate)</td>
-                    <td className="px-4 py-3 align-top">Saison- oder Teilzeitbetrieb, kleine Küchen</td>
-                  </tr>
-                  <tr className="bg-[#f7f9fb]">
-                    <td className="px-4 py-3 font-semibold text-[#0B2341] align-top">2.000 – 4.000 h</td>
-                    <td className="px-4 py-3 align-top">halbjährlich (alle 6 Monate)</td>
-                    <td className="px-4 py-3 align-top">Restaurants, Hotels, Kantinen im Regelbetrieb</td>
-                  </tr>
-                  <tr>
-                    <td className="px-4 py-3 font-semibold text-[#0B2341] align-top">über 4.000 h</td>
-                    <td className="px-4 py-3 align-top">vierteljährlich (alle 3 Monate)</td>
-                    <td className="px-4 py-3 align-top">Großküchen, Durchlauf-/Schichtbetrieb, hohe Fettlast</td>
-                  </tr>
-                </tbody>
-              </table>
+            <div className="not-prose mb-12 rounded-2xl border border-line bg-paper p-6">
+              <p className="font-bold text-navy">Für die Intervallentscheidung dokumentieren</p>
+              <ul className="mt-3 grid gap-2 text-sm text-slate sm:grid-cols-2">
+                <li>• Nutzung und Belastungsprofil</li>
+                <li>• sichtbarer Anlagenzustand</li>
+                <li>• Hersteller- und Wartungsangaben</li>
+                <li>• betriebliche, behördliche und vertragliche Vorgaben</li>
+              </ul>
             </div>
-            <p className="mb-12 text-sm text-[#6b7280]">
-              Hinweis: Die Werte sind verbreitete Orientierungsgrößen. Maßgeblich ist der tatsächliche
-              Verschmutzungsgrad — bei starkem Frittier-, Grill- oder Wok-Betrieb sind kürzere Intervalle nötig. Die
-              verbindliche Festlegung und der Nachweis liegen beim Betreiber.
-            </p>
 
-            <h2 className="text-3xl font-black text-[#0B2341] mb-6">Warum die Reinigung Pflicht ist: Brandschutz, Hygiene, Versicherung</h2>
+            <h2 className="text-3xl font-black text-[#0B2341] mb-6">Warum regelmäßige Prüfung und Reinigung wichtig sind</h2>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 mb-12">
               <div className="bg-[#f7f9fb] p-6 rounded-2xl border border-gray-100">
                 <Flame className="w-7 h-7 text-[#0B2341] mb-3" />
@@ -217,8 +182,8 @@ export default function FachwissenVDI2052() {
                 <ShieldCheck className="w-7 h-7 text-[#0D6B38] mb-3" />
                 <h3 className="font-bold text-[#0B2341] mb-2">Versicherung</h3>
                 <p className="text-sm">
-                  Sachversicherer fordern die nachweisbare Reinigung als Obliegenheit. Ohne Nachweis droht im Brandfall
-                  die Kürzung des Versicherungsschutzes.
+                  Anforderungen unterscheiden sich je Versicherungsvertrag. Klären Sie Obliegenheiten und erforderliche
+                  Nachweise direkt mit Ihrem Versicherer.
                 </p>
               </div>
               <div className="bg-[#f7f9fb] p-6 rounded-2xl border border-gray-100">
@@ -275,16 +240,16 @@ export default function FachwissenVDI2052() {
               <Link to="/branchen/hotellerie-objektbetrieb" className="text-[#0B2341] font-bold hover:underline">
                 Hotel- und Objektbetrieb
               </Link>{' '}
-              sind verlässliche Reinigungsintervalle und eine saubere Dokumentation Pflicht — wir übernehmen beides aus
-              einer Hand und planbar im laufenden Betrieb.
+              sind belastbar festgelegte Reinigungsintervalle und eine saubere Dokumentation besonders relevant. Wir
+              unterstützen bei Bestandsaufnahme, Reinigung und nachvollziehbarem Protokoll.
             </p>
 
             <h2 className="text-3xl font-black text-[#0B2341] mb-6">Fazit</h2>
             <p className="mb-8">
-              Die Reinigung der Küchenabluft nach VDI 2052 ist keine Kür, sondern Betreiberpflicht mit handfesten
-              Folgen für Brandschutz, Hygiene und Versicherungsschutz. Wer Intervalle nach Betriebsstunden einhält,
-              fachgerecht reinigen lässt und lückenlos dokumentiert, schützt Menschen, Betrieb und Versicherungsanspruch
-              zugleich.
+              Belastung und Zustand einer Küchenabluftanlage müssen regelmäßig betrachtet werden. Objektbezogene
+              Intervalle, fachgerechte Reinigung und eine nachvollziehbare Dokumentation unterstützen Brandschutz,
+              Hygiene und sicheren Anlagenbetrieb. Maßgeblich bleiben die aktuell geltenden Vorgaben für das konkrete
+              Objekt.
             </p>
           </div>
         </div>
@@ -303,7 +268,7 @@ export default function FachwissenVDI2052() {
 
       <CTABand
         title="Küchenlüftung fällig oder unklar, welches Intervall gilt?"
-        lead="Wir prüfen Ihre Anlage, empfehlen das richtige Intervall nach VDI 2052 und reinigen fachgerecht inklusive prüffähiger Dokumentation."
+        lead="Wir erfassen Zustand und Nutzung Ihrer Anlage, unterstützen bei der Intervallplanung und dokumentieren die ausgeführten Arbeiten nachvollziehbar."
       />
     </div>
   );

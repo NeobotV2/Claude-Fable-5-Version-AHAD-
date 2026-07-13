@@ -1,9 +1,10 @@
+import { StrictMode } from 'react';
 import { Writable } from 'node:stream';
 import { renderToPipeableStream } from 'react-dom/server';
 import { StaticRouter } from 'react-router';
 import { HelmetProvider } from 'react-helmet-async';
-import ErrorBoundary from './components/ErrorBoundary';
-import AppRoutes from './AppRoutes';
+import { AppFrame } from './App';
+import RouterContent from './RouterContent';
 
 /** Helmet befüllt diesen Context während des Renders. */
 interface HelmetCtx {
@@ -51,13 +52,15 @@ export function render(url: string): Promise<RenderResult> {
 
     let didError = false;
     const { pipe, abort } = renderToPipeableStream(
-      <ErrorBoundary>
+      <StrictMode>
         <HelmetProvider context={helmetContext as never}>
-          <StaticRouter basename={BASENAME || undefined} location={location}>
-            <AppRoutes />
-          </StaticRouter>
+          <AppFrame>
+            <StaticRouter basename={BASENAME || undefined} location={location}>
+              <RouterContent />
+            </StaticRouter>
+          </AppFrame>
         </HelmetProvider>
-      </ErrorBoundary>,
+      </StrictMode>,
       {
         onAllReady() {
           pipe(writable);

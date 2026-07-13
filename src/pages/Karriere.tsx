@@ -7,14 +7,13 @@ import SectionHeading from '@/components/ui/SectionHeading';
 import ButtonLink from '@/components/ui/Button';
 import SmartImage from '@/components/ui/SmartImage';
 import { IMG } from '@/lib/images';
-import { STATS } from '@/lib/site';
-import Stat from '@/components/ui/Stat';
+import { JOB_PROFILES } from '@/data/jobs';
 
 const benefits = [
   {
     icon: <Euro className="w-6 h-6" />,
-    title: 'Faire, pünktliche Bezahlung',
-    text: 'Tariflohn oder besser, pünktlich auf dem Konto — plus Zuschläge, die wirklich ausgezahlt werden.',
+    title: 'Transparente Vergütung',
+    text: 'Vergütung, Arbeitszeitmodell und mögliche Zuschläge klären wir vor dem Einsatz verständlich und verbindlich.',
   },
   {
     icon: <Clock className="w-6 h-6" />,
@@ -33,8 +32,8 @@ const benefits = [
   },
   {
     icon: <BadgeCheck className="w-6 h-6" />,
-    title: 'Unbefristet & sozialversichert',
-    text: 'Feste Anstellung mit allen Sozialleistungen — Minijob, Teilzeit oder Vollzeit, wie es zu Ihrem Leben passt.',
+    title: 'Passende Arbeitsmodelle',
+    text: 'Je nach Einsatzgebiet prüfen wir Minijob, Teilzeit oder Vollzeit gemeinsam mit Ihnen.',
   },
   {
     icon: <Heart className="w-6 h-6" />,
@@ -43,19 +42,12 @@ const benefits = [
   },
 ];
 
-const jobs = [
-  { title: 'Reinigungskraft (m/w/d)', type: 'Minijob · Teilzeit · Vollzeit', location: 'Villingen-Schwenningen & Umgebung' },
-  { title: 'Vorarbeiter:in Gebäudereinigung (m/w/d)', type: 'Vollzeit', location: 'Schwarzwald-Baar-Kreis' },
-  { title: 'Objektleiter:in (m/w/d)', type: 'Vollzeit', location: 'Region Stuttgart' },
-  { title: 'Glas- & Fassadenreiniger:in (m/w/d)', type: 'Vollzeit', location: 'Süddeutschland' },
-];
-
 export default function Karriere() {
   return (
     <div>
       <SEO
         title="Karriere & Jobs in der Gebäudereinigung | AHAD Cleaning"
-        description="Jobs bei AHAD Cleaning: faire Bezahlung, planbare Arbeitszeiten, feste Teams. Jetzt in 2 Minuten bewerben — Reinigungskraft, Vorarbeiter, Objektleitung."
+        description="Karriere bei AHAD Cleaning: Einsatzprofile, Arbeitsmodelle und ein kurzer Bewerbungsprozess ohne Lebenslauf. Verfügbarkeit wird persönlich bestätigt."
         keywords="Jobs Gebäudereinigung, Reinigungskraft Job Villingen-Schwenningen, Objektleiter Stelle, Karriere Reinigungsfirma"
       />
 
@@ -63,17 +55,18 @@ export default function Karriere() {
         eyebrow="Karriere bei AHAD"
         title={
           <>
-            Arbeit, die gesehen
-            <br />
-            wird. Bei uns.
+            <span className="block">Arbeit, die{' '}</span>
+            <span className="block">
+              <span className="whitespace-nowrap">gesehen wird.</span> Bei uns.
+            </span>
           </>
         }
-        lead="80+ Kolleginnen und Kollegen sorgen täglich dafür, dass Betriebe in Süddeutschland sauber laufen. Was sie eint: faire Bedingungen, feste Teams und ein Arbeitgeber, der Wort hält."
+        lead="Menschen und eingespielte Teams sorgen täglich dafür, dass Betriebe in Süddeutschland sauber laufen. Wir erklären Einsatz, Arbeitszeit und Vergütung vorab transparent."
         image={IMG.karriere}
         crumbs={[{ label: 'Karriere' }]}
-        cta={{ label: 'In 2 Minuten bewerben', to: '/karriere/bewerbung' }}
+        cta={{ label: 'Interesse in vier Schritten senden', to: '/karriere/bewerbung' }}
         secondaryCta={{
-          label: 'Offene Stellen ansehen',
+          label: 'Einsatzprofile ansehen',
           href: '#offene-stellen',
           // Sanfter In-Page-Scroll statt Hash-Navigation — funktioniert in
           // beiden Router-Modi (Browser- und Hash-Router der Datei-Vorschau).
@@ -82,13 +75,7 @@ export default function Karriere() {
             document.getElementById('offene-stellen')?.scrollIntoView({ behavior: 'smooth' });
           },
         }}
-      >
-        <div className="mt-14 grid grid-cols-2 lg:grid-cols-4 gap-6 max-w-3xl">
-          {STATS.map((stat) => (
-            <Stat key={stat.label} value={stat.value} suffix={stat.suffix} label={stat.label} dark />
-          ))}
-        </div>
-      </PageHero>
+      />
 
       {/* Benefits */}
       <section className="py-20 lg:py-32 bg-white">
@@ -120,19 +107,19 @@ export default function Karriere() {
         <div className="max-w-7xl mx-auto px-4 sm:px-8 grid grid-cols-1 lg:grid-cols-12 gap-12">
           <div className="lg:col-span-5">
             <SectionHeading
-              eyebrow="Gesuchte Profile"
-              title="Diese Verstärkung suchen wir laufend."
-              lead="Kein Anschreiben, kein Lebenslauf-Stress: Unsere Bewerbung dauert 2 Minuten — den Rest klären wir im persönlichen Gespräch."
+              eyebrow="Einsatzprofile"
+              title="In diesen Bereichen prüfen wir Bewerbungen."
+              lead="Die Karten sind keine Zusage einer aktuell offenen Stelle. Wir prüfen Ihr Interesse und bestätigen Einsatzort, Arbeitsmodell und Verfügbarkeit persönlich."
             />
             <Reveal delay={0.2} className="mt-8">
               <SmartImage src={IMG.team} alt="Das AHAD Team" className="rounded-3xl aspect-[4/3] shadow-soft" />
             </Reveal>
           </div>
           <div className="lg:col-span-7 flex flex-col gap-4">
-            {jobs.map((job, i) => (
+            {JOB_PROFILES.map((job, i) => (
               <Reveal key={job.title} delay={i * 0.08}>
                 <Link
-                  to="/karriere/bewerbung"
+                  to={`/karriere/bewerbung?profile=${job.id}`}
                   className="group flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white rounded-2xl border border-line p-6 lg:p-7 card-lift"
                 >
                   <div>
@@ -140,16 +127,16 @@ export default function Karriere() {
                     <div className="flex flex-wrap gap-x-5 gap-y-1 text-[13px] font-semibold text-slate">
                       <span className="flex items-center gap-1.5">
                         <Clock size={13} className="text-accent" />
-                        {job.type}
+                        {job.employment}
                       </span>
                       <span className="flex items-center gap-1.5">
                         <MapPin size={13} className="text-accent" />
-                        {job.location}
+                        {job.region}
                       </span>
                     </div>
                   </div>
                   <span className="inline-flex items-center gap-2 text-sm font-bold text-brand flex-shrink-0">
-                    Jetzt bewerben
+                    Interesse senden
                     <span className="w-9 h-9 rounded-full bg-paper grid place-items-center transition-all duration-300 group-hover:bg-accent group-hover:text-white group-hover:translate-x-1">
                       <ArrowRight size={16} />
                     </span>
@@ -164,7 +151,7 @@ export default function Karriere() {
                   <div>
                     <h3 className="font-headline font-bold text-lg mb-1">Initiativbewerbung</h3>
                     <p className="text-sm text-blue-100/80">
-                      Nichts Passendes dabei? Überzeugen Sie uns trotzdem — gute Leute finden bei uns immer einen Platz.
+                      Nichts Passendes dabei? Senden Sie uns Ihr Einsatzinteresse — wir prüfen die Möglichkeiten ohne Zusage einer konkreten Stelle.
                     </p>
                   </div>
                   <ButtonLink to="/karriere/bewerbung" variant="white" arrow className="flex-shrink-0">
@@ -206,7 +193,7 @@ export default function Karriere() {
           </div>
           <Reveal delay={0.3} className="text-center mt-12">
             <ButtonLink to="/karriere/bewerbung" size="lg" arrow>
-              Jetzt in 2 Minuten bewerben
+              Interesse in vier Schritten senden
             </ButtonLink>
           </Reveal>
         </div>

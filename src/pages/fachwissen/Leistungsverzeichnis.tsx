@@ -5,27 +5,13 @@ import SEO from '@/components/SEO';
 import Accordion from '@/components/ui/Accordion';
 import CTABand from '@/components/CTABand';
 import { IMG } from '@/lib/images';
+import ArticleMeta from '@/components/ArticleMeta';
+import { buildArticleSchema, EDITORIAL_ARTICLES } from '@/data/editorial';
 
 export default function FachwissenLeistungsverzeichnis() {
-  const articleSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'Article',
-    headline: 'Leistungsverzeichnis für die Gebäudereinigung erstellen: Anleitung & Vorlage',
-    datePublished: '2026-06-24',
-    dateModified: '2026-06-24',
-    description:
-      'Wie erstellt man ein belastbares Leistungsverzeichnis (LV) für die Gebäudereinigung? Aufbau, Bestandteile, verrichtungs- vs. ergebnisorientiert und eine Schritt-für-Schritt-Anleitung.',
-    author: { '@type': 'Organization', name: 'AHAD Cleaning Company GmbH' },
-    publisher: {
-      '@type': 'Organization',
-      name: 'AHAD Cleaning Company GmbH',
-      logo: { '@type': 'ImageObject', url: 'https://ahad-cleaning.de/logo.png' },
-    },
-    mainEntityOfPage: {
-      '@type': 'WebPage',
-      '@id': 'https://ahad-cleaning.de/fachwissen/leistungsverzeichnis-gebaeudereinigung-erstellen',
-    },
-  };
+  const articleSchema = buildArticleSchema(
+    EDITORIAL_ARTICLES['leistungsverzeichnis-gebaeudereinigung-erstellen'],
+  );
 
   const faqSchema = {
     '@context': 'https://schema.org',
@@ -96,7 +82,7 @@ export default function FachwissenLeistungsverzeichnis() {
         <div className="absolute inset-0 bg-gradient-to-r from-navy via-navy/85 to-navy/40" />
         <div className="absolute inset-0 bg-gradient-to-t from-navy via-transparent to-navy/60" />
         <div className="max-w-7xl mx-auto px-4 relative z-10">
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="max-w-3xl">
+          <motion.div initial={false} animate={{ opacity: 1, y: 0 }} className="max-w-3xl">
             <span className="inline-flex items-center gap-2 bg-white/10 px-4 py-2 rounded-full text-sm font-bold mb-6 tracking-wider uppercase border border-white/20">
               <BookOpen className="w-4 h-4 text-[#9CDDB7]" />
               Fachwissen: Entscheiderwissen
@@ -141,6 +127,8 @@ export default function FachwissenLeistungsverzeichnis() {
           </div>
         </div>
       </section>
+
+      <ArticleMeta slug="leistungsverzeichnis-gebaeudereinigung-erstellen" />
 
       {/* Content */}
       <section className="py-20 lg:py-32 bg-white">
