@@ -6,6 +6,7 @@ import Accordion from '@/components/ui/Accordion';
 import CTABand from '@/components/CTABand';
 import { IMG } from '@/lib/images';
 import ArticleMeta from '@/components/ArticleMeta';
+import HeadlineText from '@/components/ui/HeadlineText';
 import { buildArticleSchema, EDITORIAL_ARTICLES } from '@/data/editorial';
 
 export default function FachwissenKosten() {
@@ -95,7 +96,9 @@ export default function FachwissenKosten() {
               <BookOpen className="w-4 h-4 text-[#9CDDB7]" />
               Fachwissen: Kosten &amp; Kalkulation
             </span>
-            <h1 className="display-lg text-white mb-8">Was kostet Gebäudereinigung? Stundensatz, m²-Preise &amp; Beispiele</h1>
+            <h1 className="display-lg text-white mb-8">
+              <HeadlineText text="Was kostet Gebäudereinigung? Stundensatz, m²-Preise & Beispiele" />
+            </h1>
             <p className="text-xl text-blue-100 leading-relaxed mb-10 font-medium">
               Transparent statt Blackbox: Wie sich Reinigungskosten wirklich zusammensetzen, was hinter dem
               Stundensatz steckt — und wie Sie daraus den Preis für Ihr Objekt ableiten.

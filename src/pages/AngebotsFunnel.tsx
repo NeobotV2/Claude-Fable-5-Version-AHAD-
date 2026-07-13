@@ -22,6 +22,7 @@ import {
 import { Link } from 'react-router-dom';
 import SEO from '@/components/SEO';
 import { cn } from '@/lib/utils';
+import HeadlineText from '@/components/ui/HeadlineText';
 import { SITE, WHATSAPP_HREF } from '@/lib/site';
 import {
   readAttribution,
@@ -376,7 +377,9 @@ export default function AngebotsFunnel() {
     <>
       <header className="text-center mb-8">
         <span className="eyebrow text-mint justify-center mb-4"><Clock size={13} /> Vier übersichtliche Schritte</span>
-        <h1 className="display-md text-white">Kostenlose Vor-Ort-Besichtigung</h1>
+        <h1 className="display-md text-white">
+          <HeadlineText text="Kostenlose Vor-Ort-Besichtigung" />
+        </h1>
         <p className="mt-3 text-blue-100/85">Das belastbare Angebot folgt nach der gemeinsamen Objektaufnahme.</p>
       </header>
 

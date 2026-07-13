@@ -273,7 +273,10 @@ export default function Header() {
                 >
                   <Link
                     to={link.href}
-                    className={cn('flex items-center py-2.5', link.sublinks ? 'pl-3.5 pr-1' : 'px-3.5')}
+                    className={cn(
+                      'flex items-center py-2.5 whitespace-nowrap',
+                      link.sublinks ? 'pl-3.5 pr-1' : 'px-3.5',
+                    )}
                   >
                     {link.name}
                   </Link>

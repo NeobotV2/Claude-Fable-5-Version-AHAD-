@@ -567,7 +567,7 @@ export const translations = {
     successTitle: "Candidature envoyée !",
     successText: "Merci de votre intérêt. Nous vous contacterons prochainement.",
     backHome: "Retour à l'accueil",
-    step1Title: "Comment souhaitez-vous travailler ?",
+    step1Title: "Comment souhaitez‑vous travailler ?",
     jobTypes: {
       vollzeit: { title: "Temps plein", desc: "39 heures par semaine" },
       teilzeit: { title: "Temps partiel", desc: "Matin ou après-midi" },
@@ -597,7 +597,7 @@ export const translations = {
     locationPlaceholder: "Votre ville",
     trustTitle: "Pourquoi demandons-nous cela ?",
     trustText: "Nous planifions votre itinéraire de manière équitable. Vous gagnez ainsi du temps et des frais de déplacement.",
-    step4Title: "Presque fini ! Comment pouvons-nous vous contacter ?",
+    step4Title: "Presque fini ! Comment pouvons‑nous vous contacter ?",
     nameLabel: "Nom et prénom",
     namePlaceholder: "ex. Jean Dupont",
     phoneLabel: "Numéro de téléphone",

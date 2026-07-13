@@ -232,7 +232,7 @@ export default function Home() {
           style={{ opacity: heroFade }}
           className="relative z-10 flex-grow flex items-center max-w-7xl mx-auto px-4 sm:px-8 w-full pt-20 sm:pt-32 pb-8 sm:pb-14 gap-12"
         >
-          <div className="max-w-3xl min-w-0 flex-1">
+          <div className="max-w-4xl min-w-0 flex-1">
             <motion.span
               initial={false}
               animate={{ opacity: 1, y: 0 }}
@@ -249,16 +249,13 @@ export default function Home() {
             <h1
               className="display-xl text-white mb-4 sm:mb-8"
               lang="de"
-              style={{ fontSize: 'clamp(1.6rem, 8vw, 5rem)' }}
+              style={{ fontSize: 'clamp(1.35rem, 7.75vw, 5rem)' }}
             >
-              {/* inline-block hält das lange Kompositum auf einer Zeile
-                  (bei overflow-wrap:break-word bleibt ein inline-block auf
-                  max-content-Breite) statt am Zeichen umzubrechen. */}
-              <span className="inline-block">Gebäudereinigung,</span>
-              <br />
-              die Sie nicht mehr
-              <br />
-              <span className="text-mint">nachsteuern</span> müssen.
+              <span className="whitespace-nowrap">Gebäudereinigung,</span>{' '}
+              die Sie nicht mehr{' '}
+              <span className="whitespace-nowrap">
+                <span className="text-mint">nachsteuern</span> müssen.
+              </span>
             </h1>
 
             {/* LCP-Element: statisch gerendert, damit es sofort sichtbar ist

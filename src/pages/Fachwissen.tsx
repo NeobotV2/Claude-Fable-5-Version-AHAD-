@@ -120,9 +120,10 @@ export default function Fachwissen() {
         eyebrow="Fachwissen"
         title={
           <>
-            Wissen, das saubere
-            <br />
-            Entscheidungen schafft.
+            <span className="block">Wissen, das{' '}</span>
+            <span className="block">
+              <span className="whitespace-nowrap">saubere Entscheidungen</span> schafft.
+            </span>
           </>
         }
         lead="Praxisleitfäden für Facility Manager, Einkauf und Geschäftsführung — mit nachvollziehbarem Aktualisierungsstand, Einordnung veränderlicher Werte und offiziellen Primärquellen."

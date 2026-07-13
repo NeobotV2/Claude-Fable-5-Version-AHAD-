@@ -80,13 +80,7 @@ export default function AHADSystem() {
 
       <PageHero
         eyebrow="Unser Betriebssystem"
-        title={
-          <>
-            Vier Buchstaben.
-            <br />
-            Null Zufall.
-          </>
-        }
+        title="Vier Buchstaben. Null Zufall."
         lead="AHAD steht für Analyse, Handling, Audit und Dokumentation — der Kreislauf, der aus Reinigung einen steuerbaren, messbaren Prozess macht. Unser Name ist unser Verfahren."
         image={IMG.heroArchitecture}
         crumbs={[{ label: 'AHAD System' }]}

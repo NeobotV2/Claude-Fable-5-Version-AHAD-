@@ -55,13 +55,7 @@ export default function Standorte() {
 
       <PageHero
         eyebrow="Unternehmenssitz & Einsatzgebiete"
-        title={
-          <>
-            Regional geplant,
-            <br />
-            persönlich betreut.
-          </>
-        }
+        title="Regional geplant, persönlich betreut."
         lead="Von unserem Unternehmenssitz in Villingen-Schwenningen betreuen wir Objekte in mehreren Regionen Süddeutschlands. Stuttgart und Konstanz sind Einsatzgebiete."
         image={IMG.schwarzwald}
         crumbs={[{ label: 'Standorte' }]}

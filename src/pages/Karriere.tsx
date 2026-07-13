@@ -55,9 +55,10 @@ export default function Karriere() {
         eyebrow="Karriere bei AHAD"
         title={
           <>
-            Arbeit, die gesehen
-            <br />
-            wird. Bei uns.
+            <span className="block">Arbeit, die{' '}</span>
+            <span className="block">
+              <span className="whitespace-nowrap">gesehen wird.</span> Bei uns.
+            </span>
           </>
         }
         lead="Menschen und eingespielte Teams sorgen täglich dafür, dass Betriebe in Süddeutschland sauber laufen. Wir erklären Einsatz, Arbeitszeit und Vergütung vorab transparent."

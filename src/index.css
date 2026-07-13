@@ -110,31 +110,30 @@
 
   /* ── Editorial-Typografie ─────────────────────────────────────── */
   /* Statements in Montserrat Black (wie die Wortmarke) — nur hier,
-     nicht im Fließtext. Leicht verdichtet. BEWUSST OHNE Silbentrennung:
-     ein Trennstrich mitten im Markenwort („Gebäude-reinigung") wirkt
-     unsauber. Überlange Komposita brechen notfalls am Zeichen
-     (break-words), nie mit Bindestrich. */
+     nicht im Fließtext. Leicht verdichtet und bewusst ausschließlich an
+     echten Wortgrenzen umbrechen. `break-word` darf hier nicht eingesetzt
+     werden: Zusammen mit `text-wrap: balance` würde der Browser selbst
+     passende deutsche Komposita mitten im Wort teilen. */
   .display-xl {
-    @apply font-logo font-black tracking-[-0.025em] leading-[1.1] break-words;
-    /* leading bewusst nicht zu eng (1.1), sonst werden Unterlängen wie das „g"
-       in „Gebäudereinigung" bei mehrzeiligen Titeln optisch abgeschnitten.
-       Untergrenze 1.6rem: so passt das längste display-xl-Hero-Wort
-       („Küchenabluftreinigung" ≈ 281 px) selbst auf 320-px-Handys (288 px
-       Innenbreite bei px-4) komplett in EINE Zeile – sonst schnappt break-words
-       das letzte Zeichen („g") in die nächste Zeile. Gegen alle 112 gerenderten
-       Überschriften mit Montserrat-Black-Metriken verifiziert. */
-    font-size: clamp(1.6rem, 6.5vw, 5rem);
+    @apply font-logo font-black tracking-[-0.025em] leading-[1.1];
+    overflow-wrap: normal;
+    word-break: normal;
+    hyphens: none;
+    /* leading 1.1 schützt Unterlängen wie das „g" in mehrzeiligen Titeln. */
+    font-size: clamp(1.35rem, 6.5vw, 5rem);
   }
   .display-lg {
-    @apply font-logo font-black tracking-[-0.02em] leading-[1.1] break-words;
-    /* Untergrenze 1.6rem: lange „…reinigung"-Komposita (z. B.
-       „Küchenabluftreinigung" ≈ 284 px) passen damit auch auf schmalen Handys
-       in eine Zeile, statt das End-„g" per break-words abzutrennen.
-       leading 1.1 schützt zusätzlich die Unterlänge des „g". */
-    font-size: clamp(1.6rem, 4.8vw, 3.3rem);
+    @apply font-logo font-black tracking-[-0.02em] leading-[1.1];
+    overflow-wrap: normal;
+    word-break: normal;
+    hyphens: none;
+    font-size: clamp(1.3rem, 6.5vw, 1.6rem);
   }
   .display-md {
     @apply font-logo font-extrabold tracking-[-0.015em] leading-[1.12];
+    overflow-wrap: normal;
+    word-break: normal;
+    hyphens: none;
     font-size: clamp(1.55rem, 3vw, 2.3rem);
   }
   /* Digitaler Akzent in Space Grotesk (Designbook: Website-Akzente). */
@@ -191,6 +190,12 @@
   .marquee-shell:focus-within .animate-marquee,
   .marquee-container[data-paused="true"] .animate-marquee {
     animation-play-state: paused;
+  }
+
+  @media (min-width: 390px) {
+    .display-lg {
+      font-size: clamp(1.6rem, 4.8vw, 3.3rem);
+    }
   }
 
   .reference-logo {

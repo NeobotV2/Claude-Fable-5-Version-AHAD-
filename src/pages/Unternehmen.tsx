@@ -55,9 +55,8 @@ export default function Unternehmen() {
         eyebrow="Über uns"
         title={
           <>
-            Wir sind die, die
-            <br />
-            Wort halten.
+            <span className="block">Wir sind die,{' '}</span>
+            <span className="block">die Wort halten.</span>
           </>
         }
         lead="AHAD Cleaning ist ein inhabergeführtes Gebäudedienstleistungsunternehmen aus Villingen-Schwenningen. Unser Antrieb: Reinigung so verlässlich machen, dass Sie nie wieder darüber nachdenken müssen."

@@ -21,9 +21,8 @@ export default function Referenzen() {
         eyebrow="Referenzen"
         title={
           <>
-            Vertrauen wird
-            <br />
-            verdient. Täglich.
+            <span className="block">Vertrauen wird verdient.{' '}</span>
+            <span className="block">Täglich.</span>
           </>
         }
         lead="Erfahrungen aus der Zusammenarbeit geben Orientierung. Namentliche Referenzen und Logos zeigen wir nur mit dokumentierter Freigabe."

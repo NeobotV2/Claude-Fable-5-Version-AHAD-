@@ -20,13 +20,7 @@ export default function Branchen() {
 
       <PageHero
         eyebrow="Branchen"
-        title={
-          <>
-            Jede Branche hat
-            <br />
-            ihre eigene Logik.
-          </>
-        }
+        title="Jede Branche hat ihre eigene Logik."
         lead="Schichtbetrieb, Hygienezonen, Publikumsverkehr oder Abnahmetermine: Wir kennen die kritischen Punkte Ihrer Branche — und bauen die Reinigung darum herum, nicht umgekehrt."
         image={IMG.brancheIndustrie}
         crumbs={[{ label: 'Branchen' }]}
