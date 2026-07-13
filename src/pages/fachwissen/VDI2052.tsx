@@ -1,275 +1,397 @@
-import { motion } from 'motion/react';
-import { BookOpen, Flame, ClipboardCheck, CalendarClock, ShieldCheck } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { ClipboardCheck, FileSearch, ShieldCheck, Wrench } from 'lucide-react';
 import SEO from '@/components/SEO';
+import PageHero from '@/components/PageHero';
 import Accordion from '@/components/ui/Accordion';
 import CTABand from '@/components/CTABand';
-import { IMG } from '@/lib/images';
 import ArticleMeta from '@/components/ArticleMeta';
+import ArticleFooter from '@/components/ArticleFooter';
 import { buildArticleSchema, EDITORIAL_ARTICLES } from '@/data/editorial';
+import { IMG } from '@/lib/images';
+
+const SLUG = 'kuechenabluftreinigung-vdi-2052-pflicht-ablauf-nachweis' as const;
+
+const faqItems = [
+  {
+    question: 'Welches Blatt der VDI 2052 behandelt die Küchenabluftreinigung?',
+    answer:
+      'VDI 2052 Blatt 2 behandelt die Reinigung von Abluftanlagen in gewerblichen Küchen. Blatt 1 ordnet Technik und Betrieb der Küchenlüftung ein; VDI-MT 2052 Blatt 3 beschreibt ein Schulungskonzept für Personen, die mit der Reinigung von Küchenabluftanlagen befasst sind.',
+  },
+  {
+    question: 'Gibt es ein festes Reinigungsintervall für jede Küchenabluftanlage?',
+    answer:
+      'Nein. Ein belastbares Prüf- und Reinigungsintervall ist objektbezogen aus Nutzung und Belastung, dokumentiertem Anlagenzustand, Herstellerangaben sowie den aktuellen behördlichen, vertraglichen und versicherungsbezogenen Vorgaben abzuleiten. Die Entwicklung zwischen zwei Prüfungen hilft, das Intervall anzupassen.',
+  },
+  {
+    question: 'Ist Küchenabluftreinigung dasselbe wie Wartung?',
+    answer:
+      'Nein. Reinigung entfernt die im vereinbarten Umfang zugänglichen Ablagerungen. Wartung, technische Zustandsbewertung, Funktionsprüfung und Reparatur sind eigene Leistungen. Sie können gemeinsam beauftragt werden, müssen dann aber mit Zuständigkeit, Umfang und Abnahmekriterien getrennt beschrieben sein.',
+  },
+  {
+    question: 'Wer darf die Anlage nach der Reinigung wieder in Betrieb nehmen?',
+    answer:
+      'Das muss der Betreiber vor Beginn festlegen. Die Wiederinbetriebnahme sollte durch die im betrieblichen Freigabeprozess benannte und dafür befugte Person erfolgen. Reinigungskraft, technischer Prüfer und freigabeberechtigte Person können unterschiedliche Rollen sein.',
+  },
+  {
+    question: 'Was gehört in ein Reinigungsprotokoll?',
+    answer:
+      'Dokumentiert werden sollten mindestens Anlagenidentifikation, Datum, Ausgangszustand, vereinbarter und tatsächlich gereinigter Umfang, nicht zugängliche Bereiche, Verfahren und Mittel, Vorher-/Nachher-Fotos, Abweichungen, verantwortliche Personen sowie die getrennte Übergabe und Wiederinbetriebnahme. Zusätzliche Anforderungen sind objektbezogen festzulegen.',
+  },
+  {
+    question: 'Reicht ein Reinigungsprotokoll automatisch für Behörde oder Versicherer?',
+    answer:
+      'Nicht automatisch. Welche Inhalte, Prüfschritte und Aufbewahrungsfristen gefordert sind, hängt von den für das Objekt geltenden Vorgaben und dem Versicherungsvertrag ab. Der benötigte Nachweisumfang sollte vor der Beauftragung mit den zuständigen Stellen geklärt werden.',
+  },
+];
 
 export default function FachwissenVDI2052() {
-  const articleSchema = buildArticleSchema(
-    EDITORIAL_ARTICLES['kuechenabluftreinigung-vdi-2052-pflicht-ablauf-nachweis'],
-  );
-
+  const articleSchema = buildArticleSchema(EDITORIAL_ARTICLES[SLUG]);
   const faqSchema = {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
-    mainEntity: [
-      {
-        '@type': 'Question',
-        name: 'Was regelt die VDI 2052 bei Küchenlüftungsanlagen?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: 'Die Richtlinie VDI 2052 (Raumlufttechnik in Küchen) beschreibt Planung, Betrieb und Instandhaltung von raumlufttechnischen Anlagen in gewerblichen Küchen. Sie definiert unter anderem Hygiene- und Reinigungsanforderungen für Dunstabzugshauben, Aerosolabscheider (Filter), Abluftkanäle und Ventilatoren. Ziel ist es, Fettablagerungen zu begrenzen, die Hygiene sicherzustellen und die Brandgefahr durch Fettbrände zu reduzieren.',
-        },
-      },
-      {
-        '@type': 'Question',
-        name: 'Wie wird das Reinigungsintervall einer Küchenabluftanlage festgelegt?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: 'Ein belastbares Intervall wird anhand der Belastung, des Anlagenzustands, der Nutzung, der Herstellerangaben und der für den Betrieb geltenden aktuellen Vorgaben festgelegt. Pauschale Kalenderfristen auf einer Website ersetzen diese objektbezogene Prüfung nicht.',
-        },
-      },
-      {
-        '@type': 'Question',
-        name: 'Warum ist die Küchenabluftreinigung für den Brandschutz wichtig?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: 'In Dunstabzugshauben, Filtern und Abluftkanälen lagern sich mit der Zeit Fette und Aerosole ab. Diese Fettablagerungen sind leicht entzündlich und stellen eine erhebliche Brandlast dar. Entzündet sich Fett im Kanalsystem, kann sich ein Brand schnell über die gesamte Lüftungsanlage ausbreiten. Regelmäßige, fachgerechte Reinigung entfernt diese Brandlast und ist damit eine zentrale Brandschutzmaßnahme in jeder gewerblichen Küche.',
-        },
-      },
-      {
-        '@type': 'Question',
-        name: 'Welche Rolle spielt der Versicherungsschutz?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: 'Welche Nachweise und Obliegenheiten gelten, ergibt sich aus dem konkreten Versicherungsvertrag. Betreiber sollten die Anforderungen direkt mit ihrem Versicherer klären und Reinigung, Anlagenzustand sowie festgelegte Folgetermine nachvollziehbar dokumentieren.',
-        },
-      },
-      {
-        '@type': 'Question',
-        name: 'Wie wird die Reinigung der Küchenabluft nachgewiesen?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: 'Der Nachweis erfolgt über ein Reinigungsprotokoll, das den gereinigten Anlagenumfang, das Datum, den Zustand vor und nach der Reinigung (Fotodokumentation) sowie den nächsten empfohlenen Termin festhält. Seriöse Dienstleister dokumentieren Hauben, Filter, Kanäle und Ventilatoren getrennt und übergeben einen prüffähigen Bericht, den der Betreiber für Behörden, Sachversicherer und die eigene Hygieneorganisation aufbewahrt.',
-        },
-      },
-      {
-        '@type': 'Question',
-        name: 'Wer ist für die Reinigung der Küchenlüftung verantwortlich?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: 'Zuständigkeiten sollten Betreiber, Eigentümer, Wartungsunternehmen und gegebenenfalls Versicherer objektbezogen klären und dokumentieren. Welche Pflichten im Einzelfall bestehen, ergibt sich aus den aktuellen gesetzlichen, behördlichen, vertraglichen und technischen Vorgaben.',
-        },
-      },
-    ],
+    mainEntity: faqItems.map((item) => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: { '@type': 'Answer', text: item.answer },
+    })),
   };
 
   return (
-    <div>
+    <article>
       <SEO
-        title="Küchenabluftreinigung nach VDI 2052: Einordnung & Ablauf | AHAD"
-        description="Orientierung zur Küchenabluftreinigung: VDI-Übersicht, objektbezogene Intervalle, Brandschutz, Hygiene, Ablauf und nachvollziehbare Dokumentation."
-        keywords="Küchenabluftreinigung VDI 2052, Lüftungsreinigung Küche, Reinigungsintervall Küchenabluft, Brandschutz Küchenlüftung, Fettbrand, AHAD Cleaning"
+        title="Küchenabluftreinigung: VDI 2052 Blatt 2 prüfen | AHAD"
+        description="VDI 2052 Blatt 2 richtig einordnen: objektbezogene Intervalle, klar abgegrenzter Reinigungsumfang, sichere Übergabe und nachvollziehbares Musterprotokoll."
+        keywords="Küchenabluftreinigung VDI 2052 Blatt 2, Küchenlüftung reinigen, Reinigungsintervall Küchenabluft, Reinigungsprotokoll Abluftanlage"
         schema={[articleSchema, faqSchema]}
       />
 
-      {/* Hero */}
-      <section className="relative pt-36 pb-20 lg:pt-44 lg:pb-28 bg-navy text-white overflow-hidden grain">
-        <div className="absolute inset-0 opacity-40">
-          <img
-            src={IMG.kuechenabluft}
-            alt="Reinigung einer Küchenabluftanlage nach VDI 2052"
-            className="w-full h-full object-cover"
-            referrerPolicy="no-referrer"
-          />
-        </div>
-        <div className="absolute inset-0 bg-gradient-to-r from-navy via-navy/85 to-navy/40" />
-        <div className="absolute inset-0 bg-gradient-to-t from-navy via-transparent to-navy/60" />
-        <div className="max-w-7xl mx-auto px-4 relative z-10">
-          <motion.div initial={false} animate={{ opacity: 1, y: 0 }} className="max-w-3xl">
-            <span className="inline-flex items-center gap-2 bg-white/10 px-4 py-2 rounded-full text-sm font-bold mb-6 tracking-wider uppercase border border-white/20">
-              <BookOpen className="w-4 h-4 text-[#9CDDB7]" />
-              Fachwissen: Hygiene &amp; Brandschutz
-            </span>
-            <h1 className="display-lg text-white mb-8">Küchenabluftreinigung nach VDI 2052: Einordnung, Ablauf &amp; Nachweis</h1>
-            <p className="text-xl text-blue-100 leading-relaxed mb-10 font-medium">
-              Fettablagerungen in der Küchenlüftung können Brandschutz und Hygiene beeinträchtigen. Wir ordnen ein,
-              welche Faktoren bei Prüfung, Intervallplanung und Dokumentation zu berücksichtigen sind.
-            </p>
-          </motion.div>
-        </div>
-      </section>
+      <PageHero
+        compact
+        titleSize="lg"
+        eyebrow="Fachwissen · Hygiene & Brandschutz"
+        title="Küchenabluft nach VDI 2052 Blatt 2 prüfen und dokumentieren"
+        lead="Belastung, Anlagenzustand und geltende Vorgaben bestimmen, wann und in welchem Umfang gereinigt wird. Entscheidend sind eine klare Leistungsgrenze, geregelte Freigaben und ein Protokoll, das auch nicht zugängliche Bereiche sichtbar macht."
+        image={IMG.kuechenabluft}
+        imageAlt="Fachgerechte Reinigung einer gewerblichen Küchenabluftanlage"
+        crumbs={[{ label: 'Fachwissen', href: '/fachwissen' }, { label: 'VDI 2052 Blatt 2' }]}
+      />
 
-      {/* Auf einen Blick */}
-      <section className="py-16 bg-white border-b border-gray-100">
-        <div className="max-w-7xl mx-auto px-4">
-          <h2 className="text-2xl font-black text-[#0B2341] mb-8 text-center">Küchenabluftreinigung auf einen Blick</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-[#f7f9fb] p-6 rounded-2xl border border-gray-100">
-              <CalendarClock className="w-8 h-8 text-[#0B2341] mb-4" />
-              <h3 className="font-bold text-lg mb-2 text-[#0B2341]">Intervall</h3>
-              <p className="text-[#424751] text-sm">
-                Objektbezogen nach Nutzung, Belastung, Anlagenzustand, Herstellerangaben und geltenden Vorgaben.
-              </p>
-            </div>
-            <div className="bg-[#f7f9fb] p-6 rounded-2xl border border-gray-100">
-              <Flame className="w-8 h-8 text-[#0D6B38] mb-4" />
-              <h3 className="font-bold text-lg mb-2 text-[#0B2341]">Warum</h3>
-              <p className="text-[#424751] text-sm">
-                Reinigung entfernt Fettablagerungen und unterstützt Brandschutz, Hygiene und einen sicheren Anlagenbetrieb.
-              </p>
-            </div>
-            <div className="bg-[#f7f9fb] p-6 rounded-2xl border border-gray-100">
-              <ClipboardCheck className="w-8 h-8 text-[#0B2341] mb-4" />
-              <h3 className="font-bold text-lg mb-2 text-[#0B2341]">Nachweis</h3>
-              <p className="text-[#424751] text-sm">
-                Reinigungsprotokoll mit Foto-Dokumentation und Folgetermin — prüffähig für Behörde und Sachversicherer.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
+      <ArticleMeta slug={SLUG} />
 
-      <ArticleMeta slug="kuechenabluftreinigung-vdi-2052-pflicht-ablauf-nachweis" />
-
-      {/* Content */}
-      <section className="py-20 lg:py-32 bg-white">
-        <div className="max-w-4xl mx-auto px-4">
-          <div className="prose prose-lg max-w-none text-[#424751] leading-relaxed">
-            <h2 className="text-3xl font-black text-[#0B2341] mb-6">Was die VDI 2052 regelt</h2>
-            <p className="mb-8">
-              Die Richtlinie <strong>VDI 2052 „Raumlufttechnik in Küchen"</strong> beschreibt Planung, Betrieb und
-              Instandhaltung raumlufttechnischer Anlagen in gewerblichen Küchen — von der Großküche über Hotellerie und
-              Gastronomie bis zu Kantinen und Kliniken. Für den Reinigungsalltag entscheidend sind die Hygiene- und
-              Instandhaltungsanforderungen: Dunstabzugshauben, Aerosolabscheider (Fettfilter), Abluftkanäle und
-              Ventilatoren müssen so gepflegt werden, dass sich keine kritischen Fettablagerungen bilden. Damit greift
-              die VDI 2052 ineinander mit dem Lebensmittelhygienerecht und den Anforderungen des baulichen wie
-              betrieblichen Brandschutzes.
+      <section className="bg-white py-16 lg:py-24">
+        <div className="mx-auto max-w-4xl px-4 sm:px-8">
+          <div className="prose prose-lg max-w-none leading-relaxed text-slate">
+            <h2 id="vdi-einordnung" className="scroll-mt-28 font-headline text-2xl font-bold text-navy sm:text-3xl">
+              Die VDI-2052-Reihe richtig einordnen
+            </h2>
+            <p>
+              „Nach VDI 2052“ ist ohne Blattangabe zu ungenau. Die Richtlinienreihe trennt technische und
+              betriebliche Themen, die Reinigung von Abluftanlagen und das dazugehörige Schulungskonzept. Für die
+              konkrete Ausschreibung sollte deshalb benannt werden, welches Blatt und welche Leistung gemeint sind.
             </p>
 
-            <h2 className="text-3xl font-black text-[#0B2341] mb-6">Reinigungsintervalle objektbezogen festlegen</h2>
-            <p className="mb-6">
-              Ein belastbarer Reinigungsplan lässt sich nicht allein aus einer pauschalen Kalenderfrist ableiten.
-              Entscheidend sind unter anderem Nutzungsdauer, Art der Speisenzubereitung, Fett- und Aerosolbelastung,
-              Anlagenzustand, Herstellerangaben und die für den konkreten Betrieb geltenden Vorgaben. Die aktuelle
-              Richtlinienfassung und der tatsächliche Zustand der Anlage sind gemeinsam zu prüfen.
-            </p>
-            <div className="not-prose mb-12 rounded-2xl border border-line bg-paper p-6">
-              <p className="font-bold text-navy">Für die Intervallentscheidung dokumentieren</p>
-              <ul className="mt-3 grid gap-2 text-sm text-slate sm:grid-cols-2">
-                <li>• Nutzung und Belastungsprofil</li>
-                <li>• sichtbarer Anlagenzustand</li>
-                <li>• Hersteller- und Wartungsangaben</li>
-                <li>• betriebliche, behördliche und vertragliche Vorgaben</li>
-              </ul>
+            <div
+              className="not-prose my-10 overflow-x-auto rounded-2xl border border-line bg-white shadow-soft focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+              role="region"
+              aria-label="Einordnung der Richtlinienreihe VDI 2052"
+              tabIndex={0}
+            >
+              <table className="w-full min-w-[760px] border-collapse text-left text-sm">
+                <caption className="sr-only">
+                  Einordnung der drei Blätter der Richtlinienreihe VDI 2052
+                </caption>
+                <thead className="bg-navy text-white">
+                  <tr>
+                    <th scope="col" className="px-5 py-4 font-bold">Dokument</th>
+                    <th scope="col" className="px-5 py-4 font-bold">Schwerpunkt</th>
+                    <th scope="col" className="px-5 py-4 font-bold">Bedeutung für den Auftrag</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-line text-slate">
+                  <tr>
+                    <th scope="row" className="px-5 py-4 font-bold text-navy">VDI 2052 Blatt 1</th>
+                    <td className="px-5 py-4">Technik und Betrieb raumlufttechnischer Anlagen in Küchen</td>
+                    <td className="px-5 py-4">Rahmenbedingungen der vorhandenen Anlage und ihres Betriebs einordnen</td>
+                  </tr>
+                  <tr className="bg-paper">
+                    <th scope="row" className="px-5 py-4 font-bold text-navy">VDI 2052 Blatt 2</th>
+                    <td className="px-5 py-4">Reinigung von Abluftanlagen in gewerblichen Küchen</td>
+                    <td className="px-5 py-4">Prüfung, Reinigungsumfang, Verfahren und Dokumentation beschreiben</td>
+                  </tr>
+                  <tr>
+                    <th scope="row" className="px-5 py-4 font-bold text-navy">VDI-MT 2052 Blatt 3</th>
+                    <td className="px-5 py-4">Schulungskonzept für mit der Reinigung befasste Personen</td>
+                    <td className="px-5 py-4">Benötigte Qualifikation passend zu Rolle und Leistungsumfang prüfen</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
 
-            <h2 className="text-3xl font-black text-[#0B2341] mb-6">Warum regelmäßige Prüfung und Reinigung wichtig sind</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 mb-12">
-              <div className="bg-[#f7f9fb] p-6 rounded-2xl border border-gray-100">
-                <Flame className="w-7 h-7 text-[#0B2341] mb-3" />
-                <h3 className="font-bold text-[#0B2341] mb-2">Brandschutz</h3>
-                <p className="text-sm">
-                  Fett in Hauben und Kanälen ist leicht entzündlich. Ein Fettbrand breitet sich über das Kanalsystem
-                  rasend aus. Reinigung entfernt diese Brandlast.
-                </p>
-              </div>
-              <div className="bg-[#f7f9fb] p-6 rounded-2xl border border-gray-100">
-                <ShieldCheck className="w-7 h-7 text-[#0D6B38] mb-3" />
-                <h3 className="font-bold text-[#0B2341] mb-2">Versicherung</h3>
-                <p className="text-sm">
-                  Anforderungen unterscheiden sich je Versicherungsvertrag. Klären Sie Obliegenheiten und erforderliche
-                  Nachweise direkt mit Ihrem Versicherer.
-                </p>
-              </div>
-              <div className="bg-[#f7f9fb] p-6 rounded-2xl border border-gray-100">
-                <ClipboardCheck className="w-7 h-7 text-[#0B2341] mb-3" />
-                <h3 className="font-bold text-[#0B2341] mb-2">Hygiene</h3>
-                <p className="text-sm">
-                  Verfettete Abluft begünstigt Gerüche und Keime. Saubere Anlagen sichern Lebensmittelhygiene und ein
-                  gesundes Raumklima.
-                </p>
+            <div className="not-prose my-10 rounded-2xl border border-line bg-paper p-6 sm:p-8">
+              <div className="flex items-start gap-4">
+                <ShieldCheck className="mt-0.5 h-7 w-7 shrink-0 text-brand" aria-hidden="true" />
+                <div>
+                  <h3 className="font-headline text-xl font-bold text-navy">Richtlinie, Vertrag und Objekt zusammen lesen</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-slate sm:text-base">
+                    Eine VDI-Richtlinie ist keine pauschale Aussage zu jeder Betreiberpflicht. Maßgeblich sind die für
+                    das Objekt anwendbaren gesetzlichen und behördlichen Vorgaben, Herstellerunterlagen,
+                    Versicherungsbedingungen und vertraglichen Zuständigkeiten in ihrer aktuellen Fassung.
+                  </p>
+                </div>
               </div>
             </div>
 
-            <h2 className="text-3xl font-black text-[#0B2341] mb-6">Ablauf einer fachgerechten Küchenabluftreinigung</h2>
-            <ul className="space-y-4 mb-12 list-none pl-0">
+            <h2 id="intervall-festlegen" className="scroll-mt-28 font-headline text-2xl font-bold text-navy sm:text-3xl">
+              Prüf- und Reinigungsintervall objektbezogen festlegen
+            </h2>
+            <p>
+              Eine allgemeine Kalenderfrist kann die Zustandsprüfung nicht ersetzen. Ein belastbarer Plan verbindet
+              das Belastungsprofil der Küche mit dokumentierten Feststellungen an der konkreten Anlage. Nachfolgende
+              Prüfungen zeigen, ob das angesetzte Intervall beibehalten, verkürzt oder verlängert werden kann.
+            </p>
+
+            <div
+              className="not-prose my-10 overflow-x-auto rounded-2xl border border-line bg-white shadow-soft focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+              role="region"
+              aria-label="Faktoren für das Prüf- und Reinigungsintervall"
+              tabIndex={0}
+            >
+              <table className="w-full min-w-[820px] border-collapse text-left text-sm">
+                <caption className="sr-only">
+                  Faktoren und Nachweise für ein objektbezogenes Prüf- und Reinigungsintervall
+                </caption>
+                <thead className="bg-navy text-white">
+                  <tr>
+                    <th scope="col" className="px-5 py-4 font-bold">Faktor</th>
+                    <th scope="col" className="px-5 py-4 font-bold">Zu klärende Frage</th>
+                    <th scope="col" className="px-5 py-4 font-bold">Sinnvoller Nachweis</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-line text-slate">
+                  <tr>
+                    <th scope="row" className="px-5 py-4 font-bold text-navy">Nutzung und Belastung</th>
+                    <td className="px-5 py-4">Wann, wie lange und mit welchen Zubereitungsarten wird die Küche betrieben?</td>
+                    <td className="px-5 py-4">Nutzungsprofil und dokumentierte Änderungen im Küchenbetrieb</td>
+                  </tr>
+                  <tr className="bg-paper">
+                    <th scope="row" className="px-5 py-4 font-bold text-navy">Anlagenzustand</th>
+                    <td className="px-5 py-4">Welche Bauteile wurden wie geprüft und welche Ablagerungen festgestellt?</td>
+                    <td className="px-5 py-4">Datierte Zustandsaufnahme mit eindeutig zugeordneten Fotos</td>
+                  </tr>
+                  <tr>
+                    <th scope="row" className="px-5 py-4 font-bold text-navy">Zugänglichkeit</th>
+                    <td className="px-5 py-4">Welche Hauben, Abscheider, Kanalabschnitte und Ventilatoren sind erreichbar?</td>
+                    <td className="px-5 py-4">Anlagenskizze, Revisionsöffnungen und dokumentierte Prüflücken</td>
+                  </tr>
+                  <tr className="bg-paper">
+                    <th scope="row" className="px-5 py-4 font-bold text-navy">Hersteller und Instandhaltung</th>
+                    <td className="px-5 py-4">Welche Vorgaben gelten für Bauteile, Verfahren und Wartung?</td>
+                    <td className="px-5 py-4">Aktuelle Betriebs-, Hersteller- und Wartungsunterlagen</td>
+                  </tr>
+                  <tr>
+                    <th scope="row" className="px-5 py-4 font-bold text-navy">Weitere Vorgaben</th>
+                    <td className="px-5 py-4">Welche Anforderungen stellen Behörde, Brandschutz, Hygieneorganisation oder Versicherer?</td>
+                    <td className="px-5 py-4">Objektbezogene Bescheide, Konzepte, Verträge und Abstimmungen</td>
+                  </tr>
+                  <tr className="bg-paper">
+                    <th scope="row" className="px-5 py-4 font-bold text-navy">Verlauf</th>
+                    <td className="px-5 py-4">Wie hat sich der Zustand seit der letzten Prüfung oder Reinigung verändert?</td>
+                    <td className="px-5 py-4">Vergleichbare Protokolle mit identifizierten Prüfstellen</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <ol className="not-prose my-10 grid gap-4 sm:grid-cols-2">
               {[
-                'Bestandsaufnahme: Anlage sichten, Verschmutzungsgrad und Zugänglichkeit (Revisionsöffnungen) prüfen.',
-                'Schutz & Abschottung: Küche und Arbeitsflächen abdecken, Anlage außer Betrieb nehmen und sichern.',
-                'Hauben & Aerosolabscheider: Dunstabzugshauben und Fettfilter demontieren und gründlich entfetten.',
-                'Abluftkanäle: erreichbare Kanalabschnitte über Revisionsöffnungen reinigen; fehlende Öffnungen dokumentieren/ergänzen.',
-                'Ventilatoren: Abluftventilatoren von Fettablagerungen befreien, Funktion prüfen.',
-                'Endkontrolle & Montage: Bauteile wieder einsetzen, Dichtigkeit und Funktion kontrollieren.',
-                'Dokumentation: Reinigungsprotokoll mit Vorher-/Nachher-Fotos, Umfang und Folgetermin übergeben.',
-              ].map((item, i) => (
-                <li key={`vdi-step-${i}`} className="flex items-start gap-3">
-                  <ClipboardCheck className="text-[#0D6B38] w-6 h-6 flex-shrink-0 mt-0.5" />
-                  <span>{item}</span>
+                ['Ausgangslage erfassen', 'Anlage, Nutzung, Zugänglichkeit und vorhandene Vorgaben dokumentieren.'],
+                ['Erstprüfung durchführen', 'Definierte Bauteile und Prüfstellen nachvollziehbar bewerten.'],
+                ['Intervall vorläufig festlegen', 'Termin und Begründung aus Belastung, Zustand und Vorgaben ableiten.'],
+                ['Nachprüfung auswerten', 'Verlauf vergleichen und Intervall dokumentiert anpassen.'],
+              ].map(([title, text], index) => (
+                <li key={title} className="rounded-2xl border border-line bg-paper p-5">
+                  <div className="flex items-start gap-3">
+                    <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-brand text-sm font-black text-white">
+                      {index + 1}
+                    </span>
+                    <div>
+                      <h3 className="font-headline font-bold text-navy">{title}</h3>
+                      <p className="mt-1.5 text-sm leading-relaxed text-slate">{text}</p>
+                    </div>
+                  </div>
                 </li>
               ))}
-            </ul>
+            </ol>
 
-            <h2 className="text-3xl font-black text-[#0B2341] mb-6">Der Nachweis: Ihr Reinigungsprotokoll</h2>
-            <p className="mb-8">
-              Erst die Dokumentation macht die Reinigung zum belastbaren Nachweis. Ein prüffähiges Protokoll hält
-              gereinigten Anlagenumfang, Datum, Zustand vor und nach der Reinigung (Foto-Dokumentation) und den nächsten
-              empfohlenen Termin fest. Bewahren Sie diese Nachweise lückenlos auf — sie sind Ihr Beleg gegenüber
-              Behörden, Sachversicherer und der eigenen Hygieneorganisation. Genau so dokumentieren wir unsere{' '}
-              <Link to="/leistungen/kuechenabluftreinigung-vdi-2052" className="text-[#0B2341] font-bold hover:underline">
-                Küchenabluftreinigung nach VDI 2052
-              </Link>
-              .
+            <h2 id="reinigungsablauf" className="scroll-mt-28 font-headline text-2xl font-bold text-navy sm:text-3xl">
+              Reinigungsablauf und Verantwortlichkeiten trennen
+            </h2>
+            <p>
+              Vor Arbeitsbeginn müssen Umfang, Zugänge, Schutzmaßnahmen und Freigaben feststehen. Besonders wichtig:
+              Reinigung, Wartung, technische Funktionsprüfung und Wiederinbetriebnahme sind verschiedene Leistungen.
+              Sie können in einem Auftrag kombiniert werden, benötigen dann aber jeweils eine benannte verantwortliche
+              Person und eindeutige Abnahmekriterien.
             </p>
 
-            <h2 className="text-3xl font-black text-[#0B2341] mb-6">Regionaler Bezug: Gastronomie &amp; Hotellerie in der Region</h2>
-            <p className="mb-8">
-              Hotellerie, Gastronomie und Kantinen prägen die Nachfrage in{' '}
-              <Link to="/standorte/villingen-schwenningen" className="text-[#0B2341] font-bold hover:underline">
-                Villingen-Schwenningen
-              </Link>{' '}
-              und am{' '}
-              <Link to="/standorte/konstanz" className="text-[#0B2341] font-bold hover:underline">
-                Bodensee
-              </Link>
-              . Gerade im{' '}
-              <Link to="/branchen/hotellerie-objektbetrieb" className="text-[#0B2341] font-bold hover:underline">
-                Hotel- und Objektbetrieb
-              </Link>{' '}
-              sind belastbar festgelegte Reinigungsintervalle und eine saubere Dokumentation besonders relevant. Wir
-              unterstützen bei Bestandsaufnahme, Reinigung und nachvollziehbarem Protokoll.
+            <div
+              className="not-prose my-10 overflow-x-auto rounded-2xl border border-line bg-white shadow-soft focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+              role="region"
+              aria-label="Ablauf einer Küchenabluftreinigung"
+              tabIndex={0}
+            >
+              <table className="w-full min-w-[860px] border-collapse text-left text-sm">
+                <caption className="sr-only">
+                  Ablauf, Verantwortlichkeit und Dokumentation einer Küchenabluftreinigung
+                </caption>
+                <thead className="bg-navy text-white">
+                  <tr>
+                    <th scope="col" className="px-5 py-4 font-bold">Schritt</th>
+                    <th scope="col" className="px-5 py-4 font-bold">Vorab zu regeln</th>
+                    <th scope="col" className="px-5 py-4 font-bold">Zu dokumentieren</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-line text-slate">
+                  <tr>
+                    <th scope="row" className="px-5 py-4 font-bold text-navy">1. Umfang und Zugang</th>
+                    <td className="px-5 py-4">Anlagenteile, Revisionsöffnungen, Ausschlüsse und Arbeitsbereich</td>
+                    <td className="px-5 py-4">Vereinbarter Scope und bekannte nicht zugängliche Bereiche</td>
+                  </tr>
+                  <tr className="bg-paper">
+                    <th scope="row" className="px-5 py-4 font-bold text-navy">2. Außerbetriebnahme und Freigabe</th>
+                    <td className="px-5 py-4">Befugte Person, Abschaltung, Sicherung und Freigabe des Arbeitsbereichs</td>
+                    <td className="px-5 py-4">Zeitpunkt, Zustand und verantwortliche freigebende Person</td>
+                  </tr>
+                  <tr>
+                    <th scope="row" className="px-5 py-4 font-bold text-navy">3. Schutz und Reinigung</th>
+                    <td className="px-5 py-4">Abschirmung, Verfahren, Mittel, Entsorgung und Arbeitsschutz</td>
+                    <td className="px-5 py-4">Tatsächlich bearbeitete Teile, Verfahren und festgestellte Abweichungen</td>
+                  </tr>
+                  <tr className="bg-paper">
+                    <th scope="row" className="px-5 py-4 font-bold text-navy">4. Reinigungsabnahme</th>
+                    <td className="px-5 py-4">Erwarteter Reinigungszustand und Umgang mit nicht erreichbaren Stellen</td>
+                    <td className="px-5 py-4">Ergebnis, Fotos, Restbefunde, Schäden und offene Punkte</td>
+                  </tr>
+                  <tr>
+                    <th scope="row" className="px-5 py-4 font-bold text-navy">5. Technik und Wiederinbetriebnahme</th>
+                    <td className="px-5 py-4">Separater Auftrag für Montagekontrolle, Funktion, Wartung oder Reparatur</td>
+                    <td className="px-5 py-4">Prüfende und freigebende Person, Ergebnis und Übergabezeitpunkt</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div className="not-prose my-10 rounded-2xl bg-navy p-6 text-white sm:p-8">
+              <div className="flex items-start gap-4">
+                <Wrench className="mt-0.5 h-8 w-8 shrink-0 text-mint" aria-hidden="true" />
+                <div>
+                  <h3 className="font-headline text-xl font-bold">Keine stillschweigende technische Freigabe</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-blue-100 sm:text-base">
+                    Ein sauberes Bauteil ist nicht automatisch technisch geprüft. Wer Montage, Dichtheit, Funktion und
+                    Wiederinbetriebnahme bewertet, muss vorab im betrieblichen Freigabeprozess benannt sein.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <h2 id="nachweis" className="scroll-mt-28 font-headline text-2xl font-bold text-navy sm:text-3xl">
+              Ein nachvollziehbares Reinigungsprotokoll aufbauen
+            </h2>
+            <p>
+              Ein Protokoll ist dann entscheidungsnützlich, wenn der dokumentierte Umfang eindeutig zur Anlage passt.
+              Es sollte nicht nur erledigte Arbeiten zeigen, sondern auch Grenzen, Abweichungen und die getrennte
+              Übergabe an den Betreiber. Ob der Bericht für eine Behörde, Versicherung oder interne Hygieneorganisation
+              ausreicht, ist anhand deren konkreter Anforderungen zu prüfen.
             </p>
 
-            <h2 className="text-3xl font-black text-[#0B2341] mb-6">Fazit</h2>
-            <p className="mb-8">
-              Belastung und Zustand einer Küchenabluftanlage müssen regelmäßig betrachtet werden. Objektbezogene
-              Intervalle, fachgerechte Reinigung und eine nachvollziehbare Dokumentation unterstützen Brandschutz,
-              Hygiene und sicheren Anlagenbetrieb. Maßgeblich bleiben die aktuell geltenden Vorgaben für das konkrete
-              Objekt.
-            </p>
+            <div
+              className="not-prose my-10 overflow-x-auto rounded-2xl border border-line bg-white shadow-soft focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+              role="region"
+              aria-label="Musterfelder für das Reinigungsprotokoll"
+              tabIndex={0}
+            >
+              <table className="w-full min-w-[820px] border-collapse text-left text-sm">
+                <caption className="sr-only">
+                  Musterfelder für ein nachvollziehbares Protokoll der Küchenabluftreinigung
+                </caption>
+                <thead className="bg-navy text-white">
+                  <tr>
+                    <th scope="col" className="px-5 py-4 font-bold">Protokollfeld</th>
+                    <th scope="col" className="px-5 py-4 font-bold">Erforderliche Zuordnung</th>
+                    <th scope="col" className="px-5 py-4 font-bold">Warum es hilft</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-line text-slate">
+                  <tr>
+                    <th scope="row" className="px-5 py-4 font-bold text-navy">Objekt und Anlage</th>
+                    <td className="px-5 py-4">Standort, Anlagen-ID, Bereich und Anlagenskizze</td>
+                    <td className="px-5 py-4">Verhindert die Zuordnung zum falschen System</td>
+                  </tr>
+                  <tr className="bg-paper">
+                    <th scope="row" className="px-5 py-4 font-bold text-navy">Ausgangszustand</th>
+                    <td className="px-5 py-4">Datum, Prüfstellen, Befund und referenzierte Fotos</td>
+                    <td className="px-5 py-4">Macht die Intervallentscheidung später vergleichbar</td>
+                  </tr>
+                  <tr>
+                    <th scope="row" className="px-5 py-4 font-bold text-navy">Leistungsumfang</th>
+                    <td className="px-5 py-4">Gereinigte Bauteile und ausdrücklich nicht bearbeitete Bereiche</td>
+                    <td className="px-5 py-4">Vermeidet einen vermeintlichen Vollnachweis</td>
+                  </tr>
+                  <tr className="bg-paper">
+                    <th scope="row" className="px-5 py-4 font-bold text-navy">Verfahren und Mittel</th>
+                    <td className="px-5 py-4">Eingesetztes Verfahren, Produkte und relevante Schutzmaßnahmen</td>
+                    <td className="px-5 py-4">Unterstützt Nachvollziehbarkeit und spätere Ursachenklärung</td>
+                  </tr>
+                  <tr>
+                    <th scope="row" className="px-5 py-4 font-bold text-navy">Ergebnis und Abweichungen</th>
+                    <td className="px-5 py-4">Nachher-Fotos, Restbefunde, Schäden und empfohlene Folgearbeiten</td>
+                    <td className="px-5 py-4">Zeigt Grenzen und offene Entscheidungen transparent</td>
+                  </tr>
+                  <tr className="bg-paper">
+                    <th scope="row" className="px-5 py-4 font-bold text-navy">Übergabe und Folgetermin</th>
+                    <td className="px-5 py-4">Verantwortliche Personen, getrennte Freigaben und begründeter Prüftermin</td>
+                    <td className="px-5 py-4">Sichert Verantwortungswechsel und weitere Planung</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div className="not-prose rounded-2xl border border-line bg-paper p-6 sm:p-8">
+              <div className="flex items-start gap-4">
+                <FileSearch className="mt-0.5 h-8 w-8 shrink-0 text-brand" aria-hidden="true" />
+                <div>
+                  <h3 className="font-headline text-xl font-bold text-navy">Vor dem Angebot klären</h3>
+                  <ul className="mt-3 grid gap-2 text-sm leading-relaxed text-slate sm:grid-cols-2">
+                    <li className="flex gap-2"><ClipboardCheck className="mt-0.5 h-4 w-4 shrink-0 text-brand" aria-hidden="true" /> Welche Anlagenteile gehören zum Scope?</li>
+                    <li className="flex gap-2"><ClipboardCheck className="mt-0.5 h-4 w-4 shrink-0 text-brand" aria-hidden="true" /> Wo fehlen sichere Zugänge?</li>
+                    <li className="flex gap-2"><ClipboardCheck className="mt-0.5 h-4 w-4 shrink-0 text-brand" aria-hidden="true" /> Wer schaltet ab und gibt frei?</li>
+                    <li className="flex gap-2"><ClipboardCheck className="mt-0.5 h-4 w-4 shrink-0 text-brand" aria-hidden="true" /> Welche technische Prüfung ist separat nötig?</li>
+                    <li className="flex gap-2"><ClipboardCheck className="mt-0.5 h-4 w-4 shrink-0 text-brand" aria-hidden="true" /> Wer nimmt Reinigung und Technik ab?</li>
+                    <li className="flex gap-2"><ClipboardCheck className="mt-0.5 h-4 w-4 shrink-0 text-brand" aria-hidden="true" /> Welcher Nachweisumfang wird verlangt?</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* FAQ */}
-      <section className="py-20 lg:py-32 bg-[#f7f9fb]">
-        <div className="max-w-4xl mx-auto px-4">
-          <div className="text-center mb-16">
-            <span className="text-[#0B2341] font-bold tracking-wider uppercase text-sm mb-4 block">Häufige Fragen</span>
-            <h2 className="text-3xl lg:text-4xl font-black tracking-tight text-[#0B2341]">FAQs zur Küchenabluftreinigung</h2>
+      <section aria-labelledby="vdi-faq-heading" className="bg-paper py-16 lg:py-24">
+        <div className="mx-auto max-w-4xl px-4 sm:px-8">
+          <div className="mb-10 text-center">
+            <span className="eyebrow justify-center text-brand">Häufige Fragen</span>
+            <h2 id="vdi-faq-heading" className="mt-4 font-headline text-2xl font-bold text-navy sm:text-3xl lg:text-4xl">
+              Küchenabluftreinigung und VDI 2052 Blatt 2
+            </h2>
           </div>
-          <Accordion items={faqSchema.mainEntity.map((q) => ({ question: q.name, answer: q.acceptedAnswer.text }))} />
+          <Accordion items={faqItems} />
         </div>
       </section>
+
+      <ArticleFooter slug={SLUG} />
 
       <CTABand
-        title="Küchenlüftung fällig oder unklar, welches Intervall gilt?"
-        lead="Wir erfassen Zustand und Nutzung Ihrer Anlage, unterstützen bei der Intervallplanung und dokumentieren die ausgeführten Arbeiten nachvollziehbar."
+        title="Prüfumfang und Reinigung Ihrer Küchenabluft klären"
+        lead="Wir erfassen Anlage, Zugänglichkeit und Nutzung, grenzen den Reinigungsumfang nachvollziehbar ab und stimmen die benötigte Dokumentation vor dem Einsatz mit Ihnen ab."
       />
-    </div>
+    </article>
   );
 }

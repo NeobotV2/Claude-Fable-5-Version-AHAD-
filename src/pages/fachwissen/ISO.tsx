@@ -1,349 +1,314 @@
-import { motion } from 'motion/react';
-import { ShieldCheck, Award, CheckCircle2, Leaf } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { CircleAlert, SearchCheck, ShieldCheck } from 'lucide-react';
 import SEO from '@/components/SEO';
+import PageHero from '@/components/PageHero';
 import Accordion from '@/components/ui/Accordion';
 import CTABand from '@/components/CTABand';
 import ArticleMeta from '@/components/ArticleMeta';
+import ArticleFooter from '@/components/ArticleFooter';
 import { buildArticleSchema, EDITORIAL_ARTICLES } from '@/data/editorial';
-import { IMG, srcSetFor } from '@/lib/images';
+import { IMG } from '@/lib/images';
+
+const SLUG = 'iso-9001-iso-14001-gebaeudereinigung-unternehmen' as const;
+
+const faqItems = [
+  {
+    question: 'Was belegt ein ISO-9001-Zertifikat bei einer Reinigungsfirma?',
+    answer:
+      'Es dokumentiert, dass eine Zertifizierungsstelle das Qualitätsmanagementsystem der genannten Organisation im ausgewiesenen Geltungsbereich gegen die angegebene Normausgabe bewertet hat. Es belegt nicht automatisch die Qualität jeder einzelnen Reinigung oder jedes betreuten Objekts.',
+  },
+  {
+    question: 'Was belegt ein ISO-14001-Zertifikat?',
+    answer:
+      'Es bezieht sich auf ein Umweltmanagementsystem im ausgewiesenen Geltungsbereich. Daraus folgt nicht automatisch, dass ein bestimmtes Reinigungsmittel eingesetzt, eine konkrete Verbrauchsmenge unterschritten oder eine bestimmte CO₂-Reduktion erreicht wird. Solche Ergebnisse benötigen eigene, objektbezogene Nachweise.',
+  },
+  {
+    question: 'Welche Normausgaben sind aktuell?',
+    answer:
+      'Zum redaktionellen Prüfstand vom 13. Juli 2026 ist ISO 9001:2015 die veröffentlichte Ausgabe der ISO 9001; ISO 14001:2026 ist die veröffentlichte Ausgabe der ISO 14001. Weicht die Ausgabe auf einem Zertifikat ab, sollten Gültigkeit und mögliche Übergangsregeln direkt mit der Zertifizierungsstelle geprüft werden.',
+  },
+  {
+    question: 'Wie prüft man ein ISO-Zertifikat?',
+    answer:
+      'Prüfen Sie Organisation und Standorte, Norm und Ausgabe, Zertifikatsnummer, Gültigkeit, Geltungsbereich, Zertifizierungsstelle und deren Akkreditierung. Gleichen Sie anschließend ab, wie das Managementsystem im konkreten Objekt umgesetzt wird, etwa über Leistungsverzeichnis, Kontrollplan, Reklamationsprozess und dokumentierte Korrekturmaßnahmen.',
+  },
+  {
+    question: 'Braucht ein Reinigungsdienstleister ISO 9001 und ISO 14001?',
+    answer:
+      'Nicht pauschal. Welche Nachweise angemessen sind, hängt von den Qualitäts- und Umweltrisiken des Auftrags sowie von den Vergabe- und Vertragsunterlagen ab. Ein Zertifikat sollte nur verlangt und bewertet werden, wenn sein Geltungsbereich zur ausgeschriebenen Leistung passt.',
+  },
+  {
+    question: 'Führt ein ISO-Zertifikat bei öffentlichen Vergaben automatisch zu einem Vorteil?',
+    answer:
+      'Nein. Ob und wie Managementsysteme als Nachweis berücksichtigt werden, ergibt sich aus den konkreten Vergabeunterlagen und den anwendbaren Regeln. Ein Zertifikat bewirkt weder automatisch zusätzliche Wertungspunkte noch einen Zuschlag; bei öffentlichen Vergaben können zudem gleichwertige Nachweise zu berücksichtigen sein.',
+  },
+];
 
 export default function FachwissenISO() {
-  const articleSchema = buildArticleSchema(
-    EDITORIAL_ARTICLES['iso-9001-iso-14001-gebaeudereinigung-unternehmen'],
-  );
-
+  const articleSchema = buildArticleSchema(EDITORIAL_ARTICLES[SLUG]);
   const faqSchema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "Was bedeutet ISO 9001 in der Gebäudereinigung?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Die ISO 9001 ist eine international anerkannte Norm für Qualitätsmanagementsysteme. In der Gebäudereinigung können dazu standardisierte Prozesse, dokumentierte Kontrollen, Schulungen und ein geregelter Umgang mit Abweichungen gehören. Das Zertifikat bestätigt das geprüfte Managementsystem im angegebenen Geltungsbereich, nicht automatisch jedes einzelne Reinigungsergebnis."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Wofür steht die ISO 14001 Zertifizierung?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Die ISO 14001 ist die Norm für Umweltmanagementsysteme. Ein zertifizierter Reinigungsdienstleister verpflichtet sich, seine Umweltauswirkungen systematisch zu reduzieren. Dies umfasst den Einsatz ökologischer Reinigungsmittel, exakte Dosiersysteme zur Vermeidung von Überdosierung, Mülltrennung und wassersparende Reinigungsmethoden."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Warum sollte ich eine zertifizierte Reinigungsfirma beauftragen?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Zertifizierte Unternehmen bieten mehr Sicherheit, Transparenz und Verlässlichkeit. Sie haben nachgewiesen, dass ihre Prozesse funktionieren und regelmäßig von unabhängigen Auditoren überprüft werden. Das minimiert das Risiko von Ausfällen, Qualitätsschwankungen und rechtlichen Problemen (z.B. beim Arbeitsschutz oder der Entsorgung)."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Was ist der Unterschied zwischen ISO 9001 und ISO 14001?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Die ISO 9001 regelt das Qualitätsmanagement und stellt sicher, dass Reinigungsleistungen gleichbleibend gut und nachvollziehbar erbracht werden. Die ISO 14001 regelt das Umweltmanagement und sorgt dafür, dass Ressourcenverbrauch, Chemikalieneinsatz und Abfall systematisch reduziert werden. Vereinfacht gesagt: ISO 9001 sichert das WIE der Leistung, ISO 14001 sichert deren ökologische Verantwortung. Beide Normen folgen derselben Grundstruktur (High Level Structure) und lassen sich daher in einem integrierten Managementsystem kombinieren."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Wie kann ich als Auftraggeber prüfen, ob ein ISO-Zertifikat echt und gültig ist?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Achten Sie auf drei Punkte: Erstens muss das Zertifikat von einer akkreditierten Zertifizierungsstelle ausgestellt sein (in Deutschland erkennbar am DAkkS-Akkreditierungssymbol). Zweitens muss der Geltungsbereich (Scope) ausdrücklich die Gebäudereinigung umfassen und nicht nur die Verwaltung. Drittens muss das Zertifikat zeitlich gültig sein: Ein ISO-Zertifikat hat eine Laufzeit von drei Jahren und wird in dieser Zeit jährlich durch Überwachungsaudits bestätigt. Lassen Sie sich im Zweifel das aktuelle Zertifikat mit Zertifikatsnummer vorlegen oder fragen Sie bei der Zertifizierungsstelle nach."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Sind ISO-Zertifikate bei öffentlichen Ausschreibungen Pflicht?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "ISO-Zertifikate sind in der Regel keine gesetzliche Pflicht, werden aber bei öffentlichen Ausschreibungen und im professionellen Einkauf sehr häufig als Eignungs- oder Zuschlagskriterium gefordert oder positiv bewertet. Nach Vergaberecht dürfen öffentliche Auftraggeber Qualitäts- und Umweltmanagementsysteme als Nachweis verlangen, müssen aber gleichwertige Nachweise zulassen. Praktisch gilt: Ein gültiges ISO 9001- und ISO 14001-Zertifikat erleichtert die Teilnahme an Ausschreibungen erheblich und verschafft im Bietervergleich einen Vorteil."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Wie oft wird ein zertifiziertes Reinigungsunternehmen auditiert?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Ein zertifiziertes Unternehmen durchläuft zunächst ein Zertifizierungsaudit (Stufe 1 und Stufe 2). Anschließend findet in jedem der beiden Folgejahre ein externes Überwachungsaudit durch die Zertifizierungsstelle statt. Nach drei Jahren ist ein vollständiges Re-Zertifizierungsaudit erforderlich. Zusätzlich führt das Unternehmen interne Audits und ein jährliches Management-Review durch. Für Auftraggeber bedeutet diese Audit-Kadenz, dass die Qualitäts- und Umweltprozesse dauerhaft und nicht nur einmalig überprüft werden."
-        }
-      }
-    ]
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqItems.map((item) => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: { '@type': 'Answer', text: item.answer },
+    })),
   };
 
   return (
-    <div>
-      <SEO 
-        title="ISO 9001 & 14001 in der Gebäudereinigung | Fachwissen | AHAD" 
-        description="ISO 9001 und ISO 14001 in der Gebäudereinigung: Bedeutung, Geltungsbereich, typische Nachweise und Prüffragen für Auftraggeber."
-        keywords="ISO 9001 Gebäudereinigung, ISO 14001 Reinigung, Qualitätsmanagement Reinigung, Umweltmanagement Gebäudereinigung, zertifizierte Reinigungsfirma"
+    <article>
+      <SEO
+        title="ISO 9001 & ISO 14001 bei Reinigungsfirmen prüfen | AHAD"
+        description="Was ISO-9001- und ISO-14001-Zertifikate belegen, wo ihre Grenzen liegen und wie Einkauf und Facility Management Zertifikat, Scope und Objektnachweise prüfen."
+        keywords="ISO 9001 Gebäudereinigung, ISO 14001 Reinigung, Zertifikat prüfen, Qualitätsmanagement Reinigung, Umweltmanagement Gebäudereinigung"
         schema={[articleSchema, faqSchema]}
       />
-      
-      {/* Hero Section */}
-      <section className="relative pt-36 pb-20 lg:pt-44 lg:pb-28 bg-navy text-white overflow-hidden grain">
-        <div className="absolute inset-0 opacity-40">
-          <img
-            src={IMG.medizintechnik}
-            srcSet={srcSetFor(IMG.medizintechnik)}
-            sizes="100vw"
-            alt="Dokumentierte Reinigung einer hygienisch sensiblen Fläche"
-            className="w-full h-full object-cover"
-            loading="eager"
-            decoding="async"
-            referrerPolicy="no-referrer"
-          />
-        </div>
-        <div className="absolute inset-0 bg-gradient-to-r from-navy via-navy/85 to-navy/40" />
-        <div className="absolute inset-0 bg-gradient-to-t from-navy via-transparent to-navy/60" />
-        <div className="max-w-7xl mx-auto px-4 relative z-10">
-          <motion.div
-            initial={false}
-            animate={{ opacity: 1, y: 0 }}
-            className="max-w-3xl"
-          >
-            <span className="inline-flex items-center gap-2 bg-white/10 px-4 py-2 rounded-full text-sm font-bold mb-6 tracking-wider uppercase border border-white/20">
-              <Award className="w-4 h-4 text-[#9CDDB7]" />
-              Fachwissen: Qualität & Umwelt
-            </span>
-            <h1 className="display-lg text-white mb-8">
-              ISO 9001 & 14001 in der Gebäudereinigung
-            </h1>
-            <p className="text-xl text-blue-100 leading-relaxed mb-10 font-medium">
-              Warum Zertifizierungen mehr als nur Papier sind: 
-              Qualitätsmanagement und Umweltbewusstsein als Kern einer professionellen Dienstleistung.
+
+      <PageHero
+        compact
+        titleSize="lg"
+        eyebrow="Fachwissen · Qualität & Compliance"
+        title="ISO 9001 und ISO 14001: Was Zertifikate wirklich belegen"
+        lead="Ein Zertifikat bewertet ein Managementsystem im angegebenen Geltungsbereich. Für die Auswahl eines Reinigungsdienstleisters müssen Auftraggeber zusätzlich prüfen, wie die Anforderungen im konkreten Objekt umgesetzt und nachgewiesen werden."
+        image={IMG.medizintechnik}
+        imageAlt="Dokumentierte Qualitätskontrolle in einem sensiblen Reinigungsbereich"
+        crumbs={[{ label: 'Fachwissen', href: '/fachwissen' }, { label: 'ISO-Zertifikate prüfen' }]}
+      />
+
+      <ArticleMeta slug={SLUG} />
+
+      <section className="bg-white py-16 lg:py-24">
+        <div className="mx-auto max-w-4xl px-4 sm:px-8">
+          <div className="prose prose-lg max-w-none leading-relaxed text-slate">
+            <h2 id="iso-9001-einordnen" className="scroll-mt-28 font-headline text-2xl font-bold text-navy sm:text-3xl">
+              ISO 9001 richtig einordnen
+            </h2>
+            <p>
+              Die ISO 9001 beschreibt Anforderungen an ein Qualitätsmanagementsystem. Zum redaktionellen Prüfstand
+              vom 13. Juli 2026 ist <strong>ISO 9001:2015</strong> die veröffentlichte Ausgabe. Ein Zertifikat
+              dokumentiert, welche Organisation, Standorte und Tätigkeiten eine Zertifizierungsstelle innerhalb des
+              ausgewiesenen Geltungsbereichs bewertet hat.
             </p>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Auf einen Blick (At a glance) - Good for AEO/GEO */}
-      <section className="py-16 bg-white border-b border-gray-100">
-        <div className="max-w-7xl mx-auto px-4">
-          <h2 className="text-2xl font-black text-[#0B2341] mb-8 text-center">Zertifizierungen auf einen Blick</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="bg-[#f7f9fb] p-8 rounded-2xl border border-gray-100">
-              <ShieldCheck className="w-10 h-10 text-[#0B2341] mb-4" />
-              <h3 className="font-bold text-xl mb-3 text-[#0B2341]">ISO 9001: Qualitätsmanagement</h3>
-              <p className="text-[#424751] mb-4">Der internationale Standard für Qualitätsmanagement. Er garantiert strukturierte Abläufe, klare Verantwortlichkeiten und eine kontinuierliche Verbesserung der Dienstleistungsqualität.</p>
-              <ul className="space-y-2 text-sm text-[#424751]">
-                <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-[#0D6B38]" /> Standardisierte Prozesse</li>
-                <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-[#0D6B38]" /> Lückenlose Dokumentation</li>
-                <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-[#0D6B38]" /> Aktives Fehlermanagement</li>
-              </ul>
-            </div>
-            <div className="bg-[#f7f9fb] p-8 rounded-2xl border border-gray-100">
-              <Leaf className="w-10 h-10 text-[#0D6B38] mb-4" />
-              <h3 className="font-bold text-xl mb-3 text-[#0B2341]">ISO 14001: Umweltmanagement</h3>
-              <p className="text-[#424751] mb-4">Die Norm für systematisches Umweltmanagement. Sie belegt, dass ein Unternehmen ökologische Verantwortung übernimmt und Ressourcen schont.</p>
-              <ul className="space-y-2 text-sm text-[#424751]">
-                <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-[#0D6B38]" /> Ökologische Reinigungsmittel</li>
-                <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-[#0D6B38]" /> Exakte Dosiersysteme</li>
-                <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-[#0D6B38]" /> Ressourcenschonung (Wasser/Energie)</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <ArticleMeta slug="iso-9001-iso-14001-gebaeudereinigung-unternehmen" />
-
-      {/* Content Section */}
-      <section className="py-20 lg:py-32 bg-white">
-        <div className="max-w-4xl mx-auto px-4">
-          <div className="prose prose-lg max-w-none text-[#424751] leading-relaxed">
-            <h2 className="text-3xl font-black text-[#0B2341] mb-6">Qualität durch Struktur: Warum ISO 9001 entscheidend ist</h2>
-            <p className="mb-8">
-              In der Gebäudereinigung ist Vertrauen gut, Kontrolle und Struktur sind besser. Die ISO 9001 beschreibt Anforderungen an ein Qualitätsmanagementsystem. Auftraggeber sollten dabei immer Zertifikat, Geltungsbereich, Zertifizierungsstelle und Gültigkeit prüfen — ein Normbezug allein ist noch kein Nachweis.
-            </p>
-            
-            {/* Quick Links for SEO & UX */}
-            <div className="flex flex-wrap gap-3 mb-8">
-              <span className="text-sm font-bold text-gray-400 uppercase tracking-wider w-full mb-1">Passende Leistungen:</span>
-              <Link to="/leistungen/unterhaltsreinigung" className="px-4 py-2 bg-blue-50 text-[#0B2341] rounded-full text-sm font-bold hover:bg-[#0B2341] hover:text-white transition-all border border-blue-100">Unterhaltsreinigung</Link>
-              <Link to="/leistungen/industrie-produktionsreinigung" className="px-4 py-2 bg-blue-50 text-[#0B2341] rounded-full text-sm font-bold hover:bg-[#0B2341] hover:text-white transition-all border border-blue-100">Industriereinigung</Link>
-              <Link to="/leistungen/medizintechnik-reinigung" className="px-4 py-2 bg-blue-50 text-[#0B2341] rounded-full text-sm font-bold hover:bg-[#0B2341] hover:text-white transition-all border border-blue-100">Medizintechnik</Link>
-            </div>
-
-            <p className="mb-8">
-              In einem wirksamen Managementsystem basieren Abläufe – von der <Link to="/leistungen/unterhaltsreinigung" className="text-[#0B2341] font-bold hover:underline">Unterhaltsreinigung</Link> bis zur komplexen <Link to="/leistungen/industrie-produktionsreinigung" className="text-[#0B2341] font-bold hover:underline">Industriereinigung</Link> – auf definierten, überprüften und dokumentierten Prozessen.
+            <p>
+              Das ist für Auftraggeber ein nützlicher Systemnachweis, aber kein Gütesiegel für jedes einzelne
+              Reinigungsergebnis. Ob die vereinbarte Leistung in einem konkreten Büro, einer Produktion oder einem
+              sensiblen Bereich erreicht wird, zeigen erst objektbezogene Vorgaben und Nachweise: Leistungsverzeichnis,
+              Kontrollplan, Prüfergebnisse, Abweichungen und Korrekturmaßnahmen.
             </p>
 
-            <div className="bg-[#f7f9fb] p-8 rounded-3xl mb-12 border border-gray-100 shadow-sm">
-              <h3 className="text-2xl font-bold text-[#0B2341] mb-6 flex items-center gap-3">
-                <Award className="text-[#0B2341] w-8 h-8" />
-                Mögliche Vorteile für Auftraggeber
-              </h3>
-              <ul className="space-y-4 list-none pl-0">
-                {[
-                  'Reproduzierbare Reinigungsqualität durch Standardisierung aller Arbeitsschritte',
-                  'Lückenlose Dokumentation und transparente Leistungsnachweise',
-                  'Effizientes Fehlermanagement: Fehler werden nicht nur behoben, sondern ihre Ursachen analysiert, um Wiederholungen zu vermeiden',
-                  'Regelmäßige interne und externe Audits zur Sicherung des Qualitätsniveaus',
-                  'Hohe Kundenzufriedenheit durch proaktive Kommunikation und feste Ansprechpartner'
-                ].map((item, i) => (
-                  <li key={i} className="flex items-start gap-3">
-                    <CheckCircle2 className="text-[#0D6B38] w-6 h-6 mt-1 flex-shrink-0" />
-                    <span className="text-[#424751]">{item}</span>
-                  </li>
-                ))}
-              </ul>
+            <div className="not-prose my-10 rounded-2xl border border-line bg-paper p-6 sm:p-8">
+              <div className="flex items-start gap-4">
+                <ShieldCheck className="mt-0.5 h-7 w-7 shrink-0 text-brand" aria-hidden="true" />
+                <div>
+                  <h3 className="font-headline text-xl font-bold text-navy">Die entscheidende Prüffrage</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-slate sm:text-base">
+                    Nicht nur: „Gibt es ein Zertifikat?“, sondern: „Deckt sein Scope unsere Leistung ab – und mit
+                    welchen objektbezogenen Kontrollen wird das System in unserem Auftrag wirksam?“
+                  </p>
+                </div>
+              </div>
             </div>
 
-            <h2 className="text-3xl font-black text-[#0B2341] mb-6">ISO 9001 vs. ISO 14001 im direkten Vergleich</h2>
-            <p className="mb-8">
-              Beide Normen folgen seit der Revision 2015 derselben übergeordneten Grundstruktur (der sogenannten High Level Structure) und lassen sich daher in einem integrierten Managementsystem zusammenführen. Inhaltlich verfolgen sie jedoch unterschiedliche Ziele. Die folgende Übersicht zeigt, was Auftraggeber von der jeweiligen Norm konkret erwarten dürfen und welche Nachweise typischerweise damit verbunden sind.
+            <h2 id="normen-vergleichen" className="scroll-mt-28 font-headline text-2xl font-bold text-navy sm:text-3xl">
+              ISO 9001 und ISO 14001 vergleichen
+            </h2>
+            <p>
+              ISO 9001 und ISO 14001 sind Managementsystemnormen mit unterschiedlichen Schwerpunkten. Die seit April
+              2026 veröffentlichte <strong>ISO 14001:2026</strong> betrifft Umweltmanagement. Auch sie schreibt nicht
+              automatisch ein bestimmtes Reinigungsmittel, Dosiersystem oder Verbrauchsergebnis vor. Entscheidend sind
+              die im System bewerteten Umweltaspekte, Ziele, Maßnahmen und messbaren Ergebnisse.
             </p>
 
-            <div className="overflow-x-auto mb-12 rounded-2xl border border-gray-200 shadow-sm">
-              <table className="w-full text-left border-collapse text-sm md:text-base">
-                <thead>
-                  <tr className="bg-[#0B2341] text-white">
-                    <th className="px-4 py-4 font-bold align-top">Kriterium</th>
-                    <th className="px-4 py-4 font-bold align-top">ISO 9001 (Qualität)</th>
-                    <th className="px-4 py-4 font-bold align-top">ISO 14001 (Umwelt)</th>
+            <div
+              className="not-prose my-10 overflow-x-auto rounded-2xl border border-line bg-white shadow-soft focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+              role="region"
+              aria-label="Vergleich von ISO 9001 und ISO 14001"
+              tabIndex={0}
+            >
+              <table className="w-full min-w-[760px] border-collapse text-left text-sm">
+                <caption className="sr-only">
+                  Vergleich von ISO 9001 und ISO 14001 aus Sicht eines Auftraggebers
+                </caption>
+                <thead className="bg-navy text-white">
+                  <tr>
+                    <th scope="col" className="px-5 py-4 font-bold">Prüfpunkt</th>
+                    <th scope="col" className="px-5 py-4 font-bold">ISO 9001:2015</th>
+                    <th scope="col" className="px-5 py-4 font-bold">ISO 14001:2026</th>
                   </tr>
                 </thead>
-                <tbody className="text-[#424751]">
-                  <tr className="border-b border-gray-100 bg-white">
-                    <td className="px-4 py-4 font-bold text-[#0B2341] align-top">Fokus</td>
-                    <td className="px-4 py-4 align-top">Gleichbleibende Dienstleistungsqualität und Prozesssicherheit</td>
-                    <td className="px-4 py-4 align-top">Systematische Reduktion der Umweltauswirkungen</td>
+                <tbody className="divide-y divide-line text-slate">
+                  <tr>
+                    <th scope="row" className="px-5 py-4 font-bold text-navy">Gegenstand</th>
+                    <td className="px-5 py-4">Qualitätsmanagementsystem</td>
+                    <td className="px-5 py-4">Umweltmanagementsystem</td>
                   </tr>
-                  <tr className="border-b border-gray-100 bg-[#f7f9fb]">
-                    <td className="px-4 py-4 font-bold text-[#0B2341] align-top">Kernfrage</td>
-                    <td className="px-4 py-4 align-top">Wird die Leistung zuverlässig und nachvollziehbar erbracht?</td>
-                    <td className="px-4 py-4 align-top">Wird umwelt- und ressourcenschonend gearbeitet?</td>
+                  <tr className="bg-paper">
+                    <th scope="row" className="px-5 py-4 font-bold text-navy">Zertifikat unterstützt</th>
+                    <td className="px-5 py-4">Einordnung definierter Prozesse und Verantwortlichkeiten im Scope</td>
+                    <td className="px-5 py-4">Einordnung des systematischen Umgangs mit relevanten Umweltaspekten im Scope</td>
                   </tr>
-                  <tr className="border-b border-gray-100 bg-white">
-                    <td className="px-4 py-4 font-bold text-[#0B2341] align-top">Nutzen für Auftraggeber</td>
-                    <td className="px-4 py-4 align-top">Konstante Reinigungsergebnisse, weniger Reklamationen, klare Ansprechpartner, planbare Abläufe</td>
-                    <td className="px-4 py-4 align-top">Beitrag zu eigenen ESG-Zielen, Reduktion von Scope-3-Emissionen in der Lieferkette, geringeres Haftungsrisiko bei Chemie &amp; Entsorgung</td>
+                  <tr>
+                    <th scope="row" className="px-5 py-4 font-bold text-navy">Belegt nicht automatisch</th>
+                    <td className="px-5 py-4">Mangelfreie Reinigung, feste Reaktionszeit oder Qualität jedes Objekts</td>
+                    <td className="px-5 py-4">Bestimmte Mittel, konkrete Einsparungen, Emissionswerte oder vollständige Rechtskonformität</td>
                   </tr>
-                  <tr className="border-b border-gray-100 bg-[#f7f9fb]">
-                    <td className="px-4 py-4 font-bold text-[#0B2341] align-top">Typische Nachweise</td>
-                    <td className="px-4 py-4 align-top">Prozessbeschreibungen, Leistungsverzeichnisse, Qualitätskontrollen, Reklamationsprotokolle, Schulungsnachweise</td>
-                    <td className="px-4 py-4 align-top">Umweltprogramm, Gefahrstoff- und Sicherheitsdatenblätter, Dosierprotokolle, Entsorgungsnachweise, Verbrauchskennzahlen</td>
-                  </tr>
-                  <tr className="border-b border-gray-100 bg-white">
-                    <td className="px-4 py-4 font-bold text-[#0B2341] align-top">Zentrales Prinzip</td>
-                    <td className="px-4 py-4 align-top">Kontinuierliche Verbesserung (PDCA-Zyklus)</td>
-                    <td className="px-4 py-4 align-top">Kontinuierliche Verbesserung (PDCA-Zyklus)</td>
-                  </tr>
-                  <tr className="bg-[#f7f9fb]">
-                    <td className="px-4 py-4 font-bold text-[#0B2341] align-top">Gültigkeit &amp; Prüfung</td>
-                    <td className="px-4 py-4 align-top">3 Jahre, jährliche Überwachungsaudits</td>
-                    <td className="px-4 py-4 align-top">3 Jahre, jährliche Überwachungsaudits</td>
+                  <tr className="bg-paper">
+                    <th scope="row" className="px-5 py-4 font-bold text-navy">Zusätzlich objektbezogen prüfen</th>
+                    <td className="px-5 py-4">Qualitätsziel, Prüfmethode, Reklamations- und Korrekturprozess</td>
+                    <td className="px-5 py-4">Produkte, Dosierung, Verbräuche, Entsorgung und vereinbarte Umweltkennzahlen</td>
                   </tr>
                 </tbody>
               </table>
             </div>
 
-            <h2 className="text-3xl font-black text-[#0B2341] mb-6">Verantwortung für morgen: Umweltmanagement nach ISO 14001</h2>
-            <p className="mb-8">
-              Gebäudereinigung ist ressourcenintensiv. Es werden Wasser, Energie und chemische Produkte verbraucht. Ein Umweltmanagementsystem nach ISO 14001 bedeutet, diese Umweltauswirkungen systematisch zu erfassen, zu bewerten und kontinuierlich zu reduzieren.
-            </p>
-            <p className="mb-8">
-              Für moderne Unternehmen, die eigene Nachhaltigkeitsziele (ESG-Kriterien) verfolgen, ist ein zertifizierter Dienstleister ein wichtiger Baustein in der eigenen Lieferkette (Scope 3 Emissionen).
-            </p>
-
-            <h3 className="text-2xl font-bold text-[#0B2341] mb-4">Nachhaltigkeit in der Praxis: typische Maßnahmen</h3>
-            <ul className="space-y-4 mb-12 list-none pl-0">
-              {[
-                'Einsatz von biologisch abbaubaren und umweltschonenden Reinigungsmitteln (z.B. mit Ecolabel)',
-                'Strikte Vermeidung von Überdosierung durch automatische Dosieranlagen und Hochkonzentrate',
-                'Reduzierung des Wasser- und Energieverbrauchs durch moderne Maschinentechnik',
-                'Vermeidung von Plastikmüll durch Mehrwegsysteme und Großgebinde',
-                'Schulung der Mitarbeiter in ressourcenschonenden Reinigungstechniken',
-                'CO2-optimierte Fuhrparklogistik und Tourenplanung'
-              ].map((item, i) => (
-                <li key={i} className="flex items-start gap-3">
-                  <CheckCircle2 className="text-[#0D6B38] w-6 h-6 flex-shrink-0 mt-0.5" />
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-
-            <h2 className="text-3xl font-black text-[#0B2341] mb-6">Warum ISO-Zertifikate bei Ausschreibung, Einkauf und Audit zählen</h2>
-            <p className="mb-8">
-              Für professionelle Einkaufsabteilungen, Facility-Manager und öffentliche Auftraggeber sind ISO-Zertifikate weit mehr als ein Aushängeschild. Sie sind ein objektives, von einer unabhängigen Stelle bestätigtes Eignungsmerkmal, das den Auswahl- und Beauftragungsprozess absichert. Gerade in der Region Villingen-Schwenningen und im gesamten Baden-Württemberg, wo viele Industrie-, Gesundheits- und Verwaltungsobjekte hohe Anforderungen stellen, entscheidet die nachgewiesene Prozessreife häufig über den Zuschlag.
+            <h2 id="beschaffung" className="scroll-mt-28 font-headline text-2xl font-bold text-navy sm:text-3xl">
+              Zertifikate in der Beschaffung sinnvoll nutzen
+            </h2>
+            <p>
+              Für eine belastbare Anbieterbewertung sollten System- und Objektnachweise getrennt betrachtet werden.
+              Erst ihr Zusammenspiel beantwortet, ob der Dienstleister die ausgeschriebene Leistung nachvollziehbar
+              steuern und die vereinbarte Qualität im Objekt nachweisen kann.
             </p>
 
-            <h3 className="text-2xl font-bold text-[#0B2341] mb-4">Konkreter Nutzen in der Vergabe</h3>
-            <ul className="space-y-4 mb-10 list-none pl-0">
-              {[
-                'Eignungsnachweis: Im Vergaberecht dürfen Auftraggeber Qualitäts- und Umweltmanagementsysteme als Nachweis der Leistungsfähigkeit verlangen. Ein gültiges Zertifikat erleichtert die Teilnahme an Ausschreibungen erheblich.',
-                'Zuschlagskriterium: In vielen Leistungsverzeichnissen fließt eine ISO-Zertifizierung als bewertetes Kriterium in die Angebotswertung ein und verbessert die Position im Bietervergleich.',
-                'Lieferantenaudit: Bei Eigenkontrollen oder Lieferantenaudits des Auftraggebers liefert ein zertifiziertes Unternehmen sofort prüffähige Dokumentation (Prozesse, Schulungen, Gefahrstoffe, Entsorgung).',
-                'Compliance & Haftung: Dokumentierte Prozesse bei Arbeitsschutz, Chemikalieneinsatz und Abfallentsorgung reduzieren das rechtliche Risiko entlang der Lieferkette.',
-                'ESG-Berichterstattung: Die ISO 14001 des Dienstleisters ist ein belastbarer Baustein für die eigene Nachhaltigkeits- und Scope-3-Berichterstattung des Auftraggebers.'
-              ].map((item, i) => (
-                <li key={i} className="flex items-start gap-3">
-                  <CheckCircle2 className="text-[#0D6B38] w-6 h-6 flex-shrink-0 mt-0.5" />
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-
-            <h3 className="text-2xl font-bold text-[#0B2341] mb-4">Rechenbeispiel: Was Qualitätssicherung in der Praxis bedeutet</h3>
-            <p className="mb-8">
-              Ein Praxisbeispiel verdeutlicht den Wert standardisierter Prozesse. Angenommen, ein Bürogebäude mit 4.000 m&sup2; wird fünfmal pro Woche unterhaltsgereinigt. Bei einem branchenüblichen Orientierungswert von rund 250 bis 350 m&sup2; Reinigungsleistung pro Stunde für Standard-Büroflächen ergibt sich ein täglicher Aufwand von etwa 11 bis 16 Arbeitsstunden. Ohne klar definierte Prozesse schwankt dieser Wert stark je nach eingesetzter Reinigungskraft. Ein ISO-9001-gestütztes Leistungsverzeichnis legt Frequenzen, Methoden und Kontrollpunkte fest, sodass Aufwand, Qualität und Kosten kalkulierbar bleiben. Die genannten Zahlen sind ausdrücklich Richtwerte und ersetzen keine objektbezogene Kalkulation.
-            </p>
-            <p className="mb-12">
-              Ähnlich wirkt die ISO 14001 bei den Verbrauchsmaterialien: Wird Reinigungsmittel über ein automatisches Dosiersystem statt manuell dosiert, lassen sich Überdosierungen vermeiden. In der Praxis bedeutet das je nach Ausgangslage spürbar weniger Chemieverbrauch und Abwasserbelastung. Auch hier handelt es sich um Orientierungswerte, die je nach Objekt, Verschmutzungsgrad und Ausgangssituation variieren.
-            </p>
-
-            <div className="bg-[#f7f9fb] p-8 rounded-3xl mb-12 border border-gray-100 shadow-sm">
-              <h3 className="text-2xl font-bold text-[#0B2341] mb-2 flex items-center gap-3">
-                <ShieldCheck className="text-[#0B2341] w-8 h-8" />
-                Checkliste: Worauf Auftraggeber beim Zertifikat achten sollten
-              </h3>
-              <p className="text-[#424751] mb-6 text-base">
-                Diese Punkte helfen Ihnen, ein ISO-Zertifikat in der Angebotsphase schnell und sicher zu prüfen:
-              </p>
-              <ul className="space-y-4 list-none pl-0">
-                {[
-                  'Akkreditierung prüfen: Wurde das Zertifikat von einer akkreditierten Stelle ausgestellt? In Deutschland erkennbar am DAkkS-Akkreditierungssymbol.',
-                  'Geltungsbereich (Scope) lesen: Deckt der Scope ausdrücklich die Gebäudereinigung ab und nicht nur Verwaltung oder einen anderen Geschäftsbereich?',
-                  'Gültigkeitsdatum kontrollieren: Ist das Zertifikat noch gültig (Laufzeit drei Jahre) und liegen die jährlichen Überwachungsaudits vor?',
-                  'Zertifikatsnummer abgleichen: Lässt sich das Zertifikat über die Zertifizierungsstelle oder ein öffentliches Register verifizieren?',
-                  'Beide Normen abfragen: Liegen sowohl ISO 9001 (Qualität) als auch ISO 14001 (Umwelt) vor, idealerweise als integriertes Managementsystem?',
-                  'Nachweise anfordern: Kann das Unternehmen ergänzend Schulungsnachweise, Gefahrstoff- und Sicherheitsdatenblätter sowie Entsorgungsnachweise vorlegen?',
-                  'Objektbezug herstellen: Werden die zertifizierten Prozesse auch auf Ihr konkretes Objekt angewendet (Leistungsverzeichnis, Qualitätskontrollen, Ansprechpartner)?'
-                ].map((item, i) => (
-                  <li key={i} className="flex items-start gap-3">
-                    <CheckCircle2 className="text-[#0D6B38] w-6 h-6 mt-1 flex-shrink-0" />
-                    <span className="text-[#424751]">{item}</span>
-                  </li>
-                ))}
-              </ul>
+            <div
+              className="not-prose my-10 overflow-x-auto rounded-2xl border border-line bg-white shadow-soft focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+              role="region"
+              aria-label="Aussagekraft verschiedener Nachweise"
+              tabIndex={0}
+            >
+              <table className="w-full min-w-[820px] border-collapse text-left text-sm">
+                <caption className="sr-only">
+                  Aussagekraft verschiedener Nachweise bei der Auswahl eines Reinigungsdienstleisters
+                </caption>
+                <thead className="bg-navy text-white">
+                  <tr>
+                    <th scope="col" className="px-5 py-4 font-bold">Nachweis</th>
+                    <th scope="col" className="px-5 py-4 font-bold">Unterstützt die Bewertung von</th>
+                    <th scope="col" className="px-5 py-4 font-bold">Belegt nicht</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-line text-slate">
+                  <tr>
+                    <th scope="row" className="px-5 py-4 font-bold text-navy">ISO-9001-Zertifikat</th>
+                    <td className="px-5 py-4">Geprüftem Qualitätsmanagementsystem im genannten Scope</td>
+                    <td className="px-5 py-4">Qualität jedes einzelnen Reinigungsergebnisses</td>
+                  </tr>
+                  <tr className="bg-paper">
+                    <th scope="row" className="px-5 py-4 font-bold text-navy">ISO-14001-Zertifikat</th>
+                    <td className="px-5 py-4">Geprüftem Umweltmanagementsystem im genannten Scope</td>
+                    <td className="px-5 py-4">Bestimmtem Produkt oder messbarer Reduktion im Auftrag</td>
+                  </tr>
+                  <tr>
+                    <th scope="row" className="px-5 py-4 font-bold text-navy">LV und Qualitätsvereinbarung</th>
+                    <td className="px-5 py-4">Vereinbarten Tätigkeiten, Ergebnissen, Kontrollen und Zuständigkeiten</td>
+                    <td className="px-5 py-4">Dass die Vorgaben bereits wirksam ausgeführt werden</td>
+                  </tr>
+                  <tr className="bg-paper">
+                    <th scope="row" className="px-5 py-4 font-bold text-navy">Objekt- und Abweichungsprotokolle</th>
+                    <td className="px-5 py-4">Tatsächlichen Kontrollen, Feststellungen und Korrekturen im Objekt</td>
+                    <td className="px-5 py-4">Unternehmensweiter Reife des Managementsystems</td>
+                  </tr>
+                  <tr>
+                    <th scope="row" className="px-5 py-4 font-bold text-navy">Verbrauchs- und Umweltdaten</th>
+                    <td className="px-5 py-4">Messwerten innerhalb einer klar definierten Systemgrenze</td>
+                    <td className="px-5 py-4">Dass eine Veränderung allein durch die Zertifizierung verursacht wurde</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
 
-            <h2 className="text-3xl font-black text-[#0B2341] mb-6">Fazit: Zertifizierungen schaffen Vertrauen</h2>
-            <p className="mb-8">
-              ISO 9001 und ISO 14001 können Auftraggebern helfen, Managementsysteme strukturiert zu bewerten. Entscheidend ist der konkrete Nachweis: Lassen Sie sich ein gültiges Zertifikat zeigen und prüfen Sie Zertifizierungsstelle, Geltungsbereich sowie Ablaufdatum. Ob AHAD oder ein anderer Anbieter zertifiziert ist, darf erst nach dieser Prüfung behauptet werden.
+            <div className="not-prose my-10 rounded-2xl border border-line bg-paper p-6 sm:p-8">
+              <div className="flex items-start gap-4">
+                <CircleAlert className="mt-0.5 h-7 w-7 shrink-0 text-brand" aria-hidden="true" />
+                <div>
+                  <h3 className="font-headline text-xl font-bold text-navy">Hinweis für öffentliche Vergaben</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-slate sm:text-base">
+                    § 49 VgV regelt den Nachweis von Qualitäts- und Umweltmanagementnormen, wenn ein öffentlicher
+                    Auftraggeber entsprechende Bescheinigungen verlangt. Dabei können unter den gesetzlichen
+                    Voraussetzungen gleichwertige Bescheinigungen oder andere gleichwertige Unterlagen anzuerkennen
+                    sein. Ob ein Nachweis Eignung oder Wertung betrifft, bestimmen die Vergabeunterlagen; ein
+                    Zertifikat erzeugt keine automatische Zuschlagswirkung. Diese Einordnung ersetzt keine
+                    vergaberechtliche Prüfung.{' '}
+                    <a
+                      href="https://www.gesetze-im-internet.de/vgv_2016/__49.html"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-bold text-brand underline decoration-brand/30 underline-offset-4 hover:decoration-brand"
+                    >
+                      § 49 VgV öffnen
+                    </a>
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <h2 id="zertifikat-pruefen" className="scroll-mt-28 font-headline text-2xl font-bold text-navy sm:text-3xl">
+              Zertifikat und Objektumsetzung in sieben Schritten prüfen
+            </h2>
+            <p>
+              Die Prüfung beginnt beim Dokument, endet aber erst bei der Umsetzung im Objekt. Offene Punkte sollten
+              nicht durch Vermutungen ersetzt, sondern vor Beauftragung geklärt und vertraglich festgehalten werden.
             </p>
+
+            <ol className="not-prose my-10 grid gap-4 sm:grid-cols-2">
+              {[
+                ['Organisation abgleichen', 'Firmenname, Rechtsform und die für den Auftrag relevanten Standorte mit dem Angebot vergleichen.'],
+                ['Norm und Ausgabe lesen', 'Angegebene Normausgabe prüfen; bei Abweichungen Gültigkeit oder Übergangsregeln direkt klären.'],
+                ['Gültigkeit prüfen', 'Zertifikatsnummer, Ausstellungs- und Ablaufdatum sowie aktuellen Zertifikatsstatus kontrollieren.'],
+                ['Geltungsbereich lesen', 'Prüfen, ob der Scope die relevante Reinigungsleistung und Organisationseinheit tatsächlich umfasst.'],
+                ['Stelle und Akkreditierung prüfen', 'Zertifizierungsstelle und deren Akkreditierung nachvollziehen, statt nur ein Logo zu bewerten.'],
+                ['Objektumsetzung belegen', 'LV, Kontrollplan, Zuständigkeiten, Abweichungs- und Korrekturprozess für das konkrete Objekt anfordern.'],
+                ['Lücken vertraglich schließen', 'Fehlende Nachweise, Berichte, Kennzahlen und Prüftermine eindeutig vereinbaren.'],
+              ].map(([title, text], index) => (
+                <li key={title} className="rounded-2xl border border-line bg-paper p-5">
+                  <div className="flex items-start gap-3">
+                    <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-brand text-sm font-black text-white">
+                      {index + 1}
+                    </span>
+                    <div>
+                      <h3 className="font-headline font-bold text-navy">{title}</h3>
+                      <p className="mt-1.5 text-sm leading-relaxed text-slate">{text}</p>
+                    </div>
+                  </div>
+                </li>
+              ))}
+            </ol>
+
+            <div className="not-prose rounded-2xl bg-navy p-6 text-white sm:p-8">
+              <div className="flex items-start gap-4">
+                <SearchCheck className="mt-0.5 h-8 w-8 shrink-0 text-mint" aria-hidden="true" />
+                <div>
+                  <h3 className="font-headline text-xl font-bold">Fazit für die Auswahl</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-blue-100 sm:text-base">
+                    Ein passender, gültiger Scope ist ein sinnvoller Systemnachweis. Die Vergabeentscheidung sollte
+                    zusätzlich auf der konkreten Leistungsbeschreibung, dem Kontrollkonzept und belastbaren
+                    Objektnachweisen beruhen.
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* FAQ Section */}
-      <section className="py-20 lg:py-32 bg-[#f7f9fb]">
-        <div className="max-w-4xl mx-auto px-4">
-          <div className="text-center mb-16">
-            <span className="text-[#0B2341] font-bold tracking-wider uppercase text-sm mb-4 block">Häufige Fragen</span>
-            <h2 className="text-3xl lg:text-4xl font-black tracking-tight text-[#0B2341]">FAQs zu ISO-Zertifizierungen</h2>
+      <section aria-labelledby="iso-faq-heading" className="bg-paper py-16 lg:py-24">
+        <div className="mx-auto max-w-4xl px-4 sm:px-8">
+          <div className="mb-10 text-center">
+            <span className="eyebrow justify-center text-brand">Häufige Fragen</span>
+            <h2 id="iso-faq-heading" className="mt-4 font-headline text-2xl font-bold text-navy sm:text-3xl lg:text-4xl">
+              ISO-Zertifikate in der Gebäudereinigung
+            </h2>
           </div>
-          <Accordion items={faqSchema.mainEntity.map((q) => ({ question: q.name, answer: q.acceptedAnswer.text }))} />
+          <Accordion items={faqItems} />
         </div>
       </section>
 
-      <CTABand title="Qualitäts- und Umweltanforderungen abstimmen" lead="Gerne klären wir Ihre Anforderungen und die dafür benötigten Nachweise objektbezogen im Gespräch." />
-    </div>
+      <ArticleFooter slug={SLUG} />
+
+      <CTABand
+        title="Zertifikate und Objektnachweise sauber abgleichen"
+        lead="Wir klären mit Ihnen, welche Qualitäts- und Umweltnachweise für Ihr Objekt relevant sind und wie sie in Leistungsverzeichnis, Kontrolle und Dokumentation übersetzt werden."
+      />
+    </article>
   );
 }

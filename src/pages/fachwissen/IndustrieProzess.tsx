@@ -1,316 +1,436 @@
-import { motion } from 'motion/react';
-import { Settings2, Zap, CheckCircle2, ShieldAlert, Clock } from 'lucide-react';
+import { CheckCircle2, CircleAlert, ClipboardCheck, ShieldCheck } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import SEO from '@/components/SEO';
 import Accordion from '@/components/ui/Accordion';
 import CTABand from '@/components/CTABand';
+import PageHero from '@/components/PageHero';
 import ArticleMeta from '@/components/ArticleMeta';
+import ArticleFooter from '@/components/ArticleFooter';
 import { buildArticleSchema, EDITORIAL_ARTICLES } from '@/data/editorial';
 
+const ARTICLE_SLUG = 'industrie-produktionsreinigung-ohne-prozessstoerung' as const;
+
 export default function FachwissenIndustrieProzess() {
-  const articleSchema = buildArticleSchema(
-    EDITORIAL_ARTICLES['industrie-produktionsreinigung-ohne-prozessstoerung'],
-  );
+  const articleSchema = buildArticleSchema(EDITORIAL_ARTICLES[ARTICLE_SLUG]);
 
   const faqSchema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
       {
-        "@type": "Question",
-        "name": "Wie kann Industriereinigung ohne Produktionsstillstand erfolgen?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Eine Reinigung ohne Stillstand erfordert eine exakte Synchronisation mit den Produktionsplänen. Dies geschieht durch Reinigung in den Pausenzeiten, während Schichtwechseln oder durch den Einsatz spezieller, emissionsarmer Reinigungstechniken (wie Trockeneisstrahlen), die parallel zum Betrieb in angrenzenden Bereichen durchgeführt werden können."
-        }
+        '@type': 'Question',
+        name: 'Kann Industriereinigung immer ohne Produktionsstillstand erfolgen?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Nein. Arbeiten außerhalb des Gefahrenbereichs können je nach Gefährdungsbeurteilung bei laufender Produktion möglich sein. In angrenzenden Bereichen können Abschottung oder ein Teilstillstand erforderlich werden. Eingriffe in Maschinen, Arbeiten an Energiequellen oder Tätigkeiten mit nicht beherrschbaren Emissionen erfordern regelmäßig eine gesicherte Abschaltung und Freigabe. Maßgeblich sind die objektbezogene Gefährdungsbeurteilung, Herstellerangaben und das Freigabeverfahren des Betreibers.',
+        },
       },
       {
-        "@type": "Question",
-        "name": "Welche Sicherheitsvorkehrungen sind bei der Industriereinigung wichtig?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Sicherheit hat oberste Priorität. Dazu gehören: Gefährdungsbeurteilungen vor Arbeitsbeginn, das Tragen spezifischer PSA (Persönliche Schutzausrüstung), Schulungen im Umgang mit Gefahrstoffen, Lockout/Tagout-Verfahren (LOTO) zur sicheren Abschaltung von Maschinen sowie klare Freigabeprozesse durch die Produktionsleitung."
-        }
+        '@type': 'Question',
+        name: 'Welche Sicherheitsvorkehrungen sind bei der Industriereinigung wichtig?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Vor Arbeitsbeginn werden Arbeitsbereich, Gefährdungen, Energiequellen, Verkehrswege, Stoffe, Schutzmaßnahmen, Zuständigkeiten und Abbruchkriterien festgelegt. Je nach Aufgabe gehören dazu Permit-to-work, sichere Außerbetriebnahme und LOTO, Abschottung, Absaugung oder Lüftung, geeignete PSA, Unterweisung, Endkontrolle und eine dokumentierte Rückgabe an den Betreiber.',
+        },
       },
       {
-        "@type": "Question",
-        "name": "Warum ist regelmäßige Maschinenreinigung wirtschaftlich sinnvoll?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Regelmäßige Reinigung verhindert den Aufbau von Schmutz, Spänen oder Ölen, die zu Maschinenverschleiß, Überhitzung oder Sensorfehlern führen können. Sie reduziert ungeplante Ausfallzeiten, verlängert die Lebensdauer der Anlagen und sichert eine konstant hohe Produktqualität."
-        }
+        '@type': 'Question',
+        name: 'Welchen wirtschaftlichen Nutzen kann geplante Maschinenreinigung haben?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Geplante Reinigung kann Ablagerungen begrenzen, Inspektionen unterstützen und Reinigungsarbeiten mit Rüst- oder Wartungsfenstern bündeln. Ob dadurch Verfügbarkeit, Ausschuss oder Instandhaltungsaufwand verbessert werden, muss am konkreten Prozess mit geeigneten Kennzahlen geprüft werden; eine pauschale Einsparung lässt sich nicht zusagen.',
+        },
       },
       {
-        "@type": "Question",
-        "name": "Was muss eine professionelle Industriereinigung dokumentieren?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Eine professionelle Industriereinigung dokumentiert mindestens: die durchgeführte Gefährdungsbeurteilung, die LOTO-Freigabe und Wiederinbetriebnahme durch die Produktionsleitung, die verwendeten Reinigungs- und Gefahrstoffe inklusive Sicherheitsdatenblättern, das eingesetzte Verfahren und Equipment, Zeitfenster und Personal, einen Vorher-/Nachher-Nachweis (z. B. Fotos oder Messwerte) sowie die fachgerechte Entsorgung der Reinigungsrückstände. In hygienesensiblen Bereichen kommen Reinigungs- und Desinfektionspläne sowie ggf. Hygienekontrollen (z. B. ATP-Messung) hinzu."
-        }
+        '@type': 'Question',
+        name: 'Was sollte eine Industriereinigung dokumentieren?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Der notwendige Umfang folgt aus Auftrag und Gefährdungsbeurteilung. Typische Unterlagen sind Arbeits- und Freigabeschein, abgestimmte Schutzmaßnahmen, LOTO- oder Abschaltnachweis, eingesetzte Stoffe und Verfahren, Sicherheitsdatenblätter, Personal und Zeitfenster, Abweichungen, Entsorgungsnachweise, Endkontrolle sowie die dokumentierte Rückgabe des Bereichs oder der Anlage.',
+        },
       },
       {
-        "@type": "Question",
-        "name": "Welche gesetzlichen Vorgaben gelten bei der Industriereinigung in Deutschland?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Relevant sind unter anderem das Arbeitsschutzgesetz (ArbSchG), die DGUV-Vorschrift 1 (Grundsätze der Prävention, ehemals BGV A1), die Betriebssicherheitsverordnung (BetrSichV), die Gefahrstoffverordnung (GefStoffV) mit der zugehörigen TRGS sowie die DGUV-Regeln zu persönlicher Schutzausrüstung. In der Lebensmittelproduktion gelten zusätzlich die EU-Verordnung 852/2004 und HACCP-Grundsätze. Ein seriöser Dienstleister dokumentiert die Einhaltung dieser Vorgaben nachvollziehbar."
-        }
+        '@type': 'Question',
+        name: 'Welche Regeln sind bei Industriereinigung in Deutschland relevant?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Welche Vorschriften und technischen Regeln anzuwenden sind, hängt von Anlage, Tätigkeit, Stoffen und Branche ab. Regelmäßig zu prüfen sind unter anderem Arbeitsschutz, Betriebssicherheit, Gefahrstoffe und die Zusammenarbeit mehrerer Arbeitgeber. Betreiber und Reinigungsunternehmen müssen die Schutzmaßnahmen für den konkreten Auftrag abstimmen; branchenspezifische Hygiene- oder Produktanforderungen können hinzukommen.',
+        },
       },
       {
-        "@type": "Question",
-        "name": "Was kostet eine Industriereinigung im laufenden Betrieb in der Region Villingen-Schwenningen?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Belastbare Kosten lassen sich nur nach einer Objektbegehung nennen, da Fläche, Verschmutzungsgrad, Verfahren (z. B. Trockeneisstrahlen), Schichtmodell und Sicherheitsanforderungen den Aufwand bestimmen. Als grobe Orientierungswerte für die Region Villingen-Schwenningen/Baden-Württemberg liegen einfache Hallen- und Unterhaltsreinigungen häufig im Bereich von etwa 0,80 bis 2,50 Euro pro Quadratmeter, Spezial- und Maschinenreinigungen werden meist im Stundensatz von rund 35 bis 70 Euro pro Fachkraft abgerechnet. Diese Spannen sind unverbindliche Richtwerte und ersetzen kein individuelles Angebot."
-        }
-      }
-    ]
+        '@type': 'Question',
+        name: 'Was kostet Industriereinigung im laufenden Betrieb?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Ein belastbarer Preis setzt eine Objekt- und Aufgabenaufnahme voraus. Kalkulationsrelevant sind unter anderem Fläche und Zugänglichkeit, Verschmutzung, Verfahren, Personalqualifikation, Schutz- und Freigabeaufwand, Schichtfenster, Entsorgung sowie Dokumentation. Ohne diese Angaben sind pauschale Quadratmeter- oder Stundensätze nicht vergleichbar.',
+        },
+      },
+    ],
   };
 
   return (
-    <div>
-      <SEO 
-        title="Industriereinigung ohne Stillstand | Fachwissen | AHAD" 
-        description="Wie integriert man Industriereinigung in laufende Prozesse? Erfahren Sie mehr über unsere Strategien zur Vermeidung von Stillstandzeiten in der Produktion."
+    <article>
+      <SEO
+        title="Industriereinigung ohne Stillstand? Planung & Freigabe | AHAD"
+        description="Industriereinigung im Betrieb planen: Entscheidung zwischen laufender Anlage, Abschottung, Teilstillstand und gesicherter Abschaltung mit klarer Freigabe."
         keywords="Industriereinigung Prozess, Reinigung ohne Stillstand, Produktionsreinigung Strategie, Maschinenreinigung laufender Betrieb, AHAD Cleaning"
         schema={[articleSchema, faqSchema]}
       />
-      
-      {/* Hero Section */}
-      <section className="relative pt-36 pb-20 lg:pt-44 lg:pb-28 bg-navy text-white overflow-hidden grain">
-        <div className="absolute inset-0 opacity-40">
-          <picture>
-            <source media="(max-width: 640px)" srcSet="/images/ahad/industrie-detail-480.webp" />
-            <source media="(max-width: 1200px)" srcSet="/images/ahad/industrie-detail-960.webp" />
-            <img src="/images/ahad/industrie-detail.webp" alt="Industriereinigung in einer modernen Produktionshalle" className="w-full h-full object-cover" width="1600" height="900" />
-          </picture>
-        </div>
-        <div className="absolute inset-0 bg-gradient-to-r from-navy via-navy/85 to-navy/40" />
-        <div className="absolute inset-0 bg-gradient-to-t from-navy via-transparent to-navy/60" />
-        <div className="max-w-7xl mx-auto px-4 relative z-10">
-          <motion.div
-            initial={false}
-            animate={{ opacity: 1, y: 0 }}
-            className="max-w-3xl"
-          >
-            <span className="inline-flex items-center gap-2 bg-white/10 px-4 py-2 rounded-full text-sm font-bold mb-6 tracking-wider uppercase border border-white/20">
-              <Settings2 className="w-4 h-4 text-[#9CDDB7]" />
-              Fachwissen: Industrie-Logik
-            </span>
-            <h1 className="display-lg text-white mb-8">
-              Industriereinigung ohne Prozessstörung
-            </h1>
-            <p className="text-xl text-blue-100 leading-relaxed mb-10 font-medium">
-              Wie wir professionelle Reinigung in hochsensible Produktionsumfelder integrieren, 
-              ohne den laufenden Betrieb zu stören oder Stillstandzeiten zu verursachen.
-            </p>
-          </motion.div>
-        </div>
-      </section>
 
-      {/* Auf einen Blick (At a glance) - Good for AEO/GEO */}
-      <section className="py-16 bg-white border-b border-gray-100">
-        <div className="max-w-7xl mx-auto px-4">
-          <h2 className="text-2xl font-black text-[#0B2341] mb-8 text-center">Prozessintegration auf einen Blick</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-[#f7f9fb] p-6 rounded-2xl border border-gray-100">
-              <Clock className="w-8 h-8 text-[#0B2341] mb-4" />
-              <h3 className="font-bold text-lg mb-2 text-[#0B2341]">Perfektes Timing</h3>
-              <p className="text-[#424751] text-sm">Synchronisation der Reinigungsarbeiten mit Schichtplänen, Rüstzeiten und geplanten Wartungsintervallen zur Vermeidung von Ausfällen.</p>
-            </div>
-            <div className="bg-[#f7f9fb] p-6 rounded-2xl border border-gray-100">
-              <ShieldAlert className="w-8 h-8 text-[#0D6B38] mb-4" />
-              <h3 className="font-bold text-lg mb-2 text-[#0B2341]">Maximale Sicherheit</h3>
-              <p className="text-[#424751] text-sm">Strikte Einhaltung von Sicherheitsvorschriften, Lockout/Tagout-Verfahren und Einsatz von speziell geschultem Fachpersonal.</p>
-            </div>
-            <div className="bg-[#f7f9fb] p-6 rounded-2xl border border-gray-100">
-              <Zap className="w-8 h-8 text-[#0B2341] mb-4" />
-              <h3 className="font-bold text-lg mb-2 text-[#0B2341]">Spezialverfahren</h3>
-              <p className="text-[#424751] text-sm">Nutzung emissionsarmer und trockener Reinigungsverfahren (z.B. Trockeneis), die auch in der Nähe laufender Anlagen sicher sind.</p>
-            </div>
-          </div>
-        </div>
-      </section>
+      <PageHero
+        compact
+        titleSize="lg"
+        eyebrow="Fachwissen · Produktionsreinigung"
+        title="Industriereinigung im Betrieb: Was läuft weiter, was muss stehen?"
+        lead="Ohne Stillstand ist nicht immer sicher oder technisch möglich. Gefährdungsbeurteilung, Arbeitsbereich und Betreiberfreigabe entscheiden, ob bei laufender Anlage, abgeschottet oder nur im gesicherten Stillstand gereinigt wird."
+        image="/images/ahad/industrie-detail.webp"
+        imageAlt="Abgestimmte Reinigungsarbeiten in einer Produktionshalle"
+        crumbs={[{ label: 'Fachwissen', href: '/fachwissen' }, { label: 'Industriereinigung im Betrieb' }]}
+      />
 
-      <ArticleMeta slug="industrie-produktionsreinigung-ohne-prozessstoerung" />
+      <ArticleMeta slug={ARTICLE_SLUG} />
 
-      {/* Content Section */}
-      <section className="py-20 lg:py-32 bg-white">
-        <div className="max-w-4xl mx-auto px-4">
-          <div className="prose prose-lg max-w-none text-[#424751] leading-relaxed">
-            <h2 className="text-3xl font-black text-[#0B2341] mb-6">Die Herausforderung: Reinigung vs. Produktion</h2>
-            <p className="mb-8">
-              In der <Link to="/branchen/industrie-produktion" className="text-[#0B2341] font-bold hover:underline">Industrie und Produktion</Link> ist Zeit Geld. Jede Minute Stillstand kostet. 
-              Gleichzeitig ist Sauberkeit oft die Grundvoraussetzung für Produktqualität, Maschineneffizienz 
-              und Arbeitssicherheit. Die Lösung für diesen scheinbaren Widerspruch liegt in der perfekten Integration der <Link to="/leistungen/industrie-produktionsreinigung" className="text-[#0B2341] font-bold hover:underline">Industriereinigung</Link> in die bestehenden Betriebsabläufe.
+      <section className="bg-white py-16 lg:py-24">
+        <div className="mx-auto max-w-4xl px-4 sm:px-8">
+          <div className="prose prose-lg max-w-none leading-relaxed text-slate">
+            <h2 id="prozessabstimmung" className="scroll-mt-28 font-headline text-2xl font-bold text-navy sm:text-3xl">
+              Prozesse abstimmen: zuerst die zulässige Betriebsart entscheiden
+            </h2>
+            <p>
+              Industriereinigung lässt sich nur dann parallel zur Produktion ausführen, wenn Gefährdungen für
+              Beschäftigte, Anlage und Produkt beherrscht sind. Die Frage lautet deshalb nicht pauschal „ohne
+              Stillstand oder mit Stillstand?“, sondern: Welche Tätigkeit findet in welchem Bereich unter welchen
+              freigegebenen Bedingungen statt? Betreiber, Facility Management, Produktion und{' '}
+              <Link to="/leistungen/industrie-produktionsreinigung" className="font-bold text-brand hover:underline">
+                Reinigungsdienstleister
+              </Link>{' '}
+              müssen diese Entscheidung vor der Ausführung treffen.
             </p>
 
-            <div className="bg-[#0B2341] text-white p-8 rounded-3xl mb-12 shadow-xl">
-              <h3 className="text-2xl font-bold text-[#9CDDB7] mb-6 flex items-center gap-3">
-                <Zap className="text-[#9CDDB7] w-8 h-8" />
-                Unsere Integrations-Strategie
-              </h3>
-              <ul className="space-y-4 list-none pl-0">
-                {[
-                  'Exakte Synchronisation mit Schichtplänen, Pausenzeiten und Wartungsfenstern',
-                  'Einsatz von spezialisiertem, sicherheitsgeschultem Personal',
-                  'Klare Freigabeprozesse (Permit to Work) für sensible Maschinenbereiche',
-                  'Einsatz von geräuscharmen, staubfreien & emissionsfreien Reinigungsverfahren',
-                  'Proaktive und kontinuierliche Abstimmung mit der Produktionsleitung'
-                ].map((item, i) => (
-                  <li key={i} className="flex items-start gap-3">
-                    <CheckCircle2 className="text-[#0D6B38] w-6 h-6 mt-1 flex-shrink-0" />
-                    <span className="text-blue-50">{item}</span>
-                  </li>
-                ))}
-              </ul>
+            <div className="not-prose my-10 rounded-2xl border border-amber-200 bg-amber-50 p-6">
+              <div className="flex items-start gap-3">
+                <CircleAlert className="mt-0.5 h-6 w-6 shrink-0 text-amber-700" aria-hidden="true" />
+                <div>
+                  <h3 className="font-headline text-lg font-bold text-navy">Klare Grenze</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-slate">
+                    Eingriffe hinter Schutzeinrichtungen, Arbeiten an Energiequellen oder Tätigkeiten mit nicht
+                    ausreichend beherrschbaren Emissionen gehören nicht neben eine ungesichert laufende Anlage. In
+                    solchen Fällen sind Abschaltung, Sicherung gegen Wiederanlauf und dokumentierte Freigabe Teil der
+                    Arbeitsvorbereitung.
+                  </p>
+                </div>
+              </div>
             </div>
 
-            <h2 className="text-3xl font-black text-[#0B2341] mb-6">Herausforderung &amp; Lösung im laufenden Betrieb</h2>
-            <p className="mb-6">
-              Die größten Reibungspunkte zwischen Reinigung und Produktion lassen sich vorab planen und
-              vertraglich regeln. Die folgende Übersicht zeigt die typischen Herausforderungen einer
-              Produktionsreinigung im laufenden Betrieb und die jeweils bewährte Lösung, wie wir sie bei
-              Industriekunden in der Region Villingen-Schwenningen und im übrigen Baden-Württemberg umsetzen.
-            </p>
-
-            <div className="overflow-x-auto mb-12 rounded-2xl border border-gray-200 not-prose">
-              <table className="w-full text-left border-collapse text-sm">
-                <thead>
-                  <tr className="bg-[#0B2341] text-white">
-                    <th className="px-4 py-3 font-bold">Herausforderung</th>
-                    <th className="px-4 py-3 font-bold">Risiko ohne Konzept</th>
-                    <th className="px-4 py-3 font-bold">Lösung im laufenden Betrieb</th>
+            <div
+              className="not-prose my-10 overflow-x-auto rounded-2xl border border-line focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+              role="region"
+              aria-label="Entscheidungsmatrix für die Betriebsart"
+              tabIndex={0}
+            >
+              <table className="w-full min-w-[900px] border-collapse text-left text-sm">
+                <caption className="caption-top bg-paper px-4 py-3 text-left font-headline font-bold text-navy">
+                  Drei Betriebsarten für die Arbeitsfreigabe
+                </caption>
+                <thead className="bg-navy text-white">
+                  <tr>
+                    <th scope="col" className="px-4 py-3 font-bold">Betriebsart</th>
+                    <th scope="col" className="px-4 py-3 font-bold">Möglicher Einsatz</th>
+                    <th scope="col" className="px-4 py-3 font-bold">Erforderliche Grenze</th>
+                    <th scope="col" className="px-4 py-3 font-bold">Freigabeentscheidung</th>
                   </tr>
                 </thead>
-                <tbody className="text-[#424751]">
-                  <tr className="border-t border-gray-200">
-                    <td className="px-4 py-3 font-semibold text-[#0B2341]">Schichtbetrieb &amp; Verfügbarkeit</td>
-                    <td className="px-4 py-3">Produktionsstillstand, Kollision mit Schichtwechseln</td>
-                    <td className="px-4 py-3">Reinigungsfenster in Pausen, Rüst- und Wartungszeiten; Nacht- bzw. Wochenendeinsätze; abschnittsweises Vorgehen pro Linie</td>
+                <tbody className="divide-y divide-line text-slate">
+                  <tr>
+                    <th scope="row" className="bg-paper px-4 py-4 font-bold text-navy">Laufende Anlage</th>
+                    <td className="px-4 py-4">Freigegebene Arbeiten außerhalb von Gefahren- und Produkteinflussbereichen</td>
+                    <td className="px-4 py-4">Sicherer Abstand, getrennte Wege, beherrschte Stoffe und keine Eingriffe in Schutzeinrichtungen</td>
+                    <td className="px-4 py-4">Nur wenn Gefährdungsbeurteilung und betriebliche Regeln die Tätigkeit zulassen</td>
                   </tr>
-                  <tr className="border-t border-gray-200 bg-[#f7f9fb]">
-                    <td className="px-4 py-3 font-semibold text-[#0B2341]">UVV &amp; Arbeitssicherheit</td>
-                    <td className="px-4 py-3">Unfälle, Bußgelder, Haftungsrisiken</td>
-                    <td className="px-4 py-3">Gefährdungsbeurteilung vor Arbeitsbeginn, PSA gemäß DGUV, Sicherheitsunterweisung, geschultes Fachpersonal</td>
+                  <tr>
+                    <th scope="row" className="bg-paper px-4 py-4 font-bold text-navy">Angrenzend / Teilbereich</th>
+                    <td className="px-4 py-4">Reinigung eines räumlich oder organisatorisch trennbaren Abschnitts</td>
+                    <td className="px-4 py-4">Abschottung, Verkehrsregelung, Produkt- und Emissionsschutz sowie definierte Schnittstellen</td>
+                    <td className="px-4 py-4">Teilfreigabe mit dokumentierten Grenzen und Abbruchkriterien</td>
                   </tr>
-                  <tr className="border-t border-gray-200">
-                    <td className="px-4 py-3 font-semibold text-[#0B2341]">Maschinenfreigabe</td>
-                    <td className="px-4 py-3">Versehentliches Anlaufen, Beschädigung von Anlagen</td>
-                    <td className="px-4 py-3">Lockout/Tagout (LOTO), Permit-to-Work, dokumentierte Freigabe und Wiederinbetriebnahme durch die Produktionsleitung</td>
-                  </tr>
-                  <tr className="border-t border-gray-200 bg-[#f7f9fb]">
-                    <td className="px-4 py-3 font-semibold text-[#0B2341]">Rückstände &amp; Hygiene</td>
-                    <td className="px-4 py-3">Produktkontamination, Sensorfehler, Qualitätsmängel</td>
-                    <td className="px-4 py-3">Trockeneisstrahlen &amp; trockene Verfahren, definierte Reinigungs-/Desinfektionspläne, Hygienenachweise (z. B. ATP-Messung)</td>
-                  </tr>
-                  <tr className="border-t border-gray-200">
-                    <td className="px-4 py-3 font-semibold text-[#0B2341]">Dokumentation</td>
-                    <td className="px-4 py-3">Fehlende Nachweise bei Audits, kein Qualitätsbeleg</td>
-                    <td className="px-4 py-3">Lückenlose Reinigungsprotokolle, Vorher-/Nachher-Nachweis, Gefahrstoff- und Entsorgungsnachweise</td>
+                  <tr>
+                    <th scope="row" className="bg-paper px-4 py-4 font-bold text-navy">Gesicherter Stillstand</th>
+                    <td className="px-4 py-4">Arbeiten in Maschinen, an Energiequellen oder hinter trennenden Schutzeinrichtungen</td>
+                    <td className="px-4 py-4">Außerbetriebnahme, LOTO nach Betriebsverfahren, Restenergien beherrschen und Wiederanlauf verhindern</td>
+                    <td className="px-4 py-4">Freigabe vor Beginn und Rückgabe vor Wiederinbetriebnahme durch befugte Personen</td>
                   </tr>
                 </tbody>
               </table>
             </div>
 
-            <h2 className="text-3xl font-black text-[#0B2341] mb-6">Sicherheit an erster Stelle</h2>
-            <p className="mb-6">
-              Industriereinigung ist immer auch Gefahrenabwehr. Wir schulen unsere Mitarbeiter
-              intensiv in Arbeitssicherheit, dem Umgang mit Gefahrstoffen und
-              den spezifischen Sicherheitsregeln unserer Kunden. Dazu gehört das strikte Befolgen von Lockout/Tagout (LOTO) Richtlinien, um sicherzustellen, dass Maschinen während der Reinigung nicht versehentlich anlaufen können.
-            </p>
-
-            <h3 className="text-2xl font-black text-[#0B2341] mb-4">Sicherheits- &amp; Dokumentationsanforderungen</h3>
-            <p className="mb-6">
-              In Deutschland ist Industriereinigung kein rein operativer Vorgang, sondern an einen klaren
-              rechtlichen Rahmen gebunden. Maßgeblich sind unter anderem das Arbeitsschutzgesetz (ArbSchG),
-              die DGUV-Vorschrift 1 (Grundsätze der Prävention), die Betriebssicherheitsverordnung (BetrSichV)
-              sowie die Gefahrstoffverordnung (GefStoffV) mit den zugehörigen Technischen Regeln für
-              Gefahrstoffe (TRGS). In der Lebensmittel- und Pharmaproduktion kommen die EU-Verordnung
-              852/2004 und die HACCP-Grundsätze hinzu. Eine professionelle Dokumentation ist daher nicht
-              optional, sondern Bestandteil der Auftragsqualität und Voraussetzung für bestandene Audits
-              (z. B. nach IFS, BRC oder ISO 9001).
-            </p>
-
-            <h3 className="text-2xl font-black text-[#0B2341] mb-4">Checkliste: Was eine professionelle Industriereinigung dokumentieren muss</h3>
-            <p className="mb-6">
-              Nutzen Sie die folgende Checkliste, um die Dokumentationsqualität eines Dienstleisters zu
-              prüfen. Fehlt einer dieser Punkte, drohen bei Betriebsprüfungen oder Kundenaudits
-              Nachweislücken.
-            </p>
-            <ul className="space-y-3 list-none pl-0 mb-12">
+            <h3 className="font-headline text-2xl font-bold text-navy">Fünf Angaben vor jeder Terminplanung</h3>
+            <ul className="not-prose my-8 space-y-3">
               {[
-                'Gefährdungsbeurteilung und Sicherheitsunterweisung vor Arbeitsbeginn',
-                'LOTO-Freigabe sowie dokumentierte Wiederinbetriebnahme durch die Produktionsleitung',
-                'Verwendete Reinigungs- und Gefahrstoffe inkl. aktueller Sicherheitsdatenblätter',
-                'Eingesetztes Verfahren und Equipment (z. B. Trockeneisstrahlen, Hochdruck, manuell)',
-                'Zeitfenster, Dauer und eingesetztes Reinigungspersonal',
-                'Vorher-/Nachher-Nachweis (Fotos, Messwerte oder Hygiene-/ATP-Ergebnisse)',
-                'Reinigungs- und Desinfektionsplan in hygienesensiblen Bereichen',
-                'Nachweis der fach- und umweltgerechten Entsorgung der Reinigungsrückstände',
-                'Abweichungs- bzw. Mängelmeldungen und ergriffene Korrekturmaßnahmen',
-                'Unterschrift bzw. Abnahme durch eine verantwortliche Person beim Kunden'
-              ].map((item, i) => (
-                <li key={i} className="flex items-start gap-3">
-                  <CheckCircle2 className="text-[#0D6B38] w-6 h-6 mt-0.5 flex-shrink-0" />
+                'Exakter Arbeitsbereich und gewünschtes Reinigungsergebnis',
+                'Betriebszustände, Energiequellen, Restenergien und Herstellerangaben',
+                'Stoffe, Verschmutzung, Produkt- und Hygieneanforderungen',
+                'Gleichzeitig arbeitende Personen, Verkehrswege und Nachbarprozesse',
+                'Befugte Personen für Arbeitsfreigabe, Abschaltung und Rückgabe',
+              ].map((item) => (
+                <li key={item} className="flex items-start gap-3 rounded-xl border border-line bg-white p-4 text-sm text-slate">
+                  <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-brand" aria-hidden="true" />
                   <span>{item}</span>
                 </li>
               ))}
             </ul>
 
-            <h2 className="text-3xl font-black text-[#0B2341] mb-6">Praxisbeispiel: Reinigungsfenster im Schichtbetrieb</h2>
-            <p className="mb-6">
-              Ein vereinfachtes Rechenbeispiel verdeutlicht den wirtschaftlichen Nutzen der
-              Prozessintegration. Angenommen, eine Produktionslinie erwirtschaftet einen
-              Deckungsbeitrag von rund 1.500 Euro pro Betriebsstunde. Wird die Linie für eine
-              klassische Reinigung zwei Stunden angehalten, entstehen allein dadurch
-              Opportunitätskosten von etwa 3.000 Euro &ndash; zusätzlich zu den eigentlichen
-              Reinigungskosten.
-            </p>
-            <p className="mb-6">
-              Verlagert man die Reinigung stattdessen in ein ohnehin geplantes 45-minütiges
-              Rüst- oder Wartungsfenster und ergänzt sie durch staubarmes Trockeneisstrahlen an
-              den benachbarten, weiterlaufenden Linien, sinkt der produktionsbedingte
-              Stillstand gegen null. Selbst wenn das Spezialverfahren pro Einsatz höher
-              bepreist ist, amortisiert sich der Mehraufwand bereits durch die vermiedenen
-              Stillstandkosten. Die genannten Zahlen sind reine Orientierungswerte zur
-              Veranschaulichung und keine garantierten Ergebnisse.
-            </p>
-            <p className="mb-8">
-              Für produzierende Betriebe im Schwarzwald-Baar-Kreis und entlang der Achse
-              Villingen-Schwenningen&ndash;Tuttlingen&ndash;Rottweil ist dieser Ansatz besonders
-              relevant: Viele Zulieferer der Medizintechnik, Metallverarbeitung und
-              Präzisionsfertigung arbeiten im Mehrschichtbetrieb mit hohen Hygiene- und
-              Qualitätsanforderungen, bei denen ungeplante Stillstände kaum tolerierbar sind.
+            <h2 id="schutzmassnahmen" className="scroll-mt-28 font-headline text-2xl font-bold text-navy sm:text-3xl">
+              Schutzmaßnahmen und Verantwortungen vor Beginn festlegen
+            </h2>
+            <p>
+              Betreiber und Fremdfirma haben jeweils eigene Pflichten und müssen bei wechselseitigen Gefährdungen
+              zusammenarbeiten. Der betriebliche Freigabeprozess sollte deshalb nicht nur eine Unterschrift liefern,
+              sondern Arbeitsumfang, Schutzmaßnahmen, Verantwortliche und Rückgabe eindeutig verbinden.
             </p>
 
-            <h2 className="text-3xl font-black text-[#0B2341] mb-6">Technik & Know-how für den laufenden Betrieb</h2>
-            <p className="mb-6">
-              Wir nutzen moderne Reinigungstechnik, die speziell für den 
-              industriellen Einsatz konzipiert ist. Verfahren wie das Trockeneisstrahlen ermöglichen eine rückstandsfreie Reinigung ohne Wasser, was besonders in der Nähe von Elektronik oder in der Lebensmittelproduktion entscheidend ist. So können oft Anlagenteile gereinigt werden, während benachbarte Linien weiterproduzieren.
+            <div
+              className="not-prose my-10 overflow-x-auto rounded-2xl border border-line focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+              role="region"
+              aria-label="Verantwortungsmatrix für Schutzmaßnahmen"
+              tabIndex={0}
+            >
+              <table className="w-full min-w-[860px] border-collapse text-left text-sm">
+                <caption className="caption-top bg-paper px-4 py-3 text-left font-headline font-bold text-navy">
+                  Verantwortungen im Freigabe- und Rückgabeprozess
+                </caption>
+                <thead className="bg-navy text-white">
+                  <tr>
+                    <th scope="col" className="px-4 py-3 font-bold">Aufgabe</th>
+                    <th scope="col" className="px-4 py-3 font-bold">Betreiber / Produktion</th>
+                    <th scope="col" className="px-4 py-3 font-bold">Reinigungsunternehmen</th>
+                    <th scope="col" className="px-4 py-3 font-bold">Gemeinsamer Nachweis</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-line text-slate">
+                  <tr>
+                    <th scope="row" className="bg-paper px-4 py-4 font-bold text-navy">Gefährdungen abstimmen</th>
+                    <td className="px-4 py-4">Anlagen-, Prozess- und Standortgefahren mitteilen</td>
+                    <td className="px-4 py-4">Gefahren aus Verfahren, Stoffen und Arbeitsmitteln mitteilen</td>
+                    <td className="px-4 py-4">Abgestimmte Gefährdungsbeurteilung / Arbeitsplan</td>
+                  </tr>
+                  <tr>
+                    <th scope="row" className="bg-paper px-4 py-4 font-bold text-navy">Permit-to-work</th>
+                    <td className="px-4 py-4">Befugte Freigabeperson und betriebliche Bedingungen benennen</td>
+                    <td className="px-4 py-4">Umfang, Personal, Verfahren und Schutzmaßnahmen bestätigen</td>
+                    <td className="px-4 py-4">Arbeits- oder Freigabeschein mit Geltungsdauer</td>
+                  </tr>
+                  <tr>
+                    <th scope="row" className="bg-paper px-4 py-4 font-bold text-navy">LOTO / Abschaltung</th>
+                    <td className="px-4 py-4">Energiequellen nach Betriebsverfahren isolieren und Anlagenzustand freigeben</td>
+                    <td className="px-4 py-4">Freigabe prüfen, eigene Sicherungen nach Verfahren anwenden und keine fremden Sperren entfernen</td>
+                    <td className="px-4 py-4">Kennzeichnung, Sperrpunkte und Freigabestatus</td>
+                  </tr>
+                  <tr>
+                    <th scope="row" className="bg-paper px-4 py-4 font-bold text-navy">Abschottung</th>
+                    <td className="px-4 py-4">Produkt, Anlagen und betriebliche Verkehrswege berücksichtigen</td>
+                    <td className="px-4 py-4">Barrieren, Einhausung, Absaugung oder Lüftung wie freigegeben umsetzen</td>
+                    <td className="px-4 py-4">Lageplan und Kontrollpunkte</td>
+                  </tr>
+                  <tr>
+                    <th scope="row" className="bg-paper px-4 py-4 font-bold text-navy">Rückgabe</th>
+                    <td className="px-4 py-4">Endzustand prüfen und Wiederinbetriebnahme autorisieren</td>
+                    <td className="px-4 py-4">Werkzeuge, Rückstände und Schutzmittel entfernen; Bereich als fertig melden</td>
+                    <td className="px-4 py-4">Endkontrolle und dokumentierte Anlagenrückgabe</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div className="not-prose my-10 grid gap-4 md:grid-cols-2">
+              <div className="rounded-2xl border border-line bg-paper p-6">
+                <ShieldCheck className="h-7 w-7 text-brand" aria-hidden="true" />
+                <h3 className="mt-4 font-headline text-xl font-bold text-navy">Vor Arbeitsbeginn</h3>
+                <p className="mt-2 text-sm leading-relaxed text-slate">
+                  Freigabestatus, Unterweisung, PSA, Rettungs- und Alarmweg, Abschottung, Stoffe sowie
+                  Kommunikations- und Abbruchsignal gemeinsam prüfen.
+                </p>
+              </div>
+              <div className="rounded-2xl border border-line bg-paper p-6">
+                <CircleAlert className="h-7 w-7 text-amber-700" aria-hidden="true" />
+                <h3 className="mt-4 font-headline text-xl font-bold text-navy">Arbeit unterbrechen</h3>
+                <p className="mt-2 text-sm leading-relaxed text-slate">
+                  Bei geändertem Anlagenzustand, beschädigter Abschottung, unklarer Freigabe, unerwarteten Stoffen
+                  oder überschrittenen Schutzgrenzen wird die Arbeit gestoppt und neu bewertet.
+                </p>
+              </div>
+            </div>
+
+            <h2 id="reinigungsfenster" className="scroll-mt-28 font-headline text-2xl font-bold text-navy sm:text-3xl">
+              Reinigungsfenster bis zur dokumentierten Rückgabe planen
+            </h2>
+            <p>
+              Pausen, Rüstvorgänge und Wartungsfenster sind mögliche Zeitbausteine, aber noch keine Arbeitsfreigabe.
+              Erst wenn Umfang, Schutzmaßnahmen und Rückgabe in das verfügbare Fenster passen, wird daraus ein
+              belastbarer Ablauf. Reicht das Fenster nicht aus, müssen Aufgabe, Abschnitt oder Betriebszustand neu
+              geplant werden.
             </p>
 
-            <h2 className="text-3xl font-black text-[#0B2341] mb-6">Fazit: Reinigung als Wertschöpfung</h2>
-            <p className="mb-8">
-              Erfolgreiche Industriereinigung ist kein isolierter, störender Vorgang, 
-              sondern ein integraler Bestandteil der Produktionslogik. Durch intelligente Planung und spezialisierte Verfahren wird die Reinigung zu einem Faktor, der die Anlagenverfügbarkeit erhöht und somit direkt zur Wertschöpfung beiträgt.
+            <div
+              className="not-prose my-10 overflow-x-auto rounded-2xl border border-line focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+              role="region"
+              aria-label="Ablauf eines Reinigungsfensters"
+              tabIndex={0}
+            >
+              <table className="w-full min-w-[820px] border-collapse text-left text-sm">
+                <caption className="caption-top bg-paper px-4 py-3 text-left font-headline font-bold text-navy">
+                  Ablauf relativ zum freigegebenen Reinigungsfenster
+                </caption>
+                <thead className="bg-navy text-white">
+                  <tr>
+                    <th scope="col" className="px-4 py-3 font-bold">Zeitpunkt</th>
+                    <th scope="col" className="px-4 py-3 font-bold">Entscheidung / Tätigkeit</th>
+                    <th scope="col" className="px-4 py-3 font-bold">Abschlusskriterium</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-line text-slate">
+                  <tr>
+                    <th scope="row" className="bg-paper px-4 py-4 font-bold text-navy">Vor dem Fenster</th>
+                    <td className="px-4 py-4">Aufgabe, Betriebsart, Personal, Verfahren, Freigaben und Zeitreserve abstimmen</td>
+                    <td className="px-4 py-4">Vollständiger Arbeitsplan und benannte Freigabepersonen</td>
+                  </tr>
+                  <tr>
+                    <th scope="row" className="bg-paper px-4 py-4 font-bold text-navy">Fensterbeginn</th>
+                    <td className="px-4 py-4">Anlagenzustand feststellen, LOTO und Abschottung prüfen, Permit aktivieren</td>
+                    <td className="px-4 py-4">Dokumentierte Startfreigabe</td>
+                  </tr>
+                  <tr>
+                    <th scope="row" className="bg-paper px-4 py-4 font-bold text-navy">Während der Arbeit</th>
+                    <td className="px-4 py-4">Schutzgrenzen überwachen, Abweichungen melden und Abbruchkriterien anwenden</td>
+                    <td className="px-4 py-4">Arbeit bleibt innerhalb des freigegebenen Umfangs</td>
+                  </tr>
+                  <tr>
+                    <th scope="row" className="bg-paper px-4 py-4 font-bold text-navy">Arbeitsende</th>
+                    <td className="px-4 py-4">Rückstände, Werkzeuge und temporäre Hilfsmittel entfernen; Ergebnis kontrollieren</td>
+                    <td className="px-4 py-4">Bereich vollständig und ohne offene Abweichung gemeldet</td>
+                  </tr>
+                  <tr>
+                    <th scope="row" className="bg-paper px-4 py-4 font-bold text-navy">Rückgabe</th>
+                    <td className="px-4 py-4">Gemeinsame Endkontrolle; Sperren nur nach festgelegtem Verfahren aufheben</td>
+                    <td className="px-4 py-4">Dokumentierte Rückgabe und Freigabe zur Wiederinbetriebnahme</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h3 className="font-headline text-2xl font-bold text-navy">Wirksamkeit ohne fiktive ROI-Zahl bewerten</h3>
+            <p>
+              Ob die Prozessintegration wirtschaftlich wirkt, lässt sich erst mit betrieblichen Daten beurteilen.
+              Geeignete Vergleichsgrößen können geplante und ungeplante Stillstandszeit, Zusatzfreigaben,
+              Nachreinigung, Qualitätsabweichungen oder der tatsächliche Aufwand je freigegebenem Fenster sein. Die
+              Ausgangslage und der Messzeitraum müssen dabei gleich definiert sein.
+            </p>
+
+            <h2 id="verfahren-auswaehlen" className="scroll-mt-28 font-headline text-2xl font-bold text-navy sm:text-3xl">
+              Verfahren nach Rückstand, Emission und Schutzbedarf auswählen
+            </h2>
+            <p>
+              Kein Reinigungsverfahren ist allein aufgrund seines Namens für den laufenden Betrieb geeignet. Die
+              Auswahl folgt dem Material, der Verschmutzung, dem gewünschten Ergebnis, den Herstellerangaben und den
+              Gefährdungen des Verfahrens. Eine Probefläche oder technische Freigabe kann erforderlich sein.
+            </p>
+
+            <div
+              className="not-prose my-10 overflow-x-auto rounded-2xl border border-line focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+              role="region"
+              aria-label="Kriterien zur Auswahl des Reinigungsverfahrens"
+              tabIndex={0}
+            >
+              <table className="w-full min-w-[900px] border-collapse text-left text-sm">
+                <caption className="caption-top bg-paper px-4 py-3 text-left font-headline font-bold text-navy">
+                  Verfahrenswahl mit typischen Prüf- und Schutzpunkten
+                </caption>
+                <thead className="bg-navy text-white">
+                  <tr>
+                    <th scope="col" className="px-4 py-3 font-bold">Verfahrensgruppe</th>
+                    <th scope="col" className="px-4 py-3 font-bold">Zu prüfen</th>
+                    <th scope="col" className="px-4 py-3 font-bold">Mögliche Schutzpunkte</th>
+                    <th scope="col" className="px-4 py-3 font-bold">Keine pauschale Aussage</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-line text-slate">
+                  <tr>
+                    <th scope="row" className="bg-paper px-4 py-4 font-bold text-navy">Wischen / Saugen</th>
+                    <td className="px-4 py-4">Staubklasse, Aufwirbelung, Zugänglichkeit und bewegte Anlagenteile</td>
+                    <td className="px-4 py-4">Geeignete Absaugung, sichere Wege und Bereichstrennung</td>
+                    <td className="px-4 py-4">Auch scheinbar einfache Arbeiten sind nicht automatisch neben jeder Anlage zulässig</td>
+                  </tr>
+                  <tr>
+                    <th scope="row" className="bg-paper px-4 py-4 font-bold text-navy">Nass / Hochdruck</th>
+                    <td className="px-4 py-4">Wassereintrag, Aerosole, Elektrik, Korrosion, Rutsch- und Abwasserrisiko</td>
+                    <td className="px-4 py-4">Abschottung, Auffangung, Entsorgung und häufig gesicherter Betriebszustand</td>
+                    <td className="px-4 py-4">„Mit Wasser abwaschbar“ bedeutet nicht, dass die Anlage betriebsbereit bleiben darf</td>
+                  </tr>
+                  <tr>
+                    <th scope="row" className="bg-paper px-4 py-4 font-bold text-navy">Strahlverfahren / Trockeneis</th>
+                    <td className="px-4 py-4">CO₂, Lärm, Sicht, weggeschleuderte Partikel, Materialverträglichkeit und gelöster Schmutz</td>
+                    <td className="px-4 py-4">Lüftung oder Absaugung, Abschottung, PSA, Zugangskontrolle und Rückstandsentfernung</td>
+                    <td className="px-4 py-4">Trockeneis ist weder emissionsfrei noch automatisch rückstands- oder gefahrlos</td>
+                  </tr>
+                  <tr>
+                    <th scope="row" className="bg-paper px-4 py-4 font-bold text-navy">Chemische Verfahren</th>
+                    <td className="px-4 py-4">Gefahrstoffe, Reaktion, Einwirkzeit, Material, Spülung und Produktkontakt</td>
+                    <td className="px-4 py-4">Substitution, Dosierung, Lüftung, Stofffreigabe und Entsorgungsweg</td>
+                    <td className="px-4 py-4">Ein Sicherheitsdatenblatt ersetzt nicht die tätigkeitsbezogene Gefährdungsbeurteilung</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div className="not-prose my-10 rounded-2xl border border-brand/20 bg-brand/5 p-6">
+              <div className="flex items-start gap-3">
+                <ClipboardCheck className="mt-0.5 h-6 w-6 shrink-0 text-brand" aria-hidden="true" />
+                <div>
+                  <h3 className="font-headline text-lg font-bold text-navy">In das Leistungsverzeichnis übernehmen</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-slate">
+                    Betriebsart, Schnittstellen, Permit-to-work, LOTO-Verantwortung, Abschottung, Abbruchkriterien,
+                    Endkontrolle und Rückgabe gehören als objektbezogene Anforderungen in das{' '}
+                    <Link
+                      to="/fachwissen/leistungsverzeichnis-gebaeudereinigung-erstellen"
+                      className="font-bold text-brand hover:underline"
+                    >
+                      Leistungsverzeichnis
+                    </Link>
+                    . So vergleichen Auftraggeber nicht nur Preise, sondern auch den vorgesehenen Schutz- und
+                    Freigabeaufwand.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <h3 className="font-headline text-2xl font-bold text-navy">Fazit</h3>
+            <p>
+              Eine gute Prozessintegration vermeidet keinen Stillstand um jeden Preis. Sie ordnet jede Tätigkeit dem
+              sicher vertretbaren Betriebszustand zu und schafft einen prüfbaren Weg von der Freigabe bis zur
+              dokumentierten Rückgabe. Erst danach lassen sich Zeitfenster, Aufwand und mögliche betriebliche Vorteile
+              realistisch bewerten.
             </p>
           </div>
         </div>
       </section>
 
-      {/* FAQ Section */}
-      <section className="py-20 lg:py-32 bg-[#f7f9fb]">
-        <div className="max-w-4xl mx-auto px-4">
-          <div className="text-center mb-16">
-            <span className="text-[#0B2341] font-bold tracking-wider uppercase text-sm mb-4 block">Häufige Fragen</span>
-            <h2 className="text-3xl lg:text-4xl font-black tracking-tight text-[#0B2341]">FAQs zur Industriereinigung</h2>
+      <section className="bg-paper py-16 lg:py-24" aria-labelledby="industriereinigung-faq">
+        <div className="mx-auto max-w-4xl px-4 sm:px-8">
+          <div className="mb-12 text-center">
+            <span className="eyebrow justify-center text-brand">Häufige Fragen</span>
+            <h2 id="industriereinigung-faq" className="mt-4 font-headline text-2xl font-bold text-navy sm:text-3xl lg:text-4xl">
+              FAQs zur Industriereinigung im Betrieb
+            </h2>
           </div>
           <Accordion items={faqSchema.mainEntity.map((q) => ({ question: q.name, answer: q.acceptedAnswer.text }))} />
         </div>
       </section>
 
-      <CTABand title="Optimieren Sie Ihre Industriereinigung?" lead="Lassen Sie uns gemeinsam ein Reinigungskonzept entwickeln, das Ihre Produktionsprozesse unterstützt und Stillstandzeiten minimiert." />
-    </div>
+      <ArticleFooter slug={ARTICLE_SLUG} />
+
+      <CTABand
+        title="Reinigungsfenster und Freigaben vor Ort planen"
+        lead="Bei einer gemeinsamen Begehung trennen wir Aufgaben für den laufenden Betrieb von Arbeiten mit Abschottung oder Stillstand und erfassen die benötigten Schutz-, Freigabe- und Rückgabeschritte für ein belastbares Konzept."
+      />
+    </article>
   );
 }

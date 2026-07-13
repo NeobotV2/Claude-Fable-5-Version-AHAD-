@@ -1,4 +1,3 @@
-import { motion } from 'motion/react';
 import { BookOpen, FileText, CheckCircle2, AlertTriangle } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import SEO from '@/components/SEO';
@@ -6,6 +5,8 @@ import Accordion from '@/components/ui/Accordion';
 import CTABand from '@/components/CTABand';
 import { IMG } from '@/lib/images';
 import ArticleMeta from '@/components/ArticleMeta';
+import ArticleFooter from '@/components/ArticleFooter';
+import PageHero from '@/components/PageHero';
 import { buildArticleSchema, EDITORIAL_ARTICLES } from '@/data/editorial';
 
 export default function FachwissenLeistungsverzeichnis() {
@@ -22,7 +23,7 @@ export default function FachwissenLeistungsverzeichnis() {
         name: 'Was ist ein Leistungsverzeichnis in der Gebäudereinigung?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: 'Ein Leistungsverzeichnis (LV) ist die strukturierte, objektbezogene Beschreibung aller zu erbringenden Reinigungsleistungen. Es legt fest, welche Flächen in welchem Intervall mit welchem Qualitätsziel gereinigt werden. Das LV ist die Grundlage für vergleichbare Angebote, eine eindeutige Beauftragung und die spätere Qualitätskontrolle. Ohne LV vergleichen Auftraggeber Pauschalpreise ohne zu wissen, welche Leistung tatsächlich dahintersteckt.',
+          text: 'Ein Leistungsverzeichnis (LV) ist die strukturierte, objektbezogene Beschreibung der zu erbringenden Reinigungsleistungen. Es benennt etwa Raumgruppe, Fläche, Tätigkeit, Turnus und Qualitätsziel. Für einen vollständigen Vertrag werden Service-Level, kaufmännische Regeln und geforderte Nachweise getrennt ergänzt.',
         },
       },
       {
@@ -30,7 +31,7 @@ export default function FachwissenLeistungsverzeichnis() {
         name: 'Was gehört in ein Leistungsverzeichnis für die Reinigung?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: 'Ein vollständiges LV enthält: Objektdaten und Adresse, ein Flächenaufmaß je Raum- und Nutzungsart (m²), die Bodenbeläge, die Raumgruppen mit ihren Reinigungsintervallen (täglich, wöchentlich, monatlich, quartalsweise), die einzelnen Tätigkeiten je Raumgruppe, das gewünschte Qualitäts-/Ergebnisniveau, die Reinigungszeiten (Tagdienst/Randzeiten), Sonderleistungen (Glas, Grundreinigung, Winterdienst) sowie Vorgaben zu Qualitätssicherung, Dokumentation und Nachweisen (Tariflohn, Sozialversicherung).',
+          text: 'Zum LV gehören vor allem Objektdaten, Flächen und Raumgruppen, Bodenbeläge, konkrete Tätigkeiten, Turnusse oder Bedarfsauslöser, Qualitätsziele und klar abgegrenzte Sonderleistungen. Service-Level wie Reaktions- und Eskalationszeiten, Preise und Abrechnungsregeln sowie Eignungs- oder Versicherungsnachweise sollten als eigene Vertragsbausteine erkennbar bleiben.',
         },
       },
       {
@@ -38,7 +39,7 @@ export default function FachwissenLeistungsverzeichnis() {
         name: 'Was ist der Unterschied zwischen verrichtungsorientiertem und ergebnisorientiertem Leistungsverzeichnis?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: 'Beim verrichtungsorientierten LV wird genau vorgegeben, welche Tätigkeit in welchem Intervall ausgeführt wird (z. B. „Böden täglich wischen"). Es ist einfach zu kontrollieren, aber unflexibel. Beim ergebnisorientierten LV wird ein Sauberkeitsergebnis (Qualitätsniveau) definiert, und der Dienstleister entscheidet eigenverantwortlich über Häufigkeit und Methode, um dieses Ergebnis zu erreichen. Das ist flexibler und oft wirtschaftlicher, erfordert aber ein klares Qualitätsmesssystem (z. B. nach DIN EN 13549) und Vertrauen in den Anbieter. In der Praxis sind hygienisch kritische Bereiche meist verrichtungsorientiert, der Rest ergebnisorientiert.',
+          text: 'Beim verrichtungsorientierten LV werden Tätigkeit und Turnus vorgegeben. Beim ergebnisorientierten Modell wird ein prüfbares Ergebnis beschrieben und der Ausführungsweg innerhalb vereinbarter Grenzen dem Dienstleister überlassen. Beide Modelle benötigen eindeutige Kontrolle und Zuständigkeiten; welche Kombination geeignet ist, hängt von Raumgruppe, Hygieneanforderung, Risiko und Vertragsziel ab.',
         },
       },
       {
@@ -46,7 +47,7 @@ export default function FachwissenLeistungsverzeichnis() {
         name: 'Warum ist ein Leistungsverzeichnis für den Preisvergleich wichtig?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: 'Ohne einheitliches LV geben Anbieter Preise für unterschiedliche Leistungsumfänge ab — der günstigste Preis verbirgt dann oft die geringste Leistung. Erst ein objektbezogenes LV macht Angebote vergleichbar, weil alle Bieter dieselbe Flächen-, Intervall- und Qualitätsbasis kalkulieren. So lässt sich erkennen, ob ein auffällig niedriger Preis realistisch ist oder ob Leistungen, Tariflohn oder Sozialabgaben unrealistisch kalkuliert wurden.',
+          text: 'Ein gemeinsames, objektbezogenes LV verbessert die Vergleichbarkeit, weil Anbieter dieselben Flächen, Tätigkeiten, Turnusse und Qualitätsziele kalkulieren. Zusätzlich müssen kaufmännische Annahmen und Ausschlüsse vergleichbar ausgewiesen sein. Ein niedriger Preis allein erlaubt noch keine Aussage über Qualität oder Rechtskonformität.',
         },
       },
       {
@@ -61,7 +62,7 @@ export default function FachwissenLeistungsverzeichnis() {
   };
 
   return (
-    <div>
+    <article>
       <SEO
         title="Leistungsverzeichnis Gebäudereinigung erstellen: Anleitung | AHAD"
         description="Wie erstellt man ein Leistungsverzeichnis (LV) für die Gebäudereinigung? Aufbau, Bestandteile, verrichtungs- vs. ergebnisorientiert und eine Schritt-für-Schritt-Anleitung für vergleichbare Angebote."
@@ -69,59 +70,47 @@ export default function FachwissenLeistungsverzeichnis() {
         schema={[articleSchema, faqSchema]}
       />
 
-      {/* Hero */}
-      <section className="relative pt-36 pb-20 lg:pt-44 lg:pb-28 bg-navy text-white overflow-hidden grain">
-        <div className="absolute inset-0 opacity-40">
-          <img
-            src={IMG.teamMeeting}
-            alt="Leistungsverzeichnis für die Gebäudereinigung erstellen"
-            className="w-full h-full object-cover"
-            referrerPolicy="no-referrer"
-          />
-        </div>
-        <div className="absolute inset-0 bg-gradient-to-r from-navy via-navy/85 to-navy/40" />
-        <div className="absolute inset-0 bg-gradient-to-t from-navy via-transparent to-navy/60" />
-        <div className="max-w-7xl mx-auto px-4 relative z-10">
-          <motion.div initial={false} animate={{ opacity: 1, y: 0 }} className="max-w-3xl">
-            <span className="inline-flex items-center gap-2 bg-white/10 px-4 py-2 rounded-full text-sm font-bold mb-6 tracking-wider uppercase border border-white/20">
-              <BookOpen className="w-4 h-4 text-[#9CDDB7]" />
-              Fachwissen: Entscheiderwissen
-            </span>
-            <h1 className="display-lg text-white mb-8">Das Leistungsverzeichnis: So machen Sie Reinigungsangebote vergleichbar</h1>
-            <p className="text-xl text-blue-100 leading-relaxed mb-10 font-medium">
-              Ein belastbares Leistungsverzeichnis (LV) ist das wichtigste Dokument bei der Vergabe von
-              Reinigungsleistungen. Wir zeigen Aufbau, Bestandteile und den Weg zu wirklich vergleichbaren Angeboten.
-            </p>
-          </motion.div>
-        </div>
-      </section>
+      <PageHero
+        compact
+        titleSize="lg"
+        eyebrow="Fachwissen · Leistungsverzeichnis"
+        title="Leistungsverzeichnis erstellen: Reinigungsangebote besser vergleichen"
+        lead="Wie Sie Leistungen objektbezogen beschreiben und LV, Service-Level, kaufmännische Regeln sowie Nachweise sauber voneinander trennen."
+        image={IMG.teamMeeting}
+        imageAlt=""
+        crumbs={[
+          { label: 'Fachwissen', href: '/fachwissen' },
+          { label: 'Leistungsverzeichnis erstellen' },
+        ]}
+      />
 
       {/* Auf einen Blick */}
-      <section className="py-16 bg-white border-b border-gray-100">
-        <div className="max-w-7xl mx-auto px-4">
-          <h2 className="text-2xl font-black text-[#0B2341] mb-8 text-center">Das Leistungsverzeichnis auf einen Blick</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-[#f7f9fb] p-6 rounded-2xl border border-gray-100">
-              <FileText className="w-8 h-8 text-[#0B2341] mb-4" />
-              <h3 className="font-bold text-lg mb-2 text-[#0B2341]">Was es ist</h3>
-              <p className="text-[#424751] text-sm">
+      <section className="border-b border-line bg-white py-12 lg:py-14">
+        <div className="mx-auto max-w-7xl px-4 sm:px-8">
+          <h2 className="mb-8 text-center text-2xl font-black text-navy">Das Leistungsverzeichnis auf einen Blick</h2>
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+            <div className="rounded-2xl border border-line bg-paper p-6">
+              <FileText className="mb-4 h-8 w-8 text-brand" aria-hidden="true" />
+              <h3 className="mb-2 text-lg font-bold text-navy">Leistung beschreiben</h3>
+              <p className="text-sm text-slate">
                 Die objektbezogene Beschreibung aller Leistungen: welche Fläche, in welchem Intervall, mit welchem
                 Ergebnis gereinigt wird.
               </p>
             </div>
-            <div className="bg-[#f7f9fb] p-6 rounded-2xl border border-gray-100">
-              <CheckCircle2 className="w-8 h-8 text-[#0D6B38] mb-4" />
-              <h3 className="font-bold text-lg mb-2 text-[#0B2341]">Wozu es dient</h3>
-              <p className="text-[#424751] text-sm">
-                Vergleichbare Angebote, eindeutige Beauftragung und eine messbare Grundlage für die Qualitätskontrolle.
+            <div className="rounded-2xl border border-line bg-paper p-6">
+              <CheckCircle2 className="mb-4 h-8 w-8 text-accent" aria-hidden="true" />
+              <h3 className="mb-2 text-lg font-bold text-navy">Ergebnis kontrollieren</h3>
+              <p className="text-sm text-slate">
+                Mess- und Kontrollkriterien sowie Zuständigkeiten ergänzen, damit Ergebnisse nachvollziehbar bewertet
+                werden können.
               </p>
             </div>
-            <div className="bg-[#f7f9fb] p-6 rounded-2xl border border-gray-100">
-              <BookOpen className="w-8 h-8 text-[#0B2341] mb-4" />
-              <h3 className="font-bold text-lg mb-2 text-[#0B2341]">Worauf es ankommt</h3>
-              <p className="text-[#424751] text-sm">
-                Flächenaufmaß, Intervalle je Raumgruppe und ein klares Qualitätsziel — kein Standard-Copy-Paste,
-                sondern objektbezogen.
+            <div className="rounded-2xl border border-line bg-paper p-6">
+              <BookOpen className="mb-4 h-8 w-8 text-brand" aria-hidden="true" />
+              <h3 className="mb-2 text-lg font-bold text-navy">Vertragsbausteine trennen</h3>
+              <p className="text-sm text-slate">
+                LV, Service-Level, Preise und Nachweise getrennt strukturieren, damit Änderungen und Vergleiche
+                eindeutig bleiben.
               </p>
             </div>
           </div>
@@ -131,218 +120,248 @@ export default function FachwissenLeistungsverzeichnis() {
       <ArticleMeta slug="leistungsverzeichnis-gebaeudereinigung-erstellen" />
 
       {/* Content */}
-      <section className="py-20 lg:py-32 bg-white">
-        <div className="max-w-4xl mx-auto px-4">
-          <div className="prose prose-lg max-w-none text-[#424751] leading-relaxed">
-            <h2 className="text-3xl font-black text-[#0B2341] mb-6">Warum ein Leistungsverzeichnis über Erfolg oder Frust entscheidet</h2>
+      <section className="bg-white py-16 lg:py-24">
+        <div className="mx-auto max-w-3xl px-4 sm:px-8">
+          <div className="prose prose-lg max-w-none leading-relaxed text-slate">
+            <h2 id="lv-grundlagen" className="scroll-mt-28 text-2xl font-black text-navy sm:text-3xl">Welche Funktion ein Leistungsverzeichnis erfüllt</h2>
             <p className="mb-8">
-              Die meisten Konflikte zwischen Auftraggeber und Reinigungsdienstleister entstehen nicht durch schlechte
-              Arbeit, sondern durch <strong>unklare Erwartungen</strong>. Wurde nie festgehalten, ob ein Bereich täglich
-              oder zweimal pro Woche gereinigt wird, ist jeder Streit über Sauberkeit ein Streit über ein nie
-              vereinbartes Ziel. Das Leistungsverzeichnis löst genau dieses Problem: Es übersetzt die Erwartung
-              „sauber" in nachvollziehbare, prüfbare Leistungen. Es ist damit zugleich Ausschreibungsgrundlage,
-              Vertragsbestandteil und Maßstab der späteren{' '}
-              <Link to="/ahad-system" className="text-[#0B2341] font-bold hover:underline">
+              Konflikte entstehen häufig durch <strong>unklare Erwartungen</strong>. Das Leistungsverzeichnis übersetzt
+              den Bedarf in konkrete Raumgruppen, Flächen, Tätigkeiten, Turnusse oder Auslöser und Qualitätsziele. Als
+              gemeinsame Kalkulationsgrundlage kann es Angebote besser vergleichbar machen; für die spätere Steuerung
+              werden zusätzlich Service-Level, kaufmännische Regeln und Nachweise benötigt. Zusammen bilden diese
+              Bausteine den Maßstab der{' '}
+              <Link to="/ahad-system" className="font-bold text-brand hover:underline">
                 Qualitätskontrolle
               </Link>
               .
             </p>
 
-            <h2 className="text-3xl font-black text-[#0B2341] mb-6">Verrichtungs- oder ergebnisorientiert?</h2>
+            <div
+              className="mb-12 overflow-x-auto rounded-2xl border border-line shadow-soft"
+              role="region"
+              aria-label="Musterzeile für ein Leistungsverzeichnis"
+              tabIndex={0}
+            >
+              <table className="min-w-[52rem] w-full border-collapse bg-white text-left text-sm">
+                <caption className="caption-top bg-paper px-4 py-3 text-left font-bold text-navy">
+                  Beispiel einer konkreten LV-Zeile
+                </caption>
+                <thead>
+                  <tr className="bg-navy text-white">
+                    <th scope="col" className="px-4 py-3 font-bold">Raumgruppe / Fläche</th>
+                    <th scope="col" className="px-4 py-3 font-bold">Tätigkeit</th>
+                    <th scope="col" className="px-4 py-3 font-bold">Turnus</th>
+                    <th scope="col" className="px-4 py-3 font-bold">Qualitätskriterium</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row" className="px-4 py-3 align-top font-semibold text-navy">
+                      Büro 1. OG · 420 m² Teppich
+                    </th>
+                    <td className="px-4 py-3 align-top">Freie Bodenflächen saugen; erreichbare Randzonen einbeziehen</td>
+                    <td className="px-4 py-3 align-top">Mo., Mi. und Fr.; Zusatzleistung nach dokumentiertem Ereignis</td>
+                    <td className="px-4 py-3 align-top">Kein loser sichtbarer Schmutz bei vereinbarter Stichprobe</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p className="mb-12 text-sm text-slate">
+              Das Beispiel ist keine Vorlage für jedes Objekt. Es zeigt die notwendige Verknüpfung von Fläche,
+              Tätigkeit, Auslösung und prüfbarem Ergebnis; Zugänglichkeit, Ausschlüsse und Messverfahren sind bei Bedarf
+              zu ergänzen.
+            </p>
+
+            <h2 id="leistungsmodelle" className="scroll-mt-28 text-2xl font-black text-navy sm:text-3xl">Verrichtungs- oder ergebnisorientiert?</h2>
             <p className="mb-6">
               Es gibt zwei grundlegende Logiken, ein LV aufzubauen. Die Wahl bestimmt, wie viel Spielraum der
               Dienstleister hat — und wie Sie die Qualität messen.
             </p>
-            <div className="overflow-x-auto mb-12 rounded-2xl border border-gray-200 shadow-sm">
-              <table className="w-full text-left text-sm border-collapse bg-white">
+            <div
+              className="mb-12 overflow-x-auto rounded-2xl border border-line shadow-soft"
+              role="region"
+              aria-label="Vergleich von verrichtungs- und ergebnisorientiertem Leistungsmodell"
+              tabIndex={0}
+            >
+              <table className="min-w-[48rem] w-full border-collapse bg-white text-left text-sm">
+                <caption className="sr-only">Vergleich der beiden Leistungsmodelle</caption>
                 <thead>
-                  <tr className="bg-[#0B2341] text-white">
-                    <th className="px-4 py-3 font-bold">Kriterium</th>
-                    <th className="px-4 py-3 font-bold">Verrichtungsorientiert</th>
-                    <th className="px-4 py-3 font-bold">Ergebnisorientiert</th>
+                  <tr className="bg-navy text-white">
+                    <th scope="col" className="px-4 py-3 font-bold">Kriterium</th>
+                    <th scope="col" className="px-4 py-3 font-bold">Verrichtungsorientiert</th>
+                    <th scope="col" className="px-4 py-3 font-bold">Ergebnisorientiert</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-200">
+                <tbody className="divide-y divide-line">
                   <tr>
-                    <td className="px-4 py-3 font-semibold text-[#0B2341] align-top">Vorgabe</td>
+                    <th scope="row" className="px-4 py-3 font-semibold text-navy align-top">Vorgabe</th>
                     <td className="px-4 py-3 align-top">Konkrete Tätigkeit &amp; Häufigkeit („Boden täglich wischen")</td>
                     <td className="px-4 py-3 align-top">Definiertes Sauberkeitsergebnis (Qualitätsniveau)</td>
                   </tr>
-                  <tr className="bg-[#f7f9fb]">
-                    <td className="px-4 py-3 font-semibold text-[#0B2341] align-top">Flexibilität</td>
-                    <td className="px-4 py-3 align-top">Gering — Methode &amp; Takt sind fest</td>
-                    <td className="px-4 py-3 align-top">Hoch — Dienstleister wählt Methode &amp; Takt</td>
+                  <tr className="bg-paper">
+                    <th scope="row" className="px-4 py-3 font-semibold text-navy align-top">Flexibilität</th>
+                    <td className="px-4 py-3 align-top">Durch die vereinbarten Tätigkeiten und Turnusse begrenzt</td>
+                    <td className="px-4 py-3 align-top">Innerhalb definierter Ergebnis-, Kontroll- und Verfahrensgrenzen</td>
                   </tr>
                   <tr>
-                    <td className="px-4 py-3 font-semibold text-[#0B2341] align-top">Kontrolle</td>
-                    <td className="px-4 py-3 align-top">Einfach (wurde die Tätigkeit ausgeführt?)</td>
-                    <td className="px-4 py-3 align-top">Qualitätsmesssystem nötig (z. B. DIN EN 13549)</td>
+                    <th scope="row" className="px-4 py-3 font-semibold text-navy align-top">Kontrolle</th>
+                    <td className="px-4 py-3 align-top">Ausführung und vereinbartes Ergebnis prüfen</td>
+                    <td className="px-4 py-3 align-top">Prüfbares Qualitäts- und Bewertungsverfahren vereinbaren</td>
                   </tr>
-                  <tr className="bg-[#f7f9fb]">
-                    <td className="px-4 py-3 font-semibold text-[#0B2341] align-top">Wirtschaftlichkeit</td>
-                    <td className="px-4 py-3 align-top">Kann zu Leerleistung führen (leere Räume)</td>
-                    <td className="px-4 py-3 align-top">Oft günstiger durch bedarfsorientierten Einsatz</td>
+                  <tr className="bg-paper">
+                    <th scope="row" className="px-4 py-3 font-semibold text-navy align-top">Kalkulation</th>
+                    <td className="px-4 py-3 align-top">Mengen und Häufigkeiten sind vorgegeben</td>
+                    <td className="px-4 py-3 align-top">Aufwand hängt auch von Mess-, Steuerungs- und Dokumentationslogik ab</td>
                   </tr>
                   <tr>
-                    <td className="px-4 py-3 font-semibold text-[#0B2341] align-top">Geeignet für</td>
-                    <td className="px-4 py-3 align-top">Sanitär, Küche, Hygienezonen</td>
-                    <td className="px-4 py-3 align-top">Büro-, Besprechungs- und Nebenflächen</td>
+                    <th scope="row" className="px-4 py-3 font-semibold text-navy align-top">Auswahl</th>
+                    <td className="px-4 py-3 align-top">Geeignet, wenn Tätigkeit und Turnus eindeutig vorgegeben werden sollen</td>
+                    <td className="px-4 py-3 align-top">Geeignet, wenn Ergebnis und Entscheidungsspielraum belastbar messbar sind</td>
                   </tr>
                 </tbody>
               </table>
             </div>
             <p className="mb-12">
-              In der Praxis bewährt sich eine <strong>Kombination</strong>: hygienisch kritische Bereiche
-              verrichtungsorientiert im festen Tagesintervall, alle übrigen Flächen ergebnisorientiert und
-              bedarfsgesteuert. So bleibt die Hygiene gesichert, während die{' '}
-              <Link to="/fachwissen/unterhaltsreinigung-unternehmen-reinigungsintervalle" className="text-[#0B2341] font-bold hover:underline">
+              Eine <strong>Kombination</strong> kann sinnvoll sein: klar definierte Tätigkeiten dort, wo feste Abläufe
+              erforderlich sind, und ergebnisorientierte Steuerung dort, wo Kriterien und Kontrolle tragfähig sind.
+              Die Entscheidung richtet sich nach Raumgruppe, Nutzung, Hygiene- und Qualitätsanforderung sowie der{' '}
+              <Link to="/fachwissen/unterhaltsreinigung-unternehmen-reinigungsintervalle" className="font-bold text-brand hover:underline">
                 Reinigungsintervalle
               </Link>{' '}
-              dort flexibel werden, wo es wirtschaftlich sinnvoll ist.
+              im konkreten Objekt.
             </p>
 
-            <h2 className="text-3xl font-black text-[#0B2341] mb-6">Die Bestandteile eines vollständigen LV</h2>
+            <h2 id="lv-bestandteile" className="scroll-mt-28 text-2xl font-black text-navy sm:text-3xl">LV, Service-Level, Konditionen und Nachweise trennen</h2>
             <p className="mb-6">
-              Ein belastbares Leistungsverzeichnis ist mehr als eine Tätigkeitsliste. Diese Bausteine sollten enthalten
-              sein, damit Angebote wirklich vergleichbar werden:
+              Nicht jede Vertragsanforderung gehört in dieselbe Tabelle. Eine klare Trennung verhindert, dass eine
+              fachliche Leistungsänderung unbemerkt kaufmännische oder organisatorische Folgen auslöst. Die konkrete
+              Dokumentenstruktur richtet sich nach Vergabe und Vertrag; folgende Abgrenzung ist eine praxistaugliche
+              Ausgangsbasis:
             </p>
-            <div className="overflow-x-auto mb-12 rounded-2xl border border-gray-200 shadow-sm">
-              <table className="w-full text-left text-sm border-collapse bg-white">
+            <div
+              className="mb-12 overflow-x-auto rounded-2xl border border-line shadow-soft"
+              role="region"
+              aria-label="Abgrenzung der Vertragsbausteine"
+              tabIndex={0}
+            >
+              <table className="min-w-[48rem] w-full border-collapse bg-white text-left text-sm">
+                <caption className="sr-only">Inhalte von Leistungsverzeichnis, Service-Level, kaufmännischen Regelungen und Nachweisen</caption>
                 <thead>
-                  <tr className="bg-[#0B2341] text-white">
-                    <th className="px-4 py-3 font-bold">Baustein</th>
-                    <th className="px-4 py-3 font-bold">Inhalt</th>
+                  <tr className="bg-navy text-white">
+                    <th scope="col" className="px-4 py-3 font-bold">Baustein</th>
+                    <th scope="col" className="px-4 py-3 font-bold">Typische Inhalte</th>
+                    <th scope="col" className="px-4 py-3 font-bold">Prüffrage</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-200">
+                <tbody className="divide-y divide-line">
                   <tr>
-                    <td className="px-4 py-3 font-semibold text-[#0B2341] align-top">Objektdaten</td>
-                    <td className="px-4 py-3 align-top">Adresse, Gebäudeart, Etagen, Nutzungszeiten, Ansprechpartner, Zugangsregelung.</td>
+                    <th scope="row" className="px-4 py-3 font-semibold text-navy align-top">Leistungsverzeichnis</th>
+                    <td className="px-4 py-3 align-top">Objekt, Raumgruppe, Fläche, Belag, Tätigkeit, Turnus oder Auslöser, Qualitätsziel, Leistungsgrenzen und Sonderleistungen</td>
+                    <td className="px-4 py-3 align-top">Kalkulieren alle Anbieter denselben fachlichen Umfang?</td>
                   </tr>
-                  <tr className="bg-[#f7f9fb]">
-                    <td className="px-4 py-3 font-semibold text-[#0B2341] align-top">Flächenaufmaß</td>
-                    <td className="px-4 py-3 align-top">Quadratmeter je Raum- und Nutzungsart (Büro, Sanitär, Verkehrsfläche, Küche, Lager).</td>
-                  </tr>
-                  <tr>
-                    <td className="px-4 py-3 font-semibold text-[#0B2341] align-top">Bodenbeläge</td>
-                    <td className="px-4 py-3 align-top">Hartboden, Teppich, Elastik, Naturstein, Glas — je Belag eigene Pflegelogik.</td>
-                  </tr>
-                  <tr className="bg-[#f7f9fb]">
-                    <td className="px-4 py-3 font-semibold text-[#0B2341] align-top">Raumgruppen &amp; Intervalle</td>
-                    <td className="px-4 py-3 align-top">Welche Raumgruppe wird täglich, wöchentlich, monatlich oder quartalsweise gereinigt?</td>
+                  <tr className="bg-paper">
+                    <th scope="row" className="px-4 py-3 font-semibold text-navy align-top">Service-Level &amp; Qualität</th>
+                    <td className="px-4 py-3 align-top">Messverfahren, Stichprobe, Toleranz, Meldung, Reaktions- und Eskalationszeit, Zuständigkeit und Abnahme</td>
+                    <td className="px-4 py-3 align-top">Wie werden Ergebnis und Umgang mit Abweichungen geprüft?</td>
                   </tr>
                   <tr>
-                    <td className="px-4 py-3 font-semibold text-[#0B2341] align-top">Tätigkeiten je Gruppe</td>
-                    <td className="px-4 py-3 align-top">Konkrete Leistungen (Böden, Oberflächen, Sanitärobjekte, Papierkörbe, Glas innen).</td>
+                    <th scope="row" className="px-4 py-3 font-semibold text-navy align-top">Kaufmännische Regelungen</th>
+                    <td className="px-4 py-3 align-top">Preisblatt, Abrechnungsmodell, Laufzeit, Preisänderung, Zusatzauftrag, Mengenänderung und Abgrenzung von Verbrauchsmaterial</td>
+                    <td className="px-4 py-3 align-top">Sind Preisannahmen, Optionen und Änderungsfolgen vergleichbar?</td>
                   </tr>
-                  <tr className="bg-[#f7f9fb]">
-                    <td className="px-4 py-3 font-semibold text-[#0B2341] align-top">Qualitätsziel</td>
-                    <td className="px-4 py-3 align-top">Erwartetes Ergebnisniveau und Mess-/Kontrollverfahren (Sichtkontrolle, Stichprobe).</td>
-                  </tr>
-                  <tr>
-                    <td className="px-4 py-3 font-semibold text-[#0B2341] align-top">Zeiten &amp; Organisation</td>
-                    <td className="px-4 py-3 align-top">Tagdienst, Randzeiten oder außerhalb der Betriebszeit; Schlüssel-/Alarmregelung.</td>
-                  </tr>
-                  <tr className="bg-[#f7f9fb]">
-                    <td className="px-4 py-3 font-semibold text-[#0B2341] align-top">Sonderleistungen</td>
-                    <td className="px-4 py-3 align-top">Glas- und Fassadenreinigung, Grundreinigung, Bauschluss, Winterdienst — separat ausweisen.</td>
-                  </tr>
-                  <tr>
-                    <td className="px-4 py-3 font-semibold text-[#0B2341] align-top">Nachweise</td>
-                    <td className="px-4 py-3 align-top">Tariflohn, Sozialversicherung, Mindestlohn, Versicherungsschutz, ggf. Zertifikate.</td>
+                  <tr className="bg-paper">
+                    <th scope="row" className="px-4 py-3 font-semibold text-navy align-top">Eignung &amp; Nachweise</th>
+                    <td className="px-4 py-3 align-top">Nur auftragsbezogen geforderte Erklärungen, Versicherungsnachweise, Referenzen, Zertifikate und sonstige Eignungsbelege</td>
+                    <td className="px-4 py-3 align-top">Sind Anforderung, Stichtag, Geltungsbereich und Prüfmethode eindeutig?</td>
                   </tr>
                 </tbody>
               </table>
             </div>
 
-            <h2 className="text-3xl font-black text-[#0B2341] mb-6">Schritt für Schritt zum eigenen Leistungsverzeichnis</h2>
+            <h2 id="lv-erstellen" className="scroll-mt-28 text-2xl font-black text-navy sm:text-3xl">Schritt für Schritt zum eigenen Leistungsverzeichnis</h2>
             <ul className="space-y-4 mb-12 list-none pl-0">
               {[
                 'Objekt begehen und Flächen aufmessen: Räume nach Nutzungsart gliedern und in m² erfassen.',
                 'Bodenbeläge und Ausstattung dokumentieren: je Belag und Sanitärobjekt die Pflegeanforderung notieren.',
                 'Nutzungsprofil festlegen: Mitarbeiterzahl, Besucherfrequenz, Schicht-/Öffnungszeiten, Homeoffice-Quote.',
                 'Raumgruppen bilden und Intervalle definieren: was wird täglich, wöchentlich, monatlich, quartalsweise gereinigt?',
-                'Hygienezonen verrichtungsorientiert sichern: Sanitär und Küche immer im festen Tagesintervall.',
-                'Übrige Flächen ergebnisorientiert beschreiben: Qualitätsziel statt starrer Häufigkeit festlegen.',
+                'Hygiene- und Nutzungsanforderungen prüfen: Tätigkeiten und Turnusse aus Objektvorgaben statt pauschal festlegen.',
+                'Geeignete Flächen ergebnisorientiert beschreiben: Qualitätsziel, Messung und Entscheidungsspielraum gemeinsam definieren.',
                 'Sonderleistungen separat ausweisen: Glas, Grundreinigung, Bauschluss, Winterdienst getrennt kalkulierbar machen.',
                 'Qualitätssicherung verankern: Sichtkontrollen, Begehungsprotokolle, Ansprechpartner und Eskalationsweg.',
-                'Nachweispflichten aufnehmen: Tariflohn, Sozialabgaben und Versicherung transparent einfordern.',
-                'An alle Bieter identisch versenden: nur so werden die Angebote wirklich vergleichbar.',
+                'Auftragsbezogene Nachweise separat definieren: Anforderung, Geltungsbereich, Stichtag und Prüfmethode benennen.',
+                'Allen Bietern denselben Stand bereitstellen und Rückfragen beziehungsweise Änderungen zentral dokumentieren.',
               ].map((item, i) => (
                 <li key={`lv-step-${i}`} className="flex items-start gap-3">
-                  <CheckCircle2 className="text-[#0D6B38] w-6 h-6 flex-shrink-0 mt-0.5" />
+                  <CheckCircle2 className="mt-0.5 h-6 w-6 flex-shrink-0 text-accent" aria-hidden="true" />
                   <span>{item}</span>
                 </li>
               ))}
             </ul>
 
-            <div className="bg-[#f7f9fb] p-8 rounded-3xl mb-12 border border-gray-100 shadow-sm">
-              <h3 className="text-xl font-bold text-[#0B2341] mb-4 flex items-center gap-3">
-                <AlertTriangle className="text-[#0B2341] w-7 h-7" />
+            <div className="mb-12 rounded-3xl border border-line bg-paper p-6 shadow-soft sm:p-8">
+              <h3 className="mb-4 flex items-center gap-3 text-xl font-bold text-navy">
+                <AlertTriangle className="h-7 w-7 text-brand" aria-hidden="true" />
                 Häufige Fehler im Leistungsverzeichnis
               </h3>
               <ul className="space-y-3 text-sm list-none pl-0">
-                <li className="border-b border-gray-200 pb-3">
-                  <strong className="text-[#0B2341]">Standard-Vorlage ohne Objektbezug:</strong> Ein generisches LV
-                  passt zu keinem Gebäude. Flächen und Intervalle müssen aus der Begehung stammen.
+                <li className="border-b border-line pb-3">
+                  <strong className="text-navy">Standard-Vorlage ohne Objektprüfung:</strong> Eine Vorlage kann die
+                  Struktur liefern, muss aber mit Flächen, Nutzung, Belägen und Leistungszielen des Objekts abgeglichen
+                  werden.
                 </li>
-                <li className="border-b border-gray-200 pb-3">
-                  <strong className="text-[#0B2341]">Fehlendes Flächenaufmaß:</strong> Ohne m² je Nutzungsart kann
-                  niemand seriös kalkulieren — der Preis wird zum Ratespiel.
+                <li className="border-b border-line pb-3">
+                  <strong className="text-navy">Unklare Mengengrundlage:</strong> Fehlende oder uneinheitliche Flächen-
+                  und Mengenangaben erhöhen Kalkulationsunsicherheit und erschweren den Vergleich.
                 </li>
-                <li className="border-b border-gray-200 pb-3">
-                  <strong className="text-[#0B2341]">Kein Qualitäts- oder Kontrollmaßstab:</strong> Ohne definiertes
-                  Ergebnis ist jede Reklamation Auslegungssache.
+                <li className="border-b border-line pb-3">
+                  <strong className="text-navy">Kein Qualitäts- oder Kontrollmaßstab:</strong> Ohne definiertes
+                  Ergebnis und Prüfverfahren bleiben Abweichungen schwer nachvollziehbar.
                 </li>
                 <li>
-                  <strong className="text-[#0B2341]">Sonderleistungen in der Pauschale versteckt:</strong> Glas- und
-                  Grundreinigung gehören separat ausgewiesen, sonst sind Angebote nicht vergleichbar.
+                  <strong className="text-navy">Vermischte Vertragsbausteine:</strong> Leistung, Service-Level,
+                  Konditionen und Nachweise sollten erkennbar getrennt sein, damit Änderungen gezielt bewertet werden
+                  können.
                 </li>
               </ul>
             </div>
 
-            <h2 className="text-3xl font-black text-[#0B2341] mb-6">Regionaler Bezug: Vergabe in Villingen-Schwenningen und der Region</h2>
+            <h2 className="text-2xl font-black text-navy sm:text-3xl">Ausschreibungsstand und Änderungen beherrschbar halten</h2>
             <p className="mb-8">
-              Ob mittelständische Produktion im Schwarzwald-Baar-Kreis, Verwaltung in{' '}
-              <Link to="/standorte/villingen-schwenningen" className="text-[#0B2341] font-bold hover:underline">
-                Villingen-Schwenningen
-              </Link>{' '}
-              oder Dienstleister am{' '}
-              <Link to="/standorte/konstanz" className="text-[#0B2341] font-bold hover:underline">
-                Bodensee
-              </Link>{' '}
-              — ein sauberes Leistungsverzeichnis ist überall die Grundlage für faire, vergleichbare Angebote. Bei AHAD
-              erstellen wir das LV im Rahmen der kostenlosen Objektbegehung gemeinsam mit Ihnen und weisen Tariflohn und
-              Leistungsumfang transparent aus. So wissen Sie genau, wofür Sie zahlen — und können unser Angebot mit
-              jedem anderen vergleichen.
+              Versehen Sie Unterlagen mit Version und Datum, führen Sie Bieterfragen zentral und geben Sie Klarstellungen
+              allen Beteiligten in gleicher Form weiter. Änderungen an Fläche, Turnus oder Qualitätsziel sollten mit der
+              betroffenen LV-Position sowie möglichen Auswirkungen auf Service-Level und Preis dokumentiert werden.
+              Dadurch bleibt erkennbar, auf welchem Stand ein Angebot beruht.
             </p>
 
-            <h2 className="text-3xl font-black text-[#0B2341] mb-6">Fazit</h2>
+            <h2 className="text-2xl font-black text-navy sm:text-3xl">Fazit</h2>
             <p className="mb-8">
-              Das Leistungsverzeichnis ist kein bürokratischer Selbstzweck, sondern der Hebel für Qualität und
-              Kostenkontrolle. Wer Flächen, Intervalle und Qualitätsziele sauber beschreibt, bekommt vergleichbare
-              Angebote, eine eindeutige Leistung und einen objektiven Maßstab für die Zusammenarbeit. Die Investition in
-              ein gutes LV zahlt sich über die gesamte Vertragslaufzeit aus.
+              Ein objektbezogenes LV verbessert die fachliche Vergleichbarkeit, wenn Fläche, Tätigkeit, Auslösung und
+              Qualitätsziel eindeutig verbunden sind. Service-Level, kaufmännische Regeln und Nachweise bleiben als
+              eigene Bausteine sichtbar. Erst diese gemeinsame und versionierte Grundlage ermöglicht eine belastbare
+              Prüfung von Angebot, Leistung und späteren Änderungen.
             </p>
           </div>
         </div>
       </section>
 
       {/* FAQ */}
-      <section className="py-20 lg:py-32 bg-[#f7f9fb]">
-        <div className="max-w-4xl mx-auto px-4">
-          <div className="text-center mb-16">
-            <span className="text-[#0B2341] font-bold tracking-wider uppercase text-sm mb-4 block">Häufige Fragen</span>
-            <h2 className="text-3xl lg:text-4xl font-black tracking-tight text-[#0B2341]">FAQs zum Leistungsverzeichnis</h2>
+      <section className="bg-paper py-16 lg:py-24">
+        <div className="mx-auto max-w-4xl px-4 sm:px-8">
+          <div className="mb-12 text-center">
+            <span className="mb-4 block text-sm font-bold uppercase tracking-wider text-brand">Häufige Fragen</span>
+            <h2 className="text-2xl font-black tracking-tight text-navy sm:text-3xl lg:text-4xl">FAQs zum Leistungsverzeichnis</h2>
           </div>
           <Accordion items={faqSchema.mainEntity.map((q) => ({ question: q.name, answer: q.acceptedAnswer.text }))} />
         </div>
       </section>
 
+      <ArticleFooter slug="leistungsverzeichnis-gebaeudereinigung-erstellen" />
+
       <CTABand
         title="Sie möchten Reinigungsleistungen sauber ausschreiben?"
         lead="Wir erstellen mit Ihnen ein objektbezogenes Leistungsverzeichnis — transparent, vergleichbar und auf Ihr Gebäude zugeschnitten."
       />
-    </div>
+    </article>
   );
 }

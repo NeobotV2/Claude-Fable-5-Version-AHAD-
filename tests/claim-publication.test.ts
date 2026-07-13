@@ -91,11 +91,12 @@ test('unverified aggregate ratings, references and featured testimonial are gate
 
 test('ISO article is informational and uses a local responsive image', () => {
   const article = read('src/pages/fachwissen/ISO.tsx');
+  const pageHero = read('src/components/PageHero.tsx');
 
   assert.equal(article.includes('images.unsplash.com'), false);
-  assert.match(article, /src=\{IMG\.medizintechnik\}/);
-  assert.match(article, /srcSet=\{srcSetFor\(IMG\.medizintechnik\)\}/);
-  assert.match(article, /initial=\{false\}/);
+  assert.match(article, /image=\{IMG\.medizintechnik\}/);
+  assert.match(pageHero, /srcSet=\{srcSetFor\(image\)\}/);
+  assert.match(pageHero, /initial=\{false\}/);
   assert.equal(article.includes('zertifizierten Dienstleister wie dem'), false);
   assert.equal(article.includes('Wir setzen auf zertifizierte Prozesse'), false);
 });

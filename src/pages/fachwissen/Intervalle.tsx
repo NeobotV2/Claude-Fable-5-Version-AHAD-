@@ -1,10 +1,12 @@
-import { motion } from 'motion/react';
 import { BookOpen, Clock, Calendar, CheckCircle2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import SEO from '@/components/SEO';
 import Accordion from '@/components/ui/Accordion';
 import CTABand from '@/components/CTABand';
 import ArticleMeta from '@/components/ArticleMeta';
+import ArticleFooter from '@/components/ArticleFooter';
+import PageHero from '@/components/PageHero';
+import { IMG } from '@/lib/images';
 import { buildArticleSchema, EDITORIAL_ARTICLES } from '@/data/editorial';
 
 export default function FachwissenIntervalle() {
@@ -21,7 +23,7 @@ export default function FachwissenIntervalle() {
         "name": "Wie oft sollte ein Büro gereinigt werden?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Die optimale Reinigungshäufigkeit für Büros hängt von der Nutzung ab. Stark frequentierte Bereiche wie Sanitäranlagen und Küchen sollten täglich gereinigt werden. Normale Büroarbeitsplätze werden meist 2 bis 3 Mal pro Woche gereinigt, während Aufgaben wie Fensterputzen oder Grundreinigungen in größeren Abständen (z.B. monatlich oder quartalsweise) erfolgen."
+          "text": "Eine allgemeingültige Häufigkeit gibt es nicht. Der Plan sollte Nutzung, Verschmutzung, Bodenbelag, betriebliche Hygienevorgaben und das vereinbarte Qualitätsziel je Raumgruppe berücksichtigen. Feste Aufgaben können mit dokumentierten Bedarfsprüfungen für geeignete, weniger sensible Flächen kombiniert werden."
         }
       },
       {
@@ -29,7 +31,7 @@ export default function FachwissenIntervalle() {
         "name": "Was bedeutet bedarfsorientierte Reinigung?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Bedarfsorientierte Reinigung (auch dynamische Reinigung genannt) bedeutet, dass nicht starr nach einem festen Plan geputzt wird, sondern nach tatsächlichem Verschmutzungsgrad und Nutzung. Wenn beispielsweise ein Konferenzraum nicht genutzt wurde, wird er auch nicht gereinigt. Das spart Kosten und schont die Umwelt."
+          "text": "Bedarfsorientierte Reinigung ergänzt einen definierten Basisplan. Geeignete Leistungen werden anhand vereinbarter Kriterien wie Belegung, Sichtkontrolle oder dokumentierter Verschmutzung ausgelöst. Hygiene- oder vertraglich festgelegte Aufgaben bleiben davon unberührt; Abweichungen sollten nachvollziehbar dokumentiert werden."
         }
       },
       {
@@ -45,7 +47,7 @@ export default function FachwissenIntervalle() {
         "name": "Wie oft sollten Sanitäranlagen im Unternehmen gereinigt werden?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Sanitäranlagen gehören zu den hygienisch sensibelsten Bereichen und sollten als Grundregel mindestens einmal arbeitstäglich gereinigt und desinfiziert werden. In stark frequentierten Objekten (z. B. Verwaltungen mit hohem Publikumsverkehr, Produktion mit Schichtbetrieb oder Gastronomie) sind mehrfache Sichtreinigungen pro Tag oder eine Tagdienstkraft sinnvoll. Maßgeblich ist die Nutzerzahl pro WC-Einheit: Faustregel als Orientierungswert sind ab etwa 15 bis 20 Personen pro Sanitäreinheit zusätzliche Zwischenreinigungen einzuplanen. Aspekte des Arbeitsschutzes (ASR A4.1) und betriebliche Hygienevorgaben sollten dabei berücksichtigt werden."
+          "text": "Für Sanitäranlagen sollte der Betreiber ein objektbezogenes Reinigungs- und Kontrollintervall aus Nutzung, Öffnungs- oder Schichtzeiten, Verschmutzung und betrieblichen Hygienevorgaben ableiten. Zwischenreinigungen können bei hoher Nutzung sinnvoll sein. Eine routinemäßige Desinfektion ist nicht automatisch erforderlich, sondern richtet sich nach Hygieneplan, Gefährdung und konkretem Anlass."
         }
       },
       {
@@ -53,7 +55,7 @@ export default function FachwissenIntervalle() {
         "name": "Wie wirkt sich der Tariflohn auf die Reinigungskosten aus?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Der Personalkostenanteil macht in der Gebäudereinigung typischerweise 70 bis 85 Prozent des Angebotspreises aus. Maßgeblich ist der allgemeinverbindliche Tariflohn der Gebäudereinigung (Lohngruppe 1, Innenreinigung). Steigt der Tariflohn, steigen die Reinigungskosten nahezu proportional mit, da Material- und Maschinenkosten nur einen kleinen Teil ausmachen. Genau deshalb ist die richtige Intervallplanung der wichtigste Kostenhebel: Wer ein Intervall von täglich auf bedarfsorientiert (z. B. 3x pro Woche) umstellt, kann die Reinigungskraftstunden und damit die Kosten in dem betreffenden Bereich spürbar senken, ohne die Hygiene in sensiblen Zonen zu gefährden. Konkrete Preise sind immer objektabhängig und nur als Richtwert zu verstehen."
+          "text": "Der jeweils geltende Branchenmindestlohn ist ein wichtiger Kalkulationsbestandteil, aber nicht der einzige. Zum Angebot gehören unter anderem Lohnneben- und Ausfallkosten, Objektleitung, Material, Maschinen, Anfahrt und Wagnis. Veränderte Intervalle wirken zunächst auf die geplanten Arbeitsstunden; ihre Wirkung auf den Gesamtpreis muss für den konkreten Leistungsumfang berechnet werden."
         }
       },
       {
@@ -61,14 +63,14 @@ export default function FachwissenIntervalle() {
         "name": "Was ist der Unterschied zwischen starrer und dynamischer (bedarfsorientierter) Reinigung?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Bei der starren Reinigung wird jeder Bereich nach einem festen Plan in festen Intervallen gereinigt, unabhängig vom tatsächlichen Verschmutzungsgrad. Das ist einfach zu kalkulieren, kann aber zu unnötigen Leistungen (leere Räume werden gereinigt) oder zu Lücken führen. Bei der dynamischen, bedarfsorientierten Reinigung wird der tatsächliche Bedarf erfasst, etwa über Sichtkontrolle, Nutzungsdaten, Belegungspläne oder Sensorik, und es wird dort gereinigt, wo es nötig ist. Hygienisch kritische Bereiche (Sanitär, Küche, Empfang) bleiben dabei immer im festen Tagesintervall, während Büro- und Besprechungsflächen flexibel getaktet werden. So lassen sich Kosten und Ressourcen einsparen, ohne die Qualität in sensiblen Zonen zu reduzieren."
+          "text": "Bei einer festen Logik werden Tätigkeit und Turnus vorab vereinbart. Eine adaptive Logik löst geeignete Leistungen anhand definierter Bedarfskriterien aus. Welche Raumgruppen fest oder adaptiv gesteuert werden können, ergibt sich aus Nutzung, Hygieneplan, Qualitätsziel und Vertrag. Ein belastbares Konzept benennt außerdem Kontrolle, Dokumentation und Eskalation bei Abweichungen."
         }
       }
     ]
   };
 
   return (
-    <div>
+    <article>
       <SEO 
         title="Reinigungsintervalle im Büro: Wie oft putzen? | AHAD" 
         description="Wie oft sollte ein Büro gereinigt werden? Unser Leitfaden zu Reinigungsintervallen hilft Ihnen, die optimale Taktung für Ihr Unternehmen zu finden."
@@ -76,57 +78,47 @@ export default function FachwissenIntervalle() {
         schema={[articleSchema, faqSchema]}
       />
       
-      {/* Hero Section */}
-      <section className="relative pt-36 pb-20 lg:pt-44 lg:pb-28 bg-navy text-white overflow-hidden grain">
-        <div className="absolute inset-0 opacity-40">
-          <picture>
-            <source media="(max-width: 640px)" srcSet="/images/ahad/unterhalt-detail-480.webp" />
-            <source media="(max-width: 1200px)" srcSet="/images/ahad/unterhalt-detail-960.webp" />
-            <img src="/images/ahad/unterhalt-detail.webp" alt="Reinigungsintervalle im modernen Büro" className="w-full h-full object-cover" width="1600" height="900" />
-          </picture>
-        </div>
-        <div className="absolute inset-0 bg-gradient-to-r from-navy via-navy/85 to-navy/40" />
-        <div className="absolute inset-0 bg-gradient-to-t from-navy via-transparent to-navy/60" />
-        <div className="max-w-7xl mx-auto px-4 relative z-10">
-          <motion.div
-            initial={false}
-            animate={{ opacity: 1, y: 0 }}
-            className="max-w-3xl"
-          >
-            <span className="inline-flex items-center gap-2 bg-white/10 px-4 py-2 rounded-full text-sm font-bold mb-6 tracking-wider uppercase border border-white/20">
-              <BookOpen className="w-4 h-4 text-[#9CDDB7]" />
-              Fachwissen: Unterhaltsreinigung
-            </span>
-            <h1 className="display-lg text-white mb-8">
-              Reinigungsintervalle in Unternehmen: Ein Leitfaden
-            </h1>
-            <p className="text-xl text-blue-100 leading-relaxed mb-10 font-medium">
-              Wie oft muss was gereinigt werden? Wir erklären die Logik hinter 
-              effizienten Reinigungsintervallen für moderne Büro- und Verwaltungsflächen.
-            </p>
-          </motion.div>
-        </div>
-      </section>
+      <PageHero
+        compact
+        titleSize="lg"
+        eyebrow="Fachwissen · Unterhaltsreinigung"
+        title="Reinigungsintervalle in Unternehmen: Ein Leitfaden"
+        lead="Wie feste Basisleistungen, objektbezogene Bedarfskriterien und dokumentierte Kontrollen zu einem belastbaren Reinigungsplan werden."
+        image={IMG.unterhaltDetail}
+        imageAlt=""
+        crumbs={[
+          { label: 'Fachwissen', href: '/fachwissen' },
+          { label: 'Reinigungsintervalle' },
+        ]}
+      />
 
-      {/* Auf einen Blick (At a glance) - Good for AEO/GEO */}
-      <section className="py-16 bg-white border-b border-gray-100">
-        <div className="max-w-7xl mx-auto px-4">
-          <h2 className="text-2xl font-black text-[#0B2341] mb-8 text-center">Reinigungsintervalle auf einen Blick</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-[#f7f9fb] p-6 rounded-2xl border border-gray-100">
-              <Clock className="w-8 h-8 text-[#0B2341] mb-4" />
-              <h3 className="font-bold text-lg mb-2 text-[#0B2341]">Tägliche Reinigung</h3>
-              <p className="text-[#424751] text-sm">Fokus auf Hygiene und stark frequentierte Bereiche: Sanitäranlagen, Teeküchen, Empfangsbereiche und Müllentsorgung.</p>
+      <section className="border-b border-line bg-white py-12 lg:py-14">
+        <div className="mx-auto max-w-7xl px-4 sm:px-8">
+          <h2 className="mb-8 text-center text-2xl font-black text-navy">Intervallplanung auf einen Blick</h2>
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+            <div className="rounded-2xl border border-line bg-paper p-6">
+              <Clock className="mb-4 h-8 w-8 text-brand" aria-hidden="true" />
+              <h3 className="mb-2 text-lg font-bold text-navy">Fixe Basis</h3>
+              <p className="text-sm text-slate">
+                Tätigkeiten mit festem Turnus dort definieren, wo Hygieneplan, Nutzung, Vertrag oder Qualitätsziel
+                eine verlässliche Ausführung verlangen.
+              </p>
             </div>
-            <div className="bg-[#f7f9fb] p-6 rounded-2xl border border-gray-100">
-              <Calendar className="w-8 h-8 text-[#0D6B38] mb-4" />
-              <h3 className="font-bold text-lg mb-2 text-[#0B2341]">Wöchentliche Reinigung</h3>
-              <p className="text-[#424751] text-sm">Regelmäßige Pflege: Büroarbeitsplätze (2-3x pro Woche), Staubsaugen, Bodenwischen und Abstauben freier Flächen.</p>
+            <div className="rounded-2xl border border-line bg-paper p-6">
+              <Calendar className="mb-4 h-8 w-8 text-accent" aria-hidden="true" />
+              <h3 className="mb-2 text-lg font-bold text-navy">Adaptive Ergänzung</h3>
+              <p className="text-sm text-slate">
+                Geeignete Leistungen anhand vereinbarter Kriterien wie Belegung, Sichtkontrolle oder saisonalem
+                Schmutzeintrag auslösen.
+              </p>
             </div>
-            <div className="bg-[#f7f9fb] p-6 rounded-2xl border border-gray-100">
-              <BookOpen className="w-8 h-8 text-[#0B2341] mb-4" />
-              <h3 className="font-bold text-lg mb-2 text-[#0B2341]">Monatliche Reinigung</h3>
-              <p className="text-[#424751] text-sm">Tiefenpflege: Reinigung von Fußleisten, Heizkörpern, Glastüren und das Entfernen von Spinnweben.</p>
+            <div className="rounded-2xl border border-line bg-paper p-6">
+              <BookOpen className="mb-4 h-8 w-8 text-brand" aria-hidden="true" />
+              <h3 className="mb-2 text-lg font-bold text-navy">Kontrolle &amp; Anpassung</h3>
+              <p className="text-sm text-slate">
+                Ergebnis, Auslösung und Abweichungen dokumentieren und den Plan bei veränderter Nutzung oder Qualität
+                nachvollziehbar anpassen.
+              </p>
             </div>
           </div>
         </div>
@@ -135,96 +127,111 @@ export default function FachwissenIntervalle() {
       <ArticleMeta slug="unterhaltsreinigung-unternehmen-reinigungsintervalle" />
 
       {/* Content Section */}
-      <section className="py-20 lg:py-32 bg-white">
-        <div className="max-w-4xl mx-auto px-4">
-          <div className="prose prose-lg max-w-none text-[#424751] leading-relaxed">
-            <h2 className="text-3xl font-black text-[#0B2341] mb-6">Die Bedeutung der richtigen Taktung in der Unterhaltsreinigung</h2>
+      <section className="bg-white py-16 lg:py-24">
+        <div className="mx-auto max-w-3xl px-4 sm:px-8">
+          <div className="prose prose-lg max-w-none leading-relaxed text-slate">
+            <h2 id="intervalllogik" className="scroll-mt-28 text-2xl font-black text-navy sm:text-3xl">Fixe und adaptive Leistungen sachlich kombinieren</h2>
             <p className="mb-8">
-              In der <Link to="/leistungen/unterhaltsreinigung" className="text-[#0B2341] font-bold hover:underline">Unterhaltsreinigung</Link> ist das Intervall der entscheidende Hebel für 
-              Wirtschaftlichkeit und Ergebnisqualität. Zu seltene Reinigung führt zu 
-              sichtbarem Schmutz, Unzufriedenheit der Mitarbeiter und langfristigem Wertverlust der Immobilie. Zu häufige Reinigung hingegen verursacht unnötige Kosten. Das Ziel ist es, die perfekte Balance zu finden.
+              In der <Link to="/leistungen/unterhaltsreinigung" className="font-bold text-brand hover:underline">Unterhaltsreinigung</Link>{' '}
+              verbindet ein belastbarer Plan definierte Basisleistungen mit objektbezogenen Bedarfskriterien. Feste
+              Turnusse schaffen Verlässlichkeit; adaptive Leistungen können für geeignete Flächen auf tatsächliche
+              Nutzung oder Verschmutzung reagieren. Welche Logik passt, muss je Raumgruppe und Tätigkeit festgelegt
+              werden — einschließlich Kontrolle und Vorgehen bei Abweichungen.
             </p>
 
-            <div className="bg-[#f7f9fb] p-8 rounded-3xl mb-12 border border-gray-100 shadow-sm">
-              <h3 className="text-2xl font-bold text-[#0B2341] mb-6 flex items-center gap-3">
-                <Calendar className="text-[#0B2341] w-8 h-8" />
-                Typische Reinigungsintervalle im Überblick
+            <div className="mb-12 rounded-3xl border border-line bg-paper p-6 shadow-soft sm:p-8">
+              <h3 className="mb-6 flex items-center gap-3 text-2xl font-bold text-navy">
+                <Calendar className="h-8 w-8 text-brand" aria-hidden="true" />
+                Vier Entscheidungen pro Raumgruppe
               </h3>
               <ul className="space-y-4 list-none pl-0">
-                <li className="flex flex-col sm:flex-row gap-2 sm:gap-4 border-b border-gray-200 pb-4">
-                  <span className="font-bold text-[#0B2341] min-w-[120px]">Täglich:</span>
-                  <span>Sanitärräume, Küchenbereiche, stark frequentierte Flure, Empfang, Müllentsorgung.</span>
+                <li className="flex flex-col gap-2 border-b border-line pb-4 sm:flex-row sm:gap-4">
+                  <span className="min-w-[140px] font-bold text-navy">Leistungsziel:</span>
+                  <span>Welcher Zustand beziehungsweise welche konkrete Tätigkeit ist vereinbart?</span>
                 </li>
-                <li className="flex flex-col sm:flex-row gap-2 sm:gap-4 border-b border-gray-200 pb-4">
-                  <span className="font-bold text-[#0B2341] min-w-[120px]">2-3x pro Woche:</span>
-                  <span>Büroarbeitsplätze (Schreibtische), Staubsaugen in weniger genutzten Bereichen, Besprechungsräume.</span>
+                <li className="flex flex-col gap-2 border-b border-line pb-4 sm:flex-row sm:gap-4">
+                  <span className="min-w-[140px] font-bold text-navy">Auslöser:</span>
+                  <span>Gilt ein fester Turnus oder ein dokumentiertes Bedarfskriterium?</span>
                 </li>
-                <li className="flex flex-col sm:flex-row gap-2 sm:gap-4 border-b border-gray-200 pb-4">
-                  <span className="font-bold text-[#0B2341] min-w-[120px]">Wöchentlich:</span>
-                  <span>Abstauben von freien Flächen, Reinigung von Glastüren, Treppenhäuser.</span>
+                <li className="flex flex-col gap-2 border-b border-line pb-4 sm:flex-row sm:gap-4">
+                  <span className="min-w-[140px] font-bold text-navy">Kontrolle:</span>
+                  <span>Wer prüft Bedarf und Ergebnis, in welchem Rhythmus und mit welchem Nachweis?</span>
                 </li>
-                <li className="flex flex-col sm:flex-row gap-2 sm:gap-4">
-                  <span className="font-bold text-[#0B2341] min-w-[120px]">Monatlich:</span>
-                  <span>Spinnweben entfernen, Reinigung von Fußleisten, Heizkörpern, Polstermöbelpflege.</span>
+                <li className="flex flex-col gap-2 sm:flex-row sm:gap-4">
+                  <span className="min-w-[140px] font-bold text-navy">Eskalation:</span>
+                  <span>Wann wird zusätzlich gereinigt oder der Grundturnus angepasst?</span>
                 </li>
               </ul>
             </div>
 
-            <h2 className="text-3xl font-black text-[#0B2341] mb-6">Empfohlene Reinigungsintervalle nach Bereich</h2>
+            <h2 id="orientierungswerte" className="scroll-mt-28 text-2xl font-black text-navy sm:text-3xl">Planungsansätze nach Bereich</h2>
             <p className="mb-6">
-              Die folgende Tabelle fasst bewährte Richtwerte für die wichtigsten Bereiche in Büro- und Verwaltungsgebäuden zusammen. Die Angaben sind als <strong>Orientierungswerte</strong> zu verstehen und werden im konkreten Objekt anhand von Nutzung, Frequenz und Repräsentationsanspruch angepasst.
+              Die Tabelle nennt keine allgemeingültigen Kalenderfristen. Sie zeigt, welche Fragen bei typischen
+              Raumgruppen zu klären sind und wo eine feste beziehungsweise adaptive Steuerung grundsätzlich geprüft
+              werden kann. Maßgeblich bleiben Objekt, Hygieneplan, Nutzung und vereinbartes Qualitätsziel.
             </p>
-            <div className="overflow-x-auto mb-12 rounded-2xl border border-gray-200 shadow-sm">
-              <table className="w-full text-left text-sm border-collapse bg-white">
+            <div
+              className="mb-12 overflow-x-auto rounded-2xl border border-line shadow-soft"
+              role="region"
+              aria-label="Planungsansätze für Reinigungsintervalle nach Bereich"
+              tabIndex={0}
+            >
+              <table className="min-w-[48rem] w-full border-collapse bg-white text-left text-sm">
+                <caption className="sr-only">Objektbezogene Planungsansätze für verschiedene Raumgruppen</caption>
                 <thead>
-                  <tr className="bg-[#0B2341] text-white">
-                    <th className="px-4 py-3 font-bold">Bereich</th>
-                    <th className="px-4 py-3 font-bold">Empfohlenes Intervall</th>
-                    <th className="px-4 py-3 font-bold">Begründung</th>
+                  <tr className="bg-navy text-white">
+                    <th scope="col" className="px-4 py-3 font-bold">Bereich</th>
+                    <th scope="col" className="px-4 py-3 font-bold">Mögliche Planungslogik</th>
+                    <th scope="col" className="px-4 py-3 font-bold">Objektbezogen zu prüfen</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-200">
+                <tbody className="divide-y divide-line">
                   <tr>
-                    <td className="px-4 py-3 font-semibold text-[#0B2341] align-top">Sanitäranlagen (WC, Waschräume)</td>
-                    <td className="px-4 py-3 align-top">Täglich (bei hoher Frequenz mehrmals täglich / Tagdienst)</td>
-                    <td className="px-4 py-3 align-top">Hygienisch kritisch; Infektionsschutz und Akzeptanz erfordern arbeitstägliche Reinigung und Desinfektion von Kontaktflächen.</td>
+                    <th scope="row" className="px-4 py-3 font-semibold text-navy align-top">Sanitäranlagen</th>
+                    <td className="px-4 py-3 align-top">Definierter Grundturnus plus Kontroll- oder Zwischenreinigung nach Bedarf</td>
+                    <td className="px-4 py-3 align-top">Nutzung, Öffnungs-/Schichtzeiten, Hygieneplan und Ausstattung; Desinfektion nur bei entsprechender Vorgabe oder Anlass</td>
                   </tr>
-                  <tr className="bg-[#f7f9fb]">
-                    <td className="px-4 py-3 font-semibold text-[#0B2341] align-top">Büro &amp; Arbeitsplätze</td>
-                    <td className="px-4 py-3 align-top">2&ndash;3x pro Woche (Papierkorb ggf. täglich)</td>
-                    <td className="px-4 py-3 align-top">Geringe, gleichmäßige Verschmutzung; bei Homeoffice und Desk-Sharing oft bedarfsorientiert ausreichend.</td>
-                  </tr>
-                  <tr>
-                    <td className="px-4 py-3 font-semibold text-[#0B2341] align-top">Verkehrsflächen &amp; Treppenhäuser</td>
-                    <td className="px-4 py-3 align-top">Täglich bis 2&ndash;3x pro Woche (je nach Frequenz)</td>
-                    <td className="px-4 py-3 align-top">Hoher Schmutzeintrag durch Laufverkehr; im Eingangsbereich und bei Nässe (Winter) höhere Taktung.</td>
-                  </tr>
-                  <tr className="bg-[#f7f9fb]">
-                    <td className="px-4 py-3 font-semibold text-[#0B2341] align-top">Küche / Teeküche</td>
-                    <td className="px-4 py-3 align-top">Täglich</td>
-                    <td className="px-4 py-3 align-top">Lebensmittelkontakt und Geruchsbildung; Spüle, Arbeitsflächen und Müll erfordern tägliche Reinigung.</td>
+                  <tr className="bg-paper">
+                    <th scope="row" className="px-4 py-3 font-semibold text-navy align-top">Büro &amp; Arbeitsplätze</th>
+                    <td className="px-4 py-3 align-top">Fester Basisplan oder adaptive Auslösung für eindeutig definierte Tätigkeiten</td>
+                    <td className="px-4 py-3 align-top">Belegung, Desk-Sharing, Bodenbelag, Papierkörbe, freie beziehungsweise belegte Oberflächen</td>
                   </tr>
                   <tr>
-                    <td className="px-4 py-3 font-semibold text-[#0B2341] align-top">Glasflächen innen (Türen, Trennwände)</td>
-                    <td className="px-4 py-3 align-top">Wöchentlich bis monatlich (Griffspuren bei Bedarf)</td>
-                    <td className="px-4 py-3 align-top">Optik und Repräsentation; Fingerabdrücke an Glastüren werden bei Bedarf tagesaktuell entfernt.</td>
+                    <th scope="row" className="px-4 py-3 font-semibold text-navy align-top">Verkehrsflächen &amp; Eingänge</th>
+                    <td className="px-4 py-3 align-top">Basisplan mit saisonalen oder ereignisbezogenen Zusatzleistungen</td>
+                    <td className="px-4 py-3 align-top">Laufverkehr, Wetter, Sauberlaufzone, Sicherheitsrisiken durch Nässe und repräsentative Anforderungen</td>
                   </tr>
-                  <tr className="bg-[#f7f9fb]">
-                    <td className="px-4 py-3 font-semibold text-[#0B2341] align-top">Grundreinigung (Boden-Intensiv, Teppich)</td>
-                    <td className="px-4 py-3 align-top">1&ndash;4x pro Jahr (quartalsweise bis jährlich)</td>
-                    <td className="px-4 py-3 align-top">Werterhalt der Bodenbeläge; entfernt eingetragenen Tiefenschmutz, der die Unterhaltsreinigung allein nicht löst.</td>
+                  <tr className="bg-paper">
+                    <th scope="row" className="px-4 py-3 font-semibold text-navy align-top">Küche / Teeküche</th>
+                    <td className="px-4 py-3 align-top">Definierte Basisleistungen; Zusatzreinigung nach Nutzung oder Ereignis</td>
+                    <td className="px-4 py-3 align-top">Nutzungsart, Lebensmittelkontakt, Müllkonzept, Betreiberpflichten und Zuständigkeitsgrenzen</td>
+                  </tr>
+                  <tr>
+                    <th scope="row" className="px-4 py-3 font-semibold text-navy align-top">Glasflächen innen</th>
+                    <td className="px-4 py-3 align-top">Grundturnus plus bedarfsabhängige Griffspurenentfernung</td>
+                    <td className="px-4 py-3 align-top">Kontaktintensität, Sichtbarkeit, Repräsentationsziel und Zugänglichkeit</td>
+                  </tr>
+                  <tr className="bg-paper">
+                    <th scope="row" className="px-4 py-3 font-semibold text-navy align-top">Grund- und Intensivreinigung</th>
+                    <td className="px-4 py-3 align-top">Separater, zustands- oder kalenderbezogener Leistungsbaustein</td>
+                    <td className="px-4 py-3 align-top">Belag, Herstellerangaben, Zustand, Nutzung und vereinbartes Pflegeziel</td>
                   </tr>
                 </tbody>
               </table>
             </div>
-            <p className="mb-12 text-sm text-[#6b7280]">
-              Hinweis: Die genannten Intervalle sind branchenübliche Richtwerte. Verbindlich ist immer das im <Link to="/leistungen/unterhaltsreinigung" className="text-[#0B2341] font-bold hover:underline">Leistungsverzeichnis</Link> vereinbarte Konzept, das auf Ihr Objekt zugeschnitten wird.
+            <p className="mb-12 text-sm text-slate">
+              Verbindlich ist das objektbezogene{' '}
+              <Link to="/fachwissen/leistungsverzeichnis-gebaeudereinigung-erstellen" className="font-bold text-brand hover:underline">
+                Leistungsverzeichnis
+              </Link>{' '}
+              mit klarer Leistungs-, Kontroll- und Anpassungslogik.
             </p>
 
-            <h2 className="text-3xl font-black text-[#0B2341] mb-6">Welche Faktoren beeinflussen die Intervallplanung?</h2>
+            <h2 className="text-2xl font-black text-navy sm:text-3xl">Welche Faktoren beeinflussen die Intervallplanung?</h2>
             <p className="mb-6">
-              Ein professionelles Reinigungsunternehmen erstellt nicht einfach einen Standardplan. Bei der Erstellung eines Leistungsverzeichnisses für die <Link to="/branchen/buero-verwaltung" className="text-[#0B2341] font-bold hover:underline">Büroreinigung</Link> berücksichtigen wir 
-              folgende individuelle Faktoren:
+              Ein Plan sollte nicht aus einer unveränderten Standardvorlage übernommen werden. Für die{' '}
+              <Link to="/branchen/buero-verwaltung" className="font-bold text-brand hover:underline">Büroreinigung</Link>{' '}
+              sind unter anderem folgende Faktoren relevant:
             </p>
             <ul className="space-y-4 mb-12 list-none pl-0">
               {[
@@ -235,41 +242,48 @@ export default function FachwissenIntervalle() {
                 'Repräsentationsanspruch des Unternehmens (Kundenbereiche erfordern höhere Taktung)'
               ].map((item, i) => (
                 <li key={i} className="flex items-start gap-3">
-                  <CheckCircle2 className="text-[#0D6B38] w-6 h-6 flex-shrink-0 mt-0.5" />
+                  <CheckCircle2 className="mt-0.5 h-6 w-6 flex-shrink-0 text-accent" aria-hidden="true" />
                   <span>{item}</span>
                 </li>
               ))}
             </ul>
 
-            <h2 className="text-3xl font-black text-[#0B2341] mb-6">Intervall als Kostenhebel: ein Rechenbeispiel</h2>
+            <h2 id="kostenwirkung" className="scroll-mt-28 text-2xl font-black text-navy sm:text-3xl">Wie Turnusse den Stundenbedarf verändern</h2>
             <p className="mb-6">
-              In der Gebäudereinigung entfallen typischerweise <strong>70 bis 85 Prozent</strong> des Angebotspreises auf Personalkosten. Das Reinigungsintervall bestimmt unmittelbar die benötigten Reinigungskraftstunden und ist damit der größte Stellhebel für die Wirtschaftlichkeit. Das folgende vereinfachte Beispiel dient ausschließlich der Veranschaulichung und stellt keine Preisgarantie dar.
+              Der Turnus beeinflusst unmittelbar die geplanten Ausführungsstunden einer Tätigkeit. Daraus folgt jedoch
+              kein pauschaler Prozentsatz für den Gesamtpreis: feste Basisleistungen, Lohnneben- und Ausfallkosten,
+              Objektleitung, Material, Maschinen und weitere Auftragsbedingungen bleiben separat zu kalkulieren. Das
+              folgende Beispiel zeigt deshalb nur die Stundenlogik einer abgegrenzten Büroflächenleistung.
             </p>
-            <div className="bg-[#f7f9fb] p-8 rounded-3xl mb-12 border border-gray-100 shadow-sm">
-              <h3 className="text-xl font-bold text-[#0B2341] mb-4">Beispiel: Büroetage mit 500 m&sup2;</h3>
+            <div className="mb-12 rounded-3xl border border-line bg-paper p-6 shadow-soft sm:p-8">
+              <h3 className="mb-4 text-xl font-bold text-navy">Hypothetisches Beispiel: klar abgegrenzte Büroflächenleistung</h3>
               <p className="mb-4 text-sm">
-                Angenommen, eine Reinigungskraft schafft die Unterhaltsreinigung der Büroflächen in rund 1,5 Stunden pro Durchgang. Mit beispielhaft 15,00 &euro;/Stunde (Branchenmindestlohn Lohngruppe 1, Stand 2026; aktuelle BMAS-Angabe bitte prüfen) ergibt sich vor Zuschlägen und Gemeinkosten:
+                Angenommen, eine definierte Tätigkeit benötigt pro Auslösung 1,5 Stunden. Wird sie fünfmal pro Woche
+                fest ausgelöst, ergeben sich 7,5 Stunden. Bei einer zulässigen adaptiven Steuerung mit drei
+                dokumentierten Auslösungen wären es 4,5 Stunden. Ob drei Auslösungen fachlich und vertraglich genügen,
+                ist vorab festzulegen und anschließend zu kontrollieren.
               </p>
               <ul className="space-y-2 text-sm list-none pl-0">
-                <li className="flex justify-between border-b border-gray-200 pb-2">
-                  <span><strong>Tägliche Reinigung</strong> (5x/Woche): ca. 7,5 Std./Woche</span>
-                  <span className="font-bold text-[#0B2341]">~ 113 &euro;/Woche*</span>
+                <li className="flex flex-col justify-between gap-1 border-b border-line pb-2 sm:flex-row">
+                  <span><strong>Fünf Auslösungen</strong>: 5 × 1,5 Std.</span>
+                  <span className="font-bold text-navy">7,5 Std./Woche</span>
                 </li>
-                <li className="flex justify-between border-b border-gray-200 pb-2">
-                  <span><strong>Bedarfsorientiert</strong> (3x/Woche): ca. 4,5 Std./Woche</span>
-                  <span className="font-bold text-[#0D6B38]">~ 68 &euro;/Woche*</span>
+                <li className="flex flex-col justify-between gap-1 border-b border-line pb-2 sm:flex-row">
+                  <span><strong>Drei dokumentierte Auslösungen</strong>: 3 × 1,5 Std.</span>
+                  <span className="font-bold text-navy">4,5 Std./Woche</span>
                 </li>
-                <li className="flex justify-between pt-1">
-                  <span><strong>Einsparpotenzial Büroflächen</strong></span>
-                  <span className="font-bold text-[#0D6B38]">~ 40 %</span>
+                <li className="flex flex-col justify-between gap-1 pt-1 sm:flex-row">
+                  <span><strong>Differenz nur für diese Tätigkeit</strong></span>
+                  <span className="font-bold text-accent">3,0 Std./Woche</span>
                 </li>
               </ul>
-              <p className="mt-4 text-xs text-[#6b7280]">
-                *Reiner Lohnanteil ohne Lohnnebenkosten, Material, Maschinen, Regie und Wagnis/Gewinn. Sanitär und Küche bleiben dabei im Tagesintervall. Alle Zahlen sind illustrative Richtwerte; ein verbindliches Angebot erfolgt nach Objektbegehung.
+              <p className="mt-4 text-xs text-slate">
+                Das Beispiel enthält weder einen Stundenpreis noch eine Aussage zur prozentualen Veränderung des
+                Gesamtangebots. Andere Raumgruppen und fest vereinbarte Leistungen bleiben unberührt.
               </p>
             </div>
 
-            <h2 className="text-3xl font-black text-[#0B2341] mb-6">Checkliste: Reinigungsplan und Leistungsverzeichnis erstellen</h2>
+            <h2 id="reinigungsplan" className="scroll-mt-28 text-2xl font-black text-navy sm:text-3xl">Checkliste: Reinigungsplan und Leistungsverzeichnis erstellen</h2>
             <p className="mb-6">
               Ein belastbares Leistungsverzeichnis (LV) ist die Grundlage für vergleichbare Angebote und eine nachvollziehbare Qualitätskontrolle. Die folgende Checkliste hilft Ihnen, alle relevanten Punkte zu erfassen, bevor Sie ein Reinigungskonzept ausschreiben oder beauftragen:
             </p>
@@ -279,44 +293,52 @@ export default function FachwissenIntervalle() {
                 'Bodenbeläge erfassen: Hartboden, Teppich, Elastikbelag, Naturstein, Glas - je Belag eigene Pflegeintervalle.',
                 'Nutzungsprofil festlegen: Mitarbeiterzahl, Besucherfrequenz, Öffnungs-/Schichtzeiten, Homeoffice-Quote.',
                 'Intervall je Bereich definieren: Was wird täglich, wöchentlich, monatlich oder quartalsweise gereinigt?',
-                'Hygienezonen priorisieren: Sanitär und Küche immer im Tagesintervall, ggf. mit Sicht-/Zwischenreinigung.',
+                'Hygiene- und Nutzungsanforderungen festlegen: Grundturnus, Kontrollen und mögliche Zwischenreinigungen je Bereich definieren.',
                 'Grundreinigung und Sonderleistungen planen: Glasreinigung, Teppich-Intensiv, Bauschluss separat ausweisen.',
                 'Reinigungszeiten abstimmen: Tagdienst, Randzeiten oder außerhalb der Betriebszeiten festlegen.',
                 'Qualitätssicherung definieren: Sichtkontrollen, Begehungsprotokolle, Ansprechpartner und Eskalationsweg.',
                 'Dokumentationsfähigkeit sicherstellen: Nachweise zu Tariflohn, Sozialversicherung und Mindestlohn einfordern.'
               ].map((item, i) => (
                 <li key={`lv-${i}`} className="flex items-start gap-3">
-                  <CheckCircle2 className="text-[#0D6B38] w-6 h-6 flex-shrink-0 mt-0.5" />
+                  <CheckCircle2 className="mt-0.5 h-6 w-6 flex-shrink-0 text-accent" aria-hidden="true" />
                   <span>{item}</span>
                 </li>
               ))}
             </ul>
 
-            <h2 className="text-3xl font-black text-[#0B2341] mb-6">Regionaler Branchenbezug: Villingen-Schwenningen und Baden-Württemberg</h2>
+            <h2 className="text-2xl font-black text-navy sm:text-3xl">Saison und Nutzung als Anpassungssignale</h2>
             <p className="mb-8">
-              In der Region Villingen-Schwenningen und im gesamten Schwarzwald-Baar-Kreis prägen Verwaltung, Mittelstand, Medizintechnik und produzierendes Gewerbe die Nachfrage nach <Link to="/branchen/buero-verwaltung" className="text-[#0B2341] font-bold hover:underline">Büroreinigung</Link>. Saisonale Einflüsse wie Streusalz, Nässe und Laub im Schwarzwald erhöhen im Herbst und Winter den Schmutzeintrag in Eingangs- und Verkehrsflächen spürbar - hier sind temporär engere Intervalle und ausreichend dimensionierte Sauberlaufzonen sinnvoll. Für tarif- und mindestlohnkonforme Leistungen gilt in Baden-Württemberg wie bundesweit der allgemeinverbindliche Rahmentarifvertrag der Gebäudereinigung; seriöse Anbieter weisen die Lohngrundlage transparent aus.
+              Nässe, Laub oder Streumittel können den Schmutzeintrag in Eingangs- und Verkehrsflächen zeitweise erhöhen;
+              Belegungswechsel, Veranstaltungen oder Schichtpläne verändern die Nutzung. Ein anpassbares Konzept
+              definiert solche Signale, die zuständige Entscheidung und die Dauer einer engeren oder reduzierten
+              Taktung. So bleibt die Änderung prüfbar, statt allein vom spontanen Eindruck abzuhängen.
             </p>
 
-            <h2 className="text-3xl font-black text-[#0B2341] mb-6">Fazit: Dynamik schlägt Statik</h2>
+            <h2 className="text-2xl font-black text-navy sm:text-3xl">Fazit: fixe Basis, adaptive Steuerung</h2>
             <p className="mb-8">
-              Moderne Reinigungskonzepte verabschieden sich zunehmend von starren Intervallen. Die <strong>bedarfsorientierte Reinigung</strong> rückt in den Fokus. Das bedeutet: Es wird dort gereinigt, wo es tatsächlich nötig ist. Wenn ein Büro wegen Homeoffice tagelang leer steht, muss dort auch nicht gesaugt werden. Das AHAD System setzt auf intelligente Revierplanung und geschultes Personal, das Verschmutzungen erkennt und flexibel reagiert.
+              Feste und adaptive Logik sind keine Gegensätze. Ein belastbarer Reinigungsplan sichert notwendige
+              Basisleistungen und erlaubt Flexibilität nur dort, wo Auslöser, Ergebnis, Kontrolle und Dokumentation
+              klar vereinbart sind. Regelmäßige Auswertung zeigt anschließend, ob der Plan Qualität und Nutzung
+              tatsächlich zusammenführt.
             </p>
           </div>
         </div>
       </section>
 
       {/* FAQ Section */}
-      <section className="py-20 lg:py-32 bg-[#f7f9fb]">
-        <div className="max-w-4xl mx-auto px-4">
-          <div className="text-center mb-16">
-            <span className="text-[#0B2341] font-bold tracking-wider uppercase text-sm mb-4 block">Häufige Fragen</span>
-            <h2 className="text-3xl lg:text-4xl font-black tracking-tight text-[#0B2341]">FAQs zu Reinigungsintervallen</h2>
+      <section className="bg-paper py-16 lg:py-24">
+        <div className="mx-auto max-w-4xl px-4 sm:px-8">
+          <div className="mb-12 text-center">
+            <span className="mb-4 block text-sm font-bold uppercase tracking-wider text-brand">Häufige Fragen</span>
+            <h2 className="text-2xl font-black tracking-tight text-navy sm:text-3xl lg:text-4xl">FAQs zu Reinigungsintervallen</h2>
           </div>
           <Accordion items={faqSchema.mainEntity.map((q) => ({ question: q.name, answer: q.acceptedAnswer.text }))} />
         </div>
       </section>
 
+      <ArticleFooter slug="unterhaltsreinigung-unternehmen-reinigungsintervalle" />
+
       <CTABand title="Benötigen Sie ein maßgeschneidertes Reinigungskonzept?" lead="Wir analysieren Ihren Bedarf und erstellen ein Leistungsverzeichnis mit optimalen Reinigungsintervallen für Ihr Unternehmen." />
-    </div>
+    </article>
   );
 }
