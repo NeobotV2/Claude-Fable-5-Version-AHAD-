@@ -9,45 +9,53 @@ import SmartImage from '@/components/ui/SmartImage';
 import Accordion, { faqSchemaFrom } from '@/components/ui/Accordion';
 import CTABand from '@/components/CTABand';
 import { SERVICES, type ServiceData } from '@/data/services';
+import {
+  EDITORIAL_ARTICLES,
+  getEditorialArticlePath,
+  type EditorialArticleSlug,
+} from '@/data/editorial';
 import { PROMISES, SITE, ORG_REF } from '@/lib/site';
 
 /** Passende Fachwissen-Artikel je Leistung — interne Verlinkung in den
  *  Wissensbereich (SEO + Verweildauer). Bewusst kuratiert statt automatisch. */
-const FACHWISSEN_BY_SLUG: Record<string, { title: string; to: string }[]> = {
+const FACHWISSEN_BY_SLUG: Record<string, EditorialArticleSlug[]> = {
   unterhaltsreinigung: [
-    { title: 'Was kostet Gebäudereinigung? Stundensatz & m²-Preise', to: '/fachwissen/was-kostet-gebaeudereinigung-stundensatz-preise' },
-    { title: 'Reinigungsintervalle für Unternehmen: Der praxisnahe Leitfaden', to: '/fachwissen/unterhaltsreinigung-unternehmen-reinigungsintervalle' },
-    { title: 'Leistungsverzeichnis erstellen: So werden Angebote vergleichbar', to: '/fachwissen/leistungsverzeichnis-gebaeudereinigung-erstellen' },
+    'was-kostet-gebaeudereinigung-stundensatz-preise',
+    'unterhaltsreinigung-unternehmen-reinigungsintervalle',
+    'leistungsverzeichnis-gebaeudereinigung-erstellen',
   ],
   'industrie-produktionsreinigung': [
-    { title: 'Industriereinigung ohne Prozessstörung: So funktioniert es', to: '/fachwissen/industrie-produktionsreinigung-ohne-prozessstoerung' },
-    { title: 'ISO 9001 & 14001 in der Gebäudereinigung', to: '/fachwissen/iso-9001-iso-14001-gebaeudereinigung-unternehmen' },
+    'industrie-produktionsreinigung-ohne-prozessstoerung',
+    'iso-9001-iso-14001-gebaeudereinigung-unternehmen',
   ],
   'glas-fassadenreinigung': [
-    { title: 'Reinigungsfirma wechseln: Checkliste & Tipps', to: '/fachwissen/reinigungsfirma-wechseln-checkliste-tipps' },
+    'reinigungsfirma-wechseln-checkliste-tipps',
   ],
   baureinigung: [
-    { title: 'Leistungsverzeichnis erstellen: So werden Angebote vergleichbar', to: '/fachwissen/leistungsverzeichnis-gebaeudereinigung-erstellen' },
+    'leistungsverzeichnis-gebaeudereinigung-erstellen',
   ],
   'medizintechnik-reinigung': [
-    { title: 'ISO 9001 & 14001 in der Gebäudereinigung', to: '/fachwissen/iso-9001-iso-14001-gebaeudereinigung-unternehmen' },
-    { title: 'Reinigungsintervalle für Unternehmen: Der praxisnahe Leitfaden', to: '/fachwissen/unterhaltsreinigung-unternehmen-reinigungsintervalle' },
+    'iso-9001-iso-14001-gebaeudereinigung-unternehmen',
+    'unterhaltsreinigung-unternehmen-reinigungsintervalle',
   ],
   'sonderreinigung-stillstandsservice': [
-    { title: 'Industriereinigung ohne Prozessstörung: So funktioniert es', to: '/fachwissen/industrie-produktionsreinigung-ohne-prozessstoerung' },
+    'industrie-produktionsreinigung-ohne-prozessstoerung',
   ],
   'winterdienst-hausmeisterservice': [
-    { title: 'Reinigungsfirma wechseln: Checkliste & Tipps', to: '/fachwissen/reinigungsfirma-wechseln-checkliste-tipps' },
+    'reinigungsfirma-wechseln-checkliste-tipps',
   ],
   'kuechenabluftreinigung-vdi-2052': [
-    { title: 'Küchenabluftreinigung nach VDI 2052: Pflicht, Intervalle & Nachweis', to: '/fachwissen/kuechenabluftreinigung-vdi-2052-pflicht-ablauf-nachweis' },
+    'kuechenabluftreinigung-vdi-2052-pflicht-ablauf-nachweis',
   ],
 };
 
 /** Gemeinsames Premium-Layout für alle Leistungs-Detailseiten. */
 export default function ServicePage({ service }: { service: ServiceData }) {
   const related = SERVICES.filter((s) => s.slug !== service.slug).slice(0, 3);
-  const articles = FACHWISSEN_BY_SLUG[service.slug] ?? [];
+  const articles = (FACHWISSEN_BY_SLUG[service.slug] ?? []).map((slug) => ({
+    title: EDITORIAL_ARTICLES[slug].listingTitle,
+    to: getEditorialArticlePath(slug),
+  }));
 
   const serviceSchema = {
     '@context': 'https://schema.org',

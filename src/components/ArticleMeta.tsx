@@ -1,6 +1,7 @@
-import { BookOpenCheck, CalendarDays, ExternalLink, ShieldCheck } from 'lucide-react';
+import { CalendarDays, Clock3, Compass, ShieldCheck, UserRound } from 'lucide-react';
 import {
   EDITORIAL_ARTICLES,
+  EDITORIAL_SECTIONS,
   isActiveReviewer,
   type EditorialArticle,
   type EditorialArticleSlug,
@@ -24,82 +25,75 @@ function formatDate(value: string) {
 
 export default function ArticleMeta({ slug, className = '' }: ArticleMetaProps) {
   const article: EditorialArticle = EDITORIAL_ARTICLES[slug];
+  const sections = EDITORIAL_SECTIONS[slug];
   const reviewer = isActiveReviewer(article.reviewer) ? article.reviewer : null;
 
   return (
     <section
-      aria-labelledby={`${slug}-transparenz`}
-      className={`bg-paper border-y border-line py-10 print:border print:rounded-xl print:p-5 ${className}`}
+      aria-labelledby={`${slug}-einordnung`}
+      className={`border-y border-line bg-paper py-9 print:border print:rounded-xl print:p-5 ${className}`}
     >
-      <div className="max-w-4xl mx-auto px-4 print:px-0">
-        <div className="grid gap-7 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
-          <div>
-            <p className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-[0.16em] text-brand mb-3">
-              <ShieldCheck size={16} aria-hidden="true" />
-              Redaktion &amp; Transparenz
-            </p>
-            <h2 id={`${slug}-transparenz`} className="font-headline text-xl font-bold text-navy mb-3">
-              Fachlich eingeordnet, Quellen offengelegt
-            </h2>
-            <dl className="space-y-2 text-sm text-slate">
-              <div className="flex gap-2">
-                <dt className="font-bold text-navy">Redaktion:</dt>
-                <dd>Fachredaktion AHAD Cleaning</dd>
-              </div>
-              <div className="flex gap-2">
-                <CalendarDays size={16} className="mt-0.5 shrink-0 text-brand" aria-hidden="true" />
-                <div>
-                  <dt className="sr-only">Veröffentlichungs- und Aktualisierungsdatum</dt>
-                  <dd>
-                    Veröffentlicht am <time dateTime={article.datePublished}>{formatDate(article.datePublished)}</time>
-                    {' · '}Aktualisiert am <time dateTime={article.dateModified}>{formatDate(article.dateModified)}</time>
-                  </dd>
-                </div>
-              </div>
-              <div className="flex gap-2">
-                <dt className="font-bold text-navy">Fachprüfung:</dt>
-                <dd>
-                  {reviewer
-                    ? `${reviewer.name}, ${reviewer.role}`
-                    : 'Kein namentlicher Reviewer veröffentlicht; Personen werden erst nach dokumentierter, aktueller Prüfung genannt.'}
-                </dd>
-              </div>
-            </dl>
-            <p className="mt-4 text-sm leading-relaxed text-slate">
-              <strong className="text-navy">Einordnung:</strong> {article.orientationNote}
-            </p>
-          </div>
+      <div className="mx-auto grid max-w-5xl gap-8 px-4 sm:px-8 lg:grid-cols-[minmax(0,1.05fr)_minmax(19rem,0.95fr)] print:px-0">
+        <div>
+          <p className="mb-3 inline-flex items-center gap-2 text-xs font-black uppercase tracking-[0.16em] text-brand">
+            <ShieldCheck size={16} aria-hidden="true" />
+            Einordnung &amp; Aktualität
+          </p>
+          <h2 id={`${slug}-einordnung`} className="font-headline text-xl font-bold leading-snug text-navy">
+            {article.decisionQuestion}
+          </h2>
+          <p className="mt-3 text-sm leading-relaxed text-slate">{article.orientationNote}</p>
 
-          <div>
-            <h3 className="flex items-center gap-2 font-headline font-bold text-navy mb-3">
-              <BookOpenCheck size={18} className="text-brand" aria-hidden="true" />
-              Primärquellen
-            </h3>
-            <ul className="space-y-3">
-              {article.sources.map((source) => (
-                <li key={source.url}>
-                  <a
-                    href={source.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group flex items-start justify-between gap-3 rounded-xl border border-line bg-white p-3 text-sm transition-colors hover:border-brand/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
-                  >
-                    <span>
-                      <span className="block font-bold text-navy group-hover:text-brand">{source.title}</span>
-                      <span className="block mt-0.5 text-xs text-slate">{source.publisher}</span>
-                    </span>
-                    <ExternalLink size={15} className="mt-0.5 shrink-0 text-brand" aria-hidden="true" />
-                    <span className="sr-only"> (öffnet in neuem Tab)</span>
-                  </a>
-                </li>
-              ))}
-            </ul>
-            <p className="mt-3 text-xs leading-relaxed text-slate">
-              Bei Gesetzen, Normen und Richtlinien gilt stets die aktuelle amtliche bzw. herausgebende Fassung.
-              Verlinkte Übersichtsseiten ersetzen keinen vollständigen Normtext.
-            </p>
-          </div>
+          <dl className="mt-5 flex flex-wrap gap-x-5 gap-y-2 text-xs font-semibold text-slate">
+            <div className="inline-flex items-center gap-2">
+              <UserRound size={15} className="text-brand" aria-hidden="true" />
+              <dt className="sr-only">Redaktion</dt>
+              <dd>Fachredaktion AHAD Cleaning</dd>
+            </div>
+            <div className="inline-flex items-center gap-2">
+              <CalendarDays size={15} className="text-brand" aria-hidden="true" />
+              <dt className="sr-only">Veröffentlicht und aktualisiert</dt>
+              <dd>
+                Veröffentlicht <time dateTime={article.datePublished}>{formatDate(article.datePublished)}</time>
+                {' · '}aktualisiert <time dateTime={article.dateModified}>{formatDate(article.dateModified)}</time>
+              </dd>
+            </div>
+            <div className="inline-flex items-center gap-2">
+              <Clock3 size={15} className="text-brand" aria-hidden="true" />
+              <dt className="sr-only">Lesezeit</dt>
+              <dd>{article.readingMinutes} Min. Lesezeit</dd>
+            </div>
+            {reviewer && (
+              <div className="inline-flex items-center gap-2">
+                <ShieldCheck size={15} className="text-brand" aria-hidden="true" />
+                <dt className="sr-only">Fachprüfung</dt>
+                <dd>{reviewer.name}, {reviewer.role}</dd>
+              </div>
+            )}
+          </dl>
         </div>
+
+        <nav aria-label="Inhaltsübersicht" className="rounded-2xl border border-line bg-white p-5 print:hidden">
+          <p className="mb-3 flex items-center gap-2 font-headline text-sm font-bold text-navy">
+            <Compass size={17} className="text-brand" aria-hidden="true" />
+            Direkt zum Thema
+          </p>
+          <ol className="grid gap-2 sm:grid-cols-2 lg:grid-cols-1">
+            {sections.map((section, index) => (
+              <li key={section.id}>
+                <a
+                  href={`#${section.id}`}
+                  className="group flex min-h-10 items-center gap-3 rounded-lg px-2 py-1.5 text-sm font-semibold text-slate transition-colors hover:bg-paper hover:text-brand focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+                >
+                  <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-brand/8 text-[11px] font-black text-brand">
+                    {index + 1}
+                  </span>
+                  {section.label}
+                </a>
+              </li>
+            ))}
+          </ol>
+        </nav>
       </div>
     </section>
   );

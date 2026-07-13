@@ -25,6 +25,7 @@ interface PageHeroProps {
   secondaryCta?: { label: string; to?: string; href?: string; onClick?: (e: React.MouseEvent) => void };
   children?: ReactNode;
   compact?: boolean;
+  titleSize?: 'xl' | 'lg';
 }
 
 /**
@@ -42,6 +43,7 @@ export default function PageHero({
   secondaryCta,
   children,
   compact = false,
+  titleSize = 'xl',
 }: PageHeroProps) {
   const { pathname } = useLocation();
 
@@ -136,7 +138,7 @@ export default function PageHero({
               {eyebrow}
             </span>
           )}
-          <h1 className="display-xl text-white mb-7">
+          <h1 className={`${titleSize === 'lg' ? 'display-lg' : 'display-xl'} text-white mb-7`}>
             {typeof title === 'string' ? <HeadlineText text={title} /> : title}
           </h1>
           {lead && <p className="text-lg sm:text-xl text-blue-100/90 leading-relaxed font-medium max-w-2xl">{lead}</p>}

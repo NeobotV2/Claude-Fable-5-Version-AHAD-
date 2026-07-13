@@ -1,215 +1,337 @@
+import type { LucideIcon } from 'lucide-react';
+import {
+  ArrowRight,
+  BookOpenCheck,
+  Building2,
+  Calculator,
+  ClipboardList,
+  Factory,
+  Scale,
+  ShieldCheck,
+  ShoppingCart,
+  UsersRound,
+} from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, BookOpen, CalendarDays, Clock, ShieldCheck } from 'lucide-react';
 import SEO from '@/components/SEO';
 import PageHero from '@/components/PageHero';
 import Reveal from '@/components/ui/Reveal';
-import SmartImage from '@/components/ui/SmartImage';
 import CTABand from '@/components/CTABand';
-import { IMG } from '@/lib/images';
-import { EDITORIAL_ARTICLES, type EditorialArticleSlug } from '@/data/editorial';
+import { SITE } from '@/lib/site';
+import {
+  EDITORIAL_ARTICLE_LIST,
+  EDITORIAL_ARTICLES,
+  EDITORIAL_CLUSTERS,
+  EDITORIAL_CLUSTER_ORDER,
+  getEditorialArticlePath,
+  type EditorialArticleSlug,
+  type EditorialClusterKey,
+} from '@/data/editorial';
 
-const formatEditorialDate = (slug: EditorialArticleSlug) =>
-  new Intl.DateTimeFormat('de-DE', {
-    day: '2-digit',
-    month: '2-digit',
-    year: 'numeric',
-    timeZone: 'UTC',
-  }).format(new Date(`${EDITORIAL_ARTICLES[slug].dateModified}T00:00:00Z`));
+const clusterIcons: Record<EditorialClusterKey, LucideIcon> = {
+  'planen-kalkulieren': Calculator,
+  'ausschreiben-vergleichen': ClipboardList,
+  'wechsel-betrieb': Factory,
+  'qualitaet-compliance': ShieldCheck,
+};
 
-const articles = [
-  {
-    slug: 'was-kostet-gebaeudereinigung-stundensatz-preise',
-    title: 'Was kostet Gebäudereinigung? Stundensatz, m²-Preise & Rechenbeispiele',
-    excerpt:
-      'Kostenbestandteile, Leistungswerte und daraus abgeleitete m²-Preise mit offengelegten Rechenannahmen — als Orientierung, nicht als Preisversprechen.',
-    path: '/fachwissen/was-kostet-gebaeudereinigung-stundensatz-preise',
-    category: 'Kosten & Kalkulation',
-    readingTime: '9 Min.',
-    image: IMG.unterhaltDetail,
-  },
-  {
-    slug: 'checkliste-reinigungsangebot',
-    title: 'Checkliste: Reinigungsangebot einholen & vergleichen',
-    excerpt:
-      'Die druckbare Arbeitshilfe für Objektverantwortliche: Objektdaten, Leistungsdefinition, Angebotsvergleich, Anbieterprüfung und Vertragsregeln — in 5 Schritten abhaken.',
-    path: '/fachwissen/checkliste-reinigungsangebot',
-    category: 'Arbeitshilfe',
-    readingTime: '4 Min.',
-    image: IMG.teamMeeting,
-  },
-  {
-    slug: 'unterhaltsreinigung-unternehmen-reinigungsintervalle',
-    title: 'Reinigungsintervalle für Unternehmen: Der praxisnahe Leitfaden',
-    excerpt:
-      'Wie oft sollten Büro, Sanitär und Verkehrsflächen wirklich gereinigt werden? Intervalle nach Nutzung statt Bauchgefühl — mit Tabellen für typische Objekttypen.',
-    path: '/fachwissen/unterhaltsreinigung-unternehmen-reinigungsintervalle',
-    category: 'Unterhaltsreinigung',
-    readingTime: '8 Min.',
-    image: IMG.unterhaltsreinigung,
-  },
-  {
-    slug: 'iso-9001-iso-14001-gebaeudereinigung-unternehmen',
-    title: 'ISO 9001 & ISO 14001 in der Gebäudereinigung: Was Auftraggeber wissen müssen',
-    excerpt:
-      'Welche Rolle spielen Zertifizierungen bei der Dienstleisterwahl — und woran erkennen Sie, ob ein Anbieter Qualität wirklich systematisch managt?',
-    path: '/fachwissen/iso-9001-iso-14001-gebaeudereinigung-unternehmen',
-    category: 'Qualität & Compliance',
-    readingTime: '6 Min.',
-    image: IMG.medizinDetail,
-  },
-  {
-    slug: 'industrie-produktionsreinigung-ohne-prozessstoerung',
-    title: 'Industriereinigung ohne Prozessstörung: So funktioniert es',
-    excerpt:
-      'Schichtintegration, Sicherheitsunterweisungen, Eskalationswege: Die Erfolgsfaktoren für Reinigung im laufenden Produktionsbetrieb.',
-    path: '/fachwissen/industrie-produktionsreinigung-ohne-prozessstoerung',
-    category: 'Industrie',
-    readingTime: '7 Min.',
-    image: IMG.industrie,
-  },
-  {
-    slug: 'reinigungsfirma-wechseln-checkliste-tipps',
-    title: 'Reinigungsfirma wechseln: Checkliste & Tipps für den geräuschlosen Übergang',
-    excerpt:
-      'Wann lohnt der Wechsel, welche Kündigungsfristen gelten, und wie übernimmt der neue Anbieter ohne Chaos? Die komplette Checkliste.',
-    path: '/fachwissen/reinigungsfirma-wechseln-checkliste-tipps',
-    category: 'Entscheiderwissen',
-    readingTime: '10 Min.',
-    image: IMG.handshake,
-  },
-  {
-    slug: 'leistungsverzeichnis-gebaeudereinigung-erstellen',
-    title: 'Leistungsverzeichnis erstellen: So machen Sie Reinigungsangebote vergleichbar',
-    excerpt:
-      'Aufbau, Bestandteile und der Unterschied zwischen verrichtungs- und ergebnisorientiert — plus Schritt-für-Schritt-Anleitung für ein belastbares LV.',
-    path: '/fachwissen/leistungsverzeichnis-gebaeudereinigung-erstellen',
-    category: 'Entscheiderwissen',
-    readingTime: '9 Min.',
-    image: IMG.teamMeeting,
-  },
-  {
-    slug: 'kuechenabluftreinigung-vdi-2052-pflicht-ablauf-nachweis',
-    title: 'Küchenabluftreinigung nach VDI 2052: Einordnung, Ablauf & Nachweis',
-    excerpt:
-      'Wie Nutzung, Belastung und Anlagenzustand in die Intervallplanung einfließen — mit Hinweisen zu Brandschutz, Hygiene und Dokumentation.',
-    path: '/fachwissen/kuechenabluftreinigung-vdi-2052-pflicht-ablauf-nachweis',
-    category: 'Hygiene & Brandschutz',
-    readingTime: '8 Min.',
-    image: IMG.kuechenabluft,
-  },
-] satisfies Array<{
-  slug: EditorialArticleSlug;
+const rolePaths: Array<{
   title: string;
-  excerpt: string;
-  path: string;
-  category: string;
-  readingTime: string;
-  image: string;
-}>;
+  focus: string;
+  icon: LucideIcon;
+  articles: readonly EditorialArticleSlug[];
+}> = [
+  {
+    title: 'Facility Management',
+    focus: 'Bedarf, Intervalle und Qualität im Objekt steuern',
+    icon: Building2,
+    articles: [
+      'unterhaltsreinigung-unternehmen-reinigungsintervalle',
+      'leistungsverzeichnis-gebaeudereinigung-erstellen',
+    ],
+  },
+  {
+    title: 'Einkauf',
+    focus: 'Leistungen normalisieren und Angebote nachvollziehbar vergleichen',
+    icon: ShoppingCart,
+    articles: ['checkliste-reinigungsangebot', 'was-kostet-gebaeudereinigung-stundensatz-preise'],
+  },
+  {
+    title: 'Geschäftsführung',
+    focus: 'Versorgungs-, Qualitäts- und Compliance-Risiken einordnen',
+    icon: UsersRound,
+    articles: [
+      'reinigungsfirma-wechseln-checkliste-tipps',
+      'iso-9001-iso-14001-gebaeudereinigung-unternehmen',
+    ],
+  },
+];
+
+const dateFormatter = new Intl.DateTimeFormat('de-DE', {
+  day: '2-digit',
+  month: '2-digit',
+  year: 'numeric',
+  timeZone: 'UTC',
+});
+
+function formatDate(value: string) {
+  return dateFormatter.format(new Date(`${value}T00:00:00Z`));
+}
+
+const knowledgeSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'Fachwissen Gebäudereinigung für Auftraggeber',
+  description: 'Entscheidungshilfen zu Planung, Vergabe, Anbieterwechsel, Qualität und Compliance.',
+  url: `${SITE.url}/fachwissen`,
+  inLanguage: 'de-DE',
+  mainEntity: {
+    '@type': 'ItemList',
+    itemListElement: EDITORIAL_ARTICLE_LIST.map((article, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: article.listingTitle,
+      url: `${SITE.url}${getEditorialArticlePath(article.slug)}`,
+    })),
+  },
+};
 
 export default function Fachwissen() {
   return (
     <div>
       <SEO
         title="Fachwissen Gebäudereinigung: Leitfäden für Entscheider | AHAD Cleaning"
-        description="Praxisnahe Leitfäden rund um Gebäudereinigung: mit sichtbarem Aktualisierungsstand, redaktioneller Einordnung und Links zu offiziellen Primärquellen."
-        keywords="Fachwissen Gebäudereinigung, Reinigungsintervalle, ISO 9001 Reinigung, Reinigungsfirma wechseln"
+        description="Entscheidungshilfen für Facility Management, Einkauf und Geschäftsführung: Kosten planen, Leistungen ausschreiben, Anbieter wechseln und Nachweise prüfen."
+        keywords="Fachwissen Gebäudereinigung, Reinigungskosten kalkulieren, Reinigungsangebot vergleichen, Leistungsverzeichnis Reinigung, Anbieterwechsel"
+        schema={knowledgeSchema}
       />
 
       <PageHero
-        eyebrow="Fachwissen"
-        title={
-          <>
-            <span className="block">Wissen, das{' '}</span>
-            <span className="block">
-              <span className="whitespace-nowrap">saubere Entscheidungen</span> schafft.
-            </span>
-          </>
-        }
-        lead="Praxisleitfäden für Facility Manager, Einkauf und Geschäftsführung — mit nachvollziehbarem Aktualisierungsstand, Einordnung veränderlicher Werte und offiziellen Primärquellen."
+        compact
+        titleSize="lg"
+        eyebrow="Fachwissen für Auftraggeber"
+        title="Gebäudereinigung sicher entscheiden"
+        lead="Praxisnahe Leitfäden für Facility Management, Einkauf und Geschäftsführung – nach Aufgaben geordnet, mit transparenten Annahmen, Aktualisierungsstand und nachvollziehbaren Quellen."
         crumbs={[{ label: 'Fachwissen' }]}
       />
 
-      <section className="py-20 lg:py-32 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-8">
-          <Reveal className="mb-10">
-            <div className="flex items-start gap-4 rounded-2xl border border-line bg-paper p-6">
-              <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-brand/8 text-brand">
-                <ShieldCheck size={21} aria-hidden="true" />
-              </span>
-              <div>
-                <h2 className="font-headline text-lg font-bold text-navy">Unser Redaktionsstandard</h2>
-                <p className="mt-1 max-w-3xl text-sm leading-relaxed text-slate">
-                  Jeder Leitfaden nennt Redaktion, Veröffentlichungs- und Änderungsdatum sowie die verwendeten
-                  Primärquellen. Namentliche Fachprüfer zeigen wir erst nach dokumentierter und noch gültiger Prüfung.
-                  Preis-, Intervall- und Fristangaben sind Orientierung und müssen für den Einzelfall geprüft werden.
+      <div>
+        <section aria-labelledby="aufgabe-waehlen" className="bg-white py-14 lg:py-20">
+          <div className="mx-auto max-w-7xl px-4 sm:px-8">
+            <Reveal>
+              <div className="max-w-3xl">
+                <p className="eyebrow mb-4 text-brand">
+                  <span className="h-px w-8 bg-brand/40" />
+                  Nach Aufgabe einsteigen
+                </p>
+                <h2 id="aufgabe-waehlen" className="display-md text-navy">Womit möchten Sie weiterkommen?</h2>
+                <p className="mt-4 text-base leading-relaxed text-slate sm:text-lg">
+                  Wählen Sie nicht nach Fachbegriff, sondern nach der Entscheidung, die als Nächstes ansteht.
                 </p>
               </div>
-            </div>
-          </Reveal>
+            </Reveal>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {articles.map((article, i) => (
-              <Reveal key={article.path} delay={Math.min(i * 0.08, 0.25)} className="h-full">
-                <Link
-                  to={article.path}
-                  className="group flex flex-col h-full bg-paper rounded-3xl border border-line overflow-hidden card-lift"
-                >
-                  <div className="relative">
-                    <SmartImage
-                      src={article.image}
-                      alt={article.title}
-                      className="aspect-[16/8]"
-                      imgClassName="transition-transform duration-700 group-hover:scale-105"
-                    />
-                    <span className="absolute top-4 left-4 bg-navy/80 backdrop-blur text-mint text-[10px] font-black uppercase tracking-[0.18em] px-3 py-1.5 rounded-full">
-                      {article.category}
-                    </span>
-                  </div>
-                  <div className="flex flex-col flex-grow p-8">
-                    <h2 className="font-headline text-xl lg:text-2xl font-bold text-navy leading-snug mb-3 group-hover:text-brand transition-colors">
-                      {article.title}
-                    </h2>
-                    <p className="text-sm text-slate leading-relaxed flex-grow">{article.excerpt}</p>
-                    <div className="mt-6 pt-5 border-t border-line flex flex-wrap items-center justify-between gap-3">
-                      <span className="flex flex-wrap items-center gap-x-4 gap-y-1 text-[13px] font-semibold text-slate/80">
-                        <span className="flex items-center gap-2">
-                          <Clock size={14} aria-hidden="true" />
-                          {article.readingTime} Lesezeit
-                        </span>
-                        <span className="flex items-center gap-2">
-                          <CalendarDays size={14} aria-hidden="true" />
-                          Aktualisiert {formatEditorialDate(article.slug)}
+            <nav aria-label="Themenpfade" className="mt-9 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+              {EDITORIAL_CLUSTER_ORDER.map((clusterKey, index) => {
+                const cluster = EDITORIAL_CLUSTERS[clusterKey];
+                const Icon = clusterIcons[clusterKey];
+                return (
+                  <Reveal key={clusterKey} delay={Math.min(index * 0.06, 0.18)}>
+                    <a
+                      href={`#${clusterKey}`}
+                      className="group flex h-full min-h-28 items-start gap-4 rounded-2xl border border-line bg-paper p-5 transition-all hover:-translate-y-0.5 hover:border-brand/40 hover:shadow-soft focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+                    >
+                      <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-brand/8 text-brand">
+                        <Icon size={20} aria-hidden="true" />
+                      </span>
+                      <span>
+                        <span className="block font-headline font-bold leading-snug text-navy">{cluster.shortTitle}</span>
+                        <span className="mt-2 inline-flex items-center gap-1.5 text-xs font-bold text-brand">
+                          Beiträge ansehen <ArrowRight size={13} aria-hidden="true" />
                         </span>
                       </span>
-                      <span className="inline-flex items-center gap-2 text-sm font-bold text-brand">
-                        Lesen
-                        <ArrowRight size={15} className="transition-transform group-hover:translate-x-1" />
-                      </span>
-                    </div>
-                  </div>
-                </Link>
-              </Reveal>
-            ))}
+                    </a>
+                  </Reveal>
+                );
+              })}
+            </nav>
           </div>
+        </section>
 
-          <Reveal delay={0.3} className="mt-12">
-            <div className="flex items-center gap-4 bg-paper border border-line rounded-2xl p-6 max-w-2xl mx-auto">
-              <span className="w-12 h-12 rounded-xl bg-brand/8 text-brand grid place-items-center flex-shrink-0">
-                <BookOpen size={22} />
-              </span>
-              <p className="text-sm text-slate">
-                <strong className="text-navy">Ihr Thema fehlt?</strong> Schreiben Sie uns — wir erweitern unsere
-                Leitfäden laufend um Fragen aus der Praxis.
-              </p>
+        <section aria-labelledby="rollen-einstieg" className="border-y border-line bg-paper py-12">
+          <div className="mx-auto max-w-7xl px-4 sm:px-8">
+            <div className="grid gap-6 lg:grid-cols-[0.72fr_2.28fr] lg:items-start">
+              <Reveal>
+                <p className="eyebrow mb-3 text-brand">
+                  <span className="h-px w-8 bg-brand/40" />
+                  Nach Rolle
+                </p>
+                <h2 id="rollen-einstieg" className="font-headline text-2xl font-bold text-navy">
+                  Empfohlene Einstiege für Ihre Rolle
+                </h2>
+                <p className="mt-3 text-sm leading-relaxed text-slate">
+                  Eine kuratierte Auswahl; weitere passende Leitfäden finden Sie in den Themenpfaden.
+                </p>
+              </Reveal>
+
+              <div className="grid gap-4 md:grid-cols-3">
+                {rolePaths.map((role, index) => {
+                  const Icon = role.icon;
+                  return (
+                    <Reveal key={role.title} delay={Math.min(index * 0.07, 0.14)} className="h-full">
+                      <section className="h-full rounded-2xl border border-line bg-white p-5" aria-labelledby={`rolle-${index}`}>
+                        <div className="flex items-center gap-3">
+                          <span className="grid h-9 w-9 place-items-center rounded-lg bg-navy text-mint">
+                            <Icon size={18} aria-hidden="true" />
+                          </span>
+                          <h3 id={`rolle-${index}`} className="font-headline font-bold text-navy">{role.title}</h3>
+                        </div>
+                        <p className="mt-3 text-sm leading-relaxed text-slate">{role.focus}</p>
+                        <ul className="mt-4 space-y-2 border-t border-line pt-4">
+                          {role.articles.map((slug) => {
+                            const article = EDITORIAL_ARTICLES[slug];
+                            return (
+                              <li key={slug}>
+                                <Link
+                                  to={getEditorialArticlePath(slug)}
+                                  className="group flex items-start gap-2 text-sm font-semibold leading-snug text-navy hover:text-brand focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+                                >
+                                  <ArrowRight size={14} className="mt-0.5 shrink-0 text-brand transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
+                                  {article.listingTitle}
+                                </Link>
+                              </li>
+                            );
+                          })}
+                        </ul>
+                      </section>
+                    </Reveal>
+                  );
+                })}
+              </div>
             </div>
-          </Reveal>
-        </div>
-      </section>
+          </div>
+        </section>
+
+        <section aria-labelledby="alle-leitfaeden" className="bg-white py-16 lg:py-24">
+          <div className="mx-auto max-w-7xl px-4 sm:px-8">
+            <Reveal>
+              <div className="max-w-3xl">
+                <p className="eyebrow mb-4 text-brand">
+                  <span className="h-px w-8 bg-brand/40" />
+                  Alle Entscheidungshilfen
+                </p>
+                <h2 id="alle-leitfaeden" className="display-md text-navy">Vom Planungswert zum nächsten Schritt</h2>
+                <p className="mt-4 text-base leading-relaxed text-slate sm:text-lg">
+                  Jeder Beitrag beantwortet eine konkrete Prüffrage und verweist auf die passende Folgeentscheidung.
+                </p>
+              </div>
+            </Reveal>
+
+            <div className="mt-14 space-y-16">
+              {EDITORIAL_CLUSTER_ORDER.map((clusterKey) => {
+                const cluster = EDITORIAL_CLUSTERS[clusterKey];
+                const Icon = clusterIcons[clusterKey];
+                const articles = EDITORIAL_ARTICLE_LIST.filter((article) => article.cluster === clusterKey);
+
+                return (
+                  <section key={clusterKey} id={clusterKey} aria-labelledby={`${clusterKey}-titel`} className="scroll-mt-28">
+                    <Reveal>
+                      <div className="grid gap-4 border-b border-line pb-6 md:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] md:items-end">
+                        <div className="flex items-start gap-4">
+                          <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-brand/8 text-brand">
+                            <Icon size={21} aria-hidden="true" />
+                          </span>
+                          <h3 id={`${clusterKey}-titel`} className="font-headline text-2xl font-bold leading-tight text-navy">
+                            {cluster.title}
+                          </h3>
+                        </div>
+                        <p className="text-sm leading-relaxed text-slate md:text-right">{cluster.description}</p>
+                      </div>
+                    </Reveal>
+
+                    <div className="mt-6 grid gap-5 lg:grid-cols-2">
+                      {articles.map((article, index) => (
+                        <Reveal key={article.slug} delay={Math.min(index * 0.07, 0.14)} className="h-full">
+                          <Link
+                            to={getEditorialArticlePath(article.slug)}
+                            className="group flex h-full flex-col rounded-2xl border border-line bg-paper p-6 transition-all hover:-translate-y-0.5 hover:border-brand/40 hover:shadow-soft focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand sm:p-7"
+                          >
+                            <div className="flex flex-wrap items-center justify-between gap-3 text-[11px] font-black uppercase tracking-[0.14em] text-brand">
+                              <span>{article.format} · {article.topic}</span>
+                              <span className="text-slate">{article.readingMinutes} Min.</span>
+                            </div>
+                            <h4 className="mt-4 font-headline text-xl font-bold leading-snug text-navy transition-colors group-hover:text-brand sm:text-2xl">
+                              {article.listingTitle}
+                            </h4>
+                            <p className="mt-3 text-sm font-semibold leading-relaxed text-navy">{article.decisionQuestion}</p>
+                            <p className="mt-3 flex-grow text-sm leading-relaxed text-slate">{article.listingDescription}</p>
+                            <div className="mt-6 flex flex-wrap items-center justify-between gap-3 border-t border-line pt-4 text-xs font-semibold text-slate">
+                              <span>Aktualisiert {formatDate(article.dateModified)}</span>
+                              <span className="inline-flex items-center gap-2 font-bold text-brand">
+                                Leitfaden öffnen
+                                <ArrowRight size={15} className="transition-transform group-hover:translate-x-1" aria-hidden="true" />
+                              </span>
+                            </div>
+                          </Link>
+                        </Reveal>
+                      ))}
+                    </div>
+                  </section>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        <section aria-labelledby="redaktionsstandard" className="border-t border-line bg-paper py-14">
+          <div className="mx-auto grid max-w-5xl gap-8 px-4 sm:px-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
+            <Reveal>
+              <div>
+                <p className="eyebrow mb-3 text-brand">
+                  <span className="h-px w-8 bg-brand/40" />
+                  Transparent arbeiten
+                </p>
+                <h2 id="redaktionsstandard" className="font-headline text-2xl font-bold text-navy">Unser Redaktionsstandard</h2>
+              </div>
+            </Reveal>
+            <Reveal delay={0.08}>
+              <div className="grid gap-4 sm:grid-cols-2">
+                <div className="flex gap-3">
+                  <BookOpenCheck size={20} className="mt-0.5 shrink-0 text-brand" aria-hidden="true" />
+                  <p className="text-sm leading-relaxed text-slate">
+                    <strong className="block text-navy">Quellen am Beitrag</strong>
+                    Ausgangsquellen, Herausgeber und Prüfdatum werden sichtbar genannt.
+                  </p>
+                </div>
+                <div className="flex gap-3">
+                  <Scale size={20} className="mt-0.5 shrink-0 text-brand" aria-hidden="true" />
+                  <p className="text-sm leading-relaxed text-slate">
+                    <strong className="block text-navy">Annahmen klar begrenzt</strong>
+                    Preise, Intervalle und Fristen sind Orientierung und müssen objektbezogen geprüft werden.
+                  </p>
+                </div>
+                <div className="flex gap-3">
+                  <ShieldCheck size={20} className="mt-0.5 shrink-0 text-brand" aria-hidden="true" />
+                  <p className="text-sm leading-relaxed text-slate">
+                    <strong className="block text-navy">Keine erfundenen Prüfer</strong>
+                    Namentliche Fachprüfung erscheint nur mit dokumentiertem, aktuellem Nachweis.
+                  </p>
+                </div>
+                <div className="flex gap-3">
+                  <ArrowRight size={20} className="mt-0.5 shrink-0 text-brand" aria-hidden="true" />
+                  <p className="text-sm leading-relaxed text-slate">
+                    <strong className="block text-navy">Ihr Thema fehlt?</strong>
+                    <Link to="/kontakt" className="font-bold text-brand hover:underline">Praxisfrage an die Redaktion senden</Link>
+                  </p>
+                </div>
+              </div>
+            </Reveal>
+          </div>
+        </section>
+      </div>
 
       <CTABand
-        title="Lieber direkt vom Profi hören?"
-        lead="Sparen Sie sich die Recherche: In einem kurzen Gespräch klären wir, was für Ihr Objekt wirklich sinnvoll ist."
+        title="Die Entscheidung betrifft ein konkretes Objekt?"
+        lead="Wir klären Flächen, Nutzung, Qualitätsziel und Rahmenbedingungen vor Ort – als Grundlage für ein nachvollziehbares Konzept und Angebot."
       />
     </div>
   );
