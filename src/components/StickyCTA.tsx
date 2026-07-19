@@ -33,21 +33,25 @@ export default function StickyCTA() {
           transition={{ type: 'spring', damping: 26, stiffness: 300 }}
           className="fixed bottom-0 inset-x-0 z-40 lg:hidden pb-[env(safe-area-inset-bottom)]"
         >
-          <div className="glass border-t border-line shadow-[0_-8px_32px_rgb(11_35_65/0.12)] px-4 py-3 grid grid-cols-2 gap-3">
+          {/* auto+1fr statt 50/50: „Anrufen" kompakt, der längere Besichtigungs-CTA
+              bekommt die Restbreite und bleibt so auf gängigen Handys einzeilig.
+              Falls er auf sehr schmalen Geräten doch umbricht: zentriert statt
+              linksbündig hängend (text-center + leading-snug). */}
+          <div className="glass border-t border-line shadow-[0_-8px_32px_rgb(11_35_65/0.12)] px-4 py-3 grid grid-cols-[auto_1fr] gap-3">
             <a
               href={SITE.phoneHref}
               aria-label={`AHAD Cleaning anrufen: ${SITE.phone}`}
-              className="flex items-center justify-center gap-2 py-3.5 rounded-xl bg-navy text-white font-bold text-sm active:scale-[0.98] transition-transform"
+              className="flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl bg-navy text-white font-bold text-sm active:scale-[0.98] transition-transform"
             >
-              <Phone size={17} />
+              <Phone size={17} className="flex-shrink-0" />
               Anrufen
             </a>
             <Link
               to="/angebot"
               aria-label="Besichtigung anfragen"
-              className="flex items-center justify-center gap-2 py-3.5 rounded-xl bg-accent text-white font-bold text-sm shadow-glow active:scale-[0.98] transition-transform"
+              className="flex items-center justify-center gap-2 px-3 py-3.5 rounded-xl bg-accent text-white font-bold text-sm shadow-glow active:scale-[0.98] transition-transform text-center leading-snug"
             >
-              <FileText size={17} />
+              <FileText size={17} className="flex-shrink-0" />
               Besichtigung anfragen
             </Link>
           </div>
