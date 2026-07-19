@@ -16,6 +16,12 @@ const GUARANTEE_ICON = [
  * Stärkster Vertrauensblock der Seite.
  */
 export default function Guarantee() {
+  // Fail-closed konsistent zu Ende gedacht: Solange die Zusagen im
+  // Claim-Register nicht freigegeben sind (GUARANTEES leer), darf auch die
+  // Überschrift „Vier Zusagen …" nicht stehen — sonst verspricht die Sektion
+  // Inhalte, die darunter fehlen (leeres Loch im Layout).
+  if (GUARANTEES.length === 0) return null;
+
   return (
     <section className="py-24 lg:py-32 bg-white border-y border-line">
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
@@ -27,18 +33,20 @@ export default function Guarantee() {
           className="mb-14 max-w-3xl mx-auto"
         />
 
-        {/* Proof-Eckwerte */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-14">
-          {PROOF_POINTS.map((p, i) => (
-            <Reveal key={p.label} delay={i * 0.08}>
-              <div className="bg-paper rounded-2xl border border-line p-6 text-center h-full">
-                <div className="font-accent text-3xl lg:text-4xl font-bold text-brand">{p.value}</div>
-                <div className="text-sm font-bold text-navy mt-1.5">{p.label}</div>
-                <div className="text-[12px] text-slate mt-0.5">{p.sub}</div>
-              </div>
-            </Reveal>
-          ))}
-        </div>
+        {/* Proof-Eckwerte (eigenständig gegated — nur rendern, wenn freigegeben) */}
+        {PROOF_POINTS.length > 0 && (
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-14">
+            {PROOF_POINTS.map((p, i) => (
+              <Reveal key={p.label} delay={i * 0.08}>
+                <div className="bg-paper rounded-2xl border border-line p-6 text-center h-full">
+                  <div className="font-accent text-3xl lg:text-4xl font-bold text-brand">{p.value}</div>
+                  <div className="text-sm font-bold text-navy mt-1.5">{p.label}</div>
+                  <div className="text-[12px] text-slate mt-0.5">{p.sub}</div>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        )}
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
           {/* Garantie-Karten */}
