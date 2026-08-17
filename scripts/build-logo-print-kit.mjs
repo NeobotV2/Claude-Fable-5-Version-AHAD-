@@ -51,14 +51,26 @@ const [, , ICON_W, ICON_H] = A.viewBoxIcon.split(' ').map(Number); //  312 × 35
 const VARIANTS = {
   farbe: { navy: NAVY, green: GREEN, falzG: 'grad', falzN: 'grad', word: NAVY, claim: GREEN },
   'farbe-flat': { navy: NAVY, green: GREEN, falzG: GREEN, falzN: NAVY, word: NAVY, claim: GREEN },
+  // Innenfeld weiß mitgedruckt — für farbige/nicht-weiße helle Shirts (z. B. grey
+  // melange). Ohne das nimmt das Innenfeld die Stofffarbe an, weil es im
+  // Original ein Loch ist; mit weißem Kern bleibt das Originalaussehen erhalten.
+  'farbe-kern-weiss': { navy: NAVY, green: GREEN, falzG: 'grad', falzN: 'grad', word: NAVY, claim: GREEN, kern: '#ffffff' },
+  'farbe-flat-kern-weiss': { navy: NAVY, green: GREEN, falzG: GREEN, falzN: NAVY, word: NAVY, claim: GREEN, kern: '#ffffff' },
   weiss: { navy: '#ffffff', green: '#ffffff', falzG: '#ffffff', falzN: '#ffffff', word: '#ffffff', claim: '#ffffff' },
   navy: { navy: NAVY, green: NAVY, falzG: NAVY, falzN: NAVY, word: NAVY, claim: NAVY },
   gruen: { navy: GREEN, green: GREEN, falzG: GREEN, falzN: GREEN, word: GREEN, claim: GREEN },
   schwarz: { navy: '#000000', green: '#000000', falzG: '#000000', falzN: '#000000', word: '#000000', claim: '#000000' },
 };
 
-/** Varianten, die auf dunklem Grund gezeigt werden (für die Übersicht). */
-const FOR_DARK = new Set(['weiss']);
+/**
+ * Grund, auf dem die Variante in der Übersicht gezeigt wird — jede Version
+ * neben dem Untergrund, für den sie gedacht ist.
+ */
+const PREVIEW_BG = {
+  weiss: { bg: NAVY, dark: true, note: 'auf dunklem Grund' },
+  'farbe-kern-weiss': { bg: '#A9AEB6', dark: false, note: 'auf farbigem Grund, z. B. grey melange' },
+  'farbe-flat-kern-weiss': { bg: '#A9AEB6', dark: false, note: 'auf farbigem Grund, z. B. grey melange' },
+};
 
 /** Original-Falzverläufe als <defs>-Inhalt (eindeutige IDs je Suffix). */
 function gradientDefs(sfx = '') {
@@ -73,10 +85,18 @@ function gradientDefs(sfx = '') {
 const usesGradient = (v) => v.falzG === 'grad' || v.falzN === 'grad';
 const fill = (value, gradId) => (value === 'grad' ? `url(#${gradId})` : value);
 
+/**
+ * Das Innenfeld der Raute als eigener Pfad — im Original der zweite Teilpfad
+ * von `icon.navy`, der per evenodd das Loch stanzt. Wird nur für die
+ * `kern`-Varianten unter das Bildzeichen gelegt.
+ */
+const KERN_PATH = `M${A.icon.navy.split(' M')[1]}`;
+
 /** Bildzeichen-Gruppe mit Original-Transform. */
 function iconGroup(v, sfx = '') {
   return (
     `<g transform="${A.iconTransform}">` +
+    (v.kern ? `<path d="${KERN_PATH}" fill="${v.kern}"/>` : '') +
     `<path d="${A.icon.navy}" fill-rule="evenodd" fill="${v.navy}"/>` +
     `<path d="${A.icon.green}" fill="${v.green}"/>` +
     `<path d="${A.icon.falzGreen}" fill="${fill(v.falzG, `gFoldG${sfx}`)}"/>` +
@@ -184,14 +204,13 @@ function overviewSvg() {
   const rows = names
     .map((name, i) => {
       const y = top + i * rowH;
-      const dark = FOR_DARK.has(name);
-      const bg = dark ? NAVY : '#ffffff';
-      const fg = dark ? 'rgba(255,255,255,0.72)' : 'rgba(11,35,65,0.6)';
+      const p = PREVIEW_BG[name] ?? { bg: '#ffffff', dark: false, note: '' };
+      const fg = p.dark ? 'rgba(255,255,255,0.72)' : 'rgba(11,35,65,0.6)';
       const iconW = (iconH * ICON_W) / ICON_H;
       return (
-        `<rect x="60" y="${y}" width="${W - 120}" height="${rowH - 24}" rx="18" fill="${bg}" ` +
-        `stroke="${dark ? 'none' : 'rgba(11,35,65,0.12)'}"/>` +
-        label(`${name}${dark ? '  ·  auf dunklem Grund' : ''}`, 100, y + 52, fg, 26) +
+        `<rect x="60" y="${y}" width="${W - 120}" height="${rowH - 24}" rx="18" fill="${p.bg}" ` +
+        `stroke="${p.bg === '#ffffff' ? 'rgba(11,35,65,0.12)' : 'none'}"/>` +
+        label(`${name}${p.note ? `  ·  ${p.note}` : ''}`, 100, y + 52, fg, 26) +
         place('lockup', name, 100, y + 92, lockH, `-ov-l-${i}`) +
         place('bildzeichen', name, W - 180 - iconW, y + 60, iconH, `-ov-i-${i}`)
       );

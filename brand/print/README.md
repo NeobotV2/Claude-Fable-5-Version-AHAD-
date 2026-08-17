@@ -32,18 +32,33 @@ bisher keine Sonderfarben festgelegt.
 
 | Version | Einsatz |
 | --- | --- |
-| `farbe` | Original mit Falzverlauf. Digitaldruck, DTG, DTF, Sublimation — auf **hellen** Shirts. |
-| `farbe-flat` | Zweifarbig Navy + Grün, ohne Verlauf. Siebdruck, Flex/Flock, Stickerei — auf **hellen** Shirts. |
-| `weiss` | Negativ, komplett weiß. Für **dunkle** Shirts (Navy, Schwarz, Anthrazit). |
+| `farbe` | Original mit Falzverlauf. Digitaldruck, DTG, DTF, Sublimation — auf **weißem** Grund. |
+| `farbe-flat` | Zweifarbig Navy + Grün, ohne Verlauf. Siebdruck, Flex/Flock, Stickerei — auf **weißem** Grund. |
+| `farbe-kern-weiss` | Wie `farbe`, aber das Innenfeld der Raute wird weiß mitgedruckt. Für **farbige helle** Shirts (grey melange, Sand, Hellgrau). |
+| `farbe-flat-kern-weiss` | Wie `farbe-flat` mit weißem Innenfeld. Siebdruck/Flex auf farbigen hellen Shirts. |
+| `weiss` | Negativ, komplett weiß. Für **dunkle** Shirts (Navy, Schwarz, Anthrazit, Dunkelgrün). |
 | `navy` | Einfarbig `#0B2341`. Ein-Farb-Druck auf hellen Shirts. |
 | `gruen` | Einfarbig `#0D6B38`. Ein-Farb-Druck auf hellen Shirts. |
 | `schwarz` | Einfarbig Schwarz. Ein-Farb-Druck, Gravur, Prägung, Vorlagen. |
 
-Auf dunklen Shirts nur `weiss` verwenden — das Navy der Farbversion
-verschwindet im Stoff.
+### Welche Version zu welcher Shirtfarbe
 
-Bei Siebdruck, Flexdruck und Stickerei immer `farbe-flat` statt `farbe`
-nehmen: Verläufe lassen sich in diesen Verfahren nicht sauber umsetzen.
+- **Weiß** → `farbe` (bzw. `farbe-flat`)
+- **Farbig hell** (grey melange, Sand, Hellgrau) → `farbe-kern-weiss`
+- **Dunkel** (Navy, Schwarz, Anthrazit, Dunkelgrün) → `weiss`
+
+Auf dunklen Shirts funktioniert die Farbversion **nicht**: Navy `#0B2341` ist
+die dominante Logofarbe und geht im dunklen Stoff unter. Auf Dunkelgrün
+verschwindet zusätzlich das grüne „CLEANING".
+
+Das Innenfeld der Raute ist im Original ein *Loch*, kein weißes Element — dort
+scheint der Untergrund durch. Auf weißem Stoff ist das identisch mit dem
+Original. Auf farbigem Stoff nimmt es die Stofffarbe an; deshalb gibt es die
+`kern-weiss`-Varianten, die das Originalaussehen wiederherstellen. Auf dunklen
+Shirts bleibt das Innenfeld bewusst offen — so ist die Negativversion definiert.
+
+Bei Siebdruck, Flexdruck und Stickerei immer die `flat`-Version nehmen:
+Verläufe lassen sich in diesen Verfahren nicht sauber umsetzen.
 
 ## Formate
 
