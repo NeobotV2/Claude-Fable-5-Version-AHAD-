@@ -13,6 +13,7 @@
     "preview": "vite preview",
     "build:file": "VITE_HASH_ROUTER=1 vite build --config vite.singlefile.config.ts",
     "assets": "node scripts/generate-assets.mjs",
+    "logo:print": "node scripts/build-logo-print-kit.mjs",
     "lint": "eslint .",
     "typecheck": "tsc -b",
     "typecheck:app": "tsc -p tsconfig.app.json",
