@@ -24,9 +24,27 @@ bisher keine Sonderfarben festgelegt.
 ## Motive
 
 - **Lockup** — Bildzeichen + Wortmarke „AHAD CLEANING", liegend.
-  Standard für Brust- und Rückendruck.
+  Standard, wenn nur eine Fläche bedruckt wird.
+- **Wortmarke** — nur „AHAD CLEANING", ohne Bildzeichen. Für den Rücken,
+  wenn das Bildzeichen vorne auf der Brust sitzt.
 - **Bildzeichen** — Signet solo, ohne Schrift. Für kleine Flächen:
-  Brusttasche, Ärmel, Cap, Kragen.
+  Brust, Ärmel, Cap, Kragen.
+
+Wortmarke und Bildzeichen sind aus demselben Artwork geschnitten wie das
+Lockup — dieselbe Geometrie, nur andere viewBox. Die `kern`-Varianten gibt es
+nur für Lockup und Bildzeichen; die Wortmarke hat kein Innenfeld.
+
+### Aufteilung Brust + Rücken
+
+Bildzeichen vorne, Wortmarke hinten — so wiederholt sich das Bildzeichen nicht:
+
+| Fläche | Motiv | Größe |
+| --- | --- | --- |
+| Brust links | Bildzeichen | 6–7 cm Höhe |
+| Rücken | Wortmarke | 26–30 cm Breite |
+
+Das Lockup dann **nicht** zusätzlich verwenden — sonst steht die Wortmarke
+zweimal auf demselben Shirt.
 
 ## Versionen
 
@@ -64,34 +82,43 @@ Verläufe lassen sich in diesen Verfahren nicht sauber umsetzen.
 
 | Ordner | Format | Details |
 | --- | --- | --- |
-| `pdf/` | Vektor-PDF, transparent | Lockup 300 × 77,83 mm · Bildzeichen 250 × 280,45 mm. **Standard-Abgabe an die Druckerei.** |
+| `pdf/` | Vektor-PDF, transparent | **Standard-Abgabe an die Druckerei.** Seitenmaße siehe unten. |
 | `svg/` | Vektor-SVG, transparent | Für Illustrator, Affinity, Inkscape, CorelDRAW, Cutter-Software. |
-| `png/` | PNG, transparent, 300 dpi | Lockup 4000 × 1038 px (33,9 cm breit) · Bildzeichen 3000 × 3365 px (25,4 cm breit). Für Shops, die kein Vektor annehmen. |
+| `png/` | PNG, transparent, 300 dpi | Für Shops, die kein Vektor annehmen. |
+
+| Motiv | PDF-Seite | PNG |
+| --- | --- | --- |
+| Lockup | 300 × 77,83 mm | 4000 × 1038 px (33,9 cm) |
+| Wortmarke | 280 × 81,09 mm | 4000 × 1158 px (33,9 cm) |
+| Bildzeichen | 250 × 280,45 mm | 3000 × 3365 px (25,4 cm) |
 
 Vektor (PDF/SVG) ist skalierungsfrei — Größe legt die Druckerei fest.
 Die PNGs bitte **nicht vergrößern**, sonst werden die Kanten unscharf.
 
 ## Empfohlene Druckgrößen
 
-| Platzierung | Motiv | Breite |
+| Platzierung | Motiv | Größe |
 | --- | --- | --- |
-| Brust mittig | Lockup | 22–28 cm |
-| Brust links | Lockup | 8–10 cm |
-| Brust links | Bildzeichen | 6–7 cm Höhe |
-| Rücken | Lockup | 28–32 cm |
-| Ärmel | Bildzeichen | 4–5 cm Höhe |
-| Cap / Kragen | Bildzeichen | 4–6 cm Höhe |
+| Rücken | Wortmarke | 26–30 cm breit |
+| Rücken | Lockup | 28–32 cm breit |
+| Brust mittig | Lockup | 22–28 cm breit |
+| Brust links | Bildzeichen | 6–7 cm hoch |
+| Brust links | Lockup | 8–10 cm breit |
+| Ärmel | Bildzeichen | 4–5 cm hoch |
+| Cap / Kragen | Bildzeichen | 4–6 cm hoch |
 
 ## Regeln
 
-- **Mindestgröße:** Lockup ab 40 mm Breite, Bildzeichen ab 12 mm Breite.
-  Darunter reißt „CLEANING" im Druck zu.
+- **Mindestgröße:** Lockup ab 40 mm Breite, Wortmarke ab 30 mm Breite,
+  Bildzeichen ab 12 mm Breite. Darunter reißt „CLEANING" im Druck zu.
 - **Schutzraum:** rundherum mindestens die Höhe des Bildzeichen-Schlitzes
   freilassen; nichts hineinsetzen.
 - **Nicht verändern:** nicht verzerren, drehen, umfärben, mit Effekten
   (Schatten, Outline, Glow) versehen oder die Wortmarke neu setzen —
   die Schrift ist bewusst in Pfade konvertiert.
-- Bildzeichen und Wortmarke nur in der gelieferten Anordnung verwenden.
+- Bildzeichen und Wortmarke nur in der gelieferten Anordnung verwenden —
+  also entweder das Lockup, oder Wortmarke und Bildzeichen getrennt auf
+  verschiedenen Flächen. Nicht selbst neu zusammenstellen.
 
 `uebersicht.png` zeigt alle Versionen auf einem Blatt — das reicht der
 Druckerei als Abstimmungsvorlage.

@@ -8,16 +8,22 @@
  *   svg/   Vektor (das, was Druckerei/Stickerei braucht)
  *   pdf/   Vektor-PDF, transparent, maßhaltig (Standard-Abgabeformat)
  *   png/   transparent, 300 dpi, Brustdruck-Größe
- *   uebersicht.png  Kontaktbogen aller Versionen (hell + dunkel)
+ *   uebersicht.png  Kontaktbogen aller Versionen auf passendem Grund
  *
- * Motive:  lockup (Bildzeichen + Wortmarke) · bildzeichen (Signet solo)
+ * Motive:
+ *   lockup       Bildzeichen + Wortmarke (Primärlogo)
+ *   wortmarke    nur „AHAD CLEANING", ohne Bildzeichen
+ *   bildzeichen  Signet solo, ohne Schrift
+ *
  * Varianten:
- *   farbe        Original mit Falzverlauf   → Digitaldruck/DTG/DTF, helle Shirts
- *   farbe-flat   2 Farben ohne Verlauf      → Siebdruck, Flex/Flock, Stick
- *   weiss        Negativ komplett weiß      → dunkle Shirts
- *   navy         einfarbig #0B2341          → 1-Farb-Druck auf hell
- *   gruen        einfarbig #0D6B38          → 1-Farb-Druck auf hell
- *   schwarz      einfarbig #000000          → 1-Farb-Druck, Gravur, Vorlagen
+ *   farbe                   Original mit Falzverlauf  → DTG/DTF/Digital, weißer Grund
+ *   farbe-flat              2 Farben ohne Verlauf     → Siebdruck, Flex/Flock, Stick
+ *   farbe-kern-weiss        wie farbe, Innenfeld weiß → farbige helle Shirts
+ *   farbe-flat-kern-weiss   wie farbe-flat, Kern weiß → Siebdruck auf farbig hell
+ *   weiss                   Negativ komplett weiß     → dunkle Shirts
+ *   navy                    einfarbig #0B2341         → 1-Farb-Druck auf hell
+ *   gruen                   einfarbig #0D6B38         → 1-Farb-Druck auf hell
+ *   schwarz                 einfarbig #000000         → 1-Farb-Druck, Gravur
  *
  * Aufruf: npm run logo:print
  */
@@ -41,12 +47,19 @@ const A = JSON.parse(await readFile(path.join(root, 'src/components/logo-art.jso
 const NAVY = '#0B2341';
 const GREEN = '#0D6B38';
 
-const [, , LOCK_W, LOCK_H] = A.viewBoxLockup.split(' ').map(Number); // 1511 × 392
-const [, , ICON_W, ICON_H] = A.viewBoxIcon.split(' ').map(Number); //  312 × 350
+/**
+ * Enge Bounding-Box der Wortmarke innerhalb des Lockup-Koordinatensystems.
+ * Ermittelt durch Rastern der beiden Wortmarken-Pfade und Trimmen der
+ * transparenten Ränder (x 375,125 · y 39 · 1118,875 × 323,625), nach außen
+ * auf ganze Einheiten gerundet. Die Pfaddaten bleiben dadurch unverändert —
+ * nur die viewBox schneidet das Bildzeichen weg.
+ */
+const VIEWBOX_WORDMARK = '375 39 1119 324';
 
 /**
  * Füllfarben je Variante. `falz*` sind die beiden Falzflächen am Schlitz:
- * im Original Verläufe, in allen Druckvarianten einfarbig.
+ * im Original Verläufe, in allen Druckvarianten einfarbig. `kern` füllt das
+ * Innenfeld der Raute, das im Original ein Loch ist.
  */
 const VARIANTS = {
   farbe: { navy: NAVY, green: GREEN, falzG: 'grad', falzN: 'grad', word: NAVY, claim: GREEN },
@@ -110,33 +123,71 @@ function wordmark(v) {
   return `<path d="${A.wordmark.ahad}" fill="${v.word}"/><path d="${A.wordmark.cleaning}" fill="${v.claim}"/>`;
 }
 
+/**
+ * Die drei Motive. `hasIcon` steuert, ob Falzverläufe und das Innenfeld
+ * überhaupt vorkommen — die Wortmarke braucht beides nicht.
+ * `pngWidth` ist die Ausgabebreite in px bei 300 dpi, `pdfWidthMm` die
+ * Seitenbreite des Vektor-PDFs.
+ */
+const MOTIFS = {
+  lockup: {
+    viewBox: A.viewBoxLockup,
+    hasIcon: true,
+    pngWidth: 4000, // 33,9 cm
+    pdfWidthMm: 300,
+    body: (v, sfx) => iconGroup(v, sfx) + wordmark(v),
+  },
+  wortmarke: {
+    viewBox: VIEWBOX_WORDMARK,
+    hasIcon: false,
+    pngWidth: 4000, // 33,9 cm
+    pdfWidthMm: 280,
+    body: (v) => wordmark(v),
+  },
+  bildzeichen: {
+    viewBox: A.viewBoxIcon,
+    hasIcon: true,
+    pngWidth: 3000, // 25,4 cm
+    pdfWidthMm: 250,
+    body: (v, sfx) => iconGroup(v, sfx),
+  },
+};
+
+for (const m of Object.values(MOTIFS)) {
+  const [x, y, w, h] = m.viewBox.split(' ').map(Number);
+  Object.assign(m, { x, y, w, h });
+}
+
+/** Varianten, die für dieses Motiv sinnvoll sind. */
+function variantsFor(motif) {
+  // Ohne Bildzeichen gibt es kein Innenfeld — die kern-Varianten wären
+  // byteidentische Dubletten und werden übersprungen.
+  return Object.keys(VARIANTS).filter((name) => MOTIFS[motif].hasIcon || !VARIANTS[name].kern);
+}
+
+const DPI = 300;
+
 function svgDoc(motif, name) {
+  const m = MOTIFS[motif];
   const v = VARIANTS[name];
-  const box = motif === 'lockup' ? A.viewBoxLockup : A.viewBoxIcon;
-  const w = motif === 'lockup' ? LOCK_W : ICON_W;
-  const h = motif === 'lockup' ? LOCK_H : ICON_H;
-  const defs = usesGradient(v) ? `<defs>${gradientDefs()}</defs>` : '';
-  const body = motif === 'lockup' ? iconGroup(v) + wordmark(v) : iconGroup(v);
+  const defs = m.hasIcon && usesGradient(v) ? `<defs>${gradientDefs()}</defs>` : '';
   return (
-    `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="${box}" ` +
-    `role="img" aria-label="AHAD Cleaning">\n${defs}${body}\n</svg>\n`
+    `<svg xmlns="http://www.w3.org/2000/svg" width="${m.w}" height="${m.h}" viewBox="${m.viewBox}" ` +
+    `role="img" aria-label="AHAD Cleaning">\n${defs}${m.body(v)}\n</svg>\n`
   );
 }
 
-/** Motiv skaliert an eine Position setzen — für die Übersicht. */
+/**
+ * Motiv skaliert an eine Position setzen — für die Übersicht. Der viewBox-
+ * Ursprung wird mit herausgerechnet, damit auch die Wortmarke (die im
+ * Lockup-Koordinatensystem bei x=375 beginnt) bündig sitzt.
+ */
 function place(motif, name, x, y, height, sfx) {
-  const v = VARIANTS[name];
-  const s = height / (motif === 'lockup' ? LOCK_H : ICON_H);
-  const body = motif === 'lockup' ? iconGroup(v, sfx) + wordmark(v) : iconGroup(v, sfx);
-  return `<g transform="translate(${x} ${y}) scale(${s})">${body}</g>`;
+  const m = MOTIFS[motif];
+  const s = height / m.h;
+  const body = m.body(VARIANTS[name], sfx);
+  return `<g transform="translate(${x - m.x * s} ${y - m.y * s}) scale(${s})">${body}</g>`;
 }
-
-/** Breite der PNG-Ausgabe: Brustdruck-Maß bei 300 dpi. */
-const PNG_WIDTH = { lockup: 4000, bildzeichen: 3000 }; // 33,9 cm bzw. 25,4 cm
-const DPI = 300;
-
-/** Breite der PDF-Seite in mm (Höhe folgt aus dem Seitenverhältnis). */
-const PDF_WIDTH_MM = { lockup: 300, bildzeichen: 250 };
 
 /** Chromium für die PDF-Ausgabe — ohne Chromium bleibt es bei SVG + PNG. */
 function findChromium() {
@@ -157,9 +208,9 @@ function findChromium() {
  * skalieren und platzieren kann.
  */
 async function svgToPdf(chromium, svg, motif, target) {
-  const widthMm = PDF_WIDTH_MM[motif];
-  const ratio = motif === 'lockup' ? LOCK_H / LOCK_W : ICON_H / ICON_W;
-  const heightMm = Math.round(widthMm * ratio * 100) / 100;
+  const m = MOTIFS[motif];
+  const widthMm = m.pdfWidthMm;
+  const heightMm = Math.round((widthMm * m.h) / m.w * 100) / 100;
   const dir = await mkdtemp(path.join(tmpdir(), 'ahad-logo-pdf-'));
   const html = path.join(dir, 'page.html');
   try {
@@ -191,36 +242,46 @@ const label = (t, x, y, color, size = 30) =>
   `<text x="${x}" y="${y}" font-family="DejaVu Sans, Arial, sans-serif" font-size="${size}" ` +
   `letter-spacing="1.5" fill="${color}">${t}</text>`;
 
-/** Kontaktbogen: jede Variante auf passendem Grund, mit Dateinamen. */
+/** Kontaktbogen: jede Variante auf passendem Grund, alle drei Motive. */
 function overviewSvg() {
   const names = Object.keys(VARIANTS);
-  const W = 1800;
+  const W = 1900;
   const rowH = 260;
-  const top = 150;
+  const top = 170;
   const H = top + names.length * rowH + 60;
   const lockH = 84;
+  const wordH = 60;
   const iconH = 120;
+  const iconW = (iconH * MOTIFS.bildzeichen.w) / MOTIFS.bildzeichen.h;
+
+  // place() referenziert Verlaufs-IDs mit Zeilensuffix — die zugehörigen
+  // <defs> müssen hier mit ausgegeben werden, sonst fehlen die Falzflächen.
+  const defs = names.map((_, i) => gradientDefs(`-ov-l-${i}`) + gradientDefs(`-ov-i-${i}`)).join('');
 
   const rows = names
     .map((name, i) => {
       const y = top + i * rowH;
       const p = PREVIEW_BG[name] ?? { bg: '#ffffff', dark: false, note: '' };
       const fg = p.dark ? 'rgba(255,255,255,0.72)' : 'rgba(11,35,65,0.6)';
-      const iconW = (iconH * ICON_W) / ICON_H;
+      const hasKern = Boolean(VARIANTS[name].kern);
       return (
         `<rect x="60" y="${y}" width="${W - 120}" height="${rowH - 24}" rx="18" fill="${p.bg}" ` +
         `stroke="${p.bg === '#ffffff' ? 'rgba(11,35,65,0.12)' : 'none'}"/>` +
         label(`${name}${p.note ? `  ·  ${p.note}` : ''}`, 100, y + 52, fg, 26) +
         place('lockup', name, 100, y + 92, lockH, `-ov-l-${i}`) +
+        // Für die kern-Varianten gibt es kein eigenes Wortmarken-Motiv.
+        (hasKern ? '' : place('wortmarke', name, 620, y + 104, wordH)) +
         place('bildzeichen', name, W - 180 - iconW, y + 60, iconH, `-ov-i-${i}`)
       );
     })
     .join('\n  ');
 
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">
+  <defs>${defs}</defs>
   <rect width="${W}" height="${H}" fill="#F4F6F9"/>
   ${label('AHAD Cleaning — Logo-Versionen für Textildruck', 60, 78, NAVY, 42)}
-  ${label('Lockup (links) und Bildzeichen (rechts) · Vektor + 300-dpi-PNG in brand/print/', 60, 118, 'rgba(11,35,65,0.6)', 24)}
+  ${label('Lockup · Wortmarke · Bildzeichen — je als Vektor-PDF, SVG und 300-dpi-PNG in brand/print/', 60, 118, 'rgba(11,35,65,0.6)', 24)}
+  ${label('Die kern-Varianten betreffen nur das Bildzeichen, daher ohne Wortmarke-Spalte.', 60, 150, 'rgba(11,35,65,0.45)', 22)}
   ${rows}
 </svg>`;
 }
@@ -233,15 +294,15 @@ async function run() {
   const chromium = findChromium();
   if (!chromium) console.warn('! Kein Chromium gefunden — PDFs werden übersprungen (SVG + PNG entstehen trotzdem).');
 
-  for (const motif of ['lockup', 'bildzeichen']) {
-    for (const name of Object.keys(VARIANTS)) {
+  for (const motif of Object.keys(MOTIFS)) {
+    for (const name of variantsFor(motif)) {
       const base = `ahad-${motif}-${name}`;
       const svg = svgDoc(motif, name);
 
       await writeFile(out('svg', `${base}.svg`), svg);
       console.log(`✓ brand/print/svg/${base}.svg`);
 
-      const width = PNG_WIDTH[motif];
+      const width = MOTIFS[motif].pngWidth;
       await sharp(Buffer.from(svg), { density: 600 })
         .resize({ width })
         .withMetadata({ density: DPI })
