@@ -28,6 +28,7 @@ const GREEN = '#0D6B38';
 const FALZ_NAVY = '#02122A';
 const TINT = '#9CDDB7';
 
+const lockW = Number(A.viewBoxLockup.split(' ')[2]); // 1511
 const lockH = Number(A.viewBoxLockup.split(' ')[3]); // 392
 const iconH = Number(A.viewBoxIcon.split(' ')[3]); // 350
 const iconW = Number(A.viewBoxIcon.split(' ')[2]); // 312
@@ -132,6 +133,29 @@ function fallbackSvg() {
 </svg>`;
 }
 
+/**
+ * Logo für die E-Mail-Signaturen (brand/signatur/): Vollfarb-Lockup auf weißer
+ * Karte mit abgerundeten Ecken. E-Mail-Clients können kein SVG, deshalb PNG.
+ *
+ * Die weiße Karte ist Absicht: das Lockup ist überwiegend Navy und würde auf
+ * transparentem Grund im Dark Mode vieler Clients verschwinden. Auf hellem
+ * Mail-Hintergrund — dem Normalfall — ist die Karte unsichtbar, im Dark Mode
+ * trägt sie das Logo. Die Ecken bleiben transparent, damit die Karte gerundet
+ * wirkt statt als harter Kasten.
+ *
+ * @param logoH Logohöhe in CSS-Pixeln, wie im Mail-Client dargestellt.
+ * @param pad   Weißraum um das Logo, in denselben Einheiten.
+ */
+function signaturLogoSvg(logoH = 42, pad = 13) {
+  const logoW = Math.round((logoH * lockW) / lockH);
+  const w = logoW + pad * 2;
+  const h = logoH + pad * 2;
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}">
+  <rect width="${w}" height="${h}" rx="10" fill="#ffffff"/>
+  ${placeLockup('color', pad, pad, logoH, '-sig')}
+</svg>`;
+}
+
 /** App-Icon: Navy-Kachel, Bildzeichen negativ weiß, zentriert. */
 function appIconSvg(padding = 22) {
   const size = 128;
@@ -171,6 +195,16 @@ async function run() {
 
   await sharp(Buffer.from(appIconSvg(30))).resize(512, 512).png().toFile(pub('logo.png'));
   console.log('✓ public/logo.png');
+
+  // 2× gerendert für scharfe Darstellung auf Retina-Displays; im Mail-HTML
+  // wird die halbe Größe gesetzt.
+  const sigSvg = signaturLogoSvg();
+  const sigW = Number(sigSvg.match(/width="(\d+)"/)[1]);
+  await sharp(Buffer.from(sigSvg), { density: 600 })
+    .resize({ width: sigW * 2 })
+    .png({ compressionLevel: 9 })
+    .toFile(pub('signatur-logo.png'));
+  console.log(`✓ public/signatur-logo.png (${sigW * 2}px, Darstellung ${sigW}px)`);
 }
 
 run().catch((err) => {

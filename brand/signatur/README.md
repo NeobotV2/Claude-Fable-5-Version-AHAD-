@@ -11,10 +11,14 @@ wählt sie pro Mail aus.
 | `ahad-care-signatur.html` | Unterstützung im Alltag — zum Einfügen in den Mail-Client. |
 | `ahad-care-signatur.txt` | Nur-Text-Fassung. |
 
-Beide sind bis auf Marke, Beschreibungszeile, Web-Adresse und die
-Öffnungszeiten (nur Cleaning) identisch aufgebaut — gleiches Raster, gleiche
-Farben, gleicher Pflichtblock. Änderungen am Layout immer in beiden Dateien
-nachziehen.
+Gleiche Farben und gleicher Pflichtblock, aber unterschiedlicher Kopf:
+Cleaning führt das Lockup über dem Textblock, Care das Bildzeichen links
+daneben (Begründung unten). Öffnungszeiten hat nur Cleaning. Änderungen am
+Pflichtblock immer in beiden Dateien nachziehen.
+
+Weil das Cleaning-Lockup den Markennamen schon trägt, steht „AHAD Cleaning"
+dort nicht zusätzlich in der Positionszeile — bei Care schon, da das
+Bildzeichen allein den Namen nicht nennt.
 
 ## Vor dem Einsatz ersetzen
 
@@ -40,27 +44,31 @@ das ist normal und beim Empfänger vollständig sichtbar.
 **Apple Mail** — Mail → Einstellungen → Signaturen. Signatur anlegen,
 „Standardschrift immer verwenden" **deaktivieren**, dann einfügen.
 
-## Warum beide das Bildzeichen nutzen und nicht das Lockup
+## Logos in den Signaturen
 
-Beide Signaturen zeigen das **Bildzeichen** auf Navy-Kachel (`logo-512.png`)
-und setzen den Markennamen als Text. Gründe:
+**Cleaning** nutzt das vollfarbige **Lockup** — `public/signatur-logo.png`,
+erzeugt von `scripts/generate-assets.mjs` (`npm run assets`) aus dem
+Original-Artwork. Dargestellt mit 188 × 68 px, gerendert mit 376 px Breite,
+damit es auf Retina-Displays scharf bleibt.
 
-- **Dark Mode.** Das Lockup ist überwiegend Navy `#0B2341`. Als transparentes
-  Bild verschwindet es im dunklen Modus vieler Mail-Clients; mit weißem
-  Hintergrund steht ein weißer Kasten in der dunklen Mail. Die Navy-Kachel
-  bringt ihren Grund selbst mit und funktioniert in beiden Modi.
-- **Ein System für beide Felder.** Cleaning und Care gehören zur selben GmbH.
-  Gleicher Aufbau bei beiden wirkt geschlossener als eine Signatur mit
-  Lockup und eine ohne.
-- **Für AHAD Care gibt es kein eigenes Logo.** Die Wortmarke des
-  Bestandslogos ist in Pfade konvertiert („AHAD CLEANING"), die
-  Originalschrift liegt nicht im Projekt — „AHAD CARE" lässt sich damit nicht
-  im gleichen Schriftschnitt setzen, ohne die Marke nachzuzeichnen. Ein
-  eigenes Care-Logo muss gestalterisch entschieden werden.
+Das Lockup sitzt auf einer **weißen Karte mit gerundeten Ecken**. Das ist
+Absicht: es ist überwiegend Navy `#0B2341` und würde auf transparentem Grund im
+Dark Mode vieler Mail-Clients verschwinden. Auf hellem Mail-Hintergrund — dem
+Normalfall — ist die Karte unsichtbar, im Dark Mode trägt sie das Logo.
 
-Wer bei Cleaning stattdessen das vollfarbige Lockup will: dafür muss erst ein
-gehostetes PNG des Lockups nach `public/` gelegt werden (aktuell existiert
-keins), und der Dark-Mode-Nachteil bleibt.
+Was die Karte **nicht** löst: die Textfarben der Signatur sind ebenfalls
+überwiegend Navy. Wie die im Dark Mode aussehen, entscheidet der Mail-Client
+über seine eigene Farbumrechnung — das ist von außen nicht steuerbar, weil
+`<style>`-Blöcke und damit `prefers-color-scheme` in Signaturen nicht
+verfügbar sind.
+
+**Care** nutzt das **Bildzeichen** auf Navy-Kachel (`logo-512.png`) und setzt
+„AHAD Care" als Text. Grund: für AHAD Care existiert kein eigenes
+Logo-Artwork. Die Wortmarke des Bestandslogos ist in Pfade konvertiert
+(„AHAD CLEANING"), die Originalschrift liegt nicht im Projekt — „AHAD CARE"
+lässt sich damit nicht im gleichen Schriftschnitt setzen, ohne die Marke
+nachzuzeichnen. Ein eigenes Care-Logo muss gestalterisch entschieden werden;
+danach kann Care auf dieselbe Lockup-Lösung umgestellt werden.
 
 ## Technische Hinweise
 
