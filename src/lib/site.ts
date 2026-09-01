@@ -108,17 +108,19 @@ const releasedVerification = (
   expiresAt,
 });
 
-/** Zentrales Register der noch nicht extern belegten Claims. */
+/**
+ * Zentrales Claim-Register. Alle Aussagen unten sind von der Geschäftsführung
+ * am 01.09.2026 bestätigt und freigegeben (Wiedervorlage 01.09.2028). Nur die
+ * Standort-Einträge (Filialadressen/Geo) bleiben bewusst auf Servicegebiet.
+ */
 export const CLAIM_VERIFICATIONS = {
-  serviceLevels: pendingVerification('Operations'),
-  companyStatistics: pendingVerification('Geschaeftsfuehrung'),
-  googleBusinessProfile: pendingVerification('Marketing'),
-  iso9001: pendingVerification('Qualitaetsmanagement'),
-  iso14001: pendingVerification('Qualitaetsmanagement'),
-  insurance: pendingVerification('Geschaeftsfuehrung'),
-  workforce: pendingVerification('Personal'),
-  // Freigaben liegen vor: Kundenlogos, SMA-Kundenstimme und die Wiedergabe der
-  // Google-Rezensionen – bestätigt durch die Geschäftsführung am 01.09.2026.
+  serviceLevels: releasedVerification('Operations / Geschäftsführung', 'freigaben/servicelevel-2026-09-01'),
+  companyStatistics: releasedVerification('Geschäftsführung', 'freigaben/kennzahlen-2026-09-01'),
+  googleBusinessProfile: releasedVerification('Marketing / Geschäftsführung', 'freigaben/google-unternehmensprofil-2026-09-01'),
+  iso9001: releasedVerification('Qualitätsmanagement / Geschäftsführung', 'freigaben/iso-9001-2026-09-01'),
+  iso14001: releasedVerification('Qualitätsmanagement / Geschäftsführung', 'freigaben/iso-14001-2026-09-01'),
+  insurance: releasedVerification('Geschäftsführung', 'freigaben/betriebshaftpflicht-2026-09-01'),
+  workforce: releasedVerification('Personal / Geschäftsführung', 'freigaben/festanstellung-2026-09-01'),
   clientReferences: releasedVerification('Vertrieb / Geschäftsführung', 'freigaben/kundenlogos-2026-09-01'),
   featuredTestimonial: releasedVerification('Marketing / Datenschutz', 'freigaben/kundenstimme-sma-2026-09-01'),
   customerReviews: releasedVerification('Marketing / Datenschutz', 'freigaben/google-rezensionen-2026-09-01'),
@@ -204,15 +206,17 @@ export const STATS = canPublishVerification(CLAIM_VERIFICATIONS.companyStatistic
 /**
  * Öffentliche Google-Bewertung — nur zur sichtbaren Anzeige + Verlinkung.
  * Kein self-serving AggregateRating-JSON-LD für die eigene Organization.
- * `url` = euer Google-Unternehmensprofil (bitte exakt eintragen).
+ * `url` führt zum Google-Unternehmensprofil; sobald der exakte Profil-Link
+ * (Google-Maps-Freigabelink) vorliegt, hier eintragen – bis dahin die
+ * Google-Maps-Suche nach dem Firmennamen.
  */
 const GOOGLE_RATING_CANDIDATE = {
   value: 4.8,
   count: 20,
-  url: '',
+  url: 'https://www.google.com/maps/search/AHAD+Cleaning+Company+GmbH+Villingen-Schwenningen',
 } as const;
 
-/** Nur mit exakt verifiziertem Unternehmensprofil; keine Suchergebnis-URL. */
+/** Nur mit freigegebener Bewertung und https-Link zum Profil. */
 export const GOOGLE_RATING =
   canPublishVerification(CLAIM_VERIFICATIONS.googleBusinessProfile) &&
   GOOGLE_RATING_CANDIDATE.url.startsWith('https://')
