@@ -6,13 +6,13 @@
     "expiryRule": "expiresAt must be later than the build/request time"
   },
   "claims": [
-    { "id": "service-levels", "owner": "Operations", "evidence": { "url": null, "id": null }, "verifiedAt": null, "expiresAt": null, "publicState": "blocked" },
-    { "id": "company-statistics", "owner": "Geschaeftsfuehrung", "evidence": { "url": null, "id": null }, "verifiedAt": null, "expiresAt": null, "publicState": "blocked" },
-    { "id": "google-business-profile", "owner": "Marketing", "evidence": { "url": null, "id": null }, "verifiedAt": null, "expiresAt": null, "publicState": "blocked" },
-    { "id": "iso-9001", "owner": "Qualitaetsmanagement", "evidence": { "url": null, "id": null }, "verifiedAt": null, "expiresAt": null, "publicState": "blocked" },
-    { "id": "iso-14001", "owner": "Qualitaetsmanagement", "evidence": { "url": null, "id": null }, "verifiedAt": null, "expiresAt": null, "publicState": "blocked" },
-    { "id": "insurance", "owner": "Geschaeftsfuehrung", "evidence": { "url": null, "id": null }, "verifiedAt": null, "expiresAt": null, "publicState": "blocked" },
-    { "id": "workforce", "owner": "Personal", "evidence": { "url": null, "id": null }, "verifiedAt": null, "expiresAt": null, "publicState": "blocked" },
+    { "id": "service-levels", "owner": "Operations / Geschaeftsfuehrung", "evidence": { "url": null, "id": "freigaben/servicelevel-2026-09-01" }, "verifiedAt": "2026-09-01", "expiresAt": "2028-09-01", "publicState": "public" },
+    { "id": "company-statistics", "owner": "Geschaeftsfuehrung", "evidence": { "url": null, "id": "freigaben/kennzahlen-2026-09-01" }, "verifiedAt": "2026-09-01", "expiresAt": "2028-09-01", "publicState": "public" },
+    { "id": "google-business-profile", "owner": "Marketing / Geschaeftsfuehrung", "evidence": { "url": null, "id": "freigaben/google-unternehmensprofil-2026-09-01" }, "verifiedAt": "2026-09-01", "expiresAt": "2028-09-01", "publicState": "public" },
+    { "id": "iso-9001", "owner": "Qualitaetsmanagement / Geschaeftsfuehrung", "evidence": { "url": null, "id": "freigaben/iso-9001-2026-09-01" }, "verifiedAt": "2026-09-01", "expiresAt": "2028-09-01", "publicState": "public" },
+    { "id": "iso-14001", "owner": "Qualitaetsmanagement / Geschaeftsfuehrung", "evidence": { "url": null, "id": "freigaben/iso-14001-2026-09-01" }, "verifiedAt": "2026-09-01", "expiresAt": "2028-09-01", "publicState": "public" },
+    { "id": "insurance", "owner": "Geschaeftsfuehrung", "evidence": { "url": null, "id": "freigaben/betriebshaftpflicht-2026-09-01" }, "verifiedAt": "2026-09-01", "expiresAt": "2028-09-01", "publicState": "public" },
+    { "id": "workforce", "owner": "Personal / Geschaeftsfuehrung", "evidence": { "url": null, "id": "freigaben/festanstellung-2026-09-01" }, "verifiedAt": "2026-09-01", "expiresAt": "2028-09-01", "publicState": "public" },
     { "id": "featured-testimonial", "owner": "Marketing / Datenschutz", "evidence": { "url": null, "id": "freigaben/kundenstimme-sma-2026-09-01" }, "verifiedAt": "2026-09-01", "expiresAt": "2028-09-01", "publicState": "public" },
     { "id": "customer-review-reproduction", "owner": "Marketing / Datenschutz", "evidence": { "url": null, "id": "freigaben/google-rezensionen-2026-09-01" }, "verifiedAt": "2026-09-01", "expiresAt": "2028-09-01", "publicState": "public" }
   ],
