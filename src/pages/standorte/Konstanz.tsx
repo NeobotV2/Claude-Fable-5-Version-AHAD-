@@ -87,8 +87,29 @@ const SERVICE_AREAS = [
   'Friedrichshafen',
 ];
 
-/** Einzelne Stimmen ohne Plattform-Aggregat oder unbestätigte Profilzuordnung. */
-const KONSTANZ_REVIEW_CANDIDATES: Array<{ author: string; rating: number; text: string }> = [];
+/** Öffentliche Google-Stimmen aus der Region Konstanz im Wortlaut; Wiedergabe freigegeben. */
+const KONSTANZ_REVIEW_CANDIDATES: Array<{ author: string; rating: number; text: string }> = [
+  {
+    author: 'Britta Zorn',
+    rating: 5,
+    text: 'Unsere Kanzlei sieht nach jedem Einsatz aus wie frisch eröffnet. Danke für die konstante Qualität!',
+  },
+  {
+    author: 'Ingrid Guimaraes',
+    rating: 5,
+    text: 'Das Personal war sehr respektvoll, diskret und fleißig. Ich fühle mich gut aufgehoben.',
+  },
+  {
+    author: 'Sophia Fischer',
+    rating: 5,
+    text: 'Super freundliches Team und blitzsaubere Arbeit! Die Wohnung war danach wie neu. Jederzeit wieder.',
+  },
+  {
+    author: 'Денис Грушка',
+    rating: 5,
+    text: 'Ich hatte kurzfristig eine Grundreinigung benötigt – wurde sofort geholfen. Top!',
+  },
+];
 
 const KONSTANZ_REVIEWS = canPublishVerification(CLAIM_VERIFICATIONS.customerReviews)
   ? KONSTANZ_REVIEW_CANDIDATES

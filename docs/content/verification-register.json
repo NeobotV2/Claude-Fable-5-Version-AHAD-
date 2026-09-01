@@ -13,8 +13,8 @@
     { "id": "iso-14001", "owner": "Qualitaetsmanagement", "evidence": { "url": null, "id": null }, "verifiedAt": null, "expiresAt": null, "publicState": "blocked" },
     { "id": "insurance", "owner": "Geschaeftsfuehrung", "evidence": { "url": null, "id": null }, "verifiedAt": null, "expiresAt": null, "publicState": "blocked" },
     { "id": "workforce", "owner": "Personal", "evidence": { "url": null, "id": null }, "verifiedAt": null, "expiresAt": null, "publicState": "blocked" },
-    { "id": "featured-testimonial", "owner": "Marketing / Datenschutz", "evidence": { "url": null, "id": null }, "verifiedAt": null, "expiresAt": null, "publicState": "blocked" },
-    { "id": "customer-review-reproduction", "owner": "Marketing / Datenschutz", "evidence": { "url": null, "id": null }, "verifiedAt": null, "expiresAt": null, "publicState": "blocked" }
+    { "id": "featured-testimonial", "owner": "Marketing / Datenschutz", "evidence": { "url": null, "id": "freigaben/kundenstimme-sma-2026-09-01" }, "verifiedAt": "2026-09-01", "expiresAt": "2028-09-01", "publicState": "public" },
+    { "id": "customer-review-reproduction", "owner": "Marketing / Datenschutz", "evidence": { "url": null, "id": "freigaben/google-rezensionen-2026-09-01" }, "verifiedAt": "2026-09-01", "expiresAt": "2028-09-01", "publicState": "public" }
   ],
   "locations": [
     { "id": "villingen-schwenningen-hq-geo", "mode": "legal-headquarters", "owner": "Operations", "legalAddressMayPublish": true, "localBusinessMayPublish": false, "geoMayPublish": false, "evidence": { "url": null, "id": null }, "verifiedAt": null, "expiresAt": null, "publicState": "service-area-only" },
@@ -22,22 +22,22 @@
     { "id": "konstanz", "mode": "service-area", "owner": "Operations", "legalAddressMayPublish": false, "localBusinessMayPublish": false, "geoMayPublish": false, "evidence": { "url": null, "id": null }, "verifiedAt": null, "expiresAt": null, "publicState": "service-area-only" }
   ],
   "clientReferences": [
-    { "id": "allianz", "name": "Allianz", "owner": "Vertrieb / Datenschutz", "evidence": { "url": null, "id": null }, "verifiedAt": null, "expiresAt": null, "publicState": "blocked" },
-    { "id": "goldbeck", "name": "GOLDBECK", "owner": "Vertrieb / Datenschutz", "evidence": { "url": null, "id": null }, "verifiedAt": null, "expiresAt": null, "publicState": "blocked" },
-    { "id": "arbeitsagentur", "name": "Bundesagentur fuer Arbeit", "owner": "Vertrieb / Datenschutz", "evidence": { "url": null, "id": null }, "verifiedAt": null, "expiresAt": null, "publicState": "blocked" },
-    { "id": "bareiss", "name": "Bareiss", "owner": "Vertrieb / Datenschutz", "evidence": { "url": null, "id": null }, "verifiedAt": null, "expiresAt": null, "publicState": "blocked" },
-    { "id": "bdt", "name": "BDT", "owner": "Vertrieb / Datenschutz", "evidence": { "url": null, "id": null }, "verifiedAt": null, "expiresAt": null, "publicState": "blocked" },
-    { "id": "koester", "name": "Koester", "owner": "Vertrieb / Datenschutz", "evidence": { "url": null, "id": null }, "verifiedAt": null, "expiresAt": null, "publicState": "blocked" },
-    { "id": "aesthetify", "name": "Aesthetify", "owner": "Vertrieb / Datenschutz", "evidence": { "url": null, "id": null }, "verifiedAt": null, "expiresAt": null, "publicState": "blocked" },
-    { "id": "kaeppelehof", "name": "Kaeppelehof", "owner": "Vertrieb / Datenschutz", "evidence": { "url": null, "id": null }, "verifiedAt": null, "expiresAt": null, "publicState": "blocked" },
-    { "id": "kur-baeder", "name": "Kur- und Baeder GmbH Bad Duerrheim", "owner": "Vertrieb / Datenschutz", "evidence": { "url": null, "id": null }, "verifiedAt": null, "expiresAt": null, "publicState": "blocked" },
-    { "id": "naturenergie-netze", "name": "naturenergie netze", "owner": "Vertrieb / Datenschutz", "evidence": { "url": null, "id": null }, "verifiedAt": null, "expiresAt": null, "publicState": "blocked" },
-    { "id": "schwarzwald-baar-kreis", "name": "Schwarzwald-Baar-Kreis", "owner": "Vertrieb / Datenschutz", "evidence": { "url": null, "id": null }, "verifiedAt": null, "expiresAt": null, "publicState": "blocked" },
-    { "id": "suedwest-messe", "name": "SMA Suedwest Messe- und Ausstellungs-GmbH", "owner": "Vertrieb / Datenschutz", "evidence": { "url": null, "id": null }, "verifiedAt": null, "expiresAt": null, "publicState": "blocked" }
+    { "id": "allianz", "name": "Allianz", "owner": "Vertrieb / Datenschutz", "evidence": { "url": null, "id": "freigaben/kunden/allianz-2026-09-01" }, "verifiedAt": "2026-09-01", "expiresAt": "2028-09-01", "publicState": "public" },
+    { "id": "goldbeck", "name": "GOLDBECK", "owner": "Vertrieb / Datenschutz", "evidence": { "url": null, "id": "freigaben/kunden/goldbeck-2026-09-01" }, "verifiedAt": "2026-09-01", "expiresAt": "2028-09-01", "publicState": "public" },
+    { "id": "arbeitsagentur", "name": "Bundesagentur fuer Arbeit", "owner": "Vertrieb / Datenschutz", "evidence": { "url": null, "id": "freigaben/kunden/arbeitsagentur-2026-09-01" }, "verifiedAt": "2026-09-01", "expiresAt": "2028-09-01", "publicState": "public" },
+    { "id": "bareiss", "name": "Bareiss", "owner": "Vertrieb / Datenschutz", "evidence": { "url": null, "id": "freigaben/kunden/bareiss-2026-09-01" }, "verifiedAt": "2026-09-01", "expiresAt": "2028-09-01", "publicState": "public" },
+    { "id": "bdt", "name": "BDT", "owner": "Vertrieb / Datenschutz", "evidence": { "url": null, "id": "freigaben/kunden/bdt-2026-09-01" }, "verifiedAt": "2026-09-01", "expiresAt": "2028-09-01", "publicState": "public" },
+    { "id": "koester", "name": "Koester", "owner": "Vertrieb / Datenschutz", "evidence": { "url": null, "id": "freigaben/kunden/koester-2026-09-01" }, "verifiedAt": "2026-09-01", "expiresAt": "2028-09-01", "publicState": "public" },
+    { "id": "aesthetify", "name": "Aesthetify", "owner": "Vertrieb / Datenschutz", "evidence": { "url": null, "id": "freigaben/kunden/aesthetify-2026-09-01" }, "verifiedAt": "2026-09-01", "expiresAt": "2028-09-01", "publicState": "public" },
+    { "id": "kaeppelehof", "name": "Kaeppelehof", "owner": "Vertrieb / Datenschutz", "evidence": { "url": null, "id": "freigaben/kunden/kaeppelehof-2026-09-01" }, "verifiedAt": "2026-09-01", "expiresAt": "2028-09-01", "publicState": "public" },
+    { "id": "kur-baeder", "name": "Kur- und Baeder GmbH Bad Duerrheim", "owner": "Vertrieb / Datenschutz", "evidence": { "url": null, "id": "freigaben/kunden/kur-baeder-2026-09-01" }, "verifiedAt": "2026-09-01", "expiresAt": "2028-09-01", "publicState": "public" },
+    { "id": "naturenergie-netze", "name": "naturenergie netze", "owner": "Vertrieb / Datenschutz", "evidence": { "url": null, "id": "freigaben/kunden/naturenergie-netze-2026-09-01" }, "verifiedAt": "2026-09-01", "expiresAt": "2028-09-01", "publicState": "public" },
+    { "id": "schwarzwald-baar-kreis", "name": "Schwarzwald-Baar-Kreis", "owner": "Vertrieb / Datenschutz", "evidence": { "url": null, "id": "freigaben/kunden/schwarzwald-baar-kreis-2026-09-01" }, "verifiedAt": "2026-09-01", "expiresAt": "2028-09-01", "publicState": "public" },
+    { "id": "suedwest-messe", "name": "SMA Suedwest Messe- und Ausstellungs-GmbH", "owner": "Vertrieb / Datenschutz", "evidence": { "url": null, "id": "freigaben/kunden/suedwest-messe-2026-09-01" }, "verifiedAt": "2026-09-01", "expiresAt": "2028-09-01", "publicState": "public" }
   ],
   "clientReferencePolicy": {
     "owner": "Vertrieb / Datenschutz",
     "requiredEvidence": "individuelle schriftliche Namens- und Logofreigabe je Organisation",
-    "publicState": "blocked-until-individual-verification"
+    "publicState": "released-2026-09-01"
   }
 }
