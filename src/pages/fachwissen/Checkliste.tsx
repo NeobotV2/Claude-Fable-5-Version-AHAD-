@@ -72,9 +72,9 @@ export default function FachwissenCheckliste() {
 
   return (
     <article>
-      <SEO
-        title="Checkliste: Reinigungsangebot einholen & vergleichen | AHAD"
-        description="Kostenlose Checkliste für Objektverantwortliche: Welche Daten Sie bereitlegen, wie Sie Angebote vergleichbar machen und woran Sie seriöse Reinigungsanbieter erkennen — druckbar / als PDF."
+      <SEO ogType="article"
+        title="Checkliste: Reinigungsangebot vergleichen | AHAD"
+        description="Kostenlose Checkliste für Objektverantwortliche: Daten bereitlegen, Angebote vergleichbar machen und seriöse Reinigungsanbieter erkennen — druckbar."
         keywords="Checkliste Reinigungsangebot, Gebäudereinigung Angebot einholen, Reinigungsfirma vergleichen, Ausschreibung Reinigung Checkliste, AHAD Cleaning"
         schema={schema}
       />

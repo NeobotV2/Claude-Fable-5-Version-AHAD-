@@ -54,7 +54,7 @@ const steps = [
 const outcomes = [
   { value: '1', label: 'feste Objektleitung je Objekt', text: 'Ein Verantwortlicher steuert — nicht Ihr Office-Management.' },
   { value: '1', label: 'klarer Meldeweg', text: 'Jedes Anliegen erhält einen Verantwortlichen und einen dokumentierten Status.' },
-  { value: '100%', label: 'Nachweisbarkeit', text: 'Jede Leistung dokumentiert — für QM, Audit und Ihr Bauchgefühl.' },
+  { value: 'Jede', label: 'Leistung nachweisbar', text: 'Dokumentierte Ausführung — für QM, Audit und Ihr Bauchgefühl.' },
 ];
 
 /** Systemvergleich — macht den Unterschied zwischen "irgendeine Reinigungsfirma"

@@ -46,6 +46,12 @@ interface JobApplication {
   startDate: string;
   mobility: string;
   location: string;
+  /** Beworbenes Stellenprofil (Slug aus /karriere) – leer bei Initiativbewerbung. */
+  jobId: string;
+  /** Sprache, in der der Funnel ausgefüllt wurde (Datenfelder sind immer deutsch). */
+  language: string;
+  /** Einwilligung, per WhatsApp kontaktiert zu werden. */
+  whatsappOptIn?: boolean;
   status: string;
   /** false = E-Mail-Benachrichtigung fehlgeschlagen — Eintrag existiert nur hier. */
   emailSent?: boolean;
@@ -63,6 +69,10 @@ interface OfferLead {
   services: string[];
   areaSize: string;
   frequency: string;
+  anforderungen: string[];
+  preferredTime: string;
+  /** Nur befüllte Detailfelder (Glas, Produktion, Bau, Winter, Besonderheiten, Start). */
+  serviceDetails: Record<string, string>;
   status: string;
   emailSent?: boolean;
   createdAt: Timestamp | null;
@@ -99,6 +109,25 @@ const asStringArray = (value: unknown): string[] => Array.isArray(value)
   ? value.filter((item): item is string => typeof item === 'string').slice(0, 20)
   : [];
 const asTimestamp = (value: unknown): Timestamp | null => value instanceof Timestamp ? value : null;
+const asStringRecord = (value: unknown): Record<string, string> => value && typeof value === 'object' && !Array.isArray(value)
+  ? Object.fromEntries(
+      Object.entries(value as Record<string, unknown>)
+        .filter((entry): entry is [string, string] => typeof entry[1] === 'string' && entry[1].trim() !== '')
+        .slice(0, 10),
+    )
+  : {};
+
+const OFFER_DETAIL_LABELS: Record<string, string> = {
+  glassAccess: 'Glasflächen',
+  productionMode: 'Produktion/Schicht',
+  constructionPhase: 'Bauphase',
+  winterAreaType: 'Winterdienst',
+  specialRequirements: 'Besonderheiten',
+  desiredStart: 'Gewünschter Start',
+};
+
+const describeOfferDetails = (details: Record<string, string>): string =>
+  Object.entries(details).map(([key, value]) => `${OFFER_DETAIL_LABELS[key] ?? key}: ${value}`).join(' · ');
 
 function formatTimestamp(value: Timestamp | null): string {
   if (!value) return 'Zeitpunkt unbekannt';
@@ -115,7 +144,8 @@ function normalizeJob(id: string, data: Record<string, unknown>): JobApplication
     id,
     name: asString(data.name), phone: asString(data.phone), jobType: asString(data.jobType),
     department: asString(data.department), experience: asString(data.experience), startDate: asString(data.startDate),
-    mobility: asString(data.mobility), location: asString(data.location), status: asString(data.status) || 'new',
+    mobility: asString(data.mobility), location: asString(data.location), jobId: asString(data.jobId),
+    language: asString(data.language), whatsappOptIn: asBoolean(data.whatsappOptIn), status: asString(data.status) || 'new',
     emailSent: asBoolean(data.emailSent), createdAt: asTimestamp(data.createdAt),
   };
 }
@@ -126,6 +156,8 @@ function normalizeOffer(id: string, data: Record<string, unknown>): OfferLead {
     companyName: asString(data.companyName), contactPerson: asString(data.contactPerson), email: asString(data.email),
     phone: asString(data.phone), location: asString(data.location), objectType: asString(data.objectType),
     services: asStringArray(data.services), areaSize: asString(data.areaSize), frequency: asString(data.frequency),
+    anforderungen: asStringArray(data.anforderungen), preferredTime: asString(data.preferredTime),
+    serviceDetails: asStringRecord(data.serviceDetails),
     status: asString(data.status) || 'new', emailSent: asBoolean(data.emailSent), createdAt: asTimestamp(data.createdAt),
   };
 }
@@ -326,13 +358,13 @@ export default function Admin() {
                 const stamp = new Date().toISOString().slice(0, 10);
                 if (activeTab === 'jobs') downloadCsv(
                   `bewerbungen-${stamp}.csv`,
-                  ['ID', 'Name', 'Telefon', 'Stelle', 'Bereich', 'Erfahrung', 'Start', 'Mobilität', 'Standort', 'Status', 'E-Mail gesendet', 'Erstellt'],
-                  jobApplications.map((item) => [item.id, item.name, item.phone, item.jobType, item.department, item.experience, item.startDate, item.mobility, item.location, item.status, item.emailSent === true ? 'Ja' : 'Nein', formatTimestamp(item.createdAt)]),
+                  ['ID', 'Name', 'Telefon', 'Stelle', 'Bereich', 'Stellenprofil', 'Erfahrung', 'Start', 'Mobilität', 'Standort', 'Sprache', 'WhatsApp erlaubt', 'Status', 'E-Mail gesendet', 'Erstellt'],
+                  jobApplications.map((item) => [item.id, item.name, item.phone, item.jobType, item.department, item.jobId, item.experience, item.startDate, item.mobility, item.location, item.language, item.whatsappOptIn === true ? 'Ja' : 'Nein', item.status, item.emailSent === true ? 'Ja' : 'Nein', formatTimestamp(item.createdAt)]),
                 );
                 if (activeTab === 'offers') downloadCsv(
                   `angebotsanfragen-${stamp}.csv`,
-                  ['ID', 'Firma', 'Kontakt', 'E-Mail', 'Telefon', 'Standort', 'Objekt', 'Leistungen', 'Fläche', 'Intervall', 'Status', 'E-Mail gesendet', 'Erstellt'],
-                  offerLeads.map((item) => [item.id, item.companyName, item.contactPerson, item.email, item.phone, item.location, item.objectType, item.services, item.areaSize, item.frequency, item.status, item.emailSent === true ? 'Ja' : 'Nein', formatTimestamp(item.createdAt)]),
+                  ['ID', 'Firma', 'Kontakt', 'E-Mail', 'Telefon', 'Standort', 'Objekt', 'Leistungen', 'Fläche', 'Intervall', 'Anforderungen', 'Details', 'Zeitfenster Besichtigung', 'Status', 'E-Mail gesendet', 'Erstellt'],
+                  offerLeads.map((item) => [item.id, item.companyName, item.contactPerson, item.email, item.phone, item.location, item.objectType, item.services, item.areaSize, item.frequency, item.anforderungen, describeOfferDetails(item.serviceDetails), item.preferredTime, item.status, item.emailSent === true ? 'Ja' : 'Nein', formatTimestamp(item.createdAt)]),
                 );
                 if (activeTab === 'contacts') downloadCsv(
                   `kontaktanfragen-${stamp}.csv`,
@@ -469,13 +501,19 @@ export default function Admin() {
                           <span className="font-medium">Start: {app.startDate}</span>
                         </div>
                       </div>
+                      <p className="text-sm text-[#424751]">
+                        {app.jobId ? `Stellenprofil: ${app.jobId}` : 'Initiativbewerbung'}
+                        {app.language && ` · Sprache: ${app.language.toUpperCase()}`}
+                        {` · WhatsApp: ${app.whatsappOptIn === true ? 'erlaubt' : 'nicht erlaubt'}`}
+                      </p>
                     </div>
                     <div className="flex flex-col justify-between items-end gap-4">
                       <div className="text-xs text-gray-400 font-medium">
                         {formatTimestamp(app.createdAt)}
                       </div>
-                      <select 
+                      <select
                         value={app.status}
+                        aria-label={`Status von ${app.name}`}
                         onChange={(e) => updateStatus('job_applications', app.id, e.target.value)}
                         className={`px-4 py-2 rounded-lg font-bold text-sm border-2 outline-none transition-all ${
                           app.status === 'new' ? 'border-green-200 bg-green-50 text-[#0D6B38]' :
@@ -544,13 +582,21 @@ export default function Admin() {
                           <span className="font-medium">{lead.location}</span>
                         </div>
                       </div>
+                      <div className="bg-gray-50 p-4 rounded-xl text-sm text-gray-600 space-y-1">
+                        <p><strong>Leistungen:</strong> {lead.services.join(', ') || '–'}</p>
+                        <p><strong>Fläche / Turnus:</strong> {[lead.areaSize, lead.frequency].filter(Boolean).join(' · ') || '–'}</p>
+                        {lead.anforderungen.length > 0 && <p><strong>Anforderungen:</strong> {lead.anforderungen.join(', ')}</p>}
+                        {Object.keys(lead.serviceDetails).length > 0 && <p>{describeOfferDetails(lead.serviceDetails)}</p>}
+                        {lead.preferredTime && <p><strong>Zeitfenster Besichtigung:</strong> {lead.preferredTime}</p>}
+                      </div>
                     </div>
                     <div className="flex flex-col justify-between items-end gap-4">
                       <div className="text-xs text-gray-400 font-medium">
                         {formatTimestamp(lead.createdAt)}
                       </div>
-                      <select 
+                      <select
                         value={lead.status}
+                        aria-label={`Status von ${lead.companyName || lead.contactPerson}`}
                         onChange={(e) => updateStatus('offer_leads', lead.id, e.target.value)}
                         className={`px-4 py-2 rounded-lg font-bold text-sm border-2 outline-none transition-all ${
                           lead.status === 'new' ? 'border-blue-200 bg-blue-50 text-[#0B2341]' :
@@ -623,8 +669,9 @@ export default function Admin() {
                       <div className="text-xs text-gray-400 font-medium">
                         {formatTimestamp(lead.createdAt)}
                       </div>
-                      <select 
+                      <select
                         value={lead.status}
+                        aria-label={`Status von ${lead.contactPerson}`}
                         onChange={(e) => updateStatus('leads', lead.id, e.target.value)}
                         className={`px-4 py-2 rounded-lg font-bold text-sm border-2 outline-none transition-all ${
                           lead.status === 'new' ? 'border-purple-200 bg-purple-50 text-purple-600' :

@@ -13,7 +13,7 @@ Stand: 12. Juli 2026
 ## Vor dem ersten Release
 
 1. Die Werte aus `.env.example` als verschlüsselte Vercel-Umgebungsvariablen setzen. Service-Account- und Resend-Schlüssel niemals in das Repository übernehmen.
-2. `LEAD_ALLOWED_ORIGINS` auf die tatsächlich erreichbaren Produktionsorigins begrenzen und für `LEAD_RATE_LIMIT_SECRET` einen zufälligen Wert mit mindestens 32 Zeichen verwenden.
+2. `LEAD_ALLOWED_ORIGINS` auf die tatsächlich erreichbaren Produktionsorigins begrenzen und für `LEAD_RATE_LIMIT_SECRET` einen zufälligen Wert mit mindestens 32 Zeichen verwenden. Fehlt das Secret in Production, schreibt die API beim ersten Lead eine Fehlermeldung ins Vercel-Log. Preview-Deployments (`VERCEL_ENV` ≠ `production`) lassen zusätzlich ihre eigene `VERCEL_URL`/`VERCEL_BRANCH_URL` als Origin zu, damit die Formulare dort testbar sind.
 3. `PRIVACY_NOTICE_VERSION` und `WHATSAPP_NOTICE_VERSION` auf die freigegebene Fassung setzen.
 4. Domainkonfiguration so prüfen, dass `www` direkt bedient und der Apex-Host direkt auf `www` umgeleitet wird.
 5. Offene Claims, Standorte, Zertifikate, Kundenfreigaben und Stellenprofile anhand des Registers prüfen. Nicht freigegebene Inhalte bleiben durch den Code-Gate verborgen.
@@ -29,7 +29,9 @@ Stand: 12. Juli 2026
 ## Smoke- und Fehlerfälle
 
 - Ein identischer Retry mit derselben `Idempotency-Key` erzeugt keinen zweiten Lead.
-- Ein belegter Lead bleibt auch dann gespeichert, wenn die Benachrichtigungsmail ausfällt; die API meldet diesen Zustand ohne falschen Vollerfolg.
+- Ein belegter Lead bleibt auch dann gespeichert, wenn die Benachrichtigungsmail ausfällt; die API meldet diesen Zustand ohne falschen Vollerfolg. Ein Retry mit demselben Schlüssel holt die Mail bis zu dreimal nach (`notificationAttempts`), Zustellfehler stehen ohne Lead-Daten im Vercel-Log.
+- Ein vorgehender Geräte-Zeitstempel (`formStartedAt` in der Zukunft) überspringt nur die Timing-Prüfung; ohne Zeitstempel wird die Anfrage abgewiesen.
+- Serverseitige Feldfehler (`VALIDATION_ERROR` mit `fields`) zeigen die Formulare als konkreten Hinweis am Feld an, nicht als generischen Übertragungsfehler.
 - Unbekannte Payload-Felder, fremde Origins, zu große Requests und ungültige Kontaktwege werden abgewiesen.
 - Ohne JavaScript bleiben öffentliche Kerninhalte und Bilder sichtbar; Formulare dürfen einen verständlichen Fallback-Telefonweg zeigen.
 - Bei einem Rollback müssen App und API gemeinsam zurückgerollt werden. Firestore-Regeln nicht auf öffentliche Browser-Creates zurücksetzen; stattdessen die letzte funktionierende Serverversion wiederherstellen.

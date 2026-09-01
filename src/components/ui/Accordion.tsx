@@ -1,5 +1,4 @@
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import { useId, useState } from 'react';
 import { Plus } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -8,15 +7,22 @@ export interface FAQItem {
   answer: string;
 }
 
-/** Animierter FAQ-Eintrag (echte Buttons → tastaturbedienbar). */
+/**
+ * FAQ-Eintrag (echte Buttons → tastaturbedienbar). Die Antwort steht immer im
+ * DOM und wird nur ein-/ausgeblendet: So deckt sich das FAQPage-Markup mit dem
+ * sichtbaren Seiteninhalt, Screenreader finden über aria-controls ein Ziel und
+ * die Seite bleibt ohne JavaScript vollständig lesbar.
+ */
 export function AccordionItem({ item, defaultOpen = false }: { item: FAQItem; defaultOpen?: boolean }) {
   const [open, setOpen] = useState(defaultOpen);
+  const panelId = useId();
   return (
     <div className="bg-white rounded-2xl border border-line shadow-soft overflow-hidden">
       <button
         type="button"
         onClick={() => setOpen(!open)}
         aria-expanded={open}
+        aria-controls={panelId}
         className="w-full flex justify-between items-center gap-6 p-6 text-left cursor-pointer hover:bg-paper/70 transition-colors"
       >
         <span className="font-headline font-bold text-lg text-navy">{item.question}</span>
@@ -25,23 +31,23 @@ export function AccordionItem({ item, defaultOpen = false }: { item: FAQItem; de
             'flex-shrink-0 w-9 h-9 rounded-full grid place-items-center transition-all duration-300',
             open ? 'bg-accent text-white rotate-45' : 'bg-paper text-brand'
           )}
+          aria-hidden
         >
           <Plus size={18} />
         </span>
       </button>
-      <AnimatePresence initial={false}>
-        {open && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: 'auto', opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.35, ease: [0.2, 0.65, 0.3, 1] }}
-            className="overflow-hidden"
-          >
-            <p className="px-6 pb-6 text-slate leading-relaxed">{item.answer}</p>
-          </motion.div>
+      <div
+        id={panelId}
+        className={cn(
+          'grid transition-[grid-template-rows,opacity] duration-300 ease-out motion-reduce:transition-none',
+          open ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
         )}
-      </AnimatePresence>
+        aria-hidden={!open}
+      >
+        <div className="overflow-hidden">
+          <p className="px-6 pb-6 text-slate leading-relaxed">{item.answer}</p>
+        </div>
+      </div>
     </div>
   );
 }

@@ -38,7 +38,7 @@ export default function Leistungen() {
     <div>
       <SEO
         title="Gebäudereinigung Leistungen & Services | AHAD Cleaning"
-        description="Alle Leistungen von AHAD Cleaning im Überblick: Unterhaltsreinigung, Industriereinigung, Glas- & Fassadenreinigung, Baureinigung, Medizintechnik, Sonderreinigung und Winterdienst."
+        description="Alle Leistungen im Überblick: Unterhaltsreinigung, Industriereinigung, Glas- & Fassadenreinigung, Baureinigung, Medizintechnik, Sonderreinigung, Winterdienst."
         keywords="Gebäudereinigung Leistungen, Reinigungsservices Unternehmen, Reinigungsfirma Leistungen"
         schema={faqSchemaFrom(faqs)}
       />
@@ -64,7 +64,7 @@ export default function Leistungen() {
                   className="group grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 items-center bg-paper hover:bg-white border border-line rounded-3xl p-6 lg:p-8 card-lift"
                 >
                   <div className="lg:col-span-4 order-2 lg:order-1 flex items-start gap-5">
-                    <span className="font-headline text-4xl font-bold text-navy/15 group-hover:text-accent transition-colors leading-none pt-1">
+                    <span className="font-headline text-4xl font-bold text-navy/15 group-hover:text-accent transition-colors leading-none pt-1" aria-hidden>
                       {String(i + 1).padStart(2, '0')}
                     </span>
                     <div>

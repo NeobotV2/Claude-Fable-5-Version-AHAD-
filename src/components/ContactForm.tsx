@@ -2,7 +2,8 @@ import { useEffect, useRef, useState, type FormEvent } from 'react';
 import { CheckCircle2, Loader2, Phone, Send } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { SITE } from '@/lib/site';
-import { readAttribution, rememberAttribution, trackEvent } from '@/lib/analytics';
+import { trackEvent } from '@/lib/analytics';
+import { currentAttribution, describeFieldErrors, submitLead } from '@/lib/submit-lead';
 
 const SERVICES = [
   'Unterhaltsreinigung',
@@ -17,7 +18,7 @@ const SERVICES = [
 ];
 
 const inputClasses =
-  'w-full bg-white border-2 border-[#9aa8b8] rounded-xl px-4 py-3.5 text-[15px] text-navy font-medium ' +
+  'w-full bg-white border-2 border-[#738196] rounded-xl px-4 py-3.5 text-[15px] text-navy font-medium ' +
   'placeholder:text-[#596779] focus:outline-none focus:border-brand focus:ring-4 focus:ring-brand/15 transition-colors';
 
 const INITIAL_FORM = {
@@ -92,34 +93,33 @@ export default function ContactForm() {
     setContactError('');
     setSubmitError(null);
     setIsSubmitting(true);
-    idempotencyRef.current ||= typeof crypto?.randomUUID === 'function'
-      ? crypto.randomUUID()
-      : `contact-${Date.now()}-${Math.random().toString(36).slice(2)}`;
 
-    try {
-      const response = await fetch('/api/send-email', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Idempotency-Key': idempotencyRef.current },
-        body: JSON.stringify({
-          type: 'contact',
-          data: { ...formData, attribution: readAttribution() || rememberAttribution(window.location.href) },
-          website: honeypot,
-          formStartedAt: formStartedAtRef.current,
-          idempotencyKey: idempotencyRef.current,
-        }),
-      });
-      const result = await response.json().catch(() => null);
-      if (!response.ok || result?.success !== true || result?.accepted !== true) {
-        throw new Error(result?.error?.message ?? 'Übermittlung fehlgeschlagen');
-      }
+    const result = await submitLead({
+      type: 'contact',
+      data: { ...formData, attribution: currentAttribution() },
+      website: honeypot,
+      formStartedAt: formStartedAtRef.current,
+      idempotency: idempotencyRef,
+      keyPrefix: 'contact',
+    });
+    setIsSubmitting(false);
+
+    if (result.ok) {
       setIsSuccess(true);
       trackEvent('Contact Form Success', { service: formData.serviceType });
-    } catch {
-      setSubmitError('Die Nachricht konnte nicht übermittelt werden. Bitte versuchen Sie es erneut oder rufen Sie uns direkt an.');
-      trackEvent('Contact Form Error', { service: formData.serviceType });
-    } finally {
-      setIsSubmitting(false);
+      return;
     }
+    if (result.kind === 'validation') {
+      // Serverseitige Feldfehler benennen, statt sie als Übertragungsfehler zu tarnen.
+      const channelError = result.fields.email || result.fields.phone;
+      if (channelError) setContactError(channelError);
+      const detail = describeFieldErrors(result.fields);
+      setSubmitError(detail ? `${result.message} ${detail}` : result.message);
+      trackEvent('Contact Form Validation Error', { field: Object.keys(result.fields)[0] ?? 'unknown' });
+      return;
+    }
+    setSubmitError(result.message);
+    trackEvent('Contact Form Error', { service: formData.serviceType, kind: result.kind });
   };
 
   if (isSuccess) {

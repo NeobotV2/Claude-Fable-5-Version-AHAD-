@@ -16,10 +16,12 @@ import {
   Microscope,
   Sparkles,
   Snowflake,
+  Wind,
   ArrowRight,
 } from 'lucide-react';
 import Logo from '@/components/Logo';
 import { SITE } from '@/lib/site';
+import { CLAIM } from '@/lib/messaging';
 
 interface SubLink {
   name: string;
@@ -48,6 +50,7 @@ const navLinks: NavItem[] = [
       { name: 'Medizintechnik & Reinraum', href: '/leistungen/medizintechnik-reinigung', description: 'Dokumentiert & auditfähig', icon: <Microscope size={18} /> },
       { name: 'Sonderreinigung', href: '/leistungen/sonderreinigung-stillstandsservice', description: 'Grundreinigung & Stillstand', icon: <Sparkles size={18} /> },
       { name: 'Winterdienst & Hausmeister', href: '/leistungen/winterdienst-hausmeisterservice', description: 'Verkehrssicher durchs Jahr', icon: <Snowflake size={18} /> },
+      { name: 'Küchenabluftreinigung', href: '/leistungen/kuechenabluftreinigung-vdi-2052', description: 'Nach VDI 2052, mit Nachweis', icon: <Wind size={18} /> },
     ],
   },
   {
@@ -219,7 +222,7 @@ export default function Header() {
           <div className="max-w-7xl mx-auto px-8 py-2 flex items-center justify-between">
             <div className="flex items-center gap-6">
               <span className="font-black uppercase tracking-[0.16em] text-mint text-[11px]">
-                Sauberkeit mit System.
+                {CLAIM}
               </span>
               <span className="flex items-center gap-2">
                 <Clock size={13} className="text-mint" />
@@ -266,7 +269,8 @@ export default function Header() {
                 <div
                   className={cn(
                     'flex items-stretch text-[13.5px] font-semibold tracking-tight transition-colors rounded-lg',
-                    location.pathname.startsWith(link.href) && link.href !== '/'
+                    (link.href !== '/' && location.pathname.startsWith(link.href)) ||
+                      link.sublinks?.some((sub) => location.pathname.startsWith(sub.href))
                       ? 'text-brand bg-brand/5'
                       : 'text-slate hover:text-brand hover:bg-brand/5'
                   )}
@@ -346,7 +350,7 @@ export default function Header() {
                             <div className="absolute inset-0 blueprint-grid opacity-60" />
                             <div className="absolute -top-16 -right-16 w-48 h-48 rounded-full bg-accent/30 blur-3xl" />
                             <div className="relative z-10">
-                              <span className="eyebrow text-mint mb-3">In vier Schritten</span>
+                              <span className="eyebrow text-mint mb-3">In drei Schritten</span>
                               <p className="font-logo font-extrabold text-lg leading-snug mb-4">
                                 Anforderungen klären · Besichtigung · Angebot.
                               </p>
@@ -391,9 +395,11 @@ export default function Header() {
               </span>
               {SITE.phone}
             </a>
+            {/* Bis xl gibt es keine ausgeschriebene Nummer – das Icon bleibt deshalb
+                auch auf lg-Breiten sichtbar (die Sticky-Leiste endet dort). */}
             <a
               href={SITE.phoneHref}
-              className="lg:hidden p-2.5 rounded-xl text-brand hover:bg-brand/5 transition-colors"
+              className="xl:hidden p-2.5 rounded-xl text-brand hover:bg-brand/5 transition-colors"
               aria-label="Anrufen"
             >
               <Phone size={20} />

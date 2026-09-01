@@ -1,13 +1,14 @@
 import { motion } from 'motion/react';
 import SEO from '@/components/SEO';
 import PageHero from '@/components/PageHero';
+import { SITE } from '@/lib/site';
 
 export default function Impressum() {
   return (
     <div>
       <SEO
-        title="Impressum - AHAD Cleaning"
-        description="Rechtliche Informationen und Impressum der AHAD Cleaning Gebäudedienstleistungen GmbH."
+        title="Impressum | AHAD Cleaning"
+        description="Rechtliche Informationen und Impressum der AHAD Cleaning Company GmbH, Villingen-Schwenningen."
         keywords="Impressum AHAD Cleaning, Rechtliches, Kontaktinformationen"
       />
       <PageHero compact eyebrow="Rechtliches" title="Impressum" crumbs={[{ label: 'Impressum' }]} />
@@ -35,8 +36,8 @@ export default function Impressum() {
           <section className="mb-12">
             <h2 className="text-2xl font-bold mb-4">Kontakt</h2>
             <p className="text-gray-600">
-              Telefon: +49 7721 944 79 15<br />
-              E-Mail: info@ahad-cleaning.de
+              Telefon: <a href={SITE.phoneHref} className="underline">{SITE.phone}</a><br />
+              E-Mail: <a href={SITE.emailHref} className="underline">{SITE.email}</a>
             </p>
           </section>
 

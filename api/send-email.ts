@@ -4,7 +4,7 @@
  * existing deployments do not need a routing migration.
  */
 import { createHash, createHmac, randomUUID } from 'node:crypto';
-import { FieldValue, Timestamp } from 'firebase-admin/firestore';
+import { FieldValue, Timestamp, type DocumentReference } from 'firebase-admin/firestore';
 import { Resend } from 'resend';
 import { getAdminFirestore } from './_lib/firebase-admin.js';
 import {
@@ -16,6 +16,8 @@ import {
 const MAX_BODY_BYTES = 24 * 1024;
 const DEFAULT_RATE_WINDOW_MS = 60_000;
 const DEFAULT_RATE_MAX = 5;
+/** Wie oft eine fehlgeschlagene Benachrichtigung bei Wiederholungen nachgeholt wird. */
+const MAX_NOTIFICATION_ATTEMPTS = 3;
 const PRIVACY_NOTICE_VERSION = process.env.PRIVACY_NOTICE_VERSION?.trim() || '2026-07-12';
 const WHATSAPP_NOTICE_VERSION = process.env.WHATSAPP_NOTICE_VERSION?.trim() || '2026-07-12';
 
@@ -74,7 +76,14 @@ function isRecord(value: unknown): value is Record<string, unknown> {
 
 function allowedOrigins(): Set<string> {
   const configured = process.env.LEAD_ALLOWED_ORIGINS?.split(',').map((value) => value.trim()).filter(Boolean) ?? [];
-  return new Set(['https://www.ahad-cleaning.de', 'https://ahad-cleaning.de', ...configured]);
+  const origins = new Set(['https://www.ahad-cleaning.de', 'https://ahad-cleaning.de', ...configured]);
+  // Preview-Deployments (*.vercel.app) dürfen die Formulare testen — nie in Production.
+  if (process.env.VERCEL_ENV && process.env.VERCEL_ENV !== 'production') {
+    for (const host of [process.env.VERCEL_URL, process.env.VERCEL_BRANCH_URL]) {
+      if (host?.trim()) origins.add(`https://${host.trim()}`);
+    }
+  }
+  return origins;
 }
 
 function sendError(
@@ -148,14 +157,22 @@ function emailFor(lead: ValidLead, requestId: string): { subject: string; html: 
 
   if (lead.type === 'offer_lead') {
     const data = lead.data;
+    const details = data.serviceDetails;
     return {
-      subject: `Neue Angebotsanfrage: ${data.companyName.slice(0, 80)}`,
+      subject: `Neue Angebotsanfrage: ${(data.companyName || data.contactPerson).slice(0, 80)}`,
       html: wrap('Neue Angebotsanfrage', '#004888',
         row('Firma', data.companyName) + row('Ansprechpartner', data.contactPerson) + row('E-Mail', data.email) +
         row('Telefon', data.phone) + row('Standort', data.location) + row('Objektart', data.objectType) +
         row('Leistungen', data.services) + row('Fläche', data.areaSize) + row('Intervall', data.frequency) +
-        row('Anforderungen', data.anforderungen) + row('Besonderheiten', data.serviceDetails.specialRequirements) +
-        row('Gewünschter Start', data.serviceDetails.desiredStart || data.preferredTime),
+        row('Anforderungen', data.anforderungen) +
+        row('Glasflächen: Zugänglichkeit', details.glassAccess) +
+        row('Produktions-/Schichtbetrieb', details.productionMode) +
+        row('Bauphase / Übergabetermin', details.constructionPhase) +
+        row('Winterdienst: Flächen / Bereitschaft', details.winterAreaType) +
+        row('Hygiene-/Dokumentationsanforderungen', details.specialRequirements) +
+        row('Gewünschter Start', details.desiredStart) +
+        row('Zeitfenster für die Besichtigung', data.preferredTime) +
+        attributionRows(data.attribution),
         'AHAD-Angebots-Funnel', requestId),
       ...(data.email ? { replyTo: data.email } : {}),
     };
@@ -166,11 +183,19 @@ function emailFor(lead: ValidLead, requestId: string): { subject: string; html: 
     subject: `Neue Bewerbung: ${data.name.slice(0, 80)} (${data.jobType.slice(0, 60)})`,
     html: wrap('Neue Bewerbung', '#005332',
       row('Name', data.name) + row('Telefon', data.phone) + row('Stelle', data.jobType) +
-      row('Bereich', data.department) + row('Erfahrung', data.experience) + row('Startdatum', data.startDate) +
-      row('Mobilität', data.mobility) + row('Standort', data.location) + row('Sprache', data.language) +
-      row('WhatsApp erlaubt', data.whatsappOptIn ? 'Ja' : 'Nein'),
+      row('Bereich', data.department) + row('Stellenprofil', data.jobId) + row('Erfahrung', data.experience) +
+      row('Startdatum', data.startDate) + row('Mobilität', data.mobility) + row('Standort', data.location) +
+      row('Sprache', data.language) + row('WhatsApp erlaubt', data.whatsappOptIn ? 'Ja' : 'Nein') +
+      row('Formular-URL', data.sourcePath) + attributionRows(data.attribution),
       'AHAD-Karriere-Funnel', requestId),
   };
+}
+
+/** PII-freie Herkunftsdaten (Einstiegsseite, Kampagne) für die Auswertung im Postfach. */
+function attributionRows(attribution: ValidLead['data']['attribution']): string {
+  if (!attribution) return '';
+  const campaign = [attribution.utmSource, attribution.utmMedium, attribution.utmCampaign].filter(Boolean).join(' / ');
+  return row('Einstiegsseite', attribution.landingPath) + row('Kampagne', campaign) + row('Verweis', attribution.referrerHost);
 }
 
 function clampInteger(value: string | undefined, fallback: number, min: number, max: number): number {
@@ -178,9 +203,21 @@ function clampInteger(value: string | undefined, fallback: number, min: number, 
   return Number.isInteger(parsed) ? Math.min(max, Math.max(min, parsed)) : fallback;
 }
 
+let warnedMissingRateLimitSecret = false;
+
+function rateLimitSecret(): string {
+  const secret = process.env.LEAD_RATE_LIMIT_SECRET?.trim();
+  if (secret) return secret;
+  // Ohne eigenes Secret ist der IP-Hash nur so „opak“ wie die (öffentliche) Projekt-ID.
+  if (!warnedMissingRateLimitSecret && process.env.VERCEL_ENV === 'production') {
+    warnedMissingRateLimitSecret = true;
+    console.error('LEAD_RATE_LIMIT_SECRET ist nicht gesetzt – Rate-Limit-Hash nutzt einen öffentlichen Fallback-Schlüssel.');
+  }
+  return process.env.FIREBASE_PROJECT_ID || 'ahad-cleaning';
+}
+
 function opaqueIpHash(ip: string): string {
-  const secret = process.env.LEAD_RATE_LIMIT_SECRET?.trim() || process.env.FIREBASE_PROJECT_ID || 'ahad-cleaning';
-  return createHmac('sha256', secret).update(ip).digest('base64url').slice(0, 40);
+  return createHmac('sha256', rateLimitSecret()).update(ip).digest('base64url').slice(0, 40);
 }
 
 function leadDocumentId(type: ValidLead['type'], idempotencyKey: string): string {
@@ -218,10 +255,12 @@ async function persistExactlyOnce(lead: ValidLead, idempotencyKey: string, ip: s
   const result = await db.runTransaction(async (transaction) => {
     const existing = await transaction.get(leadRef);
     if (existing.exists) {
+      const attempts = existing.get('notificationAttempts');
       return {
         created: false,
         conflict: existing.get('payloadHash') !== payloadHash,
         notificationSent: existing.get('emailSent') === true,
+        notificationAttempts: Number.isInteger(attempts) ? Number(attempts) : 1,
       };
     }
 
@@ -252,7 +291,7 @@ async function persistExactlyOnce(lead: ValidLead, idempotencyKey: string, ip: s
       updatedAt: now,
       expiresAt,
     });
-    return { created: true, conflict: false, notificationSent: false };
+    return { created: true, conflict: false, notificationSent: false, notificationAttempts: 0 };
   });
 
   return { ...result, leadId, leadRef };
@@ -260,13 +299,48 @@ async function persistExactlyOnce(lead: ValidLead, idempotencyKey: string, ip: s
 
 async function notify(lead: ValidLead, requestId: string): Promise<{ sent: boolean; providerId?: string; status: string }> {
   const apiKey = process.env.RESEND_API_KEY?.trim();
-  if (!apiKey) return { sent: false, status: 'not_configured' };
+  if (!apiKey) {
+    console.error('Lead notification skipped: RESEND_API_KEY ist nicht konfiguriert', { requestId });
+    return { sent: false, status: 'not_configured' };
+  }
   const message = emailFor(lead, requestId);
   const to = (process.env.LEAD_TO || 'info@ahad-cleaning.de').split(',').map((value) => value.trim()).filter(Boolean);
   const from = process.env.RESEND_FROM || 'AHAD Cleaning <onboarding@resend.dev>';
   const { data, error } = await new Resend(apiKey).emails.send({ from, to, ...message });
-  if (error) return { sent: false, status: 'failed' };
+  if (error) {
+    // Nur Fehlerklasse loggen – keine Lead-Daten.
+    console.error('Lead notification failed', { requestId, error: error.name });
+    return { sent: false, status: 'failed' };
+  }
   return { sent: true, providerId: data?.id, status: 'sent' };
+}
+
+/**
+ * Versendet die Benachrichtigung und hält das Ergebnis am Lead fest. Der Lead
+ * ist zu diesem Zeitpunkt bereits sicher gespeichert; ein Zustellfehler darf
+ * die Antwort an den Absender deshalb nie zum Fehler machen.
+ */
+async function deliverNotification(lead: ValidLead, leadRef: DocumentReference, requestId: string): Promise<boolean> {
+  let notification: Awaited<ReturnType<typeof notify>>;
+  try {
+    notification = await notify(lead, requestId);
+  } catch (error) {
+    console.error('Lead notification failed', { requestId, error: error instanceof Error ? error.name : 'unknown' });
+    notification = { sent: false, status: 'failed' };
+  }
+  try {
+    await leadRef.update({
+      emailSent: notification.sent,
+      notificationStatus: notification.status,
+      notificationAttempts: FieldValue.increment(1),
+      notificationAttemptedAt: FieldValue.serverTimestamp(),
+      ...(notification.providerId ? { notificationProviderId: notification.providerId } : {}),
+      updatedAt: FieldValue.serverTimestamp(),
+    });
+  } catch {
+    console.error('Lead notification state update failed', { requestId });
+  }
+  return notification.sent;
 }
 
 export default async function handler(req: ApiRequest, res: ApiResponse) {
@@ -298,7 +372,14 @@ export default async function handler(req: ApiRequest, res: ApiResponse) {
     return;
   }
 
-  const body = requestBody(req);
+  // Der Body-Getter der Runtime kann bei defektem JSON selbst werfen – dann
+  // soll trotzdem unsere 400-Antwort (statt eines Runtime-500) zurückgehen.
+  let body: unknown;
+  try {
+    body = requestBody(req);
+  } catch {
+    body = null;
+  }
   if (!isRecord(body)) {
     sendError(res, 400, requestId, 'INVALID_JSON', 'Ungültiges JSON.');
     return;
@@ -335,16 +416,20 @@ export default async function handler(req: ApiRequest, res: ApiResponse) {
     return;
   }
 
-  if (body.formStartedAt !== undefined) {
-    const startedAt = body.formStartedAt;
-    if (typeof startedAt !== 'number' || !Number.isFinite(startedAt) || startedAt <= 0 || startedAt > Date.now() + 60_000) {
-      sendError(res, 400, requestId, 'VALIDATION_ERROR', 'Bitte prüfen Sie Ihre Eingaben.', { formStartedAt: 'Ungültiger Zeitstempel.' });
-      return;
-    }
-    if (Date.now() - startedAt < 500) {
-      accepted(res, 202, requestId, { duplicate: false, notificationSent: false });
-      return;
-    }
+  // Alle Formulare senden den Startzeitpunkt; Bots, die ihn weglassen, umgehen
+  // die Timing-Prüfung sonst vollständig.
+  const startedAt = body.formStartedAt;
+  if (typeof startedAt !== 'number' || !Number.isFinite(startedAt) || startedAt <= 0) {
+    sendError(res, 400, requestId, 'VALIDATION_ERROR', 'Bitte prüfen Sie Ihre Eingaben.', { formStartedAt: 'Ungültiger Zeitstempel.' });
+    return;
+  }
+  // Geht die Geräteuhr vor (Zeitstempel in der Zukunft), ist keine Aussage über
+  // die Ausfüllzeit möglich – dann wird die Prüfung übersprungen statt den Lead
+  // dauerhaft abzulehnen. Nur nachweislich unter 500 ms gilt als Automat.
+  const elapsed = Date.now() - startedAt;
+  if (elapsed >= 0 && elapsed < 500) {
+    accepted(res, 202, requestId, { duplicate: false, notificationSent: false });
+    return;
   }
 
   const validation = validateLeadPayload(body);
@@ -361,36 +446,22 @@ export default async function handler(req: ApiRequest, res: ApiResponse) {
       return;
     }
     if (!persisted.created) {
-      accepted(res, 200, requestId, {
-        leadId: persisted.leadId,
-        duplicate: true,
-        notificationSent: persisted.notificationSent,
-      });
+      // Wiederholung mit identischem Schlüssel (z. B. verlorene Antwort): Der Lead
+      // existiert bereits. Blieb die Benachrichtigung aus, wird sie – begrenzt –
+      // nachgeholt, statt den Absender mit „duplicate“ im Unklaren zu lassen.
+      const retry = !persisted.notificationSent && persisted.notificationAttempts < MAX_NOTIFICATION_ATTEMPTS;
+      const notificationSent = retry
+        ? await deliverNotification(validation.value, persisted.leadRef, requestId)
+        : persisted.notificationSent;
+      accepted(res, 200, requestId, { leadId: persisted.leadId, duplicate: true, notificationSent });
       return;
     }
 
-    let notification: Awaited<ReturnType<typeof notify>>;
-    try {
-      notification = await notify(validation.value, requestId);
-    } catch {
-      notification = { sent: false, status: 'failed' };
-    }
-    try {
-      await persisted.leadRef.update({
-        emailSent: notification.sent,
-        notificationStatus: notification.status,
-        notificationAttemptedAt: FieldValue.serverTimestamp(),
-        ...(notification.providerId ? { notificationProviderId: notification.providerId } : {}),
-        updatedAt: FieldValue.serverTimestamp(),
-      });
-    } catch {
-      console.error('Lead notification state update failed', { requestId });
-    }
-
-    accepted(res, notification.sent ? 201 : 202, requestId, {
+    const notificationSent = await deliverNotification(validation.value, persisted.leadRef, requestId);
+    accepted(res, notificationSent ? 201 : 202, requestId, {
       leadId: persisted.leadId,
       duplicate: false,
-      notificationSent: notification.sent,
+      notificationSent,
     });
   } catch (error) {
     if (error instanceof RateLimitError) {

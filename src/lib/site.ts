@@ -36,6 +36,9 @@ export const SITE = {
 /** Fertiger WhatsApp-Deeplink mit vorbefülltem Text. */
 export const WHATSAPP_HREF = `https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(SITE.whatsappText)}`;
 
+/** Pfade, auf denen schwebende Conversion-Elemente (Sticky-Leiste, WhatsApp) verborgen bleiben. */
+export const CONVERSION_HIDDEN_PATHS = ['/angebot', '/karriere/bewerbung', '/admin'] as const;
+
 /**
  * Pruefmetadaten fuer oeffentliche Tatsachenbehauptungen. Ein Eintrag wird nur
  * publiziert, wenn ein nachvollziehbarer Nachweis vorhanden, die Pruefung
@@ -361,7 +364,7 @@ export const WEBSITE_SCHEMA = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
   '@id': `${SITE.url}/#website`,
-  url: SITE.url,
+  url: `${SITE.url}/`,
   name: SITE.name,
   inLanguage: 'de-DE',
   publisher: { '@id': `${SITE.url}/#organization` },
@@ -376,7 +379,7 @@ export const ORG_REF = {
   '@type': 'Organization',
   '@id': `${SITE.url}/#organization`,
   name: 'AHAD Cleaning Company GmbH',
-  url: SITE.url,
+  url: `${SITE.url}/`,
   telephone: SITE.phone,
 } as const;
 
@@ -385,7 +388,7 @@ export const ORGANIZATION_SCHEMA = {
   '@type': 'Organization',
   '@id': `${SITE.url}/#organization`,
   name: SITE.legalName,
-  url: SITE.url,
+  url: `${SITE.url}/`,
   logo: `${SITE.url}/logo.png`,
   image: `${SITE.url}/og-image.jpg`,
   description:

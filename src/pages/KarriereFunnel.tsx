@@ -6,7 +6,8 @@ import { Link, useSearchParams } from 'react-router-dom';
 import SEO from '@/components/SEO';
 import { languages, translations, Language } from '@/constants/funnelTranslations';
 import { jobProfile } from '@/data/jobs';
-import { readAttribution, rememberAttribution, trackEvent, useFunnelAbandonment } from '@/lib/analytics';
+import { trackEvent, useFunnelAbandonment } from '@/lib/analytics';
+import { currentAttribution, describeFieldErrors, submitLead } from '@/lib/submit-lead';
 import { SITE } from '@/lib/site';
 
 type FunnelData = {
@@ -46,6 +47,7 @@ export default function KarriereFunnel() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [submitError, setSubmitError] = useState(false);
+  const [submitErrorDetail, setSubmitErrorDetail] = useState('');
   const [honeypot, setHoneypot] = useState('');
   const [searchParams] = useSearchParams();
   const cardRef = useRef<HTMLDivElement>(null);
@@ -103,37 +105,27 @@ export default function KarriereFunnel() {
     if (isSubmitting) return;
     setIsSubmitting(true);
     setSubmitError(false);
-    idempotencyRef.current ||= typeof crypto?.randomUUID === 'function'
-      ? crypto.randomUUID()
-      : `job-${Date.now()}-${Math.random().toString(36).slice(2)}`;
-    try {
-      const response = await fetch('/api/send-email', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Idempotency-Key': idempotencyRef.current },
-        body: JSON.stringify({
-          type: 'job_application',
-          data: {
-            ...data,
-            language: lang,
-            attribution: readAttribution() || rememberAttribution(window.location.href),
-          },
-          website: honeypot,
-          formStartedAt: formStartedAtRef.current,
-          idempotencyKey: idempotencyRef.current,
-        }),
-      });
-      const result = await response.json().catch(() => null);
-      if (!response.ok || result?.success !== true || result?.accepted !== true) {
-        throw new Error(result?.error?.message ?? 'Übermittlung fehlgeschlagen');
-      }
+    setSubmitErrorDetail('');
+
+    const result = await submitLead({
+      type: 'job_application',
+      data: { ...data, language: lang, attribution: currentAttribution() },
+      website: honeypot,
+      formStartedAt: formStartedAtRef.current,
+      idempotency: idempotencyRef,
+      keyPrefix: 'job',
+    });
+    setIsSubmitting(false);
+
+    if (result.ok) {
       setIsSuccess(true);
       trackEvent('Application Funnel Success', { language: lang || 'de', jobId: data.jobId || 'initiative' });
-    } catch {
-      setSubmitError(true);
-      trackEvent('Application Funnel Error', { language: lang || 'de', jobId: data.jobId || 'initiative' });
-    } finally {
-      setIsSubmitting(false);
+      return;
     }
+    setSubmitError(true);
+    // Feldfehler des Servers (z. B. Telefonformat) zusätzlich zum übersetzten Hinweis zeigen.
+    if (result.kind === 'validation') setSubmitErrorDetail(describeFieldErrors(result.fields));
+    trackEvent('Application Funnel Error', { language: lang || 'de', jobId: data.jobId || 'initiative', kind: result.kind });
   };
 
   const progress = (step / 4) * 100;
@@ -248,20 +240,22 @@ export default function KarriereFunnel() {
 
               <div className="grid gap-3">
                 {[
-                  { id: 'vollzeit', ...t.jobTypes.vollzeit },
-                  { id: 'teilzeit', ...t.jobTypes.teilzeit },
-                  { id: 'minijob', ...t.jobTypes.minijob },
+                  { id: 'vollzeit', ...t.jobTypes.vollzeit, value: translations.de.jobTypes.vollzeit.title },
+                  { id: 'teilzeit', ...t.jobTypes.teilzeit, value: translations.de.jobTypes.teilzeit.title },
+                  { id: 'minijob', ...t.jobTypes.minijob, value: translations.de.jobTypes.minijob.title },
                 ].map((item) => (
                   <button
                     key={item.id}
-                    aria-pressed={data.jobType === item.title}
+                    aria-pressed={data.jobType === item.value}
                     aria-label={`${item.title}: ${item.desc}`}
                     onClick={() => {
-                      updateData({ jobType: item.title });
+                      // Gespeichert wird immer die deutsche Bezeichnung – die
+                      // Sprache steht separat im Datensatz, das Team liest Deutsch.
+                      updateData({ jobType: item.value });
                       nextStep();
                     }}
                     className={`p-4 text-left rounded-xl border-2 transition-all ${
-                      data.jobType === item.title
+                      data.jobType === item.value
                         ? 'border-[#0D6B38] bg-accent/5'
                         : 'border-white bg-white hover:border-gray-200'
                     } shadow-sm ${isRtl ? 'text-right' : 'text-left'}`}
@@ -288,22 +282,22 @@ export default function KarriereFunnel() {
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {[
-                  { id: 'unterhalt', ...t.departments.unterhalt },
-                  { id: 'glas', ...t.departments.glas },
-                  { id: 'bau', ...t.departments.bau },
-                  { id: 'sonder', ...t.departments.sonder },
-                  { id: 'leitung', ...t.departments.leitung },
+                  { id: 'unterhalt', ...t.departments.unterhalt, value: translations.de.departments.unterhalt.title },
+                  { id: 'glas', ...t.departments.glas, value: translations.de.departments.glas.title },
+                  { id: 'bau', ...t.departments.bau, value: translations.de.departments.bau.title },
+                  { id: 'sonder', ...t.departments.sonder, value: translations.de.departments.sonder.title },
+                  { id: 'leitung', ...t.departments.leitung, value: translations.de.departments.leitung.title },
                 ].map((item) => (
                   <button
                     key={item.id}
-                    aria-pressed={data.department === item.title}
+                    aria-pressed={data.department === item.value}
                     aria-label={`${item.title}: ${item.desc}`}
                     onClick={() => {
-                      updateData({ department: item.title });
+                      updateData({ department: item.value });
                       nextStep();
                     }}
                     className={`p-4 text-left rounded-xl border-2 transition-all ${
-                      data.department === item.title 
+                      data.department === item.value
                         ? 'border-[#0D6B38] bg-accent/5' 
                         : 'border-white bg-white hover:border-gray-200'
                     } shadow-sm ${isRtl ? 'text-right' : 'text-left'}`}
@@ -383,14 +377,17 @@ export default function KarriereFunnel() {
                               value={hasDate ? data.startDate : ''}
                               onChange={(e) => updateData({ startDate: e.target.value })}
                               aria-label={t.startFrom}
-                              className={`w-full py-3 px-4 rounded-xl border-2 font-bold transition-all outline-none ${
-                                hasDate ? 'border-[#0D6B38] bg-accent/5 text-[#0D6B38]' : 'border-white bg-white text-transparent'
+                              className={`peer w-full py-3 px-4 rounded-xl border-2 font-bold transition-all outline-none ${
+                                hasDate
+                                  ? 'border-[#0D6B38] bg-accent/5 text-[#0D6B38]'
+                                  : 'border-white bg-white text-transparent focus:text-[#0B2341] focus:border-[#0D6B38]'
                               }`}
                             />
                             {/* Native Date-Inputs zeigen keinen Placeholder — dieses Label
-                                überlagert das leere Feld und verschwindet, sobald ein Datum gewählt ist. */}
+                                überlagert das leere Feld und verschwindet bei Fokus (Chromium
+                                rendert getippte Segmente sonst unsichtbar) oder gewähltem Datum. */}
                             {!hasDate && (
-                              <span className="pointer-events-none absolute inset-y-0 start-4 flex items-center font-bold text-slate/60">
+                              <span className="pointer-events-none absolute inset-y-0 start-4 flex items-center font-bold text-slate/60 peer-focus:hidden">
                                 {t.startFrom}
                               </span>
                             )}
@@ -406,15 +403,15 @@ export default function KarriereFunnel() {
                   <legend className="block text-xs font-bold uppercase tracking-widest text-[#0D6B38] mb-2">{t.mobilityLabel}</legend>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     {[
-                      { id: 'auto', label: t.mobAuto },
-                      { id: 'oepnv', label: t.mobPublic },
+                      { id: 'auto', label: t.mobAuto, value: translations.de.mobAuto },
+                      { id: 'oepnv', label: t.mobPublic, value: translations.de.mobPublic },
                     ].map((item) => (
                       <label key={item.id} className="flex items-center gap-3 p-3 bg-white rounded-xl cursor-pointer shadow-sm border-2 border-transparent has-[:checked]:border-[#0D6B38]">
                         <input
                           type="radio"
                           name="mobility"
-                          value={item.label}
-                          checked={data.mobility === item.label}
+                          value={item.value}
+                          checked={data.mobility === item.value}
                           onChange={(e) => updateData({ mobility: e.target.value })}
                           className="w-5 h-5 accent-[#0D6B38]"
                         />
@@ -557,6 +554,7 @@ export default function KarriereFunnel() {
                   {submitError && (
                     <div role="alert" className="bg-red-50 border border-red-200 text-red-800 text-sm font-medium rounded-xl p-4">
                       {t.submitErrorText} <a href={SITE.phoneHref} className="font-bold underline">{SITE.phone}</a>
+                      {submitErrorDetail && <span className="block mt-2" lang="de">{submitErrorDetail}</span>}
                     </div>
                   )}
 

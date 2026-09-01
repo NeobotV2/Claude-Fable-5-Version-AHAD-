@@ -1,3 +1,4 @@
+import { prefersReducedMotion } from '@/lib/a11y';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Heart, TrendingUp, Users, Clock, Euro, GraduationCap, BadgeCheck, MapPin } from 'lucide-react';
 import SEO from '@/components/SEO';
@@ -72,7 +73,7 @@ export default function Karriere() {
           // beiden Router-Modi (Browser- und Hash-Router der Datei-Vorschau).
           onClick: (e) => {
             e.preventDefault();
-            document.getElementById('offene-stellen')?.scrollIntoView({ behavior: 'smooth' });
+            document.getElementById('offene-stellen')?.scrollIntoView({ behavior: prefersReducedMotion() ? 'auto' : 'smooth' });
           },
         }}
       />

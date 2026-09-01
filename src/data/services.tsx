@@ -66,7 +66,7 @@ export const SERVICES: ServiceData[] = [
       'Systematische, kontinuierliche Pflege Ihrer Räumlichkeiten mit festen Teams, klaren Intervallen und dokumentierter Qualität — damit Sauberkeit bei Ihnen kein Thema mehr ist.',
     seoTitle: 'Unterhaltsreinigung für Unternehmen | AHAD Cleaning',
     seoDescription:
-      'Professionelle Unterhaltsreinigung für Büros, Verwaltungen und Gewerbe in Süddeutschland. Klare Zuständigkeiten und dokumentierte Qualitätskontrolle. Jetzt Besichtigung anfragen.',
+      'Unterhaltsreinigung für Büros, Verwaltungen und Gewerbe in Süddeutschland. Klare Zuständigkeiten, dokumentierte Qualitätskontrolle. Jetzt Besichtigung anfragen.',
     keywords: 'Unterhaltsreinigung Unternehmen, Büroreinigung, Gebäudereinigung Villingen-Schwenningen, Reinigungsfirma Büro',
     icon: <LayoutDashboard className="w-6 h-6" />,
     image: IMG.unterhaltsreinigung,
@@ -128,9 +128,9 @@ export const SERVICES: ServiceData[] = [
     heroTitle: 'Industriereinigung ohne Produktionsstillstand',
     heroLead:
       'Technische Reinigung, die sich nahtlos in Ihre Schichtlogik einfügt: UVV-konform, auditfähig und mit festen Eskalationswegen — damit Ihre Produktion läuft, während wir arbeiten.',
-    seoTitle: 'Industriereinigung & Produktionsreinigung | AHAD Cleaning',
+    seoTitle: 'Industrie- & Produktionsreinigung | AHAD Cleaning',
     seoDescription:
-      'Industriereinigung im laufenden Betrieb: Maschinen- und Anlagenreinigung, Hallenreinigung, schichtbegleitende Ausführung. UVV-konform & auditfähig. Süddeutschland.',
+      'Industriereinigung im laufenden Betrieb: Maschinen- und Anlagenreinigung, Hallenreinigung, schichtbegleitende Ausführung. UVV-konform & auditfähig.',
     keywords: 'Industriereinigung, Produktionsreinigung, Maschinenreinigung, Hallenreinigung, Industriereinigung Stuttgart',
     icon: <Factory className="w-6 h-6" />,
     image: IMG.industrie,
@@ -192,7 +192,7 @@ export const SERVICES: ServiceData[] = [
     heroTitle: 'Glas- und Fassadenreinigung für Gewerbeobjekte',
     heroLead:
       'Die Gebäudehülle ist die Visitenkarte Ihres Unternehmens. Wir planen streifenfreie Ergebnisse und langfristigen Werterhalt — mit Osmose-Technik und geeigneten Höhenzugängen.',
-    seoTitle: 'Glasreinigung & Fassadenreinigung für Gewerbe | AHAD Cleaning',
+    seoTitle: 'Glas- & Fassadenreinigung für Gewerbe | AHAD Cleaning',
     seoDescription:
       'Professionelle Glas- und Fassadenreinigung für Gewerbeobjekte in Süddeutschland. Streifenfreie Sauberkeit, Osmose-Technik und Werterhalt. Jetzt anfragen!',
     keywords: 'Glasreinigung Unternehmen, Fassadenreinigung Gewerbe, Fensterreinigung Büro, Osmose Reinigung',
@@ -256,7 +256,7 @@ export const SERVICES: ServiceData[] = [
     heroTitle: 'Baureinigung abgestimmt auf Ihren Abnahmetermin',
     heroLead:
       'Von der Baugrob- bis zur Baufeinreinigung: Wir liefern besenreine bis bezugsfertige Übergaben — pünktlich zum Abnahmetermin, auch wenn es auf der Baustelle eng wird.',
-    seoTitle: 'Baureinigung: Grob- & Feinreinigung termingerecht | AHAD Cleaning',
+    seoTitle: 'Baureinigung: Grob- & Feinreinigung | AHAD Cleaning',
     seoDescription:
       'Professionelle Baureinigung in Süddeutschland: Baugrobreinigung, Baufeinreinigung und Endreinigung vor Übergabe. Termintreu, flexibel, zuverlässig.',
     keywords: 'Baureinigung, Baufeinreinigung, Baugrobreinigung, Bauendreinigung, Baustellenreinigung',
@@ -322,7 +322,7 @@ export const SERVICES: ServiceData[] = [
       'Wo Hygiene über Produktqualität entscheidet, zählen Disziplin, Schulung und lückenlose Nachweise. Wir reinigen auditnah — nach Ihren Standards und SOPs.',
     seoTitle: 'Medizintechnik-Reinigung & Reinraum | AHAD Cleaning',
     seoDescription:
-      'Spezialisierte Reinigung für Medizintechnik, Labore und sensible Produktionsbereiche. Prozesse nach Ihren QM-Vorgaben, geschultes Personal und nachvollziehbare Dokumentation.',
+      'Reinigung für Medizintechnik, Labore und sensible Produktionsbereiche: Prozesse nach Ihren QM-Vorgaben, geschultes Personal, nachvollziehbare Dokumentation.',
     keywords: 'Medizintechnik Reinigung, Reinraumreinigung, ISO Reinigung, Hygienereinigung Produktion',
     icon: <Microscope className="w-6 h-6" />,
     image: IMG.medizintechnik,
@@ -449,9 +449,9 @@ export const SERVICES: ServiceData[] = [
     heroTitle: 'Winterdienst und Hausmeisterservice aus einer Hand',
     heroLead:
       'Verkehrssicherungspflicht erfüllt, Objekt im Griff: Räum- und Streudienst mit Einsatzdokumentation plus technische Objektbetreuung übers ganze Jahr.',
-    seoTitle: 'Winterdienst & Hausmeisterservice für Gewerbe | AHAD Cleaning',
+    seoTitle: 'Winterdienst & Hausmeisterservice | AHAD Cleaning',
     seoDescription:
-      'Zuverlässiger Winterdienst mit Einsatzdokumentation und professioneller Hausmeisterservice für Gewerbeobjekte in Süddeutschland. Verkehrssicherungspflicht erfüllt.',
+      'Zuverlässiger Winterdienst mit Einsatzdokumentation und Hausmeisterservice für Gewerbeobjekte in Süddeutschland. Verkehrssicherungspflicht erfüllt.',
     keywords: 'Winterdienst Gewerbe, Hausmeisterservice, Verkehrssicherungspflicht, Räumdienst, Objektbetreuung',
     icon: <Snowflake className="w-6 h-6" />,
     image: IMG.winterdienst,
@@ -515,7 +515,7 @@ export const SERVICES: ServiceData[] = [
       'Fett in Hauben, Kanälen und Ventilatoren ist Brandlast und Hygienerisiko. Wir reinigen Ihre komplette Abluftanlage nach VDI 2052 — mit lückenlosem Nachweis für Versicherung und Behörde.',
     seoTitle: 'Küchenabluftreinigung nach VDI 2052 | AHAD Cleaning',
     seoDescription:
-      'Professionelle Küchenabluftreinigung nach VDI 2052 für Gastronomie, Hotellerie, Kantinen und Großküchen in Süddeutschland. Brandschutzkonform, hygienisch, mit prüffähigem Nachweis.',
+      'Küchenabluftreinigung nach VDI 2052 für Gastronomie, Hotellerie, Kantinen und Großküchen in Süddeutschland. Brandschutzkonform, mit prüffähigem Nachweis.',
     keywords:
       'Küchenabluftreinigung VDI 2052, Abluftreinigung Gastronomie, Dunstabzug reinigen, Lüftungsreinigung Großküche, Fettfilter Reinigung',
     icon: <Wind className="w-6 h-6" />,

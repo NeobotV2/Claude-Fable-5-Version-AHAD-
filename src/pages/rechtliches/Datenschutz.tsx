@@ -6,7 +6,7 @@ export default function Datenschutz() {
   return (
     <div>
       <SEO
-        title="Datenschutzerklärung - AHAD Cleaning"
+        title="Datenschutzerklärung | AHAD Cleaning"
         description="Informationen zum Datenschutz und zum Umgang mit Ihren Daten bei AHAD Cleaning."
         keywords="Datenschutz AHAD Cleaning, DSGVO, Datensicherheit"
       />

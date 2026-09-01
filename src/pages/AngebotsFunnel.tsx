@@ -31,6 +31,8 @@ import {
   useFunnelAbandonment,
   type AttributionContext,
 } from '@/lib/analytics';
+import { describeFieldErrors, submitLead } from '@/lib/submit-lead';
+import { prefersReducedMotion } from '@/lib/a11y';
 
 type Step = 1 | 2 | 3 | 4;
 
@@ -137,7 +139,7 @@ const DRAFT_KEY = 'ahad-angebot-entwurf-v2';
 const DRAFT_TTL_MS = 2 * 60 * 60 * 1000;
 
 const inputClasses =
-  'w-full px-4 py-3.5 rounded-xl border-2 border-[#9aa8b8] bg-white text-[15px] font-medium text-navy ' +
+  'w-full px-4 py-3.5 rounded-xl border-2 border-[#738196] bg-white text-[15px] font-medium text-navy ' +
   'placeholder:text-[#596779] focus:border-accent focus:ring-4 focus:ring-accent/15 transition-all outline-none';
 
 const selectableCard = (active: boolean) =>
@@ -293,30 +295,18 @@ export default function AngebotsFunnel() {
     setContactError('');
     setSubmitError(null);
     setIsSubmitting(true);
-    idempotencyRef.current ||= typeof crypto?.randomUUID === 'function'
-      ? crypto.randomUUID()
-      : `offer-${Date.now()}-${Math.random().toString(36).slice(2)}`;
 
-    try {
-      const response = await fetch('/api/send-email', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Idempotency-Key': idempotencyRef.current,
-        },
-        body: JSON.stringify({
-          type: 'offer_lead',
-          data: formData,
-          website: honeypot,
-          formStartedAt: formStartedAtRef.current,
-          idempotencyKey: idempotencyRef.current,
-        }),
-      });
-      const result = await response.json().catch(() => null);
-      if (!response.ok || result?.success !== true || result?.accepted !== true) {
-        throw new Error(result?.error?.message ?? 'Übermittlung fehlgeschlagen');
-      }
+    const result = await submitLead({
+      type: 'offer_lead',
+      data: formData,
+      website: honeypot,
+      formStartedAt: formStartedAtRef.current,
+      idempotency: idempotencyRef,
+      keyPrefix: 'offer',
+    });
+    setIsSubmitting(false);
 
+    if (result.ok) {
       try {
         sessionStorage.removeItem(DRAFT_KEY);
       } catch {
@@ -327,13 +317,20 @@ export default function AngebotsFunnel() {
         entryService: formData.attribution.entryService,
         services: formData.services.length,
       });
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    } catch {
-      setSubmitError('Die Anfrage konnte nicht übermittelt werden. Bitte versuchen Sie es erneut oder rufen Sie uns an.');
-      trackEvent('Offer Funnel Error', { step: 4 });
-    } finally {
-      setIsSubmitting(false);
+      window.scrollTo({ top: 0, behavior: prefersReducedMotion() ? 'auto' : 'smooth' });
+      return;
     }
+    if (result.kind === 'validation') {
+      // Serverseitige Feldfehler benennen, statt sie als Übertragungsfehler zu tarnen.
+      const channelError = result.fields.email || result.fields.phone;
+      if (channelError) setContactError(channelError);
+      const detail = describeFieldErrors(result.fields);
+      setSubmitError(detail ? `${result.message} ${detail}` : result.message);
+      trackEvent('Offer Funnel Validation Error', { field: Object.keys(result.fields)[0] ?? 'unknown' });
+      return;
+    }
+    setSubmitError(result.message);
+    trackEvent('Offer Funnel Error', { step: 4, kind: result.kind });
   };
 
   const shell = (content: ReactNode) => (
@@ -383,7 +380,9 @@ export default function AngebotsFunnel() {
         <p className="mt-3 text-blue-100/85">Das belastbare Angebot folgt nach der gemeinsamen Objektaufnahme.</p>
       </header>
 
-      <div className="mb-8" role="progressbar" aria-label="Fortschritt der Angebotsanfrage" aria-valuemin={1} aria-valuemax={4} aria-valuenow={step} aria-valuetext={`Schritt ${step} von 4: ${STEP_LABELS[step - 1]}`}>
+      <div className="mb-8">
+        {/* Die progressbar-Rolle liegt nur auf dem Balken – auf dem Wrapper würde sie
+            die Schrittliste (inkl. aria-current) aus dem Accessibility-Tree entfernen. */}
         <ol className="flex justify-between items-end mb-3">
           {STEP_LABELS.map((label, index) => (
             <li key={label} aria-current={index + 1 === step ? 'step' : undefined} className={cn('text-[11px] font-black uppercase tracking-[0.12em]', index + 1 <= step ? 'text-mint' : 'text-white/70')}>
@@ -391,7 +390,7 @@ export default function AngebotsFunnel() {
             </li>
           ))}
         </ol>
-        <div className="h-1.5 bg-white/20 rounded-full overflow-hidden" aria-hidden>
+        <div className="h-1.5 bg-white/20 rounded-full overflow-hidden" role="progressbar" aria-label="Fortschritt der Angebotsanfrage" aria-valuemin={1} aria-valuemax={4} aria-valuenow={step} aria-valuetext={`Schritt ${step} von 4: ${STEP_LABELS[step - 1]}`}>
           <div className="h-full bg-mint transition-[width] duration-200" style={{ width: `${step * 25}%` }} />
         </div>
       </div>
@@ -478,7 +477,7 @@ export default function AngebotsFunnel() {
                 <p className="text-sm text-slate leading-relaxed">Hinweise zur Verarbeitung Ihrer Angaben finden Sie in der <Link to="/datenschutz" target="_blank" rel="noopener noreferrer" className="font-bold text-brand underline">Datenschutzerklärung (öffnet neuen Tab)</Link>.</p>
                 {submitError && <div role="alert" className="bg-red-50 border border-red-200 text-red-800 rounded-xl p-4">{submitError} <a href={SITE.phoneHref} className="font-bold underline">{SITE.phone}</a></div>}
                 <div className="flex flex-col sm:flex-row gap-3 pt-2">
-                  <button type="button" onClick={back} className="flex-1 px-6 py-3.5 rounded-xl font-bold text-slate border-2 border-[#9aa8b8]"><ChevronLeft size={18} className="inline mr-2" />Zurück</button>
+                  <button type="button" onClick={back} className="flex-1 px-6 py-3.5 rounded-xl font-bold text-slate border-2 border-[#738196]"><ChevronLeft size={18} className="inline mr-2" />Zurück</button>
                   <button type="submit" disabled={isSubmitting} className="flex-[2] inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-bold text-white bg-accent hover:bg-accent-dark disabled:opacity-60 focus-visible:ring-4 focus-visible:ring-accent/40">
                     {isSubmitting ? <><Loader2 className="animate-spin" size={18} /> Wird übermittelt</> : <>Besichtigung anfragen <ArrowRight size={18} /></>}
                   </button>
@@ -493,7 +492,7 @@ export default function AngebotsFunnel() {
 }
 
 function Navigation({ back, next, nextDisabled }: { back: () => void; next: () => void; nextDisabled: boolean }) {
-  return <div className="flex flex-col sm:flex-row gap-3 pt-7"><button type="button" onClick={back} className="flex-1 px-6 py-3.5 rounded-xl font-bold text-slate border-2 border-[#9aa8b8]"><ChevronLeft size={18} className="inline mr-2" />Zurück</button><button type="button" onClick={next} disabled={nextDisabled} className="flex-[2] px-6 py-3.5 rounded-xl font-bold text-white bg-accent disabled:opacity-50">Weiter <ChevronRight size={18} className="inline ml-2" /></button></div>;
+  return <div className="flex flex-col sm:flex-row gap-3 pt-7"><button type="button" onClick={back} className="flex-1 px-6 py-3.5 rounded-xl font-bold text-slate border-2 border-[#738196]"><ChevronLeft size={18} className="inline mr-2" />Zurück</button><button type="button" onClick={next} disabled={nextDisabled} className="flex-[2] px-6 py-3.5 rounded-xl font-bold text-white bg-accent disabled:opacity-50">Weiter <ChevronRight size={18} className="inline ml-2" /></button></div>;
 }
 
 function ChoiceGroup({ legend, options, value, onChange }: { legend: string; options: string[]; value: string; onChange: (value: string) => void }) {

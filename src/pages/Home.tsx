@@ -1,6 +1,7 @@
 import { motion, useScroll, useTransform, useReducedMotion } from 'motion/react';
 import { useRef } from 'react';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import {
   ArrowRight,
   CheckCircle2,
@@ -194,17 +195,21 @@ export default function Home() {
   const reduce = useReducedMotion();
   const { scrollYProgress } = useScroll({ target: heroRef, offset: ['start start', 'end start'] });
   const heroImageY = useTransform(scrollYProgress, [0, 1], ['0%', reduce ? '0%' : '18%']);
-  const heroFade = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+  const heroFade = useTransform(scrollYProgress, [0, 0.8], [1, reduce ? 1 : 0]);
   const featuredReview = REVIEWS[1] ?? REVIEWS[0];
 
   return (
     <div className="overflow-hidden">
       <SEO
-        title="Gebäudereinigung & Industriereinigung Villingen-Schwenningen | AHAD Cleaning"
-        description="AHAD Cleaning ist Ihr Partner für professionelle Gebäudereinigung, Industriereinigung und Unterhaltsreinigung in Villingen-Schwenningen, Stuttgart und Süddeutschland. Kostenlose Vor-Ort-Besichtigung."
+        title="Gebäudereinigung Villingen-Schwenningen | AHAD Cleaning"
+        description="Gebäudereinigung, Industriereinigung und Unterhaltsreinigung für Unternehmen in Villingen-Schwenningen, Stuttgart und Süddeutschland. Kostenlose Objektbesichtigung."
         keywords="Gebäudereinigung Villingen-Schwenningen, Industriereinigung Stuttgart, Unterhaltsreinigung, Glasreinigung Konstanz, Gebäudedienstleistungen"
         schema={[ORGANIZATION_SCHEMA, WEBSITE_SCHEMA, faqSchemaFrom(faqs)]}
       />
+      {/* LCP: Hero-Bild schon im <head> anstoßen, bevor der Parser das <img> erreicht. */}
+      <Helmet>
+        <link rel="preload" as="image" href={IMG.heroMain} imageSrcSet={srcSetFor(IMG.heroMain)} imageSizes="100vw" />
+      </Helmet>
 
       {/* ── HERO ──────────────────────────────────────────────────────── */}
       <section ref={heroRef} className="relative min-h-[92svh] flex flex-col bg-navy text-white overflow-hidden grain">
@@ -447,8 +452,9 @@ export default function Home() {
             ))}
           </div>
 
-          {/* Zweite Reihe: alle weiteren Leistungen kompakt — nichts bleibt unsichtbar */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-5">
+          {/* Zweite Reihe: alle weiteren Leistungen kompakt — nichts bleibt unsichtbar
+              (fünf Karten → fünf Spalten, sonst bliebe eine Karte allein in Reihe drei) */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mt-5">
             {moreServices.map((service, i) => (
               <Reveal key={service.slug} delay={0.1 + i * 0.06}>
                 <Link

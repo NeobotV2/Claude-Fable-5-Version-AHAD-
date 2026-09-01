@@ -45,10 +45,10 @@
     { "source": "/kuechenabluftreinigung/", "destination": "/leistungen/kuechenabluftreinigung-vdi-2052", "statusCode": 301 },
     { "source": "/online-buchung", "destination": "/kontakt", "statusCode": 301 },
     { "source": "/online-buchung/", "destination": "/kontakt", "statusCode": 301 },
-    { "source": "/reinigungskonzept", "destination": "/angebot", "statusCode": 301 },
-    { "source": "/reinigungskonzept/", "destination": "/angebot", "statusCode": 301 },
-    { "source": "/kostenrechner", "destination": "/angebot", "statusCode": 301 },
-    { "source": "/kostenrechner/", "destination": "/angebot", "statusCode": 301 }
+    { "source": "/reinigungskonzept", "destination": "/ahad-system", "statusCode": 301 },
+    { "source": "/reinigungskonzept/", "destination": "/ahad-system", "statusCode": 301 },
+    { "source": "/kostenrechner", "destination": "/fachwissen/was-kostet-gebaeudereinigung-stundensatz-preise", "statusCode": 301 },
+    { "source": "/kostenrechner/", "destination": "/fachwissen/was-kostet-gebaeudereinigung-stundensatz-preise", "statusCode": 301 }
   ],
   "headers": [
     {

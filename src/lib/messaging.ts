@@ -1,12 +1,12 @@
 /**
  * Marken-Messaging — eine Quelle für Claim und Slogan-Optionen.
  *
- * WICHTIG (Designbook v2.4): Die Website nutzt GENAU EINEN Claim —
- * „Struktur. Sauberkeit. Sicherheit." Die übrigen Zeilen sind KEINE
- * Alternativ-Claims, sondern Kanal-/Kontext-Material (Fahrzeug, Kleidung,
- * Anzeigen, Social, LV-Deckblatt). Sie gehören NICHT verstreut auf die
- * Website, sondern jeweils dorthin, wo sie wirken. Diese Datei dokumentiert
- * das, damit Marketing eine saubere Quelle hat.
+ * WICHTIG: Die Website nutzt GENAU EINEN Claim — `CLAIM` („Sauberkeit mit
+ * System."), sichtbar in Header-Leiste und Footer. Der Dreiklang „Struktur.
+ * Sauberkeit. Sicherheit." ist Sekundärmaterial (LV-Deckblatt, Anzeigen).
+ * Die übrigen Zeilen sind KEINE Alternativ-Claims, sondern Kanal-/Kontext-
+ * Material (Fahrzeug, Kleidung, Anzeigen, Social). Sie gehören NICHT verstreut
+ * auf die Website, sondern jeweils dorthin, wo sie wirken.
  */
 
 /** Der eine, verbindliche Website-Claim (Positionierung: strukturierter

@@ -2,9 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'motion/react';
 import { Phone, FileText } from 'lucide-react';
-import { SITE } from '@/lib/site';
-
-const HIDDEN_PATHS = ['/angebot', '/karriere/bewerbung', '/admin'];
+import { CONVERSION_HIDDEN_PATHS as HIDDEN_PATHS, SITE } from '@/lib/site';
 
 /**
  * Mobile Conversion-Leiste: Anruf + Angebot immer einen Daumen entfernt.

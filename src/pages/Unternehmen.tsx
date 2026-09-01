@@ -46,7 +46,7 @@ export default function Unternehmen() {
   return (
     <div>
       <SEO
-        title="Über AHAD Cleaning: Das Unternehmen | AHAD Cleaning"
+        title="Über uns: Das Unternehmen | AHAD Cleaning"
         description="AHAD Cleaning ist Ihr Partner für systematische Gebäudereinigung in Süddeutschland — mit klaren Abläufen und persönlicher Betreuung."
         keywords="AHAD Cleaning Unternehmen, Gebäudereinigung Firma Villingen-Schwenningen, Reinigungsunternehmen Süddeutschland"
       />

@@ -15,6 +15,7 @@ const columns = [
       { label: 'Medizintechnik & Reinraum', href: '/leistungen/medizintechnik-reinigung' },
       { label: 'Sonderreinigung', href: '/leistungen/sonderreinigung-stillstandsservice' },
       { label: 'Winterdienst & Hausmeister', href: '/leistungen/winterdienst-hausmeisterservice' },
+      { label: 'Küchenabluftreinigung', href: '/leistungen/kuechenabluftreinigung-vdi-2052' },
     ],
   },
   {
@@ -134,7 +135,7 @@ export default function Footer() {
           {/* Navigationsspalten */}
           {columns.map((col) => (
             <nav key={col.title} className="lg:col-span-2" aria-label={col.title}>
-              <h4 className="text-[12px] font-black uppercase tracking-[0.2em] text-blue-100/80 mb-5">{col.title}</h4>
+              <h3 className="text-[12px] font-black uppercase tracking-[0.2em] text-blue-100/80 mb-5">{col.title}</h3>
               <ul className="space-y-3">
                 {col.links.map((link) => (
                   <li key={link.href}>
@@ -152,7 +153,7 @@ export default function Footer() {
 
           {/* Kontakt — breitere Spalte, damit Adresse & E-Mail nicht umbrechen */}
           <div className="lg:col-span-3">
-            <h4 className="text-[12px] font-black uppercase tracking-[0.2em] text-blue-100/80 mb-5">Kontakt</h4>
+            <h3 className="text-[12px] font-black uppercase tracking-[0.2em] text-blue-100/80 mb-5">Kontakt</h3>
             <ul className="space-y-4 text-[14px] mb-6">
               <li className="flex gap-3">
                 <MapPin size={17} className="text-mint flex-shrink-0 mt-0.5" />
@@ -181,7 +182,7 @@ export default function Footer() {
             </ul>
 
             <div className="flex items-center gap-3">
-              <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-blue-100/40">Folgen</span>
+              <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-blue-100/70">Folgen</span>
               <a
                 href={SITE.social.instagram}
                 target="_blank"

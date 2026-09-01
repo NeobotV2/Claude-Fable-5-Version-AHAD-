@@ -42,18 +42,30 @@ test('funnels are prerendered but explicitly excluded from indexing', () => {
   }
 });
 
-test('Vercel enforces clean no-slash URLs and server-side funnel aliases', () => {
+test('Vercel enforces clean no-slash URLs and legacy redirects land on indexable pages', () => {
   const config = JSON.parse(read('vercel.json'));
   assert.equal(config.cleanUrls, true);
   assert.equal(config.trailingSlash, false);
   assert.equal(config.rewrites, undefined, 'a catch-all rewrite would create soft 404s');
 
-  for (const source of ['/reinigungskonzept', '/kostenrechner']) {
+  const indexablePaths = new Set(
+    manifest.pages.filter((page: { index: boolean }) => page.index).map((page: { path: string }) => page.path),
+  );
+  for (const redirect of config.redirects as { source: string; destination: string; statusCode: number }[]) {
+    assert.equal(redirect.statusCode, 301, `${redirect.source} must be a permanent redirect`);
+    assert.ok(
+      indexablePaths.has(redirect.destination),
+      `${redirect.source} → ${redirect.destination} must land on an indexable page (link equity)`,
+    );
+  }
+
+  // Client-side mirror of the legacy aliases stays in sync with the edge config.
+  for (const alias of manifest.redirects as { from: string; to: string }[]) {
     assert.ok(
       config.redirects.some(
-        (redirect: { source: string; destination: string; statusCode: number }) =>
-          redirect.source === source && redirect.destination === '/angebot' && redirect.statusCode === 301,
+        (redirect: { source: string; destination: string }) => redirect.source === alias.from && redirect.destination === alias.to,
       ),
+      `${alias.from} must redirect to ${alias.to} in vercel.json as well`,
     );
   }
 });
