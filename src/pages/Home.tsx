@@ -251,10 +251,13 @@ export default function Home() {
             {/* Keyword im H1 (SEO) + Schmerzpunkt der Zielgruppe (Conversion).
                 Bewusst statisch (kein Reveal-/Slide-Effekt): so steht die Headline
                 bereits im vorgerenderten HTML sichtbar → schneller LCP, valides ARIA. */}
+            {/* Obergrenze 4.5rem: ab xl steht rechts die Bewertungs-Karte (23rem),
+                die Headline-Spalte ist dann 800px breit – „Gebäudereinigung," muss
+                als ein Wort hineinpassen, sonst läuft die H1 horizontal über. */}
             <h1
               className="display-xl text-white mb-4 sm:mb-8"
               lang="de"
-              style={{ fontSize: 'clamp(1.35rem, 7.75vw, 5rem)' }}
+              style={{ fontSize: 'clamp(1.35rem, 7.75vw, 4.5rem)' }}
             >
               <span className="whitespace-nowrap">Gebäudereinigung,</span>{' '}
               die Sie nicht mehr{' '}

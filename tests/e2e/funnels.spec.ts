@@ -64,7 +64,12 @@ test('application profile reaches the API without WhatsApp consent', async ({ pa
   const captured = await captureLeadEndpoint(page);
   await page.goto('/karriere/bewerbung?profile=reinigungskraft-vs');
 
-  await page.getByRole('button', { name: /Deutsch/ }).click();
+  // The language picker is prerendered; a click that lands before the lazy
+  // route chunk has hydrated is lost, so retry until step 1 is on screen.
+  await expect(async () => {
+    await page.getByRole('button', { name: /Deutsch/ }).click();
+    await expect(page.getByRole('button', { name: /Vollzeit:/ })).toBeVisible({ timeout: 1_500 });
+  }).toPass({ timeout: 15_000 });
   await page.getByRole('button', { name: /Vollzeit:/ }).click();
   await page.getByRole('button', { name: /Unterhaltsreinigung/ }).click();
   await page.getByRole('button', { name: 'Ja, ich habe Erfahrung' }).click();
