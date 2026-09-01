@@ -71,7 +71,8 @@ export default function FachwissenIntervalle() {
 
   return (
     <article>
-      <SEO ogType="article"
+      <SEO
+        ogType="article"
         title="Reinigungsintervalle im Büro: Wie oft putzen? | AHAD" 
         description="Wie oft sollte ein Büro gereinigt werden? Unser Leitfaden zu Reinigungsintervallen hilft Ihnen, die optimale Taktung für Ihr Unternehmen zu finden."
         keywords="Reinigungsintervalle, Unterhaltsreinigung Intervalle, Büroreinigung Taktung, wie oft Büro reinigen, Reinigungsplan Büro, AHAD Cleaning"

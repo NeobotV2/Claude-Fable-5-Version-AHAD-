@@ -71,7 +71,8 @@ export default function FachwissenKosten() {
 
   return (
     <article>
-      <SEO ogType="article"
+      <SEO
+        ogType="article"
         title="Was kostet Gebäudereinigung? Preise & Stundensatz | AHAD"
         description="Gebäudereinigung kalkulieren: Kostenbestandteile, Leistungswerte, daraus abgeleitete m²-Preise und illustrative Monatsbeispiele mit offengelegten Annahmen."
         keywords="Was kostet Gebäudereinigung, Gebäudereinigung Kosten, Büroreinigung Kosten pro m², Stundensatz Gebäudereinigung, Unterhaltsreinigung Preis, Reinigung Preise Villingen-Schwenningen, AHAD Cleaning"

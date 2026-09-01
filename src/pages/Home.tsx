@@ -202,7 +202,7 @@ export default function Home() {
     <div className="overflow-hidden">
       <SEO
         title="Gebäudereinigung Villingen-Schwenningen | AHAD Cleaning"
-        description="Gebäudereinigung, Industriereinigung und Unterhaltsreinigung für Unternehmen in Villingen-Schwenningen, Stuttgart und Süddeutschland. Kostenlose Objektbesichtigung."
+        description="Gebäudereinigung, Industriereinigung und Unterhaltsreinigung für Unternehmen in Villingen-Schwenningen, Stuttgart und Süddeutschland. Kostenlose Besichtigung."
         keywords="Gebäudereinigung Villingen-Schwenningen, Industriereinigung Stuttgart, Unterhaltsreinigung, Glasreinigung Konstanz, Gebäudedienstleistungen"
         schema={[ORGANIZATION_SCHEMA, WEBSITE_SCHEMA, faqSchemaFrom(faqs)]}
       />
