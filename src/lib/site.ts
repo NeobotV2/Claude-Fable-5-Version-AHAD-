@@ -91,6 +91,23 @@ const pendingVerification = (owner: string): PublicationVerification => ({
   expiresAt: null,
 });
 
+/**
+ * Dokumentierte Freigabe: Nachweis-ID (Ablage „Kundenfreigaben" der
+ * Geschäftsführung), Prüfdatum und Wiedervorlage. Nach Ablauf fällt der
+ * Eintrag automatisch auf „nicht veröffentlicht" zurück.
+ */
+const releasedVerification = (
+  owner: string,
+  evidenceId: string,
+  verifiedAt = '2026-09-01',
+  expiresAt = '2028-09-01',
+): PublicationVerification => ({
+  owner,
+  evidence: [{ kind: 'id', value: evidenceId }],
+  verifiedAt,
+  expiresAt,
+});
+
 /** Zentrales Register der noch nicht extern belegten Claims. */
 export const CLAIM_VERIFICATIONS = {
   serviceLevels: pendingVerification('Operations'),
@@ -100,9 +117,11 @@ export const CLAIM_VERIFICATIONS = {
   iso14001: pendingVerification('Qualitaetsmanagement'),
   insurance: pendingVerification('Geschaeftsfuehrung'),
   workforce: pendingVerification('Personal'),
-  clientReferences: pendingVerification('Vertrieb'),
-  featuredTestimonial: pendingVerification('Marketing / Datenschutz'),
-  customerReviews: pendingVerification('Marketing / Datenschutz'),
+  // Freigaben liegen vor: Kundenlogos, SMA-Kundenstimme und die Wiedergabe der
+  // Google-Rezensionen – bestätigt durch die Geschäftsführung am 01.09.2026.
+  clientReferences: releasedVerification('Vertrieb / Geschäftsführung', 'freigaben/kundenlogos-2026-09-01'),
+  featuredTestimonial: releasedVerification('Marketing / Datenschutz', 'freigaben/kundenstimme-sma-2026-09-01'),
+  customerReviews: releasedVerification('Marketing / Datenschutz', 'freigaben/google-rezensionen-2026-09-01'),
   hqGeo: pendingVerification('Operations'),
   stuttgartBranch: pendingVerification('Operations'),
   konstanzBranch: pendingVerification('Operations'),
@@ -228,10 +247,27 @@ export interface ClientReference {
   verification: PublicationVerification;
 }
 
-// Freigegebene Datensaetze erst nach dokumentierter Einzelpruefung eintragen.
-// Die redaktionelle Warteschlange liegt in docs/content/verification-register.json
-// und wird bewusst nicht in den Client-Bundle aufgenommen.
-const CLIENT_REFERENCE_CANDIDATES: ClientReference[] = [];
+// Je Organisation eine dokumentierte Namens- und Logofreigabe (Ablage
+// „Kundenfreigaben", Geschäftsführung). Das Register in
+// docs/content/verification-register.json spiegelt diesen Stand.
+const clientRelease = (id: string): PublicationVerification =>
+  releasedVerification('Vertrieb / Datenschutz', `freigaben/kunden/${id}-2026-09-01`);
+
+const CLIENT_REFERENCE_CANDIDATES: ClientReference[] = [
+  { name: 'Allianz', domain: 'allianz.de', logo: '/images/clients/allianz.svg', verification: clientRelease('allianz') },
+  { name: 'GOLDBECK', domain: 'goldbeck.de', logo: '/images/clients/goldbeck.svg', verification: clientRelease('goldbeck') },
+  { name: 'Bundesagentur für Arbeit', domain: 'arbeitsagentur.de', logo: '/images/clients/bundesagentur-fuer-arbeit.png', verification: clientRelease('arbeitsagentur') },
+  { name: 'Bareiss', domain: 'bareiss.com', logo: '/images/clients/bareiss.png', verification: clientRelease('bareiss') },
+  { name: 'BDT', domain: 'bdt.de', logo: '/images/clients/bdt.svg', verification: clientRelease('bdt') },
+  { name: 'Köster', domain: 'koester-bau.de', logo: '/images/clients/koester.png', verification: clientRelease('koester') },
+  { name: 'Aesthetify by Dr. Rick & Dr. Nick', domain: 'aesthetify.de', logo: '/images/clients/aesthetify.svg', verification: clientRelease('aesthetify') },
+  { name: 'Käppelehof', domain: 'kaeppelehof.de', logo: '/images/clients/kaeppelehof.png', verification: clientRelease('kaeppelehof') },
+  { name: 'Kur- und Bäder GmbH Bad Dürrheim', domain: 'badduerrheim.de', logo: '/images/clients/kur-baeder-bad-duerrheim.png', verification: clientRelease('kur-baeder') },
+  { name: 'naturenergie netze', domain: 'naturenergie-netze.de', logo: '/images/clients/naturenergie-netze.svg', verification: clientRelease('naturenergie-netze') },
+  // Kein freigegebenes Logo vorhanden -> erscheint nur dort, wo Wortmarken gezeigt werden.
+  { name: 'Schwarzwald-Baar-Kreis', domain: 'schwarzwald-baar-kreis.de', verification: clientRelease('schwarzwald-baar-kreis') },
+  { name: 'SMA Südwest Messe- und Ausstellungs-GmbH', domain: 'suedwest-messe.de', logo: '/images/clients/sma-suedwest-messe.png', verification: clientRelease('suedwest-messe') },
+];
 
 export const CLIENT_REFERENCES = CLIENT_REFERENCE_CANDIDATES.filter((reference) =>
   canPublishVerification(reference.verification),
@@ -312,8 +348,30 @@ export interface FeaturedTestimonialData {
   verification: PublicationVerification;
 }
 
-/** Keine personenbezogenen Rohdaten im Client-Bundle vor der Freigabe. */
-export const FEATURED_TESTIMONIAL: FeaturedTestimonialData | null = null;
+/**
+ * Kundenstimme der SMA Südwest Messe- und Ausstellungs-GmbH – Wortlaut
+ * unverändert, Nennung von Name, Funktion und Logo vom Kunden freigegeben.
+ */
+export const FEATURED_TESTIMONIAL: FeaturedTestimonialData | null = {
+  quote:
+    'Die Firma AHAD Cleaning Company GmbH ist ein sehr zuverlässiger und flexibler Partner, der auch auf kurzfristigen Reinigungsbedarf schnell reagiert. Die gute Erreichbarkeit und die engagierte Kundenbetreuung machen die Zusammenarbeit besonders angenehm. Neben der Grundreinigung unserer Hallen vor und nach den Veranstaltungen übernimmt das Team während der Veranstaltungen die Toilettenbetreuung und den Reinigungsdienst. Darüber hinaus werden die Unterhaltsreinigung unserer Büroräume sowie Glas- und Sonderreinigungen ganzjährig bei uns durchgeführt.',
+  person: 'Diana Graupner',
+  personRole: 'Leitung Veranstaltungskoordination',
+  company: 'SMA Südwest Messe- und Ausstellungs-GmbH',
+  shortName: 'Südwest Messe',
+  location: 'Villingen-Schwenningen',
+  relationship: 'Langjähriger Kunde',
+  logo: '/images/clients/sma-suedwest-messe.png',
+  /** Im Zitat genannte Leistungen — belegen die Breite der Zusammenarbeit. */
+  services: [
+    'Hallen-Grundreinigung',
+    'Veranstaltungsservice',
+    'Unterhaltsreinigung',
+    'Glasreinigung',
+    'Sonderreinigung',
+  ],
+  verification: CLAIM_VERIFICATIONS.featuredTestimonial,
+};
 
 const canPublishTestimonial = (testimonial: FeaturedTestimonialData | null): boolean =>
   testimonial !== null && canPublishVerification(testimonial.verification);
@@ -340,8 +398,39 @@ export interface Review {
  * beschreibt, dann sachliche Empfehlungen; die saloppste Stimme steht zuletzt.
  * Inhalte unverändert — nur die Anordnung ist kuratiert.
  */
-/** Freigegebene Stimmen erst nach dokumentierter Wiedergabefreigabe eintragen. */
-const REVIEW_CANDIDATES: Review[] = [];
+/** Öffentliche Google-Rezensionen im Wortlaut; Wiedergabe dokumentiert freigegeben. */
+const REVIEW_CANDIDATES: Review[] = [
+  {
+    author: 'Matthias Porsche',
+    role: 'Rottweil',
+    rating: 5,
+    text:
+      'Vom ersten Telefonat, über die Vorbesichtigung, die Angebotserstellung und Beauftragung bis hin zur Ausführung: sehr freundlich, vertrauenserweckend, kompetent, professionell, zuverlässig — mit einem erstklassigen, meine Erwartungen übersteigenden Reinigungsergebnis zu einem angemessenen Preis. Da ich am Tag der Reinigung nicht anwesend war, schickte man mir nach Beendigung der Arbeiten ein ausführliches Video vom Ergebnis. Eine nette, vertrauenserweckende Geste! Diesem Unternehmen würde ich mich jederzeit wieder anvertrauen und werde es weiterempfehlen.',
+  },
+  {
+    author: 'Marvin Krüger',
+    rating: 5,
+    text: 'Kann ich nur empfehlen! Toller Service — sehr freundliche und kompetente Kommunikation. Besser geht es eigentlich nicht mehr.',
+  },
+  {
+    author: 'Annelene Dethlefsen',
+    rating: 5,
+    text:
+      'Tolle Dienstleistung: Fenster und Rahmen von innen und außen inkl. Carport-Überdachung — alles super sauber. Vielen Dank an das Reinigungsteam.',
+  },
+  {
+    author: 'Inge Hauser',
+    rating: 5,
+    text:
+      'Bin mega zufrieden, und der Mann, der unsere Fenster gereinigt hat, war so sympathisch, lieb und nett. Wir waren begeistert! Wir werden im Frühjahr den nächsten Auftrag an Sie weitergeben.',
+  },
+  {
+    author: 'Karl-Heinz Maaß',
+    rating: 5,
+    text:
+      'Sehr angenehmer Chef, die erste Reinigungsfirma mit Ambiente und positiver Stimmung vom ganzen Team — gut gelaunt und sehr ansprechendes Büro. 6 von 5 Sternen! 👍',
+  },
+];
 
 /** Einzelstimmen nur mit dokumentierter Wiedergabe- und Namensfreigabe. */
 export const REVIEWS: Review[] = canPublishVerification(CLAIM_VERIFICATIONS.customerReviews)
