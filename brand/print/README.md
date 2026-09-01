@@ -1,0 +1,124 @@
+# AHAD Cleaning — Logo-Druckdaten (Textil)
+
+Alle Dateien sind aus dem offiziellen Artwork erzeugt
+(`src/components/logo-art.json` — dieselbe Quelle wie Website und Designbook).
+Geometrie und Markenfarben sind identisch zum Original, es wurde nichts
+nachgezeichnet oder neu arrangiert.
+
+Neu erzeugen: `npm run logo:print`
+
+## Markenfarben
+
+| Farbe | HEX | RGB | CMYK (rechnerisch) |
+| --- | --- | --- | --- |
+| Navy | `#0B2341` | 11 / 35 / 65 | 83 / 46 / 0 / 75 |
+| Grün | `#0D6B38` | 13 / 107 / 56 | 88 / 0 / 48 / 58 |
+| Weiß | `#FFFFFF` | 255 / 255 / 255 | 0 / 0 / 0 / 0 |
+
+**Verbindlich sind die HEX-Werte.** Die CMYK-Angaben sind rechnerisch aus RGB
+abgeleitet und nicht auf ein Druckprofil abgestimmt. Für Siebdruck oder
+Stickerei die Sonderfarben (Pantone/Garnnummern) von der Druckerei bzw.
+Stickerei anhand der HEX-Werte bestimmen lassen — im Markenhandbuch sind
+bisher keine Sonderfarben festgelegt.
+
+## Motive
+
+- **Lockup** — Bildzeichen + Wortmarke „AHAD CLEANING", liegend.
+  Standard, wenn nur eine Fläche bedruckt wird.
+- **Wortmarke** — nur „AHAD CLEANING", ohne Bildzeichen. Für den Rücken,
+  wenn das Bildzeichen vorne auf der Brust sitzt.
+- **Bildzeichen** — Signet solo, ohne Schrift. Für kleine Flächen:
+  Brust, Ärmel, Cap, Kragen.
+
+Wortmarke und Bildzeichen sind aus demselben Artwork geschnitten wie das
+Lockup — dieselbe Geometrie, nur andere viewBox. Die `kern`-Varianten gibt es
+nur für Lockup und Bildzeichen; die Wortmarke hat kein Innenfeld.
+
+### Aufteilung Brust + Rücken
+
+Bildzeichen vorne, Wortmarke hinten — so wiederholt sich das Bildzeichen nicht:
+
+| Fläche | Motiv | Größe |
+| --- | --- | --- |
+| Brust links | Bildzeichen | 6–7 cm Höhe |
+| Rücken | Wortmarke | 26–30 cm Breite |
+
+Das Lockup dann **nicht** zusätzlich verwenden — sonst steht die Wortmarke
+zweimal auf demselben Shirt.
+
+## Versionen
+
+| Version | Einsatz |
+| --- | --- |
+| `farbe` | Original mit Falzverlauf. Digitaldruck, DTG, DTF, Sublimation — auf **weißem** Grund. |
+| `farbe-flat` | Zweifarbig Navy + Grün, ohne Verlauf. Siebdruck, Flex/Flock, Stickerei — auf **weißem** Grund. |
+| `farbe-kern-weiss` | Wie `farbe`, aber das Innenfeld der Raute wird weiß mitgedruckt. Für **farbige helle** Shirts (grey melange, Sand, Hellgrau). |
+| `farbe-flat-kern-weiss` | Wie `farbe-flat` mit weißem Innenfeld. Siebdruck/Flex auf farbigen hellen Shirts. |
+| `weiss` | Negativ, komplett weiß. Für **dunkle** Shirts (Navy, Schwarz, Anthrazit, Dunkelgrün). |
+| `navy` | Einfarbig `#0B2341`. Ein-Farb-Druck auf hellen Shirts. |
+| `gruen` | Einfarbig `#0D6B38`. Ein-Farb-Druck auf hellen Shirts. |
+| `schwarz` | Einfarbig Schwarz. Ein-Farb-Druck, Gravur, Prägung, Vorlagen. |
+
+### Welche Version zu welcher Shirtfarbe
+
+- **Weiß** → `farbe` (bzw. `farbe-flat`)
+- **Farbig hell** (grey melange, Sand, Hellgrau) → `farbe-kern-weiss`
+- **Dunkel** (Navy, Schwarz, Anthrazit, Dunkelgrün) → `weiss`
+
+Auf dunklen Shirts funktioniert die Farbversion **nicht**: Navy `#0B2341` ist
+die dominante Logofarbe und geht im dunklen Stoff unter. Auf Dunkelgrün
+verschwindet zusätzlich das grüne „CLEANING".
+
+Das Innenfeld der Raute ist im Original ein *Loch*, kein weißes Element — dort
+scheint der Untergrund durch. Auf weißem Stoff ist das identisch mit dem
+Original. Auf farbigem Stoff nimmt es die Stofffarbe an; deshalb gibt es die
+`kern-weiss`-Varianten, die das Originalaussehen wiederherstellen. Auf dunklen
+Shirts bleibt das Innenfeld bewusst offen — so ist die Negativversion definiert.
+
+Bei Siebdruck, Flexdruck und Stickerei immer die `flat`-Version nehmen:
+Verläufe lassen sich in diesen Verfahren nicht sauber umsetzen.
+
+## Formate
+
+| Ordner | Format | Details |
+| --- | --- | --- |
+| `pdf/` | Vektor-PDF, transparent | **Standard-Abgabe an die Druckerei.** Seitenmaße siehe unten. |
+| `svg/` | Vektor-SVG, transparent | Für Illustrator, Affinity, Inkscape, CorelDRAW, Cutter-Software. |
+| `png/` | PNG, transparent, 300 dpi | Für Shops, die kein Vektor annehmen. |
+
+| Motiv | PDF-Seite | PNG |
+| --- | --- | --- |
+| Lockup | 300 × 77,83 mm | 4000 × 1038 px (33,9 cm) |
+| Wortmarke | 280 × 81,09 mm | 4000 × 1158 px (33,9 cm) |
+| Bildzeichen | 250 × 280,45 mm | 3000 × 3365 px (25,4 cm) |
+
+Vektor (PDF/SVG) ist skalierungsfrei — Größe legt die Druckerei fest.
+Die PNGs bitte **nicht vergrößern**, sonst werden die Kanten unscharf.
+
+## Empfohlene Druckgrößen
+
+| Platzierung | Motiv | Größe |
+| --- | --- | --- |
+| Rücken | Wortmarke | 26–30 cm breit |
+| Rücken | Lockup | 28–32 cm breit |
+| Brust mittig | Lockup | 22–28 cm breit |
+| Brust links | Bildzeichen | 6–7 cm hoch |
+| Brust links | Lockup | 8–10 cm breit |
+| Ärmel | Bildzeichen | 4–5 cm hoch |
+| Cap / Kragen | Bildzeichen | 4–6 cm hoch |
+
+## Regeln
+
+- **Mindestgröße:** Lockup ab 40 mm Breite, Wortmarke ab 30 mm Breite,
+  Bildzeichen ab 12 mm Breite. Darunter reißt „CLEANING" im Druck zu.
+- **Schutzraum:** rundherum mindestens die Höhe des Bildzeichen-Schlitzes
+  freilassen; nichts hineinsetzen.
+- **Nicht verändern:** nicht verzerren, drehen, umfärben, mit Effekten
+  (Schatten, Outline, Glow) versehen oder die Wortmarke neu setzen —
+  die Schrift ist bewusst in Pfade konvertiert.
+- Bildzeichen und Wortmarke nur in der gelieferten Anordnung verwenden —
+  also entweder das Lockup, oder Wortmarke und Bildzeichen getrennt auf
+  verschiedenen Flächen. Nicht selbst neu zusammenstellen.
+
+`uebersicht.png` zeigt alle Versionen auf einem Blatt — das reicht der
+Druckerei als Abstimmungsvorlage.
