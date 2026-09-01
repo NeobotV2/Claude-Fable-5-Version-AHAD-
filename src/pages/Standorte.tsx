@@ -48,7 +48,7 @@ export default function Standorte() {
   return (
     <div>
       <SEO
-        title="Standorte & Einsatzgebiete in Süddeutschland | AHAD Cleaning"
+        title="Einsatzgebiete in Süddeutschland | AHAD Cleaning"
         description="AHAD Cleaning betreut Einsatzgebiete in Villingen-Schwenningen, Stuttgart und Konstanz. Die Unternehmensadresse befindet sich in Villingen-Schwenningen."
         keywords="Gebäudereinigung Standorte, Reinigungsfirma Villingen-Schwenningen, Gebäudereinigung Stuttgart, Reinigung Konstanz"
       />

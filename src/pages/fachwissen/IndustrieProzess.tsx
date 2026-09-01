@@ -71,7 +71,8 @@ export default function FachwissenIndustrieProzess() {
   return (
     <article>
       <SEO
-        title="Industriereinigung ohne Stillstand? Planung & Freigabe | AHAD"
+        ogType="article"
+        title="Industriereinigung ohne Stillstand planen | AHAD"
         description="Industriereinigung im Betrieb planen: Entscheidung zwischen laufender Anlage, Abschottung, Teilstillstand und gesicherter Abschaltung mit klarer Freigabe."
         keywords="Industriereinigung Prozess, Reinigung ohne Stillstand, Produktionsreinigung Strategie, Maschinenreinigung laufender Betrieb, AHAD Cleaning"
         schema={[articleSchema, faqSchema]}

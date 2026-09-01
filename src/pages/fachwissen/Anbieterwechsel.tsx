@@ -71,6 +71,7 @@ export default function FachwissenAnbieterwechsel() {
   return (
     <article>
       <SEO
+        ogType="article"
         title="Reinigungsfirma wechseln: Checkliste für Unternehmen | AHAD"
         description="Reinigungsfirma wechseln: Bedarf prüfen, Fristen objektbezogen planen, Angebote vergleichbar bewerten und die Übergabe an Tag 0, 7 und 30 steuern."
         keywords="Reinigungsfirma wechseln, Kündigung Reinigungsvertrag, Ausschreibung Gebäudereinigung, Checkliste Reinigungswechsel"

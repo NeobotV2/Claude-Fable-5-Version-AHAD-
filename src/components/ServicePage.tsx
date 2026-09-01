@@ -57,10 +57,14 @@ export default function ServicePage({ service }: { service: ServiceData }) {
     to: getEditorialArticlePath(slug),
   }));
 
+  const serviceUrl = `${SITE.url}/leistungen/${service.slug}`;
   const serviceSchema = {
     '@context': 'https://schema.org',
     '@type': 'Service',
+    '@id': `${serviceUrl}#service`,
+    url: serviceUrl,
     name: service.name,
+    serviceType: service.name,
     provider: ORG_REF,
     areaServed: 'Süddeutschland',
     description: service.seoDescription,
@@ -104,19 +108,22 @@ export default function ServicePage({ service }: { service: ServiceData }) {
         </section>
       )}
 
-      {/* Versprechen-Leiste */}
-      <section className="bg-white border-b border-line">
-        <div className="max-w-7xl mx-auto px-4 sm:px-8 py-8 grid grid-cols-1 sm:grid-cols-3 gap-6">
-          {PROMISES.map((promise, i) => (
-            <Reveal key={promise.label} delay={i * 0.08} y={16}>
-              <div className="flex items-center gap-4">
-                <span className="font-accent text-3xl font-bold text-brand">{promise.value}</span>
-                <span className="text-sm font-semibold text-slate leading-snug">{promise.label}</span>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-      </section>
+      {/* Versprechen-Leiste — nur, wenn das Claim-Register Servicelevel freigibt
+          (sonst bliebe ein leerer weißer Streifen mit Trennlinie). */}
+      {PROMISES.length > 0 && (
+        <section className="bg-white border-b border-line">
+          <div className="max-w-7xl mx-auto px-4 sm:px-8 py-8 grid grid-cols-1 sm:grid-cols-3 gap-6">
+            {PROMISES.map((promise, i) => (
+              <Reveal key={promise.label} delay={i * 0.08} y={16}>
+                <div className="flex items-center gap-4">
+                  <span className="font-accent text-3xl font-bold text-brand">{promise.value}</span>
+                  <span className="text-sm font-semibold text-slate leading-snug">{promise.label}</span>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </section>
+      )}
 
       {/* Auf einen Blick */}
       <section className="py-20 lg:py-28 bg-paper">

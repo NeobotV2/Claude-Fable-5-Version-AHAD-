@@ -2,7 +2,8 @@ import { useEffect, useRef, useState, type FormEvent } from 'react';
 import { CheckCircle2, Loader2, Phone, Send } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { SITE } from '@/lib/site';
-import { readAttribution, rememberAttribution, trackEvent } from '@/lib/analytics';
+import { trackEvent } from '@/lib/analytics';
+import { currentAttribution, describeFieldErrors, submitLead } from '@/lib/submit-lead';
 
 const SERVICES = [
   'Unterhaltsreinigung',
@@ -17,7 +18,7 @@ const SERVICES = [
 ];
 
 const inputClasses =
-  'w-full bg-white border-2 border-[#9aa8b8] rounded-xl px-4 py-3.5 text-[15px] text-navy font-medium ' +
+  'w-full bg-white border-2 border-[#738196] rounded-xl px-4 py-3.5 text-[15px] text-navy font-medium ' +
   'placeholder:text-[#596779] focus:outline-none focus:border-brand focus:ring-4 focus:ring-brand/15 transition-colors';
 
 const INITIAL_FORM = {
@@ -37,9 +38,35 @@ export default function ContactForm() {
   const [contactError, setContactError] = useState('');
   const [honeypot, setHoneypot] = useState('');
   const [formData, setFormData] = useState({ ...INITIAL_FORM });
+  const formRef = useRef<HTMLFormElement>(null);
   const successRef = useRef<HTMLHeadingElement>(null);
   const idempotencyRef = useRef('');
   const formStartedAtRef = useRef(Date.now());
+
+  // Die Seite ist vorgerendert: Wer tippt, bevor der Routen-Chunk hydriert hat,
+  // hätte seine Eingabe beim ersten State-Update verloren. Deshalb werden die
+  // bereits im DOM stehenden Werte einmalig in den React-State übernommen.
+  useEffect(() => {
+    const form = formRef.current;
+    if (!form) return;
+    const read = (id: string) => {
+      const element = form.elements.namedItem(id);
+      return element instanceof HTMLInputElement || element instanceof HTMLTextAreaElement || element instanceof HTMLSelectElement
+        ? element.value
+        : '';
+    };
+    const typed = {
+      contactPerson: read('cf-name'),
+      company: read('cf-company'),
+      email: read('cf-email'),
+      phone: read('cf-phone'),
+      message: read('cf-message'),
+    };
+    const service = read('cf-service');
+    const adopted = Object.fromEntries(Object.entries(typed).filter(([, value]) => value.trim() !== ''));
+    if (service && SERVICES.includes(service) && service !== INITIAL_FORM.serviceType) adopted.serviceType = service;
+    if (Object.keys(adopted).length > 0) setFormData((current) => ({ ...current, ...adopted }));
+  }, []);
 
   useEffect(() => {
     if (isSuccess) window.setTimeout(() => successRef.current?.focus(), 0);
@@ -66,34 +93,33 @@ export default function ContactForm() {
     setContactError('');
     setSubmitError(null);
     setIsSubmitting(true);
-    idempotencyRef.current ||= typeof crypto?.randomUUID === 'function'
-      ? crypto.randomUUID()
-      : `contact-${Date.now()}-${Math.random().toString(36).slice(2)}`;
 
-    try {
-      const response = await fetch('/api/send-email', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Idempotency-Key': idempotencyRef.current },
-        body: JSON.stringify({
-          type: 'contact',
-          data: { ...formData, attribution: readAttribution() || rememberAttribution(window.location.href) },
-          website: honeypot,
-          formStartedAt: formStartedAtRef.current,
-          idempotencyKey: idempotencyRef.current,
-        }),
-      });
-      const result = await response.json().catch(() => null);
-      if (!response.ok || result?.success !== true || result?.accepted !== true) {
-        throw new Error(result?.error?.message ?? 'Übermittlung fehlgeschlagen');
-      }
+    const result = await submitLead({
+      type: 'contact',
+      data: { ...formData, attribution: currentAttribution() },
+      website: honeypot,
+      formStartedAt: formStartedAtRef.current,
+      idempotency: idempotencyRef,
+      keyPrefix: 'contact',
+    });
+    setIsSubmitting(false);
+
+    if (result.ok) {
       setIsSuccess(true);
       trackEvent('Contact Form Success', { service: formData.serviceType });
-    } catch {
-      setSubmitError('Die Nachricht konnte nicht übermittelt werden. Bitte versuchen Sie es erneut oder rufen Sie uns direkt an.');
-      trackEvent('Contact Form Error', { service: formData.serviceType });
-    } finally {
-      setIsSubmitting(false);
+      return;
     }
+    if (result.kind === 'validation') {
+      // Serverseitige Feldfehler benennen, statt sie als Übertragungsfehler zu tarnen.
+      const channelError = result.fields.email || result.fields.phone;
+      if (channelError) setContactError(channelError);
+      const detail = describeFieldErrors(result.fields);
+      setSubmitError(detail ? `${result.message} ${detail}` : result.message);
+      trackEvent('Contact Form Validation Error', { field: Object.keys(result.fields)[0] ?? 'unknown' });
+      return;
+    }
+    setSubmitError(result.message);
+    trackEvent('Contact Form Error', { service: formData.serviceType, kind: result.kind });
   };
 
   if (isSuccess) {
@@ -113,7 +139,7 @@ export default function ContactForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} aria-busy={isSubmitting} className="relative bg-white p-7 sm:p-10 rounded-3xl shadow-soft border border-line space-y-5">
+    <form ref={formRef} onSubmit={handleSubmit} aria-busy={isSubmitting} className="relative bg-white p-7 sm:p-10 rounded-3xl shadow-soft border border-line space-y-5">
       <div className="absolute -left-[10000px]" aria-hidden>
         <label htmlFor="cf-website">Firma Webseite</label>
         <input id="cf-website" type="text" tabIndex={-1} autoComplete="off" value={honeypot} onChange={(event) => setHoneypot(event.target.value)} />

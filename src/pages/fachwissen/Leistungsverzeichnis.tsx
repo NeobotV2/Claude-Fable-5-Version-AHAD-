@@ -64,8 +64,9 @@ export default function FachwissenLeistungsverzeichnis() {
   return (
     <article>
       <SEO
-        title="Leistungsverzeichnis Gebäudereinigung erstellen: Anleitung | AHAD"
-        description="Wie erstellt man ein Leistungsverzeichnis (LV) für die Gebäudereinigung? Aufbau, Bestandteile, verrichtungs- vs. ergebnisorientiert und eine Schritt-für-Schritt-Anleitung für vergleichbare Angebote."
+        ogType="article"
+        title="Leistungsverzeichnis Gebäudereinigung erstellen | AHAD"
+        description="Leistungsverzeichnis (LV) für die Gebäudereinigung erstellen: Aufbau, Bestandteile, verrichtungs- vs. ergebnisorientiert – für vergleichbare Angebote."
         keywords="Leistungsverzeichnis Gebäudereinigung, LV Reinigung erstellen, Reinigung ausschreiben, Reinigungsleistung Vergleich, ergebnisorientierte Reinigung, DIN EN 13549, AHAD Cleaning"
         schema={[articleSchema, faqSchema]}
       />

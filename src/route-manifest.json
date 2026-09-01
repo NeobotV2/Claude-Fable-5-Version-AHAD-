@@ -41,7 +41,7 @@
     { "path": "/admin", "component": "admin", "index": false, "priority": "0.0", "requireH1": false, "allowHeadFallback": true }
   ],
   "redirects": [
-    { "from": "/reinigungskonzept", "to": "/angebot" },
-    { "from": "/kostenrechner", "to": "/angebot" }
+    { "from": "/reinigungskonzept", "to": "/ahad-system" },
+    { "from": "/kostenrechner", "to": "/fachwissen/was-kostet-gebaeudereinigung-stundensatz-preise" }
   ]
 }

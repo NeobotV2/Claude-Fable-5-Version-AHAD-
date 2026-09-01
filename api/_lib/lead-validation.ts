@@ -134,8 +134,8 @@ const EXACT_KEYS: Record<LeadType, readonly string[]> = {
 };
 
 const REQUIRED_KEYS: Record<LeadType, readonly string[]> = {
-  contact: EXACT_KEYS.contact,
-  offer_lead: EXACT_KEYS.offer_lead,
+  contact: EXACT_KEYS.contact.filter((key) => key !== 'attribution'),
+  offer_lead: EXACT_KEYS.offer_lead.filter((key) => key !== 'attribution'),
   job_application: EXACT_KEYS.job_application.filter((key) => !['jobId', 'sourcePath', 'attribution'].includes(key)),
 };
 
@@ -143,18 +143,29 @@ function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === 'object' && value !== null && !Array.isArray(value);
 }
 
+const ATTRIBUTION_KEYS = [
+  'landingPath', 'entryPath', 'entryService', 'entryIndustry', 'entryRegion',
+  'utmSource', 'utmMedium', 'utmCampaign', 'referrerHost',
+] as const;
+
 function text(
   source: Record<string, unknown>,
   field: string,
   issues: ValidationIssue[],
-  options: { min?: number; max: number; optional?: boolean } = { max: 200 },
+  options: { min?: number; max: number; optional?: boolean; multiline?: boolean } = { max: 200 },
 ): string {
   const raw = source[field];
   if (typeof raw !== 'string') {
     issues.push({ field, message: 'Muss Text sein.' });
     return '';
   }
-  const value = raw.trim().replace(/\r\n?/g, '\n');
+  // Steuerzeichen entfernen. Einzeilige Felder verlieren dabei auch Zeilenumbrüche –
+  // sie landen u. a. im E-Mail-Betreff und dürfen keine Header-Zeilen einschleusen.
+  const normalized = raw.replace(/\r\n?/g, '\n');
+  const value = (options.multiline
+    ? normalized.replace(/[^\P{Cc}\n\t]/gu, '')
+    : normalized.replace(/\p{Cc}/gu, ' ')
+  ).trim();
   const min = options.optional ? 0 : (options.min ?? 1);
   if (value.length < min) issues.push({ field, message: 'Pflichtfeld fehlt.' });
   if (value.length > options.max) issues.push({ field, message: `Maximal ${options.max} Zeichen.` });
@@ -210,7 +221,20 @@ function exactNestedStrings(
   const missing = keys.filter((key) => !(key in raw));
   if (unknown.length) issues.push({ field, message: `Unbekannte Felder: ${unknown.join(', ')}.` });
   if (missing.length) issues.push({ field, message: `Fehlende Felder: ${missing.join(', ')}.` });
-  return Object.fromEntries(keys.map((key) => [key, text(raw, key, issues, { max, optional: true })]));
+  return Object.fromEntries(keys.map((key) => [key, text(raw, key, issues, { max, optional: true, multiline: true })]));
+}
+
+/**
+ * Attribution ist reine Analytik (Einstiegspfad, UTM) und darf einen Lead nie
+ * blockieren: unbekannte Schlüssel werden verworfen, fehlende oder unbrauchbare
+ * Werte werden zu ''. Nur Textwerte werden übernommen und gekürzt.
+ */
+function lenientAttribution(source: Record<string, unknown>): AttributionData {
+  const raw = source.attribution;
+  const record = isRecord(raw) ? raw : {};
+  return Object.fromEntries(
+    ATTRIBUTION_KEYS.map((key) => [key, typeof record[key] === 'string' ? text(record, key, [], { max: 300, optional: true }) : '']),
+  ) as AttributionData;
 }
 
 function validateExactKeys(type: LeadType, data: Record<string, unknown>, issues: ValidationIssue[]) {
@@ -247,15 +271,9 @@ export function validateLeadPayload(payload: unknown): ValidationResult {
     const email = text(data, 'email', issues, { max: 254, optional: true }).toLowerCase();
     const phone = text(data, 'phone', issues, { max: 40, optional: true });
     const serviceType = member(text(data, 'serviceType', issues, { max: 80 }), CONTACT_SERVICES, 'serviceType', issues);
-    const message = text(data, 'message', issues, { min: 5, max: 3000 });
+    const message = text(data, 'message', issues, { min: 5, max: 3000, multiline: true });
     const privacyNoticeAccepted = booleanValue(data, 'privacyNoticeAccepted', issues);
-    const attribution = exactNestedStrings(
-      data,
-      'attribution',
-      ['landingPath', 'entryPath', 'entryService', 'entryIndustry', 'entryRegion', 'utmSource', 'utmMedium', 'utmCampaign', 'referrerHost'],
-      issues,
-      300,
-    ) as AttributionData;
+    const attribution = lenientAttribution(data);
     if (email && !EMAIL_RE.test(email)) issues.push({ field: 'email', message: 'Ungültige E-Mail-Adresse.' });
     if (phone && !PHONE_RE.test(phone)) issues.push({ field: 'phone', message: 'Ungültige Telefonnummer.' });
     if (!email && !phone) issues.push({ field: 'email', message: 'E-Mail oder Telefon ist erforderlich.' });
@@ -285,13 +303,7 @@ export function validateLeadPayload(payload: unknown): ValidationResult {
       issues,
       500,
     ) as OfferData['serviceDetails'];
-    const attribution = exactNestedStrings(
-      data,
-      'attribution',
-      ['landingPath', 'entryPath', 'entryService', 'entryIndustry', 'entryRegion', 'utmSource', 'utmMedium', 'utmCampaign', 'referrerHost'],
-      issues,
-      300,
-    ) as OfferData['attribution'];
+    const attribution = lenientAttribution(data);
     const privacyNoticeAccepted = booleanValue(data, 'privacyNoticeAccepted', issues);
     if (email && !EMAIL_RE.test(email)) issues.push({ field: 'email', message: 'Ungültige E-Mail-Adresse.' });
     if (phone && !PHONE_RE.test(phone)) issues.push({ field: 'phone', message: 'Ungültige Telefonnummer.' });
@@ -322,13 +334,7 @@ export function validateLeadPayload(payload: unknown): ValidationResult {
   const language = member(text(data, 'language', issues, { max: 5 }), LANGUAGES, 'language', issues);
   const jobId = 'jobId' in data ? text(data, 'jobId', issues, { max: 100, optional: true }) : undefined;
   const sourcePath = 'sourcePath' in data ? text(data, 'sourcePath', issues, { max: 300, optional: true }) : undefined;
-  const attribution = 'attribution' in data ? exactNestedStrings(
-    data,
-    'attribution',
-    ['landingPath', 'entryPath', 'entryService', 'entryIndustry', 'entryRegion', 'utmSource', 'utmMedium', 'utmCampaign', 'referrerHost'],
-    issues,
-    300,
-  ) as AttributionData : undefined;
+  const attribution = 'attribution' in data ? lenientAttribution(data) : undefined;
   if (startDate !== 'Sofort' && !DATE_RE.test(startDate)) issues.push({ field: 'startDate', message: 'Datum im Format YYYY-MM-DD oder „Sofort“ erwartet.' });
   if (phone && !PHONE_RE.test(phone)) issues.push({ field: 'phone', message: 'Ungültige Telefonnummer.' });
   if (!privacyNoticeAccepted) issues.push({ field: 'privacyNoticeAccepted', message: 'Der Datenschutzhinweis muss bestätigt werden.' });

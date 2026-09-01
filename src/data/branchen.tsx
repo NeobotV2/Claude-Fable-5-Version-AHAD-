@@ -31,7 +31,7 @@ export const BRANCHEN: BrancheData[] = [
     heroTitle: 'Reinigung, die Ihre Produktion respektiert',
     heroLead:
       'Schichtpläne, Taktzeiten, Arbeitssicherheit: Wir integrieren Reinigung so in Ihren Betrieb, dass nichts stillsteht — mit festen Teams, klaren Eskalationswegen und auditfähiger Dokumentation.',
-    seoTitle: 'Gebäudereinigung für Industrie & Produktion | AHAD Cleaning',
+    seoTitle: 'Reinigung für Industrie & Produktion | AHAD Cleaning',
     seoDescription:
       'Industriereinigung im laufenden Betrieb: schichtintegriert, UVV-konform, auditfähig dokumentiert. Für Produktionsbetriebe in Süddeutschland.',
     keywords: 'Reinigung Industrie, Produktionsreinigung, Hallenreinigung, Industriereinigung Schichtbetrieb',

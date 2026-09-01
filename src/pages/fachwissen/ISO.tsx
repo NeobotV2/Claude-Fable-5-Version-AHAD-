@@ -58,6 +58,7 @@ export default function FachwissenISO() {
   return (
     <article>
       <SEO
+        ogType="article"
         title="ISO 9001 & ISO 14001 bei Reinigungsfirmen prüfen | AHAD"
         description="Was ISO-9001- und ISO-14001-Zertifikate belegen, wo ihre Grenzen liegen und wie Einkauf und Facility Management Zertifikat, Scope und Objektnachweise prüfen."
         keywords="ISO 9001 Gebäudereinigung, ISO 14001 Reinigung, Zertifikat prüfen, Qualitätsmanagement Reinigung, Umweltmanagement Gebäudereinigung"

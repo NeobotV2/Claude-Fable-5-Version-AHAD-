@@ -1,4 +1,3 @@
-import { motion } from 'motion/react';
 import { Link, useLocation } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { ChevronRight } from 'lucide-react';
@@ -55,7 +54,7 @@ export default function PageHero({
           '@context': 'https://schema.org',
           '@type': 'BreadcrumbList',
           itemListElement: [
-            { '@type': 'ListItem', position: 1, name: 'Start', item: SITE.url },
+            { '@type': 'ListItem', position: 1, name: 'Start', item: `${SITE.url}/` },
             ...crumbs.map((crumb, i) => ({
               '@type': 'ListItem',
               position: i + 2,
@@ -83,6 +82,8 @@ export default function PageHero({
               alt={imageAlt}
               className="w-full h-full object-cover opacity-40"
               loading="eager"
+              // LCP-Kandidat jeder Unterseite – React 18 reicht nur lowercase `fetchpriority` durch
+              {...{ fetchpriority: 'high' }}
               decoding="async"
               referrerPolicy="no-referrer"
             />
@@ -102,9 +103,7 @@ export default function PageHero({
 
       <div className="max-w-7xl mx-auto px-4 sm:px-8 relative z-10">
         {crumbs && crumbs.length > 0 && (
-          <motion.nav
-            initial={false}
-            animate={{ opacity: 1, y: 0 }}
+          <nav
             aria-label="Brotkrumen"
             className="flex flex-wrap items-center gap-1.5 text-[13px] font-semibold text-blue-100/70 mb-8"
           >
@@ -123,15 +122,12 @@ export default function PageHero({
                 )}
               </span>
             ))}
-          </motion.nav>
+          </nav>
         )}
 
-        <motion.div
-          initial={false}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: [0.2, 0.65, 0.3, 1] }}
-          className="max-w-[66rem]"
-        >
+        {/* Kein Motion-Wrapper: initial={false} + animate auf Endwerte animierte nichts,
+            kostete aber Hydration-Arbeit auf jeder Unterseite. */}
+        <div className="max-w-[66rem]">
           {eyebrow && (
             <span className="eyebrow text-mint mb-6">
               <span className="h-px w-8 bg-mint/50" />
@@ -163,7 +159,7 @@ export default function PageHero({
               )}
             </div>
           )}
-        </motion.div>
+        </div>
 
         {children}
       </div>

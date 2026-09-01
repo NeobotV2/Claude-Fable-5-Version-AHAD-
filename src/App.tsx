@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
 import { BrowserRouter, HashRouter } from 'react-router-dom';
+import { MotionConfig } from 'motion/react';
 import { Analytics } from '@vercel/analytics/react';
 import ErrorBoundary from './components/ErrorBoundary';
 import RouterContent from './RouterContent';
@@ -9,7 +10,9 @@ import { stripAnalyticsQuery } from './lib/analytics';
 export function AppFrame({ children }: { children: ReactNode }) {
   return (
     <ErrorBoundary>
-      {children}
+      {/* „Bewegung reduzieren“ gilt damit auch für JS-Animationen (Menü, Akkordeon,
+          Sticky-Leiste) – die CSS-Regel in index.css deckt nur CSS-Transitions ab. */}
+      <MotionConfig reducedMotion="user">{children}</MotionConfig>
       {/* Cookielose Reichweitenmessung; serverseitig rendert die Komponente kein DOM. */}
       <Analytics beforeSend={(event) => ({ ...event, url: stripAnalyticsQuery(event.url) })} />
     </ErrorBoundary>

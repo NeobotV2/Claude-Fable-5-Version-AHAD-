@@ -1,9 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
-import { WHATSAPP_HREF } from '@/lib/site';
-
-const HIDDEN_PATHS = ['/angebot', '/karriere/bewerbung', '/admin'];
+import { CONVERSION_HIDDEN_PATHS as HIDDEN_PATHS, WHATSAPP_HREF } from '@/lib/site';
 
 /** Offizielles WhatsApp-Glyph (lucide hat kein Markenicon). */
 function WhatsAppGlyph({ size = 26 }: { size?: number }) {

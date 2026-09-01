@@ -110,17 +110,17 @@ export default function Kontakt() {
                   <FileText size={110} />
                 </div>
                 <div className="relative z-10">
-                  <span className="eyebrow text-mint mb-4">Schneller geht's nicht</span>
-                  <h3 className="font-headline text-2xl font-bold mb-3">Express-Angebot</h3>
+                  <span className="eyebrow text-mint mb-4">Strukturiert anfragen</span>
+                  <h3 className="font-headline text-2xl font-bold mb-3">Digitale Objektaufnahme</h3>
                   <p className="text-blue-100/85 mb-7 leading-relaxed">
-                    Vier Schritte: Unser digitaler Assistent erfasst Ihr Objekt strukturiert — als Grundlage für ein
-                    besonders schnelles, präzises Angebot.
+                    Vier Schritte: Unser digitaler Assistent erfasst Ihr Objekt strukturiert — die Grundlage für eine
+                    gut vorbereitete Besichtigung und ein präzises Angebot.
                   </p>
                   <Link
                     to="/angebot"
                     className="inline-flex items-center gap-2 bg-accent text-white px-6 py-3.5 rounded-xl font-bold hover:bg-accent-dark transition-all shadow-glow hover:-translate-y-0.5"
                   >
-                    Zum Express-Funnel <ChevronRight size={18} />
+                    Besichtigung anfragen <ChevronRight size={18} />
                   </Link>
                 </div>
               </div>

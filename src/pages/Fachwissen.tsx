@@ -99,7 +99,7 @@ export default function Fachwissen() {
   return (
     <div>
       <SEO
-        title="Fachwissen Gebäudereinigung: Leitfäden für Entscheider | AHAD Cleaning"
+        title="Fachwissen Gebäudereinigung für Entscheider | AHAD Cleaning"
         description="Entscheidungshilfen für Facility Management, Einkauf und Geschäftsführung: Kosten planen, Leistungen ausschreiben, Anbieter wechseln und Nachweise prüfen."
         keywords="Fachwissen Gebäudereinigung, Reinigungskosten kalkulieren, Reinigungsangebot vergleichen, Leistungsverzeichnis Reinigung, Anbieterwechsel"
         schema={knowledgeSchema}

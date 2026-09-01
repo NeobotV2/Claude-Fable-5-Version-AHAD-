@@ -16,6 +16,10 @@ export interface AttributionContext {
 }
 
 const ATTRIBUTION_KEY = 'ahad-attribution';
+const ATTRIBUTION_FIELDS = [
+  'landingPath', 'entryPath', 'entryService', 'entryIndustry', 'entryRegion',
+  'utmSource', 'utmMedium', 'utmCampaign', 'referrerHost',
+] as const satisfies readonly (keyof AttributionContext)[];
 
 const clean = (value: string | null | undefined, max = 120) =>
   String(value ?? '')
@@ -82,8 +86,15 @@ export function rememberAttribution(entryUrl = window.location.href): Attributio
 export function readAttribution(): AttributionContext | null {
   if (typeof window === 'undefined') return null;
   try {
-    const parsed = JSON.parse(sessionStorage.getItem(ATTRIBUTION_KEY) || 'null');
-    return parsed && typeof parsed === 'object' ? parsed as AttributionContext : null;
+    const parsed: unknown = JSON.parse(sessionStorage.getItem(ATTRIBUTION_KEY) || 'null');
+    if (!parsed || typeof parsed !== 'object') return null;
+    // Nur ein vollständiger, sauberer Datensatz zählt – ein veralteter oder fremder
+    // Wert unter demselben Schlüssel darf keine Lead-Übermittlung blockieren.
+    const record = parsed as Record<string, unknown>;
+    if (!ATTRIBUTION_FIELDS.every((field) => typeof record[field] === 'string')) return null;
+    return Object.fromEntries(
+      ATTRIBUTION_FIELDS.map((field) => [field, clean(record[field] as string, 180)]),
+    ) as unknown as AttributionContext;
   } catch {
     return null;
   }

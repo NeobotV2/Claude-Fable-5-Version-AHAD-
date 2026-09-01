@@ -10,9 +10,11 @@ interface SEOProps {
   keywords?: string;
   schema?: object | object[];
   noindex?: boolean;
+  /** Open-Graph-Objekttyp – Fachartikel melden sich als `article`. */
+  ogType?: 'website' | 'article';
 }
 
-export default function SEO({ title, description, keywords, schema, noindex }: SEOProps) {
+export default function SEO({ title, description, keywords, schema, noindex, ogType = 'website' }: SEOProps) {
   const location = useLocation();
   const canonicalPath = location.pathname === '/' ? '/' : location.pathname.replace(/\/+$/, '');
   const canonicalUrl = `${SITE.url}${canonicalPath}`;
@@ -23,17 +25,20 @@ export default function SEO({ title, description, keywords, schema, noindex }: S
   const fullTitle = /\|\s*AHAD(\s+Cleaning)?\s*$/.test(title) || title.includes('AHAD Cleaning')
     ? title
     : `${title} | AHAD Cleaning`;
-  
+
   return (
     <Helmet>
       <title>{fullTitle}</title>
       <meta name="description" content={description} />
       {keywords && <meta name="keywords" content={keywords} />}
-      <link rel="canonical" href={canonicalUrl} />
+      {/* Nur registrierte Routen tragen ein Canonical. Die 404-Seite (jeder
+          unbekannte Pfad) bekäme sonst ein Canonical auf sich selbst, z. B.
+          auf /__not-found__ – ein widersprüchliches Signal für Crawler. */}
+      {routePolicy && <link rel="canonical" href={canonicalUrl} />}
       <meta name="robots" content={shouldNoindex ? 'noindex, follow' : 'index, follow'} />
-      
+
       {/* Open Graph / Facebook */}
-      <meta property="og:type" content="website" />
+      <meta property="og:type" content={ogType} />
       <meta property="og:site_name" content="AHAD Cleaning" />
       <meta property="og:locale" content="de_DE" />
       <meta property="og:url" content={canonicalUrl} />
