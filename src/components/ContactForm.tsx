@@ -37,9 +37,35 @@ export default function ContactForm() {
   const [contactError, setContactError] = useState('');
   const [honeypot, setHoneypot] = useState('');
   const [formData, setFormData] = useState({ ...INITIAL_FORM });
+  const formRef = useRef<HTMLFormElement>(null);
   const successRef = useRef<HTMLHeadingElement>(null);
   const idempotencyRef = useRef('');
   const formStartedAtRef = useRef(Date.now());
+
+  // Die Seite ist vorgerendert: Wer tippt, bevor der Routen-Chunk hydriert hat,
+  // hätte seine Eingabe beim ersten State-Update verloren. Deshalb werden die
+  // bereits im DOM stehenden Werte einmalig in den React-State übernommen.
+  useEffect(() => {
+    const form = formRef.current;
+    if (!form) return;
+    const read = (id: string) => {
+      const element = form.elements.namedItem(id);
+      return element instanceof HTMLInputElement || element instanceof HTMLTextAreaElement || element instanceof HTMLSelectElement
+        ? element.value
+        : '';
+    };
+    const typed = {
+      contactPerson: read('cf-name'),
+      company: read('cf-company'),
+      email: read('cf-email'),
+      phone: read('cf-phone'),
+      message: read('cf-message'),
+    };
+    const service = read('cf-service');
+    const adopted = Object.fromEntries(Object.entries(typed).filter(([, value]) => value.trim() !== ''));
+    if (service && SERVICES.includes(service) && service !== INITIAL_FORM.serviceType) adopted.serviceType = service;
+    if (Object.keys(adopted).length > 0) setFormData((current) => ({ ...current, ...adopted }));
+  }, []);
 
   useEffect(() => {
     if (isSuccess) window.setTimeout(() => successRef.current?.focus(), 0);
@@ -113,7 +139,7 @@ export default function ContactForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} aria-busy={isSubmitting} className="relative bg-white p-7 sm:p-10 rounded-3xl shadow-soft border border-line space-y-5">
+    <form ref={formRef} onSubmit={handleSubmit} aria-busy={isSubmitting} className="relative bg-white p-7 sm:p-10 rounded-3xl shadow-soft border border-line space-y-5">
       <div className="absolute -left-[10000px]" aria-hidden>
         <label htmlFor="cf-website">Firma Webseite</label>
         <input id="cf-website" type="text" tabIndex={-1} autoComplete="off" value={honeypot} onChange={(event) => setHoneypot(event.target.value)} />
