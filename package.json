@@ -23,7 +23,8 @@
     "test:unit": "node --experimental-strip-types --test \"tests/*.test.ts\"",
     "test:e2e": "playwright test",
     "check:dist": "node scripts/check-performance-budget.mjs",
-    "firebase:deploy": "npx --yes firebase-tools@15.23.0 deploy --only firestore:rules,firestore:indexes"
+    "firebase:deploy": "npx --yes firebase-tools@15.23.0 deploy --only firestore:rules,firestore:indexes",
+    "social:banner": "node scripts/build-social-banner.mjs"
   },
   "dependencies": {
     "@vercel/analytics": "^2.0.1",
