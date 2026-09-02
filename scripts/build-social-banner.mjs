@@ -179,6 +179,13 @@ if (!executablePath) {
   process.exit(1);
 }
 
+/**
+ * Ausgabestufen. LinkedIn rechnet große Uploads herunter — das Ergebnis bleibt
+ * dadurch auch auf Retina-Displays scharf, während die 1x-Fassung dort
+ * hochskaliert und weich wirkt. Empfehlung für den Upload: @3x, sonst @2x.
+ */
+const SCALES = [1, 2, 3];
+
 const { chromium } = await import('playwright');
 await mkdir(out(), { recursive: true });
 
@@ -187,8 +194,8 @@ let written = 0;
 
 for (const [key, format] of Object.entries(FORMATS)) {
   for (const dark of [true, false]) {
-    for (const scale of [1, 2]) {
-      const suffix = `${dark ? '' : '-hell'}${scale === 2 ? '@2x' : ''}`;
+    for (const scale of SCALES) {
+      const suffix = `${dark ? '' : '-hell'}${scale > 1 ? `@${scale}x` : ''}`;
       const file = `${key}-${format.width}x${format.height}${suffix}.png`;
       const sfx = `${key}${dark ? 'd' : 'l'}${scale}`;
       const page_ = await browser.newPage({
@@ -228,9 +235,12 @@ Zu jeder Datei gibt es zwei Varianten:
 * **ohne Zusatz** — dunkler Navy-Grund, Logo negativ weiß (Standard)
 * **\`-hell\`** — weißer Grund, Logo in Markenfarben
 
-und jeweils eine Fassung **\`@2x\`** in doppelter Auflösung für hochauflösende
-Displays. LinkedIn rechnet sie automatisch herunter; wenn ein Upload abgelehnt
-wird, die Fassung ohne \`@2x\` verwenden.
+und jeweils Fassungen in **\`@2x\`** und **\`@3x\`** für hochauflösende Displays.
+
+**Für den Upload \`@3x\` nehmen** (ersatzweise \`@2x\`). LinkedIn rechnet große
+Dateien selbst herunter; die 1x-Fassung wird auf Retina-Displays dagegen
+hochskaliert und wirkt weich. Die 1x-Datei ist nur der Rückfall, falls ein
+Upload wegen der Dateigröße abgelehnt wird.
 
 ## Schutzzonen
 

@@ -17,9 +17,12 @@ Zu jeder Datei gibt es zwei Varianten:
 * **ohne Zusatz** — dunkler Navy-Grund, Logo negativ weiß (Standard)
 * **`-hell`** — weißer Grund, Logo in Markenfarben
 
-und jeweils eine Fassung **`@2x`** in doppelter Auflösung für hochauflösende
-Displays. LinkedIn rechnet sie automatisch herunter; wenn ein Upload abgelehnt
-wird, die Fassung ohne `@2x` verwenden.
+und jeweils Fassungen in **`@2x`** und **`@3x`** für hochauflösende Displays.
+
+**Für den Upload `@3x` nehmen** (ersatzweise `@2x`). LinkedIn rechnet große
+Dateien selbst herunter; die 1x-Fassung wird auf Retina-Displays dagegen
+hochskaliert und wirkt weich. Die 1x-Datei ist nur der Rückfall, falls ein
+Upload wegen der Dateigröße abgelehnt wird.
 
 ## Schutzzonen
 
