@@ -46,6 +46,22 @@ bewusst nicht enthalten; dafür gibt es die Banner-Formate.
 `transparent` nur dort verwenden, wo der Dienst selbst einen Hintergrund
 setzt — auf dunklem Grund geht das Navy des Logos sonst unter.
 
+## Schriftzug „AHAD CLEANING"
+
+Fertige Bilddateien in **2400 px** und **1200 px** Breite, mit Schutzraum am
+Rand. `schriftzug-*` zeigt nur die Wortmarke, `logo-quer-*` das vollständige
+Logo aus Bildzeichen und Wortmarke.
+
+| Datei | Grund |
+| --- | --- |
+| `schriftzug-weiss-*` / `logo-quer-weiss-*` | weiß, Logo in Markenfarben |
+| `schriftzug-navy-*` / `logo-quer-navy-*` | Navy, Logo weiß |
+| `schriftzug-transparent-*` / `logo-quer-transparent-*` | ohne Hintergrund, Markenfarben |
+| `schriftzug-transparent-weiss-*` / `logo-quer-transparent-weiss-*` | ohne Hintergrund, weiß |
+
+Die Vektorfassungen (SVG, PDF) und Druckauflösungen liegen in `brand/print/` —
+für Druckerei und Stickerei immer die dortigen Dateien verwenden.
+
 ## Schutzzonen
 
 * **Unternehmensseite:** Das Firmenlogo liegt am Desktop unten links über dem

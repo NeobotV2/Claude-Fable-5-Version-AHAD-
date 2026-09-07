@@ -192,6 +192,71 @@ svg{display:block}
 </style></head><body><div class="stage">${iconSvg(Math.round(size * PROFILE_ICON_RATIO), v.white, sfx)}</div></body></html>`;
 }
 
+/**
+ * Schriftzug-Kacheln. Die transparenten Vektorfassungen liegen im Druck-Kit
+ * (brand/print) — hier stehen fertige Bilddateien mit Rand und Hintergrund
+ * für Dienste, die keine Transparenz können (WhatsApp, manche Formulare).
+ * Motiv wahlweise nur die Wortmarke oder das vollständige Lockup.
+ */
+const LETTERING = {
+  'schriftzug-navy': { motif: 'wortmarke', bg: NAVY, white: true },
+  'schriftzug-weiss': { motif: 'wortmarke', bg: '#ffffff', white: false },
+  'schriftzug-transparent': { motif: 'wortmarke', bg: null, white: false },
+  'schriftzug-transparent-weiss': { motif: 'wortmarke', bg: null, white: true },
+  'logo-quer-navy': { motif: 'lockup', bg: NAVY, white: true },
+  'logo-quer-weiss': { motif: 'lockup', bg: '#ffffff', white: false },
+  'logo-quer-transparent': { motif: 'lockup', bg: null, white: false },
+  'logo-quer-transparent-weiss': { motif: 'lockup', bg: null, white: true },
+};
+
+/** Breiten der Schriftzug-Dateien in px. */
+const LETTERING_WIDTHS = [2400, 1200];
+
+/** Anteil der Bildbreite, den das Motiv einnimmt — der Rest ist Schutzraum. */
+const LETTERING_INSET = 0.84;
+
+/**
+ * Nur die Wortmarke: dieselben Pfade wie im Lockup, die viewBox schneidet das
+ * Bildzeichen weg. Werte identisch mit scripts/build-logo-print-kit.mjs.
+ */
+const VIEWBOX_WORDMARK = '375 39 1119 324';
+
+function letteringSvg(width, motif, white, sfx) {
+  const viewBox = motif === 'lockup' ? A.viewBoxLockup : VIEWBOX_WORDMARK;
+  const [, , w, h] = viewBox.split(' ').map(Number);
+  const words =
+    `<path d="${A.wordmark.ahad}" fill="${white ? '#ffffff' : NAVY}"/>` +
+    `<path d="${A.wordmark.cleaning}" fill="${white ? '#ffffff' : GREEN}"/>`;
+  const body = motif === 'lockup' ? iconGroup(white, sfx) + words : words;
+  return (
+    `<svg width="${width}" height="${Math.round((width * h) / w)}" viewBox="${viewBox}" ` +
+    `xmlns="http://www.w3.org/2000/svg" role="img" aria-label="AHAD Cleaning">` +
+    (motif === 'lockup' && !white ? gradientDefs(sfx) : '') +
+    body +
+    `</svg>`
+  );
+}
+
+/** Bildhöhe zu einer Ausgabebreite — Seitenverhältnis des Motivs plus Schutzraum. */
+function letteringHeight(width, motif) {
+  const viewBox = motif === 'lockup' ? A.viewBoxLockup : VIEWBOX_WORDMARK;
+  const [, , w, h] = viewBox.split(' ').map(Number);
+  return Math.round((Math.round(width * LETTERING_INSET) * h) / w / LETTERING_INSET);
+}
+
+function letteringPage(width, key, sfx) {
+  const v = LETTERING[key];
+  const height = letteringHeight(width, v.motif);
+  const bg = v.bg ? `background:${v.bg};` : 'background:transparent;';
+  return `<!doctype html><html lang="de"><head><meta charset="utf-8">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:${width}px;height:${height}px;background:transparent}
+.stage{width:${width}px;height:${height}px;display:grid;place-items:center;overflow:hidden;${bg}}
+svg{display:block}
+</style></head><body><div class="stage">${letteringSvg(Math.round(width * LETTERING_INSET), v.motif, v.white, sfx)}</div></body></html>`;
+}
+
 function findChromium() {
   const candidates = [
     process.env.CHROMIUM_PATH,
@@ -264,6 +329,21 @@ for (const [variant, v] of Object.entries(PROFILE_VARIANTS)) {
   }
 }
 
+for (const [key, v] of Object.entries(LETTERING)) {
+  for (const width of LETTERING_WIDTHS) {
+    const height = letteringHeight(width, v.motif);
+    const page_ = await browser.newPage({ viewport: { width, height }, deviceScaleFactor: 1 });
+    await page_.setContent(letteringPage(width, key, `l${key}${width}`), { waitUntil: 'load' });
+    await page_.screenshot({
+      path: out(`${key}-${width}x${height}.png`),
+      type: 'png',
+      omitBackground: v.bg === null,
+    });
+    await page_.close();
+    written += 1;
+  }
+}
+
 await browser.close();
 
 const readme = `# AHAD Cleaning — Social-Media-Banner
@@ -313,6 +393,22 @@ bewusst nicht enthalten; dafür gibt es die Banner-Formate.
 
 \`transparent\` nur dort verwenden, wo der Dienst selbst einen Hintergrund
 setzt — auf dunklem Grund geht das Navy des Logos sonst unter.
+
+## Schriftzug „AHAD CLEANING"
+
+Fertige Bilddateien in **2400 px** und **1200 px** Breite, mit Schutzraum am
+Rand. \`schriftzug-*\` zeigt nur die Wortmarke, \`logo-quer-*\` das vollständige
+Logo aus Bildzeichen und Wortmarke.
+
+| Datei | Grund |
+| --- | --- |
+| \`schriftzug-weiss-*\` / \`logo-quer-weiss-*\` | weiß, Logo in Markenfarben |
+| \`schriftzug-navy-*\` / \`logo-quer-navy-*\` | Navy, Logo weiß |
+| \`schriftzug-transparent-*\` / \`logo-quer-transparent-*\` | ohne Hintergrund, Markenfarben |
+| \`schriftzug-transparent-weiss-*\` / \`logo-quer-transparent-weiss-*\` | ohne Hintergrund, weiß |
+
+Die Vektorfassungen (SVG, PDF) und Druckauflösungen liegen in \`brand/print/\` —
+für Druckerei und Stickerei immer die dortigen Dateien verwenden.
 
 ## Schutzzonen
 
