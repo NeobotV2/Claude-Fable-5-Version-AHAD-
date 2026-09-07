@@ -160,6 +160,38 @@ const FORMATS = {
   },
 };
 
+/**
+ * Profilbilder. WhatsApp, LinkedIn, Instagram & Co. beschneiden das Bild rund —
+ * deshalb steht das Bildzeichen zentriert und deutlich innerhalb des Kreises.
+ * Die Wortmarke ist in dieser Größe unleserlich und bleibt bewusst weg; das
+ * Lockup gibt es als eigene Variante für Anzeigen, die quadratisch bleiben.
+ */
+const PROFILE_VARIANTS = {
+  navy: { label: 'Navy-Grund, Logo weiß', bg: NAVY, white: true },
+  'navy-verlauf': { label: 'Navy mit Verlauf und Raster, Logo weiß', dark: true, white: true },
+  gruen: { label: 'Grüner Grund, Logo weiß', bg: GREEN, white: true },
+  weiss: { label: 'Weißer Grund, Logo in Markenfarben', bg: '#ffffff', white: false },
+  transparent: { label: 'Ohne Hintergrund, Logo in Markenfarben', bg: null, white: false },
+};
+
+/** Kantenlängen: 1024 px deckt jede Plattform ab, 400 px ist das LinkedIn-Minimum. */
+const PROFILE_SIZES = [1024, 400];
+
+/** Anteil der Kantenlänge, den das Bildzeichen einnimmt — rund beschnitten sicher. */
+const PROFILE_ICON_RATIO = 0.56;
+
+function profilePage(size, variant, sfx) {
+  const v = PROFILE_VARIANTS[variant];
+  const bg = v.dark ? background(true) : v.bg ? `background:${v.bg};` : 'background:transparent;';
+  return `<!doctype html><html lang="de"><head><meta charset="utf-8">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:${size}px;height:${size}px;background:transparent}
+.stage{width:${size}px;height:${size}px;display:grid;place-items:center;overflow:hidden;${bg}}
+svg{display:block}
+</style></head><body><div class="stage">${iconSvg(Math.round(size * PROFILE_ICON_RATIO), v.white, sfx)}</div></body></html>`;
+}
+
 function findChromium() {
   const candidates = [
     process.env.CHROMIUM_PATH,
@@ -214,6 +246,24 @@ for (const [key, format] of Object.entries(FORMATS)) {
   }
 }
 
+for (const [variant, v] of Object.entries(PROFILE_VARIANTS)) {
+  for (const size of PROFILE_SIZES) {
+    const file = `profilbild-${variant}-${size}x${size}.png`;
+    const page_ = await browser.newPage({
+      viewport: { width: size, height: size },
+      deviceScaleFactor: 1,
+    });
+    await page_.setContent(profilePage(size, variant, `p${variant}${size}`), { waitUntil: 'load' });
+    await page_.screenshot({
+      path: out(file),
+      type: 'png',
+      omitBackground: v.bg === null && !v.dark,
+    });
+    await page_.close();
+    written += 1;
+  }
+}
+
 await browser.close();
 
 const readme = `# AHAD Cleaning — Social-Media-Banner
@@ -241,6 +291,28 @@ und jeweils Fassungen in **\`@2x\`** und **\`@3x\`** für hochauflösende Displa
 Dateien selbst herunter; die 1x-Fassung wird auf Retina-Displays dagegen
 hochskaliert und wirkt weich. Die 1x-Datei ist nur der Rückfall, falls ein
 Upload wegen der Dateigröße abgelehnt wird.
+
+## Profilbilder
+
+Quadratisch, für WhatsApp, LinkedIn, Instagram, Google-Unternehmensprofil und
+alles andere, was ein Profilbild verlangt. Jede Variante gibt es in
+**1024 × 1024 px** (Standard) und **400 × 400 px** (LinkedIn-Minimum).
+
+| Datei | Grund |
+| --- | --- |
+| \`profilbild-navy-1024x1024.png\` | Navy, Logo weiß — **Standardempfehlung** |
+| \`profilbild-navy-verlauf-1024x1024.png\` | Navy mit Verlauf und Raster, Logo weiß |
+| \`profilbild-gruen-1024x1024.png\` | AHAD-Grün, Logo weiß |
+| \`profilbild-weiss-1024x1024.png\` | Weiß, Logo in Markenfarben |
+| \`profilbild-transparent-1024x1024.png\` | ohne Hintergrund, Logo in Markenfarben |
+
+Fast alle Dienste beschneiden das Profilbild rund. Das Bildzeichen steht
+deshalb zentriert und mit Abstand zum Rand — es wird nichts abgeschnitten.
+Die Wortmarke „AHAD CLEANING" ist in dieser Größe nicht mehr lesbar und ist
+bewusst nicht enthalten; dafür gibt es die Banner-Formate.
+
+\`transparent\` nur dort verwenden, wo der Dienst selbst einen Hintergrund
+setzt — auf dunklem Grund geht das Navy des Logos sonst unter.
 
 ## Schutzzonen
 
