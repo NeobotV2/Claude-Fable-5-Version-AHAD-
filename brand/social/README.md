@@ -37,11 +37,16 @@ alles andere, was ein Profilbild verlangt. Jede Variante gibt es in
 | `profilbild-gruen-1024x1024.png` | AHAD-Grün, Logo weiß |
 | `profilbild-weiss-1024x1024.png` | Weiß, Logo in Markenfarben |
 | `profilbild-transparent-1024x1024.png` | ohne Hintergrund, Logo in Markenfarben |
+| `profilbild-schriftzug-navy-1024x1024.png` | Navy, Schriftzug „AHAD CLEANING" weiß |
+| `profilbild-schriftzug-weiss-1024x1024.png` | Weiß, Schriftzug in Markenfarben |
+| `profilbild-schriftzug-gruen-1024x1024.png` | AHAD-Grün, Schriftzug weiß |
+| `profilbild-schriftzug-transparent-1024x1024.png` | ohne Hintergrund, Schriftzug in Markenfarben |
 
 Fast alle Dienste beschneiden das Profilbild rund. Das Bildzeichen steht
 deshalb zentriert und mit Abstand zum Rand — es wird nichts abgeschnitten.
-Die Wortmarke „AHAD CLEANING" ist in dieser Größe nicht mehr lesbar und ist
-bewusst nicht enthalten; dafür gibt es die Banner-Formate.
+Die `schriftzug-`-Varianten zeigen die Wortmarke statt des Bildzeichens. Der
+runde Beschnitt zwingt die breite Wortmarke klein — in Miniaturgrößen (etwa in
+WhatsApp-Chatlisten) ist das Bildzeichen deutlich besser lesbar.
 
 `transparent` nur dort verwenden, wo der Dienst selbst einen Hintergrund
 setzt — auf dunklem Grund geht das Navy des Logos sonst unter.

@@ -172,7 +172,16 @@ const PROFILE_VARIANTS = {
   gruen: { label: 'Grüner Grund, Logo weiß', bg: GREEN, white: true },
   weiss: { label: 'Weißer Grund, Logo in Markenfarben', bg: '#ffffff', white: false },
   transparent: { label: 'Ohne Hintergrund, Logo in Markenfarben', bg: null, white: false },
+  // Mit Schriftzug statt Bildzeichen. Der runde Beschnitt zwingt die breite
+  // Wortmarke klein — auf Miniaturgrößen bleibt das Bildzeichen die bessere Wahl.
+  'schriftzug-navy': { label: 'Schriftzug weiß auf Navy', bg: NAVY, white: true, motif: 'wortmarke' },
+  'schriftzug-weiss': { label: 'Schriftzug in Markenfarben auf Weiß', bg: '#ffffff', white: false, motif: 'wortmarke' },
+  'schriftzug-gruen': { label: 'Schriftzug weiß auf Grün', bg: GREEN, white: true, motif: 'wortmarke' },
+  'schriftzug-transparent': { label: 'Schriftzug in Markenfarben, ohne Hintergrund', bg: null, white: false, motif: 'wortmarke' },
 };
+
+/** Breite der Wortmarke im Quadrat — innerhalb des Kreises mit Schutzraum. */
+const PROFILE_WORDMARK_RATIO = 0.78;
 
 /** Kantenlängen: 1024 px deckt jede Plattform ab, 400 px ist das LinkedIn-Minimum. */
 const PROFILE_SIZES = [1024, 400];
@@ -183,13 +192,17 @@ const PROFILE_ICON_RATIO = 0.56;
 function profilePage(size, variant, sfx) {
   const v = PROFILE_VARIANTS[variant];
   const bg = v.dark ? background(true) : v.bg ? `background:${v.bg};` : 'background:transparent;';
+  const motif =
+    v.motif === 'wortmarke'
+      ? letteringSvg(Math.round(size * PROFILE_WORDMARK_RATIO), 'wortmarke', v.white, sfx)
+      : iconSvg(Math.round(size * PROFILE_ICON_RATIO), v.white, sfx);
   return `<!doctype html><html lang="de"><head><meta charset="utf-8">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{width:${size}px;height:${size}px;background:transparent}
 .stage{width:${size}px;height:${size}px;display:grid;place-items:center;overflow:hidden;${bg}}
 svg{display:block}
-</style></head><body><div class="stage">${iconSvg(Math.round(size * PROFILE_ICON_RATIO), v.white, sfx)}</div></body></html>`;
+</style></head><body><div class="stage">${motif}</div></body></html>`;
 }
 
 /**
@@ -385,11 +398,16 @@ alles andere, was ein Profilbild verlangt. Jede Variante gibt es in
 | \`profilbild-gruen-1024x1024.png\` | AHAD-Grün, Logo weiß |
 | \`profilbild-weiss-1024x1024.png\` | Weiß, Logo in Markenfarben |
 | \`profilbild-transparent-1024x1024.png\` | ohne Hintergrund, Logo in Markenfarben |
+| \`profilbild-schriftzug-navy-1024x1024.png\` | Navy, Schriftzug „AHAD CLEANING" weiß |
+| \`profilbild-schriftzug-weiss-1024x1024.png\` | Weiß, Schriftzug in Markenfarben |
+| \`profilbild-schriftzug-gruen-1024x1024.png\` | AHAD-Grün, Schriftzug weiß |
+| \`profilbild-schriftzug-transparent-1024x1024.png\` | ohne Hintergrund, Schriftzug in Markenfarben |
 
 Fast alle Dienste beschneiden das Profilbild rund. Das Bildzeichen steht
 deshalb zentriert und mit Abstand zum Rand — es wird nichts abgeschnitten.
-Die Wortmarke „AHAD CLEANING" ist in dieser Größe nicht mehr lesbar und ist
-bewusst nicht enthalten; dafür gibt es die Banner-Formate.
+Die \`schriftzug-\`-Varianten zeigen die Wortmarke statt des Bildzeichens. Der
+runde Beschnitt zwingt die breite Wortmarke klein — in Miniaturgrößen (etwa in
+WhatsApp-Chatlisten) ist das Bildzeichen deutlich besser lesbar.
 
 \`transparent\` nur dort verwenden, wo der Dienst selbst einen Hintergrund
 setzt — auf dunklem Grund geht das Navy des Logos sonst unter.
