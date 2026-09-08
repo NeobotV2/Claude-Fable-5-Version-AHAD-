@@ -1,0 +1,45 @@
+{
+  "_hinweis": "Stammdaten für scripts/build-signaturen.mjs (npm run signaturen). Felder mit [] sind noch zu bestätigen. Leere Felder (durchwahl, mobil) lassen die Zeile in der Signatur komplett entfallen.",
+  "personen": [
+    {
+      "slug": "m-yerlikaya",
+      "name": "[Vorname] Yerlikaya",
+      "position": "[Position]",
+      "email": "m.yerlikaya@ahad-cleaning.de",
+      "durchwahl": "",
+      "mobil": ""
+    },
+    {
+      "slug": "serafettin-yerlikaya",
+      "name": "Serafettin Yerlikaya",
+      "position": "[Position]",
+      "email": "s.yerlikaya@ahad-cleaning.de",
+      "durchwahl": "",
+      "mobil": ""
+    },
+    {
+      "slug": "fatmanur-sahin",
+      "name": "Fatmanur Sahin",
+      "position": "[Position]",
+      "email": "f.sahin@ahad-cleaning.de",
+      "durchwahl": "",
+      "mobil": ""
+    },
+    {
+      "slug": "esra-atan",
+      "name": "Esra Atan",
+      "position": "[Position]",
+      "email": "e.atan@ahad-cleaning.de",
+      "durchwahl": "",
+      "mobil": ""
+    },
+    {
+      "slug": "nurhan-tokgoez",
+      "name": "Nurhan Tokgöz",
+      "position": "Assistentin der Geschäftsführung",
+      "email": "n.tokgoez@ahad-cleaning.de",
+      "durchwahl": "",
+      "mobil": ""
+    }
+  ]
+}
