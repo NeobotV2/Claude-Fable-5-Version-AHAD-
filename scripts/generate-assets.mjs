@@ -150,7 +150,11 @@ function signaturLogoSvg(logoH = 42, pad = 13) {
   const logoW = Math.round((logoH * lockW) / lockH);
   const w = logoW + pad * 2;
   const h = logoH + pad * 2;
+  // Die Falzflächen der Farbversion füllen sich aus den Original-Verläufen.
+  // Ohne passende <defs> zum Suffix zeigen url(#…)-Verweise ins Leere und die
+  // beiden Flächen fallen ersatzlos weg — das Bildzeichen wäre dann zu navy.
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}">
+  <defs>${gradientDefs('-sig')}</defs>
   <rect width="${w}" height="${h}" rx="10" fill="#ffffff"/>
   ${placeLockup('color', pad, pad, logoH, '-sig')}
 </svg>`;
