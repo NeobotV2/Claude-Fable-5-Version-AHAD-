@@ -1,11 +1,13 @@
-Muhammet Ali Yerlikaya
-Prokurist und Vertriebsleiter
-ppa. AHAD Cleaning Company GmbH
-AHAD Cleaning - Gebaeudereinigung fuer Industrie, Verwaltung & Mittelstand
+GUENTZEL Objekt-Service
+Ein Geschaeftsbereich der AHAD Cleaning Company GmbH
 
-Tel. +49 7721 944 79 15
-Mobil +49 174 3926183
-m.yerlikaya@ahad-cleaning.de | ahad-cleaning.de
+[NAME]
+[POSITION]
+[ZUSATZ]
+
+Tel. +49 7721 944 79 15 | Durchwahl [DURCHWAHL]
+Mobil [MOBIL]
+[E-MAIL] | guentzel-service.de[WEB2]
 Mo-Fr 08:00-17:00 Uhr
 
 --

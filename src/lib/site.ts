@@ -193,8 +193,13 @@ export const PROMISES = canPublishVerification(CLAIM_VERIFICATIONS.serviceLevels
   : [];
 
 const STAT_CANDIDATES = [
-  { value: 80, suffix: '+', label: 'Qualifizierte Mitarbeitende' },
-  { value: 15, suffix: '+', label: 'Jahre Erfahrung' },
+  // Werte gemäß Pressemitteilung vom 31.08.2026 (Schultze & Braun): „Seit 2015
+  // am Markt" und „rund 90 Mitarbeiterinnen und Mitarbeiter" nach der Übernahme
+  // von Güntzel Objekt-Service. Vorher standen hier 15+ Jahre und 80+ — die
+  // Jahresangabe widersprach der eigenen Pressemitteilung. 10+ bleibt richtig,
+  // ohne jedes Jahr nachgepflegt werden zu müssen.
+  { value: 90, suffix: '', label: 'Mitarbeitende' },
+  { value: 10, suffix: '+', label: 'Jahre am Markt' },
   { value: 8, suffix: '', label: 'Leistungsbereiche aus einer Hand' },
   { value: 3, suffix: '', label: 'Standorte in Süddeutschland' },
 ] as const;
@@ -233,7 +238,7 @@ const TRUST_BADGE_CANDIDATES = [
   { icon: 'badge', label: 'ISO 14001 zertifiziert', sub: 'Umweltmanagement', verification: CLAIM_VERIFICATIONS.iso14001 },
   { icon: 'users', label: 'Nur festangestellte Teams', sub: 'sozialversichert & sicherheitsüberprüft', verification: CLAIM_VERIFICATIONS.workforce },
   { icon: 'shield', label: 'Umfassend versichert', sub: 'Betriebshaftpflicht', verification: CLAIM_VERIFICATIONS.insurance },
-  { icon: 'clock', label: '15+ Jahre Erfahrung', sub: 'über 80 Objekte betreut', verification: CLAIM_VERIFICATIONS.companyStatistics },
+  { icon: 'clock', label: 'Seit 2015 am Markt', sub: 'rund 90 Mitarbeitende', verification: CLAIM_VERIFICATIONS.companyStatistics },
 ] as const;
 
 export const TRUST_BADGES = TRUST_BADGE_CANDIDATES.filter((badge) =>

@@ -20,11 +20,30 @@ const here = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(here, '..');
 const sig = (...p) => path.join(root, 'brand', 'signatur', ...p);
 
-const [htmlTemplate, txtTemplate, teamRaw] = await Promise.all([
-  readFile(sig('ahad-cleaning-signatur.html'), 'utf8'),
-  readFile(sig('ahad-cleaning-signatur.txt'), 'utf8'),
-  readFile(sig('team.json'), 'utf8'),
-]);
+/**
+ * Marken der AHAD Cleaning Company GmbH, für die es Signaturen gibt.
+ * Güntzel Objekt-Service ist ein Geschäftsbereich derselben Gesellschaft
+ * (Erwerb des Geschäftsbetriebs zum 1. September 2026) — die Pflichtangaben
+ * sind deshalb in beiden Vorlagen identisch.
+ */
+const MARKEN = {
+  ahad: { datei: 'ahad-cleaning-signatur', label: 'AHAD Cleaning', suffix: '' },
+  guentzel: { datei: 'guentzel-signatur', label: 'Güntzel Objekt-Service', suffix: '-guentzel' },
+};
+
+const vorlagen = Object.fromEntries(
+  await Promise.all(
+    Object.entries(MARKEN).map(async ([key, marke]) => [
+      key,
+      {
+        html: await readFile(sig(`${marke.datei}.html`), 'utf8'),
+        txt: await readFile(sig(`${marke.datei}.txt`), 'utf8'),
+      },
+    ]),
+  ),
+);
+
+const teamRaw = await readFile(sig('team.json'), 'utf8');
 
 const { personen } = JSON.parse(teamRaw);
 
@@ -78,22 +97,22 @@ function stripDurchwahl(html) {
  */
 function kopierseite(eintraege) {
   const karten = eintraege
-    .map(({ person, html, txt }) => {
+    .map(({ person, marke, slug, html, txt }) => {
       const offen = `${person.name}${person.position}`.includes('[');
       return `      <section class="karte">
         <header class="kopf">
           <div>
             <h2>${esc(person.name)}</h2>
-            <p class="rolle">${esc(person.position)}</p>
+            <p class="rolle">${esc(person.position)} · ${esc(marke.label)}</p>
           </div>
           <div class="knoepfe">
-            <button type="button" class="knopf" data-ziel="sig-${person.slug}">Signatur kopieren</button>
-            <button type="button" class="knopf leise" data-text="txt-${person.slug}">Nur Text</button>
+            <button type="button" class="knopf" data-ziel="sig-${slug}">Signatur kopieren</button>
+            <button type="button" class="knopf leise" data-text="txt-${slug}">Nur Text</button>
           </div>
         </header>
         ${offen ? '<p class="warnung">Diese Signatur enthält noch Platzhalter in eckigen Klammern. Vor dem Einsatz in <code>brand/signatur/team.json</code> ergänzen und <code>npm run signaturen</code> erneut ausführen.</p>' : ''}
-        <div class="buehne"><div id="sig-${person.slug}">${html}</div></div>
-        <textarea id="txt-${person.slug}" class="versteckt" readonly>${esc(txt)}</textarea>
+        <div class="buehne"><div id="sig-${slug}">${html}</div></div>
+        <textarea id="txt-${slug}" class="versteckt" readonly>${esc(txt)}</textarea>
       </section>`;
     })
     .join('\n');
@@ -238,8 +257,17 @@ const kopfzeile = '<!--\n  Fertige Signatur — erzeugt von scripts/build-signat
 const erzeugt = [];
 
 for (const person of personen) {
-  let html = htmlTemplate.replace(/<!--[\s\S]*?-->\n?/, kopfzeile);
-  let txt = txtTemplate;
+  for (const markenKey of person.marken ?? ['ahad']) {
+    const marke = MARKEN[markenKey];
+    if (!marke) throw new Error(`Unbekannte Marke "${markenKey}" bei ${person.slug}`);
+    await baue(person, markenKey, marke);
+  }
+}
+
+/** Eine Signatur je Person und Marke schreiben. */
+async function baue(person, markenKey, marke) {
+  let html = vorlagen[markenKey].html.replace(/<!--[\s\S]*?-->\n?/, kopfzeile);
+  let txt = vorlagen[markenKey].txt;
 
   if (person.durchwahl) {
     html = html.replace(/\[DURCHWAHL\]/g, esc(person.durchwahl));
@@ -291,15 +319,16 @@ for (const person of personen) {
     .replace(/\[POSITION\]/g, person.position)
     .replace(/\[E-MAIL\]/g, person.email);
 
-  await writeFile(sig('personen', `${person.slug}.html`), html);
-  await writeFile(sig('personen', `${person.slug}.txt`), txt);
-  erzeugt.push({ person, html: html.replace(/<!--[\s\S]*?-->\n?/, ''), txt });
+  const name = `${person.slug}${marke.suffix}`;
+  await writeFile(sig('personen', `${name}.html`), html);
+  await writeFile(sig('personen', `${name}.txt`), txt);
+  erzeugt.push({ person, marke, slug: name, html: html.replace(/<!--[\s\S]*?-->\n?/, ''), txt });
 }
 
 await writeFile(sig('personen', 'index.html'), kopierseite(erzeugt));
 
 const offen = personen.filter((p) => `${p.name}${p.position}`.includes('['));
-console.log(`✓ ${personen.length * 2} Signaturdateien + index.html in brand/signatur/personen/`);
+console.log(`✓ ${erzeugt.length * 2} Signaturdateien + index.html in brand/signatur/personen/`);
 if (offen.length > 0) {
   console.log(`  Noch zu bestätigen: ${offen.map((p) => p.slug).join(', ')}`);
 }
