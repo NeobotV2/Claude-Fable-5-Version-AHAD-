@@ -46,7 +46,6 @@ export default function Aktuelles() {
             <span className="block">bewegt.</span>
           </>
         }
-        lead="Unternehmensmeldungen aus erster Hand — knapp, datiert und mit Quellen belegt."
         image="/images/ahad/meeting.webp"
         crumbs={[{ label: 'Aktuelles' }]}
       />
