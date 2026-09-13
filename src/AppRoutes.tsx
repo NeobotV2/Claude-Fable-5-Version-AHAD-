@@ -10,6 +10,8 @@ const Karriere = lazy(() => import('./pages/Karriere'));
 const KarriereFunnel = lazy(() => import('./pages/KarriereFunnel'));
 const AngebotsFunnel = lazy(() => import('./pages/AngebotsFunnel'));
 const Fachwissen = lazy(() => import('./pages/Fachwissen'));
+const Aktuelles = lazy(() => import('./pages/Aktuelles'));
+const AktuellesGuentzel = lazy(() => import('./pages/aktuelles/GuentzelUebernahme'));
 const Kontakt = lazy(() => import('./pages/Kontakt'));
 const AHADSystem = lazy(() => import('./pages/AHADSystem'));
 const Leistungen = lazy(() => import('./pages/Leistungen'));
@@ -57,6 +59,8 @@ const ROUTE_COMPONENTS = {
   karriereBewerbung: KarriereFunnel,
   angebot: AngebotsFunnel,
   fachwissen: Fachwissen,
+  aktuelles: Aktuelles,
+  aktuellesGuentzel: AktuellesGuentzel,
   kontakt: Kontakt,
   ahadSystem: AHADSystem,
   leistungen: Leistungen,

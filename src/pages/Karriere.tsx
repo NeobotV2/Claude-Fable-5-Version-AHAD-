@@ -110,7 +110,7 @@ export default function Karriere() {
             <SectionHeading
               eyebrow="Einsatzprofile"
               title="In diesen Bereichen prüfen wir Bewerbungen."
-              lead="Die Karten sind keine Zusage einer aktuell offenen Stelle. Wir prüfen Ihr Interesse und bestätigen Einsatzort, Arbeitsmodell und Verfügbarkeit persönlich."
+              lead="Ob für Ihren Wunschort und Ihr Arbeitsmodell gerade etwas frei ist, klären wir persönlich — melden Sie sich einfach."
             />
             <Reveal delay={0.2} className="mt-8">
               <SmartImage src={IMG.team} alt="Das AHAD Team" className="rounded-3xl aspect-[4/3] shadow-soft" />

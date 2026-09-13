@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight, FileCheck2, Handshake, ShieldCheck } from 'lucide-react';
+import { ArrowRight, FileCheck2, Handshake } from 'lucide-react';
 import SEO from '@/components/SEO';
 import PageHero from '@/components/PageHero';
 import Reveal from '@/components/ui/Reveal';
@@ -18,13 +18,8 @@ import { BRANCHEN } from '@/data/branchen';
  */
 const REFERENZ_PRINZIPIEN = [
   {
-    icon: ShieldCheck,
-    title: 'Nur mit dokumentierter Freigabe',
-    text: 'Firmennamen, Logos und Zitate veröffentlichen wir erst, wenn der Auftraggeber schriftlich zugestimmt hat – und nehmen sie auf Wunsch jederzeit wieder herunter.',
-  },
-  {
     icon: Handshake,
-    title: 'Referenzgespräch statt Logo-Wand',
+    title: 'Referenzgespräch',
     text: 'Auf Anfrage stellen wir den Kontakt zu einem Bestandskunden mit vergleichbarem Objekt her: gleiche Branche, ähnliche Fläche, dieselbe Leistung.',
   },
   {
@@ -39,7 +34,7 @@ export default function Referenzen() {
     <div>
       <SEO
         title="Kundenstimmen & Referenzen | AHAD Cleaning"
-        description="Erfahrungen mit den Gebäudedienstleistungen von AHAD Cleaning. Namentliche Referenzen veröffentlichen wir nur mit dokumentierter Freigabe."
+        description="Auftraggeber, Kundenstimmen und Bewertungen zu den Gebäudedienstleistungen von AHAD Cleaning aus Villingen-Schwenningen."
         keywords="Referenzen Gebäudereinigung, Auftraggeber AHAD Cleaning, Reinigungsfirma Referenzen Süddeutschland"
       />
 
@@ -51,7 +46,7 @@ export default function Referenzen() {
             <span className="block">Täglich.</span>
           </>
         }
-        lead="Erfahrungen aus der Zusammenarbeit geben Orientierung. Namentliche Referenzen und Logos zeigen wir nur mit dokumentierter Freigabe."
+        lead="Auftraggeber aus Industrie, Verwaltung und Mittelstand — und was sie über die Zusammenarbeit sagen."
         image={IMG.handshake}
         crumbs={[{ label: 'Referenzen' }]}
         cta={{ label: 'Referenzkunde werden', to: '/angebot' }}
@@ -91,16 +86,16 @@ export default function Referenzen() {
       {/* Echte Google-Bewertungen statt anonymer Zitate */}
       <Reviews />
 
-      {/* So entstehen Referenzen — unabhängig von Freigaben immer sichtbar */}
+      {/* Angebot für alle, denen Logos und Zitate nicht genügen */}
       <section className="py-20 lg:py-28 bg-paper">
         <div className="max-w-7xl mx-auto px-4 sm:px-8">
           <SectionHeading
-            eyebrow="Unser Umgang mit Referenzen"
-            title="Was eine Referenz bei uns bedeutet."
-            lead="Eine Logo-Wand sagt wenig über die Zusammenarbeit. Deshalb zeigen wir lieber, wie Referenzen bei uns entstehen – und machen sie auf Wunsch persönlich erlebbar."
+            eyebrow="Weiter prüfen"
+            title="Referenzen, die Sie selbst prüfen können."
+            lead="Logos und Zitate sind der Anfang. Wer genauer hinsehen will, bekommt ein Gespräch mit einem Bestandskunden und Einblick in unsere Dokumentation."
             className="mb-12"
           />
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {REFERENZ_PRINZIPIEN.map((prinzip, index) => (
               <Reveal key={prinzip.title} delay={index * 0.08} className="h-full">
                 <div className="h-full bg-white rounded-3xl border border-line p-8 card-lift">

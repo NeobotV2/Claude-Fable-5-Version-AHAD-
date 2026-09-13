@@ -84,7 +84,7 @@ export default function FachwissenKosten() {
         titleSize="lg"
         eyebrow="Fachwissen · Kosten & Kalkulation"
         title="Was kostet Gebäudereinigung? Stundensatz, m²-Preise & Beispiele"
-        lead="Wie Kostenbestandteile, Zeitansatz und Leistungswert zusammenwirken — mit transparenten Beispielannahmen statt pauschaler Markt- oder Preisversprechen."
+        lead="Wie Kostenbestandteile, Zeitansatz und Leistungswert zusammenwirken — gezeigt an Beispielrechnungen."
         image={IMG.unterhaltDetail}
         imageAlt=""
         crumbs={[

@@ -1,0 +1,62 @@
+{
+  "_hinweis": "Stammdaten für scripts/build-signaturen.mjs (npm run signaturen). Felder mit [] sind noch zu bestätigen. Leere oder fehlende Felder (durchwahl, mobil, zusatz, web2) lassen die Zeile in der Signatur entfallen. \"marken\" bestimmt, welche Signaturen erzeugt werden: \"ahad\" und/oder \"guentzel\".",
+  "personen": [
+    {
+      "slug": "m-yerlikaya",
+      "name": "Muhammet Ali Yerlikaya",
+      "position": "Prokurist und Vertriebsleiter",
+      "email": "m.yerlikaya@ahad-cleaning.de",
+      "durchwahl": "",
+      "mobil": "+49 174 3926183",
+      "zusatz": "ppa. AHAD Cleaning Company GmbH",
+      "marken": [
+        "ahad",
+        "guentzel"
+      ]
+    },
+    {
+      "slug": "serafettin-yerlikaya",
+      "name": "Serafettin Yerlikaya",
+      "position": "[Position]",
+      "email": "s.yerlikaya@ahad-cleaning.de",
+      "durchwahl": "",
+      "mobil": "",
+      "marken": [
+        "ahad"
+      ]
+    },
+    {
+      "slug": "fatmanur-sahin",
+      "name": "Fatmanur Sahin",
+      "position": "[Position]",
+      "email": "f.sahin@ahad-cleaning.de",
+      "durchwahl": "",
+      "mobil": "",
+      "marken": [
+        "ahad"
+      ]
+    },
+    {
+      "slug": "esra-atan",
+      "name": "Esra Atan",
+      "position": "[Position]",
+      "email": "e.atan@ahad-cleaning.de",
+      "durchwahl": "",
+      "mobil": "",
+      "marken": [
+        "ahad"
+      ]
+    },
+    {
+      "slug": "nurhan-tokgoez",
+      "name": "Nurhan Tokgöz",
+      "position": "Assistentin der Geschäftsführung",
+      "email": "n.tokgoez@ahad-cleaning.de",
+      "durchwahl": "",
+      "mobil": "",
+      "marken": [
+        "ahad"
+      ]
+    }
+  ]
+}

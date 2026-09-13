@@ -110,7 +110,7 @@ export default function Standorte() {
             <SectionHeading
               eyebrow="Einzugsgebiet"
               title="Im Einsatz in ganz Süddeutschland."
-              lead="Auch außerhalb der genannten Einsatzgebiete prüfen wir Anfragen individuell. Eine Regionsnennung ist keine Behauptung einer örtlichen Niederlassung."
+              lead="Auch außerhalb der genannten Gebiete prüfen wir Anfragen. Betreut wird jedes Objekt von unserem Sitz in Villingen-Schwenningen aus."
             />
             <Reveal delay={0.15}>
               <div className="mt-8 flex flex-wrap gap-2.5">

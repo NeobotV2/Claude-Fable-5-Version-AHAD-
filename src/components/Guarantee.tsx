@@ -29,7 +29,7 @@ export default function Guarantee() {
           eyebrow="Das AHAD-Versprechen"
           align="center"
           title="Vier Zusagen, an denen Sie uns festhalten dürfen."
-          lead="Kein Kleingedrucktes. Wenn etwas nicht stimmt, bessern wir nach — kostenfrei. So sieht echte Risikoumkehr aus."
+          lead="Kein Kleingedrucktes. Wenn etwas nicht stimmt, bessern wir nach — kostenfrei."
           className="mb-14 max-w-3xl mx-auto"
         />
 

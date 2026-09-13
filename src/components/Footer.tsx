@@ -37,6 +37,7 @@ const columns = [
       { label: 'Einsatzgebiete', href: '/standorte' },
       { label: 'Karriere', href: '/karriere' },
       { label: 'Fachwissen', href: '/fachwissen' },
+      { label: 'Aktuelles', href: '/aktuelles' },
     ],
   },
 ];
