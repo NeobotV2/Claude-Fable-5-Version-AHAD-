@@ -110,7 +110,7 @@ export default function Fachwissen() {
         titleSize="lg"
         eyebrow="Fachwissen für Auftraggeber"
         title="Gebäudereinigung sicher entscheiden"
-        lead="Praxisnahe Leitfäden für Facility Management, Einkauf und Geschäftsführung – nach Aufgaben geordnet, mit transparenten Annahmen, Aktualisierungsstand und nachvollziehbaren Quellen."
+        lead="Leitfäden für Facility Management, Einkauf und Geschäftsführung – von der Kalkulation über die Ausschreibung bis zum Anbieterwechsel."
         crumbs={[{ label: 'Fachwissen' }]}
       />
 

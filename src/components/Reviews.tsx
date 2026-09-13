@@ -28,7 +28,7 @@ export default function Reviews() {
           eyebrow="Kundenstimmen"
           align="center"
           title="Was Kundinnen und Kunden über die Zusammenarbeit sagen"
-          lead="Eine Auswahl einzelner Stimmen im Wortlaut. Eine Plattform-Gesamtwertung veröffentlichen wir erst nach Prüfung des exakten Unternehmensprofils."
+          lead="Eine Auswahl im Wortlaut."
           className="mb-14 max-w-2xl mx-auto"
         />
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
