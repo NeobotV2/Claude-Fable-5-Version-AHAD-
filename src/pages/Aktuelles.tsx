@@ -42,7 +42,7 @@ export default function Aktuelles() {
         titleSize="lg"
         title={
           <>
-            <span className="block">Was sich bei uns</span>
+            <span className="block">Was sich bei uns{' '}</span>
             <span className="block">bewegt.</span>
           </>
         }

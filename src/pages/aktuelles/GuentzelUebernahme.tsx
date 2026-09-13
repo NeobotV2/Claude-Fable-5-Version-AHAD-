@@ -52,8 +52,12 @@ export default function AktuellesGuentzelUebernahme() {
         titleSize="lg"
         title={
           <>
-            <span className="block">AHAD Cleaning führt</span>
-            <span className="block">Güntzel Objekt-Service fort.</span>
+            <span className="block">AHAD Cleaning führt{' '}</span>
+            {/* Der Bindestrich wäre sonst eine Umbruchstelle und zerrisse den
+                Markennamen auf schmalen Displays. */}
+            <span className="block">
+              Güntzel <span className="whitespace-nowrap">Objekt-Service</span> fort.
+            </span>
           </>
         }
         lead="Der Geschäftsbetrieb ist zum 1. September 2026 auf die AHAD Cleaning Company GmbH übergegangen. Alle Mitarbeitenden wurden übernommen, der Name Güntzel bleibt."
