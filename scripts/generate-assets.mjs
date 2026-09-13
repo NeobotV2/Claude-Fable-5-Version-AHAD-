@@ -43,12 +43,20 @@ function gradientDefs(sfx = '') {
   return lg('green', `gFoldG${sfx}`) + lg('navy', `gFoldN${sfx}`);
 }
 
-/** Bildzeichen-Gruppe (Original-Transform). mode: 'color' | 'white' */
+/**
+ * Bildzeichen-Gruppe (Original-Transform).
+ * mode: 'color' (Falzflächen mit Original-Verlauf) | 'flat' (dieselben Flächen
+ * einfarbig) | 'white' (Negativ). 'flat' ist für kleine Darstellungen gedacht —
+ * in E-Mail-Signaturen wird der Verlauf auf wenigen Pixeln zu einem Schlieren-
+ * effekt, einfarbig bleibt die Form sauber lesbar.
+ */
 function iconGroup(mode, sfx = '') {
   const f =
     mode === 'white'
       ? { navy: '#fff', green: '#fff', fg: '#fff', fn: '#fff' }
-      : { navy: NAVY, green: GREEN, fg: `url(#gFoldG${sfx})`, fn: `url(#gFoldN${sfx})` };
+      : mode === 'flat'
+        ? { navy: NAVY, green: GREEN, fg: GREEN, fn: NAVY }
+        : { navy: NAVY, green: GREEN, fg: `url(#gFoldG${sfx})`, fn: `url(#gFoldN${sfx})` };
   return (
     `<g transform="${A.iconTransform}">` +
     `<path d="${A.icon.navy}" fill-rule="evenodd" fill="${f.navy}"/>` +
@@ -150,13 +158,13 @@ function signaturLogoSvg(logoH = 42, pad = 13) {
   const logoW = Math.round((logoH * lockW) / lockH);
   const w = logoW + pad * 2;
   const h = logoH + pad * 2;
-  // Die Falzflächen der Farbversion füllen sich aus den Original-Verläufen.
-  // Ohne passende <defs> zum Suffix zeigen url(#…)-Verweise ins Leere und die
-  // beiden Flächen fallen ersatzlos weg — das Bildzeichen wäre dann zu navy.
+  // Bewusst 'flat' statt 'color': Bei rund 42 px Logohöhe zerfällt der
+  // Original-Verlauf der Falzflächen in eine graue Schliere. Einfarbig bleibt
+  // das Bildzeichen in jedem Mail-Client sauber. Für alles ab Plakatgröße
+  // bleibt die Verlaufsversion (brand/print) die richtige Wahl.
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}">
-  <defs>${gradientDefs('-sig')}</defs>
   <rect width="${w}" height="${h}" rx="10" fill="#ffffff"/>
-  ${placeLockup('color', pad, pad, logoH, '-sig')}
+  ${placeLockup('flat', pad, pad, logoH, '-sig')}
 </svg>`;
 }
 

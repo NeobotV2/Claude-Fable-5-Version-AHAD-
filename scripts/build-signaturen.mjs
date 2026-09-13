@@ -259,6 +259,29 @@ for (const person of personen) {
     txt = dropTextLine(txt, '[MOBIL]');
   }
 
+  // Zusatzzeile (z. B. Prokura oder zweites Geschäftsfeld) — ohne Angabe
+  // verschwindet die Zeile, statt leer stehen zu bleiben.
+  if (person.zusatz) {
+    html = html.replace(/\[ZUSATZ\]/g, esc(person.zusatz));
+    txt = txt.replace(/\[ZUSATZ\]/g, person.zusatz);
+  } else {
+    html = dropHtmlRow(html, '[ZUSATZ]');
+    txt = dropTextLine(txt, '[ZUSATZ]');
+  }
+
+  // Zweite Webadresse wird an die erste angehängt, nicht als eigene Zeile.
+  if (person.web2) {
+    const ziel = person.web2.replace(/^https?:\/\//, '').replace(/^www\./, '');
+    html = html.replace(
+      /\[WEB2\]/g,
+      `\n      &nbsp;·&nbsp;\n      <a href="https://www.${esc(ziel)}" style="color:#0D6B38;text-decoration:none;font-weight:bold;">${esc(ziel)}</a>`,
+    );
+    txt = txt.replace(/\[WEB2\]/g, ` | ${ziel}`);
+  } else {
+    html = html.replace(/\[WEB2\]/g, '');
+    txt = txt.replace(/\[WEB2\]/g, '');
+  }
+
   html = html
     .replace(/\[NAME\]/g, esc(person.name))
     .replace(/\[POSITION\]/g, esc(person.position))

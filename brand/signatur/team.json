@@ -1,13 +1,15 @@
 {
-  "_hinweis": "Stammdaten für scripts/build-signaturen.mjs (npm run signaturen). Felder mit [] sind noch zu bestätigen. Leere Felder (durchwahl, mobil) lassen die Zeile in der Signatur komplett entfallen.",
+  "_hinweis": "Stammdaten für scripts/build-signaturen.mjs (npm run signaturen). Felder mit [] sind noch zu bestätigen. Leere oder fehlende Felder (durchwahl, mobil, zusatz, web2) lassen die Zeile in der Signatur komplett entfallen.",
   "personen": [
     {
       "slug": "m-yerlikaya",
-      "name": "[Vorname] Yerlikaya",
-      "position": "[Position]",
+      "name": "Muhammet Ali Yerlikaya",
+      "position": "Vertriebsleiter",
       "email": "m.yerlikaya@ahad-cleaning.de",
       "durchwahl": "",
-      "mobil": ""
+      "mobil": "+49 174 3926183",
+      "zusatz": "ppa. AHAD Cleaning Company GmbH / Güntzel Objekt-Service",
+      "web2": "guentzel-service.de"
     },
     {
       "slug": "serafettin-yerlikaya",
