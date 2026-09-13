@@ -1,0 +1,561 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>E-Mail-Signaturen — AHAD Cleaning</title>
+<style>
+  :root { --navy:#0B2341; --gruen:#0D6B38; --linie:#e6eaef; --grau:#5A6472; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:#f7f9fb; color:var(--navy);
+         font:16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif; }
+  .kopfzeile { background:var(--navy); color:#fff; padding:28px 24px; }
+  .innen { max-width:900px; margin:0 auto; }
+  .kopfzeile h1 { margin:0 0 6px; font-size:22px; }
+  .kopfzeile p { margin:0; color:#c8d4e2; font-size:14px; }
+  main { padding:28px 24px 64px; }
+  .anleitung { background:#fff; border:1px solid var(--linie); border-radius:12px;
+               padding:18px 22px; margin-bottom:26px; font-size:14px; }
+  .anleitung h2 { margin:0 0 10px; font-size:15px; }
+  .anleitung ol { margin:0; padding-left:20px; }
+  .anleitung li { margin-bottom:5px; }
+  .karte { background:#fff; border:1px solid var(--linie); border-radius:12px;
+           padding:20px 22px; margin-bottom:18px; }
+  .kopf { display:flex; flex-wrap:wrap; gap:12px; align-items:center;
+          justify-content:space-between; margin-bottom:14px; }
+  .kopf h2 { margin:0; font-size:17px; }
+  .rolle { margin:2px 0 0; font-size:13px; color:var(--grau); }
+  .knoepfe { display:flex; gap:8px; flex-wrap:wrap; }
+  .knopf { font:inherit; font-size:14px; font-weight:700; cursor:pointer;
+           border:0; border-radius:8px; padding:9px 16px;
+           background:var(--gruen); color:#fff; }
+  .knopf:hover { background:#0A552C; }
+  .knopf.leise { background:#fff; color:var(--navy); border:1px solid #9aa8b8; }
+  .knopf.leise:hover { background:#eef2f6; }
+  .knopf.fertig { background:var(--navy); }
+  .buehne { border:1px dashed var(--linie); border-radius:10px; padding:18px; overflow-x:auto; }
+  .warnung { margin:0 0 12px; padding:10px 14px; border-radius:8px; font-size:13px;
+             background:#fff7ed; border:1px solid #fed7aa; color:#7c2d12; }
+  .warnung code { background:#fff; padding:1px 5px; border-radius:4px; }
+  .versteckt { position:absolute; left:-10000px; width:1px; height:1px; }
+</style>
+</head>
+<body>
+  <div class="kopfzeile"><div class="innen">
+    <h1>E-Mail-Signaturen</h1>
+    <p>AHAD Cleaning Company GmbH — auf „Signatur kopieren" tippen und im Mailprogramm einfügen.</p>
+  </div></div>
+  <main class="innen">
+    <div class="anleitung">
+      <h2>So bauen Sie die Signatur ein</h2>
+      <ol>
+        <li>Bei Ihrem Namen auf <strong>Signatur kopieren</strong> klicken.</li>
+        <li><strong>Outlook:</strong> Datei → Optionen → E-Mail → Signaturen → Neu.
+            <strong>Outlook im Browser:</strong> Einstellungen → E-Mail → Signaturen.
+            <strong>Apple Mail:</strong> Mail → Einstellungen → Signaturen, dort
+            „Standardschrift immer verwenden" ausschalten.</li>
+        <li>Ins Signaturfeld einfügen mit <strong>Strg + V</strong> (Mac: <strong>Cmd + V</strong>) und speichern.</li>
+        <li>Zur Kontrolle eine Testmail an sich selbst schicken und prüfen, ob das Logo erscheint.</li>
+      </ol>
+    </div>
+      <section class="karte">
+        <header class="kopf">
+          <div>
+            <h2>[Vorname] Yerlikaya</h2>
+            <p class="rolle">[Position]</p>
+          </div>
+          <div class="knoepfe">
+            <button type="button" class="knopf" data-ziel="sig-m-yerlikaya">Signatur kopieren</button>
+            <button type="button" class="knopf leise" data-text="txt-m-yerlikaya">Nur Text</button>
+          </div>
+        </header>
+        <p class="warnung">Diese Signatur enthält noch Platzhalter in eckigen Klammern. Vor dem Einsatz in <code>brand/signatur/team.json</code> ergänzen und <code>npm run signaturen</code> erneut ausführen.</p>
+        <div class="buehne"><div id="sig-m-yerlikaya"><table role="presentation" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;font-family:Arial,Helvetica,sans-serif;color:#0B2341;">
+  <tr>
+    <td style="padding:0 0 12px 0;">
+      <a href="https://www.ahad-cleaning.de" style="text-decoration:none;border:0;">
+        <img src="https://www.ahad-cleaning.de/signatur-logo.png" width="188" height="68" alt="AHAD Cleaning" style="display:block;width:188px;height:68px;border:0;outline:none;text-decoration:none;" />
+      </a>
+    </td>
+  </tr>
+  <tr>
+    <td style="padding:0 0 2px 0;font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:20px;font-weight:bold;color:#0B2341;">
+      [Vorname] Yerlikaya
+    </td>
+  </tr>
+  <tr>
+    <td style="padding:0 0 1px 0;font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:18px;color:#5A6472;">
+      [Position]
+    </td>
+  </tr>
+  <tr>
+    <td style="padding:0 0 8px 0;font-family:Arial,Helvetica,sans-serif;font-size:12px;line-height:16px;color:#7A8595;">
+      Gebäudereinigung für Industrie, Verwaltung &amp; Mittelstand
+    </td>
+  </tr>
+  <tr>
+    <td style="padding:0 0 2px 0;font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:19px;color:#0B2341;">
+      Tel. <a href="tel:+4977219447915" style="color:#0B2341;text-decoration:none;">+49 7721 944 79 15</a>
+    </td>
+  </tr>
+  <tr>
+    <td style="padding:0 0 2px 0;font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:19px;color:#0B2341;">
+      <a href="mailto:m.yerlikaya@ahad-cleaning.de" style="color:#0D6B38;text-decoration:none;font-weight:bold;">m.yerlikaya@ahad-cleaning.de</a>
+      &nbsp;·&nbsp;
+      <a href="https://www.ahad-cleaning.de" style="color:#0D6B38;text-decoration:none;font-weight:bold;">ahad-cleaning.de</a>
+    </td>
+  </tr>
+  <tr>
+    <td style="padding:0;font-family:Arial,Helvetica,sans-serif;font-size:12px;line-height:18px;color:#7A8595;">
+      Mo–Fr · 08:00–17:00 Uhr
+    </td>
+  </tr>
+  <tr>
+    <td style="padding:14px 0 0 0;font-size:0;line-height:0;">
+      <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="border-collapse:collapse;width:100%;">
+        <tr>
+          <td height="2" bgcolor="#0D6B38" style="height:2px;background-color:#0D6B38;font-size:0;line-height:0;">&nbsp;</td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td style="padding:10px 0 0 0;font-family:Arial,Helvetica,sans-serif;font-size:11px;line-height:17px;color:#7A8595;">
+      <span style="font-weight:bold;color:#5A6472;">AHAD Cleaning Company GmbH</span> &nbsp;·&nbsp;
+      Max-Planck-Straße 11 &nbsp;·&nbsp; 78052 Villingen-Schwenningen<br />
+      Geschäftsführerin: Nurhan Yerlikaya &nbsp;·&nbsp;
+      Amtsgericht Freiburg im Breisgau, HRB 712961 &nbsp;·&nbsp;
+      USt-IdNr. DE301347274
+    </td>
+  </tr>
+</table>
+</div></div>
+        <textarea id="txt-m-yerlikaya" class="versteckt" readonly>[Vorname] Yerlikaya
+[Position] | AHAD Cleaning - Gebaeudereinigung fuer Industrie, Verwaltung &amp; Mittelstand
+
+Tel. +49 7721 944 79 15
+m.yerlikaya@ahad-cleaning.de | ahad-cleaning.de
+Mo-Fr 08:00-17:00 Uhr
+
+--
+AHAD Cleaning Company GmbH
+Max-Planck-Strasse 11, 78052 Villingen-Schwenningen
+Geschaeftsfuehrerin: Nurhan Yerlikaya
+Amtsgericht Freiburg im Breisgau, HRB 712961
+USt-IdNr. DE301347274
+</textarea>
+      </section>
+      <section class="karte">
+        <header class="kopf">
+          <div>
+            <h2>Serafettin Yerlikaya</h2>
+            <p class="rolle">[Position]</p>
+          </div>
+          <div class="knoepfe">
+            <button type="button" class="knopf" data-ziel="sig-serafettin-yerlikaya">Signatur kopieren</button>
+            <button type="button" class="knopf leise" data-text="txt-serafettin-yerlikaya">Nur Text</button>
+          </div>
+        </header>
+        <p class="warnung">Diese Signatur enthält noch Platzhalter in eckigen Klammern. Vor dem Einsatz in <code>brand/signatur/team.json</code> ergänzen und <code>npm run signaturen</code> erneut ausführen.</p>
+        <div class="buehne"><div id="sig-serafettin-yerlikaya"><table role="presentation" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;font-family:Arial,Helvetica,sans-serif;color:#0B2341;">
+  <tr>
+    <td style="padding:0 0 12px 0;">
+      <a href="https://www.ahad-cleaning.de" style="text-decoration:none;border:0;">
+        <img src="https://www.ahad-cleaning.de/signatur-logo.png" width="188" height="68" alt="AHAD Cleaning" style="display:block;width:188px;height:68px;border:0;outline:none;text-decoration:none;" />
+      </a>
+    </td>
+  </tr>
+  <tr>
+    <td style="padding:0 0 2px 0;font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:20px;font-weight:bold;color:#0B2341;">
+      Serafettin Yerlikaya
+    </td>
+  </tr>
+  <tr>
+    <td style="padding:0 0 1px 0;font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:18px;color:#5A6472;">
+      [Position]
+    </td>
+  </tr>
+  <tr>
+    <td style="padding:0 0 8px 0;font-family:Arial,Helvetica,sans-serif;font-size:12px;line-height:16px;color:#7A8595;">
+      Gebäudereinigung für Industrie, Verwaltung &amp; Mittelstand
+    </td>
+  </tr>
+  <tr>
+    <td style="padding:0 0 2px 0;font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:19px;color:#0B2341;">
+      Tel. <a href="tel:+4977219447915" style="color:#0B2341;text-decoration:none;">+49 7721 944 79 15</a>
+    </td>
+  </tr>
+  <tr>
+    <td style="padding:0 0 2px 0;font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:19px;color:#0B2341;">
+      <a href="mailto:s.yerlikaya@ahad-cleaning.de" style="color:#0D6B38;text-decoration:none;font-weight:bold;">s.yerlikaya@ahad-cleaning.de</a>
+      &nbsp;·&nbsp;
+      <a href="https://www.ahad-cleaning.de" style="color:#0D6B38;text-decoration:none;font-weight:bold;">ahad-cleaning.de</a>
+    </td>
+  </tr>
+  <tr>
+    <td style="padding:0;font-family:Arial,Helvetica,sans-serif;font-size:12px;line-height:18px;color:#7A8595;">
+      Mo–Fr · 08:00–17:00 Uhr
+    </td>
+  </tr>
+  <tr>
+    <td style="padding:14px 0 0 0;font-size:0;line-height:0;">
+      <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="border-collapse:collapse;width:100%;">
+        <tr>
+          <td height="2" bgcolor="#0D6B38" style="height:2px;background-color:#0D6B38;font-size:0;line-height:0;">&nbsp;</td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td style="padding:10px 0 0 0;font-family:Arial,Helvetica,sans-serif;font-size:11px;line-height:17px;color:#7A8595;">
+      <span style="font-weight:bold;color:#5A6472;">AHAD Cleaning Company GmbH</span> &nbsp;·&nbsp;
+      Max-Planck-Straße 11 &nbsp;·&nbsp; 78052 Villingen-Schwenningen<br />
+      Geschäftsführerin: Nurhan Yerlikaya &nbsp;·&nbsp;
+      Amtsgericht Freiburg im Breisgau, HRB 712961 &nbsp;·&nbsp;
+      USt-IdNr. DE301347274
+    </td>
+  </tr>
+</table>
+</div></div>
+        <textarea id="txt-serafettin-yerlikaya" class="versteckt" readonly>Serafettin Yerlikaya
+[Position] | AHAD Cleaning - Gebaeudereinigung fuer Industrie, Verwaltung &amp; Mittelstand
+
+Tel. +49 7721 944 79 15
+s.yerlikaya@ahad-cleaning.de | ahad-cleaning.de
+Mo-Fr 08:00-17:00 Uhr
+
+--
+AHAD Cleaning Company GmbH
+Max-Planck-Strasse 11, 78052 Villingen-Schwenningen
+Geschaeftsfuehrerin: Nurhan Yerlikaya
+Amtsgericht Freiburg im Breisgau, HRB 712961
+USt-IdNr. DE301347274
+</textarea>
+      </section>
+      <section class="karte">
+        <header class="kopf">
+          <div>
+            <h2>Fatmanur Sahin</h2>
+            <p class="rolle">[Position]</p>
+          </div>
+          <div class="knoepfe">
+            <button type="button" class="knopf" data-ziel="sig-fatmanur-sahin">Signatur kopieren</button>
+            <button type="button" class="knopf leise" data-text="txt-fatmanur-sahin">Nur Text</button>
+          </div>
+        </header>
+        <p class="warnung">Diese Signatur enthält noch Platzhalter in eckigen Klammern. Vor dem Einsatz in <code>brand/signatur/team.json</code> ergänzen und <code>npm run signaturen</code> erneut ausführen.</p>
+        <div class="buehne"><div id="sig-fatmanur-sahin"><table role="presentation" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;font-family:Arial,Helvetica,sans-serif;color:#0B2341;">
+  <tr>
+    <td style="padding:0 0 12px 0;">
+      <a href="https://www.ahad-cleaning.de" style="text-decoration:none;border:0;">
+        <img src="https://www.ahad-cleaning.de/signatur-logo.png" width="188" height="68" alt="AHAD Cleaning" style="display:block;width:188px;height:68px;border:0;outline:none;text-decoration:none;" />
+      </a>
+    </td>
+  </tr>
+  <tr>
+    <td style="padding:0 0 2px 0;font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:20px;font-weight:bold;color:#0B2341;">
+      Fatmanur Sahin
+    </td>
+  </tr>
+  <tr>
+    <td style="padding:0 0 1px 0;font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:18px;color:#5A6472;">
+      [Position]
+    </td>
+  </tr>
+  <tr>
+    <td style="padding:0 0 8px 0;font-family:Arial,Helvetica,sans-serif;font-size:12px;line-height:16px;color:#7A8595;">
+      Gebäudereinigung für Industrie, Verwaltung &amp; Mittelstand
+    </td>
+  </tr>
+  <tr>
+    <td style="padding:0 0 2px 0;font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:19px;color:#0B2341;">
+      Tel. <a href="tel:+4977219447915" style="color:#0B2341;text-decoration:none;">+49 7721 944 79 15</a>
+    </td>
+  </tr>
+  <tr>
+    <td style="padding:0 0 2px 0;font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:19px;color:#0B2341;">
+      <a href="mailto:f.sahin@ahad-cleaning.de" style="color:#0D6B38;text-decoration:none;font-weight:bold;">f.sahin@ahad-cleaning.de</a>
+      &nbsp;·&nbsp;
+      <a href="https://www.ahad-cleaning.de" style="color:#0D6B38;text-decoration:none;font-weight:bold;">ahad-cleaning.de</a>
+    </td>
+  </tr>
+  <tr>
+    <td style="padding:0;font-family:Arial,Helvetica,sans-serif;font-size:12px;line-height:18px;color:#7A8595;">
+      Mo–Fr · 08:00–17:00 Uhr
+    </td>
+  </tr>
+  <tr>
+    <td style="padding:14px 0 0 0;font-size:0;line-height:0;">
+      <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="border-collapse:collapse;width:100%;">
+        <tr>
+          <td height="2" bgcolor="#0D6B38" style="height:2px;background-color:#0D6B38;font-size:0;line-height:0;">&nbsp;</td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td style="padding:10px 0 0 0;font-family:Arial,Helvetica,sans-serif;font-size:11px;line-height:17px;color:#7A8595;">
+      <span style="font-weight:bold;color:#5A6472;">AHAD Cleaning Company GmbH</span> &nbsp;·&nbsp;
+      Max-Planck-Straße 11 &nbsp;·&nbsp; 78052 Villingen-Schwenningen<br />
+      Geschäftsführerin: Nurhan Yerlikaya &nbsp;·&nbsp;
+      Amtsgericht Freiburg im Breisgau, HRB 712961 &nbsp;·&nbsp;
+      USt-IdNr. DE301347274
+    </td>
+  </tr>
+</table>
+</div></div>
+        <textarea id="txt-fatmanur-sahin" class="versteckt" readonly>Fatmanur Sahin
+[Position] | AHAD Cleaning - Gebaeudereinigung fuer Industrie, Verwaltung &amp; Mittelstand
+
+Tel. +49 7721 944 79 15
+f.sahin@ahad-cleaning.de | ahad-cleaning.de
+Mo-Fr 08:00-17:00 Uhr
+
+--
+AHAD Cleaning Company GmbH
+Max-Planck-Strasse 11, 78052 Villingen-Schwenningen
+Geschaeftsfuehrerin: Nurhan Yerlikaya
+Amtsgericht Freiburg im Breisgau, HRB 712961
+USt-IdNr. DE301347274
+</textarea>
+      </section>
+      <section class="karte">
+        <header class="kopf">
+          <div>
+            <h2>Esra Atan</h2>
+            <p class="rolle">[Position]</p>
+          </div>
+          <div class="knoepfe">
+            <button type="button" class="knopf" data-ziel="sig-esra-atan">Signatur kopieren</button>
+            <button type="button" class="knopf leise" data-text="txt-esra-atan">Nur Text</button>
+          </div>
+        </header>
+        <p class="warnung">Diese Signatur enthält noch Platzhalter in eckigen Klammern. Vor dem Einsatz in <code>brand/signatur/team.json</code> ergänzen und <code>npm run signaturen</code> erneut ausführen.</p>
+        <div class="buehne"><div id="sig-esra-atan"><table role="presentation" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;font-family:Arial,Helvetica,sans-serif;color:#0B2341;">
+  <tr>
+    <td style="padding:0 0 12px 0;">
+      <a href="https://www.ahad-cleaning.de" style="text-decoration:none;border:0;">
+        <img src="https://www.ahad-cleaning.de/signatur-logo.png" width="188" height="68" alt="AHAD Cleaning" style="display:block;width:188px;height:68px;border:0;outline:none;text-decoration:none;" />
+      </a>
+    </td>
+  </tr>
+  <tr>
+    <td style="padding:0 0 2px 0;font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:20px;font-weight:bold;color:#0B2341;">
+      Esra Atan
+    </td>
+  </tr>
+  <tr>
+    <td style="padding:0 0 1px 0;font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:18px;color:#5A6472;">
+      [Position]
+    </td>
+  </tr>
+  <tr>
+    <td style="padding:0 0 8px 0;font-family:Arial,Helvetica,sans-serif;font-size:12px;line-height:16px;color:#7A8595;">
+      Gebäudereinigung für Industrie, Verwaltung &amp; Mittelstand
+    </td>
+  </tr>
+  <tr>
+    <td style="padding:0 0 2px 0;font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:19px;color:#0B2341;">
+      Tel. <a href="tel:+4977219447915" style="color:#0B2341;text-decoration:none;">+49 7721 944 79 15</a>
+    </td>
+  </tr>
+  <tr>
+    <td style="padding:0 0 2px 0;font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:19px;color:#0B2341;">
+      <a href="mailto:e.atan@ahad-cleaning.de" style="color:#0D6B38;text-decoration:none;font-weight:bold;">e.atan@ahad-cleaning.de</a>
+      &nbsp;·&nbsp;
+      <a href="https://www.ahad-cleaning.de" style="color:#0D6B38;text-decoration:none;font-weight:bold;">ahad-cleaning.de</a>
+    </td>
+  </tr>
+  <tr>
+    <td style="padding:0;font-family:Arial,Helvetica,sans-serif;font-size:12px;line-height:18px;color:#7A8595;">
+      Mo–Fr · 08:00–17:00 Uhr
+    </td>
+  </tr>
+  <tr>
+    <td style="padding:14px 0 0 0;font-size:0;line-height:0;">
+      <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="border-collapse:collapse;width:100%;">
+        <tr>
+          <td height="2" bgcolor="#0D6B38" style="height:2px;background-color:#0D6B38;font-size:0;line-height:0;">&nbsp;</td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td style="padding:10px 0 0 0;font-family:Arial,Helvetica,sans-serif;font-size:11px;line-height:17px;color:#7A8595;">
+      <span style="font-weight:bold;color:#5A6472;">AHAD Cleaning Company GmbH</span> &nbsp;·&nbsp;
+      Max-Planck-Straße 11 &nbsp;·&nbsp; 78052 Villingen-Schwenningen<br />
+      Geschäftsführerin: Nurhan Yerlikaya &nbsp;·&nbsp;
+      Amtsgericht Freiburg im Breisgau, HRB 712961 &nbsp;·&nbsp;
+      USt-IdNr. DE301347274
+    </td>
+  </tr>
+</table>
+</div></div>
+        <textarea id="txt-esra-atan" class="versteckt" readonly>Esra Atan
+[Position] | AHAD Cleaning - Gebaeudereinigung fuer Industrie, Verwaltung &amp; Mittelstand
+
+Tel. +49 7721 944 79 15
+e.atan@ahad-cleaning.de | ahad-cleaning.de
+Mo-Fr 08:00-17:00 Uhr
+
+--
+AHAD Cleaning Company GmbH
+Max-Planck-Strasse 11, 78052 Villingen-Schwenningen
+Geschaeftsfuehrerin: Nurhan Yerlikaya
+Amtsgericht Freiburg im Breisgau, HRB 712961
+USt-IdNr. DE301347274
+</textarea>
+      </section>
+      <section class="karte">
+        <header class="kopf">
+          <div>
+            <h2>Nurhan Tokgöz</h2>
+            <p class="rolle">Assistentin der Geschäftsführung</p>
+          </div>
+          <div class="knoepfe">
+            <button type="button" class="knopf" data-ziel="sig-nurhan-tokgoez">Signatur kopieren</button>
+            <button type="button" class="knopf leise" data-text="txt-nurhan-tokgoez">Nur Text</button>
+          </div>
+        </header>
+        
+        <div class="buehne"><div id="sig-nurhan-tokgoez"><table role="presentation" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;font-family:Arial,Helvetica,sans-serif;color:#0B2341;">
+  <tr>
+    <td style="padding:0 0 12px 0;">
+      <a href="https://www.ahad-cleaning.de" style="text-decoration:none;border:0;">
+        <img src="https://www.ahad-cleaning.de/signatur-logo.png" width="188" height="68" alt="AHAD Cleaning" style="display:block;width:188px;height:68px;border:0;outline:none;text-decoration:none;" />
+      </a>
+    </td>
+  </tr>
+  <tr>
+    <td style="padding:0 0 2px 0;font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:20px;font-weight:bold;color:#0B2341;">
+      Nurhan Tokgöz
+    </td>
+  </tr>
+  <tr>
+    <td style="padding:0 0 1px 0;font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:18px;color:#5A6472;">
+      Assistentin der Geschäftsführung
+    </td>
+  </tr>
+  <tr>
+    <td style="padding:0 0 8px 0;font-family:Arial,Helvetica,sans-serif;font-size:12px;line-height:16px;color:#7A8595;">
+      Gebäudereinigung für Industrie, Verwaltung &amp; Mittelstand
+    </td>
+  </tr>
+  <tr>
+    <td style="padding:0 0 2px 0;font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:19px;color:#0B2341;">
+      Tel. <a href="tel:+4977219447915" style="color:#0B2341;text-decoration:none;">+49 7721 944 79 15</a>
+    </td>
+  </tr>
+  <tr>
+    <td style="padding:0 0 2px 0;font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:19px;color:#0B2341;">
+      <a href="mailto:n.tokgoez@ahad-cleaning.de" style="color:#0D6B38;text-decoration:none;font-weight:bold;">n.tokgoez@ahad-cleaning.de</a>
+      &nbsp;·&nbsp;
+      <a href="https://www.ahad-cleaning.de" style="color:#0D6B38;text-decoration:none;font-weight:bold;">ahad-cleaning.de</a>
+    </td>
+  </tr>
+  <tr>
+    <td style="padding:0;font-family:Arial,Helvetica,sans-serif;font-size:12px;line-height:18px;color:#7A8595;">
+      Mo–Fr · 08:00–17:00 Uhr
+    </td>
+  </tr>
+  <tr>
+    <td style="padding:14px 0 0 0;font-size:0;line-height:0;">
+      <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="border-collapse:collapse;width:100%;">
+        <tr>
+          <td height="2" bgcolor="#0D6B38" style="height:2px;background-color:#0D6B38;font-size:0;line-height:0;">&nbsp;</td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td style="padding:10px 0 0 0;font-family:Arial,Helvetica,sans-serif;font-size:11px;line-height:17px;color:#7A8595;">
+      <span style="font-weight:bold;color:#5A6472;">AHAD Cleaning Company GmbH</span> &nbsp;·&nbsp;
+      Max-Planck-Straße 11 &nbsp;·&nbsp; 78052 Villingen-Schwenningen<br />
+      Geschäftsführerin: Nurhan Yerlikaya &nbsp;·&nbsp;
+      Amtsgericht Freiburg im Breisgau, HRB 712961 &nbsp;·&nbsp;
+      USt-IdNr. DE301347274
+    </td>
+  </tr>
+</table>
+</div></div>
+        <textarea id="txt-nurhan-tokgoez" class="versteckt" readonly>Nurhan Tokgöz
+Assistentin der Geschäftsführung | AHAD Cleaning - Gebaeudereinigung fuer Industrie, Verwaltung &amp; Mittelstand
+
+Tel. +49 7721 944 79 15
+n.tokgoez@ahad-cleaning.de | ahad-cleaning.de
+Mo-Fr 08:00-17:00 Uhr
+
+--
+AHAD Cleaning Company GmbH
+Max-Planck-Strasse 11, 78052 Villingen-Schwenningen
+Geschaeftsfuehrerin: Nurhan Yerlikaya
+Amtsgericht Freiburg im Breisgau, HRB 712961
+USt-IdNr. DE301347274
+</textarea>
+      </section>
+  </main>
+<script>
+  function rueckmeldung(knopf, erfolg) {
+    var alt = knopf.textContent;
+    knopf.textContent = erfolg ? 'Kopiert' : 'Bitte von Hand markieren';
+    knopf.classList.toggle('fertig', erfolg);
+    setTimeout(function () {
+      knopf.textContent = alt;
+      knopf.classList.remove('fertig');
+    }, 2000);
+  }
+
+  function markierenUndKopieren(knoten) {
+    var auswahl = window.getSelection();
+    var bereich = document.createRange();
+    bereich.selectNodeContents(knoten);
+    auswahl.removeAllRanges();
+    auswahl.addRange(bereich);
+    var ok = false;
+    try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+    auswahl.removeAllRanges();
+    return ok;
+  }
+
+  document.addEventListener('click', function (ereignis) {
+    var knopf = ereignis.target.closest('.knopf');
+    if (!knopf) return;
+
+    if (knopf.dataset.text) {
+      var feld = document.getElementById(knopf.dataset.text);
+      var text = feld.value;
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(
+          function () { rueckmeldung(knopf, true); },
+          function () { rueckmeldung(knopf, markierenUndKopieren(feld)); }
+        );
+        return;
+      }
+      feld.select();
+      var okText = false;
+      try { okText = document.execCommand('copy'); } catch (e) { okText = false; }
+      rueckmeldung(knopf, okText);
+      return;
+    }
+
+    var quelle = document.getElementById(knopf.dataset.ziel);
+    var reinText = document.getElementById(knopf.dataset.ziel.replace('sig-', 'txt-')).value;
+
+    // Zuerst die moderne API: sie legt Formatierung und Nur-Text gemeinsam ab.
+    if (window.ClipboardItem && navigator.clipboard && navigator.clipboard.write) {
+      var daten = new ClipboardItem({
+        'text/html': new Blob([quelle.innerHTML], { type: 'text/html' }),
+        'text/plain': new Blob([reinText], { type: 'text/plain' })
+      });
+      navigator.clipboard.write([daten]).then(
+        function () { rueckmeldung(knopf, true); },
+        function () { rueckmeldung(knopf, markierenUndKopieren(quelle)); }
+      );
+      return;
+    }
+
+    rueckmeldung(knopf, markierenUndKopieren(quelle));
+  });
+</script>
+</body>
+</html>
