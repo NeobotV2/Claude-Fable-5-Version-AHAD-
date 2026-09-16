@@ -36,10 +36,14 @@ const values = [
 ];
 
 const milestones = [
-  { year: 'Gründung', text: 'Start als regionaler Reinigungsdienst im Schwarzwald-Baar-Kreis — mit dem Anspruch, es besser zu machen.' },
+  { year: '2015', text: 'Start als regionaler Reinigungsdienst im Schwarzwald-Baar-Kreis — mit dem Anspruch, es besser zu machen.' },
   { year: 'Wachstum', text: 'Ausbau des Einsatzgebiets für gewerbliche Kunden in Süddeutschland.' },
   { year: 'System', text: 'Entwicklung des AHAD-Systems: Analyse, Handling, Audit, Dokumentation als verbindlicher Standard.' },
-  { year: 'Heute', text: 'Gebäudedienstleistungen mit klaren Abläufen für Unternehmen und Organisationen.' },
+  {
+    year: 'September 2026',
+    text: 'Übernahme des Geschäftsbetriebs von Güntzel Objekt-Service aus Villingen-Schwenningen. Alle rund 25 Mitarbeitenden wurden übernommen, der Name Güntzel bleibt.',
+  },
+  { year: 'Heute', text: 'Rund 90 Mitarbeiterinnen und Mitarbeiter in der Region Schwarzwald-Baar-Heuberg, zertifiziert nach ISO 9001 und ISO 14001.' },
 ];
 
 export default function Unternehmen() {
@@ -102,6 +106,15 @@ export default function Unternehmen() {
                 </Reveal>
               ))}
             </div>
+            <p className="mt-8">
+              <Link
+                to="/aktuelles/guentzel-objekt-service-fortfuehrung"
+                className="inline-flex items-center gap-2 font-bold text-brand hover:underline"
+              >
+                Zur Meldung über die Fortführung von Güntzel Objekt-Service
+                <ArrowRight size={16} aria-hidden="true" />
+              </Link>
+            </p>
           </div>
 
           <Reveal delay={0.15}>
