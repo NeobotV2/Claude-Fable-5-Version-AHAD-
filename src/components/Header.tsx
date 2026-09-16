@@ -74,6 +74,7 @@ const navLinks: NavItem[] = [
       { name: 'Standorte', href: '/standorte' },
       { name: 'Karriere', href: '/karriere' },
       { name: 'Fachwissen', href: '/fachwissen' },
+      { name: 'Aktuelles', href: '/aktuelles' },
       { name: 'Kontakt', href: '/kontakt' },
     ],
   },

@@ -30,6 +30,7 @@ import Accordion, { faqSchemaFrom, type FAQItem } from '@/components/ui/Accordio
 import LogoMarquee from '@/components/LogoMarquee';
 import FeaturedTestimonial from '@/components/FeaturedTestimonial';
 import CTABand from '@/components/CTABand';
+import NewsTeaser from '@/components/NewsTeaser';
 import Guarantee from '@/components/Guarantee';
 import Reviews from '@/components/Reviews';
 import TrustBand from '@/components/TrustBand';
@@ -387,6 +388,9 @@ export default function Home() {
         </div>
         <LogoMarquee />
       </section>}
+
+      {/* ── AKTUELLE MELDUNG ─────────────────────────────────────────── */}
+      <NewsTeaser />
 
       {/* ── LEISTUNGEN (01) ──────────────────────────────────────────── */}
       <section className="py-24 lg:py-36 bg-paper">
