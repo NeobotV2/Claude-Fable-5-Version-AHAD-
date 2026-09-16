@@ -26,10 +26,10 @@ export const SITE = {
     linkedin: 'https://linkedin.com/company/ahadcleaning',
   },
   // WhatsApp Business — Sofortkanal. Nummer im internationalen Format
-  // ohne Sonderzeichen (+49 176 20422494 → 4917620422494).
+  // ohne Sonderzeichen (0174 3926183 → 491743926183).
   /** Zweites Geschäftsfeld der AHAD Cleaning Company GmbH (eigene Website). */
   careUrl: 'https://ahad-care.de',
-  whatsapp: '4917620422494',
+  whatsapp: '491743926183',
   whatsappText: 'Hallo AHAD Cleaning, ich interessiere mich für ein Angebot zur Gebäudereinigung.',
 } as const;
 
