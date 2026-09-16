@@ -310,7 +310,10 @@ export default function Admin() {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#0D6B38]"></div>
+        {/* Auch der Ladezweig braucht SEO: Er ist es, der beim Vorrendern
+            ausgeliefert wird — ohne ihn bleibt der Seitentitel leer. */}
+        <SEO title="Admin | AHAD Cleaning" description="Geschützter Verwaltungsbereich von AHAD Cleaning." noindex />
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#0D6B38]" role="status" aria-label="Wird geladen"></div>
       </div>
     );
   }
