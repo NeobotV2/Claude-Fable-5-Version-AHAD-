@@ -60,7 +60,7 @@ export const SERVICES: ServiceData[] = [
     short: 'Planbar saubere Büros & Objekte',
     path: '/leistungen/unterhaltsreinigung',
     name: 'Unterhaltsreinigung',
-    tag: 'Null Beschwerden',
+    tag: 'Planbar sauber',
     heroTitle: 'Unterhaltsreinigung, die niemand mehr steuern muss',
     heroLead:
       'Systematische, kontinuierliche Pflege Ihrer Räumlichkeiten mit festen Teams, klaren Intervallen und dokumentierter Qualität — damit Sauberkeit bei Ihnen kein Thema mehr ist.',

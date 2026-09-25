@@ -238,7 +238,6 @@ const TRUST_BADGE_CANDIDATES = [
   { icon: 'badge', label: 'ISO 14001 zertifiziert', sub: 'Umweltmanagement', verification: CLAIM_VERIFICATIONS.iso14001 },
   { icon: 'users', label: 'Nur festangestellte Teams', sub: 'sozialversichert & sicherheitsüberprüft', verification: CLAIM_VERIFICATIONS.workforce },
   { icon: 'shield', label: 'Umfassend versichert', sub: 'Betriebshaftpflicht', verification: CLAIM_VERIFICATIONS.insurance },
-  { icon: 'clock', label: 'Seit 2015 am Markt', sub: 'rund 90 Mitarbeitende', verification: CLAIM_VERIFICATIONS.companyStatistics },
 ] as const;
 
 export const TRUST_BADGES = TRUST_BADGE_CANDIDATES.filter((badge) =>
@@ -251,6 +250,11 @@ export interface ClientReference {
   /** Lokaler Pfad zum freigegebenen Logo, z. B. '/images/clients/goldbeck.svg'.
    *  Wenn gesetzt, zeigt das Referenz-Band das Logo statt der Wortmarke. */
   logo?: string;
+  /**
+   * Kurzname neben dem Logo — für Logos, die ohne Schriftzug nicht erkennbar
+   * sind (reines Bildzeichen oder sehr feine Wortmarke).
+   */
+  caption?: string;
   /** @deprecated Externe Hotlinks vermeiden — Logos lokal unter logo ablegen. */
   logoUrl?: string;
   verification: PublicationVerification;
@@ -265,11 +269,11 @@ const clientRelease = (id: string): PublicationVerification =>
 const CLIENT_REFERENCE_CANDIDATES: ClientReference[] = [
   { name: 'Allianz', domain: 'allianz.de', logo: '/images/clients/allianz.svg', verification: clientRelease('allianz') },
   { name: 'GOLDBECK', domain: 'goldbeck.de', logo: '/images/clients/goldbeck.svg', verification: clientRelease('goldbeck') },
-  { name: 'Bundesagentur für Arbeit', domain: 'arbeitsagentur.de', logo: '/images/clients/bundesagentur-fuer-arbeit.png', verification: clientRelease('arbeitsagentur') },
-  { name: 'Bareiss', domain: 'bareiss.com', logo: '/images/clients/bareiss.png', verification: clientRelease('bareiss') },
+  { name: 'Bundesagentur für Arbeit', domain: 'arbeitsagentur.de', logo: '/images/clients/bundesagentur-fuer-arbeit.png', caption: 'Agentur für Arbeit', verification: clientRelease('arbeitsagentur') },
+  { name: 'Bareiss', domain: 'bareiss.com', logo: '/images/clients/bareiss.png', caption: 'Bareiss', verification: clientRelease('bareiss') },
   { name: 'BDT', domain: 'bdt.de', logo: '/images/clients/bdt.svg', verification: clientRelease('bdt') },
   { name: 'Köster', domain: 'koester-bau.de', logo: '/images/clients/koester.png', verification: clientRelease('koester') },
-  { name: 'Aesthetify by Dr. Rick & Dr. Nick', domain: 'aesthetify.de', logo: '/images/clients/aesthetify.svg', verification: clientRelease('aesthetify') },
+  { name: 'Aesthetify by Dr. Rick & Dr. Nick', domain: 'aesthetify.de', logo: '/images/clients/aesthetify.svg', caption: 'Aesthetify', verification: clientRelease('aesthetify') },
   { name: 'Käppelehof', domain: 'kaeppelehof.de', logo: '/images/clients/kaeppelehof.png', verification: clientRelease('kaeppelehof') },
   { name: 'Kur- und Bäder GmbH Bad Dürrheim', domain: 'badduerrheim.de', logo: '/images/clients/kur-baeder-bad-duerrheim.png', verification: clientRelease('kur-baeder') },
   { name: 'naturenergie netze', domain: 'naturenergie-netze.de', logo: '/images/clients/naturenergie-netze.svg', verification: clientRelease('naturenergie-netze') },

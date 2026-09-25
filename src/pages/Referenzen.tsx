@@ -64,7 +64,7 @@ export default function Referenzen() {
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
             {CLIENT_REFERENCES.filter((ref) => ref.logo).map((ref, index) => (
               <Reveal key={ref.domain} delay={Math.min(index * 0.05, 0.3)} className="h-full">
-                <div className="flex items-center justify-center h-full min-h-[8rem] bg-paper rounded-3xl border border-line p-7 card-lift">
+                <div className="flex flex-col items-center justify-center gap-3 h-full min-h-[8rem] bg-paper rounded-3xl border border-line p-7 card-lift">
                   <img
                     src={ref.logo}
                     alt={ref.name}
@@ -73,6 +73,11 @@ export default function Referenzen() {
                     decoding="async"
                     className="max-h-14 max-w-[78%] object-contain"
                   />
+                  {ref.caption && (
+                    <span aria-hidden="true" className="font-headline font-bold text-sm text-navy text-center">
+                      {ref.caption}
+                    </span>
+                  )}
                 </div>
               </Reveal>
             ))}
