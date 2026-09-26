@@ -14,9 +14,6 @@ import {
   Settings2,
   ClipboardCheck,
   Shield,
-  PhoneCall,
-  CalendarCheck,
-  FileCheck2,
   ClipboardList,
 } from 'lucide-react';
 import SEO from '@/components/SEO';
@@ -75,6 +72,9 @@ const featuredServices = [
     icon: <Factory className="w-6 h-6" />,
     path: '/leistungen/industrie-produktionsreinigung',
     image: IMG.industrie,
+    // Die Webadresse auf der Weste sitzt links im Bild; mittig beschnitten
+    // blieb davon nur „…aning.de" übrig.
+    imagePosition: 'object-left',
   },
   {
     title: 'Glas- & Fassadenreinigung',
@@ -120,32 +120,11 @@ const systemSteps = [
 ];
 
 const industries = [
-  { title: 'Industrie & Produktion', path: '/branchen/industrie-produktion', image: IMG.brancheIndustrie, claim: 'Störungsfrei im Schichtbetrieb' },
+  { title: 'Industrie & Produktion', path: '/branchen/industrie-produktion', image: IMG.industrieDetail, claim: 'Störungsfrei im Schichtbetrieb' },
   { title: 'Medizintechnik', path: '/branchen/medizintechnik', image: IMG.brancheMedizin, claim: 'Auditnah & dokumentiert' },
   { title: 'Büro & Verwaltung', path: '/branchen/buero-verwaltung', image: IMG.brancheBuero, claim: 'Repräsentativ, jeden Tag' },
   { title: 'Gewerbeobjekte', path: '/branchen/gewerbeobjekte', image: IMG.brancheGewerbe, claim: 'Großflächen im Griff' },
   { title: 'Hotellerie & Objektbetrieb', path: '/branchen/hotellerie-objektbetrieb', image: IMG.brancheHotel, claim: 'Gastgeberqualität sichern' },
-];
-
-const processSteps = [
-  {
-    icon: <PhoneCall className="w-6 h-6" />,
-    title: 'Anfrage stellen',
-    duration: 'Schritt 1',
-    description: 'Vier übersichtliche Schritte oder ein Anruf — mehr braucht es nicht für den Start.',
-  },
-  {
-    icon: <CalendarCheck className="w-6 h-6" />,
-    title: 'Objektbesichtigung',
-    duration: 'Nach Abstimmung',
-    description: 'Wir erfassen Flächen, Nutzung und Risiken vor Ort und beraten Sie zu sinnvollen Intervallen.',
-  },
-  {
-    icon: <FileCheck2 className="w-6 h-6" />,
-    title: 'Verbindliches Angebot',
-    duration: 'Nach Besichtigung',
-    description: 'Transparentes Leistungsverzeichnis mit Festpreis — keine versteckten Kosten, keine Knebelverträge.',
-  },
 ];
 
 const faqs: FAQItem[] = [
@@ -172,7 +151,7 @@ const faqs: FAQItem[] = [
   {
     question: 'Wie schnell ist eine Objektbesichtigung möglich?',
     answer:
-      'Den möglichen Termin für eine Vor-Ort-Besichtigung stimmen wir individuell mit Ihnen ab. Anschließend erstellen wir ein objektbezogenes Angebot.',
+      'In der Regel sind wir innerhalb von 48 Stunden vor Ort. Den genauen Termin stimmen wir mit Ihnen ab, anschließend erstellen wir ein objektbezogenes Angebot.',
   },
   {
     question: 'Arbeiten Sie mit festen Ansprechpartnern?',
@@ -424,7 +403,9 @@ export default function Home() {
                     alt={service.title}
                     sizes="(min-width:1024px) 33vw, (min-width:768px) 50vw, 100vw"
                     className="absolute inset-0"
-                    imgClassName="opacity-75 transition-transform duration-700 group-hover:scale-105"
+                    imgClassName={`opacity-75 transition-transform duration-700 group-hover:scale-105 ${
+                      'imagePosition' in service ? service.imagePosition : ''
+                    }`}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/55 to-navy/10 transition-opacity" />
 
@@ -459,9 +440,10 @@ export default function Home() {
             ))}
           </div>
 
-          {/* Zweite Reihe: alle weiteren Leistungen kompakt — nichts bleibt unsichtbar
-              (fünf Karten → fünf Spalten, sonst bliebe eine Karte allein in Reihe drei) */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mt-5">
+          {/* Zweite Reihe: alle weiteren Leistungen kompakt — nichts bleibt unsichtbar.
+              Drei Spalten: Bei fünf passten lange Namen wie „Küchenabluftreinigung"
+              nicht in die Kachel und liefen in den Pfeil. */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-5">
             {moreServices.map((service, i) => (
               <Reveal key={service.slug} delay={0.1 + i * 0.06}>
                 <Link
@@ -527,7 +509,7 @@ export default function Home() {
                     Sehen Sie selbst, was <span className="text-mint">System</span> ausmacht.
                   </>
                 }
-                lead="Ziehen Sie den Regler: links der Zustand bei Übernahme, rechts unser dokumentierter Standard. Genau diese Differenz liefern wir — jede Woche, in jedem Objekt."
+                lead="Ziehen Sie den Regler: links die Fläche nach dem Ausbau, rechts nach unserer Bauendreinigung — übergabefertig und dokumentiert."
               />
               <Reveal delay={0.2} className="mt-10">
                 <div className="flex flex-col sm:flex-row gap-4">
@@ -544,8 +526,8 @@ export default function Home() {
               <BeforeAfter
                 beforeSrc={IMG.vorher}
                 afterSrc={IMG.nachher}
-                beforeLabel="Bei Übernahme"
-                afterLabel="AHAD Standard"
+                beforeLabel="Vorher"
+                afterLabel="Nachher"
               />
               <p className="mt-4 text-[13px] text-blue-100/80 font-medium">
                 Echtes Vorher/Nachher aus einem AHAD-Objekt.
@@ -692,37 +674,7 @@ export default function Home() {
       {FEATURED_TESTIMONIAL_PUBLISHABLE && <FeaturedTestimonial />}
 
       {/* ── BEWERTUNGEN (echte Google-Reviews) ───────────────────────── */}
-      <Reviews />
-
-      {/* ── PROZESS (06) ─────────────────────────────────────────────── */}
-      <section className="py-24 lg:py-36 bg-paper">
-        <div className="max-w-7xl mx-auto px-4 sm:px-8">
-          <SectionHeading
-            eyebrow="So einfach starten Sie"
-            align="center"
-            title="In drei Schritten zum sauberen Betrieb."
-            className="mb-16 lg:mb-20 max-w-3xl mx-auto"
-          />
-          <div className="relative grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-10">
-            <div className="hidden md:block absolute top-16 left-[16%] right-[16%] h-px bg-gradient-to-r from-brand/10 via-brand/40 to-brand/10" aria-hidden />
-            {processSteps.map((step, i) => (
-              <Reveal key={step.title} delay={i * 0.15}>
-                <div className="relative bg-white rounded-3xl border border-line p-8 text-center card-lift h-full">
-                  <div className="relative inline-flex mb-6">
-                    <span className="w-16 h-16 rounded-2xl bg-navy text-mint grid place-items-center shadow-soft">{step.icon}</span>
-                    <span className="absolute -top-2 -right-2 w-7 h-7 rounded-full bg-accent text-white text-xs font-black grid place-items-center border-2 border-white">
-                      {i + 1}
-                    </span>
-                  </div>
-                  <div className="text-[11px] font-black uppercase tracking-[0.2em] text-accent mb-2">{step.duration}</div>
-                  <h3 className="font-headline text-xl font-bold text-navy mb-3">{step.title}</h3>
-                  <p className="text-sm text-slate leading-relaxed">{step.description}</p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
+      <Reviews exclude={featuredReview ? [featuredReview.author] : []} limit={2} />
 
       {/* ── AHAD-VERSPRECHEN (Garantie + Proof + Objektleitung) ──────── */}
       <Guarantee />

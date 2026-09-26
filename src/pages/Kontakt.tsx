@@ -75,7 +75,7 @@ export default function Kontakt() {
         <div className="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-3xl">
           {[
             { value: '1', label: 'Anfrage mit klarem Kontaktweg' },
-            { value: '2', label: 'Besichtigung nach Abstimmung' },
+            { value: '2', label: 'Besichtigung in der Regel binnen 48 h' },
             { value: '3', label: 'Transparentes Angebot danach' },
           ].map((promise) => (
             <div key={promise.label} className="flex items-center gap-3">

@@ -8,8 +8,8 @@ import { CLIENT_REFERENCES, type ClientReference } from '@/lib/site';
  * Zeigt nur Referenzen MIT freigegebenem Logo (Einträge ohne Logo werden
  * ausgeblendet). Alle Logos werden in eine einheitliche Box normiert
  * (gleiche Höhe, gedeckelte Breite, zentriert) — so wirken unterschiedlich
- * proportionierte Logos optisch gleich groß. Dezent in Graustufen, bei Hover
- * farbig.
+ * proportionierte Logos optisch gleich groß. Logos ohne erkennbaren Schriftzug
+ * bekommen ihren Kurznamen daneben.
  *
  * WICHTIG: Nur Logos von Kunden verwenden, die der Nennung zugestimmt haben.
  */
@@ -18,18 +18,26 @@ const REFERENCES = CLIENT_REFERENCES.filter((r) => r.logo);
 function ClientLogo({ item }: { item: ClientReference }) {
   const [failed, setFailed] = useState(false);
   return (
-    <div className="h-10 sm:h-12 w-28 sm:w-36 flex items-center justify-center shrink-0">
+    <div className="h-12 sm:h-14 min-w-[8rem] sm:min-w-[10rem] flex items-center justify-center gap-2.5 shrink-0">
       {item.logo && !failed ? (
-        <img
-          src={item.logo}
-          alt={item.name}
-          title={item.name}
-          loading="lazy"
-          decoding="async"
-          referrerPolicy="no-referrer"
-          onError={() => setFailed(true)}
-          className="max-h-full max-w-full object-contain grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-300 select-none"
-        />
+        <>
+          {/* Farbig statt grau: in Graustufen waren kleine Logos kaum zu erkennen. */}
+          <img
+            src={item.logo}
+            alt={item.name}
+            title={item.name}
+            loading="lazy"
+            decoding="async"
+            referrerPolicy="no-referrer"
+            onError={() => setFailed(true)}
+            className={`h-full object-contain select-none ${item.caption ? 'max-w-[3.5rem]' : 'max-w-[10rem]'}`}
+          />
+          {item.caption && (
+            <span aria-hidden="true" className="font-headline font-bold text-[15px] text-navy whitespace-nowrap select-none">
+              {item.caption}
+            </span>
+          )}
+        </>
       ) : (
         <span
           title={item.name}
