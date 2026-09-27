@@ -57,13 +57,13 @@ export interface ServiceData {
 export const SERVICES: ServiceData[] = [
   {
     slug: 'unterhaltsreinigung',
-    short: 'Planbar saubere Büros & Objekte',
+    short: 'Büros & Objekte nach festem Plan',
     path: '/leistungen/unterhaltsreinigung',
     name: 'Unterhaltsreinigung',
-    tag: 'Planbar sauber',
-    heroTitle: 'Unterhaltsreinigung, die niemand mehr steuern muss',
+    tag: 'Laufende Reinigung',
+    heroTitle: 'Unterhaltsreinigung für Büros, Verwaltung und Gewerbe',
     heroLead:
-      'Systematische, kontinuierliche Pflege Ihrer Räumlichkeiten mit festen Teams, klaren Intervallen und dokumentierter Qualität — damit Sauberkeit bei Ihnen kein Thema mehr ist.',
+      'Wir reinigen Ihre Räume in festen Intervallen: mit eingespieltem Team, eigener Objektleitung und dokumentierten Kontrollen. Intern muss sich niemand darum kümmern.',
     seoTitle: 'Unterhaltsreinigung für Unternehmen | AHAD Cleaning',
     seoDescription:
       'Unterhaltsreinigung für Büros, Verwaltungen und Gewerbe in Süddeutschland. Klare Zuständigkeiten, dokumentierte Qualitätskontrolle. Jetzt Besichtigung anfragen.',
@@ -75,35 +75,35 @@ export const SERVICES: ServiceData[] = [
       {
         icon: <Users className="w-7 h-7 text-brand" />,
         title: 'Feste Teams & Objektleitung',
-        text: 'Eingespielte Reinigungsteams mit fester Objektleitung — ein Ansprechpartner, der Ihr Objekt wirklich kennt.',
+        text: 'Eingespielte Reinigungsteams und eine feste Objektleitung, die Ihr Objekt kennt.',
       },
       {
         icon: <ClipboardCheck className="w-7 h-7 text-accent" />,
         title: 'Digitale Qualitätskontrolle',
-        text: 'Checklisten, Kontrollen und Reports digital dokumentiert — Leistung wird messbar statt gefühlt.',
+        text: 'Checklisten, Kontrollen und Reports dokumentieren wir digital. Sie sehen, was erledigt wurde.',
       },
       {
         icon: <AlarmClockCheck className="w-7 h-7 text-brand" />,
         title: 'Intervalle nach Nutzung',
-        text: 'Reinigungspläne exakt nach tatsächlicher Flächennutzung — kein starres Standardpaket.',
+        text: 'Wir legen die Reinigungspläne danach fest, wie Ihre Flächen tatsächlich genutzt werden.',
       },
     ],
-    scopeTitle: 'Verlässliche Routine für jede Fläche',
+    scopeTitle: 'Was wir regelmäßig reinigen',
     scopeIntro:
-      'Vom Empfang über Büros und Besprechungsräume bis zu Sanitärbereichen: Wir definieren Standards und Intervalle exakt nach der Nutzung Ihrer Flächen — und halten sie nachweisbar ein.',
+      'Empfang, Büros, Besprechungsräume und Sanitärbereiche: Für jeden Bereich legen wir Standard und Intervall fest und weisen nach, dass beides eingehalten wird.',
     scope: [
-      'Individuelle Reinigungspläne & Leistungsverzeichnisse',
+      'Reinigungspläne & Leistungsverzeichnisse für Ihr Objekt',
       'Büro-, Empfangs- und Besprechungsbereiche',
       'Sanitär- und Sozialräume mit Hygienestandard',
       'Treppenhäuser, Verkehrsflächen & Aufzüge',
-      'Verbrauchsmaterial-Management auf Wunsch',
+      'Versorgung mit Verbrauchsmaterial auf Wunsch',
       'Digitale Leistungsnachweise & Reports',
     ],
     faqs: [
       {
         question: 'Wie werden die Reinigungsintervalle festgelegt?',
         answer:
-          'Nicht nach Schema F: Nach einer Vor-Ort-Analyse legen wir Intervalle und Leistungsverzeichnis nach tatsächlicher Nutzung Ihrer Flächen fest. So zahlen Sie nur für Leistung, die wirklich gebraucht wird.',
+          'Nach einer Begehung vor Ort legen wir Intervalle und Leistungsverzeichnis danach fest, wie Ihre Flächen tatsächlich genutzt werden. Sie bezahlen nur die Leistung, die gebraucht wird.',
       },
       {
         question: 'Was passiert bei Reklamationen?',
@@ -113,21 +113,21 @@ export const SERVICES: ServiceData[] = [
       {
         question: 'Können Sie unser bestehendes Reinigungsteam übernehmen?',
         answer:
-          'Ja. Bei einem Anbieterwechsel prüfen wir die Übernahme bestehender Kräfte nach § 613a BGB und integrieren sie in unser Qualitätssystem — geräuschlos und ohne Unterbrechung Ihres Betriebs.',
+          'Ja. Bei einem Anbieterwechsel prüfen wir die Übernahme bestehender Kräfte nach § 613a BGB und arbeiten sie in unser Qualitätssystem ein. Ihr Betrieb läuft dabei normal weiter.',
       },
     ],
-    ctaTitle: 'Saubere Flächen, null Steuerungsaufwand',
-    ctaLead: 'Lassen Sie uns Ihr Objekt besichtigen — Termin nach Abstimmung, transparentes Angebot danach.',
+    ctaTitle: 'Unterhaltsreinigung anfragen',
+    ctaLead: 'Wir besichtigen Ihr Objekt zu einem abgestimmten Termin. Danach erhalten Sie unser Angebot.',
   },
   {
     slug: 'industrie-produktionsreinigung',
     short: 'Reinigung im laufenden Betrieb',
     path: '/leistungen/industrie-produktionsreinigung',
     name: 'Industrie- & Produktionsreinigung',
-    tag: 'Prozessintegriert',
+    tag: 'Schichtbetrieb',
     heroTitle: 'Industriereinigung ohne Produktionsstillstand',
     heroLead:
-      'Technische Reinigung, die sich nahtlos in Ihre Schichtlogik einfügt: UVV-konform, auditfähig und mit festen Eskalationswegen — damit Ihre Produktion läuft, während wir arbeiten.',
+      'Wir reinigen nach Ihrem Schichtplan: UVV-konform, auditfähig dokumentiert und mit festen Eskalationswegen. Ihre Produktion läuft weiter, während wir arbeiten.',
     seoTitle: 'Industrie- & Produktionsreinigung | AHAD Cleaning',
     seoDescription:
       'Industriereinigung im laufenden Betrieb: Maschinen- und Anlagenreinigung, Hallenreinigung, schichtbegleitende Ausführung. UVV-konform & auditfähig.',
@@ -144,17 +144,17 @@ export const SERVICES: ServiceData[] = [
       {
         icon: <Shield className="w-7 h-7 text-accent" />,
         title: 'UVV & Arbeitssicherheit',
-        text: 'Geschultes Personal, dokumentierte Unterweisungen und strikte Einhaltung aller Sicherheitsvorschriften.',
+        text: 'Geschultes Personal, dokumentierte Unterweisungen und Einhaltung der geltenden Sicherheitsvorschriften.',
       },
       {
         icon: <FileCheck2 className="w-7 h-7 text-brand" />,
         title: '100% auditfähig',
-        text: 'Lückenlose Dokumentation aller Leistungen — bereit für jedes Kunden- und Zertifizierungsaudit.',
+        text: 'Wir dokumentieren jede Leistung, damit Sie die Nachweise in Kunden- und Zertifizierungsaudits vorlegen können.',
       },
     ],
-    scopeTitle: 'Technische Sauberkeit für anspruchsvolle Umgebungen',
+    scopeTitle: 'Reinigung in Produktion und Logistik',
     scopeIntro:
-      'Produktionshallen, Maschinen, Anlagen und Logistikflächen: Wir reinigen dort, wo Standardfirmen an ihre Grenzen kommen — mit Verfahren, die zu Material und Prozess passen.',
+      'Produktionshallen, Maschinen, Anlagen und Logistikflächen reinigen wir mit Verfahren, die zum Material und zu Ihrem Prozess passen.',
     scope: [
       'Maschinen- & Anlagenreinigung nach Herstellervorgaben',
       'Hallenböden: Kehren, Schrubben, Entfetten',
@@ -167,34 +167,34 @@ export const SERVICES: ServiceData[] = [
       {
         question: 'Reinigen Sie im laufenden Betrieb?',
         answer:
-          'Ja — das ist unsere Kernkompetenz. Unsere Teams fügen sich in Ihre Schicht- und Betriebslogik ein, arbeiten in produktionsfreien Fenstern oder parallel in abgegrenzten Bereichen, ohne Ihre Abläufe zu stören.',
+          'Ja. Unsere Teams richten sich nach Ihren Schicht- und Betriebszeiten und arbeiten in produktionsfreien Fenstern oder parallel in abgegrenzten Bereichen, ohne Ihre Abläufe zu stören.',
       },
       {
         question: 'Wie stellen Sie Arbeitssicherheit sicher?',
         answer:
-          'Alle Mitarbeitenden sind sicherheitsunterwiesen, mit PSA ausgestattet und für die jeweiligen Anlagen geschult. Unterweisungen und Befähigungen dokumentieren wir lückenlos — auf Wunsch erhalten Sie alle Nachweise.',
+          'Alle Mitarbeitenden sind sicherheitsunterwiesen, mit PSA ausgestattet und für die jeweiligen Anlagen geschult. Unterweisungen und Befähigungen dokumentieren wir. Auf Wunsch erhalten Sie alle Nachweise.',
       },
       {
         question: 'Übernehmen Sie auch einmalige Grundreinigungen?',
         answer:
-          'Ja, etwa nach Umbauten, vor Audits oder im geplanten Stillstand. Wir kalkulieren transparent nach Aufwand und liefern ein verbindliches Festpreisangebot.',
+          'Ja, etwa nach Umbauten, vor Audits oder im geplanten Stillstand. Wir kalkulieren nach Aufwand und machen Ihnen ein verbindliches Festpreisangebot.',
       },
     ],
-    ctaTitle: 'Produktion läuft. Reinigung auch.',
-    ctaLead: 'Sprechen Sie mit uns über schichtintegrierte Reinigung — wir klären Anforderungen und nächste Schritte persönlich.',
+    ctaTitle: 'Reinigung im Schichtbetrieb besprechen',
+    ctaLead: 'Im persönlichen Gespräch klären wir Ihre Anforderungen und die nächsten Schritte.',
   },
   {
     slug: 'glas-fassadenreinigung',
     short: 'Werterhalt der Gebäudehülle',
     path: '/leistungen/glas-fassadenreinigung',
     name: 'Glas- & Fassadenreinigung',
-    tag: 'Werterhalt im Blick',
+    tag: 'Werterhalt',
     heroTitle: 'Glas- und Fassadenreinigung für Gewerbeobjekte',
     heroLead:
-      'Die Gebäudehülle ist die Visitenkarte Ihres Unternehmens. Wir planen streifenfreie Ergebnisse und langfristigen Werterhalt — mit Osmose-Technik und geeigneten Höhenzugängen.',
+      'Wir reinigen Glasflächen streifenfrei und erhalten den Wert Ihrer Fassade: mit Osmose-Technik und geeigneten Höhenzugängen.',
     seoTitle: 'Glas- & Fassadenreinigung für Gewerbe | AHAD Cleaning',
     seoDescription:
-      'Professionelle Glas- und Fassadenreinigung für Gewerbeobjekte in Süddeutschland. Streifenfreie Sauberkeit, Osmose-Technik und Werterhalt. Jetzt anfragen!',
+      'Glas- und Fassadenreinigung für Gewerbeobjekte in Süddeutschland: streifenfreie Fenster, Osmose-Technik, Hubsteiger und Industriekletterer. Jetzt anfragen.',
     keywords: 'Glasreinigung Unternehmen, Fassadenreinigung Gewerbe, Fensterreinigung Büro, Osmose Reinigung',
     icon: <Building2 className="w-6 h-6" />,
     image: IMG.glasfassade,
@@ -203,22 +203,22 @@ export const SERVICES: ServiceData[] = [
       {
         icon: <Sparkles className="w-7 h-7 text-brand" />,
         title: 'Streifenfreie Sicht',
-        text: 'Glasfronten, Fenster, Rahmen und Einfassungen — maximale Lichtausbeute und Repräsentativität.',
+        text: 'Wir reinigen Glasfronten und Fenster samt Rahmen und Einfassungen.',
       },
       {
         icon: <Droplets className="w-7 h-7 text-accent" />,
         title: 'Osmose-Technologie',
-        text: 'Entmineralisiertes Wasser reinigt kraftvoll, trocknet rückstandsfrei und schont die Umwelt.',
+        text: 'Entmineralisiertes Wasser trocknet ohne Rückstände und kommt ohne Reinigungsmittel aus.',
       },
       {
         icon: <Shield className="w-7 h-7 text-brand" />,
         title: 'Sichere Höhenzugänge',
-        text: 'Hubsteiger, Gerüste oder Industriekletterer — zertifiziertes Personal unter Einhaltung aller UVV.',
+        text: 'Hubsteiger, Gerüst oder Industriekletterer, mit zertifiziertem Personal und nach UVV.',
       },
     ],
-    scopeTitle: 'Präzision in der Höhe, Werterhalt im Blick',
+    scopeTitle: 'Glas, Fassade und Sonnenschutz',
     scopeIntro:
-      'Ob moderne Glasarchitektur, Metallfassade, Eloxal oder historische Bausubstanz — wir wählen das exakt passende Verfahren für jedes Material und schützen Ihre Gebäudehülle vor dauerhaften Schäden.',
+      'Glasarchitektur, Metallfassade, Eloxal oder historische Bausubstanz: Für jedes Material wählen wir ein Verfahren, das die Oberfläche nicht dauerhaft schädigt.',
     scope: [
       'Glasfronten, Fenster & Glasdächer',
       'Fassaden aus Metall, Stein, Putz & Eloxal',
@@ -236,29 +236,29 @@ export const SERVICES: ServiceData[] = [
       {
         question: 'Was ist das Osmose-Verfahren?',
         answer:
-          'Beim Osmose-Verfahren verwenden wir entmineralisiertes Wasser mit hoher Reinigungskraft, das völlig streifenfrei abtrocknet — ganz ohne chemische Reinigungsmittel. Besonders umweltschonend und effizient bei großen Glasflächen.',
+          'Beim Osmose-Verfahren arbeiten wir mit entmineralisiertem Wasser. Es löst Schmutz gut und trocknet ohne Streifen ab, chemische Reinigungsmittel sind nicht nötig. Das schont die Umwelt und spart bei großen Glasflächen Zeit.',
       },
       {
         question: 'Können Sie auch schwer zugängliche Fassaden reinigen?',
         answer:
-          'Ja. Wir verfügen über moderne Höhenzugangstechnik wie Hubsteiger und arbeiten bei Bedarf mit zertifizierten Industriekletterern, um auch schwer erreichbare Glasfronten sicher und professionell zu reinigen.',
+          'Ja. Wir setzen Hubsteiger ein und arbeiten bei Bedarf mit zertifizierten Industriekletterern. So reinigen wir auch Glasfronten, die vom Boden aus nicht erreichbar sind.',
       },
     ],
-    ctaTitle: 'Glänzende Aussichten für Ihr Gebäude',
-    ctaLead: 'Objektbesichtigung nach Abstimmung, transparentes Angebot im Anschluss — kostenfrei und unverbindlich.',
+    ctaTitle: 'Glas- und Fassadenreinigung anfragen',
+    ctaLead: 'Wir sehen uns Ihr Gebäude zu einem abgestimmten Termin an und schicken Ihnen danach ein Angebot. Beides ist kostenfrei und unverbindlich.',
   },
   {
     slug: 'baureinigung',
-    short: 'Termingerechte, bezugsfertige Übergaben',
+    short: 'Bezugsfertig zum Übergabetermin',
     path: '/leistungen/baureinigung',
     name: 'Baureinigung',
-    tag: 'Terminfest',
+    tag: 'Zum Abnahmetermin',
     heroTitle: 'Baureinigung abgestimmt auf Ihren Abnahmetermin',
     heroLead:
-      'Von der Baugrob- bis zur Baufeinreinigung: Wir liefern besenreine bis bezugsfertige Übergaben — pünktlich zum Abnahmetermin, auch wenn es auf der Baustelle eng wird.',
+      'Von der Baugrob- bis zur Baufeinreinigung: Wir übergeben besenrein oder bezugsfertig zum vereinbarten Termin, auch wenn es auf der Baustelle eng wird.',
     seoTitle: 'Baureinigung: Grob- & Feinreinigung | AHAD Cleaning',
     seoDescription:
-      'Professionelle Baureinigung in Süddeutschland: Baugrobreinigung, Baufeinreinigung und Endreinigung vor Übergabe. Termintreu, flexibel, zuverlässig.',
+      'Baureinigung in Süddeutschland: Baugrobreinigung, Baufeinreinigung und Endreinigung vor der Übergabe, abgestimmt mit Bauleitung und Bauzeitenplan.',
     keywords: 'Baureinigung, Baufeinreinigung, Baugrobreinigung, Bauendreinigung, Baustellenreinigung',
     icon: <HardHat className="w-6 h-6" />,
     image: IMG.baureinigung,
@@ -271,18 +271,18 @@ export const SERVICES: ServiceData[] = [
       },
       {
         icon: <Users className="w-7 h-7 text-accent" />,
-        title: 'Skalierbare Teams',
-        text: 'Vom Einzelobjekt bis zum Großprojekt: Wir skalieren Personal kurzfristig nach Baufortschritt.',
+        title: 'Teamgröße nach Bedarf',
+        text: 'Vom Einzelobjekt bis zum Großprojekt: Wir passen die Zahl der Kräfte kurzfristig an den Baufortschritt an.',
       },
       {
         icon: <BadgeCheck className="w-7 h-7 text-brand" />,
         title: 'Übergabefertige Qualität',
-        text: 'Bezugsfertig heißt bei uns: abnahmebereit für Bauherren, Käufer und Mieter — dokumentiert.',
+        text: 'Bezugsfertig heißt bei uns: abnahmebereit für Bauherren, Käufer und Mieter, mit Dokumentation.',
       },
     ],
-    scopeTitle: 'Vom Rohbau zur repräsentativen Übergabe',
+    scopeTitle: 'Vom Rohbau bis zur Übergabe',
     scopeIntro:
-      'Neubau, Umbau oder Sanierung: Wir begleiten Ihr Projekt durch alle Reinigungsphasen und arbeiten Hand in Hand mit Bauleitung und Gewerken — flexibel nach Baufortschritt.',
+      'Neubau, Umbau oder Sanierung: Wir übernehmen alle Reinigungsphasen und stimmen jeden Einsatz nach Baufortschritt mit Bauleitung und Gewerken ab.',
     scope: [
       'Baugrobreinigung & Entsorgung von Bauschutt',
       'Baufeinreinigung aller Oberflächen',
@@ -295,12 +295,12 @@ export const SERVICES: ServiceData[] = [
       {
         question: 'Wie kurzfristig können Sie auf der Baustelle starten?',
         answer:
-          'In dringenden Fällen innerhalb weniger Tage. Durch unsere Teamstruktur können wir Kapazitäten kurzfristig bündeln — sprechen Sie uns auch bei engen Abnahmeterminen an.',
+          'In dringenden Fällen innerhalb weniger Tage. Durch unsere Teamstruktur können wir Kapazitäten kurzfristig bündeln. Sprechen Sie uns auch bei engen Abnahmeterminen an.',
       },
       {
         question: 'Was umfasst eine Baufeinreinigung?',
         answer:
-          'Die vollständige Reinigung aller Oberflächen nach Abschluss der Gewerke: Böden, Fenster inklusive Rahmen und Folienentfernung, Sanitärobjekte, Einbauten und Beleuchtung — bis zur bezugsfertigen Übergabe.',
+          'Die vollständige Reinigung aller Oberflächen nach Abschluss der Gewerke: Böden, Fenster inklusive Rahmen und Folienentfernung, Sanitärobjekte, Einbauten und Beleuchtung, bis das Objekt bezugsfertig übergeben werden kann.',
       },
       {
         question: 'Arbeiten Sie mit Generalunternehmern zusammen?',
@@ -308,8 +308,8 @@ export const SERVICES: ServiceData[] = [
           'Ja. Leistungsumfang, Sicherheitsanforderungen, Bauzeitenplan und Übergabepunkte stimmen wir direkt mit Bauleitung und Gewerken ab.',
       },
     ],
-    ctaTitle: 'Ihr Abnahmetermin steht? Wir auch.',
-    ctaLead: 'Senden Sie uns Eckdaten und Termin — nach der Prüfung besprechen wir Machbarkeit und nächste Schritte.',
+    ctaTitle: 'Baureinigung anfragen',
+    ctaLead: 'Schicken Sie uns Eckdaten und Abnahmetermin. Nach der Prüfung besprechen wir Machbarkeit und nächste Schritte.',
   },
   {
     slug: 'medizintechnik-reinigung',
@@ -319,7 +319,7 @@ export const SERVICES: ServiceData[] = [
     tag: 'Dokumentiert',
     heroTitle: 'Reinigung für Medizintechnik und sensible Bereiche',
     heroLead:
-      'Wo Hygiene über Produktqualität entscheidet, zählen Disziplin, Schulung und lückenlose Nachweise. Wir reinigen auditnah — nach Ihren Standards und SOPs.',
+      'Wo Hygiene über die Produktqualität entscheidet, braucht es geschultes Personal und vollständige Nachweise. Wir reinigen nach Ihren Standards und SOPs: mit festem Team und dokumentierter Ausführung.',
     seoTitle: 'Medizintechnik-Reinigung & Reinraum | AHAD Cleaning',
     seoDescription:
       'Reinigung für Medizintechnik, Labore und sensible Produktionsbereiche: Prozesse nach Ihren QM-Vorgaben, geschultes Personal, nachvollziehbare Dokumentation.',
@@ -336,17 +336,17 @@ export const SERVICES: ServiceData[] = [
       {
         icon: <Users className="w-7 h-7 text-accent" />,
         title: 'Geschultes Fachpersonal',
-        text: 'Speziell unterwiesene, feste Mitarbeitende — Hygieneschulung und Verhaltensregeln inklusive.',
+        text: 'Feste, speziell unterwiesene Mitarbeitende mit Hygieneschulung und Einweisung in Ihre Verhaltensregeln.',
       },
       {
         icon: <ClipboardCheck className="w-7 h-7 text-brand" />,
-        title: 'Lückenlose Dokumentation',
-        text: 'Jede Leistung nachvollziehbar protokolliert — bereit für jedes Audit, jederzeit.',
+        title: 'Vollständige Dokumentation',
+        text: 'Jede Leistung wird nachvollziehbar protokolliert. Die Nachweise liegen für Ihre Audits vor.',
       },
     ],
-    scopeTitle: 'Hygiene, die Audits standhält',
+    scopeTitle: 'Reinigung nach Hygieneplan und SOP',
     scopeIntro:
-      'Medizintechnik-Produktion, Labore und sensible Fertigungsbereiche stellen besondere Anforderungen. Wir erfüllen sie mit System: definierte Verfahren, geeignete Mittel, dokumentierte Ausführung.',
+      'In Medizintechnik-Produktion, Laboren und sensiblen Fertigungsbereichen arbeiten wir mit definierten Verfahren und geeigneten Mitteln und dokumentieren jede Ausführung.',
     scope: [
       'Reinigung nach Hygieneplan & Ihren SOPs',
       'Produktions- & Laborflächen',
@@ -359,12 +359,12 @@ export const SERVICES: ServiceData[] = [
       {
         question: 'Arbeiten Sie nach unseren internen Hygienevorgaben?',
         answer:
-          'Ja — Ihre SOPs und Hygienepläne sind für uns bindend. Wir integrieren sie in unsere Checklisten und schulen unser festes Team gezielt auf Ihre Anforderungen.',
+          'Ja. Ihre SOPs und Hygienepläne sind für uns verbindlich. Wir übernehmen sie in unsere Checklisten und schulen unser festes Team auf Ihre Anforderungen.',
       },
       {
         question: 'Wie unterstützen Sie uns bei Audits?',
         answer:
-          'Mit lückenloser Dokumentation: Leistungsnachweise, Schulungsprotokolle und Kontrollberichte liegen jederzeit abrufbar vor. Auf Wunsch nimmt Ihre AHAD-Objektleitung am Audit teil.',
+          'Leistungsnachweise, Schulungsprotokolle und Kontrollberichte liegen vollständig vor und sind abrufbar, wenn Sie sie brauchen. Auf Wunsch nimmt Ihre AHAD-Objektleitung am Audit teil.',
       },
       {
         question: 'Setzen Sie wechselndes Personal ein?',
@@ -372,8 +372,8 @@ export const SERVICES: ServiceData[] = [
           'Nein. Gerade in sensiblen Bereichen arbeiten wir mit festen, geschulten Teams. Jeder Personalwechsel wird angekündigt und neue Kräfte werden dokumentiert eingewiesen.',
       },
     ],
-    ctaTitle: 'Auditfähige Sauberkeit, planbar geliefert',
-    ctaLead: 'Lassen Sie uns über Ihre Hygieneanforderungen sprechen — vertraulich und unverbindlich.',
+    ctaTitle: 'Hygieneanforderungen besprechen',
+    ctaLead: 'Wir besprechen Ihre Vorgaben und Bereiche vertraulich und unverbindlich.',
   },
   {
     slug: 'sonderreinigung-stillstandsservice',
@@ -381,13 +381,13 @@ export const SERVICES: ServiceData[] = [
     short: 'Grundreinigung & Stillstandsservice',
     path: '/leistungen/sonderreinigung-stillstandsservice',
     name: 'Sonderreinigung & Stillstandsservice',
-    tag: 'Planbar',
-    heroTitle: 'Sonderreinigung für besondere Anforderungen',
+    tag: 'Außer der Reihe',
+    heroTitle: 'Sonderreinigung und Stillstandsservice',
     heroLead:
-      'Grundreinigung, Teppich- und Polsterreinigung oder geplanter Stillstandsservice: maßgeschneiderte Lösungen für alles, was über die Routine hinausgeht.',
+      'Grundreinigung, Teppich- und Polsterreinigung oder geplanter Stillstandsservice: Wir übernehmen die Arbeiten, die über die laufende Reinigung hinausgehen.',
     seoTitle: 'Sonderreinigung & Stillstandsservice | AHAD Cleaning',
     seoDescription:
-      'Sonderreinigungen für Gewerbe und Industrie: Grundreinigung, Teppichreinigung, Stillstandsservice. Planbar, transparent kalkuliert, professionell ausgeführt.',
+      'Sonderreinigungen für Gewerbe und Industrie: Grundreinigung, Teppich- und Polsterreinigung, Stillstandsservice in Betriebsferien. Kalkuliert zum Festpreis.',
     keywords: 'Sonderreinigung, Grundreinigung, Teppichreinigung Büro, Stillstandsreinigung, Spezialreinigung',
     icon: <Sparkles className="w-6 h-6" />,
     image: IMG.sonderreinigung,
@@ -396,22 +396,22 @@ export const SERVICES: ServiceData[] = [
       {
         icon: <Clock className="w-7 h-7 text-brand" />,
         title: 'Planbar im Stillstand',
-        text: 'Betriebsferien, Wartungsfenster, Wochenenden — wir nutzen Ihre Stillstandszeiten optimal.',
+        text: 'Wir reinigen in Betriebsferien, Wartungsfenstern und an Wochenenden, wenn bei Ihnen nichts läuft.',
       },
       {
         icon: <Sparkles className="w-7 h-7 text-accent" />,
-        title: 'Tiefenwirkung statt Oberfläche',
-        text: 'Grundreinigung bringt strapazierte Böden und Flächen zurück auf Neuzustand.',
+        title: 'Grundreinigung von Böden',
+        text: 'Strapazierte Böden und Flächen werden gründlich gereinigt und wieder aufbereitet.',
       },
       {
         icon: <BadgeCheck className="w-7 h-7 text-brand" />,
         title: 'Festpreis-Kalkulation',
-        text: 'Transparente Kalkulation nach Aufwand — verbindlich, ohne Nachträge.',
+        text: 'Wir kalkulieren nach Aufwand und nennen Ihnen einen verbindlichen Preis ohne Nachträge.',
       },
     ],
-    scopeTitle: 'Spezialisten für das Außerplanmäßige',
+    scopeTitle: 'Arbeiten außerhalb der Routine',
     scopeIntro:
-      'Außergewöhnliche Verschmutzungen, besondere Materialien oder intensive Auffrischung: Wir bieten das passende Verfahren und das geschulte Team für jede Sonderaufgabe.',
+      'Starke Verschmutzungen, empfindliche Materialien oder eine gründliche Auffrischung: Wir wählen das Verfahren nach der Aufgabe und setzen dafür geschulte Kräfte ein.',
     scope: [
       'Grundreinigung & Beschichtung von Böden',
       'Teppich-, Polster- & Stuhlreinigung',
@@ -424,7 +424,7 @@ export const SERVICES: ServiceData[] = [
       {
         question: 'Was ist ein Stillstandsservice?',
         answer:
-          'Die intensive Reinigung Ihrer Flächen und Anlagen während geplanter Betriebsruhen — etwa in Betriebsferien oder Wartungsfenstern. So entsteht Tiefenreinigung ohne jede Störung Ihres Betriebs.',
+          'Die gründliche Reinigung Ihrer Flächen und Anlagen während geplanter Betriebsruhen, etwa in Betriebsferien oder Wartungsfenstern. Ihr laufender Betrieb wird dadurch nicht gestört.',
       },
       {
         question: 'Wie schnell können Sie bei akuten Fällen helfen?',
@@ -434,11 +434,11 @@ export const SERVICES: ServiceData[] = [
       {
         question: 'Lohnt sich eine regelmäßige Grundreinigung?',
         answer:
-          'Ja: Eine ein- bis zweimal jährliche Grundreinigung verlängert die Lebensdauer von Bodenbelägen erheblich und senkt langfristig Ihre Instandhaltungskosten — wir beraten Sie zum sinnvollen Intervall.',
+          'Ja. Eine Grundreinigung ein- bis zweimal im Jahr verlängert die Lebensdauer von Bodenbelägen erheblich und senkt langfristig Ihre Instandhaltungskosten. Welches Intervall sinnvoll ist, besprechen wir mit Ihnen.',
       },
     ],
-    ctaTitle: 'Ein Sonderfall? Unser Normalfall.',
-    ctaLead: 'Beschreiben Sie uns Ihre Aufgabe — wir prüfen den Bedarf und vereinbaren das weitere Vorgehen.',
+    ctaTitle: 'Sonderreinigung anfragen',
+    ctaLead: 'Beschreiben Sie uns die Aufgabe. Wir prüfen den Bedarf und stimmen das weitere Vorgehen mit Ihnen ab.',
   },
   {
     slug: 'winterdienst-hausmeisterservice',
@@ -448,10 +448,10 @@ export const SERVICES: ServiceData[] = [
     tag: 'Verkehrssicher',
     heroTitle: 'Winterdienst und Hausmeisterservice aus einer Hand',
     heroLead:
-      'Verkehrssicherungspflicht erfüllt, Objekt im Griff: Räum- und Streudienst mit Einsatzdokumentation plus technische Objektbetreuung übers ganze Jahr.',
+      'Wir räumen und streuen Ihre Flächen und dokumentieren jeden Einsatz: So erfüllen Sie Ihre Verkehrssicherungspflicht. Das ganze Jahr über übernimmt unser Hausmeisterservice die technische Objektbetreuung.',
     seoTitle: 'Winterdienst & Hausmeisterservice | AHAD Cleaning',
     seoDescription:
-      'Zuverlässiger Winterdienst mit Einsatzdokumentation und Hausmeisterservice für Gewerbeobjekte in Süddeutschland. Verkehrssicherungspflicht erfüllt.',
+      'Winterdienst mit Einsatzdokumentation und Hausmeisterservice für Gewerbeobjekte in Süddeutschland. So erfüllen Sie Ihre Verkehrssicherungspflicht.',
     keywords: 'Winterdienst Gewerbe, Hausmeisterservice, Verkehrssicherungspflicht, Räumdienst, Objektbetreuung',
     icon: <Snowflake className="w-6 h-6" />,
     image: IMG.winterdienst,
@@ -460,22 +460,22 @@ export const SERVICES: ServiceData[] = [
       {
         icon: <Shield className="w-7 h-7 text-brand" />,
         title: 'Haftungsrisiko ausgelagert',
-        text: 'Wir übernehmen Ihre Verkehrssicherungspflicht — mit dokumentierten Einsätzen als Nachweis.',
+        text: 'Wir übernehmen Ihre Verkehrssicherungspflicht und dokumentieren jeden Einsatz als Nachweis.',
       },
       {
         icon: <AlarmClockCheck className="w-7 h-7 text-accent" />,
         title: 'Einsatzbereit ab 4 Uhr',
-        text: 'Wetterüberwachung und frühe Räumzeiten: Ihre Flächen sind sicher, bevor der Betrieb startet.',
+        text: 'Wetterüberwachung und frühe Räumzeiten: Ihre Flächen sind geräumt und gestreut, bevor der Betrieb startet.',
       },
       {
         icon: <ClipboardCheck className="w-7 h-7 text-brand" />,
-        title: 'Objekt ganzjährig im Griff',
-        text: 'Kontrollgänge, Kleinreparaturen, Grünpflege — ein Partner für den kompletten Objektbetrieb.',
+        title: 'Ganzjährige Objektbetreuung',
+        text: 'Kontrollgänge, Kleinreparaturen und Grünpflege übernehmen wir ebenfalls, mit einem Ansprechpartner für alles.',
       },
     ],
-    scopeTitle: 'Sicherheit und Ordnung — bei jedem Wetter',
+    scopeTitle: 'Sicherheit und Ordnung bei jedem Wetter',
     scopeIntro:
-      'Vom Schneeräumen vor Betriebsbeginn bis zur Kleinreparatur zwischendurch: Wir halten Ihr Objekt sicher, funktionsfähig und repräsentativ — das ganze Jahr.',
+      'Vom Schneeräumen vor Betriebsbeginn bis zur Kleinreparatur zwischendurch: Wir halten Ihr Objekt das ganze Jahr sicher und in Ordnung.',
     scope: [
       'Räum- & Streudienst mit Wetterüberwachung',
       'Dokumentierte Einsatzprotokolle (Haftungsnachweis)',
@@ -488,21 +488,21 @@ export const SERVICES: ServiceData[] = [
       {
         question: 'Übernehmen Sie die volle Verkehrssicherungspflicht?',
         answer:
-          'Ja, vertraglich. Jeder Einsatz wird mit Zeit, Fläche und Maßnahme dokumentiert — im Schadensfall haben Sie damit den rechtssicheren Nachweis ordnungsgemäßer Räumung.',
+          'Ja, vertraglich. Jeder Einsatz wird mit Zeit, Fläche und Maßnahme dokumentiert. Im Schadensfall haben Sie damit den rechtssicheren Nachweis, dass ordnungsgemäß geräumt wurde.',
       },
       {
         question: 'Ab wann sind die Flächen geräumt?',
         answer:
-          'Wir überwachen die Wetterlage aktiv und beginnen bei Bedarf ab 4 Uhr morgens. Verkehrswege, Zufahrten und Parkflächen sind sicher begehbar, bevor Ihre Mitarbeitenden und Kunden eintreffen.',
+          'Wir überwachen die Wetterlage und beginnen bei Bedarf ab 4 Uhr morgens. Verkehrswege, Zufahrten und Parkflächen sind sicher begehbar, bevor Ihre Mitarbeitenden und Kunden eintreffen.',
       },
       {
         question: 'Was umfasst der Hausmeisterservice?',
         answer:
-          'Regelmäßige Kontrollgänge, Kleinreparaturen, Lampen- und Leuchtmitteltausch, Grünpflege sowie die Koordination von Fachfirmen — individuell zusammengestellt nach Ihrem Objekt.',
+          'Regelmäßige Kontrollgänge, Kleinreparaturen, Lampen- und Leuchtmitteltausch, Grünpflege sowie die Koordination von Fachfirmen. Den Umfang stellen wir nach Ihrem Objekt zusammen.',
       },
     ],
-    ctaTitle: 'Der nächste Winter kommt sicher',
-    ctaLead: 'Sichern Sie sich Ihre Räumkapazität rechtzeitig — Angebot nach Bedarfsklärung und Besichtigung.',
+    ctaTitle: 'Winterdienst für die nächste Saison',
+    ctaLead: 'Reservieren Sie Ihre Räumkapazität vor Saisonbeginn. Das Angebot erstellen wir nach Bedarfsklärung und Besichtigung.',
   },
   {
     slug: 'kuechenabluftreinigung-vdi-2052',
@@ -510,9 +510,9 @@ export const SERVICES: ServiceData[] = [
     path: '/leistungen/kuechenabluftreinigung-vdi-2052',
     name: 'Küchenabluftreinigung (VDI 2052)',
     tag: 'Brandschutz & Hygiene',
-    heroTitle: 'Küchenabluftreinigung nach VDI 2052 — prüffähig dokumentiert',
+    heroTitle: 'Küchenabluftreinigung nach VDI 2052 mit prüffähigem Nachweis',
     heroLead:
-      'Fett in Hauben, Kanälen und Ventilatoren ist Brandlast und Hygienerisiko. Wir reinigen Ihre komplette Abluftanlage nach VDI 2052 — mit lückenlosem Nachweis für Versicherung und Behörde.',
+      'Fett in Hauben, Kanälen und Ventilatoren ist Brandlast und Hygienerisiko. Wir reinigen die gesamte Abluftanlage nach VDI 2052: mit Protokoll und Fotos als Nachweis für Versicherung und Behörde.',
     seoTitle: 'Küchenabluftreinigung nach VDI 2052 | AHAD Cleaning',
     seoDescription:
       'Küchenabluftreinigung nach VDI 2052 für Gastronomie, Hotellerie, Kantinen und Großküchen in Süddeutschland. Brandschutzkonform, mit prüffähigem Nachweis.',
@@ -525,20 +525,20 @@ export const SERVICES: ServiceData[] = [
       {
         icon: <Flame className="w-7 h-7 text-accent" />,
         title: 'Brandlast nachweisbar gesenkt',
-        text: 'Fett in Abluftkanälen ist eine der häufigsten Brandursachen in Großküchen — wir entfernen es zuverlässig.',
+        text: 'Fett in Abluftkanälen ist eine der häufigsten Brandursachen in Großküchen. Wir entfernen die Ablagerungen.',
       },
       {
         icon: <BadgeCheck className="w-7 h-7 text-brand" />,
         title: 'Nach VDI 2052',
-        text: 'Die gesamte Anlage — Hauben, Filter, Kanäle, Ventilatoren — nach anerkannter Richtlinie gereinigt.',
+        text: 'Wir reinigen Hauben, Filter, Kanäle und Ventilatoren nach der anerkannten Richtlinie.',
       },
       {
         icon: <FileCheck2 className="w-7 h-7 text-accent" />,
         title: 'Prüffähiger Nachweis',
-        text: 'Foto-Dokumentation und Protokoll für Versicherung, Hygieneaudit und Behörde — auf Knopfdruck.',
+        text: 'Foto-Dokumentation und Protokoll für Versicherung, Hygieneaudit und Behörde.',
       },
     ],
-    scopeTitle: 'Die komplette Abluftstrecke — nicht nur die Haube',
+    scopeTitle: 'Die komplette Abluftstrecke, nicht nur die Haube',
     scopeIntro:
       'Versicherer und Hygienevorgaben verlangen die regelmäßige Reinigung der gesamten Anlage. Wir übernehmen sie vollständig, dokumentiert und außerhalb Ihrer Betriebszeiten.',
     scope: [
@@ -554,21 +554,21 @@ export const SERVICES: ServiceData[] = [
       {
         question: 'Wie oft muss die Küchenabluft gereinigt werden?',
         answer:
-          'Die VDI 2052 empfiehlt das Intervall je nach Nutzung — von vierteljährlich bei Dauer-/Fettbetrieb bis jährlich bei geringer Auslastung. Das genaue Intervall legen wir nach einer Begehung fest.',
+          'Die VDI 2052 empfiehlt das Intervall je nach Nutzung: von vierteljährlich bei Dauer-/Fettbetrieb bis jährlich bei geringer Auslastung. Das genaue Intervall legen wir nach einer Begehung fest.',
       },
       {
         question: 'Warum ist das für meine Versicherung wichtig?',
         answer:
-          'Verfettete Abluftanlagen zählen zu den größten Brandrisiken in Küchen. Viele Versicherer setzen eine dokumentierte Reinigung nach VDI 2052 voraus — fehlt der Nachweis, drohen im Schadensfall Leistungskürzungen.',
+          'Verfettete Abluftanlagen zählen zu den größten Brandrisiken in Küchen. Viele Versicherer setzen eine dokumentierte Reinigung nach VDI 2052 voraus. Fehlt der Nachweis, drohen im Schadensfall Leistungskürzungen.',
       },
       {
         question: 'Stören Sie meinen Betrieb?',
         answer:
-          'Nein. Wir reinigen außerhalb Ihrer Öffnungs- und Produktionszeiten, auf Wunsch nachts. Ihre Küche ist zum nächsten Service wieder voll einsatzbereit.',
+          'Nein. Wir reinigen außerhalb Ihrer Öffnungs- und Produktionszeiten, auf Wunsch nachts. Ihre Küche ist zum nächsten Service wieder einsatzbereit.',
       },
     ],
     ctaTitle: 'Abluftanlage prüfen lassen',
-    ctaLead: 'Wir bewerten Verschmutzungsgrad und Intervall — und liefern den Nachweis, den Ihre Versicherung sehen will.',
+    ctaLead: 'Wir prüfen Verschmutzungsgrad und Intervall und liefern den Nachweis, den Ihre Versicherung verlangt.',
   },
 ];
 

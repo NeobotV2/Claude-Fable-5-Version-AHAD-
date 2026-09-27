@@ -14,14 +14,14 @@ export default function Branchen() {
     <div>
       <SEO
         title="Branchenlösungen für Gebäudereinigung | AHAD Cleaning"
-        description="Spezialisierte Reinigungskonzepte für Industrie & Produktion, Medizintechnik, Büro & Verwaltung, Gewerbeobjekte und Hotellerie in Süddeutschland."
+        description="Reinigungskonzepte nach Branche: Industrie & Produktion, Medizintechnik, Büro & Verwaltung, Gewerbeobjekte und Hotellerie in Süddeutschland."
         keywords="Gebäudereinigung Branchen, Industriereinigung, Büroreinigung, Hotelreinigung, Reinigung Medizintechnik"
       />
 
       <PageHero
         eyebrow="Branchen"
-        title="Jede Branche hat ihre eigene Logik."
-        lead="Schichtbetrieb, Hygienezonen, Publikumsverkehr oder Abnahmetermine: Wir kennen die kritischen Punkte Ihrer Branche — und bauen die Reinigung darum herum, nicht umgekehrt."
+        title="Jede Branche hat eigene Anforderungen."
+        lead="Schichtbetrieb, Hygienezonen, Publikumsverkehr oder Abnahmetermine: Wir kennen die kritischen Punkte Ihrer Branche und planen die Reinigung danach."
         image={IMG.brancheIndustrie}
         crumbs={[{ label: 'Branchen' }]}
         cta={{ label: 'Kostenlose Besichtigung anfragen', to: '/angebot' }}
@@ -30,8 +30,8 @@ export default function Branchen() {
       <section className="py-20 lg:py-32 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-8">
           <SectionHeading
-            eyebrow="Übersicht"
-            title="Fünf Umgebungen, in denen wir zuhause sind."
+            eyebrow="Fünf Branchen"
+            title="In diesen Branchen arbeiten wir."
             className="mb-14"
           />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -72,8 +72,8 @@ export default function Branchen() {
       </section>
 
       <CTABand
-        title="Ihre Branche, Ihre Anforderungen"
-        lead="Erzählen Sie uns von Ihrem Objekt — wir antworten mit einem Konzept, das zu Ihrer Betriebslogik passt."
+        title="Reinigungskonzept für Ihr Objekt"
+        lead="Beschreiben Sie uns Ihr Objekt und Ihre Abläufe. Wir schlagen Ihnen ein passendes Konzept vor."
       />
     </div>
   );

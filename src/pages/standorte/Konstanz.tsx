@@ -15,17 +15,17 @@ const LOCAL_SERVICES = [
   {
     title: 'Unterhaltsreinigung in Konstanz',
     to: '/leistungen/unterhaltsreinigung',
-    desc: 'Planbar saubere Büros, Praxen und Verwaltungen in Konstanz und am Bodensee — feste Teams, dokumentierte Qualität.',
+    desc: 'Regelmäßige Reinigung von Büros, Praxen und Verwaltungen in Konstanz und am Bodensee mit festen Teams und dokumentierter Qualitätskontrolle.',
   },
   {
     title: 'Glas- & Fassadenreinigung in Konstanz',
     to: '/leistungen/glas-fassadenreinigung',
-    desc: 'Streifenfreie Glasflächen mit Seeblick und repräsentative Fassaden — auch in der Höhe und mit Osmose-Verfahren.',
+    desc: 'Glasflächen und Fassaden in Konstanz und am See, auch in der Höhe und im Osmose-Verfahren.',
   },
   {
     title: 'Industrie- & Produktionsreinigung in Konstanz',
     to: '/leistungen/industrie-produktionsreinigung',
-    desc: 'Reinigung für Gewerbe- und Produktionsbetriebe der Bodenseeregion — im laufenden Betrieb und auditfähig.',
+    desc: 'Reinigung für Gewerbe- und Produktionsbetriebe der Bodenseeregion im laufenden Betrieb, mit Nachweisen für Audits.',
   },
   {
     title: 'Baureinigung in Konstanz',
@@ -35,7 +35,7 @@ const LOCAL_SERVICES = [
   {
     title: 'Winterdienst & Hausmeisterservice in Konstanz',
     to: '/leistungen/winterdienst-hausmeisterservice',
-    desc: 'Sichere Verkehrswege und gepflegte Objekte — Räum- und Streudienst, Kontrollgänge und Kleinreparaturen.',
+    desc: 'Räum- und Streudienst für Ihre Verkehrswege sowie Kontrollgänge und Kleinreparaturen im Objekt.',
   },
   {
     title: 'Sonder- & Grundreinigung in Konstanz',
@@ -50,27 +50,27 @@ const LOCAL_BRANCHEN = [
   {
     title: 'Hotellerie & Objektbetrieb',
     to: '/branchen/hotellerie-objektbetrieb',
-    desc: 'Hotels, Gastronomie und Freizeitbäder am Bodensee — Reinigung, die sich geräuschlos in den Gästebetrieb einfügt.',
+    desc: 'Hotels, Gastronomie und Freizeitbäder am Bodensee. Wir reinigen abgestimmt auf den Gästebetrieb.',
   },
   {
     title: 'Büros, Verwaltung & Kanzleien',
     to: '/branchen/buero-verwaltung',
-    desc: 'Verwaltungen, Kanzleien und Dienstleister in Konstanz — repräsentativ sauber mit fester Objektleitung.',
+    desc: 'Verwaltungen, Kanzleien und Dienstleister in Konstanz, betreut von einer festen Objektleitung.',
   },
   {
     title: 'Medizintechnik, Praxen & Kliniken',
     to: '/branchen/medizintechnik',
-    desc: 'Praxen und Gesundheitseinrichtungen der Region — Hygiene dokumentiert und auditfähig.',
+    desc: 'Praxen und Gesundheitseinrichtungen der Region, mit dokumentierter Hygiene und Nachweisen für Audits.',
   },
   {
     title: 'Handel & Gewerbeobjekte',
     to: '/branchen/gewerbeobjekte',
-    desc: 'Einzelhandel und Grenzverkehr: saubere Verkaufsflächen auch bei hoher Kundenfrequenz.',
+    desc: 'Verkaufsflächen im Einzelhandel, auch bei hoher Kundenfrequenz durch den Grenzverkehr.',
   },
   {
     title: 'Industrie & Produktion',
     to: '/branchen/industrie-produktion',
-    desc: 'Produktions- und Gewerbebetriebe rund um Konstanz, Radolfzell und Singen — im laufenden Betrieb.',
+    desc: 'Produktions- und Gewerbebetriebe rund um Konstanz, Radolfzell und Singen, im laufenden Betrieb.',
   },
 ];
 
@@ -119,17 +119,17 @@ const LOCAL_FAQS: FAQItem[] = [
   {
     question: 'Welche Reinigungsleistungen bietet AHAD in Konstanz?',
     answer:
-      'In Konstanz und der Bodenseeregion bieten wir das komplette Spektrum: Unterhaltsreinigung, Glas- und Fassadenreinigung, Industrie- und Produktionsreinigung, Baureinigung, Sonder- und Grundreinigung sowie Winterdienst und Hausmeisterservice — aus einer Hand, mit fester Objektleitung.',
+      'In Konstanz und der Bodenseeregion bieten wir Unterhaltsreinigung, Glas- und Fassadenreinigung, Industrie- und Produktionsreinigung, Baureinigung, Sonder- und Grundreinigung sowie Winterdienst und Hausmeisterservice an. Alle Leistungen koordiniert eine feste Objektleitung.',
   },
   {
     question: 'Reinigen Sie auch Hotellerie und Gastronomie am Bodensee?',
     answer:
-      'Ja. Wir kennen die hohen Repräsentations- und Hygieneanforderungen im Tourismus-Sektor und arbeiten mit eingespielten Teams, die sich diskret in den laufenden Gästebetrieb einfügen.',
+      'Ja. Wir kennen die Anforderungen an Hygiene und Erscheinungsbild im Tourismus und arbeiten mit eingespielten Teams, die diskret im laufenden Gästebetrieb reinigen.',
   },
   {
     question: 'In welchem Gebiet rund um Konstanz sind Sie im Einsatz?',
     answer:
-      'Wir betreuen Kunden von Radolfzell über Singen und Stockach bis Überlingen und Meersburg — inklusive Reichenau, Allensbach und Engen sowie der weiteren Bodenseeregion.',
+      'Wir betreuen Kunden von Radolfzell über Singen und Stockach bis Überlingen und Meersburg, dazu Reichenau, Allensbach und Engen sowie die weitere Bodenseeregion.',
   },
   {
     question: 'Arbeiten Sie mit umweltschonenden Reinigungsverfahren?',
@@ -161,7 +161,7 @@ export default function StandortKonstanz() {
       <PageHero
         eyebrow="Einsatzgebiet · Bodenseeregion"
         title="Gebäudereinigung in Konstanz"
-        lead="Wir sind Ihr Partner für professionelle Gebäudedienstleistungen in der Bodenseeregion – wir betreuen Radolfzell, Singen, Kreuzlingen, Meersburg, Überlingen, Stockach und Umgebung."
+        lead="Wir bieten Gebäudedienstleistungen in der Bodenseeregion an und betreuen Objekte in Radolfzell, Singen, Kreuzlingen, Meersburg, Überlingen, Stockach und Umgebung."
         image={IMG.bodensee}
         imageAlt="Konstanz am Bodensee — Luftaufnahme der Stadt"
         crumbs={[{ label: 'Standorte', href: '/standorte' }, { label: 'Konstanz' }]}
@@ -173,16 +173,16 @@ export default function StandortKonstanz() {
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-20">
             <div>
-              <h2 className="text-3xl font-bold mb-8 text-gray-900">Sauberkeit am See</h2>
+              <h2 className="text-3xl font-bold mb-8 text-gray-900">Gebäudereinigung am Bodensee</h2>
               <p className="text-lg text-gray-600 mb-8 leading-relaxed">
-                Die Bodenseeregion ist geprägt von Tourismus, Bildung und innovativem Gewerbe. Wir bieten die passende
-                Reinigungslogik für jede dieser Anforderungen.
+                Die Bodenseeregion lebt von Tourismus, Bildung und Gewerbe. Wir planen die Reinigung nach den
+                Anforderungen des jeweiligen Objekts.
               </p>
               <ul className="space-y-4">
                 {[
                   'Reinigung für Hotellerie & Gastronomie',
-                  'Professionelle Büroreinigung für Dienstleister',
-                  'Glas- & Fassadenreinigung mit Seeblick',
+                  'Büroreinigung für Dienstleister',
+                  'Glas- & Fassadenreinigung',
                   'Unterhaltsreinigung für öffentliche Einrichtungen',
                   'Objektbezogene Einsatz- und Terminplanung',
                   'Umweltschonende Reinigungsmittel',
@@ -236,8 +236,8 @@ export default function StandortKonstanz() {
           <div className="mb-20">
             <h2 className="text-3xl font-bold mb-3 text-gray-900">Unsere Leistungen in Konstanz &amp; am Bodensee</h2>
             <p className="text-lg text-gray-600 mb-10 max-w-3xl leading-relaxed">
-              Das komplette Gebäudereinigungs-Spektrum für Unternehmen in Konstanz und der Bodenseeregion — aus einer
-              Hand, mit fester Objektleitung und dokumentierter Qualität.
+              Alle Leistungen der Gebäudereinigung für Unternehmen in Konstanz und der Bodenseeregion, koordiniert von
+              einer festen Objektleitung und mit dokumentierter Qualitätskontrolle.
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
               {LOCAL_SERVICES.map((s) => (
@@ -259,7 +259,7 @@ export default function StandortKonstanz() {
           {/* Branchen vor Ort */}
           <div className="mb-20">
             <h2 className="text-3xl font-bold mb-3 text-gray-900">Branchen, die wir in Konstanz & am Bodensee betreuen</h2>
-            <p className="text-lg text-gray-600 mb-10 max-w-3xl leading-relaxed">Tourismus, Gesundheit und innovatives Gewerbe prägen die Bodenseeregion: Wir reinigen passgenau für die Branchen vor Ort — umweltschonend und diskret im laufenden Betrieb.</p>
+            <p className="text-lg text-gray-600 mb-10 max-w-3xl leading-relaxed">Tourismus, Gesundheit und Gewerbe prägen die Bodenseeregion. Wir reinigen für diese Branchen umweltschonend und diskret im laufenden Betrieb.</p>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
               {LOCAL_BRANCHEN.map((b) => (
                 <Link
@@ -281,7 +281,7 @@ export default function StandortKonstanz() {
           <div className="mb-20">
             <h2 className="text-3xl font-bold mb-3 text-gray-900">Einsatzgebiete rund um Konstanz</h2>
             <p className="text-lg text-gray-600 mb-8 max-w-3xl leading-relaxed">
-              In der gesamten Bodenseeregion sind wir schnell für Sie im Einsatz:
+              In diesen Orten der Bodenseeregion sind wir im Einsatz:
             </p>
             <div className="flex flex-wrap gap-2.5">
               {SERVICE_AREAS.map((area) => (
@@ -303,9 +303,9 @@ export default function StandortKonstanz() {
               <div className="max-w-3xl">
                 <h2 className="text-3xl font-bold mb-6">Warum AHAD Cleaning in Konstanz?</h2>
                 <p className="text-xl text-blue-100 mb-8 leading-relaxed">
-                  Konstanz und die Bodenseeregion erfordern einen sensiblen Umgang mit der Umwelt und höchste Standards im
-                  Tourismus-Sektor. Wir betreuen Kunden von Radolfzell bis Überlingen mit spezialisierten Teams, die die
-                  logistischen Besonderheiten der Region (z. B. Altstadt-Logistik) genau kennen.
+                  Am Bodensee spielen der Schutz der Umwelt und die Anforderungen des Tourismus eine große Rolle. Wir
+                  betreuen Kunden von Radolfzell bis Überlingen mit Teams, die die Besonderheiten der Region kennen,
+                  etwa die Logistik in der Altstadt.
                 </p>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="flex items-start gap-3">
@@ -325,8 +325,8 @@ export default function StandortKonstanz() {
           {KONSTANZ_REVIEWS.length > 0 && <div className="mb-20">
             <h2 className="text-3xl font-bold mb-3 text-gray-900">Das sagen Kundinnen und Kunden in Konstanz</h2>
             <p className="text-lg text-gray-600 mb-10 max-w-3xl leading-relaxed">
-              Eine Auswahl einzelner Stimmen im Wortlaut. Eine Zuordnung zu einem Plattform-Profil und eine
-              Gesamtwertung veröffentlichen wir erst nach Prüfung des exakten Profils.
+              Einzelne Bewertungen aus der Region, unverändert wiedergegeben. Eine Zuordnung zu einem Plattform-Profil
+              und eine Gesamtwertung veröffentlichen wir erst nach Prüfung des Profils.
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {KONSTANZ_REVIEWS.map((r) => (
@@ -357,7 +357,7 @@ export default function StandortKonstanz() {
 
           {/* Lokale FAQ */}
           <div className="max-w-3xl">
-            <h2 className="text-3xl font-bold mb-8 text-gray-900">Häufige Fragen — Gebäudereinigung Konstanz</h2>
+            <h2 className="text-3xl font-bold mb-8 text-gray-900">Häufige Fragen zur Gebäudereinigung in Konstanz</h2>
             <Accordion items={LOCAL_FAQS} />
           </div>
         </div>
@@ -365,7 +365,7 @@ export default function StandortKonstanz() {
 
       <CTABand
         title="Ihr Objekt am Bodensee?"
-        lead="Regional erreichbar: Besichtigung nach Abstimmung, belastbares Angebot im Anschluss."
+        lead="Wir besichtigen Ihr Objekt zu einem abgestimmten Termin und erstellen danach ein Angebot."
       />
     </div>
   );

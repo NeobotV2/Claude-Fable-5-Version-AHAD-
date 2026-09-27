@@ -28,9 +28,9 @@ export const BRANCHEN: BrancheData[] = [
     path: '/branchen/industrie-produktion',
     name: 'Industrie & Produktion',
     claim: 'Störungsfrei im Schichtbetrieb',
-    heroTitle: 'Reinigung, die Ihre Produktion respektiert',
+    heroTitle: 'Reinigung, die sich nach Ihrer Produktion richtet',
     heroLead:
-      'Schichtpläne, Taktzeiten, Arbeitssicherheit: Wir integrieren Reinigung so in Ihren Betrieb, dass nichts stillsteht — mit festen Teams, klaren Eskalationswegen und auditfähiger Dokumentation.',
+      'Schichtpläne, Taktzeiten, Arbeitssicherheit: Wir planen die Reinigung so, dass Ihre Anlagen weiterlaufen. Dafür setzen wir feste Teams ein, legen Eskalationswege fest und dokumentieren auditfähig.',
     seoTitle: 'Reinigung für Industrie & Produktion | AHAD Cleaning',
     seoDescription:
       'Industriereinigung im laufenden Betrieb: schichtintegriert, UVV-konform, auditfähig dokumentiert. Für Produktionsbetriebe in Süddeutschland.',
@@ -40,11 +40,11 @@ export const BRANCHEN: BrancheData[] = [
     pains: [
       {
         title: 'Reinigung stört die Produktion',
-        text: 'Standard-Dienstleister arbeiten nach eigenem Plan — und stehen dann mitten in Ihrer Schicht im Weg.',
+        text: 'Viele Dienstleister arbeiten nach eigenem Plan und stehen dann mitten in Ihrer Schicht im Weg.',
       },
       {
         title: 'Sicherheitsauflagen werden unterschätzt',
-        text: 'Unterweisungen fehlen, PSA sitzt nicht, im Audit fehlen die Nachweise — das Risiko liegt bei Ihnen.',
+        text: 'Unterweisungen fehlen, PSA sitzt nicht, im Audit fehlen die Nachweise. Das Risiko tragen Sie.',
       },
       {
         title: 'Qualität schwankt mit dem Personal',
@@ -57,7 +57,7 @@ export const BRANCHEN: BrancheData[] = [
       'Maschinen- & Anlagenreinigung nach Herstellervorgabe',
       'Dokumentierte Unterweisungen & UVV-Konformität',
       'Eskalationswege mit fester Objektleitung',
-      'Auditfähige Leistungsnachweise auf Knopfdruck',
+      'Auditfähige Leistungsnachweise',
     ],
     services: [
       { name: 'Industrie- & Produktionsreinigung', path: '/leistungen/industrie-produktionsreinigung' },
@@ -68,12 +68,12 @@ export const BRANCHEN: BrancheData[] = [
       {
         question: 'Wie stimmen Sie sich mit unserer Produktionsplanung ab?',
         answer:
-          'Ihre AHAD-Objektleitung plant Reinigungsfenster gemeinsam mit Ihrer Schicht- oder Produktionsleitung — wöchentlich oder nach Bedarf. Änderungen fließen direkt in die Einsatzplanung ein.',
+          'Ihre AHAD-Objektleitung plant Reinigungsfenster gemeinsam mit Ihrer Schicht- oder Produktionsleitung, wöchentlich oder nach Bedarf. Änderungen fließen direkt in die Einsatzplanung ein.',
       },
       {
         question: 'Sind Ihre Mitarbeitenden für Industrieumgebungen geschult?',
         answer:
-          'Ja. Alle Kräfte erhalten dokumentierte Sicherheitsunterweisungen, tragen vorgeschriebene PSA und werden objektspezifisch eingearbeitet — inklusive Verhaltensregeln an Maschinen und Anlagen.',
+          'Ja. Alle Kräfte erhalten dokumentierte Sicherheitsunterweisungen, tragen vorgeschriebene PSA und werden objektspezifisch eingearbeitet, einschließlich der Verhaltensregeln an Maschinen und Anlagen.',
       },
     ],
   },
@@ -84,10 +84,10 @@ export const BRANCHEN: BrancheData[] = [
     claim: 'Auditnah & dokumentiert',
     heroTitle: 'Hygiene-Standards, die Audits bestehen',
     heroLead:
-      'In der Medizintechnik entscheidet dokumentierte Sauberkeit über Zertifikate und Kundenvertrauen. Wir liefern auditnahe Reinigung nach Ihren SOPs — mit festem, geschultem Personal.',
+      'In der Medizintechnik hängen Zertifikate und Kundenvertrauen an dokumentierter Sauberkeit. Wir reinigen nach Ihren SOPs: mit festem, geschultem Personal und vollständigen Nachweisen.',
     seoTitle: 'Reinigung für Medizintechnik-Unternehmen | AHAD Cleaning',
     seoDescription:
-      'Auditfähige Reinigung für Medizintechnik und sensible Produktionsbereiche: ISO-konform, nach SOP, lückenlos dokumentiert. Süddeutschland.',
+      'Auditfähige Reinigung für Medizintechnik und sensible Produktionsbereiche: ISO-konform, nach SOP, vollständig dokumentiert. Für Betriebe in Süddeutschland.',
     keywords: 'Reinigung Medizintechnik, Reinraumreinigung, ISO 13485 Reinigung, Hygienereinigung',
     icon: <Microscope className="w-6 h-6" />,
     image: IMG.brancheMedizin,
@@ -98,7 +98,7 @@ export const BRANCHEN: BrancheData[] = [
       },
       {
         title: 'SOPs werden ignoriert',
-        text: 'Standard-Reinigungskräfte kennen weder Hygieneschleusen noch Verhaltensregeln in sensiblen Zonen.',
+        text: 'Ungeschulte Reinigungskräfte kennen weder Hygieneschleusen noch Verhaltensregeln in sensiblen Zonen.',
       },
       {
         title: 'Personalwechsel ohne Einweisung',
@@ -106,11 +106,11 @@ export const BRANCHEN: BrancheData[] = [
       },
     ],
     solutions: [
-      'Reinigung strikt nach Ihren SOPs & Hygieneplänen',
+      'Reinigung nach Ihren SOPs & Hygieneplänen',
       'Festes, hygienegeschultes Stammpersonal',
       'Dokumentierte Einweisungen & Schulungsnachweise',
       'Freigegebene Reinigungsmittel & Verfahren',
-      'Lückenlose Leistungsdokumentation je Zone',
+      'Leistungsdokumentation je Zone',
       'Audit-Begleitung durch Ihre Objektleitung',
     ],
     services: [
@@ -122,12 +122,12 @@ export const BRANCHEN: BrancheData[] = [
       {
         question: 'Unterstützen Sie uns bei ISO-Audits?',
         answer:
-          'Ja. Alle Leistungen, Schulungen und Kontrollen sind lückenlos dokumentiert und jederzeit abrufbar. Auf Wunsch nimmt Ihre AHAD-Objektleitung persönlich am Audit teil und beantwortet Fragen der Auditoren.',
+          'Ja. Alle Leistungen, Schulungen und Kontrollen sind dokumentiert und abrufbar. Auf Wunsch nimmt Ihre AHAD-Objektleitung am Audit teil und beantwortet Fragen der Auditoren.',
       },
       {
         question: 'Wie gehen Sie mit unseren Hygienezonen um?',
         answer:
-          'Wir übernehmen Ihre Zonenlogik in unsere Reinigungspläne: getrennte Ausrüstung je Zone, definierte Wege, dokumentierte Schleusenprozesse — exakt nach Ihren Vorgaben.',
+          'Wir übernehmen Ihre Zonenlogik so in unsere Reinigungspläne, wie Sie sie vorgeben: getrennte Ausrüstung je Zone, definierte Wege, dokumentierte Schleusenprozesse.',
       },
     ],
   },
@@ -138,31 +138,31 @@ export const BRANCHEN: BrancheData[] = [
     claim: 'Repräsentativ, jeden Tag',
     heroTitle: 'Büros, die jeden Tag einen guten Eindruck machen',
     heroLead:
-      'Empfang, Meetingräume, Arbeitsplätze, Sanitär: Wir halten Ihre Verwaltung verlässlich repräsentativ — ohne dass sich intern jemand darum kümmern muss.',
+      'Empfang, Meetingräume, Arbeitsplätze, Sanitär: Wir halten Ihre Büros sauber und gepflegt, ohne dass sich intern jemand darum kümmern muss.',
     seoTitle: 'Büroreinigung & Verwaltungsgebäude | AHAD Cleaning',
     seoDescription:
-      'Zuverlässige Büroreinigung für Unternehmen und Verwaltungen: feste Teams, planbare Qualität, digitale Nachweise. Villingen-Schwenningen, Stuttgart, Konstanz.',
+      'Büroreinigung für Unternehmen und Verwaltungen: feste Teams, planbare Qualität, digitale Nachweise. Villingen-Schwenningen, Stuttgart, Konstanz.',
     keywords: 'Büroreinigung, Reinigung Verwaltung, Unterhaltsreinigung Büro, Reinigungsfirma Büro Stuttgart',
     icon: <Building2 className="w-6 h-6" />,
     image: IMG.brancheBuero,
     pains: [
       {
         title: 'Beschwerden landen bei Ihnen',
-        text: 'Volle Papierkörbe, fleckige Tische — und Ihre Mitarbeitenden beschweren sich beim Office-Management.',
+        text: 'Bei vollen Papierkörben und fleckigen Tischen beschweren sich Ihre Mitarbeitenden beim Office-Management.',
       },
       {
         title: 'Niemand fühlt sich zuständig',
-        text: 'Beim Dienstleister wechseln Ansprechpartner und Ausreden — nur das Problem bleibt.',
+        text: 'Beim Dienstleister wechseln die Ansprechpartner, das Problem bleibt.',
       },
       {
         title: 'Qualität ist Glückssache',
-        text: 'Mal top, mal schlampig: Ohne Kontrollen und Nachweise bleibt Reinigung ein Blindflug.',
+        text: 'Mal gut, mal schlampig: Ohne Kontrollen und Nachweise weiß niemand, was tatsächlich gereinigt wurde.',
       },
     ],
     solutions: [
       'Feste Reinigungsteams mit Objektleitung',
       'Reinigungszeiten passend zu Ihren Bürozeiten',
-      'Empfang & Meetingräume mit Prioritätenlogik',
+      'Empfang & Meetingräume mit Vorrang',
       'Sanitär-Hygiene mit definierten Standards',
       'Digitale Checklisten & Qualitätsreports',
       'Klare Zuständigkeit bei jedem Anliegen',
@@ -181,7 +181,7 @@ export const BRANCHEN: BrancheData[] = [
       {
         question: 'Wie schnell reagieren Sie auf Sonderwünsche?',
         answer:
-          'Ihre Objektleitung klärt den Bedarf und stimmt die nächsten Schritte mit Ihnen ab — ob Zusatzreinigung nach einem Event oder Änderung der Intervalle.',
+          'Ihre Objektleitung klärt den Bedarf, etwa eine Zusatzreinigung nach einer Veranstaltung oder geänderte Intervalle, und stimmt die nächsten Schritte mit Ihnen ab.',
       },
     ],
   },
@@ -192,21 +192,21 @@ export const BRANCHEN: BrancheData[] = [
     claim: 'Großflächen im Griff',
     heroTitle: 'Gewerbeflächen sauber und verkehrssicher betreiben',
     heroLead:
-      'Logistikhallen, Handelsflächen, Mischobjekte: Wir betreuen großflächige Gewerbeimmobilien wirtschaftlich — von der Routine bis zum Winterdienst, alles aus einer Hand.',
+      'Logistikhallen, Handelsflächen, Mischobjekte: Wir betreuen große Gewerbeimmobilien wirtschaftlich, von der laufenden Reinigung bis zum Winterdienst, mit einem Vertrag und einem Ansprechpartner.',
     seoTitle: 'Reinigung für Gewerbeobjekte & Logistik | AHAD Cleaning',
     seoDescription:
-      'Professionelle Reinigung für Gewerbeimmobilien, Logistik- und Handelsflächen: wirtschaftlich, zuverlässig, mit Objektbetreuung aus einer Hand.',
+      'Reinigung für Gewerbeimmobilien, Logistik- und Handelsflächen: maschinelle Großflächenreinigung, Winterdienst und Hausmeisterservice in einem Vertrag.',
     keywords: 'Reinigung Gewerbe, Hallenreinigung Logistik, Gewerbeimmobilien Reinigung, Objektbetreuung',
     icon: <Warehouse className="w-6 h-6" />,
     image: IMG.brancheGewerbe,
     pains: [
       {
         title: 'Viele Dienstleister, viel Koordination',
-        text: 'Reinigung, Winterdienst, Hausmeister — drei Verträge, drei Ansprechpartner, dreifacher Aufwand.',
+        text: 'Reinigung, Winterdienst und Hausmeister bedeuten oft drei Verträge und drei Ansprechpartner.',
       },
       {
         title: 'Großflächen sprengen das Budget',
-        text: 'Ohne effiziente Maschinen- und Intervalllogik werden große Flächen unnötig teuer.',
+        text: 'Ohne passende Maschinen und Intervalle wird die Reinigung großer Flächen unnötig teuer.',
       },
       {
         title: 'Verkehrssicherung wird zum Risiko',
@@ -214,12 +214,12 @@ export const BRANCHEN: BrancheData[] = [
       },
     ],
     solutions: [
-      'Objektbetreuung aus einer Hand — ein Vertrag',
+      'Objektbetreuung mit einem Vertrag',
       'Maschinelle Reinigung für Großflächen',
       'Intervalle nach Frequenz & Nutzung',
       'Winterdienst mit dokumentierter Verkehrssicherung',
       'Hausmeisterservice & Kontrollgänge',
-      'Transparente Kosten je Fläche',
+      'Kosten je Fläche ausgewiesen',
     ],
     services: [
       { name: 'Unterhaltsreinigung', path: '/leistungen/unterhaltsreinigung' },
@@ -230,12 +230,12 @@ export const BRANCHEN: BrancheData[] = [
       {
         question: 'Können Sie mehrere Standorte gleichzeitig betreuen?',
         answer:
-          'Ja. Wir betreuen Portfolios mit mehreren Objekten in ganz Süddeutschland — mit einheitlichen Standards, zentraler Ansprechperson und konsolidierter Abrechnung.',
+          'Ja. Wir betreuen Portfolios mit mehreren Objekten in ganz Süddeutschland, mit einheitlichen Standards, einer zentralen Ansprechperson und einer gemeinsamen Abrechnung.',
       },
       {
         question: 'Lohnt sich maschinelle Reinigung für unsere Flächen?',
         answer:
-          'Bei großen Hart- und Industrieböden fast immer: Aufsitz- und Scheuersaugmaschinen senken die Kosten pro Quadratmeter deutlich. Wir kalkulieren beide Varianten transparent für Sie.',
+          'Bei großen Hart- und Industrieböden fast immer: Aufsitz- und Scheuersaugmaschinen senken die Kosten pro Quadratmeter deutlich. Wir rechnen Ihnen beide Varianten durch.',
       },
     ],
   },
@@ -243,13 +243,13 @@ export const BRANCHEN: BrancheData[] = [
     slug: 'hotellerie-objektbetrieb',
     path: '/branchen/hotellerie-objektbetrieb',
     name: 'Hotellerie & Objektbetrieb',
-    claim: 'Gastgeberqualität sichern',
-    heroTitle: 'Sauberkeit, die Ihre Gäste spüren — und bewerten',
+    claim: 'Housekeeping & Objektreinigung',
+    heroTitle: 'Sauberkeit, die Ihre Gäste bemerken und bewerten',
     heroLead:
-      'In Hotellerie und Objektbetrieb ist Sauberkeit Teil des Produkts. Wir liefern Housekeeping-Unterstützung und Objektreinigung in konstanter Qualität — auch bei Personalspitzen.',
+      'In Hotellerie und Objektbetrieb ist Sauberkeit Teil des Produkts. Wir unterstützen Ihr Housekeeping und reinigen Ihr Objekt: in gleichbleibender Qualität, auch bei Belegungsspitzen.',
     seoTitle: 'Reinigung für Hotellerie & Objektbetrieb | AHAD Cleaning',
     seoDescription:
-      'Professionelle Reinigung für Hotels, Kur- und Freizeitbetriebe: Housekeeping-Support, öffentliche Bereiche, Wellness. Konstante Qualität, flexible Kapazität.',
+      'Reinigung für Hotels, Kur- und Freizeitbetriebe: Housekeeping-Support, öffentliche Bereiche, Wellness. Gleichbleibende Qualität, Kapazität nach Belegung.',
     keywords: 'Hotelreinigung, Housekeeping Dienstleister, Reinigung Hotellerie, Wellnessbereich Reinigung',
     icon: <ConciergeBell className="w-6 h-6" />,
     image: IMG.brancheHotel,
@@ -260,11 +260,11 @@ export const BRANCHEN: BrancheData[] = [
       },
       {
         title: 'Schwankende Auslastung',
-        text: 'Messen, Saison, Events: Starre Personalmodelle passen nie zur realen Belegung.',
+        text: 'Messen, Saison, Veranstaltungen: Ein starrer Personalplan passt selten zur tatsächlichen Belegung.',
       },
       {
         title: 'Eine schlechte Bewertung kostet',
-        text: 'Ein Haar im Bad reicht — und die Online-Bewertung beschädigt Ihr Geschäft nachhaltig.',
+        text: 'Ein Haar im Bad reicht für eine schlechte Online-Bewertung, und die bleibt lange sichtbar.',
       },
     ],
     solutions: [
@@ -284,12 +284,12 @@ export const BRANCHEN: BrancheData[] = [
       {
         question: 'Können Sie kurzfristig bei Belegungsspitzen unterstützen?',
         answer:
-          'Ja — genau dafür sind wir aufgestellt. Mit unserem Personalpool verstärken wir Ihr Housekeeping kurzfristig, eingearbeitet nach Ihren Standards und Abläufen.',
+          'Ja. Mit unserem Personalpool verstärken wir Ihr Housekeeping kurzfristig. Die Kräfte werden nach Ihren Standards und Abläufen eingearbeitet.',
       },
       {
         question: 'Arbeiten Ihre Teams nach unseren Hotelstandards?',
         answer:
-          'Selbstverständlich. Wir übernehmen Ihre Zimmer- und Reinigungsstandards in unsere Checklisten und sichern sie über eigene Qualitätskontrollen — konstant, auch bei Personalwechsel.',
+          'Ja. Wir übernehmen Ihre Zimmer- und Reinigungsstandards in unsere Checklisten und prüfen sie mit eigenen Qualitätskontrollen, auch wenn das Personal wechselt.',
       },
     ],
   },

@@ -14,22 +14,22 @@ const faqs: FAQItem[] = [
   {
     question: 'Welche Reinigungsleistungen bietet AHAD Cleaning an?',
     answer:
-      'AHAD Cleaning bietet ein umfassendes Portfolio an Gebäudedienstleistungen: Unterhaltsreinigung für Büros, spezialisierte Industrie- und Produktionsreinigung, Glas- und Fassadenreinigung, Baureinigung, Medizintechnik- und Reinraumreinigung, Sonderreinigungen sowie Winterdienst und Hausmeisterservice.',
+      'AHAD Cleaning übernimmt Unterhaltsreinigung für Büros, Industrie- und Produktionsreinigung, Glas- und Fassadenreinigung, Baureinigung, Medizintechnik- und Reinraumreinigung, Küchenabluftreinigung nach VDI 2052, Sonderreinigungen sowie Winterdienst und Hausmeisterservice.',
   },
   {
     question: 'Wie werden die Reinigungsintervalle festgelegt?',
     answer:
-      'Wir setzen nicht auf starre Standardpakete. Die Reinigungsintervalle und Leistungsverzeichnisse werden individuell nach einer Vor-Ort-Analyse, der tatsächlichen Nutzung Ihrer Flächen und Ihrer spezifischen Betriebslogik (z.B. Schichtpläne) entwickelt.',
+      'Nach einer Begehung vor Ort. Intervalle und Leistungsverzeichnis richten sich danach, wie Ihre Flächen genutzt werden und wie Ihr Betrieb läuft, zum Beispiel nach Ihren Schichtplänen.',
   },
   {
     question: 'Bieten Sie auch spezialisierte Reinigungen für die Industrie an?',
     answer:
-      'Ja, wir sind Experten für Industriereinigung. Dies umfasst die Reinigung von Produktionshallen, die fachgerechte Maschinen- und Anlagenreinigung sowie die Entfettung von Industrieböden – alles unter strenger Einhaltung von Arbeitssicherheitsvorschriften (UVV).',
+      'Ja. Wir reinigen Produktionshallen, Maschinen und Anlagen fachgerecht und entfetten Industrieböden. Dabei halten wir die Arbeitssicherheitsvorschriften (UVV) ein.',
   },
   {
     question: 'Können mehrere Leistungen kombiniert werden?',
     answer:
-      'Selbstverständlich — das ist sogar der Regelfall. Sie erhalten ein konsolidiertes Leistungsverzeichnis, eine feste Objektleitung und eine Rechnung für alle gebuchten Leistungen.',
+      'Ja, das ist bei uns der Regelfall. Sie erhalten ein gemeinsames Leistungsverzeichnis, eine feste Objektleitung und eine Rechnung für alle gebuchten Leistungen.',
   },
 ];
 
@@ -38,15 +38,15 @@ export default function Leistungen() {
     <div>
       <SEO
         title="Gebäudereinigung Leistungen & Services | AHAD Cleaning"
-        description="Alle Leistungen im Überblick: Unterhaltsreinigung, Industriereinigung, Glas- & Fassadenreinigung, Baureinigung, Medizintechnik, Sonderreinigung, Winterdienst."
+        description="Gebäudereinigung: Unterhaltsreinigung, Industriereinigung, Glas- & Fassadenreinigung, Baureinigung, Medizintechnik, Sonderreinigung, Winterdienst."
         keywords="Gebäudereinigung Leistungen, Reinigungsservices Unternehmen, Reinigungsfirma Leistungen"
         schema={faqSchemaFrom(faqs)}
       />
 
       <PageHero
         eyebrow="Leistungen"
-        title="Acht Leistungen. Ein Qualitätssystem."
-        lead="Wir verkaufen keine Reinigungsstunden, sondern stabile Prozesse, Werterhalt und Rechtssicherheit — jede Leistung läuft über dasselbe AHAD-System aus Analyse, Handling, Audit und Dokumentation."
+        title="Acht Leistungen, ein Qualitätssystem"
+        lead="Ob Büro, Halle oder Baustelle: Jede Leistung läuft über das AHAD System aus Analyse, Handling, Audit und Dokumentation."
         image={IMG.heroLowAngle}
         crumbs={[{ label: 'Leistungen' }]}
         cta={{ label: 'Kostenlose Besichtigung anfragen', to: '/angebot' }}
@@ -109,7 +109,7 @@ export default function Leistungen() {
       {/* FAQ */}
       <section className="py-20 lg:py-28 bg-paper border-t border-line">
         <div className="max-w-4xl mx-auto px-4 sm:px-8">
-          <SectionHeading eyebrow="Gut zu wissen" title="Häufige Fragen zu unseren Leistungen" align="center" className="mb-12" />
+          <SectionHeading eyebrow="FAQ" title="Häufige Fragen zu unseren Leistungen" align="center" className="mb-12" />
           <Accordion items={faqs} />
         </div>
       </section>
