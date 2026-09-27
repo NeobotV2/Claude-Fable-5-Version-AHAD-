@@ -82,7 +82,7 @@ export default function Logo({ variant = 'light', size = 36, className, asLink =
     <Link
       to="/"
       onClick={onClick}
-      aria-label="AHAD Cleaning — Startseite"
+      aria-label="AHAD Cleaning, zur Startseite"
       className={cn('inline-flex items-center transition-opacity hover:opacity-90', className)}
     >
       {mark}

@@ -13,17 +13,17 @@ const LOCAL_SERVICES = [
   {
     title: 'Unterhaltsreinigung in Villingen-Schwenningen',
     to: '/leistungen/unterhaltsreinigung',
-    desc: 'Planbar saubere Büros, Verwaltungen und Gewerbeflächen — feste Teams, digitale Qualitätskontrolle und ein fester Ansprechpartner vor Ort.',
+    desc: 'Regelmäßige Reinigung von Büros, Verwaltungen und Gewerbeflächen mit festen Teams, digitaler Qualitätskontrolle und festem Ansprechpartner vor Ort.',
   },
   {
     title: 'Glas- & Fassadenreinigung in Villingen-Schwenningen',
     to: '/leistungen/glas-fassadenreinigung',
-    desc: 'Streifenfreie Glasflächen und repräsentative Fassaden — auch in der Höhe und mit reinem Osmose-Verfahren.',
+    desc: 'Reinigung von Glasflächen und Fassaden, auch in der Höhe und im Osmose-Verfahren mit Reinwasser.',
   },
   {
     title: 'Industrie- & Produktionsreinigung in Villingen-Schwenningen',
     to: '/leistungen/industrie-produktionsreinigung',
-    desc: 'Hallen, Maschinen und Produktionsflächen in den Industriegebieten von VS — im laufenden Betrieb, UVV-konform und auditfähig.',
+    desc: 'Hallen, Maschinen und Produktionsflächen in den Industriegebieten von VS, im laufenden Betrieb, nach UVV und mit Nachweisen für Audits.',
   },
   {
     title: 'Baureinigung in Villingen-Schwenningen',
@@ -33,7 +33,7 @@ const LOCAL_SERVICES = [
   {
     title: 'Winterdienst & Hausmeisterservice in Villingen-Schwenningen',
     to: '/leistungen/winterdienst-hausmeisterservice',
-    desc: 'Sichere Verkehrswege und gepflegte Objekte — Räum- und Streudienst, Kontrollgänge und Kleinreparaturen aus einer Hand.',
+    desc: 'Räum- und Streudienst für Ihre Verkehrswege sowie Kontrollgänge und Kleinreparaturen im Objekt.',
   },
   {
     title: 'Sonder- & Grundreinigung in Villingen-Schwenningen',
@@ -48,27 +48,27 @@ const LOCAL_BRANCHEN = [
   {
     title: 'Büros, Verwaltung & öffentliche Einrichtungen',
     to: '/branchen/buero-verwaltung',
-    desc: 'Verwaltungen, Behörden, Kanzleien und Bürogebäude in Villingen-Schwenningen — repräsentativ sauber, diskret im laufenden Betrieb.',
+    desc: 'Verwaltungen, Behörden, Kanzleien und Bürogebäude in Villingen-Schwenningen. Wir reinigen diskret, auch im laufenden Betrieb.',
   },
   {
     title: 'Industrie & Produktion',
     to: '/branchen/industrie-produktion',
-    desc: 'Produktions- und Logistikbetriebe in den VS-Industriegebieten — Hallen-, Maschinen- und Produktionsreinigung UVV-konform und schichtintegriert.',
+    desc: 'Hallen-, Maschinen- und Produktionsreinigung für Betriebe in den VS-Industriegebieten, nach UVV und abgestimmt auf Ihre Schichten.',
   },
   {
     title: 'Medizintechnik, Praxen & Kliniken',
     to: '/branchen/medizintechnik',
-    desc: 'Die Medizintechnik-Region Schwarzwald-Baar verlangt Hygiene auf höchstem Niveau — dokumentiert, validiert und auditfähig.',
+    desc: 'In der Medizintechnik-Region Schwarzwald-Baar gelten hohe Hygieneanforderungen. Wir arbeiten nach dokumentierten, validierten Abläufen und liefern Nachweise für Audits.',
   },
   {
     title: 'Handel & Gewerbeobjekte',
     to: '/branchen/gewerbeobjekte',
-    desc: 'Märkte, Autohäuser, Ausstellungs- und Gewerbeflächen in VS — saubere Kundenbereiche, die den ersten Eindruck tragen.',
+    desc: 'Märkte, Autohäuser, Ausstellungs- und Gewerbeflächen in VS, mit besonderem Augenmerk auf die Kundenbereiche.',
   },
   {
     title: 'Hotellerie & Objektbetrieb',
     to: '/branchen/hotellerie-objektbetrieb',
-    desc: 'Hotels, Gastronomie und Freizeiteinrichtungen in der Region — verlässliche Reinigung mit Gespür für den Gast.',
+    desc: 'Hotels, Gastronomie und Freizeiteinrichtungen in der Region. Wir reinigen abgestimmt auf den Gästebetrieb.',
   },
 ];
 
@@ -101,7 +101,7 @@ const LOCAL_FAQS: FAQItem[] = [
   {
     question: 'Welche Reinigungsleistungen bietet AHAD in Villingen-Schwenningen?',
     answer:
-      'Von unserer Zentrale in Villingen-Schwenningen bieten wir das komplette Spektrum für Unternehmen: Unterhaltsreinigung, Glas- und Fassadenreinigung, Industrie- und Produktionsreinigung, Baureinigung, Sonder- und Grundreinigung sowie Winterdienst und Hausmeisterservice — alles aus einer Hand mit fester Objektleitung.',
+      'Von unserer Zentrale in Villingen-Schwenningen aus bieten wir Unternehmen Unterhaltsreinigung, Glas- und Fassadenreinigung, Industrie- und Produktionsreinigung, Baureinigung, Sonder- und Grundreinigung sowie Winterdienst und Hausmeisterservice an. Alle Leistungen koordiniert eine feste Objektleitung.',
   },
   {
     question: 'Wie schnell ist AHAD in Villingen-Schwenningen vor Ort?',
@@ -111,17 +111,17 @@ const LOCAL_FAQS: FAQItem[] = [
   {
     question: 'Reinigen Sie auch in den Industrie- und Gewerbegebieten rund um Villingen-Schwenningen?',
     answer:
-      'Ja. Wir betreuen Unternehmen in ganz Villingen-Schwenningen und der Region Schwarzwald-Baar — unter anderem in Donaueschingen, Bad Dürrheim, St. Georgen, Trossingen, Tuttlingen und Rottweil, inklusive der dortigen Industrie- und Gewerbegebiete.',
+      'Ja. Wir betreuen Unternehmen in ganz Villingen-Schwenningen und der Region Schwarzwald-Baar, unter anderem in Donaueschingen, Bad Dürrheim, St. Georgen, Trossingen, Tuttlingen und Rottweil, inklusive der dortigen Industrie- und Gewerbegebiete.',
   },
   {
     question: 'Übernehmen Sie Unterhaltsreinigung im laufenden Betrieb?',
     answer:
-      'Ja. Unsere festangestellten Teams fügen sich geräuschlos in Ihre Betriebs- und Schichtlogik ein — mit dokumentierter Qualitätskontrolle und einer festen Objektleitung als direktem Ansprechpartner.',
+      'Ja. Unsere festangestellten Teams richten sich nach Ihren Betriebs- und Schichtzeiten. Die Qualitätskontrolle wird dokumentiert, direkter Ansprechpartner ist eine feste Objektleitung.',
   },
   {
     question: 'Bieten Sie auch Winterdienst in Villingen-Schwenningen an?',
     answer:
-      'Ja. Wir sichern Verkehrswege, Zufahrten und Parkflächen Ihres Objekts — bei Bedarf ab den frühen Morgenstunden, damit Mitarbeitende und Kunden sicher ankommen.',
+      'Ja. Wir räumen und streuen Verkehrswege, Zufahrten und Parkflächen Ihres Objekts, bei Bedarf schon in den frühen Morgenstunden.',
   },
 ];
 
@@ -161,19 +161,19 @@ export default function StandortVS() {
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-20">
             <div>
-              <h2 className="text-3xl font-bold mb-8 text-gray-900">Ihre Experten vor Ort</h2>
+              <h2 className="text-3xl font-bold mb-8 text-gray-900">Vor Ort in Villingen-Schwenningen</h2>
               <p className="text-lg text-gray-600 mb-8 leading-relaxed">
-                Als regional verwurzeltes Unternehmen kennen wir die Anforderungen der hiesigen Wirtschaft. Wir bieten
-                kurze Wege, schnelle Reaktionszeiten und eine persönliche Betreuung durch unsere Objektleiter vor Ort.
+                Wir sind ein Unternehmen aus der Region und kennen die Betriebe hier. Unsere Wege zu Ihnen sind kurz,
+                und unsere Objektleiter betreuen Sie persönlich vor Ort.
               </p>
               <ul className="space-y-4">
                 {[
                   'Zentrale Steuerung aller regionalen Teams',
-                  'Kurze Anfahrtswege für maximale Flexibilität',
+                  'Kurze Anfahrtswege',
                   'Persönliche Ansprechpartner in der Region',
-                  'Umfassendes Leistungsangebot vor Ort',
+                  'Alle Leistungsbereiche vor Ort',
                   'Notfall-Service für Bestandskunden',
-                  'Regionale Marktkenntnis & Vernetzung',
+                  'Kenntnis der regionalen Wirtschaft',
                 ].map((item) => (
                   <li key={item} className="flex items-center gap-3 text-gray-700 font-medium">
                     <CheckCircle2 className="text-accent w-5 h-5 flex-shrink-0" />
@@ -237,8 +237,8 @@ export default function StandortVS() {
           <div className="mb-20">
             <h2 className="text-3xl font-bold mb-3 text-gray-900">Unsere Leistungen in Villingen-Schwenningen</h2>
             <p className="text-lg text-gray-600 mb-10 max-w-3xl leading-relaxed">
-              Das komplette Gebäudereinigungs-Spektrum für Unternehmen in Villingen-Schwenningen und der Region — aus
-              einer Hand, mit fester Objektleitung und dokumentierter Qualität.
+              Alle Leistungen der Gebäudereinigung für Unternehmen in Villingen-Schwenningen und der Region, koordiniert
+              von einer festen Objektleitung und mit dokumentierter Qualitätskontrolle.
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
               {LOCAL_SERVICES.map((s) => (
@@ -261,8 +261,8 @@ export default function StandortVS() {
           <div className="mb-20">
             <h2 className="text-3xl font-bold mb-3 text-gray-900">Branchen, die wir in Villingen-Schwenningen betreuen</h2>
             <p className="text-lg text-gray-600 mb-10 max-w-3xl leading-relaxed">
-              Vom Verwaltungsgebäude über die Produktionshalle bis zur Praxis: Wir kennen die Anforderungen der
-              Branchen, die die Wirtschaft im Schwarzwald-Baar-Kreis prägen — und reinigen passgenau dazu.
+              Verwaltungsgebäude, Produktionshallen und Praxen haben unterschiedliche Anforderungen. Wir kennen die
+              Branchen im Schwarzwald-Baar-Kreis und richten die Reinigung danach aus.
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
               {LOCAL_BRANCHEN.map((b) => (
@@ -285,7 +285,7 @@ export default function StandortVS() {
           <div className="mb-20">
             <h2 className="text-3xl font-bold mb-3 text-gray-900">Einsatzgebiete rund um Villingen-Schwenningen</h2>
             <p className="text-lg text-gray-600 mb-8 max-w-3xl leading-relaxed">
-              Ab unserer Zentrale in Villingen-Schwenningen sind wir schnell in der gesamten Region im Einsatz:
+              Von unserer Zentrale in Villingen-Schwenningen aus sind wir in diesen Orten im Einsatz:
             </p>
             <div className="flex flex-wrap gap-2.5">
               {SERVICE_AREAS.map((area) => (
@@ -302,8 +302,8 @@ export default function StandortVS() {
             <div className="mt-10 bg-gray-50 border border-gray-100 rounded-2xl p-8">
               <h3 className="font-bold text-lg text-[#0B2341] mb-2">Industrie- &amp; Gewerbegebiete in Villingen-Schwenningen</h3>
               <p className="text-sm text-gray-600 mb-5 leading-relaxed">
-                Besonders häufig sind wir in den Gewerbe- und Industriegebieten von VS im Einsatz — kurze Wege ab
-                unserer Zentrale bedeuten schnelle Reaktionszeiten für Produktion, Logistik und Verwaltung:
+                Besonders häufig arbeiten wir für Produktion, Logistik und Verwaltung in den Gewerbe- und
+                Industriegebieten von VS. Von unserer Zentrale aus sind wir dort schnell vor Ort:
               </p>
               <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-3">
                 {INDUSTRIE_GEBIETE.map((g) => (
@@ -323,10 +323,9 @@ export default function StandortVS() {
               <div className="max-w-3xl">
                 <h2 className="text-3xl font-bold mb-6">Warum AHAD Cleaning in Villingen-Schwenningen?</h2>
                 <p className="text-xl text-blue-100 mb-8 leading-relaxed">
-                  In Villingen-Schwenningen schlägt das Herz unseres Unternehmens. Von hier aus steuern wir unsere
-                  Qualitätssicherung für den gesamten süddeutschen Raum. Unsere tiefe Verwurzelung in der Region
-                  Schwarzwald-Baar verbindet klare Zuständigkeiten mit einer Partnerschaft
-                  auf Augenhöhe mit Handschlagqualität.
+                  In Villingen-Schwenningen sitzt unsere Unternehmenszentrale. Von hier aus steuern wir die
+                  Qualitätssicherung für den gesamten süddeutschen Raum. Wir sind in der Region Schwarzwald-Baar zu
+                  Hause, und für jedes Objekt ist klar geregelt, wer zuständig ist.
                 </p>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="flex items-start gap-3">
@@ -335,7 +334,7 @@ export default function StandortVS() {
                   </div>
                   <div className="flex items-start gap-3">
                     <CheckCircle2 className="text-[#0D6B38] w-6 h-6 flex-shrink-0 mt-1" />
-                    <p className="font-medium">Maximale Flexibilität & Tempo</p>
+                    <p className="font-medium">Kurze Wege zu Ihrem Objekt</p>
                   </div>
                 </div>
               </div>
@@ -345,7 +344,7 @@ export default function StandortVS() {
           {/* Lokale FAQ */}
           <div className="max-w-3xl">
             <h2 className="text-3xl font-bold mb-8 text-gray-900">
-              Häufige Fragen — Gebäudereinigung Villingen-Schwenningen
+              Häufige Fragen zur Gebäudereinigung in Villingen-Schwenningen
             </h2>
             <Accordion items={LOCAL_FAQS} />
           </div>
@@ -354,7 +353,7 @@ export default function StandortVS() {
 
       <CTABand
         title="Ihr Objekt in Villingen-Schwenningen?"
-        lead="Kurze Wege ab Zentrale: Besichtigung nach Abstimmung, belastbares Angebot im Anschluss."
+        lead="Wir besichtigen Ihr Objekt zu einem abgestimmten Termin und erstellen danach ein Angebot."
       />
     </div>
   );
