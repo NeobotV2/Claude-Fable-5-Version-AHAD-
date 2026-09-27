@@ -27,7 +27,7 @@ export const BRANCHEN: BrancheData[] = [
     slug: 'industrie-produktion',
     path: '/branchen/industrie-produktion',
     name: 'Industrie & Produktion',
-    claim: 'Störungsfrei im Schichtbetrieb',
+    claim: 'Im Schichtbetrieb',
     heroTitle: 'Reinigung, die sich nach Ihrer Produktion richtet',
     heroLead:
       'Schichtpläne, Taktzeiten, Arbeitssicherheit: Wir planen die Reinigung so, dass Ihre Anlagen weiterlaufen. Dafür setzen wir feste Teams ein, legen Eskalationswege fest und dokumentieren auditfähig.',
@@ -81,8 +81,8 @@ export const BRANCHEN: BrancheData[] = [
     slug: 'medizintechnik',
     path: '/branchen/medizintechnik',
     name: 'Medizintechnik',
-    claim: 'Auditnah & dokumentiert',
-    heroTitle: 'Hygiene-Standards, die Audits bestehen',
+    claim: 'Mit Nachweisen für Audits',
+    heroTitle: 'Reinigung nach Ihren Hygienevorgaben',
     heroLead:
       'In der Medizintechnik hängen Zertifikate und Kundenvertrauen an dokumentierter Sauberkeit. Wir reinigen nach Ihren SOPs: mit festem, geschultem Personal und vollständigen Nachweisen.',
     seoTitle: 'Reinigung für Medizintechnik-Unternehmen | AHAD Cleaning',
@@ -135,7 +135,7 @@ export const BRANCHEN: BrancheData[] = [
     slug: 'buero-verwaltung',
     path: '/branchen/buero-verwaltung',
     name: 'Büro & Verwaltung',
-    claim: 'Repräsentativ, jeden Tag',
+    claim: 'Büros, Flure, Sanitärräume',
     heroTitle: 'Büros, die jeden Tag einen guten Eindruck machen',
     heroLead:
       'Empfang, Meetingräume, Arbeitsplätze, Sanitär: Wir halten Ihre Büros sauber und gepflegt, ohne dass sich intern jemand darum kümmern muss.',
@@ -189,7 +189,7 @@ export const BRANCHEN: BrancheData[] = [
     slug: 'gewerbeobjekte',
     path: '/branchen/gewerbeobjekte',
     name: 'Gewerbeobjekte',
-    claim: 'Großflächen im Griff',
+    claim: 'Große Flächen nach Plan',
     heroTitle: 'Gewerbeflächen sauber und verkehrssicher betreiben',
     heroLead:
       'Logistikhallen, Handelsflächen, Mischobjekte: Wir betreuen große Gewerbeimmobilien wirtschaftlich, von der laufenden Reinigung bis zum Winterdienst, mit einem Vertrag und einem Ansprechpartner.',

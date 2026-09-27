@@ -74,7 +74,7 @@ export default function FachwissenIntervalle() {
       <SEO
         ogType="article"
         title="Reinigungsintervalle im Büro: Wie oft putzen? | AHAD" 
-        description="Reinigungsintervalle im Büro festlegen: feste Basisleistungen, Bedarfskriterien je Raumgruppe, Kontrolle und die Wirkung des Turnus auf die Arbeitsstunden."
+        description="Reinigungsintervalle im Büro festlegen: feste Basisleistungen, Bedarfskriterien je Raumgruppe, Kontrolle und Wirkung des Turnus auf die Arbeitsstunden."
         keywords="Reinigungsintervalle, Unterhaltsreinigung Intervalle, Büroreinigung Taktung, wie oft Büro reinigen, Reinigungsplan Büro, AHAD Cleaning"
         schema={[articleSchema, faqSchema]}
       />
