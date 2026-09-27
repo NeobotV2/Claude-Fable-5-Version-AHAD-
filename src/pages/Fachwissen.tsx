@@ -51,7 +51,7 @@ const rolePaths: Array<{
   },
   {
     title: 'Einkauf',
-    focus: 'Leistungen normalisieren und Angebote nachvollziehbar vergleichen',
+    focus: 'Leistungen einheitlich beschreiben und Angebote nachvollziehbar vergleichen',
     icon: ShoppingCart,
     articles: ['checkliste-reinigungsangebot', 'was-kostet-gebaeudereinigung-stundensatz-preise'],
   },
@@ -110,7 +110,7 @@ export default function Fachwissen() {
         titleSize="lg"
         eyebrow="Fachwissen für Auftraggeber"
         title="Gebäudereinigung sicher entscheiden"
-        lead="Leitfäden für Facility Management, Einkauf und Geschäftsführung – von der Kalkulation über die Ausschreibung bis zum Anbieterwechsel."
+        lead="Leitfäden für Facility Management, Einkauf und Geschäftsführung zu Kalkulation, Ausschreibung, Anbieterwechsel und Nachweisen."
         crumbs={[{ label: 'Fachwissen' }]}
       />
 
@@ -123,9 +123,9 @@ export default function Fachwissen() {
                   <span className="h-px w-8 bg-brand/40" />
                   Nach Aufgabe einsteigen
                 </p>
-                <h2 id="aufgabe-waehlen" className="display-md text-navy">Womit möchten Sie weiterkommen?</h2>
+                <h2 id="aufgabe-waehlen" className="display-md text-navy">Welche Entscheidung steht an?</h2>
                 <p className="mt-4 text-base leading-relaxed text-slate sm:text-lg">
-                  Wählen Sie nicht nach Fachbegriff, sondern nach der Entscheidung, die als Nächstes ansteht.
+                  Wählen Sie den Themenpfad, der zu Ihrer nächsten Entscheidung passt.
                 </p>
               </div>
             </Reveal>
@@ -169,7 +169,7 @@ export default function Fachwissen() {
                   Empfohlene Einstiege für Ihre Rolle
                 </h2>
                 <p className="mt-3 text-sm leading-relaxed text-slate">
-                  Eine kuratierte Auswahl; weitere passende Leitfäden finden Sie in den Themenpfaden.
+                  Je Rolle zwei Leitfäden für den Anfang. Die übrigen stehen in den Themenpfaden.
                 </p>
               </Reveal>
 
@@ -219,9 +219,9 @@ export default function Fachwissen() {
                   <span className="h-px w-8 bg-brand/40" />
                   Alle Entscheidungshilfen
                 </p>
-                <h2 id="alle-leitfaeden" className="display-md text-navy">Vom Planungswert zum nächsten Schritt</h2>
+                <h2 id="alle-leitfaeden" className="display-md text-navy">Leitfäden nach Thema</h2>
                 <p className="mt-4 text-base leading-relaxed text-slate sm:text-lg">
-                  Jeder Beitrag beantwortet eine konkrete Prüffrage und verweist auf die passende Folgeentscheidung.
+                  Jeder Beitrag behandelt eine Prüffrage und nennt am Ende zwei passende Folgethemen.
                 </p>
               </div>
             </Reveal>
@@ -288,7 +288,7 @@ export default function Fachwissen() {
               <div>
                 <p className="eyebrow mb-3 text-brand">
                   <span className="h-px w-8 bg-brand/40" />
-                  Transparent arbeiten
+                  Quellen und Prüfung
                 </p>
                 <h2 id="redaktionsstandard" className="font-headline text-2xl font-bold text-navy">Unser Redaktionsstandard</h2>
               </div>
@@ -299,21 +299,21 @@ export default function Fachwissen() {
                   <BookOpenCheck size={20} className="mt-0.5 shrink-0 text-brand" aria-hidden="true" />
                   <p className="text-sm leading-relaxed text-slate">
                     <strong className="block text-navy">Quellen am Beitrag</strong>
-                    Ausgangsquellen, Herausgeber und Prüfdatum werden sichtbar genannt.
+                    Jeder Beitrag nennt Quellen, Herausgeber und Prüfdatum.
                   </p>
                 </div>
                 <div className="flex gap-3">
                   <Scale size={20} className="mt-0.5 shrink-0 text-brand" aria-hidden="true" />
                   <p className="text-sm leading-relaxed text-slate">
-                    <strong className="block text-navy">Annahmen klar begrenzt</strong>
-                    Preise, Intervalle und Fristen sind Orientierung und müssen objektbezogen geprüft werden.
+                    <strong className="block text-navy">Annahmen gekennzeichnet</strong>
+                    Preise, Intervalle und Fristen sind Orientierungswerte und müssen für das Objekt geprüft werden.
                   </p>
                 </div>
                 <div className="flex gap-3">
                   <ShieldCheck size={20} className="mt-0.5 shrink-0 text-brand" aria-hidden="true" />
                   <p className="text-sm leading-relaxed text-slate">
-                    <strong className="block text-navy">Keine erfundenen Prüfer</strong>
-                    Namentliche Fachprüfung erscheint nur mit dokumentiertem, aktuellem Nachweis.
+                    <strong className="block text-navy">Fachprüfung nur mit Nachweis</strong>
+                    Eine namentliche Fachprüfung nennen wir nur, wenn ein aktueller Nachweis dokumentiert ist.
                   </p>
                 </div>
                 <div className="flex gap-3">
@@ -330,8 +330,8 @@ export default function Fachwissen() {
       </div>
 
       <CTABand
-        title="Die Entscheidung betrifft ein konkretes Objekt?"
-        lead="Wir klären Flächen, Nutzung, Qualitätsziel und Rahmenbedingungen vor Ort – als Grundlage für ein nachvollziehbares Konzept und Angebot."
+        title="Beratung für Ihr Objekt"
+        lead="Wir klären Flächen, Nutzung, Qualitätsziel und Rahmenbedingungen vor Ort. Darauf bauen Konzept und Angebot auf."
       />
     </div>
   );

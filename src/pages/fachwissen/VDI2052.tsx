@@ -19,7 +19,7 @@ const faqItems = [
   {
     question: 'Gibt es ein festes Reinigungsintervall für jede Küchenabluftanlage?',
     answer:
-      'Nein. Ein belastbares Prüf- und Reinigungsintervall ist objektbezogen aus Nutzung und Belastung, dokumentiertem Anlagenzustand, Herstellerangaben sowie den aktuellen behördlichen, vertraglichen und versicherungsbezogenen Vorgaben abzuleiten. Die Entwicklung zwischen zwei Prüfungen hilft, das Intervall anzupassen.',
+      'Nein. Das Prüf- und Reinigungsintervall ist objektbezogen aus Nutzung und Belastung, dokumentiertem Anlagenzustand, Herstellerangaben sowie den aktuellen behördlichen, vertraglichen und versicherungsbezogenen Vorgaben abzuleiten. Die Entwicklung zwischen zwei Prüfungen hilft, das Intervall anzupassen.',
   },
   {
     question: 'Ist Küchenabluftreinigung dasselbe wie Wartung?',
@@ -60,7 +60,7 @@ export default function FachwissenVDI2052() {
       <SEO
         ogType="article"
         title="Küchenabluftreinigung: VDI 2052 Blatt 2 prüfen | AHAD"
-        description="VDI 2052 Blatt 2 richtig einordnen: objektbezogene Intervalle, klar abgegrenzter Reinigungsumfang, sichere Übergabe und nachvollziehbares Musterprotokoll."
+        description="VDI 2052 Blatt 2 in der Praxis: objektbezogene Intervalle, abgegrenzter Reinigungsumfang, geregelte Übergabe und ein Musterprotokoll für die Küchenabluft."
         keywords="Küchenabluftreinigung VDI 2052 Blatt 2, Küchenlüftung reinigen, Reinigungsintervall Küchenabluft, Reinigungsprotokoll Abluftanlage"
         schema={[articleSchema, faqSchema]}
       />
@@ -70,9 +70,9 @@ export default function FachwissenVDI2052() {
         titleSize="lg"
         eyebrow="Fachwissen · Hygiene & Brandschutz"
         title="Küchenabluft nach VDI 2052 Blatt 2 prüfen und dokumentieren"
-        lead="Belastung, Anlagenzustand und geltende Vorgaben bestimmen, wann und in welchem Umfang gereinigt wird. Entscheidend sind eine klare Leistungsgrenze, geregelte Freigaben und ein Protokoll, das auch nicht zugängliche Bereiche sichtbar macht."
+        lead="Belastung, Anlagenzustand und geltende Vorgaben bestimmen, wann und in welchem Umfang gereinigt wird. Dazu gehören eine festgelegte Leistungsgrenze, geregelte Freigaben und ein Protokoll, das auch nicht zugängliche Bereiche ausweist."
         image={IMG.kuechenabluft}
-        imageAlt="Fachgerechte Reinigung einer gewerblichen Küchenabluftanlage"
+        imageAlt="Reinigung einer gewerblichen Küchenabluftanlage"
         crumbs={[{ label: 'Fachwissen', href: '/fachwissen' }, { label: 'VDI 2052 Blatt 2' }]}
       />
 
@@ -82,7 +82,7 @@ export default function FachwissenVDI2052() {
         <div className="mx-auto max-w-4xl px-4 sm:px-8">
           <div className="prose prose-lg max-w-none leading-relaxed text-slate">
             <h2 id="vdi-einordnung" className="scroll-mt-28 font-headline text-2xl font-bold text-navy sm:text-3xl">
-              Die VDI-2052-Reihe richtig einordnen
+              Die VDI-2052-Reihe einordnen
             </h2>
             <p>
               „Nach VDI 2052“ ist ohne Blattangabe zu ungenau. Die Richtlinienreihe trennt technische und
@@ -145,7 +145,7 @@ export default function FachwissenVDI2052() {
               Prüf- und Reinigungsintervall objektbezogen festlegen
             </h2>
             <p>
-              Eine allgemeine Kalenderfrist kann die Zustandsprüfung nicht ersetzen. Ein belastbarer Plan verbindet
+              Eine allgemeine Kalenderfrist kann die Zustandsprüfung nicht ersetzen. Der Plan verbindet
               das Belastungsprofil der Küche mit dokumentierten Feststellungen an der konkreten Anlage. Nachfolgende
               Prüfungen zeigen, ob das angesetzte Intervall beibehalten, verkürzt oder verlängert werden kann.
             </p>
@@ -227,8 +227,7 @@ export default function FachwissenVDI2052() {
               Reinigungsablauf und Verantwortlichkeiten trennen
             </h2>
             <p>
-              Vor Arbeitsbeginn müssen Umfang, Zugänge, Schutzmaßnahmen und Freigaben feststehen. Besonders wichtig:
-              Reinigung, Wartung, technische Funktionsprüfung und Wiederinbetriebnahme sind verschiedene Leistungen.
+              Vor Arbeitsbeginn müssen Umfang, Zugänge, Schutzmaßnahmen und Freigaben feststehen. Reinigung, Wartung, technische Funktionsprüfung und Wiederinbetriebnahme sind verschiedene Leistungen.
               Sie können in einem Auftrag kombiniert werden, benötigen dann aber jeweils eine benannte verantwortliche
               Person und eindeutige Abnahmekriterien.
             </p>
@@ -254,7 +253,7 @@ export default function FachwissenVDI2052() {
                   <tr>
                     <th scope="row" className="px-5 py-4 font-bold text-navy">1. Umfang und Zugang</th>
                     <td className="px-5 py-4">Anlagenteile, Revisionsöffnungen, Ausschlüsse und Arbeitsbereich</td>
-                    <td className="px-5 py-4">Vereinbarter Scope und bekannte nicht zugängliche Bereiche</td>
+                    <td className="px-5 py-4">Vereinbarter Umfang und bekannte nicht zugängliche Bereiche</td>
                   </tr>
                   <tr className="bg-paper">
                     <th scope="row" className="px-5 py-4 font-bold text-navy">2. Außerbetriebnahme und Freigabe</th>
@@ -297,9 +296,9 @@ export default function FachwissenVDI2052() {
               Ein nachvollziehbares Reinigungsprotokoll aufbauen
             </h2>
             <p>
-              Ein Protokoll ist dann entscheidungsnützlich, wenn der dokumentierte Umfang eindeutig zur Anlage passt.
-              Es sollte nicht nur erledigte Arbeiten zeigen, sondern auch Grenzen, Abweichungen und die getrennte
-              Übergabe an den Betreiber. Ob der Bericht für eine Behörde, Versicherung oder interne Hygieneorganisation
+              Ein Protokoll hilft bei Entscheidungen, wenn der dokumentierte Umfang eindeutig zur Anlage passt. Neben
+              den erledigten Arbeiten gehören Grenzen, Abweichungen und die getrennte Übergabe an den Betreiber
+              hinein. Ob der Bericht für eine Behörde, Versicherung oder interne Hygieneorganisation
               ausreicht, ist anhand deren konkreter Anforderungen zu prüfen.
             </p>
 
@@ -344,7 +343,7 @@ export default function FachwissenVDI2052() {
                   <tr>
                     <th scope="row" className="px-5 py-4 font-bold text-navy">Ergebnis und Abweichungen</th>
                     <td className="px-5 py-4">Nachher-Fotos, Restbefunde, Schäden und empfohlene Folgearbeiten</td>
-                    <td className="px-5 py-4">Zeigt Grenzen und offene Entscheidungen transparent</td>
+                    <td className="px-5 py-4">Macht Grenzen und offene Entscheidungen sichtbar</td>
                   </tr>
                   <tr className="bg-paper">
                     <th scope="row" className="px-5 py-4 font-bold text-navy">Übergabe und Folgetermin</th>
@@ -361,7 +360,7 @@ export default function FachwissenVDI2052() {
                 <div>
                   <h3 className="font-headline text-xl font-bold text-navy">Vor dem Angebot klären</h3>
                   <ul className="mt-3 grid gap-2 text-sm leading-relaxed text-slate sm:grid-cols-2">
-                    <li className="flex gap-2"><ClipboardCheck className="mt-0.5 h-4 w-4 shrink-0 text-brand" aria-hidden="true" /> Welche Anlagenteile gehören zum Scope?</li>
+                    <li className="flex gap-2"><ClipboardCheck className="mt-0.5 h-4 w-4 shrink-0 text-brand" aria-hidden="true" /> Welche Anlagenteile gehören zum Auftrag?</li>
                     <li className="flex gap-2"><ClipboardCheck className="mt-0.5 h-4 w-4 shrink-0 text-brand" aria-hidden="true" /> Wo fehlen sichere Zugänge?</li>
                     <li className="flex gap-2"><ClipboardCheck className="mt-0.5 h-4 w-4 shrink-0 text-brand" aria-hidden="true" /> Wer schaltet ab und gibt frei?</li>
                     <li className="flex gap-2"><ClipboardCheck className="mt-0.5 h-4 w-4 shrink-0 text-brand" aria-hidden="true" /> Welche technische Prüfung ist separat nötig?</li>

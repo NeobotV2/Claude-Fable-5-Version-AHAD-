@@ -51,8 +51,8 @@ export default function IndustryPage({ branche }: { branche: BrancheData }) {
       <section className="py-20 lg:py-32 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-8">
           <SectionHeading
-            eyebrow="Kennen Sie das?"
-            title="Drei Probleme, die Sie kein zweites Mal haben sollten."
+            eyebrow="Ausgangslage"
+            title="Drei Probleme, die in dieser Branche häufig auftreten."
             className="mb-12 lg:mb-16 max-w-3xl"
           />
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
@@ -76,7 +76,7 @@ export default function IndustryPage({ branche }: { branche: BrancheData }) {
               <div className="relative z-10">
                 <span className="eyebrow text-mint mb-5">
                   <span className="h-px w-8 bg-mint/50" />
-                  Die AHAD-Antwort
+                  Unser Vorgehen
                 </span>
                 <h3 className="display-md text-white mb-10 max-w-2xl">
                   So lösen wir das für {branche.name}:
@@ -90,7 +90,7 @@ export default function IndustryPage({ branche }: { branche: BrancheData }) {
                   ))}
                 </ul>
                 <ButtonLink to="/ahad-system" variant="white" arrow>
-                  Das System dahinter verstehen
+                  Mehr zum AHAD System
                 </ButtonLink>
               </div>
             </div>
@@ -151,8 +151,8 @@ export default function IndustryPage({ branche }: { branche: BrancheData }) {
       </section>
 
       <CTABand
-        title={`Ihr Objekt in besten Händen`}
-        lead={`Lassen Sie uns über die Anforderungen in ${branche.name} sprechen — wir klären Bedarf und nächste Schritte persönlich.`}
+        title={`Reinigung für ${branche.name} anfragen`}
+        lead={`Wir besprechen mit Ihnen die Anforderungen in ${branche.name} und klären Bedarf und nächste Schritte persönlich.`}
       />
     </div>
   );

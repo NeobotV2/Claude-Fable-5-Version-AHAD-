@@ -48,7 +48,7 @@ for (const path of articlePaths) {
     const sourceRegion = article.locator('section[aria-labelledby$="-quellen"]');
     await expect(sourceRegion.getByRole('heading', { level: 2, name: 'Quellen & Prüfstand' })).toBeVisible();
     expect(await sourceRegion.locator('a[target="_blank"]').count()).toBeGreaterThanOrEqual(2);
-    const relatedNavigation = article.getByRole('navigation', { name: 'Passend weiterarbeiten' });
+    const relatedNavigation = article.getByRole('navigation', { name: 'Weiterlesen' });
     await expect(relatedNavigation.locator('a[href^="/fachwissen/"]')).toHaveCount(2);
 
     const tables = article.locator('table');

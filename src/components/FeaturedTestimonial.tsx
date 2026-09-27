@@ -53,7 +53,7 @@ export default function FeaturedTestimonial({ dark = true }: { dark?: boolean })
               <div className="h-16 w-44 sm:w-52 bg-white rounded-2xl grid place-items-center flex-shrink-0 shadow-soft px-3 py-2">
                 <img
                   src={T.logo}
-                  alt={`${T.shortName} — Logo`}
+                  alt={`Logo ${T.shortName}`}
                   title={T.company}
                   loading="lazy"
                   decoding="async"

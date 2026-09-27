@@ -86,13 +86,13 @@ export default function Footer() {
               <p className="text-[12px] font-bold uppercase tracking-[0.18em] text-mint">{CLAIM}</p>
             </div>
             <p className="text-blue-100/70 leading-relaxed">
-              Systematische Gebäudedienstleistungen für Industrie, Verwaltung und Mittelstand — messbar,
-              dokumentiert, verlässlich.
+              Gebäudedienstleistungen für Industrie, Verwaltung und Mittelstand, mit festen Teams und
+              dokumentierter Qualitätskontrolle.
             </p>
             <div className="flex flex-wrap gap-2.5">
               {[
-                { icon: <ShieldCheck size={13} />, label: 'Klare Zuständigkeit' },
-                { icon: <BadgeCheck size={13} />, label: 'B2B ausgerichtet' },
+                { icon: <ShieldCheck size={13} />, label: 'Feste Objektleitung' },
+                { icon: <BadgeCheck size={13} />, label: 'Für Geschäftskunden' },
                 { icon: <FileCheck2 size={13} />, label: 'Dokumentiert' },
               ].map((badge) => (
                 <span
@@ -124,9 +124,9 @@ export default function Footer() {
                 <span className="block text-[10px] font-black uppercase tracking-[0.18em] text-mint mb-0.5">
                   Unser zweites Geschäftsfeld
                 </span>
-                <span className="font-bold text-white">AHAD Care — Unterstützung im Alltag</span>
+                <span className="font-bold text-white">AHAD Care: Unterstützung im Alltag</span>
                 <span className="block mt-0.5">
-                  Informationen zum separaten Angebot finden Sie auf ahad-care.de
+                  Separates Angebot unter ahad-care.de
                 </span>
               </span>
               <ArrowRight size={15} className="text-mint flex-shrink-0 transition-transform group-hover:translate-x-0.5" />

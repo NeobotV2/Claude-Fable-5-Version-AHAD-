@@ -24,14 +24,13 @@ export default function NotFound() {
       <div className="relative z-10 max-w-3xl mx-auto px-4 sm:px-8 py-40 text-center">
         <span className="eyebrow text-mint justify-center mb-6">
           <Sparkles size={14} />
-          Hier wurde zu gründlich aufgeräumt
+          Seite nicht gefunden
         </span>
         <h1 className="font-logo font-black text-[clamp(6rem,20vw,12rem)] leading-none tracking-tighter text-white/95">
           404
         </h1>
         <p className="text-xl text-blue-100/85 font-medium mt-6 mb-10 max-w-xl mx-auto">
-          Diese Seite existiert nicht mehr oder wurde verschoben. Was wir Ihnen stattdessen anbieten können:
-          blitzsaubere Wege zurück.
+          Diese Seite existiert nicht mehr oder wurde verschoben. Über die folgenden Links kommen Sie weiter.
         </p>
         <div className="flex flex-col sm:flex-row justify-center gap-4 mb-10">
           <ButtonLink to="/" size="lg" arrow>

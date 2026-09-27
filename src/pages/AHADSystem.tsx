@@ -11,11 +11,11 @@ const steps = [
   {
     letter: 'A',
     title: 'Analyse',
-    subtitle: 'Objektlogik sauber erfassen',
+    subtitle: 'Objekt und Anforderungen erfassen',
     icon: <Search className="w-7 h-7" />,
     description:
-      'Bevor wir reinigen, verstehen wir: Flächen, Nutzungsintensität, Risikozonen, Schichtlogik und Ihre internen Anforderungen werden systematisch erfasst.',
-    deliverables: ['Objektaufnahme mit Flächenlogik', 'Risiko- & Anforderungsprofil', 'Leistungsverzeichnis als Festpreisbasis'],
+      'Vor dem ersten Einsatz erfassen wir Flächen, Nutzungsintensität, Risikozonen, Schichtzeiten und Ihre internen Anforderungen.',
+    deliverables: ['Objektaufnahme mit Flächenaufstellung', 'Risiko- & Anforderungsprofil', 'Leistungsverzeichnis als Festpreisbasis'],
     accent: <FileSearch className="w-5 h-5" />,
   },
   {
@@ -24,8 +24,8 @@ const steps = [
     subtitle: 'Feste Teams, klare Zuständigkeit',
     icon: <Settings2 className="w-7 h-7" />,
     description:
-      'Eingespielte Teams mit fester Objektleitung führen nach definierten Abläufen aus. Jeder weiß, was zu tun ist — und wer verantwortlich ist.',
-    deliverables: ['Festes Reinigungsteam je Objekt', 'Objektleitung als Ihr Single Point of Contact', 'Definierte Eskalationswege'],
+      'Eingespielte Teams arbeiten unter einer festen Objektleitung nach festgelegten Abläufen. Jeder im Team kennt seine Aufgaben und weiß, wer verantwortlich ist.',
+    deliverables: ['Festes Reinigungsteam je Objekt', 'Objektleitung als Ihr zentraler Ansprechpartner', 'Festgelegte Eskalationswege'],
     accent: <Users className="w-5 h-5" />,
   },
   {
@@ -34,27 +34,27 @@ const steps = [
     subtitle: 'Qualität regelmäßig prüfen',
     icon: <ClipboardCheck className="w-7 h-7" />,
     description:
-      'Regelmäßige, dokumentierte Kontrollen machen Leistung messbar. Abweichungen werden erkannt und behoben, bevor sie zur Reklamation werden.',
+      'Wir kontrollieren die Leistung regelmäßig und dokumentieren das Ergebnis. Abweichungen beheben wir, bevor daraus eine Reklamation wird.',
     deliverables: ['Digitale Qualitätskontrollen', 'Definierte Prüfintervalle', 'Sofortmaßnahmen bei Abweichung'],
     accent: <Repeat className="w-5 h-5" />,
   },
   {
     letter: 'D',
     title: 'Dokumentation',
-    subtitle: 'Nachweise auf Knopfdruck',
+    subtitle: 'Leistungen belegen',
     icon: <Shield className="w-7 h-7" />,
     description:
-      'Checklisten, Leistungen und Kontrollen werden lückenlos dokumentiert. Sie erhalten Transparenz, Nachweissicherheit und Auditfähigkeit — jederzeit.',
-    deliverables: ['Leistungsnachweise & Reports', 'Audit-taugliche Historie', 'Klare Datenbasis für Entscheidungen'],
+      'Wir dokumentieren Checklisten, erbrachte Leistungen und Kontrollen. Die Nachweise können Sie für Ihr Qualitätsmanagement und für Audits verwenden.',
+    deliverables: ['Leistungsnachweise & Reports', 'Nachvollziehbare Historie für Audits', 'Datengrundlage für Ihre Entscheidungen'],
     accent: <FileCheck2 className="w-5 h-5" />,
     highlight: true,
   },
 ];
 
 const outcomes = [
-  { value: '1', label: 'feste Objektleitung je Objekt', text: 'Ein Verantwortlicher steuert — nicht Ihr Office-Management.' },
-  { value: '1', label: 'klarer Meldeweg', text: 'Jedes Anliegen erhält einen Verantwortlichen und einen dokumentierten Status.' },
-  { value: 'Jede', label: 'Leistung nachweisbar', text: 'Dokumentierte Ausführung — für QM, Audit und Ihr Bauchgefühl.' },
+  { value: '1', label: 'feste Objektleitung je Objekt', text: 'Die Objektleitung steuert die Reinigung. Ihr Office-Management muss das nicht übernehmen.' },
+  { value: '1', label: 'fester Meldeweg', text: 'Jedes Anliegen erhält einen Verantwortlichen und einen dokumentierten Status.' },
+  { value: 'Jede', label: 'Leistung nachweisbar', text: 'Die Ausführung ist dokumentiert und für QM und Audits verwendbar.' },
 ];
 
 /** Systemvergleich — macht den Unterschied zwischen "irgendeine Reinigungsfirma"
@@ -64,27 +64,27 @@ const VERGLEICH = [
   { thema: 'Ansprechpartner', ohne: 'Wechselnde Kontakte, niemand fühlt sich zuständig', ahad: 'Feste Objektleitung mit Namen und Gesicht' },
   { thema: 'Qualität', ohne: 'Fällt erst auf, wenn sich jemand beschwert', ahad: 'Dokumentierte Audits in festen Intervallen' },
   { thema: 'Angebot', ohne: 'Pauschalpreis ohne definierten Leistungsumfang', ahad: 'Festpreis auf Basis eines Leistungsverzeichnisses' },
-  { thema: 'Reklamation', ohne: 'Diskussion, Vertröstung, Wiederholung', ahad: 'Dokumentierter Meldeweg und vereinbarte Nachbesserung' },
-  { thema: 'Personal', ohne: 'Anonyme Kolonnen, häufige Wechsel', ahad: 'Festangestellte, geschulte und eingespielte Teams' },
-  { thema: 'Nachweise', ohne: 'Keine — Sauberkeit bleibt Bauchgefühl', ahad: 'Auditfähige Leistungs- und Qualitätsnachweise' },
+  { thema: 'Reklamation', ohne: 'Lange Diskussionen, Mängel treten wieder auf', ahad: 'Dokumentierter Meldeweg und vereinbarte Nachbesserung' },
+  { thema: 'Personal', ohne: 'Anonyme Kolonnen, häufige Wechsel', ahad: 'Festangestellte, geschulte Teams' },
+  { thema: 'Nachweise', ohne: 'Keine, Sauberkeit lässt sich nicht belegen', ahad: 'Auditfähige Leistungs- und Qualitätsnachweise' },
 ];
 
 export default function AHADSystem() {
   return (
     <div>
       <SEO
-        title="Das AHAD System: Qualität mit Methode | AHAD Cleaning"
-        description="Analyse, Handling, Audit, Dokumentation: Das AHAD System ersetzt Zufall durch messbare Reinigungsqualität — mit festen Teams und lückenlosen Nachweisen."
+        title="Das AHAD System: So arbeiten wir | AHAD Cleaning"
+        description="Analyse, Handling, Audit, Dokumentation: So organisiert AHAD Cleaning die Gebäudereinigung, mit festen Teams, regelmäßigen Kontrollen und Leistungsnachweisen."
         keywords="AHAD System, Qualitätsmanagement Gebäudereinigung, dokumentierte Reinigung, Qualitätssicherung Reinigung"
       />
 
       <PageHero
-        eyebrow="Unser Betriebssystem"
-        title="Vier Buchstaben. Null Zufall."
-        lead="AHAD steht für Analyse, Handling, Audit und Dokumentation — der Kreislauf, der aus Reinigung einen steuerbaren, messbaren Prozess macht. Unser Name ist unser Verfahren."
+        eyebrow="Unser Verfahren"
+        title="Vier Schritte, nach denen wir arbeiten."
+        lead="AHAD steht für Analyse, Handling, Audit und Dokumentation. Nach diesen vier Schritten planen, führen und prüfen wir die Reinigung Ihres Objekts."
         image={IMG.heroArchitecture}
         crumbs={[{ label: 'AHAD System' }]}
-        cta={{ label: 'System live erleben — Angebot anfordern', to: '/angebot' }}
+        cta={{ label: 'Angebot anfordern', to: '/angebot' }}
       />
 
       {/* Die 4 Schritte — vertikale Editorial-Strecke */}
@@ -92,7 +92,7 @@ export default function AHADSystem() {
         <div className="max-w-5xl mx-auto px-4 sm:px-8">
           <SectionHeading
             eyebrow="Der Kreislauf"
-            title="So entsteht Qualität, die bleibt."
+            title="Die vier Schritte im Einzelnen."
             align="center"
             className="mb-16 lg:mb-24"
           />
@@ -168,8 +168,8 @@ export default function AHADSystem() {
       <section className="py-20 lg:py-28 bg-paper border-t border-line">
         <div className="max-w-7xl mx-auto px-4 sm:px-8">
           <SectionHeading
-            eyebrow="Das Ergebnis"
-            title="Was das System für Sie verändert."
+            eyebrow="Im Alltag"
+            title="Was sich für Sie ändert."
             align="center"
             className="mb-14 max-w-2xl mx-auto"
           />
@@ -186,7 +186,7 @@ export default function AHADSystem() {
           </div>
           <Reveal delay={0.25} className="text-center mt-12">
             <ButtonLink to="/referenzen" variant="outline" arrow>
-              Kunden, die dem System vertrauen
+              Referenzen ansehen
             </ButtonLink>
           </Reveal>
         </div>
@@ -196,9 +196,9 @@ export default function AHADSystem() {
       <section className="py-20 lg:py-28 bg-white border-t border-line">
         <div className="max-w-5xl mx-auto px-4 sm:px-8">
           <SectionHeading
-            eyebrow="Der Unterschied"
-            title="Reinigung ohne System — oder mit."
-            lead="Der Preis pro Stunde sieht oft ähnlich aus. Der Unterschied zeigt sich im Betrieb: wenn etwas schiefgeht, wenn jemand fragt, wer zuständig ist, und wenn ein Audit Nachweise verlangt."
+            eyebrow="Vergleich"
+            title="Reinigung mit und ohne festes System."
+            lead="Der Stundenpreis ist oft ähnlich. Unterschiede zeigen sich im Alltag: bei Mängeln, bei der Frage nach der Zuständigkeit und wenn ein Audit Nachweise verlangt."
             align="center"
             className="mb-12 max-w-2xl mx-auto"
           />
@@ -238,8 +238,8 @@ export default function AHADSystem() {
       </section>
 
       <CTABand
-        title="Erleben Sie das System im eigenen Objekt"
-        lead="Starten Sie mit der Analyse: Termin nach Abstimmung, belastbares Angebot nach der Objektbesichtigung."
+        title="Das AHAD System für Ihr Objekt"
+        lead="Am Anfang steht die Objektbesichtigung. Den Termin stimmen wir mit Ihnen ab, danach erhalten Sie ein Angebot."
       />
     </div>
   );

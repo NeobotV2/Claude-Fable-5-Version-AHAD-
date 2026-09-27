@@ -35,7 +35,7 @@ test('offer funnel completes with one contact channel and preserves PII-free att
   await page.getByLabel('E-Mail').fill('e2e@example.com');
   await page.getByRole('button', { name: 'Besichtigung anfragen' }).click();
 
-  await expect(page.getByRole('heading', { name: /Anfrage erfolgreich übermittelt/i })).toBeVisible();
+  await expect(page.getByRole('heading', { name: /Anfrage übermittelt/i })).toBeVisible();
   const payload = captured();
   expect(payload?.type).toBe('offer_lead');
   expect(payload?.idempotencyKey).toMatch(/^[A-Za-z0-9_-]{16,128}$/);
@@ -80,7 +80,7 @@ test('application profile reaches the API without WhatsApp consent', async ({ pa
   await page.getByLabel('Handynummer').fill('0170 1234567');
   await page.getByRole('button', { name: 'Bewerbung absenden' }).click();
 
-  await expect(page.getByRole('heading', { name: 'Bewerbung gesendet!' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Bewerbung gesendet' })).toBeVisible();
   const payload = captured();
   expect(payload?.type).toBe('job_application');
   expect(payload?.data?.jobId).toBe('reinigungskraft-vs');

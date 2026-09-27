@@ -31,7 +31,7 @@ export default function FachwissenLeistungsverzeichnis() {
         name: 'Was gehört in ein Leistungsverzeichnis für die Reinigung?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: 'Zum LV gehören vor allem Objektdaten, Flächen und Raumgruppen, Bodenbeläge, konkrete Tätigkeiten, Turnusse oder Bedarfsauslöser, Qualitätsziele und klar abgegrenzte Sonderleistungen. Service-Level wie Reaktions- und Eskalationszeiten, Preise und Abrechnungsregeln sowie Eignungs- oder Versicherungsnachweise sollten als eigene Vertragsbausteine erkennbar bleiben.',
+          text: 'Zum LV gehören vor allem Objektdaten, Flächen und Raumgruppen, Bodenbeläge, konkrete Tätigkeiten, Turnusse oder Bedarfsauslöser, Qualitätsziele und abgegrenzte Sonderleistungen. Service-Level wie Reaktions- und Eskalationszeiten, Preise und Abrechnungsregeln sowie Eignungs- oder Versicherungsnachweise sollten als eigene Vertragsbausteine erkennbar bleiben.',
         },
       },
       {
@@ -52,10 +52,10 @@ export default function FachwissenLeistungsverzeichnis() {
       },
       {
         '@type': 'Question',
-        name: 'Wer erstellt das Leistungsverzeichnis — Auftraggeber oder Reinigungsfirma?',
+        name: 'Wer erstellt das Leistungsverzeichnis: Auftraggeber oder Reinigungsfirma?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: 'Beides ist üblich. Größere Auftraggeber und öffentliche Ausschreibungen geben das LV selbst (oft mit einem Berater) vor, damit alle Bieter dieselbe Grundlage haben. Kleinere Unternehmen lassen das LV häufig im Rahmen der Objektbegehung vom Reinigungsdienstleister erstellen. Wichtig ist in beiden Fällen, dass das LV objektbezogen, nachvollziehbar und prüfbar ist — kein Standard-Copy-Paste.',
+          text: 'Beides ist üblich. Größere Auftraggeber und öffentliche Ausschreibungen geben das LV selbst (oft mit einem Berater) vor, damit alle Bieter dieselbe Grundlage haben. Kleinere Unternehmen lassen das LV häufig im Rahmen der Objektbegehung vom Reinigungsdienstleister erstellen. In beiden Fällen sollte das LV objektbezogen, nachvollziehbar und prüfbar sein; eine unveränderte Standardvorlage erfüllt das nicht.',
         },
       },
     ],
@@ -66,7 +66,7 @@ export default function FachwissenLeistungsverzeichnis() {
       <SEO
         ogType="article"
         title="Leistungsverzeichnis Gebäudereinigung erstellen | AHAD"
-        description="Leistungsverzeichnis (LV) für die Gebäudereinigung erstellen: Aufbau, Bestandteile, verrichtungs- vs. ergebnisorientiert – für vergleichbare Angebote."
+        description="Leistungsverzeichnis (LV) für die Gebäudereinigung erstellen: Aufbau, Bestandteile und verrichtungs- oder ergebnisorientierte Beschreibung für vergleichbare Angebote."
         keywords="Leistungsverzeichnis Gebäudereinigung, LV Reinigung erstellen, Reinigung ausschreiben, Reinigungsleistung Vergleich, ergebnisorientierte Reinigung, DIN EN 13549, AHAD Cleaning"
         schema={[articleSchema, faqSchema]}
       />
@@ -76,7 +76,7 @@ export default function FachwissenLeistungsverzeichnis() {
         titleSize="lg"
         eyebrow="Fachwissen · Leistungsverzeichnis"
         title="Leistungsverzeichnis erstellen: Reinigungsangebote besser vergleichen"
-        lead="Wie Sie Leistungen objektbezogen beschreiben und LV, Service-Level, kaufmännische Regeln sowie Nachweise sauber voneinander trennen."
+        lead="Wie Sie Leistungen objektbezogen beschreiben und LV, Service-Level, kaufmännische Regeln sowie Nachweise voneinander trennen."
         image={IMG.teamMeeting}
         imageAlt=""
         crumbs={[
@@ -88,7 +88,7 @@ export default function FachwissenLeistungsverzeichnis() {
       {/* Auf einen Blick */}
       <section className="border-b border-line bg-white py-12 lg:py-14">
         <div className="mx-auto max-w-7xl px-4 sm:px-8">
-          <h2 className="mb-8 text-center text-2xl font-black text-navy">Das Leistungsverzeichnis auf einen Blick</h2>
+          <h2 className="mb-8 text-center text-2xl font-black text-navy">Drei Grundregeln für das Leistungsverzeichnis</h2>
           <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
             <div className="rounded-2xl border border-line bg-paper p-6">
               <FileText className="mb-4 h-8 w-8 text-brand" aria-hidden="true" />
@@ -168,15 +168,14 @@ export default function FachwissenLeistungsverzeichnis() {
               </table>
             </div>
             <p className="mb-12 text-sm text-slate">
-              Das Beispiel ist keine Vorlage für jedes Objekt. Es zeigt die notwendige Verknüpfung von Fläche,
-              Tätigkeit, Auslösung und prüfbarem Ergebnis; Zugänglichkeit, Ausschlüsse und Messverfahren sind bei Bedarf
-              zu ergänzen.
+              Die Zeile verknüpft Fläche, Tätigkeit, Auslösung und prüfbares Ergebnis. Sie passt nicht auf jedes
+              Objekt; Zugänglichkeit, Ausschlüsse und Messverfahren sind bei Bedarf zu ergänzen.
             </p>
 
             <h2 id="leistungsmodelle" className="scroll-mt-28 text-2xl font-black text-navy sm:text-3xl">Verrichtungs- oder ergebnisorientiert?</h2>
             <p className="mb-6">
-              Es gibt zwei grundlegende Logiken, ein LV aufzubauen. Die Wahl bestimmt, wie viel Spielraum der
-              Dienstleister hat — und wie Sie die Qualität messen.
+              Ein LV lässt sich nach zwei Logiken aufbauen. Die Wahl bestimmt, wie viel Spielraum der Dienstleister
+              hat und wie Sie die Qualität messen.
             </p>
             <div
               className="mb-12 overflow-x-auto rounded-2xl border border-line shadow-soft"
@@ -223,7 +222,7 @@ export default function FachwissenLeistungsverzeichnis() {
               </table>
             </div>
             <p className="mb-12">
-              Eine <strong>Kombination</strong> kann sinnvoll sein: klar definierte Tätigkeiten dort, wo feste Abläufe
+              Eine <strong>Kombination</strong> kann sinnvoll sein: fest definierte Tätigkeiten dort, wo feste Abläufe
               erforderlich sind, und ergebnisorientierte Steuerung dort, wo Kriterien und Kontrolle tragfähig sind.
               Die Entscheidung richtet sich nach Raumgruppe, Nutzung, Hygiene- und Qualitätsanforderung sowie der{' '}
               <Link to="/fachwissen/unterhaltsreinigung-unternehmen-reinigungsintervalle" className="font-bold text-brand hover:underline">
@@ -234,9 +233,9 @@ export default function FachwissenLeistungsverzeichnis() {
 
             <h2 id="lv-bestandteile" className="scroll-mt-28 text-2xl font-black text-navy sm:text-3xl">LV, Service-Level, Konditionen und Nachweise trennen</h2>
             <p className="mb-6">
-              Nicht jede Vertragsanforderung gehört in dieselbe Tabelle. Eine klare Trennung verhindert, dass eine
+              Nicht jede Vertragsanforderung gehört in dieselbe Tabelle. Die Trennung verhindert, dass eine
               fachliche Leistungsänderung unbemerkt kaufmännische oder organisatorische Folgen auslöst. Die konkrete
-              Dokumentenstruktur richtet sich nach Vergabe und Vertrag; folgende Abgrenzung ist eine praxistaugliche
+              Dokumentenstruktur richtet sich nach Vergabe und Vertrag; folgende Abgrenzung eignet sich als
               Ausgangsbasis:
             </p>
             <div
@@ -286,7 +285,7 @@ export default function FachwissenLeistungsverzeichnis() {
                 'Bodenbeläge und Ausstattung dokumentieren: je Belag und Sanitärobjekt die Pflegeanforderung notieren.',
                 'Nutzungsprofil festlegen: Mitarbeiterzahl, Besucherfrequenz, Schicht-/Öffnungszeiten, Homeoffice-Quote.',
                 'Raumgruppen bilden und Intervalle definieren: was wird täglich, wöchentlich, monatlich, quartalsweise gereinigt?',
-                'Hygiene- und Nutzungsanforderungen prüfen: Tätigkeiten und Turnusse aus Objektvorgaben statt pauschal festlegen.',
+                'Hygiene- und Nutzungsanforderungen prüfen: Tätigkeiten und Turnusse aus den Objektvorgaben ableiten.',
                 'Geeignete Flächen ergebnisorientiert beschreiben: Qualitätsziel, Messung und Entscheidungsspielraum gemeinsam definieren.',
                 'Sonderleistungen separat ausweisen: Glas, Grundreinigung, Bauschluss, Winterdienst getrennt kalkulierbar machen.',
                 'Qualitätssicherung verankern: Sichtkontrollen, Begehungsprotokolle, Ansprechpartner und Eskalationsweg.',
@@ -327,7 +326,7 @@ export default function FachwissenLeistungsverzeichnis() {
               </ul>
             </div>
 
-            <h2 className="text-2xl font-black text-navy sm:text-3xl">Ausschreibungsstand und Änderungen beherrschbar halten</h2>
+            <h2 className="text-2xl font-black text-navy sm:text-3xl">Ausschreibungsstand und Änderungen dokumentieren</h2>
             <p className="mb-8">
               Versehen Sie Unterlagen mit Version und Datum, führen Sie Bieterfragen zentral und geben Sie Klarstellungen
               allen Beteiligten in gleicher Form weiter. Änderungen an Fläche, Turnus oder Qualitätsziel sollten mit der
@@ -339,8 +338,8 @@ export default function FachwissenLeistungsverzeichnis() {
             <p className="mb-8">
               Ein objektbezogenes LV verbessert die fachliche Vergleichbarkeit, wenn Fläche, Tätigkeit, Auslösung und
               Qualitätsziel eindeutig verbunden sind. Service-Level, kaufmännische Regeln und Nachweise bleiben als
-              eigene Bausteine sichtbar. Erst diese gemeinsame und versionierte Grundlage ermöglicht eine belastbare
-              Prüfung von Angebot, Leistung und späteren Änderungen.
+              eigene Bausteine sichtbar. Auf dieser gemeinsamen, versionierten Grundlage lassen sich Angebot, Leistung
+              und spätere Änderungen prüfen.
             </p>
           </div>
         </div>
@@ -360,8 +359,8 @@ export default function FachwissenLeistungsverzeichnis() {
       <ArticleFooter slug="leistungsverzeichnis-gebaeudereinigung-erstellen" />
 
       <CTABand
-        title="Sie möchten Reinigungsleistungen sauber ausschreiben?"
-        lead="Wir erstellen mit Ihnen ein objektbezogenes Leistungsverzeichnis — transparent, vergleichbar und auf Ihr Gebäude zugeschnitten."
+        title="Reinigungsleistungen ausschreiben"
+        lead="Wir erstellen mit Ihnen ein Leistungsverzeichnis für Ihr Gebäude, das alle Anbieter auf derselben Grundlage kalkulieren können."
       />
     </article>
   );

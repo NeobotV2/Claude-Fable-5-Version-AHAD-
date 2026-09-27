@@ -197,7 +197,7 @@ export default function KarriereFunnel() {
         <p className="sr-only" role="status">{t.step} {step} {t.of} 4</p>
         {selectedProfile && (
           <div className="mb-5 rounded-xl border border-[#0D6B38]/25 bg-[#0D6B38]/8 p-4 text-sm text-[#0B2341]">
-            <strong>Gewähltes Einsatzprofil:</strong> {selectedProfile.title} · {selectedProfile.region}. Die aktuelle Einsatzmöglichkeit bestätigen wir persönlich.
+            <strong>Gewähltes Einsatzprofil:</strong> {selectedProfile.title} · {selectedProfile.region}. Ob die Stelle aktuell frei ist, bestätigen wir dir persönlich.
           </div>
         )}
         {/* Progress Bar + jederzeit sichtbarer Sprachwechsel */}
@@ -548,7 +548,7 @@ export default function KarriereFunnel() {
 
                 <div className="space-y-3">
                   <p className="text-xs text-gray-600 leading-relaxed">
-                    Wir verwenden die Angaben zur Bearbeitung deiner Bewerbung. <Link to="/datenschutz" target="_blank" rel="noopener noreferrer" className="underline font-semibold">{t.privacyLink} (öffnet neuen Tab)</Link>
+                    Wir nutzen deine Angaben, um deine Bewerbung zu bearbeiten. <Link to="/datenschutz" target="_blank" rel="noopener noreferrer" className="underline font-semibold">{t.privacyLink} (öffnet neuen Tab)</Link>
                   </p>
 
                   {submitError && (

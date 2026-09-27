@@ -40,7 +40,7 @@ const contactChannels = [
         {SITE.email}
       </a>
     ),
-    hint: 'Persönliche Antwort — kein Ticketsystem',
+    hint: 'Wir antworten persönlich, ohne Ticketsystem',
   },
   {
     icon: <MapPin size={22} />,
@@ -74,9 +74,9 @@ export default function Kontakt() {
       >
         <div className="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-3xl">
           {[
-            { value: '1', label: 'Anfrage mit klarem Kontaktweg' },
+            { value: '1', label: 'Anfrage per Formular, Telefon oder E-Mail' },
             { value: '2', label: 'Besichtigung in der Regel binnen 48 h' },
-            { value: '3', label: 'Transparentes Angebot danach' },
+            { value: '3', label: 'Angebot im Anschluss' },
           ].map((promise) => (
             <div key={promise.label} className="flex items-center gap-3">
               <span className="font-accent text-3xl font-bold text-mint">{promise.value}</span>
@@ -93,7 +93,7 @@ export default function Kontakt() {
             <Reveal>
               <h2 className="display-md text-navy mb-3">Nachricht schreiben</h2>
               <p className="text-slate text-lg mb-8">
-                Füllen Sie das Formular aus — wir melden uns persönlich bei Ihnen.
+                Füllen Sie das Formular aus. Wir melden uns persönlich bei Ihnen.
               </p>
             </Reveal>
             <Reveal delay={0.1}>
@@ -110,11 +110,11 @@ export default function Kontakt() {
                   <FileText size={110} />
                 </div>
                 <div className="relative z-10">
-                  <span className="eyebrow text-mint mb-4">Strukturiert anfragen</span>
+                  <span className="eyebrow text-mint mb-4">Online-Anfrage</span>
                   <h3 className="font-headline text-2xl font-bold mb-3">Digitale Objektaufnahme</h3>
                   <p className="text-blue-100/85 mb-7 leading-relaxed">
-                    Vier Schritte: Unser digitaler Assistent erfasst Ihr Objekt strukturiert — die Grundlage für eine
-                    gut vorbereitete Besichtigung und ein präzises Angebot.
+                    In vier Schritten erfassen Sie die wichtigsten Daten zu Ihrem Objekt. Damit bereiten wir die
+                    Besichtigung und das Angebot vor.
                   </p>
                   <Link
                     to="/angebot"

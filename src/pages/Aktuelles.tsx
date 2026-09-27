@@ -32,7 +32,7 @@ export default function Aktuelles() {
     <div>
       <SEO
         title="Aktuelles | AHAD Cleaning"
-        description="Unternehmensmeldungen der AHAD Cleaning Company GmbH aus Villingen-Schwenningen — Übernahmen, Standorte und Entwicklungen im Überblick."
+        description="Unternehmensmeldungen der AHAD Cleaning Company GmbH aus Villingen-Schwenningen zu Übernahmen, Standorten und der Entwicklung des Unternehmens."
         keywords="AHAD Cleaning Neuigkeiten, Gebäudereinigung Villingen-Schwenningen aktuell, Unternehmensmeldung"
         schema={SCHEMA}
       />
@@ -42,8 +42,8 @@ export default function Aktuelles() {
         titleSize="lg"
         title={
           <>
-            <span className="block">Was sich bei uns{' '}</span>
-            <span className="block">bewegt.</span>
+            <span className="block">Meldungen aus{' '}</span>
+            <span className="block">dem Unternehmen.</span>
           </>
         }
         image="/images/ahad/meeting.webp"
@@ -84,7 +84,7 @@ export default function Aktuelles() {
 
       <CTABand
         title="Sprechen wir über Ihr Objekt"
-        lead="Kostenlose Besichtigung, transparentes Angebot, feste Objektleitung."
+        lead="Wir besichtigen Ihr Objekt kostenlos und erstellen danach ein Angebot. Betreut wird es von einer festen Objektleitung."
       />
     </div>
   );

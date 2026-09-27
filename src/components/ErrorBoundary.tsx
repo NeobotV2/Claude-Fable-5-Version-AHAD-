@@ -82,9 +82,9 @@ class ErrorBoundary extends Component<Props, State> {
       return (
         <div className="min-h-screen flex items-center justify-center bg-gray-50 p-4">
           <div className="max-w-md w-full bg-white p-8 rounded-2xl shadow-xl border border-red-100">
-            <h1 className="text-2xl font-black text-red-600 mb-4">Etwas ist schief gelaufen</h1>
+            <h1 className="text-2xl font-black text-red-600 mb-4">Etwas ist schiefgelaufen</h1>
             <p className="text-gray-600 mb-6 font-medium">
-              Die Anwendung konnte nicht geladen werden. Bitte laden Sie die Seite neu oder kontaktieren Sie den Support.
+              Die Seite konnte nicht geladen werden. Bitte laden Sie sie neu. Wenn der Fehler bleibt, kontaktieren Sie uns.
             </p>
             <div className="bg-red-50 p-4 rounded-lg mb-6 overflow-auto max-h-40">
               <code className="text-xs text-red-800">{this.state.error?.message}</code>
