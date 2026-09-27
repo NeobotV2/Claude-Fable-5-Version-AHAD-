@@ -26,7 +26,7 @@ AHAD beschreibt einen vierstufigen Ablauf: **A**nalyse der Objekt- und Nutzungsa
 
 ## Anfrageprozess
 
-Der Online-Funnel erfasst in vier Schritten Objektart, gewünschte Leistungen, Umfang sowie einen Kontaktweg. E-Mail oder Telefonnummer genügt; Unternehmen und Einsatzort sind optional. Ein belastbares Angebot folgt nach Klärung der Anforderungen und, soweit erforderlich, einer Objektbesichtigung.
+Der Online-Funnel erfasst in vier Schritten Objektart, gewünschte Leistungen, Umfang sowie einen Kontaktweg. E-Mail oder Telefonnummer genügt; Unternehmen und Einsatzort sind optional. Das Angebot folgt nach Klärung der Anforderungen und, soweit erforderlich, einer Objektbesichtigung.
 
 - [Besichtigung anfragen](https://www.ahad-cleaning.de/angebot)
 - [Kontakt](https://www.ahad-cleaning.de/kontakt)
@@ -49,4 +49,4 @@ Der Online-Funnel erfasst in vier Schritten Objektart, gewünschte Leistungen, U
 - E-Mail: info@ahad-cleaning.de
 - Unternehmensadresse: Max-Planck-Straße 11, 78052 Villingen-Schwenningen, Deutschland
 
-Zertifikate, Kennzahlen, Kundenfreigaben, Gesamtbewertungen, Niederlassungen und laufende Stellen werden nur veröffentlicht, wenn sie im Claim-Register mit Beleg und Gültigkeit freigegeben sind. Das Fehlen einer solchen Angabe in dieser Datei ist bewusst und darf nicht als negativer Nachweis interpretiert werden.
+Zertifikate, Kennzahlen, Kundenfreigaben, Gesamtbewertungen, Niederlassungen und laufende Stellen werden nur veröffentlicht, wenn sie im Claim-Register mit Beleg und Gültigkeit freigegeben sind. Das Fehlen einer solchen Angabe in dieser Datei ist gewollt und darf nicht als negativer Nachweis interpretiert werden.

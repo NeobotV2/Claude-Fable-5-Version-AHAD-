@@ -11,17 +11,17 @@ const LOCAL_SERVICES = [
   {
     title: 'Unterhaltsreinigung in Stuttgart',
     to: '/leistungen/unterhaltsreinigung',
-    desc: 'Planbar saubere Büros und Verwaltungsgebäude im Großraum Stuttgart — feste Teams, digitale Qualitätskontrolle.',
+    desc: 'Regelmäßige Reinigung von Büros und Verwaltungsgebäuden im Großraum Stuttgart mit festen Teams und digitaler Qualitätskontrolle.',
   },
   {
     title: 'Industrie- & Produktionsreinigung in Stuttgart',
     to: '/leistungen/industrie-produktionsreinigung',
-    desc: 'Reinigung für Produktionsbetriebe und Weltmarktführer der Region — im laufenden Betrieb, UVV-konform und auditfähig.',
+    desc: 'Reinigung für Produktionsbetriebe und Weltmarktführer der Region im laufenden Betrieb, nach UVV und mit Nachweisen für Audits.',
   },
   {
     title: 'Glas- & Fassadenreinigung in Stuttgart',
     to: '/leistungen/glas-fassadenreinigung',
-    desc: 'Repräsentative Glasarchitektur und Fassaden im Großraum Stuttgart — auch in der Höhe und mit Osmose-Verfahren.',
+    desc: 'Glasflächen und Fassaden im Großraum Stuttgart, auch in der Höhe und im Osmose-Verfahren.',
   },
   {
     title: 'Baureinigung in Stuttgart',
@@ -31,7 +31,7 @@ const LOCAL_SERVICES = [
   {
     title: 'Winterdienst & Hausmeisterservice in Stuttgart',
     to: '/leistungen/winterdienst-hausmeisterservice',
-    desc: 'Sichere Verkehrswege und gepflegte Objekte — Räum- und Streudienst, Kontrollgänge und Kleinreparaturen.',
+    desc: 'Räum- und Streudienst für Ihre Verkehrswege sowie Kontrollgänge und Kleinreparaturen im Objekt.',
   },
   {
     title: 'Sonder- & Grundreinigung in Stuttgart',
@@ -46,27 +46,27 @@ const LOCAL_BRANCHEN = [
   {
     title: 'Büros, Verwaltung & Kanzleien',
     to: '/branchen/buero-verwaltung',
-    desc: 'Bürotürme, Verwaltungen und Kanzleien im Großraum Stuttgart — repräsentativ sauber, diskret im laufenden Betrieb.',
+    desc: 'Bürogebäude, Verwaltungen und Kanzleien im Großraum Stuttgart. Wir reinigen diskret, auch im laufenden Betrieb.',
   },
   {
     title: 'Industrie & Produktion',
     to: '/branchen/industrie-produktion',
-    desc: 'Automotive, Maschinenbau und Zulieferer in den Industriegebieten der Region — UVV-konform und schichtintegriert.',
+    desc: 'Fahrzeugbau, Maschinenbau und Zulieferer in den Industriegebieten der Region, nach UVV und abgestimmt auf Ihre Schichten.',
   },
   {
     title: 'Medizintechnik, Praxen & Kliniken',
     to: '/branchen/medizintechnik',
-    desc: 'Hygienisch sensible Bereiche mit dokumentierter, auditfähiger Reinigung.',
+    desc: 'Reinigung hygienisch sensibler Bereiche, dokumentiert und mit Nachweisen für Audits.',
   },
   {
     title: 'Handel & Gewerbeobjekte',
     to: '/branchen/gewerbeobjekte',
-    desc: 'Autohäuser, Märkte und Ausstellungsflächen — saubere Kundenbereiche für den ersten Eindruck.',
+    desc: 'Autohäuser, Märkte und Ausstellungsflächen, mit besonderem Augenmerk auf die Kundenbereiche.',
   },
   {
     title: 'Hotellerie & Objektbetrieb',
     to: '/branchen/hotellerie-objektbetrieb',
-    desc: 'Hotels und Gastronomie in der Landeshauptstadt — verlässliche Reinigung mit Gespür für den Gast.',
+    desc: 'Hotels und Gastronomie in der Landeshauptstadt. Wir reinigen abgestimmt auf den Gästebetrieb.',
   },
 ];
 
@@ -87,7 +87,7 @@ const LOCAL_FAQS: FAQItem[] = [
   {
     question: 'Welche Reinigungsleistungen bietet AHAD in Stuttgart?',
     answer:
-      'Im Großraum Stuttgart bieten wir das komplette Spektrum für Unternehmen: Unterhaltsreinigung, Industrie- und Produktionsreinigung, Glas- und Fassadenreinigung, Baureinigung, Sonder- und Grundreinigung sowie Winterdienst und Hausmeisterservice — aus einer Hand, mit fester Objektleitung.',
+      'Im Großraum Stuttgart bieten wir Unternehmen Unterhaltsreinigung, Industrie- und Produktionsreinigung, Glas- und Fassadenreinigung, Baureinigung, Sonder- und Grundreinigung sowie Winterdienst und Hausmeisterservice an. Alle Leistungen koordiniert eine feste Objektleitung.',
   },
   {
     question: 'Wie schnell ist AHAD im Großraum Stuttgart vor Ort?',
@@ -97,12 +97,12 @@ const LOCAL_FAQS: FAQItem[] = [
   {
     question: 'Reinigen Sie auch Produktions- und Industriebetriebe im Raum Stuttgart?',
     answer:
-      'Ja. Wir sind auf Industrie- und Produktionsreinigung im laufenden Betrieb spezialisiert — schichtintegriert, UVV-konform und mit auditfähiger Dokumentation, wie sie die Zulieferer und Mittelständler der Region benötigen.',
+      'Ja. Wir sind auf Industrie- und Produktionsreinigung im laufenden Betrieb spezialisiert. Wir arbeiten nach Ihrem Schichtplan und nach UVV und dokumentieren so, wie es Zulieferer und Mittelständler der Region für ihre Audits brauchen.',
   },
   {
     question: 'Übernehmen Sie Büro- und Verwaltungsgebäude in Stuttgart?',
     answer:
-      'Ja. Für Büro- und Verwaltungsgebäude bieten wir planbare Unterhaltsreinigung mit abgestimmter Einsatzplanung, dokumentierten Kontrollen und klarer Zuständigkeit — auch in repräsentativen Innenstadtlagen.',
+      'Ja. Für Büro- und Verwaltungsgebäude, auch in der Innenstadt, bieten wir Unterhaltsreinigung mit abgestimmter Einsatzplanung, dokumentierten Kontrollen und klarer Zuständigkeit.',
   },
 ];
 
@@ -141,17 +141,17 @@ export default function StandortStuttgart() {
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-20">
             <div>
-              <h2 className="text-3xl font-bold mb-8 text-gray-900">Expertise für das Einsatzgebiet Stuttgart</h2>
+              <h2 className="text-3xl font-bold mb-8 text-gray-900">Im Einsatzgebiet Stuttgart</h2>
               <p className="text-lg text-gray-600 mb-8 leading-relaxed">
-                Stuttgart ist ein Zentrum für Industrie und Verwaltung. Wir bieten maßgeschneiderte Reinigungskonzepte,
-                die den hohen Anforderungen dieser Region gerecht werden.
+                Stuttgart ist ein Zentrum für Industrie und Verwaltung. Wir erstellen für jedes Objekt ein eigenes
+                Reinigungskonzept.
               </p>
               <ul className="space-y-4">
                 {[
-                  'Spezialisierte Industriereinigung für Produktionsbetriebe',
-                  'Professionelle Büroreinigung für Verwaltungsgebäude',
-                  'Glas- & Fassadenreinigung für moderne Architektur',
-                  'Termingerechte Baureinigung für Neubauprojekte',
+                  'Industriereinigung für Produktionsbetriebe',
+                  'Büroreinigung für Verwaltungsgebäude',
+                  'Glas- & Fassadenreinigung',
+                  'Baureinigung für Neubauprojekte',
                   'Objektbezogene Einsatz- und Terminplanung',
                   'Nachvollziehbare Qualitätskontrollen',
                 ].map((item) => (
@@ -204,8 +204,8 @@ export default function StandortStuttgart() {
           <div className="mb-20">
             <h2 className="text-3xl font-bold mb-3 text-gray-900">Unsere Leistungen in Stuttgart</h2>
             <p className="text-lg text-gray-600 mb-10 max-w-3xl leading-relaxed">
-              Das komplette Gebäudereinigungs-Spektrum für Unternehmen im Großraum Stuttgart — aus einer Hand, mit fester
-              Objektleitung und dokumentierter Qualität.
+              Alle Leistungen der Gebäudereinigung für Unternehmen im Großraum Stuttgart, koordiniert von einer festen
+              Objektleitung und mit dokumentierter Qualitätskontrolle.
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
               {LOCAL_SERVICES.map((s) => (
@@ -227,7 +227,7 @@ export default function StandortStuttgart() {
           {/* Branchen vor Ort */}
           <div className="mb-20">
             <h2 className="text-3xl font-bold mb-3 text-gray-900">Branchen, die wir in Stuttgart betreuen</h2>
-            <p className="text-lg text-gray-600 mb-10 max-w-3xl leading-relaxed">Vom Verwaltungsturm über die Produktionshalle bis zum Autohaus: Wir kennen die Anforderungen der Branchen, die den Wirtschaftsraum Stuttgart prägen — und reinigen passgenau dazu.</p>
+            <p className="text-lg text-gray-600 mb-10 max-w-3xl leading-relaxed">Verwaltungsgebäude, Produktionshallen und Autohäuser haben unterschiedliche Anforderungen. Wir kennen die Branchen im Wirtschaftsraum Stuttgart und richten die Reinigung danach aus.</p>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
               {LOCAL_BRANCHEN.map((b) => (
                 <Link
@@ -271,9 +271,9 @@ export default function StandortStuttgart() {
               <div className="max-w-3xl">
                 <h2 className="text-3xl font-bold mb-6">Warum AHAD Cleaning in Stuttgart?</h2>
                 <p className="text-xl text-blue-100 mb-8 leading-relaxed">
-                  Die Region Stuttgart ist geprägt von Weltmarktführern und hochspezialisierten Mittelständlern. Unsere
-                  Leistungen planen wir passend zu Objekt, Nutzung und vereinbartem Zeitfenster — auch für Industrie-
-                  und Gewerbeobjekte in Filderstadt, Sindelfingen und Ludwigsburg.
+                  In der Region Stuttgart sitzen viele Weltmarktführer und spezialisierte Mittelständler. Wir planen
+                  jeden Einsatz nach Objekt, Nutzung und vereinbartem Zeitfenster, auch für Industrie- und
+                  Gewerbeobjekte in Filderstadt, Sindelfingen und Ludwigsburg.
                 </p>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="flex items-start gap-3">
@@ -291,7 +291,7 @@ export default function StandortStuttgart() {
 
           {/* Lokale FAQ */}
           <div className="max-w-3xl">
-            <h2 className="text-3xl font-bold mb-8 text-gray-900">Häufige Fragen — Gebäudereinigung Stuttgart</h2>
+            <h2 className="text-3xl font-bold mb-8 text-gray-900">Häufige Fragen zur Gebäudereinigung in Stuttgart</h2>
             <Accordion items={LOCAL_FAQS} />
           </div>
         </div>
@@ -299,7 +299,7 @@ export default function StandortStuttgart() {
 
       <CTABand
         title="Ihr Objekt im Großraum Stuttgart?"
-        lead="Regionale Betreuung und feste Objektleitung: Besichtigung nach Abstimmung, Angebot im Anschluss."
+        lead="Wir besichtigen Ihr Objekt zu einem abgestimmten Termin und erstellen danach ein Angebot. Betreut wird es von einer festen Objektleitung."
       />
     </div>
   );

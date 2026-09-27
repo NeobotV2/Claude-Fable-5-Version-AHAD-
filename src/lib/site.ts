@@ -200,7 +200,7 @@ const STAT_CANDIDATES = [
   // ohne jedes Jahr nachgepflegt werden zu müssen.
   { value: 90, suffix: '', label: 'Mitarbeitende' },
   { value: 10, suffix: '+', label: 'Jahre am Markt' },
-  { value: 8, suffix: '', label: 'Leistungsbereiche aus einer Hand' },
+  { value: 8, suffix: '', label: 'Leistungsbereiche' },
   { value: 3, suffix: '', label: 'Standorte in Süddeutschland' },
 ] as const;
 
@@ -237,7 +237,7 @@ const TRUST_BADGE_CANDIDATES = [
   { icon: 'badge', label: 'ISO 9001 zertifiziert', sub: 'Qualitätsmanagement', verification: CLAIM_VERIFICATIONS.iso9001 },
   { icon: 'badge', label: 'ISO 14001 zertifiziert', sub: 'Umweltmanagement', verification: CLAIM_VERIFICATIONS.iso14001 },
   { icon: 'users', label: 'Nur festangestellte Teams', sub: 'sozialversichert & sicherheitsüberprüft', verification: CLAIM_VERIFICATIONS.workforce },
-  { icon: 'shield', label: 'Umfassend versichert', sub: 'Betriebshaftpflicht', verification: CLAIM_VERIFICATIONS.insurance },
+  { icon: 'shield', label: 'Versichert', sub: 'Betriebshaftpflicht', verification: CLAIM_VERIFICATIONS.insurance },
 ] as const;
 
 export const TRUST_BADGES = TRUST_BADGE_CANDIDATES.filter((badge) =>
@@ -293,20 +293,20 @@ export const CLIENT_REFERENCES = CLIENT_REFERENCE_CANDIDATES.filter((reference) 
  */
 const GUARANTEE_CANDIDATES = [
   {
-    title: 'Reaktions-Versprechen',
-    promise: 'Antwort auf jede Meldung innerhalb von 24 Stunden — nachvollziehbar dokumentiert.',
+    title: 'Reaktionszeit',
+    promise: 'Wir antworten auf jede Meldung innerhalb von 24 Stunden und dokumentieren das.',
   },
   {
-    title: 'Qualitäts-Versprechen',
-    promise: 'Zu Recht beanstandete Leistung bessern wir kostenfrei nach. Ohne Diskussion.',
+    title: 'Nachbesserung',
+    promise: 'Zu Recht beanstandete Leistungen bessern wir kostenfrei nach.',
   },
   {
-    title: 'Festpreis-Versprechen',
-    promise: 'Transparentes Leistungsverzeichnis, fester Preis — keine versteckten Nachträge.',
+    title: 'Festpreis',
+    promise: 'Sie erhalten ein Leistungsverzeichnis mit festem Preis, ohne versteckte Nachträge.',
   },
   {
-    title: 'Fairness-Versprechen',
-    promise: 'Faire Laufzeiten statt Knebelverträge. Wir binden durch Leistung, nicht durch Vertrag.',
+    title: 'Laufzeit',
+    promise: 'Wir vereinbaren faire Vertragslaufzeiten ohne lange Mindestbindung.',
   },
 ] as const;
 
@@ -322,8 +322,8 @@ export const GUARANTEES = canPublishVerification(CLAIM_VERIFICATIONS.serviceLeve
 const PROOF_POINT_CANDIDATES = [
   { value: '24 h', label: 'Reaktionszeit', sub: 'vertraglich zugesichert' },
   { value: '48 h', label: 'bis Objektbesichtigung', sub: 'in der Regel vor Ort' },
-  { value: '1', label: 'feste Objektleitung', sub: 'pro Objekt, mit Gesicht' },
-  { value: '100 %', label: 'dokumentierte Leistung', sub: 'auditfähig nachweisbar' },
+  { value: '1', label: 'feste Objektleitung', sub: 'pro Objekt' },
+  { value: '100 %', label: 'dokumentierte Leistung', sub: 'für Audits nachweisbar' },
 ] as const;
 
 export const PROOF_POINTS = canPublishVerification(CLAIM_VERIFICATIONS.serviceLevels)
@@ -340,7 +340,7 @@ export const OBJEKTLEITUNG = {
   role: 'Direkter Ansprechpartner für Ihr Objekt',
   photo: '', // z. B. '/team/objektleitung.jpg' — leer => gebrandeter Platzhalter
   quote:
-    'Sie haben eine Nummer, die abnimmt — und einen Menschen, der Ihr Objekt kennt. Kein Ticketsystem, keine Warteschleife.',
+    'Sie erreichen mich direkt am Telefon, ohne Ticketsystem und Warteschleife. Ich kenne Ihr Objekt.',
 } as const;
 
 /**

@@ -47,7 +47,7 @@ export default function FachwissenIntervalle() {
         "name": "Wie oft sollten Sanitäranlagen im Unternehmen gereinigt werden?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Für Sanitäranlagen sollte der Betreiber ein objektbezogenes Reinigungs- und Kontrollintervall aus Nutzung, Öffnungs- oder Schichtzeiten, Verschmutzung und betrieblichen Hygienevorgaben ableiten. Zwischenreinigungen können bei hoher Nutzung sinnvoll sein. Eine routinemäßige Desinfektion ist nicht automatisch erforderlich, sondern richtet sich nach Hygieneplan, Gefährdung und konkretem Anlass."
+          "text": "Für Sanitäranlagen sollte der Betreiber ein objektbezogenes Reinigungs- und Kontrollintervall aus Nutzung, Öffnungs- oder Schichtzeiten, Verschmutzung und betrieblichen Hygienevorgaben ableiten. Zwischenreinigungen können bei hoher Nutzung sinnvoll sein. Ob eine routinemäßige Desinfektion erforderlich ist, richtet sich nach Hygieneplan, Gefährdung und konkretem Anlass."
         }
       },
       {
@@ -63,7 +63,7 @@ export default function FachwissenIntervalle() {
         "name": "Was ist der Unterschied zwischen starrer und dynamischer (bedarfsorientierter) Reinigung?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Bei einer festen Logik werden Tätigkeit und Turnus vorab vereinbart. Eine adaptive Logik löst geeignete Leistungen anhand definierter Bedarfskriterien aus. Welche Raumgruppen fest oder adaptiv gesteuert werden können, ergibt sich aus Nutzung, Hygieneplan, Qualitätsziel und Vertrag. Ein belastbares Konzept benennt außerdem Kontrolle, Dokumentation und Eskalation bei Abweichungen."
+          "text": "Bei einer festen Logik werden Tätigkeit und Turnus vorab vereinbart. Eine adaptive Logik löst geeignete Leistungen anhand definierter Bedarfskriterien aus. Welche Raumgruppen fest oder adaptiv gesteuert werden können, ergibt sich aus Nutzung, Hygieneplan, Qualitätsziel und Vertrag. Das Konzept benennt außerdem Kontrolle, Dokumentation und Eskalation bei Abweichungen."
         }
       }
     ]
@@ -74,7 +74,7 @@ export default function FachwissenIntervalle() {
       <SEO
         ogType="article"
         title="Reinigungsintervalle im Büro: Wie oft putzen? | AHAD" 
-        description="Wie oft sollte ein Büro gereinigt werden? Unser Leitfaden zu Reinigungsintervallen hilft Ihnen, die optimale Taktung für Ihr Unternehmen zu finden."
+        description="Reinigungsintervalle im Büro festlegen: feste Basisleistungen, Bedarfskriterien je Raumgruppe, Kontrolle und Wirkung des Turnus auf die Arbeitsstunden."
         keywords="Reinigungsintervalle, Unterhaltsreinigung Intervalle, Büroreinigung Taktung, wie oft Büro reinigen, Reinigungsplan Büro, AHAD Cleaning"
         schema={[articleSchema, faqSchema]}
       />
@@ -83,7 +83,7 @@ export default function FachwissenIntervalle() {
         compact
         titleSize="lg"
         eyebrow="Fachwissen · Unterhaltsreinigung"
-        title="Reinigungsintervalle in Unternehmen: Ein Leitfaden"
+        title="Reinigungsintervalle in Unternehmen festlegen"
         lead="Wie feste Basisleistungen, objektbezogene Bedarfskriterien und dokumentierte Kontrollen zu einem belastbaren Reinigungsplan werden."
         image={IMG.unterhaltDetail}
         imageAlt=""
@@ -95,7 +95,7 @@ export default function FachwissenIntervalle() {
 
       <section className="border-b border-line bg-white py-12 lg:py-14">
         <div className="mx-auto max-w-7xl px-4 sm:px-8">
-          <h2 className="mb-8 text-center text-2xl font-black text-navy">Intervallplanung auf einen Blick</h2>
+          <h2 className="mb-8 text-center text-2xl font-black text-navy">Drei Bausteine der Intervallplanung</h2>
           <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
             <div className="rounded-2xl border border-line bg-paper p-6">
               <Clock className="mb-4 h-8 w-8 text-brand" aria-hidden="true" />
@@ -131,13 +131,13 @@ export default function FachwissenIntervalle() {
       <section className="bg-white py-16 lg:py-24">
         <div className="mx-auto max-w-3xl px-4 sm:px-8">
           <div className="prose prose-lg max-w-none leading-relaxed text-slate">
-            <h2 id="intervalllogik" className="scroll-mt-28 text-2xl font-black text-navy sm:text-3xl">Fixe und adaptive Leistungen sachlich kombinieren</h2>
+            <h2 id="intervalllogik" className="scroll-mt-28 text-2xl font-black text-navy sm:text-3xl">Fixe und adaptive Leistungen kombinieren</h2>
             <p className="mb-8">
               In der <Link to="/leistungen/unterhaltsreinigung" className="font-bold text-brand hover:underline">Unterhaltsreinigung</Link>{' '}
-              verbindet ein belastbarer Plan definierte Basisleistungen mit objektbezogenen Bedarfskriterien. Feste
+              verbindet der Reinigungsplan definierte Basisleistungen mit objektbezogenen Bedarfskriterien. Feste
               Turnusse schaffen Verlässlichkeit; adaptive Leistungen können für geeignete Flächen auf tatsächliche
-              Nutzung oder Verschmutzung reagieren. Welche Logik passt, muss je Raumgruppe und Tätigkeit festgelegt
-              werden — einschließlich Kontrolle und Vorgehen bei Abweichungen.
+              Nutzung oder Verschmutzung reagieren. Welche Logik passt, wird je Raumgruppe und Tätigkeit festgelegt,
+              einschließlich Kontrolle und Vorgehen bei Abweichungen.
             </p>
 
             <div className="mb-12 rounded-3xl border border-line bg-paper p-6 shadow-soft sm:p-8">
@@ -167,9 +167,8 @@ export default function FachwissenIntervalle() {
 
             <h2 id="orientierungswerte" className="scroll-mt-28 text-2xl font-black text-navy sm:text-3xl">Planungsansätze nach Bereich</h2>
             <p className="mb-6">
-              Die Tabelle nennt keine allgemeingültigen Kalenderfristen. Sie zeigt, welche Fragen bei typischen
-              Raumgruppen zu klären sind und wo eine feste beziehungsweise adaptive Steuerung grundsätzlich geprüft
-              werden kann. Maßgeblich bleiben Objekt, Hygieneplan, Nutzung und vereinbartes Qualitätsziel.
+              Allgemeingültige Kalenderfristen gibt es nicht. Für typische Raumgruppen sind die folgenden Fragen zu
+              klären; außerdem lässt sich dort prüfen, ob eine feste oder eine adaptive Steuerung in Frage kommt. Maßgeblich bleiben Objekt, Hygieneplan, Nutzung und vereinbartes Qualitätsziel.
             </p>
             <div
               className="mb-12 overflow-x-auto rounded-2xl border border-line shadow-soft"
@@ -225,10 +224,10 @@ export default function FachwissenIntervalle() {
               <Link to="/fachwissen/leistungsverzeichnis-gebaeudereinigung-erstellen" className="font-bold text-brand hover:underline">
                 Leistungsverzeichnis
               </Link>{' '}
-              mit klarer Leistungs-, Kontroll- und Anpassungslogik.
+              mit festgelegter Leistungs-, Kontroll- und Anpassungslogik.
             </p>
 
-            <h2 className="text-2xl font-black text-navy sm:text-3xl">Welche Faktoren beeinflussen die Intervallplanung?</h2>
+            <h2 className="text-2xl font-black text-navy sm:text-3xl">Faktoren für die Intervallplanung</h2>
             <p className="mb-6">
               Ein Plan sollte nicht aus einer unveränderten Standardvorlage übernommen werden. Für die{' '}
               <Link to="/branchen/buero-verwaltung" className="font-bold text-brand hover:underline">Büroreinigung</Link>{' '}
@@ -236,7 +235,7 @@ export default function FachwissenIntervalle() {
             </p>
             <ul className="space-y-4 mb-12 list-none pl-0">
               {[
-                'Besucherfrequenz & Mitarbeiteranzahl (Wie viele Menschen nutzen die Fläche?)',
+                'Besucherfrequenz und Zahl der Mitarbeitenden auf der Fläche',
                 'Bodenbelagsart (Teppichboden benötigt andere Intervalle als Hartboden)',
                 'Nutzungsart der Räume (Ein Konferenzraum verschmutzt anders als ein Einzelbüro)',
                 'Jahreszeitliche Einflüsse (Im Winter wird mehr Schmutz und Nässe hereingetragen)',
@@ -257,7 +256,7 @@ export default function FachwissenIntervalle() {
               folgende Beispiel zeigt deshalb nur die Stundenlogik einer abgegrenzten Büroflächenleistung.
             </p>
             <div className="mb-12 rounded-3xl border border-line bg-paper p-6 shadow-soft sm:p-8">
-              <h3 className="mb-4 text-xl font-bold text-navy">Hypothetisches Beispiel: klar abgegrenzte Büroflächenleistung</h3>
+              <h3 className="mb-4 text-xl font-bold text-navy">Hypothetisches Beispiel: abgegrenzte Büroflächenleistung</h3>
               <p className="mb-4 text-sm">
                 Angenommen, eine definierte Tätigkeit benötigt pro Auslösung 1,5 Stunden. Wird sie fünfmal pro Woche
                 fest ausgelöst, ergeben sich 7,5 Stunden. Bei einer zulässigen adaptiven Steuerung mit drei
@@ -286,12 +285,12 @@ export default function FachwissenIntervalle() {
 
             <h2 id="reinigungsplan" className="scroll-mt-28 text-2xl font-black text-navy sm:text-3xl">Checkliste: Reinigungsplan und Leistungsverzeichnis erstellen</h2>
             <p className="mb-6">
-              Ein belastbares Leistungsverzeichnis (LV) ist die Grundlage für vergleichbare Angebote und eine nachvollziehbare Qualitätskontrolle. Die folgende Checkliste hilft Ihnen, alle relevanten Punkte zu erfassen, bevor Sie ein Reinigungskonzept ausschreiben oder beauftragen:
+              Das Leistungsverzeichnis (LV) ist die Grundlage für vergleichbare Angebote und eine nachvollziehbare Qualitätskontrolle. Bevor Sie ein Reinigungskonzept ausschreiben oder beauftragen, sollten diese Punkte erfasst sein:
             </p>
             <ul className="space-y-4 mb-12 list-none pl-0">
               {[
                 'Flächenaufmaß erstellen: Quadratmeter je Raum-/Nutzungsart (Büro, Sanitär, Verkehrsfläche, Küche) dokumentieren.',
-                'Bodenbeläge erfassen: Hartboden, Teppich, Elastikbelag, Naturstein, Glas - je Belag eigene Pflegeintervalle.',
+                'Bodenbeläge erfassen: Hartboden, Teppich, Elastikbelag, Naturstein, Glas, jeweils mit eigenen Pflegeintervallen.',
                 'Nutzungsprofil festlegen: Mitarbeiterzahl, Besucherfrequenz, Öffnungs-/Schichtzeiten, Homeoffice-Quote.',
                 'Intervall je Bereich definieren: Was wird täglich, wöchentlich, monatlich oder quartalsweise gereinigt?',
                 'Hygiene- und Nutzungsanforderungen festlegen: Grundturnus, Kontrollen und mögliche Zwischenreinigungen je Bereich definieren.',
@@ -312,15 +311,14 @@ export default function FachwissenIntervalle() {
               Nässe, Laub oder Streumittel können den Schmutzeintrag in Eingangs- und Verkehrsflächen zeitweise erhöhen;
               Belegungswechsel, Veranstaltungen oder Schichtpläne verändern die Nutzung. Ein anpassbares Konzept
               definiert solche Signale, die zuständige Entscheidung und die Dauer einer engeren oder reduzierten
-              Taktung. So bleibt die Änderung prüfbar, statt allein vom spontanen Eindruck abzuhängen.
+              Taktung. So bleibt jede Änderung prüfbar.
             </p>
 
-            <h2 className="text-2xl font-black text-navy sm:text-3xl">Fazit: fixe Basis, adaptive Steuerung</h2>
+            <h2 className="text-2xl font-black text-navy sm:text-3xl">Fazit</h2>
             <p className="mb-8">
-              Feste und adaptive Logik sind keine Gegensätze. Ein belastbarer Reinigungsplan sichert notwendige
-              Basisleistungen und erlaubt Flexibilität nur dort, wo Auslöser, Ergebnis, Kontrolle und Dokumentation
-              klar vereinbart sind. Regelmäßige Auswertung zeigt anschließend, ob der Plan Qualität und Nutzung
-              tatsächlich zusammenführt.
+              Ein Reinigungsplan sichert die notwendigen Basisleistungen und lässt Flexibilität nur dort zu, wo
+              Auslöser, Ergebnis, Kontrolle und Dokumentation vereinbart sind. Eine regelmäßige Auswertung zeigt, ob
+              der Plan noch zur Nutzung und zum Qualitätsziel passt.
             </p>
           </div>
         </div>
@@ -339,7 +337,7 @@ export default function FachwissenIntervalle() {
 
       <ArticleFooter slug="unterhaltsreinigung-unternehmen-reinigungsintervalle" />
 
-      <CTABand title="Benötigen Sie ein maßgeschneidertes Reinigungskonzept?" lead="Wir analysieren Ihren Bedarf und erstellen ein Leistungsverzeichnis mit optimalen Reinigungsintervallen für Ihr Unternehmen." />
+      <CTABand title="Reinigungsintervalle für Ihr Objekt festlegen" lead="Wir erfassen Flächen und Nutzung Ihres Objekts und erstellen daraus ein Leistungsverzeichnis mit Intervallen je Raumgruppe." />
     </article>
   );
 }

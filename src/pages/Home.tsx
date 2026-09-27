@@ -57,18 +57,18 @@ const moreServices = SERVICES.filter((service) => !FEATURED_PATHS.includes(servi
 const featuredServices = [
   {
     title: 'Unterhaltsreinigung',
-    outcome: 'Planbar saubere Flächen — ohne internen Steuerungsaufwand.',
+    outcome: 'Saubere Flächen nach festem Plan. Die Steuerung übernehmen wir.',
     benefits: ['Feste Teams & Objektleitung', 'Digitale Qualitätskontrolle'],
-    tag: 'Planbar sauber',
+    tag: 'Nach festem Plan',
     icon: <LayoutDashboard className="w-6 h-6" />,
     path: '/leistungen/unterhaltsreinigung',
     image: IMG.unterhaltsreinigung,
   },
   {
     title: 'Industrie- & Produktionsreinigung',
-    outcome: 'Reinigung im laufenden Betrieb — ohne Prozessstörung.',
+    outcome: 'Wir reinigen im laufenden Betrieb, ohne die Produktion zu stören.',
     benefits: ['Schichtintegrierte Ausführung', 'UVV-konform & auditfähig'],
-    tag: 'Prozessintegriert',
+    tag: 'Im Schichtbetrieb',
     icon: <Factory className="w-6 h-6" />,
     path: '/leistungen/industrie-produktionsreinigung',
     image: IMG.industrie,
@@ -78,9 +78,9 @@ const featuredServices = [
   },
   {
     title: 'Glas- & Fassadenreinigung',
-    outcome: 'Repräsentative Gebäudehülle und langfristiger Werterhalt.',
+    outcome: 'Gepflegte Glasflächen und Fassaden erhalten den Wert des Gebäudes.',
     benefits: ['Osmose-Verfahren', 'Geplante Höhenzugänge'],
-    tag: 'Werterhalt im Blick',
+    tag: 'Gebäudehülle',
     icon: <Building2 className="w-6 h-6" />,
     path: '/leistungen/glas-fassadenreinigung',
     image: IMG.glasfassade,
@@ -91,62 +91,62 @@ const systemSteps = [
   {
     letter: 'A',
     title: 'Analyse',
-    subtitle: 'Objektlogik sauber erfassen',
-    description: 'Flächen, Nutzung, Risiken und Reinigungsbedarf werden als belastbare Grundlage für Planung und Ausführung erfasst.',
+    subtitle: 'Das Objekt erfassen',
+    description: 'Wir erfassen Flächen, Nutzung, Risiken und Reinigungsbedarf. Darauf bauen Planung und Ausführung auf.',
     icon: <Search className="w-7 h-7" />,
   },
   {
     letter: 'H',
     title: 'Handling',
     subtitle: 'Feste Teams, klare Zuständigkeit',
-    description: 'Eingespielte Teams, definierte Abläufe und eine feste Objektleitung sichern die Ausführung ohne ständiges Nachsteuern.',
+    description: 'Eingespielte Teams arbeiten nach festgelegten Abläufen. Eine feste Objektleitung ist für Ihr Objekt zuständig.',
     icon: <Settings2 className="w-7 h-7" />,
   },
   {
     letter: 'A',
     title: 'Audit',
     subtitle: 'Qualität regelmäßig prüfen',
-    description: 'Regelmäßige Kontrollen machen Leistung messbar und Abweichungen sichtbar, bevor Reklamationen entstehen.',
+    description: 'Regelmäßige Kontrollen zeigen Abweichungen, bevor es zu Reklamationen kommt.',
     icon: <ClipboardCheck className="w-7 h-7" />,
   },
   {
     letter: 'D',
     title: 'Dokumentation',
-    subtitle: 'Nachweise auf Knopfdruck',
-    description: 'Checklisten, Leistungen und Kontrollen werden nachvollziehbar dokumentiert — Transparenz und Auditfähigkeit inklusive.',
+    subtitle: 'Nachweise zum Abrufen',
+    description: 'Wir dokumentieren Checklisten, erbrachte Leistungen und Kontrollen. Diese Nachweise können Sie bei Audits vorlegen.',
     icon: <Shield className="w-7 h-7" />,
     highlight: true,
   },
 ];
 
 const industries = [
-  { title: 'Industrie & Produktion', path: '/branchen/industrie-produktion', image: IMG.industrieDetail, claim: 'Störungsfrei im Schichtbetrieb' },
-  { title: 'Medizintechnik', path: '/branchen/medizintechnik', image: IMG.brancheMedizin, claim: 'Auditnah & dokumentiert' },
-  { title: 'Büro & Verwaltung', path: '/branchen/buero-verwaltung', image: IMG.brancheBuero, claim: 'Repräsentativ, jeden Tag' },
-  { title: 'Gewerbeobjekte', path: '/branchen/gewerbeobjekte', image: IMG.brancheGewerbe, claim: 'Großflächen im Griff' },
-  { title: 'Hotellerie & Objektbetrieb', path: '/branchen/hotellerie-objektbetrieb', image: IMG.brancheHotel, claim: 'Gastgeberqualität sichern' },
+  { title: 'Industrie & Produktion', path: '/branchen/industrie-produktion', image: IMG.industrieDetail, claim: 'Im Schichtbetrieb' },
+  { title: 'Medizintechnik', path: '/branchen/medizintechnik', image: IMG.brancheMedizin, claim: 'Mit Nachweisen für Audits' },
+  { title: 'Büro & Verwaltung', path: '/branchen/buero-verwaltung', image: IMG.brancheBuero, claim: 'Büros, Flure, Sanitärräume' },
+  { title: 'Gewerbeobjekte', path: '/branchen/gewerbeobjekte', image: IMG.brancheGewerbe, claim: 'Große Flächen nach Plan' },
+  { title: 'Hotellerie & Objektbetrieb', path: '/branchen/hotellerie-objektbetrieb', image: IMG.brancheHotel, claim: 'Sauber für Ihre Gäste' },
 ];
 
 const faqs: FAQItem[] = [
   {
     question: 'Wie setzen sich Ihre Preise zusammen?',
     answer:
-      'Unsere Preise basieren auf einem transparenten Leistungsverzeichnis. Wir berechnen nach tatsächlichem Aufwand, Quadratmetern und Reinigungsintervallen – ohne versteckte Kosten. Sie erhalten ein verbindliches Festpreisangebot.',
+      'Grundlage ist ein Leistungsverzeichnis. Wir kalkulieren nach Aufwand, Quadratmetern und Reinigungsintervallen. Sie erhalten ein verbindliches Festpreisangebot, in dem alle Kosten aufgeführt sind.',
   },
   {
     question: 'Wie läuft ein Anbieterwechsel ab?',
     answer:
-      'Geräuschlos und ohne Betriebsunterbrechung. Wir übernehmen die komplette Transition: Von der Bestandsaufnahme über die Einarbeitung des Personals bis zur Implementierung unseres Qualitätsmanagements.',
+      'Ohne Unterbrechung Ihres Betriebs. Wir übernehmen den gesamten Wechsel: Bestandsaufnahme, Einarbeitung des Personals und Einführung unseres Qualitätsmanagements.',
   },
   {
     question: 'Gibt es lange Mindestlaufzeiten?',
     answer:
-      'Wir binden Kunden durch Leistung, nicht durch Knebelverträge. Nach einer fairen Probezeit bieten wir flexible Laufzeiten, die sich an Ihren unternehmerischen Bedürfnissen orientieren.',
+      'Nein. Nach einer Probezeit vereinbaren wir flexible Laufzeiten, die zu Ihrem Betrieb passen.',
   },
   {
     question: 'Wie sind Haftung und Sicherheit geregelt?',
     answer:
-      'Wir sind umfassend betriebshaftpflichtversichert. Alle Mitarbeiter sind fest angestellt, sozialversichert und sicherheitsüberprüft. Schlüssel und Zugangscodes werden nach strengsten Sicherheitsprotokollen verwaltet.',
+      'Wir haben eine Betriebshaftpflichtversicherung. Alle Mitarbeiter sind fest angestellt, sozialversichert und sicherheitsüberprüft. Schlüssel und Zugangscodes verwalten wir nach festen Sicherheitsregeln.',
   },
   {
     question: 'Wie schnell ist eine Objektbesichtigung möglich?',
@@ -156,17 +156,17 @@ const faqs: FAQItem[] = [
   {
     question: 'Arbeiten Sie mit festen Ansprechpartnern?',
     answer:
-      'Ja. Jedes Objekt wird von einer festen Objektleitung betreut. Sie haben immer einen direkten, kompetenten Ansprechpartner für alle Anliegen.',
+      'Ja. Jedes Objekt hat eine feste Objektleitung. Sie ist Ihr direkter Ansprechpartner für alle Anliegen.',
   },
   {
     question: 'Wie wird die Qualität dokumentiert?',
     answer:
-      'Wir nutzen digitale Checklisten und regelmäßige Audits durch unsere Objektleiter. Sie erhalten auf Wunsch lückenlose Reports über alle erbrachten Leistungen.',
+      'Wir nutzen digitale Checklisten, und unsere Objektleiter führen regelmäßig Audits durch. Auf Wunsch erhalten Sie Berichte über alle erbrachten Leistungen.',
   },
   {
     question: 'Übernehmen Sie auch Objekte im laufenden Betrieb?',
     answer:
-      'Absolut. Unsere Teams sind darauf geschult, sich geräuschlos in Ihre Schicht- und Betriebslogik einzufügen, ohne Ihre Abläufe zu stören.',
+      'Ja. Unsere Teams sind geschult, sich nach Ihren Schichten und Abläufen zu richten, ohne den Betrieb zu stören.',
   },
 ];
 
@@ -249,8 +249,8 @@ export default function Home() {
             {/* LCP-Element: statisch gerendert, damit es sofort sichtbar ist
                 (keine opacity-0-Einblendung, die den LCP verzögert). */}
             <p className="text-[15px] sm:text-xl text-blue-50 max-w-2xl font-medium leading-relaxed mb-5 sm:mb-10">
-              Schluss mit Reklamationen und internem Hinterherlaufen: Wir steuern Ausführung, Qualität und
-              Nachweise als System — damit Ihr Betrieb einfach sauber läuft.
+              Wir organisieren Ausführung, Qualitätskontrolle und Nachweise selbst. Sie müssen weder
+              Reklamationen verfolgen noch intern hinterherlaufen.
             </p>
 
             <motion.div
@@ -280,7 +280,7 @@ export default function Home() {
               </span>
               <span className="flex items-center gap-2">
                 <CheckCircle2 size={15} className="text-mint" />
-                Abgestimmte, geschulte Teams
+                Feste, geschulte Teams
               </span>
               {GOOGLE_RATING && (
                 <a
@@ -359,7 +359,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-8 mb-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <p className="eyebrow text-slate">
             <span className="h-px w-8 bg-slate/30" />
-            Auswahl betreuter Auftraggeber
+            Einige unserer Auftraggeber
           </p>
           <Link to="/referenzen" className="text-sm font-bold text-brand hover:text-brand-light transition-colors inline-flex items-center gap-1.5">
             Alle Referenzen <ArrowRight size={15} />
@@ -379,7 +379,7 @@ export default function Home() {
               eyebrow="Leistungen"
               title={
                 <>
-                  Ergebnisse statt <span className="text-brand-light">Reinigungsstunden.</span>
+                  Reinigung für Büro, <span className="text-brand-light">Produktion und Fassade.</span>
                 </>
               }
               className="max-w-2xl"
@@ -481,8 +481,8 @@ export default function Home() {
               <div className="relative z-10 flex-grow">
                 <h3 className="font-headline font-bold text-xl mb-1">Strukturierte Anfrage für FM &amp; Einkauf</h3>
                 <p className="text-blue-100/80 text-sm font-medium">
-                  Objekt, Leistungen und Anforderungen erfassen — als Grundlage für Angebot und
-                  Leistungsverzeichnis. Persönliche Terminabstimmung nach Eingang.
+                  Erfassen Sie Objekt, Leistungen und Anforderungen. Daraus erstellen wir Angebot und
+                  Leistungsverzeichnis und melden uns zur Terminabstimmung.
                 </p>
               </div>
               <span className="relative z-10 inline-flex items-center gap-2 text-sm font-bold text-mint flex-shrink-0">
@@ -502,14 +502,14 @@ export default function Home() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
             <div className="lg:col-span-5">
               <SectionHeading
-                eyebrow="Der Unterschied"
+                eyebrow="Vorher / Nachher"
                 dark
                 title={
                   <>
-                    Sehen Sie selbst, was <span className="text-mint">System</span> ausmacht.
+                    Eine Fläche nach unserer <span className="text-mint">Bauendreinigung</span>.
                   </>
                 }
-                lead="Ziehen Sie den Regler: links die Fläche nach dem Ausbau, rechts nach unserer Bauendreinigung — übergabefertig und dokumentiert."
+                lead="Ziehen Sie den Regler: links die Fläche nach dem Ausbau, rechts nach der Reinigung, übergabefertig und dokumentiert."
               />
               <Reveal delay={0.2} className="mt-10">
                 <div className="flex flex-col sm:flex-row gap-4">
@@ -530,7 +530,7 @@ export default function Home() {
                 afterLabel="Nachher"
               />
               <p className="mt-4 text-[13px] text-blue-100/80 font-medium">
-                Echtes Vorher/Nachher aus einem AHAD-Objekt.
+                Aufnahmen aus einem von uns betreuten Objekt.
               </p>
             </Reveal>
           </div>
@@ -541,14 +541,14 @@ export default function Home() {
       <section className="py-24 lg:py-36 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-8">
           <SectionHeading
-            eyebrow="Ihr Wettbewerbsvorteil"
+            eyebrow="Unser Vorgehen"
             align="center"
             title={
               <>
                 Das <span className="font-logo text-brand-light">AHAD</span> System
               </>
             }
-            lead="Vier Buchstaben, vier Schritte: Analyse, Handling, Audit, Dokumentation. So wird aus Reinigung ein steuerbarer Prozess mit messbarer Qualität."
+            lead="Die vier Buchstaben stehen für vier Schritte: Analyse, Handling, Audit, Dokumentation. So bleibt die Reinigung planbar und die Qualität überprüfbar."
             className="mb-16 lg:mb-24 max-w-3xl mx-auto"
           />
 
@@ -609,8 +609,8 @@ export default function Home() {
           <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-16">
             <SectionHeading
               eyebrow="Branchen"
-              title="Zuhause in anspruchsvollen Umgebungen."
-              lead="Wo Ausfälle, Reklamationen oder fehlende Nachweise teuer werden, zählt stabile Ausführung im laufenden Betrieb."
+              title="Für Betriebe mit hohen Anforderungen."
+              lead="In diesen Branchen werden Ausfälle, Reklamationen und fehlende Nachweise schnell teuer. Wir reinigen dort im laufenden Betrieb."
               className="max-w-2xl"
             />
             <Reveal delay={0.15}>
@@ -658,7 +658,7 @@ export default function Home() {
                 <div className="relative z-10">
                   <h3 className="font-headline text-xl font-bold mb-3">Ihre Branche nicht dabei?</h3>
                   <p className="text-sm text-blue-100/85 font-medium mb-5">
-                    Wir prüfen jedes Objekt individuell — sagen Sie uns, was Sie brauchen.
+                    Wir sehen uns jedes Objekt einzeln an. Sagen Sie uns, was Sie brauchen.
                   </p>
                   <ButtonLink to="/kontakt" variant="white" arrow className="!px-5 !py-2.5">
                     Kontakt aufnehmen
@@ -684,14 +684,14 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-8 grid grid-cols-1 lg:grid-cols-12 gap-12">
           <div className="lg:col-span-4">
             <SectionHeading
-              eyebrow="Klartext"
+              eyebrow="FAQ"
               title="Häufige Fragen."
-              lead="Antworten auf das, was Entscheider vor dem Wechsel wirklich wissen wollen."
+              lead="Was Entscheider vor einem Anbieterwechsel klären wollen."
             />
             <Reveal delay={0.2} className="mt-8">
               <div className="bg-paper rounded-2xl border border-line p-6">
                 <p className="text-sm font-bold text-navy mb-1">Ihre Frage ist nicht dabei?</p>
-                <p className="text-sm text-slate mb-4">Rufen Sie uns an — wir antworten ohne Warteschleife.</p>
+                <p className="text-sm text-slate mb-4">Rufen Sie uns an. Sie landen nicht in einer Warteschleife.</p>
                 <a href={SITE.phoneHref} className="font-headline font-bold text-brand text-lg hover:text-brand-light transition-colors">
                   {SITE.phone}
                 </a>

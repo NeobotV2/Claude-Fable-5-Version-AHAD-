@@ -75,7 +75,6 @@ export default function Reviews({ exclude = [], limit }: ReviewsProps) {
           eyebrow="Kundenstimmen"
           align="center"
           title="Was Kundinnen und Kunden über die Zusammenarbeit sagen"
-          lead="Eine Auswahl im Wortlaut."
           className="mb-14 max-w-2xl mx-auto"
         />
         <div className={`grid grid-cols-1 gap-6 ${columns}`}>

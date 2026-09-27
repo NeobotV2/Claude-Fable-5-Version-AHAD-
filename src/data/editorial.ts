@@ -75,12 +75,12 @@ const noReviewer = null;
 export const EDITORIAL_ARTICLES = {
   'reinigungsfirma-wechseln-checkliste-tipps': {
     slug: 'reinigungsfirma-wechseln-checkliste-tipps',
-    headline: 'Reinigungsfirma wechseln: Übergang planbar vorbereiten',
+    headline: 'Reinigungsfirma wechseln: den Übergang vorbereiten',
     description:
-      'Orientierung zu Kündigungsfristen, Neu-Ausschreibung und einem planbaren Übergang beim Wechsel des Reinigungsdienstleisters.',
-    listingTitle: 'Reinigungsfirma wechseln: Übergang planbar vorbereiten',
+      'Orientierung zu Kündigungsfristen, Neu-Ausschreibung und Übergabe beim Wechsel des Reinigungsdienstleisters.',
+    listingTitle: 'Reinigungsfirma wechseln: den Übergang vorbereiten',
     listingDescription:
-      'Vertrag prüfen, Bedarf neu beschreiben, Angebote vergleichen und den Start des neuen Dienstleisters strukturiert vorbereiten.',
+      'Vertrag prüfen, Bedarf neu beschreiben, Angebote vergleichen und den Start des neuen Dienstleisters vorbereiten.',
     cluster: 'wechsel-betrieb',
     topic: 'Anbieterwechsel',
     format: 'Leitfaden',
@@ -114,13 +114,13 @@ export const EDITORIAL_ARTICLES = {
       'Druckbare Arbeitshilfe für Objektdaten, Leistungsdefinition, Angebotsvergleich, Anbieterprüfung und Zusammenarbeit.',
     listingTitle: 'Checkliste: Reinigungsangebote strukturiert vergleichen',
     listingDescription:
-      'Eine druckbare Arbeitshilfe für Objektdaten, Leistungsumfang, Nachweise, Vertragsregeln und die spätere Zusammenarbeit.',
+      'Druckbare Arbeitshilfe für Objektdaten, Leistungsumfang, Nachweise, Vertragsregeln und die spätere Zusammenarbeit.',
     cluster: 'ausschreiben-vergleichen',
     topic: 'Arbeitshilfe',
     format: 'Checkliste',
     readingMinutes: 4,
     audiences: ['Facility Management', 'Einkauf'],
-    decisionQuestion: 'Welche Angaben brauchen Anbieter, damit ihre Angebote wirklich vergleichbar sind?',
+    decisionQuestion: 'Welche Angaben brauchen Anbieter, damit sich ihre Angebote vergleichen lassen?',
     related: ['leistungsverzeichnis-gebaeudereinigung-erstellen', 'was-kostet-gebaeudereinigung-stundensatz-preise'],
     image: '/og-image.jpg',
     datePublished: '2026-07-02',
@@ -150,7 +150,7 @@ export const EDITORIAL_ARTICLES = {
     slug: 'industrie-produktionsreinigung-ohne-prozessstoerung',
     headline: 'Industriereinigung im Betrieb: Was läuft weiter, was muss stehen?',
     description:
-      'Praxisüberblick zur Integration von Reinigungsarbeiten in Produktionsabläufe und zu grundlegenden Schutzmaßnahmen.',
+      'Wie sich Reinigungsarbeiten in Produktionsabläufe einplanen lassen und welche grundlegenden Schutzmaßnahmen gelten.',
     listingTitle: 'Industriereinigung in laufende Prozesse integrieren',
     listingDescription:
       'Reinigungsfenster, Freigaben, Schutzmaßnahmen und Zuständigkeiten so planen, dass Betrieb und Reinigung zusammenpassen.',
@@ -187,18 +187,18 @@ export const EDITORIAL_ARTICLES = {
   },
   'unterhaltsreinigung-unternehmen-reinigungsintervalle': {
     slug: 'unterhaltsreinigung-unternehmen-reinigungsintervalle',
-    headline: 'Reinigungsintervalle in Unternehmen: Ein Leitfaden',
+    headline: 'Reinigungsintervalle in Unternehmen festlegen',
     description:
       'Orientierung für nutzungs- und bedarfsabhängige Intervalle in Büro-, Sanitär- und Verkehrsflächen.',
     listingTitle: 'Reinigungsintervalle objektbezogen festlegen',
     listingDescription:
-      'Nutzung, Verschmutzung und Hygieneanforderungen in belastbare Intervalle für Büro-, Sanitär- und Verkehrsflächen übersetzen.',
+      'Nutzung, Verschmutzung und Hygieneanforderungen in nachvollziehbare Intervalle für Büro-, Sanitär- und Verkehrsflächen übersetzen.',
     cluster: 'planen-kalkulieren',
     topic: 'Unterhaltsreinigung',
     format: 'Leitfaden',
     readingMinutes: 8,
     audiences: ['Facility Management', 'Einkauf'],
-    decisionQuestion: 'Welche Flächen brauchen feste Intervalle – und wo ist bedarfsorientierte Reinigung sinnvoll?',
+    decisionQuestion: 'Welche Flächen brauchen feste Intervalle, und wo ist bedarfsorientierte Reinigung sinnvoll?',
     related: ['was-kostet-gebaeudereinigung-stundensatz-preise', 'leistungsverzeichnis-gebaeudereinigung-erstellen'],
     image: '/images/ahad/unterhalt-detail.webp',
     datePublished: '2026-06-12',
@@ -236,13 +236,13 @@ export const EDITORIAL_ARTICLES = {
       'Einordnung von Kostenbestandteilen, Leistungswerten und Rechenbeispielen für gewerbliche Gebäudereinigung.',
     listingTitle: 'Reinigungskosten nachvollziehbar kalkulieren',
     listingDescription:
-      'Stundensatz, Leistungswert und Frequenz als Kalkulationslogik verstehen – mit offengelegten Annahmen statt pauschaler Preisversprechen.',
+      'Wie Stundensatz, Leistungswert und Frequenz den Preis bestimmen. Mit Rechenbeispielen und offengelegten Annahmen.',
     cluster: 'planen-kalkulieren',
     topic: 'Kosten & Kalkulation',
     format: 'Leitfaden',
     readingMinutes: 9,
     audiences: ['Facility Management', 'Einkauf', 'Geschäftsführung'],
-    decisionQuestion: 'Welche Annahmen erklären den Angebotspreis – und wie lassen sie sich prüfen?',
+    decisionQuestion: 'Welche Annahmen erklären den Angebotspreis, und wie lassen sie sich prüfen?',
     related: ['unterhaltsreinigung-unternehmen-reinigungsintervalle', 'checkliste-reinigungsangebot'],
     image: '/images/ahad/unterhalt-detail.webp',
     datePublished: '2026-07-02',
@@ -338,18 +338,18 @@ export const EDITORIAL_ARTICLES = {
   },
   'iso-9001-iso-14001-gebaeudereinigung-unternehmen': {
     slug: 'iso-9001-iso-14001-gebaeudereinigung-unternehmen',
-    headline: 'ISO 9001 und ISO 14001: Was Zertifikate wirklich belegen',
+    headline: 'ISO 9001 und ISO 14001: Was Zertifikate belegen',
     description:
       'Orientierung zur Rolle von Qualitäts- und Umweltmanagementsystemen bei der Auswahl eines Reinigungsdienstleisters.',
     listingTitle: 'ISO 9001 und ISO 14001 bei Anbietern einordnen',
     listingDescription:
-      'Zertifikat, Geltungsbereich und gelebte Prozesse prüfen – und Managementsysteme nicht mit dem Reinigungsergebnis verwechseln.',
+      'Zertifikat, Geltungsbereich und gelebte Prozesse prüfen. Ein Managementsystem belegt noch kein Reinigungsergebnis.',
     cluster: 'qualitaet-compliance',
     topic: 'Qualität & Compliance',
     format: 'Leitfaden',
     readingMinutes: 7,
     audiences: ['Einkauf', 'Geschäftsführung', 'Facility Management'],
-    decisionQuestion: 'Was belegt ein Zertifikat – und welche Nachweise sollten Auftraggeber zusätzlich prüfen?',
+    decisionQuestion: 'Was belegt ein Zertifikat, und welche Nachweise sollten Auftraggeber zusätzlich prüfen?',
     related: ['checkliste-reinigungsangebot', 'kuechenabluftreinigung-vdi-2052-pflicht-ablauf-nachweis'],
     image: '/images/ahad/medizin-detail.webp',
     datePublished: '2026-06-12',
@@ -393,12 +393,12 @@ export const EDITORIAL_CLUSTERS = {
   'ausschreiben-vergleichen': {
     title: 'Leistungen ausschreiben & Angebote vergleichen',
     shortTitle: 'Ausschreiben & vergleichen',
-    description: 'Eine gemeinsame Leistungsgrundlage schaffen und Angebote anhand belastbarer Kriterien prüfen.',
+    description: 'Eine gemeinsame Leistungsgrundlage schaffen und Angebote nach festen Kriterien prüfen.',
   },
   'wechsel-betrieb': {
     title: 'Anbieterwechsel & laufenden Betrieb sichern',
     shortTitle: 'Wechsel & Betrieb',
-    description: 'Übergänge, Zuständigkeiten und betriebliche Abläufe ohne unnötige Reibungsverluste vorbereiten.',
+    description: 'Übergänge, Zuständigkeiten und Reinigung im laufenden Betrieb planen.',
   },
   'qualitaet-compliance': {
     title: 'Qualität, Nachweise & Compliance prüfen',

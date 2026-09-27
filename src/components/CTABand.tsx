@@ -12,8 +12,8 @@ interface CTABandProps {
 /** Conversion-Band am Seitenende — überall identische Abschlusslogik. */
 export default function CTABand({
   title = 'In vier Schritten zur Objektbesichtigung.',
-  lead = 'Beschreiben Sie Objekt, Leistung und Umfang. Wir melden uns persönlich zur Terminabstimmung; das belastbare Angebot folgt nach der Besichtigung.',
-  bullets = ['Strukturierte Bedarfserfassung', 'Unverbindliche Terminabstimmung', 'Transparentes Angebot nach Besichtigung'],
+  lead = 'Beschreiben Sie Objekt, Leistung und Umfang. Wir melden uns persönlich zur Terminabstimmung. Das Angebot erstellen wir nach der Besichtigung.',
+  bullets = ['Bedarfserfassung per Formular', 'Unverbindliche Terminabstimmung', 'Angebot nach der Besichtigung'],
 }: CTABandProps) {
   return (
     <section className="py-20 lg:py-28 bg-paper">

@@ -95,7 +95,7 @@ export default function ServicePage({ service }: { service: ServiceData }) {
         <section className="bg-accent text-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-8 py-4 flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-6 text-center">
             <p className="font-bold text-[15px]">
-              Kurzfristiger oder dringender Einsatz? Rufen Sie direkt an — wir disponieren noch heute.
+              Kurzfristige oder dringende Einsätze: Rufen Sie direkt an, wir disponieren noch heute.
             </p>
             <a
               href={SITE.phoneHref}
@@ -129,7 +129,7 @@ export default function ServicePage({ service }: { service: ServiceData }) {
       <section className="py-20 lg:py-28 bg-paper">
         <div className="max-w-7xl mx-auto px-4 sm:px-8">
           <SectionHeading
-            eyebrow="Auf einen Blick"
+            eyebrow="Schwerpunkte"
             title={`${service.name} mit AHAD`}
             className="mb-12 lg:mb-16"
           />
@@ -180,13 +180,13 @@ export default function ServicePage({ service }: { service: ServiceData }) {
             <div className="relative">
               <SmartImage
                 src={service.detailImage}
-                alt={`${service.name} — Ausführung durch AHAD Cleaning`}
+                alt={`${service.name}: Ausführung durch AHAD Cleaning`}
                 className="rounded-3xl shadow-lifted aspect-[4/3]"
               />
               <div className="absolute -bottom-6 -left-6 hidden sm:block bg-navy text-white rounded-2xl p-6 shadow-lifted max-w-[16rem] grain overflow-hidden">
                 <p className="relative z-10 font-headline font-bold text-lg leading-snug mb-1.5">Feste Objektleitung</p>
                 <p className="relative z-10 text-blue-100/80 text-[13px] leading-relaxed">
-                  Ein Ansprechpartner, der Ihr Objekt kennt — erreichbar, verantwortlich, verbindlich.
+                  Eine feste Ansprechperson, die Ihr Objekt kennt und für die Ausführung verantwortlich ist.
                 </p>
               </div>
             </div>
@@ -199,7 +199,7 @@ export default function ServicePage({ service }: { service: ServiceData }) {
         <div className="max-w-4xl mx-auto px-4 sm:px-8">
           <SectionHeading
             eyebrow="Häufige Fragen"
-            title={`FAQs zur ${service.name}`}
+            title={`Fragen und Antworten: ${service.name}`}
             align="center"
             className="mb-12"
           />
@@ -258,7 +258,7 @@ export default function ServicePage({ service }: { service: ServiceData }) {
           <div className="max-w-7xl mx-auto px-4 sm:px-8">
             <h2 className="font-headline text-xl font-bold text-navy mb-6 flex items-center gap-2.5">
               <BookOpen size={20} className="text-accent" />
-              Vertiefen Sie das Thema
+              Fachbeiträge zum Thema
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {articles.map((a) => (

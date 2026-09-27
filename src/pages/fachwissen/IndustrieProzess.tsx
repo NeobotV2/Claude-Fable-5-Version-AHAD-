@@ -73,7 +73,7 @@ export default function FachwissenIndustrieProzess() {
       <SEO
         ogType="article"
         title="Industriereinigung ohne Stillstand planen | AHAD"
-        description="Industriereinigung im Betrieb planen: Entscheidung zwischen laufender Anlage, Abschottung, Teilstillstand und gesicherter Abschaltung mit klarer Freigabe."
+        description="Industriereinigung im Betrieb planen: Wahl zwischen laufender Anlage, Abschottung, Teilstillstand und gesicherter Abschaltung mit dokumentierter Freigabe."
         keywords="Industriereinigung Prozess, Reinigung ohne Stillstand, Produktionsreinigung Strategie, Maschinenreinigung laufender Betrieb, AHAD Cleaning"
         schema={[articleSchema, faqSchema]}
       />
@@ -99,9 +99,9 @@ export default function FachwissenIndustrieProzess() {
             </h2>
             <p>
               Industriereinigung lässt sich nur dann parallel zur Produktion ausführen, wenn Gefährdungen für
-              Beschäftigte, Anlage und Produkt beherrscht sind. Die Frage lautet deshalb nicht pauschal „ohne
-              Stillstand oder mit Stillstand?“, sondern: Welche Tätigkeit findet in welchem Bereich unter welchen
-              freigegebenen Bedingungen statt? Betreiber, Facility Management, Produktion und{' '}
+              Beschäftigte, Anlage und Produkt beherrscht sind. Für jede Tätigkeit ist deshalb festzulegen, in
+              welchem Bereich und unter welchen freigegebenen Bedingungen sie stattfindet. Betreiber, Facility
+              Management, Produktion und{' '}
               <Link to="/leistungen/industrie-produktionsreinigung" className="font-bold text-brand hover:underline">
                 Reinigungsdienstleister
               </Link>{' '}
@@ -112,7 +112,7 @@ export default function FachwissenIndustrieProzess() {
               <div className="flex items-start gap-3">
                 <CircleAlert className="mt-0.5 h-6 w-6 shrink-0 text-amber-700" aria-hidden="true" />
                 <div>
-                  <h3 className="font-headline text-lg font-bold text-navy">Klare Grenze</h3>
+                  <h3 className="font-headline text-lg font-bold text-navy">Wann die Anlage stehen muss</h3>
                   <p className="mt-2 text-sm leading-relaxed text-slate">
                     Eingriffe hinter Schutzeinrichtungen, Arbeiten an Energiequellen oder Tätigkeiten mit nicht
                     ausreichend beherrschbaren Emissionen gehören nicht neben eine ungesichert laufende Anlage. In
@@ -167,7 +167,7 @@ export default function FachwissenIndustrieProzess() {
             <h3 className="font-headline text-2xl font-bold text-navy">Fünf Angaben vor jeder Terminplanung</h3>
             <ul className="not-prose my-8 space-y-3">
               {[
-                'Exakter Arbeitsbereich und gewünschtes Reinigungsergebnis',
+                'Abgegrenzter Arbeitsbereich und gewünschtes Reinigungsergebnis',
                 'Betriebszustände, Energiequellen, Restenergien und Herstellerangaben',
                 'Stoffe, Verschmutzung, Produkt- und Hygieneanforderungen',
                 'Gleichzeitig arbeitende Personen, Verkehrswege und Nachbarprozesse',
@@ -185,8 +185,8 @@ export default function FachwissenIndustrieProzess() {
             </h2>
             <p>
               Betreiber und Fremdfirma haben jeweils eigene Pflichten und müssen bei wechselseitigen Gefährdungen
-              zusammenarbeiten. Der betriebliche Freigabeprozess sollte deshalb nicht nur eine Unterschrift liefern,
-              sondern Arbeitsumfang, Schutzmaßnahmen, Verantwortliche und Rückgabe eindeutig verbinden.
+              zusammenarbeiten. Im betrieblichen Freigabeprozess werden deshalb Arbeitsumfang, Schutzmaßnahmen,
+              Verantwortliche und Rückgabe gemeinsam festgehalten.
             </p>
 
             <div
@@ -318,7 +318,7 @@ export default function FachwissenIndustrieProzess() {
               </table>
             </div>
 
-            <h3 className="font-headline text-2xl font-bold text-navy">Wirksamkeit ohne fiktive ROI-Zahl bewerten</h3>
+            <h3 className="font-headline text-2xl font-bold text-navy">Wirtschaftlichkeit mit Betriebsdaten bewerten</h3>
             <p>
               Ob die Prozessintegration wirtschaftlich wirkt, lässt sich erst mit betrieblichen Daten beurteilen.
               Geeignete Vergleichsgrößen können geplante und ungeplante Stillstandszeit, Zusatzfreigaben,
@@ -330,9 +330,9 @@ export default function FachwissenIndustrieProzess() {
               Verfahren nach Rückstand, Emission und Schutzbedarf auswählen
             </h2>
             <p>
-              Kein Reinigungsverfahren ist allein aufgrund seines Namens für den laufenden Betrieb geeignet. Die
-              Auswahl folgt dem Material, der Verschmutzung, dem gewünschten Ergebnis, den Herstellerangaben und den
-              Gefährdungen des Verfahrens. Eine Probefläche oder technische Freigabe kann erforderlich sein.
+              Ob ein Reinigungsverfahren im laufenden Betrieb eingesetzt werden kann, hängt vom Material, der
+              Verschmutzung, dem gewünschten Ergebnis, den Herstellerangaben und den Gefährdungen des Verfahrens
+              ab. Eine Probefläche oder technische Freigabe kann erforderlich sein.
             </p>
 
             <div
@@ -396,8 +396,8 @@ export default function FachwissenIndustrieProzess() {
                     >
                       Leistungsverzeichnis
                     </Link>
-                    . So vergleichen Auftraggeber nicht nur Preise, sondern auch den vorgesehenen Schutz- und
-                    Freigabeaufwand.
+                    . Dann können Auftraggeber neben dem Preis auch den vorgesehenen Schutz- und Freigabeaufwand
+                    vergleichen.
                   </p>
                 </div>
               </div>
@@ -405,10 +405,9 @@ export default function FachwissenIndustrieProzess() {
 
             <h3 className="font-headline text-2xl font-bold text-navy">Fazit</h3>
             <p>
-              Eine gute Prozessintegration vermeidet keinen Stillstand um jeden Preis. Sie ordnet jede Tätigkeit dem
-              sicher vertretbaren Betriebszustand zu und schafft einen prüfbaren Weg von der Freigabe bis zur
-              dokumentierten Rückgabe. Erst danach lassen sich Zeitfenster, Aufwand und mögliche betriebliche Vorteile
-              realistisch bewerten.
+              Eine gute Prozessintegration ordnet jede Tätigkeit dem Betriebszustand zu, der sicher vertretbar ist,
+              auch wenn das einen Stillstand bedeutet. Von der Freigabe bis zur dokumentierten Rückgabe bleibt jeder
+              Schritt prüfbar. Danach lassen sich Zeitfenster, Aufwand und mögliche betriebliche Vorteile bewerten.
             </p>
           </div>
         </div>
@@ -430,7 +429,7 @@ export default function FachwissenIndustrieProzess() {
 
       <CTABand
         title="Reinigungsfenster und Freigaben vor Ort planen"
-        lead="Bei einer gemeinsamen Begehung trennen wir Aufgaben für den laufenden Betrieb von Arbeiten mit Abschottung oder Stillstand und erfassen die benötigten Schutz-, Freigabe- und Rückgabeschritte für ein belastbares Konzept."
+        lead="Bei einer gemeinsamen Begehung trennen wir Aufgaben für den laufenden Betrieb von Arbeiten mit Abschottung oder Stillstand und erfassen die benötigten Schutz-, Freigabe- und Rückgabeschritte."
       />
     </article>
   );

@@ -111,7 +111,7 @@ const OBJECT_TYPES = [
 ];
 
 const SERVICES = [
-  { id: 'unterhaltsreinigung', title: 'Unterhaltsreinigung', subtitle: 'Planbare laufende Reinigung', icon: Building },
+  { id: 'unterhaltsreinigung', title: 'Unterhaltsreinigung', subtitle: 'Laufende Reinigung nach festem Plan', icon: Building },
   { id: 'industrie-produktionsreinigung', title: 'Industrie- & Produktionsreinigung', subtitle: 'Maschinen, Anlagen und Hallen', icon: Factory },
   { id: 'glas-fassadenreinigung', title: 'Glas- & Fassadenreinigung', subtitle: 'Fenster und Gebäudehüllen', icon: Sparkles },
   { id: 'baureinigung', title: 'Baureinigung', subtitle: 'Grob-, Fein- und Endreinigung', icon: HardHat },
@@ -337,7 +337,7 @@ export default function AngebotsFunnel() {
     <div className="relative min-h-screen bg-navy overflow-hidden grain">
       <SEO
         title="Kostenlose Objektbesichtigung anfragen | AHAD Cleaning"
-        description="In vier übersichtlichen Schritten zur kostenlosen Vor-Ort-Besichtigung. Das transparente Angebot folgt nach der gemeinsamen Objektaufnahme."
+        description="In vier Schritten zur kostenlosen Vor-Ort-Besichtigung. Das Angebot erstellen wir, nachdem wir Ihr Objekt gemeinsam aufgenommen haben."
         noindex
       />
       <div className="absolute inset-0 blueprint-grid" aria-hidden />
@@ -352,10 +352,10 @@ export default function AngebotsFunnel() {
           <Check className="w-10 h-10 text-accent" />
         </div>
         <h1 ref={successRef} tabIndex={-1} className="font-headline text-3xl font-bold text-navy mb-4 outline-none">
-          Anfrage erfolgreich übermittelt
+          Anfrage übermittelt
         </h1>
         <p className="text-lg text-slate mb-7 max-w-lg mx-auto">
-          Vielen Dank. Wir prüfen Ihre Angaben und melden uns persönlich zur Terminabstimmung für die Objektbesichtigung.
+          Vielen Dank. Wir prüfen Ihre Angaben und melden uns persönlich, um einen Termin für die Besichtigung abzustimmen.
         </p>
         <div className="flex flex-col sm:flex-row gap-3 justify-center mb-8">
           <a href={SITE.phoneHref} className="inline-flex items-center justify-center gap-2 bg-accent text-white px-6 py-3.5 rounded-xl font-bold">
@@ -373,11 +373,11 @@ export default function AngebotsFunnel() {
   return shell(
     <>
       <header className="text-center mb-8">
-        <span className="eyebrow text-mint justify-center mb-4"><Clock size={13} /> Vier übersichtliche Schritte</span>
+        <span className="eyebrow text-mint justify-center mb-4"><Clock size={13} /> Vier Schritte</span>
         <h1 className="display-md text-white">
           <HeadlineText text="Kostenlose Vor-Ort-Besichtigung" />
         </h1>
-        <p className="mt-3 text-blue-100/85">Das belastbare Angebot folgt nach der gemeinsamen Objektaufnahme.</p>
+        <p className="mt-3 text-blue-100/85">Das Angebot erstellen wir nach der Besichtigung vor Ort.</p>
       </header>
 
       <div className="mb-8">
@@ -400,8 +400,8 @@ export default function AngebotsFunnel() {
         <AnimatePresence mode="wait" initial={false}>
           {step === 1 && (
             <motion.section key="step-1" initial={false} animate={{ opacity: 1 }} exit={{ opacity: 0 }} aria-labelledby="offer-step-1">
-              <h2 id="offer-step-1" className="font-headline text-2xl md:text-3xl font-bold text-navy mb-2">Für welches Objekt suchen Sie eine Lösung?</h2>
-              <p className="text-slate mb-6">Wählen Sie den passendsten Objekttyp. Details klären wir gemeinsam.</p>
+              <h2 id="offer-step-1" className="font-headline text-2xl md:text-3xl font-bold text-navy mb-2">Um welches Objekt geht es?</h2>
+              <p className="text-slate mb-6">Wählen Sie den Objekttyp, der am besten passt. Details klären wir gemeinsam.</p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {OBJECT_TYPES.map((type) => (
                   <button key={type.id} type="button" aria-pressed={formData.objectType === type.title} onClick={() => { setFormData((current) => ({ ...current, objectType: type.title })); next(); }} className={cn('p-5 group', selectableCard(formData.objectType === type.title))}>
@@ -417,7 +417,7 @@ export default function AngebotsFunnel() {
           {step === 2 && (
             <motion.section key="step-2" initial={false} animate={{ opacity: 1 }} exit={{ opacity: 0 }} aria-labelledby="offer-step-2">
               <h2 id="offer-step-2" className="font-headline text-2xl md:text-3xl font-bold text-navy mb-2">Welche Leistungen benötigen Sie?</h2>
-              <p className="text-slate mb-6">Mehrfachauswahl ist möglich.</p>
+              <p className="text-slate mb-6">Sie können mehrere Leistungen wählen.</p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {SERVICES.map((service) => {
                   const active = formData.services.includes(service.title);

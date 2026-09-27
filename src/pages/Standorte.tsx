@@ -15,7 +15,7 @@ const regionen = [
     path: '/standorte/villingen-schwenningen',
     region: 'Zentrale · Schwarzwald-Baar-Kreis',
     description:
-      'Unsere Zentrale: Von hier steuern wir Einsatzplanung, Qualitätssicherung und die Betreuung des Schwarzwald-Baar-Kreises.',
+      'Von unserer Zentrale aus steuern wir Einsatzplanung, Qualitätssicherung und die Betreuung des Schwarzwald-Baar-Kreises.',
     image: IMG.heroArchitecture,
     badge: 'Hauptsitz',
   },
@@ -24,7 +24,7 @@ const regionen = [
     path: '/standorte/stuttgart',
     region: 'Landeshauptstadt & Umland',
     description:
-      'Gebäude- und Industriereinigung für die Metropolregion Stuttgart — von Bürotürmen bis Produktionsstandorten.',
+      'Gebäude- und Industriereinigung in der Metropolregion Stuttgart, für Bürogebäude ebenso wie für Produktionsstandorte.',
     image: IMG.stuttgart,
     badge: 'Metropolregion',
   },
@@ -33,7 +33,7 @@ const regionen = [
     path: '/standorte/konstanz',
     region: 'Bodenseeregion',
     description:
-      'Zuverlässige Objektbetreuung rund um den Bodensee — für Gewerbe, Hotellerie und öffentliche Auftraggeber.',
+      'Objektbetreuung rund um den Bodensee für Gewerbe, Hotellerie und öffentliche Auftraggeber.',
     image: IMG.bodensee,
     badge: 'Bodensee',
   },
@@ -55,7 +55,7 @@ export default function Standorte() {
 
       <PageHero
         eyebrow="Unternehmenssitz & Einsatzgebiete"
-        title="Regional geplant, persönlich betreut."
+        title="Wo wir für Sie im Einsatz sind."
         lead="Von unserem Unternehmenssitz in Villingen-Schwenningen betreuen wir Objekte in mehreren Regionen Süddeutschlands. Stuttgart und Konstanz sind Einsatzgebiete."
         image={IMG.schwarzwald}
         crumbs={[{ label: 'Standorte' }]}
@@ -109,7 +109,7 @@ export default function Standorte() {
           <div>
             <SectionHeading
               eyebrow="Einzugsgebiet"
-              title="Im Einsatz in ganz Süddeutschland."
+              title="Im Einsatz in Süddeutschland."
               lead="Auch außerhalb der genannten Gebiete prüfen wir Anfragen. Betreut wird jedes Objekt von unserem Sitz in Villingen-Schwenningen aus."
             />
             <Reveal delay={0.15}>
@@ -160,7 +160,7 @@ export default function Standorte() {
 
       <CTABand
         title="Ihr Objekt liegt in unserer Region?"
-        lead="Dann vereinbaren Sie jetzt eine Besichtigung — unverbindlich, kostenfrei und mit transparentem Angebot im Anschluss."
+        lead="Dann vereinbaren Sie eine Besichtigung. Sie ist unverbindlich und kostenfrei, im Anschluss erhalten Sie ein Angebot."
       />
     </div>
   );

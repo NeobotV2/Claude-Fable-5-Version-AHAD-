@@ -38,7 +38,7 @@ export default function ArticleFooter({ slug, className = '' }: ArticleFooterPro
             Quellen &amp; Prüfstand
           </h2>
           <p className="mt-2 max-w-2xl text-sm leading-relaxed text-slate">
-            Diese Ausgangsquellen wurden für die fachliche Einordnung herangezogen. Gesetze, Normen und Richtlinien
+            Auf diese Quellen stützt sich der Beitrag. Gesetze, Normen und Richtlinien
             sind für den konkreten Auftrag in ihrer aktuellen Fassung und ihrem vollständigen Wortlaut zu prüfen.
           </p>
           <ul className="mt-5 space-y-3">
@@ -66,9 +66,9 @@ export default function ArticleFooter({ slug, className = '' }: ArticleFooterPro
         </section>
 
         <nav aria-labelledby={`${slug}-weiterlesen`} className="min-w-0 print:hidden">
-          <p className="mb-2 text-xs font-black uppercase tracking-[0.16em] text-brand">Nächster sinnvoller Schritt</p>
+          <p className="mb-2 text-xs font-black uppercase tracking-[0.16em] text-brand">Verwandte Themen</p>
           <h2 id={`${slug}-weiterlesen`} className="font-headline text-xl font-bold text-navy">
-            Passend weiterarbeiten
+            Weiterlesen
           </h2>
           <div className="mt-4 space-y-3">
             {related.map((relatedArticle) => (
@@ -84,7 +84,7 @@ export default function ArticleFooter({ slug, className = '' }: ArticleFooterPro
                   {relatedArticle.listingTitle}
                 </span>
                 <span className="mt-3 inline-flex items-center gap-2 text-sm font-bold text-brand">
-                  Weiterarbeiten
+                  Zum Beitrag
                   <ArrowRight size={15} className="transition-transform group-hover:translate-x-1" aria-hidden="true" />
                 </span>
               </Link>

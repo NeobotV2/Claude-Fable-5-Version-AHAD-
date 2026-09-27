@@ -62,7 +62,7 @@ export default function FachwissenAnbieterwechsel() {
         name: 'Wie viel Vorlauf braucht ein Anbieterwechsel?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: 'Der Vorlauf hängt von Kündigungstermin, Vergabeprozess, Objektgröße, Sicherheitsanforderungen, Material- und Personalplanung sowie den vereinbarten Freigaben ab. Sinnvoll ist ein rückwärts geplanter Terminplan mit Entscheidung, Beauftragung, Mobilisierung, Tag 0 sowie Kontrollen an Tag 7 und Tag 30 statt einer pauschalen Wochenangabe.',
+          text: 'Der Vorlauf hängt von Kündigungstermin, Vergabeprozess, Objektgröße, Sicherheitsanforderungen, Material- und Personalplanung sowie den vereinbarten Freigaben ab. Eine pauschale Wochenangabe hilft wenig. Planen Sie rückwärts mit Terminen für Entscheidung, Beauftragung, Mobilisierung, Tag 0 sowie Kontrollen an Tag 7 und Tag 30.',
         },
       },
     ],
@@ -82,8 +82,8 @@ export default function FachwissenAnbieterwechsel() {
         compact
         titleSize="lg"
         eyebrow="Fachwissen · Anbieterwechsel"
-        title="Reinigungsfirma wechseln: Übergang planbar vorbereiten"
-        lead="Ein Wechsel ist nicht immer die erste oder einzige Lösung. Entscheidend sind dokumentierte Abweichungen, ein geprüfter Vertrag, vergleichbare Angebote und eine klar verantwortete Übergabe."
+        title="Reinigungsfirma wechseln: den Übergang vorbereiten"
+        lead="Ein Wechsel ist nicht immer die erste oder einzige Lösung. Er setzt dokumentierte Abweichungen, einen geprüften Vertrag, vergleichbare Angebote und eine Übergabe mit klaren Zuständigkeiten voraus."
         image="/images/ahad/meeting.webp"
         imageAlt="Besprechung zur Planung eines Dienstleisterwechsels"
         crumbs={[{ label: 'Fachwissen', href: '/fachwissen' }, { label: 'Anbieterwechsel' }]}
@@ -223,7 +223,7 @@ export default function FachwissenAnbieterwechsel() {
             <p>
               Ein Dienstleisterwechsel löst nicht automatisch einen Betriebsübergang aus. Ob § 613a BGB relevant
               sein kann, hängt von den tatsächlichen Umständen ab und sollte bei Anhaltspunkten arbeitsrechtlich
-              geprüft werden. Im Projektplan genügt dafür zunächst ein klarer Prüfpunkt: Wer erhebt welche
+              geprüft werden. Im Projektplan genügt dafür zunächst ein eigener Prüfpunkt: Wer erhebt welche
               Informationen, wer bewertet sie und bis wann muss das Ergebnis für Vergabe und Mobilisierung vorliegen?
             </p>
 
@@ -244,7 +244,7 @@ export default function FachwissenAnbieterwechsel() {
             >
               <table className="w-full min-w-[760px] border-collapse text-left text-sm">
                 <caption className="caption-top bg-paper px-4 py-3 text-left font-headline font-bold text-navy">
-                  Vergleichskriterien statt pauschaler Produktivitätswertung
+                  Kriterien für den Angebotsvergleich
                 </caption>
                 <thead className="bg-navy text-white">
                   <tr>
@@ -351,10 +351,10 @@ export default function FachwissenAnbieterwechsel() {
               </table>
             </div>
 
-            <h3 className="font-headline text-2xl font-bold text-navy">Betreuungsfähigkeit objektiv bewerten</h3>
+            <h3 className="font-headline text-2xl font-bold text-navy">Betreuungsfähigkeit bewerten</h3>
             <p>
-              Der Unternehmenssitz allein belegt weder Reaktionsgeschwindigkeit noch Vertretungssicherheit. Relevanter
-              sind vertraglich messbare Kriterien: zugesagte Erreichbarkeit, Reaktions- und Wiederherstellungszeiten,
+              Der Unternehmenssitz allein belegt weder Reaktionsgeschwindigkeit noch Vertretungssicherheit. Aussagekräftiger
+              sind Kriterien, die sich vertraglich messen lassen: zugesagte Erreichbarkeit, Reaktions- und Wiederherstellungszeiten,
               Kapazität für Vertretungen, Befugnisse der Objektleitung, dokumentierte Eskalation und die Häufigkeit
               gemeinsamer Qualitätsbegehungen.
             </p>
@@ -365,9 +365,8 @@ export default function FachwissenAnbieterwechsel() {
                 <div>
                   <h3 className="font-headline text-lg font-bold text-navy">Ergebnis des Wechselprojekts</h3>
                   <p className="mt-2 text-sm leading-relaxed text-slate">
-                    Am Ende stehen kein abstraktes Qualitätsversprechen, sondern ein abgestimmtes LV, ein
-                    nachvollziehbarer Angebotsvergleich, ein terminierter Übergabeplan und messbare Kontrollen für
-                    die ersten 30 Tage.
+                    Am Ende liegen ein abgestimmtes LV, ein nachvollziehbarer Angebotsvergleich, ein terminierter
+                    Übergabeplan und messbare Kontrollen für die ersten 30 Tage vor.
                   </p>
                 </div>
               </div>
@@ -381,7 +380,7 @@ export default function FachwissenAnbieterwechsel() {
           <div className="mb-12 text-center">
             <span className="eyebrow justify-center text-brand">Häufige Fragen</span>
             <h2 id="anbieterwechsel-faq" className="mt-4 font-headline text-2xl font-bold text-navy sm:text-3xl lg:text-4xl">
-              FAQs zum Anbieterwechsel
+              Fragen zum Anbieterwechsel
             </h2>
           </div>
           <Accordion items={faqSchema.mainEntity.map((q) => ({ question: q.name, answer: q.acceptedAnswer.text }))} />
@@ -392,7 +391,7 @@ export default function FachwissenAnbieterwechsel() {
 
       <CTABand
         title="Objektaufnahme für den Anbieterwechsel vereinbaren"
-        lead="Bringen Sie vorhandenes Leistungsverzeichnis, Zieltermin und bekannte Qualitätsprobleme mit. Bei der Besichtigung erfassen wir den künftigen Umfang als Grundlage für ein nachvollziehbares Angebot; Vertrags- und Kündigungsfragen bleiben Ihrer rechtlichen Prüfung vorbehalten."
+        lead="Bringen Sie vorhandenes Leistungsverzeichnis, Zieltermin und bekannte Qualitätsprobleme mit. Bei der Besichtigung erfassen wir den künftigen Umfang als Grundlage für das Angebot. Vertrags- und Kündigungsfragen lassen Sie bitte rechtlich prüfen."
       />
     </article>
   );

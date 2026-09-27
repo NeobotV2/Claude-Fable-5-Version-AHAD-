@@ -28,8 +28,8 @@ export default function Guarantee() {
         <SectionHeading
           eyebrow="Das AHAD-Versprechen"
           align="center"
-          title="Vier Zusagen, an denen Sie uns festhalten dürfen."
-          lead="Kein Kleingedrucktes. Wenn etwas nicht stimmt, bessern wir nach — kostenfrei."
+          title="Vier Zusagen, auf die Sie sich berufen können."
+          lead="Wenn etwas nicht stimmt, bessern wir kostenfrei nach."
           className="mb-14 max-w-3xl mx-auto"
         />
 

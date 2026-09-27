@@ -43,11 +43,11 @@ const navLinks: NavItem[] = [
     href: '/leistungen',
     mega: true,
     sublinks: [
-      { name: 'Unterhaltsreinigung', href: '/leistungen/unterhaltsreinigung', description: 'Planbar saubere Büros & Objekte', icon: <LayoutDashboard size={18} /> },
+      { name: 'Unterhaltsreinigung', href: '/leistungen/unterhaltsreinigung', description: 'Büros und Objekte nach festem Plan', icon: <LayoutDashboard size={18} /> },
       { name: 'Industriereinigung', href: '/leistungen/industrie-produktionsreinigung', description: 'Reinigung im laufenden Betrieb', icon: <Factory size={18} /> },
       { name: 'Glas- & Fassadenreinigung', href: '/leistungen/glas-fassadenreinigung', description: 'Werterhalt der Gebäudehülle', icon: <Building2 size={18} /> },
       { name: 'Baureinigung', href: '/leistungen/baureinigung', description: 'Termingerechte Übergaben', icon: <HardHat size={18} /> },
-      { name: 'Medizintechnik & Reinraum', href: '/leistungen/medizintechnik-reinigung', description: 'Dokumentiert & auditfähig', icon: <Microscope size={18} /> },
+      { name: 'Medizintechnik & Reinraum', href: '/leistungen/medizintechnik-reinigung', description: 'Mit Nachweisen für Audits', icon: <Microscope size={18} /> },
       { name: 'Sonderreinigung', href: '/leistungen/sonderreinigung-stillstandsservice', description: 'Grundreinigung & Stillstand', icon: <Sparkles size={18} /> },
       { name: 'Winterdienst & Hausmeister', href: '/leistungen/winterdienst-hausmeisterservice', description: 'Verkehrssicher durchs Jahr', icon: <Snowflake size={18} /> },
       { name: 'Küchenabluftreinigung', href: '/leistungen/kuechenabluftreinigung-vdi-2052', description: 'Nach VDI 2052, mit Nachweis', icon: <Wind size={18} /> },
@@ -526,7 +526,7 @@ export default function Header() {
                                 className="px-4 py-3 text-sm font-bold text-brand-light bg-paper rounded-xl mb-1"
                                 onClick={closeMobileMenuForNavigation}
                               >
-                                {link.name} — Übersicht
+                                {link.name}: Übersicht
                               </Link>
                               {link.sublinks.map((sub) => (
                                 <Link

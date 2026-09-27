@@ -13,18 +13,18 @@ import { JOB_PROFILES } from '@/data/jobs';
 const benefits = [
   {
     icon: <Euro className="w-6 h-6" />,
-    title: 'Transparente Vergütung',
-    text: 'Vergütung, Arbeitszeitmodell und mögliche Zuschläge klären wir vor dem Einsatz verständlich und verbindlich.',
+    title: 'Klare Vergütung',
+    text: 'Vergütung, Arbeitszeitmodell und mögliche Zuschläge besprechen wir vor dem ersten Einsatz verbindlich mit Ihnen.',
   },
   {
     icon: <Clock className="w-6 h-6" />,
     title: 'Planbare Arbeitszeiten',
-    text: 'Feste Objekte und feste Touren statt täglichem Springen — Ihre Zeit ist planbar, auch für die Familie.',
+    text: 'Sie arbeiten in festen Objekten und auf festen Touren. So können Sie Ihre Zeit planen, auch für die Familie.',
   },
   {
     icon: <Users className="w-6 h-6" />,
-    title: 'Echtes Team, feste Objekte',
-    text: 'Sie arbeiten in eingespielten Teams mit fester Objektleitung, die erreichbar ist und Rückendeckung gibt.',
+    title: 'Festes Team, feste Objektleitung',
+    text: 'Sie arbeiten in eingespielten Teams mit einer Objektleitung, die für Sie erreichbar ist und Sie unterstützt.',
   },
   {
     icon: <GraduationCap className="w-6 h-6" />,
@@ -39,7 +39,7 @@ const benefits = [
   {
     icon: <Heart className="w-6 h-6" />,
     title: 'Respekt & Wertschätzung',
-    text: 'Ordentliche Arbeitskleidung, modernes Material und ein Umgang auf Augenhöhe — bei uns Standard.',
+    text: 'Ordentliche Arbeitskleidung, modernes Material und ein respektvoller Umgang miteinander.',
   },
 ];
 
@@ -58,11 +58,11 @@ export default function Karriere() {
           <>
             <span className="block">Arbeit, die{' '}</span>
             <span className="block">
-              <span className="whitespace-nowrap">gesehen wird.</span> Bei uns.
+              <span className="whitespace-nowrap">gesehen wird.</span>
             </span>
           </>
         }
-        lead="Menschen und eingespielte Teams sorgen täglich dafür, dass Betriebe in Süddeutschland sauber laufen. Wir erklären Einsatz, Arbeitszeit und Vergütung vorab transparent."
+        lead="Unsere Teams reinigen täglich Betriebe in Süddeutschland. Einsatzort, Arbeitszeit und Vergütung besprechen wir mit Ihnen vor dem Start."
         image={IMG.karriere}
         crumbs={[{ label: 'Karriere' }]}
         cta={{ label: 'Interesse in vier Schritten senden', to: '/karriere/bewerbung' }}
@@ -83,8 +83,8 @@ export default function Karriere() {
         <div className="max-w-7xl mx-auto px-4 sm:px-8">
           <SectionHeading
             eyebrow="Warum AHAD"
-            title="Sechs Gründe, morgens gern zu starten."
-            lead="Gebäudereinigung hat einen besseren Ruf verdient. Wir fangen bei den Arbeitsbedingungen an."
+            title="Was wir unseren Mitarbeitenden bieten."
+            lead="Gute Arbeit in der Gebäudereinigung setzt faire Arbeitsbedingungen voraus."
             className="mb-14"
           />
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -110,7 +110,7 @@ export default function Karriere() {
             <SectionHeading
               eyebrow="Einsatzprofile"
               title="In diesen Bereichen prüfen wir Bewerbungen."
-              lead="Ob für Ihren Wunschort und Ihr Arbeitsmodell gerade etwas frei ist, klären wir persönlich — melden Sie sich einfach."
+              lead="Ob an Ihrem Wunschort und in Ihrem Arbeitsmodell gerade eine Stelle frei ist, klären wir persönlich mit Ihnen."
             />
             <Reveal delay={0.2} className="mt-8">
               <SmartImage src={IMG.team} alt="Das AHAD Team" className="rounded-3xl aspect-[4/3] shadow-soft" />
@@ -152,7 +152,7 @@ export default function Karriere() {
                   <div>
                     <h3 className="font-headline font-bold text-lg mb-1">Initiativbewerbung</h3>
                     <p className="text-sm text-blue-100/80">
-                      Nichts Passendes dabei? Senden Sie uns Ihr Einsatzinteresse — wir prüfen die Möglichkeiten ohne Zusage einer konkreten Stelle.
+                      Kein passendes Profil dabei? Senden Sie uns Ihr Einsatzinteresse. Wir prüfen die Möglichkeiten, können aber keine konkrete Stelle zusagen.
                     </p>
                   </div>
                   <ButtonLink to="/karriere/bewerbung" variant="white" arrow className="flex-shrink-0">
@@ -176,9 +176,9 @@ export default function Karriere() {
           />
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
             {[
-              { step: '01', title: 'Einstieg & Einarbeitung', text: 'Strukturierter Start mit Patenprinzip — niemand wird ins kalte Wasser geworfen.' },
+              { step: '01', title: 'Einstieg & Einarbeitung', text: 'Einarbeitung nach dem Patenprinzip: Eine erfahrene Kollegin oder ein erfahrener Kollege arbeitet Sie ein.' },
               { step: '02', title: 'Vorarbeiter:in', text: 'Verantwortung für Team und Qualität im Objekt, mit Schulungen und mehr Gehalt.' },
-              { step: '03', title: 'Objektleitung', text: 'Eigene Objekte, Kundenkontakt und Führungsverantwortung — das Karriereziel im System.' },
+              { step: '03', title: 'Objektleitung', text: 'Eigene Objekte, Kundenkontakt und Führungsverantwortung.' },
             ].map((stage, i) => (
               <Reveal key={stage.step} delay={i * 0.12}>
                 <div className="relative bg-paper rounded-3xl border border-line p-8 h-full">

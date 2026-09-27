@@ -23,7 +23,7 @@ export default function FachwissenKosten() {
         name: 'Was kostet Gebäudereinigung pro Stunde?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: 'Einen allgemein gültigen Stundensatz gibt es nicht. Er hängt unter anderem von Leistungsumfang, Arbeitsbedingungen, Zeiten, Material, Maschinen und Betreuung ab. Der Artikel nutzt 34 € ausschließlich als transparente Rechenannahme; dies ist weder Marktangabe noch Preisversprechen.',
+          text: 'Einen allgemein gültigen Stundensatz gibt es nicht. Er hängt unter anderem von Leistungsumfang, Arbeitsbedingungen, Zeiten, Material, Maschinen und Betreuung ab. Die 34 € in diesem Artikel sind eine reine Rechenannahme, weder Marktangabe noch Preisversprechen.',
         },
       },
       {
@@ -47,12 +47,12 @@ export default function FachwissenKosten() {
         name: 'Warum sind sehr billige Reinigungsangebote riskant?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: 'Ein niedriger Preis allein belegt keinen Verstoß. Prüfen Sie stattdessen, ob Leistungsumfang, Zeitansatz, Leistungswert und relevante Nachweise nachvollziehbar sind und ob alle Angebote dieselbe Grundlage verwenden. Rechtliche Haftungsfragen sollten im Einzelfall fachlich geprüft werden.',
+          text: 'Ein niedriger Preis allein belegt keinen Verstoß. Prüfen Sie, ob Leistungsumfang, Zeitansatz, Leistungswert und relevante Nachweise nachvollziehbar sind und ob alle Angebote dieselbe Grundlage verwenden. Rechtliche Haftungsfragen sollten im Einzelfall fachlich geprüft werden.',
         },
       },
       {
         '@type': 'Question',
-        name: 'Festpreis oder Abrechnung nach Stunden — was ist besser?',
+        name: 'Festpreis oder Abrechnung nach Stunden: Was ist besser?',
         acceptedAnswer: {
           '@type': 'Answer',
           text: 'Ein Festpreis kann bei klar definiertem Leistungsverzeichnis Planbarkeit schaffen; Stundenabrechnung kann für noch nicht sicher quantifizierbare Zusatzleistungen sinnvoll sein. Welche Form passt, hängt von Umfang, Änderungsregeln und Risikoverteilung des konkreten Auftrags ab.',
@@ -63,7 +63,7 @@ export default function FachwissenKosten() {
         name: 'Wie bekomme ich einen verbindlichen Preis für mein Objekt?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: 'Über eine Objektbesichtigung: Dabei werden Flächen, Bodenbeläge, Nutzung und gewünschte Intervalle aufgenommen und in einem Leistungsverzeichnis festgehalten. Auf dieser Basis kann anschließend ein belastbares, objektspezifisches Angebot erstellt werden.',
+          text: 'Über eine Objektbesichtigung: Dabei werden Flächen, Bodenbeläge, Nutzung und gewünschte Intervalle aufgenommen und in einem Leistungsverzeichnis festgehalten. Auf dieser Basis wird das verbindliche Angebot für Ihr Objekt erstellt.',
         },
       },
     ],
@@ -84,7 +84,7 @@ export default function FachwissenKosten() {
         titleSize="lg"
         eyebrow="Fachwissen · Kosten & Kalkulation"
         title="Was kostet Gebäudereinigung? Stundensatz, m²-Preise & Beispiele"
-        lead="Wie Kostenbestandteile, Zeitansatz und Leistungswert zusammenwirken — gezeigt an Beispielrechnungen."
+        lead="Wie Kostenbestandteile, Zeitansatz und Leistungswert zusammenwirken, gezeigt an Beispielrechnungen."
         image={IMG.unterhaltDetail}
         imageAlt=""
         crumbs={[
@@ -96,7 +96,7 @@ export default function FachwissenKosten() {
       {/* Auf einen Blick */}
       <section className="border-b border-line bg-white py-12 lg:py-14">
         <div className="mx-auto max-w-7xl px-4 sm:px-8">
-          <h2 className="mb-8 text-center text-2xl font-black text-navy">Reinigungskosten auf einen Blick</h2>
+          <h2 className="mb-8 text-center text-2xl font-black text-navy">Drei Größen für die Kalkulation</h2>
           <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
             <div className="rounded-2xl border border-line bg-paper p-6">
               <Euro className="mb-4 h-8 w-8 text-accent" aria-hidden="true" />
@@ -118,8 +118,8 @@ export default function FachwissenKosten() {
               <Clock className="mb-4 h-8 w-8 text-brand" aria-hidden="true" />
               <h3 className="mb-2 text-lg font-bold text-navy">Zeitansatz &amp; Turnus</h3>
               <p className="text-sm text-slate">
-                Nicht nur der Stundensatz, sondern auch das <strong>Reinigungsintervall</strong>: Eine bedarfsorientierte
-                Taktung verändert den Stundenbedarf, sofern feste Hygiene-, Leistungs- und Qualitätsziele eingehalten
+                Auch das <strong>Reinigungsintervall</strong> bestimmt die Kosten. Eine bedarfsorientierte Taktung
+                verändert den Stundenbedarf, sofern feste Hygiene-, Leistungs- und Qualitätsziele eingehalten
                 und adaptive Leistungen nachvollziehbar gesteuert werden.
               </p>
             </div>
@@ -133,7 +133,7 @@ export default function FachwissenKosten() {
       <section className="bg-white py-16 lg:py-24">
         <div className="mx-auto max-w-3xl px-4 sm:px-8">
           <div className="prose prose-lg max-w-none leading-relaxed text-slate">
-            <h2 id="kostenbestandteile" className="scroll-mt-28 text-2xl font-black text-navy sm:text-3xl">Der Stundensatz: Kostenbestandteile transparent machen</h2>
+            <h2 id="kostenbestandteile" className="scroll-mt-28 text-2xl font-black text-navy sm:text-3xl">Der Stundensatz und seine Kostenbestandteile</h2>
             <p className="mb-6">
               Für die folgenden Formeln verwenden wir <strong>34 € pro Reinigungsstunde als illustrative Annahme</strong>.
               Sie ist weder Marktspanne noch Preisversprechen. Entscheidend ist, welche Leistungen und Kostenbestandteile
@@ -160,7 +160,7 @@ export default function FachwissenKosten() {
                   </tr>
                   <tr className="bg-paper">
                     <th scope="row" className="px-4 py-3 font-semibold text-navy align-top">Ausfallzeiten</th>
-                    <td className="px-4 py-3 align-top">Urlaub, Krankheit und Feiertage werden bezahlt, sind aber nicht produktiv — sie müssen auf die geleisteten Stunden umgelegt werden.</td>
+                    <td className="px-4 py-3 align-top">Urlaub, Krankheit und Feiertage werden bezahlt, sind aber nicht produktiv. Sie müssen auf die geleisteten Stunden umgelegt werden.</td>
                   </tr>
                   <tr>
                     <th scope="row" className="px-4 py-3 font-semibold text-navy align-top">Material &amp; Maschinen</th>
@@ -172,20 +172,20 @@ export default function FachwissenKosten() {
                   </tr>
                   <tr>
                     <th scope="row" className="px-4 py-3 font-semibold text-navy align-top">Verwaltung, Versicherung, Gewinn</th>
-                    <td className="px-4 py-3 align-top">Betriebshaftpflicht, Lohnabrechnung, Disposition — und ein angemessener Unternehmergewinn.</td>
+                    <td className="px-4 py-3 align-top">Betriebshaftpflicht, Lohnabrechnung, Disposition und ein angemessener Unternehmergewinn.</td>
                   </tr>
                 </tbody>
               </table>
             </div>
             <p className="mb-12">
-              Die Aufstellung zeigt, warum ein Stundenpreis nur zusammen mit Leistungsumfang, Zeitansatz und
-              Kostenbestandteilen bewertet werden sollte. Ein Preis allein belegt weder Qualität noch einen Verstoß.
+              Ein Stundenpreis lässt sich deshalb nur zusammen mit Leistungsumfang, Zeitansatz und
+              Kostenbestandteilen bewerten. Ein Preis allein belegt weder Qualität noch einen Verstoß.
             </p>
 
             <h2 id="leistungswert" className="scroll-mt-28 text-2xl font-black text-navy sm:text-3xl">Vom Stundensatz zum m²-Preis: der Leistungswert</h2>
             <p className="mb-6">
-              Der Stundensatz allein sagt wenig über Ihre Kosten — entscheidend ist der{' '}
-              <strong>Leistungswert</strong>: der für eine konkrete Tätigkeit und Fläche angesetzte Quadratmeterumfang
+              Für die Kosten je m² ist neben dem Stundensatz der <strong>Leistungswert</strong> maßgeblich, also
+              der für eine konkrete Tätigkeit und Fläche angesetzte Quadratmeterumfang
               je Arbeitsstunde. Er muss aus Verfahren, Zugänglichkeit, Möblierung, Verschmutzung und Qualitätsziel
               objektbezogen begründet werden. Die folgenden Werte sind ausschließlich hypothetische Eingaben, um die
               Rechenlogik zu zeigen:
@@ -274,7 +274,7 @@ export default function FachwissenKosten() {
             <h2 id="preistreiber" className="scroll-mt-28 text-2xl font-black text-navy sm:text-3xl">Was den Preis nach oben oder unten bewegt</h2>
             <ul className="space-y-4 mb-12 list-none pl-0">
               {[
-                'Reinigungsintervall: bedarfsorientierte statt starre Taktung kann Stunden reduzieren, wenn Hygiene- und Qualitätsziele eingehalten werden.',
+                'Reinigungsintervall: Eine bedarfsorientierte Taktung kann gegenüber einem festen Turnus Stunden reduzieren, wenn Hygiene- und Qualitätsziele eingehalten werden.',
                 'Sanitäranteil: kleinteilige Ausstattung, definierte Hygieneschritte und Verbrauchsmaterial können den Zeitansatz erhöhen.',
                 'Möblierungsgrad & Bodenbelag: Teppich, viele Arbeitsplätze und Hindernisse senken den Leistungswert.',
                 'Reinigungszeiten: Randzeiten mit Zuschlägen vs. Tagdienst im laufenden Betrieb.',
@@ -317,19 +317,19 @@ export default function FachwissenKosten() {
             <p className="mb-8">
               Die gesetzliche beziehungsweise tarifliche Lohnuntergrenze ist nur ein Baustein. Unterschiede entstehen
               unter anderem durch Flächenzuschnitt, Rüst- und Wegezeiten, Zutrittsregeln, Schicht- oder Randzeiten,
-              Maschinen- und Materialbedarf, Vertretungsorganisation, gewünschte Qualitätskontrollen sowie klar
+              Maschinen- und Materialbedarf, Vertretungsorganisation, gewünschte Qualitätskontrollen sowie
               abgegrenzte Sonderleistungen. Vergleichbar werden Angebote daher erst, wenn alle Anbieter dieselben
               Objektdaten, Leistungen, Turnusse und Qualitätsziele kalkulieren.
             </p>
 
             <h2 className="text-2xl font-black text-navy sm:text-3xl">Fazit</h2>
             <p className="mb-8">
-              Eine belastbare Kalkulation verbindet Kostenbestandteile, Leistungswert und das passende{' '}
+              Eine nachvollziehbare Kalkulation verbindet Kostenbestandteile, Leistungswert und das passende{' '}
               <Link to="/fachwissen/unterhaltsreinigung-unternehmen-reinigungsintervalle" className="font-bold text-brand hover:underline">
                 Reinigungsintervall
               </Link>
               . Wer Angebote auf derselben Leistungsgrundlage vergleicht, kann Zeitansätze, Leistungswerte und
-              enthaltene Kostenbestandteile gezielt auf Plausibilität prüfen.
+              enthaltene Kostenbestandteile auf Plausibilität prüfen.
             </p>
           </div>
         </div>
@@ -350,7 +350,7 @@ export default function FachwissenKosten() {
 
       <CTABand
         title="Was kostet die Reinigung Ihres Objekts?"
-        lead="Objektbesichtigung nach Abstimmung, belastbares Angebot auf Basis des vereinbarten Leistungsumfangs — transparent und nachvollziehbar kalkuliert."
+        lead="Wir besichtigen Ihr Objekt nach Absprache und kalkulieren das Angebot nachvollziehbar auf Basis des vereinbarten Leistungsumfangs."
       />
     </article>
   );

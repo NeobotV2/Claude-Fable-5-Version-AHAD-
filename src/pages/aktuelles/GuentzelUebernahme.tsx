@@ -96,7 +96,7 @@ export default function AktuellesGuentzelUebernahme() {
               und der Winterdienst für die kommende Saison ist gesichert.“
             </blockquote>
             <figcaption className="mt-4 text-sm text-slate">
-              <span className="font-bold text-navy">Muhammet Ali Yerlikaya</span> — Prokurist und
+              <span className="font-bold text-navy">Muhammet Ali Yerlikaya</span>, Prokurist und
               Vertriebsleiter, AHAD Cleaning Company GmbH
             </figcaption>
           </figure>
@@ -146,7 +146,7 @@ export default function AktuellesGuentzelUebernahme() {
               positiv in die Zukunft schauen.“
             </blockquote>
             <figcaption className="mt-4 text-sm text-slate">
-              <span className="font-bold text-navy">Rechtsanwalt Stefano Buck</span> — Insolvenzverwalter,
+              <span className="font-bold text-navy">Rechtsanwalt Stefano Buck</span>, Insolvenzverwalter,
               Schultze &amp; Braun
             </figcaption>
           </figure>
@@ -218,7 +218,7 @@ export default function AktuellesGuentzelUebernahme() {
 
       <CTABand
         title="Fragen zu Ihrem Objekt?"
-        lead="Wir melden uns persönlich und klären den nächsten Schritt — ohne Ticketsystem, ohne Warteschleife."
+        lead="Wir melden uns persönlich bei Ihnen und klären den nächsten Schritt."
       />
     </div>
   );

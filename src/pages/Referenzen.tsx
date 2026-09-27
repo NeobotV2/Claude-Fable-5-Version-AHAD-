@@ -25,7 +25,7 @@ const REFERENZ_PRINZIPIEN = [
   {
     icon: FileCheck2,
     title: 'Nachweise aus dem laufenden Betrieb',
-    text: 'Leistungsverzeichnis, Prüfprotokolle und Qualitätsdokumentation zeigen wir bei der Besichtigung anonymisiert – so sehen Sie, wie wir arbeiten, nicht nur, für wen.',
+    text: 'Bei der Besichtigung zeigen wir Ihnen anonymisierte Leistungsverzeichnisse, Prüfprotokolle und Qualitätsdokumentation aus laufenden Objekten.',
   },
 ];
 
@@ -42,14 +42,14 @@ export default function Referenzen() {
         eyebrow="Referenzen"
         title={
           <>
-            <span className="block">Vertrauen wird verdient.{' '}</span>
-            <span className="block">Täglich.</span>
+            <span className="block">Für wen{' '}</span>
+            <span className="block">wir arbeiten.</span>
           </>
         }
-        lead="Auftraggeber aus Industrie, Verwaltung und Mittelstand — und was sie über die Zusammenarbeit sagen."
+        lead="Auftraggeber aus Industrie, Verwaltung und Mittelstand und was sie über die Zusammenarbeit mit uns sagen."
         image={IMG.handshake}
         crumbs={[{ label: 'Referenzen' }]}
-        cta={{ label: 'Referenzkunde werden', to: '/angebot' }}
+        cta={{ label: 'Angebot anfordern', to: '/angebot' }}
       />
 
       {/* Referenz-Wand — echte Kundenlogos, einheitlich normiert (nur mit Logo) */}
@@ -57,8 +57,8 @@ export default function Referenzen() {
         <div className="max-w-7xl mx-auto px-4 sm:px-8">
           <SectionHeading
             eyebrow="Auswahl betreuter Auftraggeber"
-            title="Auftraggeber, die nicht mehr nachfassen müssen."
-            lead="Vom regionalen Mittelständler bis zum internationalen Konzern — maßgeschneiderte Reinigungskonzepte für jeden Anspruch."
+            title="Unternehmen, die wir betreuen."
+            lead="Vom regionalen Mittelständler bis zum internationalen Konzern, jeweils mit einem eigenen Reinigungskonzept für das Objekt."
             className="mb-14"
           />
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
@@ -97,7 +97,7 @@ export default function Referenzen() {
           <SectionHeading
             eyebrow="Weiter prüfen"
             title="Referenzen, die Sie selbst prüfen können."
-            lead="Logos und Zitate sind der Anfang. Wer genauer hinsehen will, bekommt ein Gespräch mit einem Bestandskunden und Einblick in unsere Dokumentation."
+            lead="Auf Wunsch vermitteln wir Ihnen ein Gespräch mit einem Bestandskunden und zeigen Ihnen unsere Dokumentation."
             className="mb-12"
           />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -121,8 +121,8 @@ export default function Referenzen() {
         <div className="max-w-7xl mx-auto px-4 sm:px-8">
           <SectionHeading
             eyebrow="Einsatzfelder"
-            title="Branchen, in denen wir täglich arbeiten."
-            lead="Jede Branche hat eigene Anforderungen an Hygiene, Nachweise und Ablauf. Die Branchenseiten zeigen, wie unser System dort konkret greift."
+            title="Branchen, in denen wir arbeiten."
+            lead="Jede Branche hat eigene Anforderungen an Hygiene, Nachweise und Ablauf. Auf den Branchenseiten beschreiben wir, wie wir dort vorgehen."
             className="mb-10"
           />
           <ul className="flex flex-wrap gap-3">
@@ -146,8 +146,8 @@ export default function Referenzen() {
       </section>
 
       <CTABand
-        title="Werden Sie unsere nächste Referenz"
-        lead="Lassen Sie uns gemeinsam ein Reinigungskonzept entwickeln, das Sie weiterempfehlen werden."
+        title="Angebot für Ihr Objekt anfordern"
+        lead="Wir besichtigen Ihr Objekt und erstellen daraus ein Reinigungskonzept."
       />
     </div>
   );

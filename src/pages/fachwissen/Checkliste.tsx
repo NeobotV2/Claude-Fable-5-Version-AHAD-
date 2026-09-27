@@ -17,7 +17,7 @@ const GRUPPEN = [
     id: 'objektdaten',
     titel: '1. Objektdaten bereitlegen',
     punkte: [
-      'Flächen in m² — grob je Nutzungsart (Büro, Sanitär, Verkehrsflächen, Küche, Lager)',
+      'Flächen in m², grob je Nutzungsart (Büro, Sanitär, Verkehrsflächen, Küche, Lager)',
       'Bodenbeläge (Hartboden, Teppich, Naturstein …)',
       'Nutzungszeiten / Schichtbetrieb und gewünschte Reinigungszeiten',
       'Besonderheiten: Zugangsregelung, Alarmanlage, sensible Bereiche',
@@ -30,7 +30,7 @@ const GRUPPEN = [
       'Welche Bereiche sollen wie oft gereinigt werden? (täglich / wöchentlich / nach Bedarf)',
       'Hygienekritische Zonen (Sanitär, Küche) separat festhalten',
       'Zusatzleistungen: Glasreinigung, Grundreinigung, Winterdienst, Verbrauchsmaterial',
-      'Gibt es ein bestehendes Leistungsverzeichnis? (An alle Bieter identisch versenden!)',
+      'Bestehendes Leistungsverzeichnis vorhanden? An alle Bieter identisch versenden.',
     ],
   },
   {
@@ -40,7 +40,7 @@ const GRUPPEN = [
       'Liegt jedem Angebot dasselbe Leistungsverzeichnis zugrunde?',
       'Stundenverrechnungssatz und seine Kostenbestandteile nachvollziehbar ausgewiesen?',
       'Leistungswerte mit Objekt, Tätigkeit, Verfahren und Qualitätsziel begründet?',
-      'Festpreis mit definiertem Umfang statt Pauschale ohne Inhalt?',
+      'Bei Festpreis: Ist der enthaltene Leistungsumfang definiert?',
     ],
   },
   {
@@ -75,7 +75,7 @@ export default function FachwissenCheckliste() {
       <SEO
         ogType="article"
         title="Checkliste: Reinigungsangebot vergleichen | AHAD"
-        description="Kostenlose Checkliste für Objektverantwortliche: Daten bereitlegen, Angebote vergleichbar machen und seriöse Reinigungsanbieter erkennen — druckbar."
+        description="Kostenlose, druckbare Checkliste für Objektverantwortliche: Objektdaten bereitlegen, Angebote vergleichbar machen und Reinigungsanbieter prüfen."
         keywords="Checkliste Reinigungsangebot, Gebäudereinigung Angebot einholen, Reinigungsfirma vergleichen, Ausschreibung Reinigung Checkliste, AHAD Cleaning"
         schema={schema}
       />
@@ -86,7 +86,7 @@ export default function FachwissenCheckliste() {
           titleSize="lg"
           eyebrow="Fachwissen · Arbeitshilfe"
           title="Die Angebots-Checkliste für Objektverantwortliche"
-          lead="In 5 Schritten zum vergleichbaren, belastbaren Reinigungsangebot — bereitlegen, abhaken, ausschreiben. Druckbar oder als PDF speicherbar."
+          lead="5 Schritte von den Objektdaten bis zur Vertragsregelung, dazu eine Bietermatrix für bis zu drei Angebote. Zum Ausdrucken oder als PDF."
           crumbs={[{ label: 'Fachwissen', href: '/fachwissen' }, { label: 'Angebots-Checkliste' }]}
         />
       </div>
@@ -103,7 +103,7 @@ export default function FachwissenCheckliste() {
           {/* Druck-Aktion */}
           <div className="print:hidden flex flex-col sm:flex-row items-center justify-between gap-4 bg-paper border border-line rounded-2xl p-5 mb-10">
             <p className="text-sm text-slate font-medium">
-              <strong className="text-navy">Tipp:</strong> Über „Drucken" können Sie die Checkliste auch direkt{' '}
+              <strong className="text-navy">Tipp:</strong> Über „Drucken“ können Sie die Checkliste auch direkt{' '}
               <strong className="text-navy">als PDF speichern</strong>.
             </p>
             <button
@@ -180,7 +180,7 @@ export default function FachwissenCheckliste() {
 
           <section aria-labelledby="bietermatrix-titel" className="mt-12 print:break-inside-avoid">
             <h2 id="bietermatrix-titel" className="mb-3 font-headline text-xl font-bold text-navy">
-              Kompakte Bietermatrix
+              Bietermatrix
             </h2>
             <p className="mb-5 text-sm leading-relaxed text-slate">
               Tragen Sie nur Angebote ein, die auf demselben Stand des Leistungsverzeichnisses beruhen. Abweichungen,
@@ -258,9 +258,9 @@ export default function FachwissenCheckliste() {
           </section>
 
           <div className="print:hidden mt-12 bg-navy rounded-3xl p-8 text-white">
-            <h2 className="font-headline text-xl font-bold mb-2">Anforderungen vollständig geprüft?</h2>
+            <h2 className="font-headline text-xl font-bold mb-2">Von der Checkliste zur Anfrage</h2>
             <p className="text-blue-100/90 text-sm leading-relaxed mb-6">
-              Übertragen Sie die geprüften Objektdaten und Leistungsanforderungen in die Anfrage. Wie ein belastbares
+              Übertragen Sie die geprüften Objektdaten und Leistungsanforderungen in die Anfrage. Wie ein
               Leistungsverzeichnis aufgebaut wird, zeigt unser{' '}
               <Link to="/fachwissen/leistungsverzeichnis-gebaeudereinigung-erstellen" className="underline font-semibold hover:text-mint">
                 LV-Leitfaden
@@ -292,8 +292,8 @@ export default function FachwissenCheckliste() {
 
       <div className="print:hidden">
         <CTABand
-          title="Nächster Schritt: Anforderungen objektbezogen prüfen"
-          lead="Auf Basis Ihrer Angaben klären wir offene Punkte bei der Besichtigung und grenzen den angebotenen Leistungsumfang nachvollziehbar ab."
+          title="Anforderungen am Objekt prüfen"
+          lead="Bei der Besichtigung klären wir mit Ihren Angaben die offenen Punkte und legen fest, welcher Leistungsumfang im Angebot enthalten ist."
         />
       </div>
     </article>

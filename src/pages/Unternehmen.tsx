@@ -16,17 +16,17 @@ const values = [
   {
     icon: <Target className="w-6 h-6" />,
     title: 'Verbindlichkeit',
-    text: 'Wir stimmen Leistungen, Zuständigkeiten und Termine transparent ab und halten Vereinbarungen nachvollziehbar fest.',
+    text: 'Wir stimmen Leistungen, Zuständigkeiten und Termine mit Ihnen ab und halten Vereinbarungen nachvollziehbar fest.',
   },
   {
     icon: <ShieldCheck className="w-6 h-6" />,
     title: 'Nachweisbarkeit',
-    text: 'Wir dokumentieren, was wir leisten. Qualität, die man nicht belegen kann, zählt für uns nicht.',
+    text: 'Wir dokumentieren, was wir leisten, damit sich jede Leistung und jede Kontrolle belegen lässt.',
   },
   {
     icon: <Handshake className="w-6 h-6" />,
     title: 'Partnerschaft',
-    text: 'Faire Verträge ohne Knebel, feste Ansprechpartner und ein Umgang auf Augenhöhe — mit Kunden wie Mitarbeitenden.',
+    text: 'Faire Verträge ohne Knebelklauseln, feste Ansprechpartner und ein respektvoller Umgang mit Kunden und Mitarbeitenden.',
   },
   {
     icon: <Leaf className="w-6 h-6" />,
@@ -36,9 +36,9 @@ const values = [
 ];
 
 const milestones = [
-  { year: '2015', text: 'Start als regionaler Reinigungsdienst im Schwarzwald-Baar-Kreis — mit dem Anspruch, es besser zu machen.' },
+  { year: '2015', text: 'Start als regionaler Reinigungsdienst im Schwarzwald-Baar-Kreis.' },
   { year: 'Wachstum', text: 'Ausbau des Einsatzgebiets für gewerbliche Kunden in Süddeutschland.' },
-  { year: 'System', text: 'Entwicklung des AHAD-Systems: Analyse, Handling, Audit, Dokumentation als verbindlicher Standard.' },
+  { year: 'System', text: 'Entwicklung des AHAD-Systems mit den Schritten Analyse, Handling, Audit und Dokumentation als festem Ablauf.' },
   {
     year: 'September 2026',
     text: 'Übernahme des Geschäftsbetriebs von Güntzel Objekt-Service aus Villingen-Schwenningen. Alle rund 25 Mitarbeitenden wurden übernommen, der Name Güntzel bleibt.',
@@ -51,7 +51,7 @@ export default function Unternehmen() {
     <div>
       <SEO
         title="Über uns: Das Unternehmen | AHAD Cleaning"
-        description="AHAD Cleaning ist Ihr Partner für systematische Gebäudereinigung in Süddeutschland — mit klaren Abläufen und persönlicher Betreuung."
+        description="AHAD Cleaning aus Villingen-Schwenningen: inhabergeführte Gebäudereinigung für Gewerbekunden in Süddeutschland, mit festen Abläufen und persönlicher Betreuung."
         keywords="AHAD Cleaning Unternehmen, Gebäudereinigung Firma Villingen-Schwenningen, Reinigungsunternehmen Süddeutschland"
       />
 
@@ -63,7 +63,7 @@ export default function Unternehmen() {
             <span className="block">die Wort halten.</span>
           </>
         }
-        lead="AHAD Cleaning ist ein inhabergeführtes Gebäudedienstleistungsunternehmen aus Villingen-Schwenningen. Unser Antrieb: Reinigung so verlässlich machen, dass Sie nie wieder darüber nachdenken müssen."
+        lead="AHAD Cleaning ist ein inhabergeführtes Gebäudedienstleistungsunternehmen aus Villingen-Schwenningen. Wir organisieren die Reinigung Ihrer Gebäude so, dass Sie sich nicht selbst darum kümmern müssen."
         image={IMG.team}
         crumbs={[{ label: 'Unternehmen' }]}
         cta={{ label: 'Mit uns arbeiten', to: '/angebot' }}
@@ -88,7 +88,7 @@ export default function Unternehmen() {
             <SectionHeading
               eyebrow="Unsere Geschichte"
               title="Vom regionalen Dienstleister zum System-Anbieter."
-              lead="Was als kleiner Reinigungsbetrieb begann, ist heute ein strukturiertes Unternehmen mit eigenem Qualitätssystem — gewachsen durch Empfehlungen, nicht durch Versprechen."
+              lead="Wir haben als kleiner Reinigungsbetrieb angefangen und sind vor allem durch Empfehlungen unserer Kunden gewachsen."
             />
             <div className="mt-10 space-y-6">
               {milestones.map((milestone, i) => (
@@ -180,11 +180,10 @@ export default function Unternehmen() {
               <div className="absolute inset-0 blueprint-grid" />
               <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
                 <div>
-                  <span className="eyebrow text-mint mb-4">Werden Sie Teil davon</span>
-                  <h2 className="display-md text-white mb-4">Menschen, die Qualität ernst nehmen, passen zu uns.</h2>
+                  <span className="eyebrow text-mint mb-4">Karriere</span>
+                  <h2 className="display-md text-white mb-4">Wir suchen Kolleginnen und Kollegen, die sorgfältig arbeiten.</h2>
                   <p className="text-blue-100/85 font-medium">
-                    Ob Reinigungskraft, Vorarbeiter:in oder Objektleitung: Wir wachsen — und suchen Kolleginnen und
-                    Kollegen mit Anspruch.
+                    Wir stellen Reinigungskräfte, Vorarbeiter:innen und Objektleitungen ein.
                   </p>
                 </div>
                 <div className="flex flex-col sm:flex-row lg:justify-end gap-4">

@@ -60,7 +60,7 @@ export default function FachwissenISO() {
       <SEO
         ogType="article"
         title="ISO 9001 & ISO 14001 bei Reinigungsfirmen prüfen | AHAD"
-        description="Was ISO-9001- und ISO-14001-Zertifikate belegen, wo ihre Grenzen liegen und wie Einkauf und Facility Management Zertifikat, Scope und Objektnachweise prüfen."
+        description="Was ISO-9001- und ISO-14001-Zertifikate belegen, wo ihre Grenzen liegen und wie Einkauf und FM Zertifikat, Geltungsbereich und Objektnachweise prüfen."
         keywords="ISO 9001 Gebäudereinigung, ISO 14001 Reinigung, Zertifikat prüfen, Qualitätsmanagement Reinigung, Umweltmanagement Gebäudereinigung"
         schema={[articleSchema, faqSchema]}
       />
@@ -69,7 +69,7 @@ export default function FachwissenISO() {
         compact
         titleSize="lg"
         eyebrow="Fachwissen · Qualität & Compliance"
-        title="ISO 9001 und ISO 14001: Was Zertifikate wirklich belegen"
+        title="ISO 9001 und ISO 14001: Was Zertifikate belegen"
         lead="Ein Zertifikat bewertet ein Managementsystem im angegebenen Geltungsbereich. Für die Auswahl eines Reinigungsdienstleisters müssen Auftraggeber zusätzlich prüfen, wie die Anforderungen im konkreten Objekt umgesetzt und nachgewiesen werden."
         image={IMG.medizintechnik}
         imageAlt="Dokumentierte Qualitätskontrolle in einem sensiblen Reinigungsbereich"
@@ -91,8 +91,7 @@ export default function FachwissenISO() {
               ausgewiesenen Geltungsbereichs bewertet hat.
             </p>
             <p>
-              Das ist für Auftraggeber ein nützlicher Systemnachweis, aber kein Gütesiegel für jedes einzelne
-              Reinigungsergebnis. Ob die vereinbarte Leistung in einem konkreten Büro, einer Produktion oder einem
+              Für Auftraggeber ist das ein nützlicher Systemnachweis. Ob die vereinbarte Leistung in einem konkreten Büro, einer Produktion oder einem
               sensiblen Bereich erreicht wird, zeigen erst objektbezogene Vorgaben und Nachweise: Leistungsverzeichnis,
               Kontrollplan, Prüfergebnisse, Abweichungen und Korrekturmaßnahmen.
             </p>
@@ -101,10 +100,10 @@ export default function FachwissenISO() {
               <div className="flex items-start gap-4">
                 <ShieldCheck className="mt-0.5 h-7 w-7 shrink-0 text-brand" aria-hidden="true" />
                 <div>
-                  <h3 className="font-headline text-xl font-bold text-navy">Die entscheidende Prüffrage</h3>
+                  <h3 className="font-headline text-xl font-bold text-navy">Zwei Fragen an jedes Zertifikat</h3>
                   <p className="mt-2 text-sm leading-relaxed text-slate sm:text-base">
-                    Nicht nur: „Gibt es ein Zertifikat?“, sondern: „Deckt sein Scope unsere Leistung ab – und mit
-                    welchen objektbezogenen Kontrollen wird das System in unserem Auftrag wirksam?“
+                    Deckt der Geltungsbereich unsere Leistung ab? Mit welchen Kontrollen im Objekt wird das System in
+                    unserem Auftrag wirksam?
                   </p>
                 </div>
               </div>
@@ -116,7 +115,7 @@ export default function FachwissenISO() {
             <p>
               ISO 9001 und ISO 14001 sind Managementsystemnormen mit unterschiedlichen Schwerpunkten. Die seit April
               2026 veröffentlichte <strong>ISO 14001:2026</strong> betrifft Umweltmanagement. Auch sie schreibt nicht
-              automatisch ein bestimmtes Reinigungsmittel, Dosiersystem oder Verbrauchsergebnis vor. Entscheidend sind
+              automatisch ein bestimmtes Reinigungsmittel, Dosiersystem oder Verbrauchsergebnis vor. Maßgeblich sind
               die im System bewerteten Umweltaspekte, Ziele, Maßnahmen und messbaren Ergebnisse.
             </p>
 
@@ -145,8 +144,8 @@ export default function FachwissenISO() {
                   </tr>
                   <tr className="bg-paper">
                     <th scope="row" className="px-5 py-4 font-bold text-navy">Zertifikat unterstützt</th>
-                    <td className="px-5 py-4">Einordnung definierter Prozesse und Verantwortlichkeiten im Scope</td>
-                    <td className="px-5 py-4">Einordnung des systematischen Umgangs mit relevanten Umweltaspekten im Scope</td>
+                    <td className="px-5 py-4">Einordnung definierter Prozesse und Verantwortlichkeiten im Geltungsbereich</td>
+                    <td className="px-5 py-4">Einordnung des Umgangs mit relevanten Umweltaspekten im Geltungsbereich</td>
                   </tr>
                   <tr>
                     <th scope="row" className="px-5 py-4 font-bold text-navy">Belegt nicht automatisch</th>
@@ -163,12 +162,12 @@ export default function FachwissenISO() {
             </div>
 
             <h2 id="beschaffung" className="scroll-mt-28 font-headline text-2xl font-bold text-navy sm:text-3xl">
-              Zertifikate in der Beschaffung sinnvoll nutzen
+              Zertifikate in der Beschaffung nutzen
             </h2>
             <p>
-              Für eine belastbare Anbieterbewertung sollten System- und Objektnachweise getrennt betrachtet werden.
-              Erst ihr Zusammenspiel beantwortet, ob der Dienstleister die ausgeschriebene Leistung nachvollziehbar
-              steuern und die vereinbarte Qualität im Objekt nachweisen kann.
+              Bei der Anbieterbewertung sollten System- und Objektnachweise getrennt betrachtet werden. Erst beide
+              zusammen zeigen, ob der Dienstleister die ausgeschriebene Leistung steuern und die vereinbarte Qualität
+              im Objekt nachweisen kann.
             </p>
 
             <div
@@ -191,12 +190,12 @@ export default function FachwissenISO() {
                 <tbody className="divide-y divide-line text-slate">
                   <tr>
                     <th scope="row" className="px-5 py-4 font-bold text-navy">ISO-9001-Zertifikat</th>
-                    <td className="px-5 py-4">Geprüftem Qualitätsmanagementsystem im genannten Scope</td>
+                    <td className="px-5 py-4">Geprüftem Qualitätsmanagementsystem im genannten Geltungsbereich</td>
                     <td className="px-5 py-4">Qualität jedes einzelnen Reinigungsergebnisses</td>
                   </tr>
                   <tr className="bg-paper">
                     <th scope="row" className="px-5 py-4 font-bold text-navy">ISO-14001-Zertifikat</th>
-                    <td className="px-5 py-4">Geprüftem Umweltmanagementsystem im genannten Scope</td>
+                    <td className="px-5 py-4">Geprüftem Umweltmanagementsystem im genannten Geltungsbereich</td>
                     <td className="px-5 py-4">Bestimmtem Produkt oder messbarer Reduktion im Auftrag</td>
                   </tr>
                   <tr>
@@ -211,7 +210,7 @@ export default function FachwissenISO() {
                   </tr>
                   <tr>
                     <th scope="row" className="px-5 py-4 font-bold text-navy">Verbrauchs- und Umweltdaten</th>
-                    <td className="px-5 py-4">Messwerten innerhalb einer klar definierten Systemgrenze</td>
+                    <td className="px-5 py-4">Messwerten innerhalb einer definierten Systemgrenze</td>
                     <td className="px-5 py-4">Dass eine Veränderung allein durch die Zertifizierung verursacht wurde</td>
                   </tr>
                 </tbody>
@@ -247,8 +246,8 @@ export default function FachwissenISO() {
               Zertifikat und Objektumsetzung in sieben Schritten prüfen
             </h2>
             <p>
-              Die Prüfung beginnt beim Dokument, endet aber erst bei der Umsetzung im Objekt. Offene Punkte sollten
-              nicht durch Vermutungen ersetzt, sondern vor Beauftragung geklärt und vertraglich festgehalten werden.
+              Die Prüfung beginnt beim Dokument und endet bei der Umsetzung im Objekt. Offene Punkte sollten vor der
+              Beauftragung geklärt und vertraglich festgehalten werden.
             </p>
 
             <ol className="not-prose my-10 grid gap-4 sm:grid-cols-2">
@@ -256,8 +255,8 @@ export default function FachwissenISO() {
                 ['Organisation abgleichen', 'Firmenname, Rechtsform und die für den Auftrag relevanten Standorte mit dem Angebot vergleichen.'],
                 ['Norm und Ausgabe lesen', 'Angegebene Normausgabe prüfen; bei Abweichungen Gültigkeit oder Übergangsregeln direkt klären.'],
                 ['Gültigkeit prüfen', 'Zertifikatsnummer, Ausstellungs- und Ablaufdatum sowie aktuellen Zertifikatsstatus kontrollieren.'],
-                ['Geltungsbereich lesen', 'Prüfen, ob der Scope die relevante Reinigungsleistung und Organisationseinheit tatsächlich umfasst.'],
-                ['Stelle und Akkreditierung prüfen', 'Zertifizierungsstelle und deren Akkreditierung nachvollziehen, statt nur ein Logo zu bewerten.'],
+                ['Geltungsbereich lesen', 'Prüfen, ob der Geltungsbereich die relevante Reinigungsleistung und Organisationseinheit umfasst.'],
+                ['Stelle und Akkreditierung prüfen', 'Zertifizierungsstelle und deren Akkreditierung nachvollziehen. Ein Logo auf dem Dokument genügt nicht.'],
                 ['Objektumsetzung belegen', 'LV, Kontrollplan, Zuständigkeiten, Abweichungs- und Korrekturprozess für das konkrete Objekt anfordern.'],
                 ['Lücken vertraglich schließen', 'Fehlende Nachweise, Berichte, Kennzahlen und Prüftermine eindeutig vereinbaren.'],
               ].map(([title, text], index) => (
@@ -281,9 +280,9 @@ export default function FachwissenISO() {
                 <div>
                   <h3 className="font-headline text-xl font-bold">Fazit für die Auswahl</h3>
                   <p className="mt-2 text-sm leading-relaxed text-blue-100 sm:text-base">
-                    Ein passender, gültiger Scope ist ein sinnvoller Systemnachweis. Die Vergabeentscheidung sollte
-                    zusätzlich auf der konkreten Leistungsbeschreibung, dem Kontrollkonzept und belastbaren
-                    Objektnachweisen beruhen.
+                    Ein gültiges Zertifikat mit passendem Geltungsbereich ist ein sinnvoller Systemnachweis. Die
+                    Vergabeentscheidung sollte zusätzlich auf der konkreten Leistungsbeschreibung, dem Kontrollkonzept
+                    und den Nachweisen aus dem Objekt beruhen.
                   </p>
                 </div>
               </div>
@@ -307,7 +306,7 @@ export default function FachwissenISO() {
       <ArticleFooter slug={SLUG} />
 
       <CTABand
-        title="Zertifikate und Objektnachweise sauber abgleichen"
+        title="Zertifikate und Objektnachweise abgleichen"
         lead="Wir klären mit Ihnen, welche Qualitäts- und Umweltnachweise für Ihr Objekt relevant sind und wie sie in Leistungsverzeichnis, Kontrolle und Dokumentation übersetzt werden."
       />
     </article>
