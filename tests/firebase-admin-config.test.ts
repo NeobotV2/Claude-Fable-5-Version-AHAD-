@@ -37,10 +37,15 @@ test('service-account JSON takes precedence and its project_id wins over FIREBAS
 });
 
 test('broken JSON fails with a fixed message that does not echo the secret', () => {
-  assert.throws(
-    () => serviceAccountFromEnvironment({ FIREBASE_SERVICE_ACCOUNT_JSON: '{"private_key": "geheim' }),
-    (error: unknown) => error instanceof StorageNotConfiguredError && !error.message.includes('geheim'),
-  );
+  for (const input of ['{"private_key": "geheim', '{"private_key": geheimSECRET}']) {
+    // Gegenprobe: Der rohe Parser-Fehler zitiert den Wert zumindest für die zweite Eingabe.
+    if (input.endsWith('}')) assert.throws(() => JSON.parse(input), /geheim/);
+    assert.throws(
+      () => serviceAccountFromEnvironment({ FIREBASE_SERVICE_ACCOUNT_JSON: input }),
+      (error: unknown) =>
+        error instanceof StorageNotConfiguredError && error.message === 'FIREBASE_SERVICE_ACCOUNT_JSON ist kein gültiges JSON.',
+    );
+  }
 });
 
 test('JSON without key material is rejected', () => {

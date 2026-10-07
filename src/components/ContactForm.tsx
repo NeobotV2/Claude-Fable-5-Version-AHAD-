@@ -35,6 +35,7 @@ export default function ContactForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
+  const [submitErrorCode, setSubmitErrorCode] = useState<string | null>(null);
   const [contactError, setContactError] = useState('');
   const [honeypot, setHoneypot] = useState('');
   const [formData, setFormData] = useState({ ...INITIAL_FORM });
@@ -75,6 +76,7 @@ export default function ContactForm() {
   const resetForm = () => {
     setIsSuccess(false);
     setSubmitError(null);
+    setSubmitErrorCode(null);
     setContactError('');
     setFormData({ ...INITIAL_FORM });
     setHoneypot('');
@@ -92,6 +94,7 @@ export default function ContactForm() {
     }
     setContactError('');
     setSubmitError(null);
+    setSubmitErrorCode(null);
     setIsSubmitting(true);
 
     const result = await submitLead({
@@ -118,7 +121,8 @@ export default function ContactForm() {
       trackEvent('Contact Form Validation Error', { field: Object.keys(result.fields)[0] ?? 'unknown' });
       return;
     }
-    setSubmitError(`${result.message} (Fehlercode: ${result.code})`);
+    setSubmitError(result.message);
+    setSubmitErrorCode(result.code);
     trackEvent('Contact Form Error', { service: formData.serviceType, kind: result.kind });
   };
 
@@ -174,7 +178,7 @@ export default function ContactForm() {
         </Link>.
       </p>
 
-      {submitError && <div role="alert" className="flex items-start gap-3 bg-red-50 border border-red-200 text-red-800 text-sm font-medium rounded-xl p-4"><Phone size={16} className="shrink-0 mt-0.5" /><span>{submitError} <a href={SITE.phoneHref} className="font-bold underline">{SITE.phone}</a></span></div>}
+      {submitError && <div role="alert" className="flex items-start gap-3 bg-red-50 border border-red-200 text-red-800 text-sm font-medium rounded-xl p-4"><Phone size={16} className="shrink-0 mt-0.5" /><span>{submitError} <a href={SITE.phoneHref} className="font-bold underline">{SITE.phone}</a>{submitErrorCode && <span className="block mt-1 text-xs">Fehlercode: {submitErrorCode}</span>}</span></div>}
 
       <button type="submit" disabled={isSubmitting} className="group w-full inline-flex items-center justify-center gap-2 bg-accent text-white px-8 py-4 rounded-xl font-bold text-[15px] hover:bg-accent-dark focus-visible:ring-4 focus-visible:ring-accent/40 disabled:opacity-60">
         {isSubmitting ? <><Loader2 size={18} className="animate-spin" /> Wird übermittelt</> : <>Nachricht senden <Send size={17} /></>}

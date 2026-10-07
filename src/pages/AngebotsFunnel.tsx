@@ -206,6 +206,7 @@ export default function AngebotsFunnel() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
+  const [submitErrorCode, setSubmitErrorCode] = useState<string | null>(null);
   const [contactError, setContactError] = useState('');
   const [honeypot, setHoneypot] = useState('');
   const cardRef = useRef<HTMLDivElement>(null);
@@ -294,6 +295,7 @@ export default function AngebotsFunnel() {
 
     setContactError('');
     setSubmitError(null);
+    setSubmitErrorCode(null);
     setIsSubmitting(true);
 
     const result = await submitLead({
@@ -329,7 +331,8 @@ export default function AngebotsFunnel() {
       trackEvent('Offer Funnel Validation Error', { field: Object.keys(result.fields)[0] ?? 'unknown' });
       return;
     }
-    setSubmitError(`${result.message} (Fehlercode: ${result.code})`);
+    setSubmitError(result.message);
+    setSubmitErrorCode(result.code);
     trackEvent('Offer Funnel Error', { step: 4, kind: result.kind });
   };
 
@@ -475,7 +478,7 @@ export default function AngebotsFunnel() {
                 <TextInput id="offer-location" label="PLZ / Ort des Einsatzes (optional)" autoComplete="postal-code" value={formData.location} onChange={(location) => setFormData((current) => ({ ...current, location }))} />
                 <TextInput id="offer-preferred" label="Bevorzugtes Zeitfenster für die Besichtigung (optional)" value={formData.preferredTime} onChange={(preferredTime) => setFormData((current) => ({ ...current, preferredTime }))} />
                 <p className="text-sm text-slate leading-relaxed">Hinweise zur Verarbeitung Ihrer Angaben finden Sie in der <Link to="/datenschutz" target="_blank" rel="noopener noreferrer" className="font-bold text-brand underline">Datenschutzerklärung (öffnet neuen Tab)</Link>.</p>
-                {submitError && <div role="alert" className="bg-red-50 border border-red-200 text-red-800 rounded-xl p-4">{submitError} <a href={SITE.phoneHref} className="font-bold underline">{SITE.phone}</a></div>}
+                {submitError && <div role="alert" className="bg-red-50 border border-red-200 text-red-800 rounded-xl p-4">{submitError} <a href={SITE.phoneHref} className="font-bold underline">{SITE.phone}</a>{submitErrorCode && <span className="block mt-1 text-xs">Fehlercode: {submitErrorCode}</span>}</div>}
                 <div className="flex flex-col sm:flex-row gap-3 pt-2">
                   <button type="button" onClick={back} className="flex-1 px-6 py-3.5 rounded-xl font-bold text-slate border-2 border-[#738196]"><ChevronLeft size={18} className="inline mr-2" />Zurück</button>
                   <button type="submit" disabled={isSubmitting} className="flex-[2] inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-bold text-white bg-accent hover:bg-accent-dark disabled:opacity-60 focus-visible:ring-4 focus-visible:ring-accent/40">

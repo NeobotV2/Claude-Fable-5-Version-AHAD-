@@ -69,7 +69,8 @@ function getAdminApp(): App {
   // Ohne Dienstkonto bliebe nur die Google-Standardanmeldung. Die gibt es auf Vercel
   // nicht: Sie scheitert erst nach mehreren Sekunden Wiederholung (und mit unbehandelten
   // Promise-Fehlern). Deshalb dort sofort und eindeutig abbrechen.
-  if (!account && process.env.VERCEL && !process.env.GOOGLE_APPLICATION_CREDENTIALS) {
+  const deployedOnVercel = Boolean(process.env.VERCEL) && process.env.VERCEL_ENV !== 'development';
+  if (!account && deployedOnVercel && !process.env.GOOGLE_APPLICATION_CREDENTIALS && !process.env.FIRESTORE_EMULATOR_HOST) {
     throw new StorageNotConfiguredError(
       'Keine Firebase-Zugangsdaten: FIREBASE_SERVICE_ACCOUNT_JSON oder FIREBASE_CLIENT_EMAIL + FIREBASE_PRIVATE_KEY setzen.',
     );

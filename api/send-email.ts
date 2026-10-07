@@ -294,7 +294,7 @@ async function persistExactlyOnce(lead: ValidLead, idempotencyKey: string, ip: s
       expiresAt,
     });
     return { created: true, conflict: false, notificationSent: false, notificationAttempts: 0 };
-  });
+  }, { maxAttempts: 3 }); // Bei Auth-/Verbindungsfehlern greift der E-Mail-Notbetrieb nach ~3 statt ~10 s.
 
   return { ...result, leadId, leadRef };
 }
@@ -321,9 +321,9 @@ async function notify(
   );
   if (error) {
     // Gleicher Schlüssel, andere Daten: wie IDEMPOTENCY_REUSE behandeln. Läuft dieselbe
-    // Anfrage noch parallel, verschickt diese die Mail – kein zweiter Versand nötig.
+    // Anfrage noch (concurrent_idempotent_requests), ist ihr Ausgang offen – das zählt als
+    // Fehlschlag; ein erneuter Versuch mit demselben Schlüssel erhält Resends Ergebnis.
     if (error.name === 'invalid_idempotent_request') return { sent: false, status: 'conflict' };
-    if (error.name === 'concurrent_idempotent_requests') return { sent: true, status: 'sent' };
     // Nur Fehlerklasse loggen – keine Lead-Daten.
     console.error('Lead notification failed', { requestId, error: error.name });
     return { sent: false, status: 'failed' };
@@ -389,12 +389,17 @@ function fallbackRateLimited(ip: string): boolean {
 const UNSTORED_NOTICE =
   'Achtung: Diese Anfrage konnte nicht in der Datenbank gespeichert werden und erscheint nicht im Admin-Bereich. ' +
   'Bitte direkt aus dieser E-Mail bearbeiten. Die Website-Datenbank (Firebase) muss geprüft werden.';
+/** Bei Verbindungs- oder Zeitfehlern kann der Lead trotz Fehlermeldung gespeichert sein. */
+const MAYBE_UNSTORED_NOTICE =
+  'Achtung: Das Speichern dieser Anfrage in der Datenbank ist fehlgeschlagen oder unbestätigt. ' +
+  'Bitte vor dem Anlegen im Admin-Bereich nach einem Eintrag suchen. Die Website-Datenbank (Firebase) muss geprüft werden.';
 
 async function deliverWithoutStorage(
   lead: ValidLead,
   idempotencyKey: string,
   ip: string,
   requestId: string,
+  definitelyUnstored: boolean,
 ): Promise<'sent' | 'failed' | 'conflict' | 'rate_limited'> {
   if (fallbackRateLimited(ip)) return 'rate_limited';
   const leadId = leadDocumentId(lead.type, idempotencyKey);
@@ -403,7 +408,7 @@ async function deliverWithoutStorage(
     // Resend sie anhand des Schlüssels als Duplikat erkennt.
     const result = await notify(lead, requestId, {
       reference: leadId,
-      notice: UNSTORED_NOTICE,
+      notice: definitelyUnstored ? UNSTORED_NOTICE : MAYBE_UNSTORED_NOTICE,
       subjectPrefix: '[Nicht gespeichert] ',
       idempotencyKey: `lead/${leadId}`,
     });
@@ -553,16 +558,14 @@ export default async function handler(req: ApiRequest, res: ApiResponse) {
       sendError(res, 429, requestId, 'RATE_LIMITED', 'Zu viele Anfragen. Bitte versuchen Sie es später erneut.');
       return;
     }
-    console.error('Lead persistence failed', {
-      requestId,
-      notConfigured: error instanceof StorageNotConfiguredError,
-      error: describeStorageError(error),
-    });
-    const fallback = await deliverWithoutStorage(validation.value, idempotencyKey, clientIp(req), requestId);
+    const leadId = leadDocumentId(validation.value.type, idempotencyKey);
+    const notConfigured = error instanceof StorageNotConfiguredError;
+    console.error('Lead persistence failed', { requestId, leadId, notConfigured, error: describeStorageError(error) });
+    const fallback = await deliverWithoutStorage(validation.value, idempotencyKey, clientIp(req), requestId, notConfigured);
     if (fallback === 'sent') {
-      console.error('Lead delivered by e-mail only (not stored)', { requestId });
+      console.error('Lead delivered by e-mail only (not stored)', { requestId, leadId });
       accepted(res, 202, requestId, {
-        leadId: leadDocumentId(validation.value.type, idempotencyKey),
+        leadId,
         duplicate: false,
         notificationSent: true,
         stored: false,
