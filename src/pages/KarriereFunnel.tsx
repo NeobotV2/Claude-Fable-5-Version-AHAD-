@@ -125,6 +125,7 @@ export default function KarriereFunnel() {
     setSubmitError(true);
     // Feldfehler des Servers (z. B. Telefonformat) zusätzlich zum übersetzten Hinweis zeigen.
     if (result.kind === 'validation') setSubmitErrorDetail(describeFieldErrors(result.fields));
+    else setSubmitErrorDetail(`Fehlercode: ${result.code}`);
     trackEvent('Application Funnel Error', { language: lang || 'de', jobId: data.jobId || 'initiative', kind: result.kind });
   };
 
@@ -286,6 +287,8 @@ export default function KarriereFunnel() {
                   { id: 'glas', ...t.departments.glas, value: translations.de.departments.glas.title },
                   { id: 'bau', ...t.departments.bau, value: translations.de.departments.bau.title },
                   { id: 'sonder', ...t.departments.sonder, value: translations.de.departments.sonder.title },
+                  { id: 'hausmeister', ...t.departments.hausmeister, value: translations.de.departments.hausmeister.title },
+                  { id: 'gruenpflege', ...t.departments.gruenpflege, value: translations.de.departments.gruenpflege.title },
                   { id: 'leitung', ...t.departments.leitung, value: translations.de.departments.leitung.title },
                 ].map((item) => (
                   <button
