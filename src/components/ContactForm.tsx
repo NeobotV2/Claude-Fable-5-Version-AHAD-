@@ -118,7 +118,7 @@ export default function ContactForm() {
       trackEvent('Contact Form Validation Error', { field: Object.keys(result.fields)[0] ?? 'unknown' });
       return;
     }
-    setSubmitError(result.message);
+    setSubmitError(`${result.message} (Fehlercode: ${result.code})`);
     trackEvent('Contact Form Error', { service: formData.serviceType, kind: result.kind });
   };
 

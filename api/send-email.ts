@@ -6,7 +6,7 @@
 import { createHash, createHmac, randomUUID } from 'node:crypto';
 import { FieldValue, Timestamp, type DocumentReference } from 'firebase-admin/firestore';
 import { Resend } from 'resend';
-import { getAdminFirestore } from './_lib/firebase-admin.js';
+import { getAdminFirestore, StorageNotConfiguredError } from './_lib/firebase-admin.js';
 import {
   type ValidLead,
   validIdempotencyKey,
@@ -105,7 +105,7 @@ function accepted(
   res: ApiResponse,
   status: number,
   requestId: string,
-  options: { leadId?: string; duplicate: boolean; notificationSent: boolean },
+  options: { leadId?: string; duplicate: boolean; notificationSent: boolean; stored?: boolean },
 ) {
   res.status(status).json({
     success: true,
@@ -114,6 +114,7 @@ function accepted(
     ...(options.leadId ? { leadId: options.leadId } : {}),
     duplicate: options.duplicate,
     notificationSent: options.notificationSent,
+    stored: options.stored ?? true,
   });
 }
 
@@ -133,8 +134,9 @@ function row(label: string, value: unknown): string {
   return `<p style="margin:4px 0"><strong>${esc(label)}:</strong> ${esc(rendered)}</p>`;
 }
 
-function wrap(title: string, color: string, inner: string, source: string, requestId: string): string {
+function wrap(title: string, color: string, inner: string, source: string, requestId: string, notice = ''): string {
   return `<div style="font-family:sans-serif;padding:20px;color:#333">
+    ${notice ? `<p style="background:#fff4e5;border:1px solid #f0b46c;padding:12px;border-radius:6px;margin:0 0 16px">${esc(notice)}</p>` : ''}
     <h2 style="color:${color}">${esc(title)}</h2>
     ${inner}
     <hr style="border:1px solid #eee;margin:20px 0"/>
@@ -142,7 +144,7 @@ function wrap(title: string, color: string, inner: string, source: string, reque
   </div>`;
 }
 
-function emailFor(lead: ValidLead, requestId: string): { subject: string; html: string; replyTo?: string } {
+function emailFor(lead: ValidLead, requestId: string, notice = ''): { subject: string; html: string; replyTo?: string } {
   if (lead.type === 'contact') {
     const data = lead.data;
     return {
@@ -150,7 +152,7 @@ function emailFor(lead: ValidLead, requestId: string): { subject: string; html: 
       html: wrap('Neue Kontaktanfrage', '#004888',
         row('Name', data.contactPerson) + row('Firma', data.company) + row('E-Mail', data.email) +
         row('Telefon', data.phone) + row('Leistung', data.serviceType) + row('Nachricht', data.message),
-        'AHAD-Kontaktformular', requestId),
+        'AHAD-Kontaktformular', requestId, notice),
       ...(data.email ? { replyTo: data.email } : {}),
     };
   }
@@ -173,7 +175,7 @@ function emailFor(lead: ValidLead, requestId: string): { subject: string; html: 
         row('Gewünschter Start', details.desiredStart) +
         row('Zeitfenster für die Besichtigung', data.preferredTime) +
         attributionRows(data.attribution),
-        'AHAD-Angebots-Funnel', requestId),
+        'AHAD-Angebots-Funnel', requestId, notice),
       ...(data.email ? { replyTo: data.email } : {}),
     };
   }
@@ -187,7 +189,7 @@ function emailFor(lead: ValidLead, requestId: string): { subject: string; html: 
       row('Startdatum', data.startDate) + row('Mobilität', data.mobility) + row('Standort', data.location) +
       row('Sprache', data.language) + row('WhatsApp erlaubt', data.whatsappOptIn ? 'Ja' : 'Nein') +
       row('Formular-URL', data.sourcePath) + attributionRows(data.attribution),
-      'AHAD-Karriere-Funnel', requestId),
+      'AHAD-Karriere-Funnel', requestId, notice),
   };
 }
 
@@ -297,17 +299,31 @@ async function persistExactlyOnce(lead: ValidLead, idempotencyKey: string, ip: s
   return { ...result, leadId, leadRef };
 }
 
-async function notify(lead: ValidLead, requestId: string): Promise<{ sent: boolean; providerId?: string; status: string }> {
+type NotifyResult = { sent: boolean; providerId?: string; status: 'sent' | 'not_configured' | 'failed' | 'conflict' };
+
+async function notify(
+  lead: ValidLead,
+  requestId: string,
+  options: { reference?: string; notice?: string; subjectPrefix?: string; idempotencyKey?: string } = {},
+): Promise<NotifyResult> {
   const apiKey = process.env.RESEND_API_KEY?.trim();
   if (!apiKey) {
     console.error('Lead notification skipped: RESEND_API_KEY ist nicht konfiguriert', { requestId });
     return { sent: false, status: 'not_configured' };
   }
-  const message = emailFor(lead, requestId);
+  const message = emailFor(lead, options.reference ?? requestId, options.notice);
+  if (options.subjectPrefix) message.subject = `${options.subjectPrefix}${message.subject}`;
   const to = (process.env.LEAD_TO || 'info@ahad-cleaning.de').split(',').map((value) => value.trim()).filter(Boolean);
   const from = process.env.RESEND_FROM || 'AHAD Cleaning <onboarding@resend.dev>';
-  const { data, error } = await new Resend(apiKey).emails.send({ from, to, ...message });
+  const { data, error } = await new Resend(apiKey).emails.send(
+    { from, to, ...message },
+    options.idempotencyKey ? { idempotencyKey: options.idempotencyKey } : undefined,
+  );
   if (error) {
+    // Gleicher Schlüssel, andere Daten: wie IDEMPOTENCY_REUSE behandeln. Läuft dieselbe
+    // Anfrage noch parallel, verschickt diese die Mail – kein zweiter Versand nötig.
+    if (error.name === 'invalid_idempotent_request') return { sent: false, status: 'conflict' };
+    if (error.name === 'concurrent_idempotent_requests') return { sent: true, status: 'sent' };
     // Nur Fehlerklasse loggen – keine Lead-Daten.
     console.error('Lead notification failed', { requestId, error: error.name });
     return { sent: false, status: 'failed' };
@@ -321,7 +337,7 @@ async function notify(lead: ValidLead, requestId: string): Promise<{ sent: boole
  * die Antwort an den Absender deshalb nie zum Fehler machen.
  */
 async function deliverNotification(lead: ValidLead, leadRef: DocumentReference, requestId: string): Promise<boolean> {
-  let notification: Awaited<ReturnType<typeof notify>>;
+  let notification: NotifyResult;
   try {
     notification = await notify(lead, requestId);
   } catch (error) {
@@ -341,6 +357,73 @@ async function deliverNotification(lead: ValidLead, leadRef: DocumentReference, 
     console.error('Lead notification state update failed', { requestId });
   }
   return notification.sent;
+}
+
+/**
+ * Notbetrieb, wenn Firestore nicht erreichbar oder nicht eingerichtet ist: Der Lead
+ * geht dann wenigstens per E-Mail raus, statt ganz verloren zu gehen. Rate-Limit und
+ * Doppelversand-Schutz laufen hier ohne Datenbank: ein Zähler pro Instanz (best effort)
+ * und der Idempotenzschlüssel von Resend. Die Mail sagt deutlich, dass der Lead nicht
+ * im System steht.
+ */
+const fallbackHits = new Map<string, { count: number; windowStartedAt: number }>();
+
+function fallbackRateLimited(ip: string): boolean {
+  const windowMs = clampInteger(process.env.LEAD_RATE_WINDOW_MS, DEFAULT_RATE_WINDOW_MS, 10_000, 3_600_000);
+  const maxHits = clampInteger(process.env.LEAD_RATE_MAX, DEFAULT_RATE_MAX, 1, 20);
+  const now = Date.now();
+  if (fallbackHits.size > 5_000) {
+    for (const [key, entry] of fallbackHits) if (entry.windowStartedAt <= now - windowMs) fallbackHits.delete(key);
+  }
+  const key = opaqueIpHash(ip);
+  const entry = fallbackHits.get(key);
+  if (!entry || entry.windowStartedAt <= now - windowMs) {
+    fallbackHits.set(key, { count: 1, windowStartedAt: now });
+    return false;
+  }
+  if (entry.count >= maxHits) return true;
+  entry.count += 1;
+  return false;
+}
+
+const UNSTORED_NOTICE =
+  'Achtung: Diese Anfrage konnte nicht in der Datenbank gespeichert werden und erscheint nicht im Admin-Bereich. ' +
+  'Bitte direkt aus dieser E-Mail bearbeiten. Die Website-Datenbank (Firebase) muss geprüft werden.';
+
+async function deliverWithoutStorage(
+  lead: ValidLead,
+  idempotencyKey: string,
+  ip: string,
+  requestId: string,
+): Promise<'sent' | 'failed' | 'conflict' | 'rate_limited'> {
+  if (fallbackRateLimited(ip)) return 'rate_limited';
+  const leadId = leadDocumentId(lead.type, idempotencyKey);
+  try {
+    // Referenz = Lead-ID statt Request-ID: Wiederholungen ergeben dieselbe Mail, damit
+    // Resend sie anhand des Schlüssels als Duplikat erkennt.
+    const result = await notify(lead, requestId, {
+      reference: leadId,
+      notice: UNSTORED_NOTICE,
+      subjectPrefix: '[Nicht gespeichert] ',
+      idempotencyKey: `lead/${leadId}`,
+    });
+    if (result.status === 'conflict') return 'conflict';
+    return result.sent ? 'sent' : 'failed';
+  } catch (error) {
+    console.error('Lead fallback notification failed', { requestId, error: error instanceof Error ? error.name : 'unknown' });
+    return 'failed';
+  }
+}
+
+/** Ursache für das Vercel-Log: Fehlerklasse, gRPC-Code und gekürzte Meldung, keine Lead-Daten. */
+function describeStorageError(error: unknown): Record<string, string | number> {
+  if (!(error instanceof Error)) return { name: 'unknown' };
+  const code = (error as { code?: unknown }).code;
+  return {
+    name: error.name,
+    ...(typeof code === 'string' || typeof code === 'number' ? { code } : {}),
+    message: error.message.replace(/\s+/g, ' ').slice(0, 300),
+  };
 }
 
 export default async function handler(req: ApiRequest, res: ApiResponse) {
@@ -470,7 +553,32 @@ export default async function handler(req: ApiRequest, res: ApiResponse) {
       sendError(res, 429, requestId, 'RATE_LIMITED', 'Zu viele Anfragen. Bitte versuchen Sie es später erneut.');
       return;
     }
-    console.error('Lead persistence failed', { requestId, error: error instanceof Error ? error.name : 'unknown' });
+    console.error('Lead persistence failed', {
+      requestId,
+      notConfigured: error instanceof StorageNotConfiguredError,
+      error: describeStorageError(error),
+    });
+    const fallback = await deliverWithoutStorage(validation.value, idempotencyKey, clientIp(req), requestId);
+    if (fallback === 'sent') {
+      console.error('Lead delivered by e-mail only (not stored)', { requestId });
+      accepted(res, 202, requestId, {
+        leadId: leadDocumentId(validation.value.type, idempotencyKey),
+        duplicate: false,
+        notificationSent: true,
+        stored: false,
+      });
+      return;
+    }
+    if (fallback === 'conflict') {
+      sendError(res, 409, requestId, 'IDEMPOTENCY_REUSE', 'Dieser Idempotenzschlüssel wurde bereits für andere Daten verwendet.');
+      return;
+    }
+    if (fallback === 'rate_limited') {
+      const retryWindow = clampInteger(process.env.LEAD_RATE_WINDOW_MS, DEFAULT_RATE_WINDOW_MS, 10_000, 3_600_000);
+      res.setHeader('Retry-After', String(Math.ceil(retryWindow / 1000)));
+      sendError(res, 429, requestId, 'RATE_LIMITED', 'Zu viele Anfragen. Bitte versuchen Sie es später erneut.');
+      return;
+    }
     sendError(res, 503, requestId, 'STORAGE_UNAVAILABLE', 'Die Anfrage konnte nicht sicher gespeichert werden. Bitte versuchen Sie es erneut.');
   }
 }

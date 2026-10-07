@@ -329,7 +329,7 @@ export default function AngebotsFunnel() {
       trackEvent('Offer Funnel Validation Error', { field: Object.keys(result.fields)[0] ?? 'unknown' });
       return;
     }
-    setSubmitError(result.message);
+    setSubmitError(`${result.message} (Fehlercode: ${result.code})`);
     trackEvent('Offer Funnel Error', { step: 4, kind: result.kind });
   };
 
