@@ -20,7 +20,7 @@ export default function Branchen() {
 
       <PageHero
         eyebrow="Branchen"
-        title="Jede Branche hat eigene Anforderungen."
+        title="Gebäudereinigung nach Branche: jede mit eigenen Anforderungen."
         lead="Schichtbetrieb, Hygienezonen, Publikumsverkehr oder Abnahmetermine: Wir kennen die kritischen Punkte Ihrer Branche und planen die Reinigung danach."
         image={IMG.brancheIndustrie}
         crumbs={[{ label: 'Branchen' }]}

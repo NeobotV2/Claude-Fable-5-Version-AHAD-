@@ -18,7 +18,7 @@ const SCHEMA = {
   url: `${SITE.url}/aktuelles`,
   name: 'Aktuelles von AHAD Cleaning',
   inLanguage: 'de-DE',
-  isPartOf: { '@id': `${SITE.url}/#website` },
+  isPartOf: { '@type': 'WebSite', '@id': `${SITE.url}/#website`, url: `${SITE.url}/`, name: SITE.name },
   hasPart: NEWS_BY_DATE.map((item) => ({
     '@type': 'NewsArticle',
     headline: item.headline,
@@ -31,7 +31,7 @@ export default function Aktuelles() {
   return (
     <div>
       <SEO
-        title="Aktuelles | AHAD Cleaning"
+        title="Aktuelles aus der Gebäudereinigung | AHAD Cleaning"
         description="Unternehmensmeldungen der AHAD Cleaning Company GmbH aus Villingen-Schwenningen zu Übernahmen, Standorten und der Entwicklung des Unternehmens."
         keywords="AHAD Cleaning Neuigkeiten, Gebäudereinigung Villingen-Schwenningen aktuell, Unternehmensmeldung"
         schema={SCHEMA}

@@ -468,6 +468,7 @@ export const WEBSITE_SCHEMA = {
   '@id': `${SITE.url}/#website`,
   url: `${SITE.url}/`,
   name: SITE.name,
+  alternateName: ['AHAD Cleaning Company', 'ahad-cleaning.de'],
   inLanguage: 'de-DE',
   publisher: { '@id': `${SITE.url}/#organization` },
 };
@@ -477,6 +478,15 @@ export const WEBSITE_SCHEMA = {
  * loest die @id-Referenz AUF DERSELBEN SEITE auf — Schema-Parser lesen nur die
  * aktuelle Seite, eine reine @id-Referenz auf die Startseite bliebe haengend.
  */
+/** Einsatzgebiet für Service-Markup: konkret statt „Süddeutschland“. */
+export const AREA_SERVED = [
+  { '@type': 'City', name: 'Villingen-Schwenningen' },
+  { '@type': 'AdministrativeArea', name: 'Schwarzwald-Baar-Kreis' },
+  { '@type': 'City', name: 'Stuttgart' },
+  { '@type': 'City', name: 'Konstanz' },
+  { '@type': 'State', name: 'Baden-Württemberg' },
+] as const;
+
 export const ORG_REF = {
   '@type': 'Organization',
   '@id': `${SITE.url}/#organization`,
@@ -490,20 +500,19 @@ export const ORGANIZATION_SCHEMA = {
   '@type': 'Organization',
   '@id': `${SITE.url}/#organization`,
   name: SITE.legalName,
+  legalName: SITE.legalName,
+  alternateName: ['AHAD Cleaning', 'AHAD'],
   url: `${SITE.url}/`,
   logo: `${SITE.url}/logo.png`,
+  vatID: 'DE301347274',
+  foundingDate: '2015',
+  numberOfEmployees: { '@type': 'QuantitativeValue', value: 90 },
   image: `${SITE.url}/og-image.jpg`,
   description:
     'Gebäudereinigung, Industriereinigung und Unterhaltsreinigung für Unternehmen in Villingen-Schwenningen, Stuttgart, Konstanz und Süddeutschland.',
   telephone: SITE.phone,
   email: SITE.email,
-  areaServed: [
-    { '@type': 'City', name: 'Villingen-Schwenningen' },
-    { '@type': 'City', name: 'Stuttgart' },
-    { '@type': 'City', name: 'Konstanz' },
-    { '@type': 'AdministrativeArea', name: 'Schwarzwald-Baar-Kreis' },
-    { '@type': 'AdministrativeArea', name: 'Baden-Württemberg' },
-  ],
+  areaServed: AREA_SERVED,
   contactPoint: {
     '@type': 'ContactPoint',
     telephone: SITE.phone,
@@ -516,6 +525,7 @@ export const ORGANIZATION_SCHEMA = {
     streetAddress: SITE.address.street,
     addressLocality: SITE.address.city,
     postalCode: SITE.address.zip,
+    addressRegion: 'Baden-Württemberg',
     addressCountry: SITE.address.country,
   },
   // ahad-care.de gehört zur selben GmbH (zweites Geschäftsfeld) -> selbe Entität.

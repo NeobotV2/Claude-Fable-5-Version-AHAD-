@@ -16,9 +16,9 @@ const LOCAL_SERVICES = [
     desc: 'Regelmäßige Reinigung von Büros, Verwaltungen und Gewerbeflächen mit festen Teams, digitaler Qualitätskontrolle und festem Ansprechpartner vor Ort.',
   },
   {
-    title: 'Glas- & Fassadenreinigung in Villingen-Schwenningen',
+    title: 'Fenster- & Glasreinigung in Villingen-Schwenningen',
     to: '/leistungen/glas-fassadenreinigung',
-    desc: 'Reinigung von Glasflächen und Fassaden, auch in der Höhe und im Osmose-Verfahren mit Reinwasser.',
+    desc: 'Fenster, Rahmen, Glasfronten und Fassaden, auch in der Höhe und im Osmose-Verfahren mit Reinwasser.',
   },
   {
     title: 'Industrie- & Produktionsreinigung in Villingen-Schwenningen',
@@ -29,6 +29,11 @@ const LOCAL_SERVICES = [
     title: 'Baureinigung in Villingen-Schwenningen',
     to: '/leistungen/baureinigung',
     desc: 'Bau-, Zwischen- und Endreinigung für Neubau- und Sanierungsprojekte im Schwarzwald-Baar-Kreis.',
+  },
+  {
+    title: 'Teppichreinigung in Villingen-Schwenningen',
+    to: '/leistungen/teppichreinigung',
+    desc: 'Teppichböden, Polster und Bürostühle in Büros, Hotels und Praxen, gereinigt außerhalb Ihrer Betriebszeit.',
   },
   {
     title: 'Winterdienst & Hausmeisterservice in Villingen-Schwenningen',
@@ -83,18 +88,43 @@ const INDUSTRIE_GEBIETE = [
 
 /** Einsatzgebiete ab Zentrale VS — deckt lokale Suchanfragen der Umgebung ab. */
 const SERVICE_AREAS = [
-  'Villingen',
-  'Schwenningen',
+  'Villingen-Schwenningen',
   'Donaueschingen',
   'Bad Dürrheim',
   'St. Georgen',
+  'Königsfeld',
+  'Dauchingen',
+  'Brigachtal',
+  'Mönchweiler',
+  'Unterkirnach',
+  'Vöhrenbach',
+  'Hüfingen',
+  'Bräunlingen',
+  'Furtwangen',
   'Trossingen',
   'Tuttlingen',
   'Rottweil',
-  'Bräunlingen',
-  'Furtwangen',
-  'Königsfeld',
   'Schwarzwald-Baar-Kreis',
+];
+
+/** Umland nach Lage gruppiert: eigene Absätze statt dünner Einzelseiten je Ort. */
+const UMLAND = [
+  {
+    title: 'St. Georgen, Königsfeld, Mönchweiler und Unterkirnach',
+    text: 'Für Betriebe, Praxen und Verwaltungen auf der Schwarzwaldseite übernehmen wir Unterhalts- und Fensterreinigung. Im Winter räumen und streuen wir Zufahrten und Parkflächen, bevor der Betrieb beginnt; auf den höher gelegenen Strecken planen wir dafür früher ein.',
+  },
+  {
+    title: 'Bad Dürrheim, Dauchingen und Brigachtal',
+    text: 'Kurze Wege von unserer Zentrale: Hier betreuen wir Büros, Gewerbeflächen sowie Hotel- und Kurbetriebe mit Unterhaltsreinigung, Glasreinigung und Hausmeisterservice.',
+  },
+  {
+    title: 'Donaueschingen, Hüfingen und Bräunlingen',
+    text: 'In den Gewerbegebieten an der Baar reinigen wir Produktions- und Lagerflächen, Büros und Sozialräume. Baureinigung und Bauendreinigung stimmen wir mit der Bauleitung auf den Abnahmetermin ab.',
+  },
+  {
+    title: 'Rottweil, Trossingen und Tuttlingen',
+    text: 'Für Industrie und Medizintechnik in den Nachbarkreisen reinigen wir nach Ihren Hygiene- und QM-Vorgaben und dokumentieren jede Leistung für Audits.',
+  },
 ];
 
 const LOCAL_FAQS: FAQItem[] = [
@@ -134,21 +164,21 @@ export default function StandortVS() {
     '@id': `${SITE.url}/standorte/villingen-schwenningen#service`,
     url: `${SITE.url}/standorte/villingen-schwenningen`,
     provider: ORG_REF,
-    areaServed: SERVICE_AREAS.map((name) => ({ '@type': 'City', name })),
+    areaServed: SERVICE_AREAS.map((name) => ({ '@type': name.endsWith('-Kreis') ? 'AdministrativeArea' : 'City', name })),
   };
 
   return (
     <div>
       <SEO
-        title="Gebäudereinigung Villingen-Schwenningen | AHAD Cleaning"
-        description="Gebäudereinigung in Villingen-Schwenningen: Unterhalts-, Glas-, Industrie-, Bau- und Sonderreinigung sowie Winterdienst für die Region Schwarzwald-Baar."
+        title="Reinigungsfirma VS & Schwarzwald-Baar-Kreis | AHAD Cleaning"
+        description="Reinigungsfirma für Villingen-Schwenningen und Umgebung: Büro-, Fenster- und Industriereinigung sowie Winterdienst in St. Georgen, Bad Dürrheim und Königsfeld."
         keywords="Gebäudereinigung Villingen-Schwenningen, Reinigungsfirma Villingen-Schwenningen, Unterhaltsreinigung Villingen-Schwenningen, Industriereinigung Villingen-Schwenningen, Glasreinigung VS, Schwarzwald-Baar-Kreis"
         schema={[regionalServiceSchema, faqSchemaFrom(LOCAL_FAQS)]}
       />
       <PageHero
         eyebrow="Zentrale · Schwarzwald-Baar-Kreis"
-        title="Gebäudereinigung in Villingen-Schwenningen"
-        lead="Von unserem Hauptstandort in Villingen-Schwenningen aus betreuen wir Unternehmen in der gesamten Region Schwarzwald-Baar, Donaueschingen, Rottweil, Tuttlingen, Bad Dürrheim, St. Georgen und Trossingen."
+        title="Reinigungsfirma für Villingen-Schwenningen und Umgebung"
+        lead="Von unserer Zentrale in Villingen-Schwenningen aus betreuen wir Unternehmen im Schwarzwald-Baar-Kreis und in den Nachbarkreisen: von St. Georgen und Königsfeld über Bad Dürrheim und Donaueschingen bis Rottweil und Tuttlingen."
         image={IMG.heroArchitecture}
         imageAlt="AHAD Cleaning Zentrale in Villingen-Schwenningen"
         crumbs={[{ label: 'Standorte', href: '/standorte' }, { label: 'Villingen-Schwenningen' }]}
@@ -296,6 +326,15 @@ export default function StandortVS() {
                   <MapPin className="w-3.5 h-3.5 text-accent" />
                   {area}
                 </span>
+              ))}
+            </div>
+
+            <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-5">
+              {UMLAND.map((area) => (
+                <div key={area.title} className="bg-white border border-gray-100 rounded-2xl p-6">
+                  <h3 className="font-bold text-lg text-[#0B2341] mb-2">Reinigungsservice in {area.title}</h3>
+                  <p className="text-sm text-gray-600 leading-relaxed">{area.text}</p>
+                </div>
               ))}
             </div>
 

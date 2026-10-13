@@ -59,7 +59,7 @@ export default function FachwissenVDI2052() {
     <article>
       <SEO
         ogType="article"
-        title="Küchenabluftreinigung: VDI 2052 Blatt 2 prüfen | AHAD"
+        title="Küchenabluft nach VDI 2052: Intervall & Nachweis | AHAD"
         description="VDI 2052 Blatt 2 in der Praxis: objektbezogene Intervalle, abgegrenzter Reinigungsumfang, geregelte Übergabe und ein Musterprotokoll für die Küchenabluft."
         keywords="Küchenabluftreinigung VDI 2052 Blatt 2, Küchenlüftung reinigen, Reinigungsintervall Küchenabluft, Reinigungsprotokoll Abluftanlage"
         schema={[articleSchema, faqSchema]}

@@ -55,7 +55,7 @@ export default function Standorte() {
 
       <PageHero
         eyebrow="Unternehmenssitz & Einsatzgebiete"
-        title="Wo wir für Sie im Einsatz sind."
+        title="Gebäudereinigung in Baden-Württemberg: unsere Einsatzgebiete"
         lead="Von unserem Unternehmenssitz in Villingen-Schwenningen betreuen wir Objekte in mehreren Regionen Süddeutschlands. Stuttgart und Konstanz sind Einsatzgebiete."
         image={IMG.schwarzwald}
         crumbs={[{ label: 'Standorte' }]}

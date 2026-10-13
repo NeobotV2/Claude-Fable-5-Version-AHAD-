@@ -41,7 +41,7 @@ export default function SEO({ title, description, keywords, schema, noindex, ogT
       <meta property="og:type" content={ogType} />
       <meta property="og:site_name" content="AHAD Cleaning" />
       <meta property="og:locale" content="de_DE" />
-      <meta property="og:url" content={canonicalUrl} />
+      {routePolicy && <meta property="og:url" content={canonicalUrl} />}
       <meta property="og:title" content={fullTitle} />
       <meta property="og:description" content={description} />
       <meta property="og:image" content={`${SITE.url}/og-image.jpg`} />
@@ -51,7 +51,7 @@ export default function SEO({ title, description, keywords, schema, noindex, ogT
 
       {/* Twitter */}
       <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:url" content={canonicalUrl} />
+      {routePolicy && <meta name="twitter:url" content={canonicalUrl} />}
       <meta name="twitter:title" content={fullTitle} />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={`${SITE.url}/og-image.jpg`} />

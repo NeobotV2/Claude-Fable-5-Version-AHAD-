@@ -134,7 +134,7 @@ export default function KarriereFunnel() {
   if (!lang) {
     return (
       <div className="min-h-screen bg-[#f7f9fb] flex items-center justify-center p-4 pt-32 pb-20 lg:pt-40 lg:pb-32">
-        <SEO title="Language Selection | AHAD Cleaning" description="Choose your language for the application." noindex />
+        <SEO title="Bewerbung: Sprache wählen | AHAD Cleaning" description="Wähle die Sprache für deine Bewerbung bei AHAD Cleaning. Choose your language for the application." noindex />
         <div className="max-w-xl w-full">
           <div className="text-center mb-12">
             <div className="w-16 h-16 bg-[#0D6B38] text-white rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg">

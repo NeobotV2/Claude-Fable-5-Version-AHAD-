@@ -47,8 +47,8 @@ export default function Karriere() {
   return (
     <div>
       <SEO
-        title="Karriere & Jobs in der Gebäudereinigung | AHAD Cleaning"
-        description="Karriere bei AHAD Cleaning: Einsatzprofile, Arbeitsmodelle und ein kurzer Bewerbungsprozess ohne Lebenslauf. Verfügbarkeit wird persönlich bestätigt."
+        title="Jobs Reinigungskraft Villingen-Schwenningen | AHAD"
+        description="Jobs in der Gebäudereinigung in Villingen-Schwenningen und Region: Minijob, Teilzeit oder Vollzeit. Bewerbung in vier kurzen Schritten, ganz ohne Lebenslauf."
         keywords="Jobs Gebäudereinigung, Reinigungskraft Job Villingen-Schwenningen, Objektleiter Stelle, Karriere Reinigungsfirma"
       />
 
@@ -56,6 +56,9 @@ export default function Karriere() {
         eyebrow="Karriere bei AHAD"
         title={
           <>
+            <span className="block text-mint text-lg sm:text-2xl font-bold mb-3 sm:mb-5" style={{ letterSpacing: 'normal' }}>
+              Jobs in der Gebäudereinigung
+            </span>{' '}
             <span className="block">Arbeit, die{' '}</span>
             <span className="block">
               <span className="whitespace-nowrap">gesehen wird.</span>

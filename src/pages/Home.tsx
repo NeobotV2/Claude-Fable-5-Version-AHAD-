@@ -127,6 +127,24 @@ const industries = [
   { title: 'Hotellerie & Objektbetrieb', path: '/branchen/hotellerie-objektbetrieb', image: IMG.brancheHotel, claim: 'Sauber für Ihre Gäste' },
 ];
 
+const REGION_LINKS = [
+  {
+    title: 'Villingen-Schwenningen & Schwarzwald-Baar',
+    to: '/standorte/villingen-schwenningen',
+    places: 'St. Georgen, Bad Dürrheim, Donaueschingen, Königsfeld, Dauchingen, Trossingen, Rottweil und Tuttlingen',
+  },
+  {
+    title: 'Konstanz & Bodensee',
+    to: '/standorte/konstanz',
+    places: 'Konstanz, Radolfzell, Singen und die Bodenseeregion',
+  },
+  {
+    title: 'Region Stuttgart',
+    to: '/standorte/stuttgart',
+    places: 'Stuttgart und Umgebung',
+  },
+];
+
 const faqs: FAQItem[] = [
   {
     question: 'Wie setzen sich Ihre Preise zusammen?',
@@ -181,8 +199,8 @@ export default function Home() {
   return (
     <div className="overflow-hidden">
       <SEO
-        title="Gebäudereinigung für Industrie & Mittelstand | AHAD Cleaning"
-        description="Gebäudereinigung, Industriereinigung und Unterhaltsreinigung für Unternehmen in Villingen-Schwenningen, Stuttgart und Süddeutschland. Kostenlose Besichtigung."
+        title="Gebäudereinigung Villingen-Schwenningen | AHAD Cleaning"
+        description="Reinigungsfirma aus Villingen-Schwenningen: Büro-, Industrie- und Fensterreinigung, Winterdienst für Unternehmen. ISO 9001 & 14001, kostenlose Besichtigung."
         keywords="Gebäudereinigung Villingen-Schwenningen, Industriereinigung Stuttgart, Unterhaltsreinigung, Glasreinigung Konstanz, Gebäudedienstleistungen"
         schema={[ORGANIZATION_SCHEMA, WEBSITE_SCHEMA, faqSchemaFrom(faqs)]}
       />
@@ -218,16 +236,6 @@ export default function Home() {
           className="relative z-10 flex-grow flex items-center max-w-7xl mx-auto px-4 sm:px-8 w-full pt-20 sm:pt-32 pb-8 sm:pb-14 gap-12"
         >
           <div className="max-w-4xl min-w-0 flex-1">
-            <motion.span
-              initial={false}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="eyebrow text-mint mb-3 sm:mb-7"
-            >
-              <span className="h-px w-8 bg-mint/50" />
-              Für Industrie, Verwaltung & Mittelstand in Süddeutschland
-            </motion.span>
-
             {/* Keyword im H1 (SEO) + Schmerzpunkt der Zielgruppe (Conversion).
                 Bewusst statisch (kein Reveal-/Slide-Effekt): so steht die Headline
                 bereits im vorgerenderten HTML sichtbar → schneller LCP, valides ARIA. */}
@@ -239,6 +247,14 @@ export default function Home() {
               lang="de"
               style={{ fontSize: 'clamp(1.35rem, 7.75vw, 4.5rem)' }}
             >
+              {/* Ortsbezug im H1: Die Startseite rankt für die VS-Suchanfragen
+                  (Search Console). Optisch die frühere Eyebrow-Zeile. */}
+              <span className="eyebrow text-mint mb-3 sm:mb-7 flex" style={{ letterSpacing: '0.22em' }}>
+                <span className="h-px w-8 bg-mint/50" aria-hidden="true" />
+                <span>
+                  Reinigungsfirma in <span className="whitespace-nowrap">Villingen-Schwenningen</span>
+                </span>
+              </span>{' '}
               <span className="whitespace-nowrap">Gebäudereinigung,</span>{' '}
               die Sie nicht mehr{' '}
               <span className="whitespace-nowrap">
@@ -678,6 +694,33 @@ export default function Home() {
 
       {/* ── AHAD-VERSPRECHEN (Garantie + Proof + Objektleitung) ──────── */}
       <Guarantee />
+
+      {/* ── EINSATZGEBIET (Ortsbezug + Links auf die Standortseiten) ──── */}
+      <section className="py-20 lg:py-28 bg-paper border-t border-line" aria-label="Einsatzgebiet">
+        <div className="max-w-7xl mx-auto px-4 sm:px-8">
+          <SectionHeading
+            eyebrow="Einsatzgebiet"
+            title="Reinigungsfirma in Villingen-Schwenningen und Umgebung"
+            lead="Unsere Zentrale steht in der Max-Planck-Straße in Villingen-Schwenningen. Von hier aus betreuen wir Betriebe im Schwarzwald-Baar-Kreis und in den Nachbarkreisen, dazu Objekte in den Einsatzgebieten Konstanz und Stuttgart."
+            className="max-w-3xl mb-12"
+          />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+            {REGION_LINKS.map((region) => (
+              <Link
+                key={region.to}
+                to={region.to}
+                className="group block bg-white border border-line rounded-2xl p-6 hover:border-accent/40 hover:shadow-soft transition-all"
+              >
+                <span className="flex items-start justify-between gap-3 font-headline font-bold text-lg text-navy">
+                  {region.title}
+                  <ArrowRight size={18} className="mt-1 text-accent flex-shrink-0 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
+                </span>
+                <span className="block mt-2 text-sm text-slate leading-relaxed">{region.places}</span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* ── FAQ ──────────────────────────────────────────────────────── */}
       <section className="py-24 lg:py-32 bg-white border-t border-line">

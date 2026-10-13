@@ -153,8 +153,8 @@ export default function StandortKonstanz() {
   return (
     <div>
       <SEO
-        title="Gebäudereinigung Konstanz | AHAD Cleaning"
-        description="Gebäudereinigung im Einsatzgebiet Konstanz und Bodensee: Unterhalts-, Glas-, Industrie-, Bau- und Sonderreinigung sowie Winterdienst nach Abstimmung."
+        title="Gebäudereinigung Konstanz & Bodensee | AHAD Cleaning"
+        description="Gebäudereinigung in Konstanz, Singen und am Bodensee: Büro- und Unterhaltsreinigung, Fenster-, Industrie-, Bauend- und Sonderreinigung für Unternehmen."
         keywords="Gebäudereinigung Konstanz, Reinigungsfirma Konstanz, Büroreinigung Konstanz, Gebäudereinigung Bodensee, Unterhaltsreinigung Konstanz"
         schema={[regionalServiceSchema, faqSchemaFrom(LOCAL_FAQS)]}
       />

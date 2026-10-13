@@ -18,6 +18,7 @@
     { "source": "/bauschlussreinigung", "destination": "/leistungen/baureinigung", "statusCode": 301 },
     { "source": "/bauschlussreinigung/", "destination": "/leistungen/baureinigung", "statusCode": 301 },
     { "source": "/das-sind-wir", "destination": "/unternehmen", "statusCode": 301 },
+    { "source": "/author/:slug", "destination": "/unternehmen", "statusCode": 301 },
     { "source": "/das-sind-wir/", "destination": "/unternehmen", "statusCode": 301 },
     { "source": "/industriereinigung", "destination": "/leistungen/industrie-produktionsreinigung", "statusCode": 301 },
     { "source": "/industriereinigung/", "destination": "/leistungen/industrie-produktionsreinigung", "statusCode": 301 },
@@ -55,6 +56,12 @@
       "source": "/assets/(.*)",
       "headers": [
         { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
+    },
+    {
+      "source": "/images/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=86400, stale-while-revalidate=604800" }
       ]
     },
     {

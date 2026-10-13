@@ -45,7 +45,7 @@ export default function Leistungen() {
 
       <PageHero
         eyebrow="Leistungen"
-        title="Acht Leistungen, ein Qualitätssystem"
+        title="Gebäudereinigung: acht Leistungen, ein Qualitätssystem"
         lead="Ob Büro, Halle oder Baustelle: Jede Leistung läuft über das AHAD System aus Analyse, Handling, Audit und Dokumentation."
         image={IMG.heroLowAngle}
         crumbs={[{ label: 'Leistungen' }]}
@@ -64,7 +64,7 @@ export default function Leistungen() {
                   className="group grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 items-center bg-paper hover:bg-white border border-line rounded-3xl p-6 lg:p-8 card-lift"
                 >
                   <div className="lg:col-span-4 order-2 lg:order-1 flex items-start gap-5">
-                    <span className="font-headline text-4xl font-bold text-navy/15 group-hover:text-accent transition-colors leading-none pt-1" aria-hidden>
+                    <span className="font-headline text-4xl font-bold text-navy/45 group-hover:text-accent transition-colors leading-none pt-1" aria-hidden>
                       {String(i + 1).padStart(2, '0')}
                     </span>
                     <div>

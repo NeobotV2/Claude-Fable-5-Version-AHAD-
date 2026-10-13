@@ -25,6 +25,7 @@ const GlasFassadenreinigung = lazy(() => import('./pages/leistungen/GlasFassaden
 const Baureinigung = lazy(() => import('./pages/leistungen/Baureinigung'));
 const MedizintechnikReinigung = lazy(() => import('./pages/leistungen/MedizintechnikReinigung'));
 const Sonderreinigung = lazy(() => import('./pages/leistungen/Sonderreinigung'));
+const Teppichreinigung = lazy(() => import('./pages/leistungen/Teppichreinigung'));
 const Winterdienst = lazy(() => import('./pages/leistungen/Winterdienst'));
 const Kuechenabluftreinigung = lazy(() => import('./pages/leistungen/Kuechenabluftreinigung'));
 const IndustrieProduktion = lazy(() => import('./pages/branchen/IndustrieProduktion'));
@@ -74,6 +75,7 @@ const ROUTE_COMPONENTS = {
   baureinigung: Baureinigung,
   medizintechnikReinigung: MedizintechnikReinigung,
   sonderreinigung: Sonderreinigung,
+  teppichreinigung: Teppichreinigung,
   winterdienst: Winterdienst,
   kuechenabluftreinigung: Kuechenabluftreinigung,
   industrieProduktion: IndustrieProduktion,
