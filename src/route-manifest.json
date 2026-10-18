@@ -151,6 +151,18 @@
       "priority": "0.7"
     },
     {
+      "path": "/standorte/donaueschingen",
+      "component": "donaueschingen",
+      "index": true,
+      "priority": "0.7"
+    },
+    {
+      "path": "/standorte/tuttlingen",
+      "component": "tuttlingen",
+      "index": true,
+      "priority": "0.7"
+    },
+    {
       "path": "/karriere",
       "component": "karriere",
       "index": true,

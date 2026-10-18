@@ -37,6 +37,8 @@ const HotellerieObjektbetrieb = lazy(() => import('./pages/branchen/HotellerieOb
 const VillingenSchwenningen = lazy(() => import('./pages/standorte/VillingenSchwenningen'));
 const Stuttgart = lazy(() => import('./pages/standorte/Stuttgart'));
 const Konstanz = lazy(() => import('./pages/standorte/Konstanz'));
+const Donaueschingen = lazy(() => import('./pages/standorte/Donaueschingen'));
+const Tuttlingen = lazy(() => import('./pages/standorte/Tuttlingen'));
 const FachwissenIntervalle = lazy(() => import('./pages/fachwissen/Intervalle'));
 const FachwissenISO = lazy(() => import('./pages/fachwissen/ISO'));
 const FachwissenIndustrieProzess = lazy(() => import('./pages/fachwissen/IndustrieProzess'));
@@ -88,6 +90,8 @@ const ROUTE_COMPONENTS = {
   villingenSchwenningen: VillingenSchwenningen,
   stuttgart: Stuttgart,
   konstanz: Konstanz,
+  donaueschingen: Donaueschingen,
+  tuttlingen: Tuttlingen,
   fachwissenIntervalle: FachwissenIntervalle,
   fachwissenIso: FachwissenISO,
   fachwissenIndustrieProzess: FachwissenIndustrieProzess,

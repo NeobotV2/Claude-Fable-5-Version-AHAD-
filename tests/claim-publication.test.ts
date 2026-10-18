@@ -60,6 +60,8 @@ test('regional pages publish Service area markup without branch addresses or geo
     read('src/pages/standorte/Stuttgart.tsx'),
     read('src/pages/standorte/Konstanz.tsx'),
     read('src/pages/standorte/VillingenSchwenningen.tsx'),
+    read('src/pages/standorte/Donaueschingen.tsx'),
+    read('src/pages/standorte/Tuttlingen.tsx'),
   ];
 
   for (const page of pages) {

@@ -83,7 +83,7 @@ const BAAR_FAKTOREN = [
   {
     icon: Footprints,
     title: 'Streusalz im Eingangsbereich',
-    text: 'Was im Winter an den Schuhen hereinkommt, landet auf Teppichböden und in Sauberlaufzonen. Diese Flächen reinigen wir in der Saison häufiger und entfernen im Frühjahr die Salzränder, damit der Belag länger hält.',
+    text: 'Was im Winter an den Schuhen hereinkommt, landet auf Teppichböden und in Sauberlaufzonen. Auf Wunsch reinigen wir diese Flächen in der Wintersaison in kürzeren Intervallen und entfernen im Frühjahr die Salzränder, damit der Belag länger hält.',
   },
   {
     icon: Route,
@@ -111,7 +111,7 @@ const UMLAND = [
   },
   {
     title: 'Brigachtal und Bad Dürrheim',
-    text: 'Beide Gemeinden grenzen an Villingen-Schwenningen, die Wege zu unserer Zentrale sind entsprechend kurz. Neben Unterhalts- und Glasreinigung übernehmen wir hier auch Sonder- und Grundreinigungen nach Absprache.',
+    text: 'Beide Gemeinden liegen nur wenige Kilometer von unserer Zentrale in Villingen-Schwenningen entfernt. Neben Unterhalts- und Glasreinigung übernehmen wir hier auch Sonder- und Grundreinigungen nach Absprache.',
   },
   {
     title: 'Blumberg und Geisingen',
