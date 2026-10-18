@@ -127,12 +127,12 @@ export const SERVICES: ServiceData[] = [
     path: '/leistungen/industrie-produktionsreinigung',
     name: 'Industrie- & Produktionsreinigung',
     tag: 'Schichtbetrieb',
-    heroTitle: 'Industrie- und Maschinenreinigung ohne Produktionsstillstand',
+    heroTitle: 'Industriereinigung ohne Produktionsstillstand',
     heroLead:
       'Wir reinigen nach Ihrem Schichtplan: UVV-konform, auditfähig dokumentiert und mit festen Eskalationswegen. Ihre Produktion läuft weiter, während wir arbeiten.',
-    seoTitle: 'Industriereinigung & Maschinenreinigung | AHAD Cleaning',
+    seoTitle: 'Industriereinigung im laufenden Betrieb | AHAD Cleaning',
     seoDescription:
-      'Industriereinigung und Maschinenreinigung im laufenden Betrieb: Hallen, Maschinen und Anlagen schichtbegleitend, UVV-konform und für Audits dokumentiert.',
+      'Industriereinigung im laufenden Betrieb: Produktionshallen, Hallenböden und Logistikflächen schichtbegleitend, UVV-konform und für Audits dokumentiert.',
     keywords: 'Industriereinigung, Produktionsreinigung, Maschinenreinigung, Hallenreinigung, Industriereinigung Stuttgart',
     icon: <Factory className="w-6 h-6" />,
     image: IMG.industrie,
@@ -164,6 +164,10 @@ export const SERVICES: ServiceData[] = [
       'Späne-, Öl- und Emulsionsmanagement',
       'Hochdruck- und Spezialverfahren',
       'Dokumentation für Audits & Zertifizierungen',
+    ],
+    detailLinks: [
+      { label: 'Maschinen- und Anlagenreinigung', to: '/leistungen/maschinenreinigung' },
+      { label: 'Stillstandsservice in Betriebsferien', to: '/leistungen/sonderreinigung-stillstandsservice' },
     ],
     faqs: [
       {
@@ -585,6 +589,79 @@ export const SERVICES: ServiceData[] = [
  * Eigene URL für eigene Suchanfragen, aber kein neunter Bereich in Menüs und Zählern.
  */
 export const DETAIL_SERVICES: ServiceData[] = [
+  {
+    slug: 'maschinenreinigung',
+    short: 'Maschinen & Anlagen',
+    path: '/leistungen/maschinenreinigung',
+    name: 'Maschinenreinigung',
+    tag: 'Industrie',
+    heroTitle: 'Maschinen- und Anlagenreinigung für die Produktion',
+    heroLead:
+      'Wir reinigen Bearbeitungszentren, Fertigungslinien, Förderanlagen und Maschinenumfelder nach den Vorgaben des Herstellers und Ihrer Arbeitssicherheit. Je nach Anlage im laufenden Betrieb, im Teilstillstand oder während der Betriebsruhe.',
+    seoTitle: 'Maschinenreinigung für Industrie & Produktion | AHAD',
+    seoDescription:
+      'Maschinen- und Anlagenreinigung im laufenden Betrieb oder im Stillstand: nach Herstellervorgaben, mit Freigabe und Protokoll, für Produktionsbetriebe.',
+    keywords: 'Maschinenreinigung, Anlagenreinigung, Industriereinigung Maschinen, Maschinenreinigung Villingen-Schwenningen, Stillstandsreinigung',
+    icon: <Factory className="w-6 h-6" />,
+    image: IMG.industrieDetail,
+    detailImage: IMG.industrie,
+    highlights: [
+      {
+        icon: <Shield className="w-7 h-7 text-brand" />,
+        title: 'Freigabe vor jedem Einsatz',
+        text: 'Wir reinigen erst, wenn Ihre Verantwortlichen die Anlage freigegeben und den Arbeitsbereich abgesichert haben.',
+      },
+      {
+        icon: <Gauge className="w-7 h-7 text-accent" />,
+        title: 'Passend zum Produktionsplan',
+        text: 'Laufender Betrieb, Teilstillstand oder Betriebsruhe: Den Zeitpunkt legen wir gemeinsam nach Anlage und Verschmutzung fest.',
+      },
+      {
+        icon: <FileCheck2 className="w-7 h-7 text-brand" />,
+        title: 'Protokoll je Anlage',
+        text: 'Gereinigte Bereiche, Abweichungen und Übergabe halten wir schriftlich fest. Das Protokoll können Sie für Audits verwenden.',
+      },
+    ],
+    scopeTitle: 'Welche Maschinen und Anlagen wir reinigen',
+    scopeIntro:
+      'Späne, Kühlschmierstoff, Öl und Staub setzen sich in und an Maschinen fest. Regelmäßige Reinigung hält Arbeitsbereiche sicher und erleichtert Wartung und Sichtkontrollen. Was gereinigt wird und was nicht, legen wir vorab je Anlage fest.',
+    scope: [
+      'Bearbeitungszentren und Werkzeugmaschinen (außen und Arbeitsraum)',
+      'Fertigungs- und Montagelinien',
+      'Förderbänder, Transport- und Verpackungsanlagen',
+      'Maschinenumfeld, Gruben und Hallenböden',
+      'Entfernen von Spänen, Öl- und Emulsionsrückständen',
+      'Reinigung im Stillstand und zwischen den Jahren',
+    ],
+    detailLinks: [
+      { label: 'Industriereinigung im laufenden Betrieb', to: '/leistungen/industrie-produktionsreinigung' },
+      { label: 'Stillstandsservice in Betriebsferien', to: '/leistungen/sonderreinigung-stillstandsservice' },
+    ],
+    faqs: [
+      {
+        question: 'Reinigen Sie Maschinen im laufenden Betrieb?',
+        answer:
+          'Das Maschinenumfeld und abgegrenzte Bereiche ja. Arbeitsräume und Bereiche mit bewegten Teilen reinigen wir nur, wenn die Anlage stillsteht und Ihre Verantwortlichen sie freigegeben haben.',
+      },
+      {
+        question: 'Wer gibt die Anlage frei?',
+        answer:
+          'Freigabe, Abschaltung und Sicherung gegen Wiedereinschalten liegen bei Ihren Verantwortlichen. Wir stimmen den Ablauf vorab ab, unterweisen unser Team für die Anlage und dokumentieren die Übergabe.',
+      },
+      {
+        question: 'Wann ist ein Stillstand sinnvoll?',
+        answer:
+          'Für gründliche Reinigungen von Arbeitsräumen, Gruben und Förderanlagen. Viele Betriebe nutzen Wartungsfenster, Wochenenden oder die Betriebsruhe zwischen den Jahren. Diese Termine sollten Sie frühzeitig einplanen.',
+      },
+      {
+        question: 'Was kostet eine Maschinenreinigung?',
+        answer:
+          'Das hängt von Anlage, Verschmutzung, Zugänglichkeit und Zeitfenster ab. Wir sehen uns die Maschinen vor Ort an und machen Ihnen danach ein Festpreisangebot.',
+      },
+    ],
+    ctaTitle: 'Maschinenreinigung anfragen',
+    ctaLead: 'Nennen Sie uns Anlagen und mögliche Zeitfenster. Wir besichtigen vor Ort und machen Ihnen ein Festpreisangebot.',
+  },
   {
     slug: 'teppichreinigung',
     short: 'Teppichboden, Polster & Stühle',

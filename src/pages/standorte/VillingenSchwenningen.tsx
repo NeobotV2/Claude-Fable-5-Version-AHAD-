@@ -108,7 +108,7 @@ const SERVICE_AREAS = [
 ];
 
 /** Umland nach Lage gruppiert: eigene Absätze statt dünner Einzelseiten je Ort. */
-const UMLAND = [
+const UMLAND: { title: string; text: string; link?: { label: string; to: string } }[] = [
   {
     title: 'St. Georgen, Königsfeld, Mönchweiler und Unterkirnach',
     text: 'Für Betriebe, Praxen und Verwaltungen auf der Schwarzwaldseite übernehmen wir Unterhalts- und Fensterreinigung. Im Winter räumen und streuen wir Zufahrten und Parkflächen, bevor der Betrieb beginnt; auf den höher gelegenen Strecken planen wir dafür früher ein.',
@@ -119,10 +119,12 @@ const UMLAND = [
   },
   {
     title: 'Donaueschingen, Hüfingen und Bräunlingen',
+    link: { label: 'Gebäudereinigung in Donaueschingen', to: '/standorte/donaueschingen' },
     text: 'In den Gewerbegebieten an der Baar reinigen wir Produktions- und Lagerflächen, Büros und Sozialräume. Baureinigung und Bauendreinigung stimmen wir mit der Bauleitung auf den Abnahmetermin ab.',
   },
   {
     title: 'Rottweil, Trossingen und Tuttlingen',
+    link: { label: 'Gebäudereinigung in Tuttlingen', to: '/standorte/tuttlingen' },
     text: 'Für Industrie und Medizintechnik in den Nachbarkreisen reinigen wir nach Ihren Hygiene- und QM-Vorgaben und dokumentieren jede Leistung für Audits.',
   },
 ];
@@ -334,6 +336,12 @@ export default function StandortVS() {
                 <div key={area.title} className="bg-white border border-gray-100 rounded-2xl p-6">
                   <h3 className="font-bold text-lg text-[#0B2341] mb-2">Reinigungsservice in {area.title}</h3>
                   <p className="text-sm text-gray-600 leading-relaxed">{area.text}</p>
+                  {area.link && (
+                    <Link to={area.link.to} className="inline-flex items-center gap-1.5 mt-3 text-sm font-semibold text-[#0B2341] hover:text-accent">
+                      {area.link.label}
+                      <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
+                    </Link>
+                  )}
                 </div>
               ))}
             </div>

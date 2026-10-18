@@ -11,9 +11,11 @@ const articlePaths = [
   '/fachwissen/kuechenabluftreinigung-vdi-2052-pflicht-ablauf-nachweis',
   '/fachwissen/was-kostet-gebaeudereinigung-stundensatz-preise',
   '/fachwissen/checkliste-reinigungsangebot',
+  '/fachwissen/raeum-und-streupflicht-unternehmen',
+  '/fachwissen/mindestlohn-gebaeudereinigung',
 ] as const;
 
-test('Fachwissen is organized by decision and role with eight canonical guides', async ({ page }) => {
+test('Fachwissen is organized by decision and role with ten canonical guides', async ({ page }) => {
   await page.goto('/fachwissen', { waitUntil: 'networkidle' });
 
   await expect(page.getByRole('heading', { level: 1, name: 'Gebäudereinigung sicher entscheiden' })).toBeVisible();
@@ -25,9 +27,9 @@ test('Fachwissen is organized by decision and role with eight canonical guides',
 
   const guideRegion = page.locator('section[aria-labelledby="alle-leitfaeden"]');
   const guideLinks = guideRegion.locator('a[href^="/fachwissen/"]');
-  await expect(guideLinks).toHaveCount(8);
+  await expect(guideLinks).toHaveCount(10);
   const hrefs = await guideLinks.evaluateAll((links) => links.map((link) => link.getAttribute('href')));
-  expect(new Set(hrefs).size).toBe(8);
+  expect(new Set(hrefs).size).toBe(10);
 });
 
 for (const path of articlePaths) {

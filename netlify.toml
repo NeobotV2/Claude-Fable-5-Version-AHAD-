@@ -68,13 +68,13 @@
 
 [[redirects]]
   from = "/maschinenreinigung"
-  to = "/leistungen/industrie-produktionsreinigung"
+  to = "/leistungen/maschinenreinigung"
   status = 301
   force = true
 
 [[redirects]]
   from = "/industrie-und-maschinenreinigung"
-  to = "/leistungen/industrie-produktionsreinigung"
+  to = "/leistungen/maschinenreinigung"
   status = 301
   force = true
 

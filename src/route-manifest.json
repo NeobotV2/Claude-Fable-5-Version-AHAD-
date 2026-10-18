@@ -25,6 +25,12 @@
       "priority": "0.8"
     },
     {
+      "path": "/leistungen/maschinenreinigung",
+      "component": "maschinenreinigung",
+      "index": true,
+      "priority": "0.7"
+    },
+    {
       "path": "/leistungen/glas-fassadenreinigung",
       "component": "glasFassadenreinigung",
       "index": true,
@@ -145,6 +151,18 @@
       "priority": "0.7"
     },
     {
+      "path": "/standorte/donaueschingen",
+      "component": "donaueschingen",
+      "index": true,
+      "priority": "0.7"
+    },
+    {
+      "path": "/standorte/tuttlingen",
+      "component": "tuttlingen",
+      "index": true,
+      "priority": "0.7"
+    },
+    {
       "path": "/karriere",
       "component": "karriere",
       "index": true,
@@ -225,6 +243,18 @@
     {
       "path": "/fachwissen/checkliste-reinigungsangebot",
       "component": "fachwissenCheckliste",
+      "index": true,
+      "priority": "0.6"
+    },
+    {
+      "path": "/fachwissen/raeum-und-streupflicht-unternehmen",
+      "component": "fachwissenStreupflicht",
+      "index": true,
+      "priority": "0.6"
+    },
+    {
+      "path": "/fachwissen/mindestlohn-gebaeudereinigung",
+      "component": "fachwissenMindestlohn",
       "index": true,
       "priority": "0.6"
     },

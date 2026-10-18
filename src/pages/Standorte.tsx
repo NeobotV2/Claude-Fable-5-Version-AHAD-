@@ -39,6 +39,15 @@ const regionen = [
   },
 ];
 
+/** Orte mit eigener Seite: Chips verlinken dorthin. */
+const ORTSSEITEN: Record<string, string> = {
+  'Villingen-Schwenningen': '/standorte/villingen-schwenningen',
+  Stuttgart: '/standorte/stuttgart',
+  Konstanz: '/standorte/konstanz',
+  Donaueschingen: '/standorte/donaueschingen',
+  Tuttlingen: '/standorte/tuttlingen',
+};
+
 const einzugsgebiete = [
   'Villingen-Schwenningen', 'Stuttgart', 'Konstanz', 'Rottweil', 'Tuttlingen', 'Donaueschingen',
   'Bad Dürrheim', 'Singen', 'Freiburg', 'Offenburg', 'Balingen', 'Sindelfingen',
@@ -49,7 +58,7 @@ export default function Standorte() {
     <div>
       <SEO
         title="Einsatzgebiete in Süddeutschland | AHAD Cleaning"
-        description="AHAD Cleaning betreut Einsatzgebiete in Villingen-Schwenningen, Stuttgart und Konstanz. Die Unternehmensadresse befindet sich in Villingen-Schwenningen."
+        description="Einsatzgebiete von AHAD Cleaning: Villingen-Schwenningen, Donaueschingen, Tuttlingen, Konstanz und Stuttgart. Unternehmenssitz in Villingen-Schwenningen."
         keywords="Gebäudereinigung Standorte, Reinigungsfirma Villingen-Schwenningen, Gebäudereinigung Stuttgart, Reinigung Konstanz"
       />
 
@@ -114,14 +123,24 @@ export default function Standorte() {
             />
             <Reveal delay={0.15}>
               <div className="mt-8 flex flex-wrap gap-2.5">
-                {einzugsgebiete.map((stadt) => (
-                  <span
-                    key={stadt}
-                    className="text-[13px] font-semibold bg-white border border-line px-4 py-2 rounded-full text-navy"
-                  >
-                    {stadt}
-                  </span>
-                ))}
+                {einzugsgebiete.map((stadt) =>
+                  ORTSSEITEN[stadt] ? (
+                    <Link
+                      key={stadt}
+                      to={ORTSSEITEN[stadt]}
+                      className="text-[13px] font-semibold bg-white border border-accent/40 px-4 py-2 rounded-full text-navy underline decoration-accent/50 underline-offset-2 hover:border-accent"
+                    >
+                      {stadt}
+                    </Link>
+                  ) : (
+                    <span
+                      key={stadt}
+                      className="text-[13px] font-semibold bg-white border border-line px-4 py-2 rounded-full text-navy"
+                    >
+                      {stadt}
+                    </span>
+                  ),
+                )}
                 <span className="text-[13px] font-bold bg-navy text-mint px-4 py-2 rounded-full">+ Umgebung</span>
               </div>
             </Reveal>

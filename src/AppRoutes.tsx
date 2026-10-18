@@ -26,6 +26,7 @@ const Baureinigung = lazy(() => import('./pages/leistungen/Baureinigung'));
 const MedizintechnikReinigung = lazy(() => import('./pages/leistungen/MedizintechnikReinigung'));
 const Sonderreinigung = lazy(() => import('./pages/leistungen/Sonderreinigung'));
 const Teppichreinigung = lazy(() => import('./pages/leistungen/Teppichreinigung'));
+const Maschinenreinigung = lazy(() => import('./pages/leistungen/Maschinenreinigung'));
 const Winterdienst = lazy(() => import('./pages/leistungen/Winterdienst'));
 const Kuechenabluftreinigung = lazy(() => import('./pages/leistungen/Kuechenabluftreinigung'));
 const IndustrieProduktion = lazy(() => import('./pages/branchen/IndustrieProduktion'));
@@ -36,6 +37,8 @@ const HotellerieObjektbetrieb = lazy(() => import('./pages/branchen/HotellerieOb
 const VillingenSchwenningen = lazy(() => import('./pages/standorte/VillingenSchwenningen'));
 const Stuttgart = lazy(() => import('./pages/standorte/Stuttgart'));
 const Konstanz = lazy(() => import('./pages/standorte/Konstanz'));
+const Donaueschingen = lazy(() => import('./pages/standorte/Donaueschingen'));
+const Tuttlingen = lazy(() => import('./pages/standorte/Tuttlingen'));
 const FachwissenIntervalle = lazy(() => import('./pages/fachwissen/Intervalle'));
 const FachwissenISO = lazy(() => import('./pages/fachwissen/ISO'));
 const FachwissenIndustrieProzess = lazy(() => import('./pages/fachwissen/IndustrieProzess'));
@@ -44,6 +47,8 @@ const FachwissenLeistungsverzeichnis = lazy(() => import('./pages/fachwissen/Lei
 const FachwissenVDI2052 = lazy(() => import('./pages/fachwissen/VDI2052'));
 const FachwissenKosten = lazy(() => import('./pages/fachwissen/Kosten'));
 const FachwissenCheckliste = lazy(() => import('./pages/fachwissen/Checkliste'));
+const FachwissenStreupflicht = lazy(() => import('./pages/fachwissen/Streupflicht'));
+const FachwissenMindestlohn = lazy(() => import('./pages/fachwissen/Mindestlohn'));
 const Referenzen = lazy(() => import('./pages/Referenzen'));
 const Admin = lazy(() => import('./pages/Admin'));
 const NotFound = lazy(() => import('./pages/NotFound'));
@@ -76,6 +81,7 @@ const ROUTE_COMPONENTS = {
   medizintechnikReinigung: MedizintechnikReinigung,
   sonderreinigung: Sonderreinigung,
   teppichreinigung: Teppichreinigung,
+  maschinenreinigung: Maschinenreinigung,
   winterdienst: Winterdienst,
   kuechenabluftreinigung: Kuechenabluftreinigung,
   industrieProduktion: IndustrieProduktion,
@@ -86,6 +92,8 @@ const ROUTE_COMPONENTS = {
   villingenSchwenningen: VillingenSchwenningen,
   stuttgart: Stuttgart,
   konstanz: Konstanz,
+  donaueschingen: Donaueschingen,
+  tuttlingen: Tuttlingen,
   fachwissenIntervalle: FachwissenIntervalle,
   fachwissenIso: FachwissenISO,
   fachwissenIndustrieProzess: FachwissenIndustrieProzess,
@@ -94,6 +102,8 @@ const ROUTE_COMPONENTS = {
   fachwissenVdi2052: FachwissenVDI2052,
   fachwissenKosten: FachwissenKosten,
   fachwissenCheckliste: FachwissenCheckliste,
+  fachwissenStreupflicht: FachwissenStreupflicht,
+  fachwissenMindestlohn: FachwissenMindestlohn,
   referenzen: Referenzen,
   admin: Admin,
 } as const;

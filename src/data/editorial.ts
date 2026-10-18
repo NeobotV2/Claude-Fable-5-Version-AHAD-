@@ -8,7 +8,9 @@ export type EditorialArticleSlug =
   | 'was-kostet-gebaeudereinigung-stundensatz-preise'
   | 'leistungsverzeichnis-gebaeudereinigung-erstellen'
   | 'kuechenabluftreinigung-vdi-2052-pflicht-ablauf-nachweis'
-  | 'iso-9001-iso-14001-gebaeudereinigung-unternehmen';
+  | 'iso-9001-iso-14001-gebaeudereinigung-unternehmen'
+  | 'raeum-und-streupflicht-unternehmen'
+  | 'mindestlohn-gebaeudereinigung';
 
 export type EditorialClusterKey =
   | 'planen-kalkulieren'
@@ -62,13 +64,18 @@ const official = (
   title: string,
   publisher: string,
   url: string,
-): EditorialSource => ({ title, publisher, url, kind: 'official-primary', checkedAt: '2026-07-13' });
+  checkedAt = '2026-07-13',
+): EditorialSource => ({ title, publisher, url, kind: 'official-primary', checkedAt });
 
 const guidance = (
   title: string,
   publisher: string,
   url: string,
-): EditorialSource => ({ title, publisher, url, kind: 'industry-guidance', checkedAt: '2026-07-13' });
+  checkedAt = '2026-07-13',
+): EditorialSource => ({ title, publisher, url, kind: 'industry-guidance', checkedAt });
+
+/** Prüfdatum der Quellen, die für die Beiträge vom Oktober 2026 erhoben wurden. */
+const CHECKED_2026_10 = '2026-10-18';
 
 const noReviewer = null;
 
@@ -375,6 +382,164 @@ export const EDITORIAL_ARTICLES = {
       'Redaktionsstand 13. Juli 2026: ISO 9001:2015 und ISO 14001:2026 sind die veröffentlichten Ausgaben. Ein Zertifikat ist anhand von Ausgabe, Gültigkeit, Zertifizierungsstelle, Standorten und Geltungsbereich zu prüfen; es belegt nicht jedes einzelne Reinigungsergebnis.',
     reviewer: noReviewer,
   },
+  'raeum-und-streupflicht-unternehmen': {
+    slug: 'raeum-und-streupflicht-unternehmen',
+    headline: 'Räum- und Streupflicht für Unternehmen: Was gilt, wer haftet?',
+    description:
+      'Orientierung zu Rechtsgrundlagen in Baden-Württemberg, Verkehrssicherung auf Gehweg, Zufahrt und Parkplatz sowie zur Übertragung an einen Winterdienst.',
+    listingTitle: 'Räum- und Streupflicht auf Betriebsflächen organisieren',
+    listingDescription:
+      'Gehweg, Zufahrt und Parkplatz zuordnen, den Winterdienst vertraglich beauftragen, Kontrollen einplanen und jeden Einsatz nachvollziehbar dokumentieren.',
+    cluster: 'qualitaet-compliance',
+    topic: 'Winterdienst & Haftung',
+    format: 'Leitfaden',
+    readingMinutes: 9,
+    audiences: ['Facility Management', 'Geschäftsführung'],
+    decisionQuestion:
+      'Welche Flächen müssen wir im Winter sichern, und was bleibt nach der Übertragung an einen Winterdienst bei uns?',
+    related: ['leistungsverzeichnis-gebaeudereinigung-erstellen', 'checkliste-reinigungsangebot'],
+    image: '/images/ahad/brand-back.webp',
+    datePublished: '2026-10-18',
+    dateModified: '2026-10-18',
+    sources: [
+      official(
+        '§ 41 StrG BW – Beleuchtungs-, Reinigungs-, Räum- und Streupflicht',
+        'Land Baden-Württemberg (Landesrecht BW)',
+        'https://www.landesrecht-bw.de/jportal/?quelle=jlink&query=StrG+BW+%C2%A7+41&psml=bsbawueprod.psml&max=true',
+        CHECKED_2026_10,
+      ),
+      official(
+        'Streupflichtsatzung der Großen Kreisstadt Villingen-Schwenningen (Fassung vom 4. Dezember 2002)',
+        'Stadt Villingen-Schwenningen',
+        'https://www.villingen-schwenningen.de/fileadmin/VS/01_Rathaus_Leben/Unsere_Stadt/Ortsrecht/streupflichtsatzung_04_12_2002.pdf',
+        CHECKED_2026_10,
+      ),
+      official(
+        'ASR A1.8 – Verkehrswege',
+        'Bundesanstalt für Arbeitsschutz und Arbeitsmedizin',
+        'https://www.baua.de/DE/Angebote/Regelwerk/ASR/pdf/ASR-A1-8.pdf',
+        CHECKED_2026_10,
+      ),
+      official(
+        'BGH, Urteil vom 22. Januar 2008 – VI ZR 126/07 (Übertragung der Streupflicht)',
+        'Bundesgerichtshof',
+        'https://juris.bundesgerichtshof.de/cgi-bin/bgh_notp/document.py?Gericht=bgh&Art=en&Datum=2008&Sort=2051&Seite=93&nr=1419&anz=2952&pos=2818',
+        CHECKED_2026_10,
+      ),
+      official(
+        'BGH, Urteil vom 12. Juni 2012 – VI ZR 138/11 (allgemeine Glätte)',
+        'Bundesgerichtshof',
+        'https://juris.bundesgerichtshof.de/cgi-bin/rechtsprechung/document.py?Gericht=bgh&Art=en&nr=60839&pos=0&anz=1',
+        CHECKED_2026_10,
+      ),
+      official(
+        'BGH, Urteil vom 2. Juli 2019 – VI ZR 184/18 (Streupflicht auf Parkplätzen)',
+        'Bundesgerichtshof',
+        'https://juris.bundesgerichtshof.de/cgi-bin/rechtsprechung/document.py?Gericht=bgh&Art=en&nr=98764',
+        CHECKED_2026_10,
+      ),
+      official(
+        'Räum- und Streupflicht des Vermieters an der Grundstücksgrenze (VIII ZR 255/16)',
+        'Bundesgerichtshof, Pressemitteilung',
+        'https://www.bundesgerichtshof.de/SharedDocs/Pressemitteilungen/DE/2018/2018036.html',
+        CHECKED_2026_10,
+      ),
+      official(
+        'Haftung des Vermieters bei Eisglätte trotz beauftragtem Dienstleister (VIII ZR 250/23)',
+        'Bundesgerichtshof, Pressemitteilung',
+        'https://www.bundesgerichtshof.de/SharedDocs/Pressemitteilungen/DE/2025/2025187.html',
+        CHECKED_2026_10,
+      ),
+    ],
+    orientationNote:
+      'Keine Rechtsberatung. Umfang, Uhrzeiten und zulässige Streumittel regelt die Satzung der jeweiligen Gemeinde in ihrer aktuellen Fassung. Ob und wie weit eine Haftung besteht, hängt vom Einzelfall, von den Verträgen und von der Rechtsprechung ab. Redaktionsstand 18. Oktober 2026.',
+    reviewer: noReviewer,
+  },
+  'mindestlohn-gebaeudereinigung': {
+    slug: 'mindestlohn-gebaeudereinigung',
+    headline: 'Mindestlohn in der Gebäudereinigung 2026 und Ausblick 2027',
+    description:
+      'Branchenmindestlöhne seit 1. Januar 2026, Stand der Tarifrunde, gesetzlicher Mindestlohn 2027 und die Folgen für Stundensätze, Verträge und Auftraggeber.',
+    listingTitle: 'Mindestlohn Gebäudereinigung 2026 und Ausblick 2027',
+    listingDescription:
+      'Was Lohngruppe 1 und 6 seit Januar 2026 vorschreiben, wo die Tarifrunde steht und wie Auftraggeber Preisanpassung und Haftung einordnen.',
+    cluster: 'planen-kalkulieren',
+    topic: 'Lohn & Tarif',
+    format: 'Leitfaden',
+    readingMinutes: 8,
+    audiences: ['Einkauf', 'Geschäftsführung'],
+    decisionQuestion:
+      'Welche Lohnuntergrenzen gelten, und wie wirken sich Änderungen 2027 auf laufende Reinigungsverträge aus?',
+    related: ['was-kostet-gebaeudereinigung-stundensatz-preise', 'checkliste-reinigungsangebot'],
+    image: '/images/ahad/karriere.webp',
+    datePublished: '2026-10-18',
+    dateModified: '2026-10-18',
+    sources: [
+      official(
+        'Zehnte Verordnung über zwingende Arbeitsbedingungen in der Gebäudereinigung (10. GebäudeArbbV)',
+        'Bundesministerium für Arbeit und Soziales',
+        'https://www.bmas.de/DE/Service/Gesetze-und-Gesetzesvorhaben/zehnte-verordnung-zwingende-arbeitsbedingungen-gebaeudereinigung.html',
+        CHECKED_2026_10,
+      ),
+      official(
+        '§ 1 MiLoV5 – Höhe des Mindestlohns ab 1. Januar 2026 und 1. Januar 2027',
+        'Bundesministerium der Justiz / Bundesamt für Justiz',
+        'https://www.gesetze-im-internet.de/milov5/__1.html',
+        CHECKED_2026_10,
+      ),
+      official(
+        '§ 13 MiLoG – Haftung des Auftraggebers',
+        'Bundesministerium der Justiz / Bundesamt für Justiz',
+        'https://www.gesetze-im-internet.de/milog/__13.html',
+        CHECKED_2026_10,
+      ),
+      official(
+        '§ 14 AEntG – Haftung des Auftraggebers',
+        'Bundesministerium der Justiz / Bundesamt für Justiz',
+        'https://www.gesetze-im-internet.de/aentg_2009/__14.html',
+        CHECKED_2026_10,
+      ),
+      official(
+        '§ 21 MiLoG – Bußgeldvorschriften',
+        'Bundesministerium der Justiz / Bundesamt für Justiz',
+        'https://www.gesetze-im-internet.de/milog/__21.html',
+        CHECKED_2026_10,
+      ),
+      official(
+        'Haftung des Auftraggebers bei Mindestarbeitsbedingungen',
+        'Zoll online, Generalzolldirektion',
+        'https://www.zoll.de/DE/Fachthemen/Arbeit/Mindestarbeitsbedingungen/Haftung-Auftraggebers/haftung-auftraggebers_node.html',
+        CHECKED_2026_10,
+      ),
+      official(
+        'BAG, Urteil vom 16. Oktober 2019 – 5 AZR 241/18 (Unternehmerbegriff der Auftraggeberhaftung)',
+        'Bundesarbeitsgericht',
+        'https://www.bundesarbeitsgericht.de/entscheidung/5-azr-241-18/',
+        CHECKED_2026_10,
+      ),
+      official(
+        '§ 1 PrKG – Preisklauselverbot und Kostenelementeklauseln',
+        'Bundesministerium der Justiz / Bundesamt für Justiz',
+        'https://www.gesetze-im-internet.de/prkg/__1.html',
+        CHECKED_2026_10,
+      ),
+      guidance(
+        'Reinigungsarbeit wird unter Wert verkauft (erste Verhandlungsrunde 2026)',
+        'IG Bauen-Agrar-Umwelt',
+        'https://igbau.de/Reinigungsarbeit-wird-unter-Wert-verkauft.html',
+        CHECKED_2026_10,
+      ),
+      guidance(
+        'Gebäudereiniger: Arbeitgeber lehnen 13-Prozent-Forderung ab',
+        'Deutsche Handwerks Zeitung',
+        'https://www.deutsche-handwerks-zeitung.de/gebaeudereiniger-arbeitgeber-lehnen-13-prozent-forderung-ab-383375/',
+        CHECKED_2026_10,
+      ),
+    ],
+    orientationNote:
+      'Redaktionsstand 18. Oktober 2026: Die Werte für 2026 beruhen auf der Zehnten Verordnung über zwingende Arbeitsbedingungen in der Gebäudereinigung, die am 31. Dezember 2026 ausläuft. Ein Tarifergebnis für 2027 lag zu diesem Zeitpunkt nicht vor. Vertrags- und Haftungsfragen sind im Einzelfall rechtlich zu prüfen; der Beitrag ist keine Rechtsberatung.',
+    reviewer: noReviewer,
+  },
 } as const satisfies Record<EditorialArticleSlug, EditorialArticle>;
 
 export const EDITORIAL_CLUSTER_ORDER: readonly EditorialClusterKey[] = [
@@ -470,6 +635,20 @@ export const EDITORIAL_SECTIONS = {
     { id: 'normen-vergleichen', label: 'Normen vergleichen' },
     { id: 'beschaffung', label: 'In der Beschaffung nutzen' },
     { id: 'zertifikat-pruefen', label: 'Zertifikat prüfen' },
+  ],
+  'raeum-und-streupflicht-unternehmen': [
+    { id: 'rechtsgrundlagen-bw', label: 'Rechtsgrundlagen in Baden-Württemberg' },
+    { id: 'flaechen-zuordnen', label: 'Gehweg, Zufahrt, Parkplatz' },
+    { id: 'zeiten-streumittel', label: 'Zeiten und Streumittel' },
+    { id: 'winterdienst-beauftragen', label: 'Pflicht übertragen' },
+    { id: 'einsatzprotokoll-vertrag', label: 'Einsatzprotokoll & Vertrag' },
+  ],
+  'mindestlohn-gebaeudereinigung': [
+    { id: 'branchenmindestlohn-2026', label: 'Branchenmindestlohn 2026' },
+    { id: 'tarifrunde-2027', label: 'Tarifrunde für 2027' },
+    { id: 'gesetzlicher-mindestlohn-2027', label: 'Gesetzlicher Mindestlohn 2027' },
+    { id: 'stundensaetze-vertraege', label: 'Stundensätze & Verträge' },
+    { id: 'auftraggeberhaftung', label: 'Auftraggeberhaftung' },
   ],
 } as const satisfies Record<EditorialArticleSlug, readonly EditorialSectionLink[]>;
 
