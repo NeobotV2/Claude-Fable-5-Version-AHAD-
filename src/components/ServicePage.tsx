@@ -23,6 +23,7 @@ const FACHWISSEN_BY_SLUG: Record<string, EditorialArticleSlug[]> = {
     'was-kostet-gebaeudereinigung-stundensatz-preise',
     'unterhaltsreinigung-unternehmen-reinigungsintervalle',
     'leistungsverzeichnis-gebaeudereinigung-erstellen',
+    'mindestlohn-gebaeudereinigung',
   ],
   'industrie-produktionsreinigung': [
     'industrie-produktionsreinigung-ohne-prozessstoerung',
@@ -30,6 +31,7 @@ const FACHWISSEN_BY_SLUG: Record<string, EditorialArticleSlug[]> = {
   ],
   'glas-fassadenreinigung': [
     'reinigungsfirma-wechseln-checkliste-tipps',
+    'mindestlohn-gebaeudereinigung',
   ],
   baureinigung: [
     'leistungsverzeichnis-gebaeudereinigung-erstellen',
@@ -42,6 +44,7 @@ const FACHWISSEN_BY_SLUG: Record<string, EditorialArticleSlug[]> = {
     'industrie-produktionsreinigung-ohne-prozessstoerung',
   ],
   'winterdienst-hausmeisterservice': [
+    'raeum-und-streupflicht-unternehmen',
     'reinigungsfirma-wechseln-checkliste-tipps',
   ],
   'kuechenabluftreinigung-vdi-2052': [

@@ -247,6 +247,18 @@
       "priority": "0.6"
     },
     {
+      "path": "/fachwissen/raeum-und-streupflicht-unternehmen",
+      "component": "fachwissenStreupflicht",
+      "index": true,
+      "priority": "0.6"
+    },
+    {
+      "path": "/fachwissen/mindestlohn-gebaeudereinigung",
+      "component": "fachwissenMindestlohn",
+      "index": true,
+      "priority": "0.6"
+    },
+    {
       "path": "/kontakt",
       "component": "kontakt",
       "index": true,

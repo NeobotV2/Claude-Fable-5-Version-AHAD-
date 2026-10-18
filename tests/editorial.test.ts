@@ -31,7 +31,7 @@ test('every editorial article has dates, orientation and classified HTTPS source
     sources: Array<{ url: string; kind: string; checkedAt: string }>;
   }>;
 
-  assert.equal(articles.length, 8);
+  assert.equal(articles.length, 10);
   assert.equal(EDITORIAL_ARTICLE_LIST.length, articles.length);
   assert.equal(EDITORIAL_CLUSTER_ORDER.length, 4);
   for (const article of articles) {
@@ -88,6 +88,17 @@ test('claim-sensitive guides use directly relevant sources rather than generic i
 
   assert.ok(urls('iso-9001-iso-14001-gebaeudereinigung-unternehmen').some((url: string) => url.endsWith('/__49.html')));
   assert.ok(urls('kuechenabluftreinigung-vdi-2052-pflicht-ablauf-nachweis').some((url: string) => url.includes('vdi-2052-blatt-2')));
+
+  const winter = urls('raeum-und-streupflicht-unternehmen');
+  assert.ok(winter.some((url: string) => url.includes('landesrecht-bw.de') && url.includes('StrG+BW+%C2%A7+41')));
+  assert.ok(winter.some((url: string) => url.includes('villingen-schwenningen.de') && url.includes('streupflichtsatzung')));
+  assert.ok(winter.some((url: string) => url.includes('bundesgerichtshof.de')));
+
+  const wage = urls('mindestlohn-gebaeudereinigung');
+  assert.ok(wage.some((url: string) => url.includes('zehnte-verordnung-zwingende-arbeitsbedingungen-gebaeudereinigung')));
+  assert.ok(wage.some((url: string) => url.endsWith('/milov5/__1.html')));
+  assert.ok(wage.some((url: string) => url.endsWith('/milog/__13.html')));
+  assert.ok(wage.some((url: string) => url.endsWith('/aentg_2009/__14.html')));
 });
 test('reviewer gate is fail-closed for missing evidence and expired verification', async () => {
   const { isActiveReviewer } = await editorialModule;

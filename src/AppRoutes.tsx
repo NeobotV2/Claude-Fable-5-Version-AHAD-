@@ -47,6 +47,8 @@ const FachwissenLeistungsverzeichnis = lazy(() => import('./pages/fachwissen/Lei
 const FachwissenVDI2052 = lazy(() => import('./pages/fachwissen/VDI2052'));
 const FachwissenKosten = lazy(() => import('./pages/fachwissen/Kosten'));
 const FachwissenCheckliste = lazy(() => import('./pages/fachwissen/Checkliste'));
+const FachwissenStreupflicht = lazy(() => import('./pages/fachwissen/Streupflicht'));
+const FachwissenMindestlohn = lazy(() => import('./pages/fachwissen/Mindestlohn'));
 const Referenzen = lazy(() => import('./pages/Referenzen'));
 const Admin = lazy(() => import('./pages/Admin'));
 const NotFound = lazy(() => import('./pages/NotFound'));
@@ -100,6 +102,8 @@ const ROUTE_COMPONENTS = {
   fachwissenVdi2052: FachwissenVDI2052,
   fachwissenKosten: FachwissenKosten,
   fachwissenCheckliste: FachwissenCheckliste,
+  fachwissenStreupflicht: FachwissenStreupflicht,
+  fachwissenMindestlohn: FachwissenMindestlohn,
   referenzen: Referenzen,
   admin: Admin,
 } as const;
