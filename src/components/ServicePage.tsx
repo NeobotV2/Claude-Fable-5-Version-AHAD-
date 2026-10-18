@@ -14,7 +14,7 @@ import {
   getEditorialArticlePath,
   type EditorialArticleSlug,
 } from '@/data/editorial';
-import { PROMISES, SITE, ORG_REF } from '@/lib/site';
+import { PROMISES, SITE, ORG_REF, AREA_SERVED } from '@/lib/site';
 
 /** Passende Fachwissen-Artikel je Leistung — interne Verlinkung in den
  *  Wissensbereich (SEO + Verweildauer). Bewusst kuratiert statt automatisch. */
@@ -66,7 +66,7 @@ export default function ServicePage({ service }: { service: ServiceData }) {
     name: service.name,
     serviceType: service.name,
     provider: ORG_REF,
-    areaServed: 'Süddeutschland',
+    areaServed: AREA_SERVED,
     description: service.seoDescription,
   };
 
@@ -163,6 +163,19 @@ export default function ServicePage({ service }: { service: ServiceData }) {
                   </li>
                 ))}
               </ul>
+              {service.detailLinks && (
+                <p className="mt-6 text-[15px] text-slate">
+                  Mehr dazu:{' '}
+                  {service.detailLinks.map((link, i) => (
+                    <span key={link.to}>
+                      {i > 0 && ', '}
+                      <Link to={link.to} className="font-semibold text-brand underline underline-offset-2 hover:text-brand-light">
+                        {link.label}
+                      </Link>
+                    </span>
+                  ))}
+                </p>
+              )}
             </Reveal>
             <Reveal delay={0.25} className="mt-10">
               <div className="flex flex-col sm:flex-row gap-4">
@@ -234,7 +247,7 @@ export default function ServicePage({ service }: { service: ServiceData }) {
                 >
                   <SmartImage
                     src={rel.image}
-                    alt={rel.name}
+                    alt=""
                     className="absolute inset-0"
                     imgClassName="opacity-60 transition-transform duration-700 group-hover:scale-105"
                   />

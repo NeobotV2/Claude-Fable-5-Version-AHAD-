@@ -10,7 +10,7 @@ export type LeadType = 'contact' | 'offer_lead' | 'job_application';
 export type SubmitLeadResult =
   | { ok: true; duplicate: boolean; notificationSent: boolean }
   | { ok: false; kind: 'validation'; message: string; fields: Record<string, string> }
-  | { ok: false; kind: 'rate_limited' | 'rejected' | 'network'; message: string };
+  | { ok: false; kind: 'rate_limited' | 'rejected' | 'network'; message: string; code: string };
 
 type ApiPayload = {
   success?: boolean;
@@ -90,7 +90,7 @@ export async function submitLead(input: {
         }),
       });
     } catch {
-      return { ok: false, kind: 'network', message: GENERIC_SUBMIT_ERROR };
+      return { ok: false, kind: 'network', message: GENERIC_SUBMIT_ERROR, code: 'NETWORK' };
     }
 
     const result = (await response.json().catch(() => null)) as ApiPayload | null;
@@ -119,10 +119,13 @@ export async function submitLead(input: {
         ok: false,
         kind: 'rate_limited',
         message: 'Zu viele Anfragen in kurzer Zeit. Bitte versuchen Sie es in einer Minute erneut oder rufen Sie uns an.',
+        code: 'RATE_LIMITED',
       };
     }
-    return { ok: false, kind: 'rejected', message: GENERIC_SUBMIT_ERROR };
+    // Fehlercode des Servers (oder HTTP-Status) mitgeben, damit ein Abbruch im
+    // Formular benennbar ist, statt nur „hat nicht geklappt“.
+    return { ok: false, kind: 'rejected', message: GENERIC_SUBMIT_ERROR, code: code || `HTTP_${response.status}` };
   }
 
-  return { ok: false, kind: 'rejected', message: GENERIC_SUBMIT_ERROR };
+  return { ok: false, kind: 'rejected', message: GENERIC_SUBMIT_ERROR, code: 'IDEMPOTENCY_REUSE' };
 }

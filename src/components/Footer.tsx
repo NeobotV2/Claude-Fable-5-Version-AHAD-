@@ -136,7 +136,7 @@ export default function Footer() {
           {/* Navigationsspalten */}
           {columns.map((col) => (
             <nav key={col.title} className="lg:col-span-2" aria-label={col.title}>
-              <h3 className="text-[12px] font-black uppercase tracking-[0.2em] text-blue-100/80 mb-5">{col.title}</h3>
+              <p className="text-[12px] font-black uppercase tracking-[0.2em] text-blue-100/80 mb-5">{col.title}</p>
               <ul className="space-y-3">
                 {col.links.map((link) => (
                   <li key={link.href}>
@@ -154,7 +154,7 @@ export default function Footer() {
 
           {/* Kontakt — breitere Spalte, damit Adresse & E-Mail nicht umbrechen */}
           <div className="lg:col-span-3">
-            <h3 className="text-[12px] font-black uppercase tracking-[0.2em] text-blue-100/80 mb-5">Kontakt</h3>
+            <p className="text-[12px] font-black uppercase tracking-[0.2em] text-blue-100/80 mb-5">Kontakt</p>
             <ul className="space-y-4 text-[14px] mb-6">
               <li className="flex gap-3">
                 <MapPin size={17} className="text-mint flex-shrink-0 mt-0.5" />
@@ -179,6 +179,12 @@ export default function Footer() {
               <li className="flex gap-3">
                 <Clock size={17} className="text-mint flex-shrink-0 mt-0.5" />
                 <span className="text-blue-100/75">{SITE.hours}</span>
+              </li>
+              <li className="flex gap-3">
+                <ArrowRight size={17} className="text-mint flex-shrink-0 mt-0.5" />
+                <Link to="/kontakt" className="text-blue-100/75 hover:text-mint transition-colors link-underline">
+                  Zum Kontaktformular
+                </Link>
               </li>
             </ul>
 

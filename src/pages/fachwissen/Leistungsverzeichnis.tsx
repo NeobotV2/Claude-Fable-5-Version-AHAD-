@@ -149,10 +149,10 @@ export default function FachwissenLeistungsverzeichnis() {
                 </caption>
                 <thead>
                   <tr className="bg-navy text-white">
-                    <th scope="col" className="px-4 py-3 font-bold">Raumgruppe / Fläche</th>
-                    <th scope="col" className="px-4 py-3 font-bold">Tätigkeit</th>
-                    <th scope="col" className="px-4 py-3 font-bold">Turnus</th>
-                    <th scope="col" className="px-4 py-3 font-bold">Qualitätskriterium</th>
+                    <th scope="col" className="px-4 py-3 font-bold text-white">Raumgruppe / Fläche</th>
+                    <th scope="col" className="px-4 py-3 font-bold text-white">Tätigkeit</th>
+                    <th scope="col" className="px-4 py-3 font-bold text-white">Turnus</th>
+                    <th scope="col" className="px-4 py-3 font-bold text-white">Qualitätskriterium</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -187,9 +187,9 @@ export default function FachwissenLeistungsverzeichnis() {
                 <caption className="sr-only">Vergleich der beiden Leistungsmodelle</caption>
                 <thead>
                   <tr className="bg-navy text-white">
-                    <th scope="col" className="px-4 py-3 font-bold">Kriterium</th>
-                    <th scope="col" className="px-4 py-3 font-bold">Verrichtungsorientiert</th>
-                    <th scope="col" className="px-4 py-3 font-bold">Ergebnisorientiert</th>
+                    <th scope="col" className="px-4 py-3 font-bold text-white">Kriterium</th>
+                    <th scope="col" className="px-4 py-3 font-bold text-white">Verrichtungsorientiert</th>
+                    <th scope="col" className="px-4 py-3 font-bold text-white">Ergebnisorientiert</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-line">
@@ -248,9 +248,9 @@ export default function FachwissenLeistungsverzeichnis() {
                 <caption className="sr-only">Inhalte von Leistungsverzeichnis, Service-Level, kaufmännischen Regelungen und Nachweisen</caption>
                 <thead>
                   <tr className="bg-navy text-white">
-                    <th scope="col" className="px-4 py-3 font-bold">Baustein</th>
-                    <th scope="col" className="px-4 py-3 font-bold">Typische Inhalte</th>
-                    <th scope="col" className="px-4 py-3 font-bold">Prüffrage</th>
+                    <th scope="col" className="px-4 py-3 font-bold text-white">Baustein</th>
+                    <th scope="col" className="px-4 py-3 font-bold text-white">Typische Inhalte</th>
+                    <th scope="col" className="px-4 py-3 font-bold text-white">Prüffrage</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-line">

@@ -180,9 +180,9 @@ export default function FachwissenIntervalle() {
                 <caption className="sr-only">Objektbezogene Planungsansätze für verschiedene Raumgruppen</caption>
                 <thead>
                   <tr className="bg-navy text-white">
-                    <th scope="col" className="px-4 py-3 font-bold">Bereich</th>
-                    <th scope="col" className="px-4 py-3 font-bold">Mögliche Planungslogik</th>
-                    <th scope="col" className="px-4 py-3 font-bold">Objektbezogen zu prüfen</th>
+                    <th scope="col" className="px-4 py-3 font-bold text-white">Bereich</th>
+                    <th scope="col" className="px-4 py-3 font-bold text-white">Mögliche Planungslogik</th>
+                    <th scope="col" className="px-4 py-3 font-bold text-white">Objektbezogen zu prüfen</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-line">

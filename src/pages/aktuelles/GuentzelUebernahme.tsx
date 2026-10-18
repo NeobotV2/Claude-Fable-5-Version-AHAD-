@@ -41,8 +41,8 @@ export default function AktuellesGuentzelUebernahme() {
     <div>
       <SEO
         ogType="article"
-        title="Güntzel Objekt-Service wird fortgeführt | AHAD Cleaning"
-        description={ITEM.summary.slice(0, 155)}
+        title="Güntzel Objekt-Service: jetzt Teil von AHAD Cleaning"
+        description="Güntzel Objekt-Service wird seit 1. September 2026 von AHAD Cleaning fortgeführt: Name, rund 25 Mitarbeitende und Verträge bleiben. Antworten für Kunden."
         keywords="Güntzel Objekt-Service, AHAD Cleaning Übernahme, Gebäudereinigung Villingen-Schwenningen, Betriebsfortführung"
         schema={buildNewsSchema(ITEM)}
       />

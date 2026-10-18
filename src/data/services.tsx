@@ -49,6 +49,8 @@ export interface ServiceData {
   scopeTitle: string;
   scopeIntro: string;
   scope: string[];
+  /** Vertiefende Seiten zu einzelnen Arbeiten (interne Verlinkung). */
+  detailLinks?: { label: string; to: string }[];
   faqs: FAQItem[];
   ctaTitle: string;
   ctaLead: string;
@@ -64,9 +66,9 @@ export const SERVICES: ServiceData[] = [
     heroTitle: 'Unterhaltsreinigung für Büros, Verwaltung und Gewerbe',
     heroLead:
       'Wir reinigen Ihre Räume in festen Intervallen: mit eingespieltem Team, eigener Objektleitung und dokumentierten Kontrollen. Intern muss sich niemand darum kümmern.',
-    seoTitle: 'Unterhaltsreinigung für Unternehmen | AHAD Cleaning',
+    seoTitle: 'Unterhaltsreinigung & Büroreinigung für Firmen | AHAD',
     seoDescription:
-      'Unterhaltsreinigung für Büros, Verwaltungen und Gewerbe in Süddeutschland. Klare Zuständigkeiten, dokumentierte Qualitätskontrolle. Jetzt Besichtigung anfragen.',
+      'Unterhaltsreinigung und Büroreinigung für Unternehmen in Villingen-Schwenningen und Region: feste Teams, eigene Objektleitung, dokumentierte Kontrollen.',
     keywords: 'Unterhaltsreinigung Unternehmen, Büroreinigung, Gebäudereinigung Villingen-Schwenningen, Reinigungsfirma Büro',
     icon: <LayoutDashboard className="w-6 h-6" />,
     image: IMG.unterhaltsreinigung,
@@ -125,12 +127,12 @@ export const SERVICES: ServiceData[] = [
     path: '/leistungen/industrie-produktionsreinigung',
     name: 'Industrie- & Produktionsreinigung',
     tag: 'Schichtbetrieb',
-    heroTitle: 'Industriereinigung ohne Produktionsstillstand',
+    heroTitle: 'Industrie- und Maschinenreinigung ohne Produktionsstillstand',
     heroLead:
       'Wir reinigen nach Ihrem Schichtplan: UVV-konform, auditfähig dokumentiert und mit festen Eskalationswegen. Ihre Produktion läuft weiter, während wir arbeiten.',
-    seoTitle: 'Industrie- & Produktionsreinigung | AHAD Cleaning',
+    seoTitle: 'Industriereinigung & Maschinenreinigung | AHAD Cleaning',
     seoDescription:
-      'Industriereinigung im laufenden Betrieb: Maschinen- und Anlagenreinigung, Hallenreinigung, schichtbegleitende Ausführung. UVV-konform & auditfähig.',
+      'Industriereinigung und Maschinenreinigung im laufenden Betrieb: Hallen, Maschinen und Anlagen schichtbegleitend, UVV-konform und für Audits dokumentiert.',
     keywords: 'Industriereinigung, Produktionsreinigung, Maschinenreinigung, Hallenreinigung, Industriereinigung Stuttgart',
     icon: <Factory className="w-6 h-6" />,
     image: IMG.industrie,
@@ -189,12 +191,12 @@ export const SERVICES: ServiceData[] = [
     path: '/leistungen/glas-fassadenreinigung',
     name: 'Glas- & Fassadenreinigung',
     tag: 'Werterhalt',
-    heroTitle: 'Glas- und Fassadenreinigung für Gewerbeobjekte',
+    heroTitle: 'Fensterreinigung, Glas- und Fassadenreinigung für Gewerbe',
     heroLead:
       'Wir reinigen Glasflächen streifenfrei und erhalten den Wert Ihrer Fassade: mit Osmose-Technik und geeigneten Höhenzugängen.',
-    seoTitle: 'Glas- & Fassadenreinigung für Gewerbe | AHAD Cleaning',
+    seoTitle: 'Fensterreinigung & Glasreinigung für Gewerbe | AHAD',
     seoDescription:
-      'Glas- und Fassadenreinigung für Gewerbeobjekte in Süddeutschland: streifenfreie Fenster, Osmose-Technik, Hubsteiger und Industriekletterer. Jetzt anfragen.',
+      'Fensterreinigung und Glasreinigung für Büros und Gewerbe in Villingen-Schwenningen und Region: Fenster, Rahmen, Glasfronten und Fassaden, mit Osmose-Technik.',
     keywords: 'Glasreinigung Unternehmen, Fassadenreinigung Gewerbe, Fensterreinigung Büro, Osmose Reinigung',
     icon: <Building2 className="w-6 h-6" />,
     image: IMG.glasfassade,
@@ -253,12 +255,12 @@ export const SERVICES: ServiceData[] = [
     path: '/leistungen/baureinigung',
     name: 'Baureinigung',
     tag: 'Zum Abnahmetermin',
-    heroTitle: 'Baureinigung abgestimmt auf Ihren Abnahmetermin',
+    heroTitle: 'Baureinigung und Bauendreinigung zum Abnahmetermin',
     heroLead:
       'Von der Baugrob- bis zur Baufeinreinigung: Wir übergeben besenrein oder bezugsfertig zum vereinbarten Termin, auch wenn es auf der Baustelle eng wird.',
-    seoTitle: 'Baureinigung: Grob- & Feinreinigung | AHAD Cleaning',
+    seoTitle: 'Baureinigung & Bauendreinigung für Gewerbe | AHAD',
     seoDescription:
-      'Baureinigung in Süddeutschland: Baugrobreinigung, Baufeinreinigung und Endreinigung vor der Übergabe, abgestimmt mit Bauleitung und Bauzeitenplan.',
+      'Baureinigung und Bauendreinigung in Baden-Württemberg: Baugrob-, Baufein- und Endreinigung vor der Übergabe, abgestimmt mit Bauleitung und Bauzeitenplan.',
     keywords: 'Baureinigung, Baufeinreinigung, Baugrobreinigung, Bauendreinigung, Baustellenreinigung',
     icon: <HardHat className="w-6 h-6" />,
     image: IMG.baureinigung,
@@ -320,9 +322,9 @@ export const SERVICES: ServiceData[] = [
     heroTitle: 'Reinigung für Medizintechnik und sensible Bereiche',
     heroLead:
       'Wo Hygiene über die Produktqualität entscheidet, braucht es geschultes Personal und vollständige Nachweise. Wir reinigen nach Ihren Standards und SOPs: mit festem Team und dokumentierter Ausführung.',
-    seoTitle: 'Medizintechnik-Reinigung & Reinraum | AHAD Cleaning',
+    seoTitle: 'Reinraumreinigung & Medizintechnik-Reinigung | AHAD',
     seoDescription:
-      'Reinigung für Medizintechnik, Labore und sensible Produktionsbereiche: Prozesse nach Ihren QM-Vorgaben, geschultes Personal, nachvollziehbare Dokumentation.',
+      'Reinraumreinigung und Reinigung für Medizintechnik in Tuttlingen, Villingen-Schwenningen und Region: nach Ihren SOPs und QM-Vorgaben, mit Nachweisen für Audits.',
     keywords: 'Medizintechnik Reinigung, Reinraumreinigung, ISO Reinigung, Hygienereinigung Produktion',
     icon: <Microscope className="w-6 h-6" />,
     image: IMG.medizintechnik,
@@ -420,6 +422,7 @@ export const SERVICES: ServiceData[] = [
       'Graffiti-Entfernung & Spezialverfahren',
       'Einmalige Projekte & feste Intervalle',
     ],
+    detailLinks: [{ label: 'Teppichreinigung für Büro und Gewerbe', to: '/leistungen/teppichreinigung' }],
     faqs: [
       {
         question: 'Was ist ein Stillstandsservice?',
@@ -446,12 +449,12 @@ export const SERVICES: ServiceData[] = [
     path: '/leistungen/winterdienst-hausmeisterservice',
     name: 'Winterdienst & Hausmeisterservice',
     tag: 'Verkehrssicher',
-    heroTitle: 'Winterdienst und Hausmeisterservice aus einer Hand',
+    heroTitle: 'Winterdienst und Hausmeisterservice in Villingen-Schwenningen',
     heroLead:
       'Wir räumen und streuen Ihre Flächen und dokumentieren jeden Einsatz: So erfüllen Sie Ihre Verkehrssicherungspflicht. Das ganze Jahr über übernimmt unser Hausmeisterservice die technische Objektbetreuung.',
-    seoTitle: 'Winterdienst & Hausmeisterservice | AHAD Cleaning',
+    seoTitle: 'Winterdienst Villingen-Schwenningen für Gewerbe | AHAD',
     seoDescription:
-      'Winterdienst mit Einsatzdokumentation und Hausmeisterservice für Gewerbeobjekte in Süddeutschland. So erfüllen Sie Ihre Verkehrssicherungspflicht.',
+      'Winterdienst für Gewerbe in Villingen-Schwenningen, Bad Dürrheim, Donaueschingen und Umgebung: Räumen und Streuen ab 4 Uhr, jeder Einsatz protokolliert.',
     keywords: 'Winterdienst Gewerbe, Hausmeisterservice, Verkehrssicherungspflicht, Räumdienst, Objektbetreuung',
     icon: <Snowflake className="w-6 h-6" />,
     image: IMG.winterdienst,
@@ -459,8 +462,8 @@ export const SERVICES: ServiceData[] = [
     highlights: [
       {
         icon: <Shield className="w-7 h-7 text-brand" />,
-        title: 'Haftungsrisiko ausgelagert',
-        text: 'Wir übernehmen Ihre Verkehrssicherungspflicht und dokumentieren jeden Einsatz als Nachweis.',
+        title: 'Räum- und Streupflicht übertragen',
+        text: 'Wir übernehmen die Räum- und Streupflicht vertraglich und dokumentieren jeden Einsatz als Nachweis.',
       },
       {
         icon: <AlarmClockCheck className="w-7 h-7 text-accent" />,
@@ -486,14 +489,19 @@ export const SERVICES: ServiceData[] = [
     ],
     faqs: [
       {
-        question: 'Übernehmen Sie die volle Verkehrssicherungspflicht?',
+        question: 'Übernehmen Sie die Räum- und Streupflicht für unser Objekt?',
         answer:
-          'Ja, vertraglich. Jeder Einsatz wird mit Zeit, Fläche und Maßnahme dokumentiert. Im Schadensfall haben Sie damit den rechtssicheren Nachweis, dass ordnungsgemäß geräumt wurde.',
+          'Ja. Die Räum- und Streupflicht für die vereinbarten Flächen übertragen Sie vertraglich auf uns. Jeder Einsatz wird mit Zeit, Fläche und Maßnahme protokolliert. Eine Kontroll- und Überwachungspflicht bleibt rechtlich beim Eigentümer oder Betreiber; die Protokolle zeigen Ihnen, wann und wo geräumt und gestreut wurde.',
       },
       {
         question: 'Ab wann sind die Flächen geräumt?',
         answer:
           'Wir überwachen die Wetterlage und beginnen bei Bedarf ab 4 Uhr morgens. Verkehrswege, Zufahrten und Parkflächen sind sicher begehbar, bevor Ihre Mitarbeitenden und Kunden eintreffen.',
+      },
+      {
+        question: 'In welchen Orten bieten Sie Winterdienst an?',
+        answer:
+          'Von unserer Zentrale in Villingen-Schwenningen aus betreuen wir Gewerbeobjekte in VS und Umgebung, etwa in Bad Dürrheim, Donaueschingen, St. Georgen, Königsfeld, Dauchingen und Brigachtal. Für weiter entfernte Standorte prüfen wir die Einsatzplanung vor dem Angebot.',
       },
       {
         question: 'Was umfasst der Hausmeisterservice?',
@@ -513,9 +521,9 @@ export const SERVICES: ServiceData[] = [
     heroTitle: 'Küchenabluftreinigung nach VDI 2052 mit prüffähigem Nachweis',
     heroLead:
       'Fett in Hauben, Kanälen und Ventilatoren ist Brandlast und Hygienerisiko. Wir reinigen die gesamte Abluftanlage nach VDI 2052: mit Protokoll und Fotos als Nachweis für Versicherung und Behörde.',
-    seoTitle: 'Küchenabluftreinigung nach VDI 2052 | AHAD Cleaning',
+    seoTitle: 'Küchenabluft- & Lüftungsreinigung VDI 2052 | AHAD',
     seoDescription:
-      'Küchenabluftreinigung nach VDI 2052 für Gastronomie, Hotellerie, Kantinen und Großküchen in Süddeutschland. Brandschutzkonform, mit prüffähigem Nachweis.',
+      'Küchenabluft- und Lüftungsreinigung für Gewerbeküchen nach VDI 2052: Hauben, Filter, Kanäle und Ventilatoren, mit prüffähigem Protokoll für die Versicherung.',
     keywords:
       'Küchenabluftreinigung VDI 2052, Abluftreinigung Gastronomie, Dunstabzug reinigen, Lüftungsreinigung Großküche, Fettfilter Reinigung',
     icon: <Wind className="w-6 h-6" />,
@@ -554,7 +562,7 @@ export const SERVICES: ServiceData[] = [
       {
         question: 'Wie oft muss die Küchenabluft gereinigt werden?',
         answer:
-          'Die VDI 2052 empfiehlt das Intervall je nach Nutzung: von vierteljährlich bei Dauer-/Fettbetrieb bis jährlich bei geringer Auslastung. Das genaue Intervall legen wir nach einer Begehung fest.',
+          'Ein festes Intervall für alle Küchen gibt es nicht. Nach VDI 2052 wird es objektbezogen aus Nutzung, Fettbelastung, dem dokumentierten Anlagenzustand und den Vorgaben von Versicherung und Behörde abgeleitet. Wir legen es nach einer Begehung fest und passen es anhand der Prüfergebnisse an.',
       },
       {
         question: 'Warum ist das für meine Versicherung wichtig?',
@@ -572,4 +580,85 @@ export const SERVICES: ServiceData[] = [
   },
 ];
 
-export const getService = (slug: string) => SERVICES.find((s) => s.slug === slug)!;
+/**
+ * Vertiefende Leistungsseiten zu einzelnen Arbeiten aus den acht Leistungsbereichen.
+ * Eigene URL für eigene Suchanfragen, aber kein neunter Bereich in Menüs und Zählern.
+ */
+export const DETAIL_SERVICES: ServiceData[] = [
+  {
+    slug: 'teppichreinigung',
+    short: 'Teppichboden, Polster & Stühle',
+    path: '/leistungen/teppichreinigung',
+    name: 'Teppichreinigung',
+    tag: 'Für Büro & Gewerbe',
+    heroTitle: 'Teppichreinigung für Büros und Gewerbe in Villingen-Schwenningen',
+    heroLead:
+      'Wir reinigen Teppichböden, Polstermöbel und Bürostühle in Büros, Hotels, Praxen und Verkaufsräumen. Die Arbeiten legen wir außerhalb Ihrer Betriebszeiten, damit die Flächen am nächsten Morgen wieder nutzbar sind.',
+    seoTitle: 'Teppichreinigung für Büro & Gewerbe in VS | AHAD',
+    seoDescription:
+      'Teppichreinigung für Büros, Hotels und Gewerbe in Villingen-Schwenningen: Teppichboden, Polster und Bürostühle, gereinigt außerhalb Ihrer Betriebszeit.',
+    keywords: 'Teppichreinigung Villingen-Schwenningen, Teppichbodenreinigung Büro, Polsterreinigung Gewerbe, Bürostuhlreinigung',
+    icon: <Sparkles className="w-6 h-6" />,
+    image: IMG.sonderDetail,
+    detailImage: IMG.unterhaltDetail,
+    highlights: [
+      {
+        icon: <Clock className="w-7 h-7 text-brand" />,
+        title: 'Außerhalb der Betriebszeit',
+        text: 'Abends, am Wochenende oder in Betriebsferien: Wir planen so, dass die Flächen bis zum Arbeitsbeginn trocknen können.',
+      },
+      {
+        icon: <Sparkles className="w-7 h-7 text-accent" />,
+        title: 'Verfahren nach Belag',
+        text: 'Schlinge, Velours, Nadelfilz oder Teppichfliesen: Wir prüfen Belag und Verschmutzung und wählen das Verfahren danach.',
+      },
+      {
+        icon: <BadgeCheck className="w-7 h-7 text-brand" />,
+        title: 'Festpreis nach Besichtigung',
+        text: 'Wir messen die Flächen auf, sehen uns Flecken und Laufstraßen an und nennen Ihnen einen verbindlichen Preis.',
+      },
+    ],
+    scopeTitle: 'Was wir reinigen',
+    scopeIntro:
+      'Teppichböden in Büros und Fluren nutzen sich vor allem an Laufwegen, Eingängen und unter Bürostühlen ab. Eine regelmäßige Zwischenreinigung und eine gründliche Tiefenreinigung in größeren Abständen halten den Belag länger nutzbar.',
+    scope: [
+      'Teppichböden und Teppichfliesen in Büros und Fluren',
+      'Laufstraßen, Eingangsbereiche und Sauberlaufzonen',
+      'Fleckentfernung, auch Streusalzränder nach dem Winter',
+      'Polstermöbel in Empfang, Lounge und Besprechung',
+      'Bürostühle und Konferenzbestuhlung',
+      'Einmalige Aufträge oder feste Intervalle',
+    ],
+    detailLinks: [
+      { label: 'Grundreinigung und Sonderreinigung', to: '/leistungen/sonderreinigung-stillstandsservice' },
+      { label: 'Unterhaltsreinigung für Büros', to: '/leistungen/unterhaltsreinigung' },
+    ],
+    faqs: [
+      {
+        question: 'Wie lange muss der Teppich nach der Reinigung trocknen?',
+        answer:
+          'Das hängt von Verfahren, Belag, Raumklima und Lüftung ab. Wir planen die Reinigung deshalb außerhalb der Betriebszeit und sagen Ihnen vorher, ab wann die Flächen wieder begehbar sind.',
+      },
+      {
+        question: 'Wie oft sollte Teppichboden im Büro gereinigt werden?',
+        answer:
+          'Abgesaugt wird im Rahmen der Unterhaltsreinigung regelmäßig. Eine Tiefenreinigung richtet sich nach Nutzung: Eingänge und Laufstraßen brauchen sie deutlich öfter als Einzelbüros. Wir schlagen Ihnen nach der Besichtigung ein Intervall je Bereich vor.',
+      },
+      {
+        question: 'Bekommen Sie Streusalzränder wieder heraus?',
+        answer:
+          'Streusalz hinterlässt nach dem Winter oft weiße Ränder an Eingängen. Meist lassen sie sich mit einer gezielten Fleckbehandlung und anschließender Reinigung entfernen. Ob ein Fleck vollständig herausgeht, sehen wir uns vorab vor Ort an.',
+      },
+      {
+        question: 'Reinigen Sie auch Teppiche für Privathaushalte?',
+        answer:
+          'Unser Schwerpunkt sind Unternehmen, Verwaltungen, Hotels und Praxen. Für Privathaushalte rufen Sie uns bitte an, dann klären wir, ob wir den Auftrag übernehmen können.',
+      },
+    ],
+    ctaTitle: 'Teppichreinigung anfragen',
+    ctaLead: 'Nennen Sie uns Flächen und Belagsart. Wir besichtigen das Objekt und machen Ihnen ein Festpreisangebot.',
+  },
+];
+
+export const getService = (slug: string) =>
+  [...SERVICES, ...DETAIL_SERVICES].find((s) => s.slug === slug)!;

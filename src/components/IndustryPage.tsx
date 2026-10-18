@@ -8,7 +8,7 @@ import ButtonLink from '@/components/ui/Button';
 import Accordion, { faqSchemaFrom } from '@/components/ui/Accordion';
 import CTABand from '@/components/CTABand';
 import { BRANCHEN, type BrancheData } from '@/data/branchen';
-import { SITE, ORG_REF } from '@/lib/site';
+import { SITE, ORG_REF, AREA_SERVED } from '@/lib/site';
 
 /** Gemeinsames Layout für alle Branchen-Seiten: Problem → Lösung → Leistungen. */
 export default function IndustryPage({ branche }: { branche: BrancheData }) {
@@ -19,11 +19,13 @@ export default function IndustryPage({ branche }: { branche: BrancheData }) {
   const serviceSchema = {
     '@context': 'https://schema.org',
     '@type': 'Service',
+    '@id': `${SITE.url}${branche.path}#service`,
+    url: `${SITE.url}${branche.path}`,
     name: `Gebäudereinigung für ${branche.name}`,
     serviceType: 'Gebäudereinigung',
     audience: { '@type': 'BusinessAudience', name: branche.name },
     provider: ORG_REF,
-    areaServed: 'Süddeutschland',
+    areaServed: AREA_SERVED,
     description: branche.seoDescription,
   };
 

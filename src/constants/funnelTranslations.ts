@@ -39,6 +39,8 @@ export const translations = {
       glas: { title: "Glas- & Rahmenreinigung", desc: "Fenster und Rahmen putzen" },
       bau: { title: "Baureinigung", desc: "Gebäude nach Bauarbeiten reinigen" },
       sonder: { title: "Sonderreinigung", desc: "Einmalige und intensive Reinigungen" },
+      hausmeister: { title: "Hausmeisterservice", desc: "Kleine Reparaturen, Kontrollgänge und Winterdienst" },
+      gruenpflege: { title: "Grünpflege", desc: "Rasen mähen, Hecken schneiden, Außenanlagen pflegen" },
       leitung: { title: "Objektleitung", desc: "Teams führen und Qualität sichern" }
     },
     step3Title: "Erzähl uns kurz von dir",
@@ -93,6 +95,8 @@ export const translations = {
       glas: { title: "Glass & Frame Cleaning", desc: "Clean windows and frames" },
       bau: { title: "Construction Cleaning", desc: "Clean buildings after construction work" },
       sonder: { title: "Special Cleaning", desc: "One-off and intensive cleaning jobs" },
+      hausmeister: { title: "Caretaker Service", desc: "Small repairs, inspection rounds and winter service" },
+      gruenpflege: { title: "Grounds Maintenance", desc: "Mow lawns, trim hedges, look after outdoor areas" },
       leitung: { title: "Facility Management", desc: "Lead teams and ensure quality" }
     },
     step3Title: "Tell us a bit about yourself",
@@ -147,6 +151,8 @@ export const translations = {
       glas: { title: "Cam ve Çerçeve Temizliği", desc: "Cam ve çerçeve temizliği" },
       bau: { title: "İnşaat Temizliği", desc: "İnşaat sonrası binaları temizlemek" },
       sonder: { title: "Özel Temizlik", desc: "Tek seferlik ve yoğun temizlik işleri" },
+      hausmeister: { title: "Bina Bakım Hizmeti", desc: "Küçük onarımlar, kontrol turları ve kış hizmeti" },
+      gruenpflege: { title: "Bahçe Bakımı", desc: "Çim biçmek, çit budamak, dış alanların bakımı" },
       leitung: { title: "Tesis Yönetimi", desc: "Ekipleri yönetmek ve kaliteyi sağlamak" }
     },
     step3Title: "Bize biraz kendinizden bahsedin",
@@ -201,6 +207,8 @@ export const translations = {
       glas: { title: "تنظيف الزجاج والإطارات", desc: "تنظيف النوافذ والإطارات" },
       bau: { title: "تنظيف مواقع البناء", desc: "تنظيف المباني بعد أعمال البناء" },
       sonder: { title: "تنظيف خاص", desc: "أعمال تنظيف لمرة واحدة ومكثفة" },
+      hausmeister: { title: "خدمات صيانة المباني", desc: "إصلاحات صغيرة وجولات تفقد وخدمة الشتاء" },
+      gruenpflege: { title: "العناية بالمساحات الخضراء", desc: "قص العشب وتقليم الأسيجة والعناية بالمساحات الخارجية" },
       leitung: { title: "إدارة المواقع", desc: "قيادة الفرق وضمان الجودة" }
     },
     step3Title: "أخبرنا قليلاً عن نفسك",
@@ -255,6 +263,8 @@ export const translations = {
       glas: { title: "Мойка окон и рам", desc: "Мытьё окон и рам" },
       bau: { title: "Послестроительная уборка", desc: "Уборка зданий после строительных работ" },
       sonder: { title: "Специальная уборка", desc: "Разовая и интенсивная уборка" },
+      hausmeister: { title: "Обслуживание зданий", desc: "Мелкий ремонт, обходы и зимняя уборка" },
+      gruenpflege: { title: "Уход за зелёными зонами", desc: "Стрижка газонов, обрезка живой изгороди, уход за территорией" },
       leitung: { title: "Управление объектами", desc: "Руководство командами и контроль качества" }
     },
     step3Title: "Расскажите немного о себе",
@@ -309,6 +319,8 @@ export const translations = {
       glas: { title: "Миття вікон та рам", desc: "Миття вікон і рам" },
       bau: { title: "Післябудівельне прибирання", desc: "Прибирання будівель після будівельних робіт" },
       sonder: { title: "Спеціальне прибирання", desc: "Разове та інтенсивне прибирання" },
+      hausmeister: { title: "Обслуговування будівель", desc: "Дрібний ремонт, обходи та зимове прибирання" },
+      gruenpflege: { title: "Догляд за зеленими зонами", desc: "Косіння газонів, обрізання живоплоту, догляд за територією" },
       leitung: { title: "Управління об'єктами", desc: "Керівництво командами та контроль якості" }
     },
     step3Title: "Розкажіть трохи про себе",
@@ -363,6 +375,8 @@ export const translations = {
       glas: { title: "Mycie okien i ram", desc: "Mycie okien i ram" },
       bau: { title: "Sprzątanie pobudowlane", desc: "Sprzątanie budynków po pracach budowlanych" },
       sonder: { title: "Sprzątanie specjalistyczne", desc: "Jednorazowe i intensywne sprzątanie" },
+      hausmeister: { title: "Usługi dozorcy", desc: "Drobne naprawy, obchody kontrolne i odśnieżanie" },
+      gruenpflege: { title: "Pielęgnacja zieleni", desc: "Koszenie trawników, przycinanie żywopłotów, dbanie o tereny zewnętrzne" },
       leitung: { title: "Zarządzanie obiektami", desc: "Kierowanie zespołami i dbanie o jakość" }
     },
     step3Title: "Opowiedz nam trochę o sobie",
@@ -417,6 +431,8 @@ export const translations = {
       glas: { title: "Curățare geamuri și rame", desc: "Spălarea geamurilor și a ramelor" },
       bau: { title: "Curățenie după constructor", desc: "Curățarea clădirilor după lucrări de construcție" },
       sonder: { title: "Curățenie specială", desc: "Curățenie ocazională și intensivă" },
+      hausmeister: { title: "Întreținere clădiri", desc: "Reparații mici, ronduri de control și deszăpezire" },
+      gruenpflege: { title: "Întreținerea spațiilor verzi", desc: "Tuns gazonul, tăiat gardurile vii, îngrijirea spațiilor exterioare" },
       leitung: { title: "Managementul obiectivelor", desc: "Conducerea echipelor și asigurarea calității" }
     },
     step3Title: "Spuneți-ne puțin despre dumneavoastră",
@@ -471,6 +487,8 @@ export const translations = {
       glas: { title: "Pulizia vetri e telai", desc: "Pulizia di vetri e telai" },
       bau: { title: "Pulizia post-cantiere", desc: "Pulire gli edifici dopo i lavori edili" },
       sonder: { title: "Pulizie speciali", desc: "Pulizie una tantum e intensive" },
+      hausmeister: { title: "Servizio di custodia", desc: "Piccole riparazioni, giri di controllo e servizio invernale" },
+      gruenpflege: { title: "Manutenzione del verde", desc: "Tagliare l'erba, potare le siepi, curare gli spazi esterni" },
       leitung: { title: "Gestione impianti", desc: "Guidare team e garantire la qualità" }
     },
     step3Title: "Raccontaci un po' di te",
@@ -525,6 +543,8 @@ export const translations = {
       glas: { title: "Καθαρισμός τζαμιών & πλαισίων", desc: "Καθαρισμός παραθύρων και πλαισίων" },
       bau: { title: "Καθαρισμός εργοταξίου", desc: "Καθαρισμός κτιρίων μετά από οικοδομικές εργασίες" },
       sonder: { title: "Ειδικός καθαρισμός", desc: "Εφάπαξ και εντατικοί καθαρισμοί" },
+      hausmeister: { title: "Υπηρεσίες επιστάτη", desc: "Μικροεπισκευές, έλεγχοι και χειμερινές εργασίες" },
+      gruenpflege: { title: "Φροντίδα πρασίνου", desc: "Κούρεμα γκαζόν, κλάδεμα φρακτών, φροντίδα εξωτερικών χώρων" },
       leitung: { title: "Διαχείριση εγκαταστάσεων", desc: "Καθοδήγηση ομάδων και διασφάλιση ποιότητας" }
     },
     step3Title: "Πείτε μας λίγα λόγια για εσάς",
@@ -579,6 +599,8 @@ export const translations = {
       glas: { title: "Nettoyage de vitres et cadres", desc: "Nettoyage des vitres et des cadres" },
       bau: { title: "Nettoyage de chantier", desc: "Nettoyer les bâtiments après les travaux" },
       sonder: { title: "Nettoyage spécialisé", desc: "Nettoyages ponctuels et intensifs" },
+      hausmeister: { title: "Conciergerie et maintenance", desc: "Petites réparations, rondes de contrôle et service hivernal" },
+      gruenpflege: { title: "Entretien des espaces verts", desc: "Tondre la pelouse, tailler les haies, entretenir les extérieurs" },
       leitung: { title: "Gestion de site", desc: "Diriger des équipes et assurer la qualité" }
     },
     step3Title: "Parlez-nous un peu de vous",

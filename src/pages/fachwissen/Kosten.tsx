@@ -73,8 +73,8 @@ export default function FachwissenKosten() {
     <article>
       <SEO
         ogType="article"
-        title="Was kostet Gebäudereinigung? Preise & Stundensatz | AHAD"
-        description="Gebäudereinigung kalkulieren: Kostenbestandteile, Leistungswerte, daraus abgeleitete m²-Preise und illustrative Monatsbeispiele mit offengelegten Annahmen."
+        title="Gebäudereinigung Kosten 2026: Stundensatz & m²-Preise | AHAD"
+        description="Was kostet Gebäudereinigung 2026? Stundensatz, Leistungswerte und m²-Preise erklärt, mit Rechenbeispielen und offengelegten Annahmen für Ihr Objekt."
         keywords="Was kostet Gebäudereinigung, Gebäudereinigung Kosten, Büroreinigung Kosten pro m², Stundensatz Gebäudereinigung, Unterhaltsreinigung Preis, Reinigung Preise Villingen-Schwenningen, AHAD Cleaning"
         schema={[articleSchema, faqSchema]}
       />
@@ -83,7 +83,7 @@ export default function FachwissenKosten() {
         compact
         titleSize="lg"
         eyebrow="Fachwissen · Kosten & Kalkulation"
-        title="Was kostet Gebäudereinigung? Stundensatz, m²-Preise & Beispiele"
+        title="Was kostet Gebäudereinigung? Stundensatz, m²-Preise und Beispiele"
         lead="Wie Kostenbestandteile, Zeitansatz und Leistungswert zusammenwirken, gezeigt an Beispielrechnungen."
         image={IMG.unterhaltDetail}
         imageAlt=""
@@ -149,8 +149,8 @@ export default function FachwissenKosten() {
                 <caption className="sr-only">Kostenbestandteile, die ein kalkulierter Stundensatz abdecken kann</caption>
                 <thead>
                   <tr className="bg-navy text-white">
-                    <th scope="col" className="px-4 py-3 font-bold">Kostenbaustein</th>
-                    <th scope="col" className="px-4 py-3 font-bold">Erläuterung</th>
+                    <th scope="col" className="px-4 py-3 font-bold text-white">Kostenbaustein</th>
+                    <th scope="col" className="px-4 py-3 font-bold text-white">Erläuterung</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-line">
@@ -200,9 +200,9 @@ export default function FachwissenKosten() {
                 <caption className="sr-only">Hypothetische Leistungswerte bei einem angenommenen Stundensatz von 34 Euro</caption>
                 <thead>
                   <tr className="bg-navy text-white">
-                    <th scope="col" className="px-4 py-3 font-bold">Rechenszenario</th>
-                    <th scope="col" className="px-4 py-3 font-bold">Hypothetischer Leistungswert</th>
-                    <th scope="col" className="px-4 py-3 font-bold">Ergebnis bei 34 €/h*</th>
+                    <th scope="col" className="px-4 py-3 font-bold text-white">Rechenszenario</th>
+                    <th scope="col" className="px-4 py-3 font-bold text-white">Hypothetischer Leistungswert</th>
+                    <th scope="col" className="px-4 py-3 font-bold text-white">Ergebnis bei 34 €/h*</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-line">

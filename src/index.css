@@ -1,16 +1,45 @@
 /* Selbst gehostete Fonts (DSGVO-sauber, kein Google-Request) — siehe scripts/fetch-fonts.mjs */
 @import './styles/fonts.css';
 @import "tailwindcss";
+
+/* Metrisch angeglichene Ersatzschriften: Bis die Webfonts geladen sind, nimmt
+   Arial mit diesen Korrekturen denselben Platz ein. Verhindert Layoutsprünge
+   (CLS) beim Schrifttausch. Werte aus den Schriftdateien berechnet
+   (Ascender/Descender, gewichtete Zeichenbreite gegenüber Arial). */
+@font-face {
+  font-family: 'Inter Fallback';
+  src: local('Arial'), local('Liberation Sans'), local('Arimo');
+  size-adjust: 107.10%;
+  ascent-override: 90.45%;
+  descent-override: 22.52%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: 'Montserrat Fallback';
+  src: local('Arial'), local('Liberation Sans'), local('Arimo');
+  size-adjust: 111.02%;
+  ascent-override: 87.19%;
+  descent-override: 22.61%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: 'Space Grotesk Fallback';
+  src: local('Arial'), local('Liberation Sans'), local('Arimo');
+  size-adjust: 109.97%;
+  ascent-override: 89.48%;
+  descent-override: 26.55%;
+  line-gap-override: 0%;
+}
 @plugin "@tailwindcss/typography";
 
 @theme {
   /* Typografie: Montserrat ausschließlich für Logo & große Statements
      (display-Klassen), Inter für Fließtext und UI, Space Grotesk nur
      als digitaler Akzent (Eyebrows, Zahlen, technische Labels). */
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-headline: "Inter", sans-serif;
-  --font-accent: "Space Grotesk", sans-serif;
-  --font-logo: "Montserrat", sans-serif;
+  --font-sans: "Inter", "Inter Fallback", ui-sans-serif, system-ui, sans-serif;
+  --font-headline: "Inter", "Inter Fallback", sans-serif;
+  --font-accent: "Space Grotesk", "Space Grotesk Fallback", sans-serif;
+  --font-logo: "Montserrat", "Montserrat Fallback", sans-serif;
 
   /* ── AHAD Markenfarben (Designbook v2.3, Juni 2026) ───────────────
      AHAD Navy #0B2341 · AHAD Grün #0D6B38 · Weiß als Grundfläche ·

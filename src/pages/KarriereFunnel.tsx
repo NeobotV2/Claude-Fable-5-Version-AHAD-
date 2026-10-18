@@ -125,6 +125,7 @@ export default function KarriereFunnel() {
     setSubmitError(true);
     // Feldfehler des Servers (z. B. Telefonformat) zusätzlich zum übersetzten Hinweis zeigen.
     if (result.kind === 'validation') setSubmitErrorDetail(describeFieldErrors(result.fields));
+    else setSubmitErrorDetail(`Fehlercode: ${result.code}`);
     trackEvent('Application Funnel Error', { language: lang || 'de', jobId: data.jobId || 'initiative', kind: result.kind });
   };
 
@@ -133,7 +134,7 @@ export default function KarriereFunnel() {
   if (!lang) {
     return (
       <div className="min-h-screen bg-[#f7f9fb] flex items-center justify-center p-4 pt-32 pb-20 lg:pt-40 lg:pb-32">
-        <SEO title="Language Selection | AHAD Cleaning" description="Choose your language for the application." noindex />
+        <SEO title="Bewerbung: Sprache wählen | AHAD Cleaning" description="Wähle die Sprache für deine Bewerbung bei AHAD Cleaning. Choose your language for the application." noindex />
         <div className="max-w-xl w-full">
           <div className="text-center mb-12">
             <div className="w-16 h-16 bg-[#0D6B38] text-white rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg">
@@ -286,6 +287,8 @@ export default function KarriereFunnel() {
                   { id: 'glas', ...t.departments.glas, value: translations.de.departments.glas.title },
                   { id: 'bau', ...t.departments.bau, value: translations.de.departments.bau.title },
                   { id: 'sonder', ...t.departments.sonder, value: translations.de.departments.sonder.title },
+                  { id: 'hausmeister', ...t.departments.hausmeister, value: translations.de.departments.hausmeister.title },
+                  { id: 'gruenpflege', ...t.departments.gruenpflege, value: translations.de.departments.gruenpflege.title },
                   { id: 'leitung', ...t.departments.leitung, value: translations.de.departments.leitung.title },
                 ].map((item) => (
                   <button

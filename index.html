@@ -24,7 +24,11 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
-    <!-- Fonts sind selbst gehostet (src/styles/fonts.css) — kein externer Font-Request. -->
+    <!-- Fonts sind selbst gehostet (src/styles/fonts.css) — kein externer Font-Request.
+         Montserrat (Headlines) und Inter (Text) vorladen: sonst entdeckt der Browser sie
+         erst nach dem CSS, und der späte Schrifttausch verschiebt das Layout (CLS). -->
+    <link rel="preload" href="/src/assets/fonts/Montserrat-var.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/src/assets/fonts/Inter-var.woff2" as="font" type="font/woff2" crossorigin />
   </head>
   <body>
     <div id="root"></div>
