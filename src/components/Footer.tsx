@@ -46,7 +46,9 @@ const areas = [
   { label: 'Villingen-Schwenningen', href: '/standorte/villingen-schwenningen' },
   { label: 'Stuttgart', href: '/standorte/stuttgart' },
   { label: 'Konstanz', href: '/standorte/konstanz' },
-  { label: 'Schwarzwald-Baar-Kreis', href: '/standorte' },
+  { label: 'Donaueschingen', href: '/standorte/donaueschingen' },
+  { label: 'Tuttlingen', href: '/standorte/tuttlingen' },
+  { label: 'Alle Einsatzgebiete', href: '/standorte' },
 ];
 
 export default function Footer() {

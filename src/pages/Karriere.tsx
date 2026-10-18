@@ -164,6 +164,21 @@ export default function Karriere() {
                 </div>
               </div>
             </Reveal>
+
+            <Reveal delay={0.4}>
+              <p className="text-sm text-slate leading-relaxed">
+                Konkrete, aktuell ausgeschriebene Stellen mit Einsatzort und Arbeitszeit veröffentlichen wir auch auf{' '}
+                <a
+                  href="https://join.com/companies/ahad-cleaning"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-semibold text-brand underline underline-offset-2 hover:text-brand-light"
+                >
+                  JOIN (öffnet neuen Tab)
+                </a>
+                .
+              </p>
+            </Reveal>
           </div>
         </div>
       </section>
