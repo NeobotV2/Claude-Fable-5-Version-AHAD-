@@ -71,6 +71,15 @@ function validateRender(route, html, head) {
 let ok = 0;
 const failures = [];
 
+/**
+ * Formularseiten brauchen das Hydrations-JS sofort: Klicks vor der Hydration
+ * gehen sonst verloren (z. B. die Objektart-Karten im Angebots-Funnel).
+ * Hier bleibt es bei normaler Ladepriorität (vite.config: lowPriorityHydration).
+ */
+const INTERACTIVE_ROUTES = new Set(['/angebot', '/kontakt', '/karriere/bewerbung']);
+const withHydrationPriority = (route, html) =>
+  INTERACTIVE_ROUTES.has(route.path) ? html.replaceAll(' fetchpriority="low"', '') : html;
+
 async function emit(route, outFile) {
   await mkdir(path.dirname(outFile), { recursive: true });
   try {
@@ -81,7 +90,7 @@ async function emit(route, outFile) {
       head += `<title>Admin | AHAD Cleaning</title><meta name="description" content="Geschützter Verwaltungsbereich von AHAD Cleaning."><meta name="robots" content="noindex, follow"><link rel="canonical" href="${canonicalOrigin}${route.path}">`;
     }
     validateRender(route, html, head);
-    await writeFile(outFile, injectRoot(base, html, head));
+    await writeFile(outFile, withHydrationPriority(route, injectRoot(base, html, head)));
     ok++;
   } catch (error) {
     // Artefakt nur zur lokalen Diagnose schreiben; der Build schlägt unten fehl.

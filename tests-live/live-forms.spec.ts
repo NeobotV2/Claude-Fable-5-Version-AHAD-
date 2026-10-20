@@ -33,7 +33,14 @@ test('Kontaktformular', async ({ page }) => {
 
 test('Angebots-Funnel', async ({ page }) => {
   await page.goto('/angebot?service=unterhaltsreinigung&utm_source=funktionstest');
-  await page.getByRole('button', { name: /Büro & Verwaltung/ }).click();
+  // Ein Klick vor der Hydration geht verloren; protokollieren, wie oft das passiert.
+  let attempts = 0;
+  await expect(async () => {
+    attempts += 1;
+    await page.getByRole('button', { name: /Büro & Verwaltung/ }).click();
+    await expect(page.getByRole('button', { name: /^Weiter/ })).toBeVisible({ timeout: 1_500 });
+  }).toPass({ timeout: 20_000 });
+  console.log(`### Angebot: Klicks bis Schritt 2: ${attempts}`);
   await page.getByRole('button', { name: /^Weiter/ }).click();
   await page.getByRole('button', { name: 'Unter 500 m²' }).click();
   await page.getByRole('button', { name: 'Täglich' }).click();
