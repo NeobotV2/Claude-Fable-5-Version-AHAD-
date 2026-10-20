@@ -1,0 +1,39 @@
+name: Live-Formulartest
+
+# Prüft die Formulare auf der Live-Seite. Läuft nur bei Änderungen an diesem
+# Test auf dem Arbeitsbranch oder manuell.
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - claude/busy-cray-xd334k
+    paths:
+      - tests-live/**
+      - .github/workflows/live-form-check.yml
+
+permissions:
+  contents: read
+
+jobs:
+  live:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Erreichbarkeit und Umleitungen
+        run: |
+          set +e
+          for u in https://www.ahad-cleaning.de/ https://ahad-cleaning.de/ https://ahad-cleaning.de/kontakt/ https://www.ahad-cleaning.de/maschinenreinigung https://www.ahad-cleaning.de/leistungen/teppichreinigung https://www.ahad-cleaning.de/standorte/donaueschingen https://www.ahad-cleaning.de/fachwissen/mindestlohn-gebaeudereinigung; do
+            echo "== $u"; curl -sS -o /dev/null -I -w "%{http_code} -> %{redirect_url}\n" "$u"
+          done
+          echo "== Titel Startseite"; curl -sS https://www.ahad-cleaning.de/ | grep -o '<title>[^<]*</title>'
+          echo "== API GET (erwartet 405)"; curl -sS -w "\nHTTP %{http_code}\n" https://www.ahad-cleaning.de/api/send-email
+      - run: npx playwright install --with-deps chromium
+        timeout-minutes: 8
+      - name: Formulare live absenden
+        run: npx playwright test -c tests-live/playwright.live.config.ts
