@@ -473,7 +473,7 @@ export const EDITORIAL_ARTICLES = {
     related: ['was-kostet-gebaeudereinigung-stundensatz-preise', 'checkliste-reinigungsangebot'],
     image: '/images/ahad/karriere.webp',
     datePublished: '2026-10-18',
-    dateModified: '2026-10-18',
+    dateModified: '2026-11-03',
     sources: [
       official(
         'Zehnte Verordnung über zwingende Arbeitsbedingungen in der Gebäudereinigung (10. GebäudeArbbV)',
@@ -535,9 +535,21 @@ export const EDITORIAL_ARTICLES = {
         'https://www.deutsche-handwerks-zeitung.de/gebaeudereiniger-arbeitgeber-lehnen-13-prozent-forderung-ab-383375/',
         CHECKED_2026_10,
       ),
+      guidance(
+        'Zweite Tarifrunde endet ohne Einigung (22. Oktober 2026)',
+        'IG Bauen-Agrar-Umwelt',
+        'https://igbau.de/IG-BAU-lehnt-erstes-Arbeitgeberangebot-in-der-Gebaeudereinigung-ab.html',
+        '2026-11-03',
+      ),
+      guidance(
+        'Arbeitgeberangebot in der zweiten Tarifrunde (22. Oktober 2026)',
+        'Bundesinnungsverband des Gebäudereiniger-Handwerks',
+        'https://www.die-gebaeudedienstleister.de/pressemitteilungen/zweite-tarifverhandlungsrunde-im-gebaeudereiniger-handwerk-arbeitgeber-legen-angebot-mit-augenmass-vor/',
+        '2026-11-03',
+      ),
     ],
     orientationNote:
-      'Redaktionsstand 18. Oktober 2026: Die Werte für 2026 beruhen auf der Zehnten Verordnung über zwingende Arbeitsbedingungen in der Gebäudereinigung, die am 31. Dezember 2026 ausläuft. Ein Tarifergebnis für 2027 lag zu diesem Zeitpunkt nicht vor. Vertrags- und Haftungsfragen sind im Einzelfall rechtlich zu prüfen; der Beitrag ist keine Rechtsberatung.',
+      'Redaktionsstand 3. November 2026: Die Werte für 2026 beruhen auf der Zehnten Verordnung über zwingende Arbeitsbedingungen in der Gebäudereinigung, die am 31. Dezember 2026 ausläuft. Ein Tarifabschluss für 2027 war zu diesem Zeitpunkt öffentlich nicht bestätigt. Vertrags- und Haftungsfragen sind im Einzelfall rechtlich zu prüfen; der Beitrag ist keine Rechtsberatung.',
     reviewer: noReviewer,
   },
 } as const satisfies Record<EditorialArticleSlug, EditorialArticle>;
