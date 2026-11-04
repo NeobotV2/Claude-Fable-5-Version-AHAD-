@@ -22,10 +22,10 @@ auf der Claude-Design-Fläche „Visitenkarten AHAD Cleaning“:
 ## Druckdaten
 
 - Endformat **85 × 55 mm**, Datenformat **91 × 61 mm** (3 mm Beschnitt rundum),
-  ohne Schnittmarken. Texte liegen mindestens 4,5 mm innerhalb der Schnittkante.
-- Vektor, Schriften eingebettet (Montserrat, Inter).
+  ohne Schnittmarken. Texte liegen mindestens 4 mm innerhalb der Schnittkante.
+- Vektor, Schrift eingebettet (Inter); das Logo ist Vektor aus dem Original-Artwork.
 - Farben laut Markenhandbuch als RGB/HEX: Navy `#0B2341`, Grün `#0D6B38`,
-  Mint `#9CDDB7`. Die Druckerei wandelt in CMYK um. Weil die Rückseite
+  Mint `#9CDDB7`. Die Druckerei wandelt in CMYK um. Weil die Vorderseite
   vollflächig Navy ist, vor der Großauflage einen Andruck oder ein kleines
   Testpaket bestellen.
 - QR-Code auf der Rückseite: vCard mit Name, Position, Telefon, E-Mail,
