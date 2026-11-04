@@ -8,6 +8,17 @@ Erzeugt aus `brand/signatur/team.json` mit `npm run visitenkarten`
 | `<slug>/visitenkarte-<slug>-druck.pdf` | Druckdatei, 2 Seiten (vorne, hinten) |
 | `<slug>/vorschau-<slug>.png` | Ansicht im Endformat, nicht zum Drucken |
 
+## Gestaltung
+
+Nach dem Design-System „AHAD Cleaning“ (Komponente Visitenkarte), gestaltet
+auf der Claude-Design-Fläche „Visitenkarten AHAD Cleaning“:
+
+- Vorderseite: vollflächig Navy, Wortmarke weiß-mint mittig.
+- Rückseite: weiß, Logo komplett oben links, Name, Funktion, Telefon, E-Mail,
+  Webseite (Grün), Anschrift, QR-Code mit vCard.
+- Die Wortmarke „AHAD CLEANING“ ist auf beiden Seiten exakt gleich groß
+  (34 mm; das Logo komplett ist dafür 46 mm breit).
+
 ## Druckdaten
 
 - Endformat **85 × 55 mm**, Datenformat **91 × 61 mm** (3 mm Beschnitt rundum),

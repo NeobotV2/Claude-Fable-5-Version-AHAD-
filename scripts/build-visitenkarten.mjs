@@ -32,12 +32,14 @@ const FIRMA = {
 };
 
 const logoFarbe = await readFile(path.join(root, 'brand/print/svg/ahad-lockup-farbe.svg'), 'utf8');
-const logoWeiss = await readFile(path.join(root, 'brand/print/svg/ahad-lockup-weiss.svg'), 'utf8');
+// Wortmarke weiß-mint (Standard auf Navy laut Design-System): Original-Artwork, nur umgefärbt.
+const logoWortmarke = (await readFile(path.join(root, 'brand/print/svg/ahad-wortmarke-farbe-flat.svg'), 'utf8'))
+  .replace('#0B2341', '#FFFFFF')
+  .replace('#0D6B38', '#9CDDB7');
 // Schriften als data-URL einbetten: file://-Fonts lädt Chromium aus setContent() nicht.
 const fontData = async (file) =>
   `data:font/woff2;base64,${(await readFile(path.join(root, 'src/assets/fonts', file))).toString('base64')}`;
 const INTER = await fontData('Inter-var.woff2');
-const MONTSERRAT = await fontData('Montserrat-var.woff2');
 
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 const vcardEsc = (s) => String(s).replace(/([,;\\])/g, '\\$1');
@@ -62,79 +64,59 @@ function vcard(p) {
   ].filter(Boolean).join('\r\n');
 }
 
-/** Eine Seite = 91 × 61 mm. Inhalt im Sicherheitsabstand: 3 mm Beschnitt + 4 mm. */
+/**
+ * Eine Seite = 91 × 61 mm. Aufbau nach Design-System „AHAD Cleaning“ (Komponente Visitenkarte):
+ * Vorderseite Navy mit Wortmarke weiß-mint, Rückseite weiß mit Logo komplett und Kontakt.
+ * Die Wortmarke ist auf beiden Seiten gleich groß: 34 mm (Logo komplett 46 mm ⇒ Wortmarke 34 mm).
+ * Inhalt im Sicherheitsabstand: 3 mm Beschnitt + 4 mm.
+ */
 function html(p, qrSvg) {
   const zeilen = [
-    p.mobil && ['Mobil', p.mobil],
-    ['Telefon', FIRMA.telefon],
-    ['E-Mail', p.email],
-    ['Web', FIRMA.web],
+    p.mobil && `Mobil ${p.mobil}`,
+    `${p.mobil ? 'Zentrale' : 'Telefon'} ${FIRMA.telefon}`,
+    p.email,
   ].filter(Boolean);
 
   return `<!doctype html><meta charset="utf-8">
 <style>
   @font-face { font-family: Inter; src: url('${INTER}') format('woff2'); font-weight: 400 900; }
-  @font-face { font-family: Montserrat; src: url('${MONTSERRAT}') format('woff2'); font-weight: 500 900; }
   @page { size: 91mm 61mm; margin: 0; }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html, body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   .seite { width: 91mm; height: 61mm; position: relative; overflow: hidden; page-break-after: always; break-after: page; }
   .seite:last-child { page-break-after: auto; break-after: auto; }
-  /* Sicherheitsbereich: 3 mm Beschnitt + 4,5 mm Rand */
-  .inhalt { position: absolute; inset: 7.5mm; }
 
-  .vorne { background: #ffffff; color: #1C2733; font-family: Inter, sans-serif; }
-  .vorne .logo svg { width: 36mm; height: auto; display: block; }
-  .vorne .linie { position: absolute; left: 0; top: 0; bottom: 0; width: 4.2mm; background: #0D6B38; }
-  .vorne .inhalt { display: flex; flex-direction: column; justify-content: space-between; }
-  .vorne .person { margin-bottom: 2.6mm; }
-  .vorne .name { font-family: Montserrat, sans-serif; font-weight: 800; font-size: 11pt; color: #0B2341; letter-spacing: -0.01em; }
-  .vorne .position { font-weight: 600; font-size: 7.2pt; color: #0D6B38; margin-top: 0.9mm; }
-  .vorne .kontakt { font-size: 6.9pt; line-height: 1.45; }
-  .vorne .kontakt span { display: inline-block; width: 11mm; color: #5B6878; font-weight: 500; }
-  .vorne .kontakt b { font-weight: 600; color: #0B2341; }
+  .vorne { background: #0B2341; display: flex; align-items: center; justify-content: center; }
+  .vorne svg { width: 34mm; height: auto; display: block; }
 
-  .hinten { background: #0B2341; color: #ffffff; font-family: Inter, sans-serif; }
+  .hinten { background: #ffffff; color: #1C2733; font-family: Inter, sans-serif; padding: 7mm;
+    display: flex; flex-direction: column; justify-content: space-between; }
   .hinten .logo svg { width: 46mm; height: auto; display: block; }
-  .hinten .claim { font-family: Montserrat, sans-serif; font-weight: 700; font-size: 8.4pt; color: #9CDDB7; margin-top: 3.2mm; }
-  .hinten .unten { position: absolute; left: 0; bottom: 0; width: 44mm; font-size: 6.5pt; line-height: 1.5; color: rgba(255,255,255,0.82); }
-  .hinten .leistungen { margin-top: 1.8mm; }
-  .hinten .iso { margin-top: 1.6mm; font-weight: 700; color: #ffffff; letter-spacing: 0.04em; }
-  .hinten .qr { position: absolute; right: 0; bottom: 0; width: 24mm; text-align: center; }
-  .hinten .qr .feld { background: #ffffff; border-radius: 1.6mm; padding: 1.6mm; }
+  .hinten .unten { display: flex; align-items: flex-end; justify-content: space-between; gap: 3mm; }
+  .hinten .name { font-weight: 700; font-size: 9pt; line-height: 1.25; color: #0B2341; }
+  .hinten .position { font-weight: 500; font-size: 7pt; line-height: 1.3; color: #424751; margin-bottom: 1.8mm; }
+  .hinten .kontakt { font-size: 7pt; line-height: 1.4; }
+  .hinten .web { font-weight: 600; color: #0D6B38; }
+  .hinten .adresse { color: #424751; margin-top: 0.8mm; }
+  .hinten .qr { width: 16mm; flex: none; }
   .hinten .qr svg { width: 100%; height: auto; display: block; }
-  .hinten .qr .hinweis { font-size: 5.8pt; margin-top: 1.2mm; color: rgba(255,255,255,0.82); }
 </style>
 
-<section class="seite vorne">
-  <div class="linie"></div>
-  <div class="inhalt" style="left: 10mm">
-    <div class="logo">${logoFarbe}</div>
-    <div>
-      <div class="person">
-        <div class="name">${esc(p.name)}</div>
-        <div class="position">${esc(p.position)}</div>
-      </div>
-      <div class="kontakt">
-        ${zeilen.map(([k, v]) => `<div><span>${k}</span><b>${esc(v)}</b></div>`).join('')}
-      </div>
-    </div>
-  </div>
-</section>
+<section class="seite vorne">${logoWortmarke}</section>
 
 <section class="seite hinten">
-  <div class="inhalt">
-    <div class="logo">${logoWeiss}</div>
-    <div class="claim">Sauberkeit mit System.</div>
-    <div class="unten">
-      <div>${esc(FIRMA.name)}<br>${esc(FIRMA.strasse)}<br>${FIRMA.plz} ${esc(FIRMA.ort)}</div>
-      <div class="leistungen">Gebäude-, Industrie- und Glasreinigung<br>Winterdienst und Hausmeisterservice</div>
-      <div class="iso">ISO 9001 · ISO 14001</div>
+  <div class="logo">${logoFarbe}</div>
+  <div class="unten">
+    <div>
+      <div class="name">${esc(p.name)}</div>
+      <div class="position">${esc(p.position)}</div>
+      <div class="kontakt">
+        ${zeilen.map((z) => `<div>${esc(z)}</div>`).join('')}
+        <div class="web">${FIRMA.web}</div>
+        <div class="adresse">${esc(FIRMA.strasse)}<br>${FIRMA.plz} ${esc(FIRMA.ort)}</div>
+      </div>
     </div>
-    <div class="qr">
-      <div class="feld">${qrSvg}</div>
-      <div class="hinweis">Kontakt speichern</div>
-    </div>
+    <div class="qr">${qrSvg}</div>
   </div>
 </section>`;
 }
@@ -161,8 +143,7 @@ try {
     await page.addStyleTag({ content: `
       body { display: flex; gap: 6mm; padding: 6mm; background: #E9EDF2; width: max-content; }
       .seite { width: 85mm; height: 55mm; border-radius: 0.8mm; box-shadow: 0 1.5mm 4mm rgba(11,35,65,.18); }
-      .inhalt { inset: 4.5mm; } .vorne .inhalt { left: 7mm !important; }
-      .vorne .linie { width: 1.2mm; }` });
+      .hinten { padding: 4mm; }` });
     await page.locator('body').screenshot({ path: path.join(dir, `vorschau-${p.slug}.png`) });
     await page.close();
     console.log(`✓ ${p.name}: ${path.relative(root, pdf)}`);
