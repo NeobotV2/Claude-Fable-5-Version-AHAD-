@@ -14,7 +14,7 @@
  */
 import { chromium } from 'playwright';
 import QRCode from 'qrcode';
-import { mkdir, readFile, writeFile } from 'node:fs/promises';
+import { mkdir, readFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -152,7 +152,7 @@ try {
     const qrSvg = await QRCode.toString(vcard(p), { type: 'svg', errorCorrectionLevel: 'L', margin: 0, color: { dark: '#0B2341', light: '#ffffff' } });
     const page = await browser.newPage({ deviceScaleFactor: 4 });
     await page.setContent(html(p, qrSvg), { waitUntil: 'load' });
-    await page.evaluate(() => document.fonts.ready);
+    await page.evaluate('document.fonts.ready');
     const pdf = path.join(dir, `visitenkarte-${p.slug}-druck.pdf`);
     await page.pdf({ path: pdf, width: '91mm', height: '61mm', printBackground: true, preferCSSPageSize: true });
 
