@@ -487,6 +487,25 @@ export const AREA_SERVED = [
   { '@type': 'State', name: 'Baden-Württemberg' },
 ] as const;
 
+/**
+ * Leistungen für das Organization-Schema (knowsAbout / hasOfferCatalog).
+ * Statisch statt aus data/services.tsx, um keinen Import-Zyklus zu erzeugen;
+ * ein Test prüft, dass jeder Pfad eine indexierbare Seite im Route-Manifest ist.
+ */
+export const ORG_SERVICES = [
+  { name: 'Gebäudereinigung', path: '/leistungen' },
+  { name: 'Unterhaltsreinigung und Büroreinigung', path: '/leistungen/unterhaltsreinigung' },
+  { name: 'Industrie- und Produktionsreinigung', path: '/leistungen/industrie-produktionsreinigung' },
+  { name: 'Maschinenreinigung', path: '/leistungen/maschinenreinigung' },
+  { name: 'Fensterreinigung und Glasreinigung', path: '/leistungen/glas-fassadenreinigung' },
+  { name: 'Baureinigung und Bauendreinigung', path: '/leistungen/baureinigung' },
+  { name: 'Reinraumreinigung und Medizintechnik-Reinigung', path: '/leistungen/medizintechnik-reinigung' },
+  { name: 'Sonderreinigung und Stillstandsservice', path: '/leistungen/sonderreinigung-stillstandsservice' },
+  { name: 'Teppichreinigung', path: '/leistungen/teppichreinigung' },
+  { name: 'Winterdienst und Hausmeisterservice', path: '/leistungen/winterdienst-hausmeisterservice' },
+  { name: 'Küchenabluftreinigung nach VDI 2052', path: '/leistungen/kuechenabluftreinigung-vdi-2052' },
+] as const;
+
 export const ORG_REF = {
   '@type': 'Organization',
   '@id': `${SITE.url}/#organization`,
@@ -530,4 +549,15 @@ export const ORGANIZATION_SCHEMA = {
   },
   // ahad-care.de gehört zur selben GmbH (zweites Geschäftsfeld) -> selbe Entität.
   sameAs: [SITE.social.instagram, SITE.social.linkedin, SITE.careUrl],
+  // Verknüpft die Firma mit ihren Leistungsthemen und den Leistungsseiten, damit
+  // Suchmaschinen und KI-Systeme die Entität eindeutig den Suchbegriffen zuordnen.
+  knowsAbout: ORG_SERVICES.map((s) => s.name),
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'Leistungen der AHAD Cleaning Company GmbH',
+    itemListElement: ORG_SERVICES.map((s) => ({
+      '@type': 'Offer',
+      itemOffered: { '@type': 'Service', name: s.name, url: `${SITE.url}${s.path}` },
+    })),
+  },
 };

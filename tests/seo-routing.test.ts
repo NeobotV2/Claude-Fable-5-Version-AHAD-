@@ -75,3 +75,23 @@ test('self-serving Organization and LocalBusiness rating markup stays disabled',
   assert.equal(sources.includes("'@type': 'AggregateRating'"), false);
   assert.equal(sources.includes('"@type": "AggregateRating"'), false);
 });
+
+test('llms.txt links every indexable page of the route manifest', () => {
+  const llms = read('public/llms.txt');
+  const missing = manifest.pages
+    .filter((page: { index: boolean }) => page.index)
+    .map((page: { path: string }) => page.path)
+    .filter((pagePath: string) => !llms.includes(`](${siteConfig.canonicalOrigin}${pagePath})`));
+  assert.deepEqual(missing, [], `In public/llms.txt fehlen: ${missing.join(', ')}`);
+});
+
+test('Organization schema services point to indexable pages', () => {
+  const site = read('src/lib/site.ts');
+  const block = site.slice(site.indexOf('export const ORG_SERVICES'), site.indexOf('] as const;', site.indexOf('export const ORG_SERVICES')));
+  const paths = [...block.matchAll(/path: '([^']+)'/g)].map((m) => m[1]);
+  assert.ok(paths.length >= 10, 'ORG_SERVICES erwartet');
+  const indexable = new Set(
+    manifest.pages.filter((page: { index: boolean }) => page.index).map((page: { path: string }) => page.path),
+  );
+  for (const p of paths) assert.ok(indexable.has(p), `${p} ist keine indexierbare Seite`);
+});
