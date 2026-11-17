@@ -38,6 +38,8 @@ export const WHATSAPP_HREF = `https://wa.me/${SITE.whatsapp}?text=${encodeURICom
 
 /** Pfade, auf denen schwebende Conversion-Elemente (Sticky-Leiste, WhatsApp) verborgen bleiben. */
 export const CONVERSION_HIDDEN_PATHS = ['/angebot', '/karriere/bewerbung', '/admin'] as const;
+/** Die feste Handy-Leiste entfällt zusätzlich dort, wo ein Formular den eigenen Absende-Knopf hat. */
+export const STICKY_CTA_HIDDEN_PATHS = [...CONVERSION_HIDDEN_PATHS, '/kontakt'] as const;
 
 /**
  * Pruefmetadaten fuer oeffentliche Tatsachenbehauptungen. Ein Eintrag wird nur

@@ -150,7 +150,12 @@ export default function AHADSystem() {
             lead="Der Stundenpreis ist oft ähnlich. Unterschiede zeigen sich im Alltag: bei Mängeln, bei der Frage nach der Zuständigkeit und wenn ein Audit Nachweise verlangt."
             className="mb-10 max-w-3xl"
           />
-            <div className="overflow-x-auto border-t-2 border-navy">
+            <div
+              className="overflow-x-auto border-t-2 border-navy focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+              role="region"
+              aria-label="Vergleich: Reinigung ohne System und mit dem AHAD System"
+              tabIndex={0}
+            >
               <table className="w-full text-left text-sm border-collapse bg-white">
                 <thead>
                   <tr>

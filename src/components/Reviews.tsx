@@ -33,7 +33,7 @@ function ReviewItem({ review }: { review: Review }) {
             type="button"
             onClick={() => setOpen((value) => !value)}
             aria-expanded={open}
-            className="mt-3 text-sm font-semibold text-accent hover:underline underline-offset-4"
+            className="mt-3 py-2.5 -mb-2.5 text-sm font-semibold text-accent hover:underline underline-offset-4"
           >
             {open ? 'Weniger anzeigen' : 'Ganze Bewertung lesen'}
           </button>

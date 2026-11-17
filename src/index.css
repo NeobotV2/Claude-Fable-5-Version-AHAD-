@@ -207,10 +207,10 @@
 
   /* Textlink mit Pfeil — die zweite Aktionsebene neben dem Button. */
   .text-link {
-    @apply inline-flex items-center gap-2 font-semibold text-accent underline-offset-4 decoration-2 transition-colors hover:text-accent-dark hover:underline;
+    @apply inline-flex items-center gap-2 py-2.5 -my-2.5 font-semibold text-accent underline-offset-4 decoration-2 transition-colors hover:text-accent-dark hover:underline;
   }
   .text-link-light {
-    @apply inline-flex items-center gap-2 font-semibold text-white underline-offset-4 decoration-2 transition-colors hover:text-mint hover:underline;
+    @apply inline-flex items-center gap-2 py-2.5 -my-2.5 font-semibold text-white underline-offset-4 decoration-2 transition-colors hover:text-mint hover:underline;
   }
 
   /* ── Oberflächen ──────────────────────────────────────────────── */

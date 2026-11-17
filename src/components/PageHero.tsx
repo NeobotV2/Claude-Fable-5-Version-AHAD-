@@ -78,8 +78,9 @@ export default function PageHero({
       )}
     >
       {crumbs && crumbs.length > 0 && (
-        <nav aria-label="Brotkrumen" className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[13px] text-slate mb-6">
-          <Link to="/" className="hover:text-accent transition-colors">
+        <nav aria-label="Brotkrumen" className="flex flex-wrap items-center gap-x-2 text-[13px] text-slate mb-3">
+          {/* py-3: Trefferfläche 44 px hoch, ohne die Zeile optisch zu vergrößern */}
+          <Link to="/" className="py-3 hover:text-accent transition-colors">
             Start
           </Link>
           {crumbs.map((crumb, i) => (
@@ -88,7 +89,7 @@ export default function PageHero({
                 /
               </span>
               {crumb.href ? (
-                <Link to={crumb.href} className="hover:text-accent transition-colors">
+                <Link to={crumb.href} className="py-3 hover:text-accent transition-colors">
                   {crumb.label}
                 </Link>
               ) : (

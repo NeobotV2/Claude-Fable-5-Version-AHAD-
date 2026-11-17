@@ -134,7 +134,7 @@ export default function IndustryPage({ branche }: { branche: BrancheData }) {
         <p className="max-w-7xl mx-auto px-4 sm:px-8 flex flex-wrap items-baseline gap-x-6 gap-y-2 text-[15px]">
           <span className="font-semibold text-navy">Weitere Branchen:</span>
           {others.map((other) => (
-            <Link key={other.slug} to={other.path} className="text-accent font-medium hover:underline underline-offset-4">
+            <Link key={other.slug} to={other.path} className="py-2.5 -my-2.5 text-accent font-medium hover:underline underline-offset-4">
               {other.name}
             </Link>
           ))}

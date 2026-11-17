@@ -54,7 +54,8 @@ const columns = [
   },
 ];
 
-const linkClass = 'text-[15px] text-blue-100/75 hover:text-white transition-colors';
+// py-2 vergrößert die Trefferfläche je Link auf dem Handy (38 px Zeilenraster).
+const linkClass = 'inline-block py-2 lg:py-1.5 text-[15px] text-blue-100/75 hover:text-white transition-colors';
 
 export default function Footer() {
   return (
@@ -90,8 +91,8 @@ export default function Footer() {
           {/* Navigationsspalten */}
           {columns.map((col) => (
             <nav key={col.title} className="lg:col-span-2" aria-label={col.title}>
-              <p className="text-sm font-semibold text-white mb-4">{col.title}</p>
-              <ul className="space-y-2.5">
+              <p className="text-sm font-semibold text-white mb-2">{col.title}</p>
+              <ul>
                 {col.links.map((link) => (
                   <li key={link.href}>
                     <Link to={link.href} className={linkClass}>
@@ -121,15 +122,16 @@ export default function Footer() {
 
         {/* Abschlusszeile — extra Bodenabstand auf Mobile, damit die fixe
             Sticky-CTA-Leiste die Rechtslinks nicht überdeckt. */}
-        <div className="pt-5 pb-28 lg:pb-6 border-t border-white/15 flex flex-col md:flex-row md:items-center justify-between gap-4 text-[13px] text-blue-100/75">
+        <div className="pt-3 pb-24 lg:pb-3 border-t border-white/15 flex flex-col md:flex-row md:items-center justify-between gap-x-4 gap-y-1 text-[13px] text-blue-100/75">
           <p>
             © {new Date().getFullYear()} {SITE.legalName}. Alle Rechte vorbehalten.
           </p>
-          <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
-            <Link to="/impressum" className="hover:text-white transition-colors">
+          {/* Trefferflächen mindestens 44 px hoch (py-3) bzw. 44 × 44 px (Icons). */}
+          <div className="flex flex-wrap items-center gap-x-5">
+            <Link to="/impressum" className="py-3 hover:text-white transition-colors">
               Impressum
             </Link>
-            <Link to="/datenschutz" className="hover:text-white transition-colors">
+            <Link to="/datenschutz" className="py-3 hover:text-white transition-colors">
               Datenschutz
             </Link>
             <a
@@ -137,7 +139,7 @@ export default function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="AHAD Cleaning auf Instagram"
-              className="hover:text-white transition-colors"
+              className="grid place-items-center w-11 h-11 -mx-2 hover:text-white transition-colors"
             >
               <Instagram size={18} aria-hidden="true" />
             </a>
@@ -146,7 +148,7 @@ export default function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="AHAD Cleaning auf LinkedIn"
-              className="hover:text-white transition-colors"
+              className="grid place-items-center w-11 h-11 -mx-2 hover:text-white transition-colors"
             >
               <Linkedin size={18} aria-hidden="true" />
             </a>
