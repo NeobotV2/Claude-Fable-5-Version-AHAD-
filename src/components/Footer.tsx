@@ -54,8 +54,8 @@ const columns = [
   },
 ];
 
-// py-2 vergrößert die Trefferfläche je Link auf dem Handy (38 px Zeilenraster).
-const linkClass = 'inline-block py-2 lg:py-1.5 text-body-sm text-ondark/75 hover:text-white transition-colors';
+// py-2.5 vergrößert die Trefferfläche je Link auf dem Handy auf gut 42 px.
+const linkClass = 'inline-block py-2.5 lg:py-1.5 text-body-sm text-ondark/75 hover:text-white transition-colors';
 
 export default function Footer() {
   return (

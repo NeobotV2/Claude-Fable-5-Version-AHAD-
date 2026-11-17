@@ -160,7 +160,7 @@ export default function Fachwissen() {
                               <li key={slug}>
                                 <Link
                                   to={getEditorialArticlePath(slug)}
-                                  className="group flex items-start gap-2 py-2.5 text-sm font-semibold leading-snug text-navy hover:text-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+                                  className="group flex items-start gap-2 py-3 text-sm font-semibold leading-snug text-navy hover:text-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
                                 >
                                   <ArrowRight size={14} className="mt-0.5 shrink-0 text-brand transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
                                   {article.listingTitle}

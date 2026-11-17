@@ -148,23 +148,23 @@ export default function AktuellesGuentzelUebernahme() {
             </p>
             <p className="font-bold text-navy">Muhammet Ali Yerlikaya</p>
             <p className="text-sm text-slate mb-4">Prokurist und Vertriebsleiter</p>
-            <ul className="space-y-2 text-body-sm">
+            <ul className="text-body-sm">
               <li className="flex items-center gap-2.5">
                 <Phone size={16} className="text-accent flex-shrink-0" aria-hidden="true" />
-                <a href="tel:+491743926183" className="font-bold text-brand hover:underline">
+                <a href="tel:+491743926183" className="inline-block py-2.5 font-bold text-brand hover:underline">
                   0174 3926183
                 </a>
                 <span className="text-slate text-sm">mobil</span>
               </li>
               <li className="flex items-center gap-2.5">
                 <Phone size={16} className="text-accent flex-shrink-0" aria-hidden="true" />
-                <a href={SITE.phoneHref} className="font-bold text-brand hover:underline">
+                <a href={SITE.phoneHref} className="inline-block py-2.5 font-bold text-brand hover:underline">
                   {SITE.phone}
                 </a>
                 <span className="text-slate text-sm">Büro, werktags 7 bis 17 Uhr</span>
               </li>
               <li>
-                <a href={`mailto:${SITE.email}`} className="font-bold text-brand hover:underline">
+                <a href={`mailto:${SITE.email}`} className="inline-block py-2.5 font-bold text-brand hover:underline">
                   {SITE.email}
                 </a>
               </li>
@@ -196,7 +196,7 @@ export default function AktuellesGuentzelUebernahme() {
           </div>
 
           <p className="mt-10">
-            <Link to="/aktuelles" className="inline-flex items-center gap-2 font-bold text-brand hover:underline">
+            <Link to="/aktuelles" className="text-link">
               Alle Meldungen <ArrowRight size={16} aria-hidden="true" />
             </Link>
           </p>

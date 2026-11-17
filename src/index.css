@@ -166,6 +166,12 @@
   p {
     text-wrap: pretty;
   }
+  /* Fließtext: Ausgeschriebene Internetadressen und sehr lange Wörter dürfen
+     umbrechen, statt die Seite auf schmalen Handys breiter als den Bildschirm
+     zu machen. Greift nur, wenn ein Wort allein nicht in die Zeile passt. */
+  p, li, dd, td, blockquote, address {
+    overflow-wrap: break-word;
+  }
   ::selection {
     @apply bg-brand text-white;
   }
