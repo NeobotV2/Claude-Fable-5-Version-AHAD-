@@ -326,3 +326,27 @@ textarea::placeholder {
     background: #fff !important;
   }
 }
+
+/* ── Vergleichsvariante Startseiten-Kopf: Foto über die ganze Breite ──────
+   Nur ab 1024 px; auf dem Handy bleibt Text oben, Foto darunter. Links ein
+   ruhiger dunkelblauer Verlauf für die Lesbarkeit, sonst keine Effekte. */
+@media (min-width: 1024px) {
+  .hero--photo { position: relative; background: var(--color-navy); }
+  .hero--photo .hero-media { position: absolute; inset: 4rem 0 0 0; }
+  .hero--photo .hero-media::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, rgb(11 35 65 / 0.96) 0%, rgb(11 35 65 / 0.9) 34%, rgb(11 35 65 / 0.45) 58%, rgb(11 35 65 / 0) 78%);
+  }
+  .hero--photo .hero-media figcaption { left: auto; right: 0; z-index: 1; }
+  .hero--photo .hero-copy { position: relative; z-index: 1; }
+  .hero--photo .hero-copy h1,
+  .hero--photo .hero-copy .text-link,
+  .hero--photo .hero-copy li a span { color: #fff; }
+  .hero--photo .hero-copy h1 .eyebrow { color: var(--color-mint); }
+  .hero--photo .hero-copy p,
+  .hero--photo .hero-copy ul,
+  .hero--photo .hero-copy li a { color: var(--color-ondark); }
+  .hero--photo .hero-copy ul { border-color: rgb(255 255 255 / 0.25); }
+}

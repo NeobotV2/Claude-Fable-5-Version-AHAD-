@@ -1,9 +1,11 @@
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { ArrowRight } from 'lucide-react';
 import SEO from '@/components/SEO';
 import SectionHeading from '@/components/ui/SectionHeading';
 import ButtonLink from '@/components/ui/Button';
+import { cn } from '@/lib/utils';
 import SmartImage from '@/components/ui/SmartImage';
 import FactRow from '@/components/ui/FactRow';
 import LinkList from '@/components/ui/LinkList';
@@ -164,6 +166,13 @@ const faqs: FAQItem[] = [
 const HERO_SIZES = '(min-width: 1024px) 50vw, 100vw';
 
 export default function Home() {
+  // Vergleichsansicht: /?hero=foto zeigt den Kopfbereich mit vollflächigem Foto.
+  // Nur zum Abwägen der beiden Varianten; entfällt, sobald eine gewählt ist.
+  const [photoHero, setPhotoHero] = useState(false);
+  useEffect(() => {
+    setPhotoHero(new URLSearchParams(window.location.search).get('hero') === 'foto');
+  }, []);
+
   return (
     <div>
       <SEO
@@ -186,9 +195,9 @@ export default function Home() {
           Zweispaltig: links die Aussage auf Weiß, rechts das echte Foto der
           Zentrale in voller Farbe, bis an den Seitenrand. Kein Text auf dem
           Bild, keine Überlagerung. pt-16 = Höhe der festen Kopfzeile. */}
-      <section className="bg-white pt-16">
+      <section className={cn('bg-white pt-16', photoHero && 'hero--photo')}>
         <div className="grid grid-cols-1 lg:grid-cols-2">
-          <div className="flex lg:justify-end">
+          <div className="hero-copy flex lg:justify-end">
             <div className="w-full lg:max-w-[40rem] px-4 sm:px-8 lg:pr-14 py-10 sm:py-14 lg:py-24">
               {/* Keyword im H1 (SEO) + Schmerzpunkt der Zielgruppe (Conversion).
                   Statisch gerendert: steht im vorgerenderten HTML → schneller LCP. */}
@@ -241,11 +250,11 @@ export default function Home() {
             </div>
           </div>
 
-          <figure className="relative aspect-[3/2] lg:aspect-auto bg-navy/5">
+          <figure className="hero-media relative aspect-[3/2] lg:aspect-auto bg-navy/5">
             <img
               src={IMG.heroMain}
               srcSet={srcSetFor(IMG.heroMain)}
-              sizes={HERO_SIZES}
+              sizes={photoHero ? '100vw' : HERO_SIZES}
               alt="AHAD-Fuhrpark vor der Zentrale in Villingen-Schwenningen"
               {...intrinsicSizeFor(IMG.heroMain)}
               className="absolute inset-0 w-full h-full object-cover"
