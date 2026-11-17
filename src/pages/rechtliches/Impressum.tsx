@@ -1,4 +1,3 @@
-import { motion } from 'motion/react';
 import SEO from '@/components/SEO';
 import PageHero from '@/components/PageHero';
 import { SITE } from '@/lib/site';
@@ -13,9 +12,7 @@ export default function Impressum() {
       />
       <PageHero compact eyebrow="Rechtliches" title="Impressum" crumbs={[{ label: 'Impressum' }]} />
       <div className="max-w-4xl mx-auto px-4 section-y">
-        <motion.div
-          initial={false}
-          animate={{ opacity: 1, y: 0 }}
+        <div
           className="prose prose-slate max-w-none"
         >
 
@@ -67,7 +64,7 @@ export default function Impressum() {
               78052 Villingen-Schwenningen
             </p>
           </section>
-        </motion.div>
+        </div>
       </div>
     </div>
   );

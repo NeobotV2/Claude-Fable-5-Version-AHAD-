@@ -1,4 +1,3 @@
-import { motion } from 'motion/react';
 import SEO from '@/components/SEO';
 import PageHero from '@/components/PageHero';
 
@@ -12,9 +11,7 @@ export default function Datenschutz() {
       />
       <PageHero compact eyebrow="Rechtliches" title="Datenschutzerklärung" crumbs={[{ label: 'Datenschutz' }]} />
       <div className="max-w-4xl mx-auto px-4 section-y">
-        <motion.div
-          initial={false}
-          animate={{ opacity: 1, y: 0 }}
+        <div
           className="prose prose-slate max-w-none"
         >
 
@@ -171,7 +168,7 @@ export default function Datenschutz() {
               direkt im WhatsApp-Chat widerrufen. Der Widerruf berührt nicht die Bearbeitung Ihrer Bewerbung.
             </p>
           </section>
-        </motion.div>
+        </div>
       </div>
     </div>
   );

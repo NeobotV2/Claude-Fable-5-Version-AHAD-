@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
 import { Helmet } from 'react-helmet-async';
 import { ChevronLeft, ChevronRight, Check, Send, Smartphone, User, Info, Loader2, Globe } from 'lucide-react';
 import { Link, useSearchParams } from 'react-router-dom';
@@ -225,13 +224,10 @@ export default function KarriereFunnel() {
           </div>
         </div>
 
-        <AnimatePresence mode="wait">
+        <>
           {step === 1 && (
-            <motion.div
+            <div
               key="step1"
-              initial={false}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -20 }}
               className="space-y-4"
             >
               <div className="text-center mb-4">
@@ -266,15 +262,12 @@ export default function KarriereFunnel() {
                   </button>
                 ))}
               </div>
-            </motion.div>
+            </div>
           )}
 
           {step === 2 && (
-            <motion.div
+            <div
               key="step2"
-              initial={false}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -20 }}
               className="space-y-4"
             >
               <div className="text-center mb-4">
@@ -314,15 +307,12 @@ export default function KarriereFunnel() {
               <button onClick={prevStep} className="flex items-center gap-2 text-slate font-bold py-3">
                 {isRtl ? <ChevronRight size={20} /> : <ChevronLeft size={20} />} {t.back}
               </button>
-            </motion.div>
+            </div>
           )}
 
           {step === 3 && (
-            <motion.div
+            <div
               key="step3"
-              initial={false}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -20 }}
               className="space-y-4"
             >
               <div className="text-center mb-4">
@@ -469,15 +459,12 @@ export default function KarriereFunnel() {
                   {t.next}
                 </button>
               </div>
-            </motion.div>
+            </div>
           )}
 
           {step === 4 && (
-            <motion.div
+            <div
               key="step4"
-              initial={false}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -20 }}
               className="space-y-4"
             >
               <div className="text-center mb-4">
@@ -576,9 +563,9 @@ export default function KarriereFunnel() {
                   </div>
                 </div>
               </form>
-            </motion.div>
+            </div>
           )}
-        </AnimatePresence>
+        </>
       </div>
     </div>
   );

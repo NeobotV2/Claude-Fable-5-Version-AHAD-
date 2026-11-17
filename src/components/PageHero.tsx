@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import ButtonLink from '@/components/ui/Button';
 import HeadlineText from '@/components/ui/HeadlineText';
 import { SITE } from '@/lib/site';
-import { srcSetFor } from '@/lib/images';
+import { intrinsicSizeFor, srcSetFor } from '@/lib/images';
 import { jsonLd } from '@/lib/jsonld';
 import { cn } from '@/lib/utils';
 import type { ReactNode } from 'react';
@@ -12,6 +12,9 @@ export interface Crumb {
   label: string;
   href?: string;
 }
+
+/** Sichtbare Bildbreite: ab lg rund 42 % der Seite, darunter volle Breite. */
+const HERO_SIZES = '(min-width: 1024px) 42vw, 100vw';
 
 interface PageHeroProps {
   eyebrow?: string;
@@ -141,6 +144,13 @@ export default function PageHero({
           <script type="application/ld+json">{jsonLd(breadcrumbSchema)}</script>
         </Helmet>
       )}
+      {/* LCP: Titelbild schon im <head> anstoßen, bevor der Parser das <img> erreicht
+          und bevor das Skript die Seite übernimmt. */}
+      {image && (
+        <Helmet>
+          <link rel="preload" as="image" href={image} imageSrcSet={srcSetFor(image)} imageSizes={HERO_SIZES} />
+        </Helmet>
+      )}
 
       {image ? (
         <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)]">
@@ -149,8 +159,9 @@ export default function PageHero({
             <img
               src={image}
               srcSet={srcSetFor(image)}
-              sizes="(min-width: 1024px) 42vw, 100vw"
+              sizes={HERO_SIZES}
               alt={imageAlt}
+              {...intrinsicSizeFor(image)}
               className="absolute inset-0 w-full h-full object-cover"
               loading="eager"
               // LCP-Kandidat jeder Unterseite – React 18 reicht nur lowercase `fetchpriority` durch

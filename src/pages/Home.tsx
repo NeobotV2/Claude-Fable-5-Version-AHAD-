@@ -17,7 +17,7 @@ import NewsTeaser from '@/components/NewsTeaser';
 import Guarantee from '@/components/Guarantee';
 import Reviews from '@/components/Reviews';
 import TrustBand from '@/components/TrustBand';
-import { IMG, srcSetFor } from '@/lib/images';
+import { IMG, intrinsicSizeFor, srcSetFor } from '@/lib/images';
 import {
   SITE,
   STATS,
@@ -243,6 +243,7 @@ export default function Home() {
               srcSet={srcSetFor(IMG.heroMain)}
               sizes={HERO_SIZES}
               alt="AHAD-Fuhrpark vor der Zentrale in Villingen-Schwenningen"
+              {...intrinsicSizeFor(IMG.heroMain)}
               className="absolute inset-0 w-full h-full object-cover"
               loading="eager"
               // React 18 reicht nur lowercase `fetchpriority` an das DOM durch

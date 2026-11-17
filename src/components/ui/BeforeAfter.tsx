@@ -1,7 +1,7 @@
 import { useCallback, useId, useRef, useState } from 'react';
 import { ChevronsLeftRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { srcSetFor } from '@/lib/images';
+import { intrinsicSizeFor, srcSetFor } from '@/lib/images';
 
 interface BeforeAfterProps {
   beforeSrc: string;
@@ -66,6 +66,7 @@ export default function BeforeAfter({
         srcSet={srcSetFor(afterSrc)}
         sizes="(min-width:1024px) 50vw, 100vw"
         alt={afterLabel}
+        {...intrinsicSizeFor(afterSrc)}
         draggable={false}
         loading="lazy"
         decoding="async"
@@ -83,6 +84,7 @@ export default function BeforeAfter({
           srcSet={srcSetFor(beforeSrc)}
           sizes="(min-width:1024px) 50vw, 100vw"
           alt=""
+          {...intrinsicSizeFor(beforeSrc)}
           draggable={false}
           loading="lazy"
           decoding="async"

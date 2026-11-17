@@ -1,12 +1,14 @@
 {
   "bau.webp": {
     "width": 854,
+    "height": 1280,
     "variants": [
       480
     ]
   },
   "branche-buero.webp": {
     "width": 1200,
+    "height": 800,
     "variants": [
       480,
       960
@@ -14,6 +16,7 @@
   },
   "branche-hotel.webp": {
     "width": 1200,
+    "height": 1799,
     "variants": [
       480,
       960
@@ -21,6 +24,7 @@
   },
   "branche-industrie.webp": {
     "width": 1200,
+    "height": 800,
     "variants": [
       480,
       960
@@ -28,6 +32,7 @@
   },
   "branche-medizin.webp": {
     "width": 1600,
+    "height": 1067,
     "variants": [
       480,
       960
@@ -35,6 +40,7 @@
   },
   "brand-back.webp": {
     "width": 1280,
+    "height": 854,
     "variants": [
       480,
       960
@@ -42,6 +48,7 @@
   },
   "gewerbe.webp": {
     "width": 1280,
+    "height": 854,
     "variants": [
       480,
       960
@@ -49,6 +56,7 @@
   },
   "glas-detail.webp": {
     "width": 1200,
+    "height": 800,
     "variants": [
       480,
       960
@@ -56,12 +64,14 @@
   },
   "glas.webp": {
     "width": 854,
+    "height": 1280,
     "variants": [
       480
     ]
   },
   "hero-hq-wide.webp": {
     "width": 1280,
+    "height": 854,
     "variants": [
       480,
       960
@@ -69,6 +79,7 @@
   },
   "hero-hq.webp": {
     "width": 1280,
+    "height": 854,
     "variants": [
       480,
       960
@@ -76,6 +87,7 @@
   },
   "industrie-detail.webp": {
     "width": 1100,
+    "height": 734,
     "variants": [
       480,
       960
@@ -83,6 +95,7 @@
   },
   "industrie.webp": {
     "width": 1280,
+    "height": 854,
     "variants": [
       480,
       960
@@ -90,6 +103,7 @@
   },
   "karriere.webp": {
     "width": 1280,
+    "height": 854,
     "variants": [
       480,
       960
@@ -97,6 +111,7 @@
   },
   "konstanz.webp": {
     "width": 1280,
+    "height": 854,
     "variants": [
       480,
       960
@@ -104,6 +119,7 @@
   },
   "kuechenabluft.webp": {
     "width": 1200,
+    "height": 1799,
     "variants": [
       480,
       960
@@ -111,6 +127,7 @@
   },
   "medizin-detail.webp": {
     "width": 1200,
+    "height": 1799,
     "variants": [
       480,
       960
@@ -118,6 +135,7 @@
   },
   "medizintechnik.webp": {
     "width": 1600,
+    "height": 1067,
     "variants": [
       480,
       960
@@ -125,6 +143,7 @@
   },
   "meeting.webp": {
     "width": 1280,
+    "height": 854,
     "variants": [
       480,
       960
@@ -132,6 +151,7 @@
   },
   "nachher.webp": {
     "width": 1280,
+    "height": 720,
     "variants": [
       480,
       960
@@ -139,6 +159,7 @@
   },
   "sonder-detail.webp": {
     "width": 1100,
+    "height": 734,
     "variants": [
       480,
       960
@@ -146,6 +167,7 @@
   },
   "sonder.webp": {
     "width": 1280,
+    "height": 854,
     "variants": [
       480,
       960
@@ -153,12 +175,14 @@
   },
   "stuttgart.webp": {
     "width": 853,
+    "height": 1280,
     "variants": [
       480
     ]
   },
   "team.webp": {
     "width": 1142,
+    "height": 616,
     "variants": [
       480,
       960
@@ -166,6 +190,7 @@
   },
   "unterhalt-detail.webp": {
     "width": 1100,
+    "height": 734,
     "variants": [
       480,
       960
@@ -173,12 +198,14 @@
   },
   "unterhalt.webp": {
     "width": 854,
+    "height": 1280,
     "variants": [
       480
     ]
   },
   "vorher.webp": {
     "width": 1280,
+    "height": 720,
     "variants": [
       480,
       960

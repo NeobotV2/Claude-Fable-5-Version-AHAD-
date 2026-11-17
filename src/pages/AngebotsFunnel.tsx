@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState, type FormEvent, type ReactNode } from 'react';
-import { AnimatePresence, motion } from 'motion/react';
 import {
   ArrowRight,
   Building,
@@ -401,9 +400,9 @@ export default function AngebotsFunnel() {
 
       <p className="sr-only" role="status">Schritt {step} von 4: {STEP_LABELS[step - 1]}</p>
       <div ref={cardRef} tabIndex={-1} className="bg-white shadow-lifted p-6 sm:p-10 outline-none focus-visible:ring-4 focus-visible:ring-mint/60">
-        <AnimatePresence mode="wait" initial={false}>
+        <>
           {step === 1 && (
-            <motion.section key="step-1" initial={false} animate={{ opacity: 1 }} exit={{ opacity: 0 }} aria-labelledby="offer-step-1">
+            <section key="step-1" aria-labelledby="offer-step-1">
               <h2 id="offer-step-1" className="font-headline text-2xl md:text-3xl font-bold text-navy mb-2">Um welches Objekt geht es?</h2>
               <p className="text-slate mb-6">Wählen Sie den Objekttyp, der am besten passt. Details klären wir gemeinsam.</p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -415,11 +414,11 @@ export default function AngebotsFunnel() {
                   </button>
                 ))}
               </div>
-            </motion.section>
+            </section>
           )}
 
           {step === 2 && (
-            <motion.section key="step-2" initial={false} animate={{ opacity: 1 }} exit={{ opacity: 0 }} aria-labelledby="offer-step-2">
+            <section key="step-2" aria-labelledby="offer-step-2">
               <h2 id="offer-step-2" className="font-headline text-2xl md:text-3xl font-bold text-navy mb-2">Welche Leistungen benötigen Sie?</h2>
               <p className="text-slate mb-6">Sie können mehrere Leistungen wählen.</p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -434,11 +433,11 @@ export default function AngebotsFunnel() {
                 })}
               </div>
               <Navigation back={back} next={next} nextDisabled={formData.services.length === 0} />
-            </motion.section>
+            </section>
           )}
 
           {step === 3 && (
-            <motion.section key="step-3" initial={false} animate={{ opacity: 1 }} exit={{ opacity: 0 }} aria-labelledby="offer-step-3" className="space-y-7">
+            <section key="step-3" aria-labelledby="offer-step-3" className="space-y-7">
               <div><h2 id="offer-step-3" className="font-headline text-2xl md:text-3xl font-bold text-navy mb-2">Umfang und besondere Anforderungen</h2><p className="text-slate">Eine grobe Einschätzung genügt für die Terminvorbereitung.</p></div>
               <ChoiceGroup legend="Ungefähre Fläche" options={AREA_SIZES} value={formData.areaSize} onChange={(areaSize) => setFormData((current) => ({ ...current, areaSize }))} />
               <ChoiceGroup legend="Gewünschter Turnus" options={FREQUENCIES} value={formData.frequency} onChange={(frequency) => setFormData((current) => ({ ...current, frequency }))} />
@@ -460,11 +459,11 @@ export default function AngebotsFunnel() {
                 </div>
               </fieldset>
               <Navigation back={back} next={next} nextDisabled={!formData.areaSize || !formData.frequency} />
-            </motion.section>
+            </section>
           )}
 
           {step === 4 && (
-            <motion.section key="step-4" initial={false} animate={{ opacity: 1 }} exit={{ opacity: 0 }} aria-labelledby="offer-step-4">
+            <section key="step-4" aria-labelledby="offer-step-4">
               <h2 id="offer-step-4" className="font-headline text-2xl md:text-3xl font-bold text-navy mb-2">Wie dürfen wir Sie erreichen?</h2>
               <p className="text-slate mb-6">Ansprechperson und ein Kontaktweg genügen. Unternehmen und Einsatzort können Sie optional ergänzen.</p>
               <form onSubmit={handleSubmit} className="space-y-4" aria-busy={isSubmitting}>
@@ -487,9 +486,9 @@ export default function AngebotsFunnel() {
                   </button>
                 </div>
               </form>
-            </motion.section>
+            </section>
           )}
-        </AnimatePresence>
+        </>
       </div>
     </>,
   );

@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { motion, AnimatePresence } from 'motion/react';
 import { CONVERSION_HIDDEN_PATHS as HIDDEN_PATHS, WHATSAPP_HREF } from '@/lib/site';
 
 /** Offizielles WhatsApp-Glyph (lucide hat kein Markenicon). */
@@ -29,24 +28,19 @@ export default function WhatsAppButton() {
   }, []);
 
   return (
-    <AnimatePresence>
+    <>
       {shown && !hidden && (
-        <motion.a
+        <a
           data-page-action="whatsapp"
           href={WHATSAPP_HREF}
           target="_blank"
           rel="noopener noreferrer"
           aria-label="AHAD Cleaning per WhatsApp kontaktieren"
-          initial={{ opacity: 0, scale: 0.6 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0.6 }}
-          whileHover={{ scale: 1.06 }}
-          whileTap={{ scale: 0.95 }}
-          className="fixed right-4 z-40 w-12 h-12 rounded-full bg-whatsapp text-white hidden lg:grid place-items-center shadow-lifted bottom-6"
+          className="fixed right-4 z-40 w-12 h-12 rounded-full bg-whatsapp text-white hidden lg:grid place-items-center shadow-lifted bottom-6 animate-fade-in"
         >
           <WhatsAppGlyph size={22} />
-        </motion.a>
+        </a>
       )}
-    </AnimatePresence>
+    </>
   );
 }

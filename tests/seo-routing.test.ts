@@ -95,3 +95,13 @@ test('Organization schema services point to indexable pages', () => {
   );
   for (const p of paths) assert.ok(indexable.has(p), `${p} ist keine indexierbare Seite`);
 });
+
+test('eigene Schriftgrößen-Tokens sind bei tailwind-merge angemeldet', () => {
+  // Jede --text-* Größe aus index.css muss in cn() als Schriftgröße bekannt sein,
+  // sonst verdrängt sie Textfarben (z. B. text-white auf Schaltflächen).
+  const css = read('src/index.css');
+  const utils = read('src/lib/utils.ts');
+  const tokens = [...css.matchAll(/^\s*--text-([a-z-]+):/gm)].map((m) => m[1]);
+  assert.ok(tokens.length >= 5, 'Schriftgrößen-Tokens erwartet');
+  for (const token of tokens) assert.ok(utils.includes(`'${token}'`), `text-${token} fehlt in src/lib/utils.ts`);
+});

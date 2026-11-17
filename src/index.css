@@ -107,16 +107,22 @@
   --shadow-glow: 0 0 #0000;
 
   /* ── Animationen ───────────────────────────────────────────────── */
-  --animate-float: float 7s ease-in-out infinite;
-  --animate-pulse-soft: pulse-soft 3s ease-in-out infinite;
+  /* Kurze Einblendungen für schwebende Ebenen (Menü, feste Leiste). */
+  --animate-fade-in: fade-in 0.15s ease-out both;
+  --animate-slide-in-right: slide-in-right 0.2s ease-out both;
+  --animate-slide-up: slide-up 0.25s ease-out both;
 
-  @keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-12px); }
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
   }
-  @keyframes pulse-soft {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.55; }
+  @keyframes slide-in-right {
+    from { transform: translateX(100%); }
+    to { transform: none; }
+  }
+  @keyframes slide-up {
+    from { transform: translateY(100%); }
+    to { transform: none; }
   }
 }
 

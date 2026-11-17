@@ -20,7 +20,7 @@ export default defineConfig({
   ssr: {
     // Diese Pakete in den SSR-Bundle ziehen, um ESM/Interop-Probleme im
     // Node-Render zu vermeiden.
-    noExternal: ['motion', 'react-helmet-async', 'lucide-react', 'clsx', 'tailwind-merge'],
+    noExternal: ['react-helmet-async', 'lucide-react', 'clsx', 'tailwind-merge'],
   },
   build: {
     ssr: 'src/entry-server.tsx',

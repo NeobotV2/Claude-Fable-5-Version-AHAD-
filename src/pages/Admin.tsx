@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { motion } from 'motion/react';
 import { 
   auth, 
   db, 
@@ -322,9 +321,7 @@ export default function Admin() {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
         <SEO title="Admin Login | AHAD Cleaning" description="Admin Bereich für AHAD Cleaning." noindex />
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+        <div
           className="bg-white p-8 rounded-3xl shadow-xl max-w-md w-full text-center"
         >
           <div className="w-20 h-20 bg-blue-50 text-[#0B2341] rounded-full flex items-center justify-center mx-auto mb-6">
@@ -340,7 +337,7 @@ export default function Admin() {
           >
             <LogIn size={20} /> Mit Google anmelden
           </button>
-        </motion.div>
+        </div>
       </div>
     );
   }
@@ -471,10 +468,8 @@ export default function Admin() {
               </div>
             ) : (
               jobApplications.map((app) => (
-                <motion.div 
+                <div 
                   key={app.id}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
                   className="bg-white p-6 md:p-8 rounded-3xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow"
                 >
                   <div className="flex flex-col md:flex-row justify-between gap-6">
@@ -540,7 +535,7 @@ export default function Admin() {
                       </button>
                     </div>
                   </div>
-                </motion.div>
+                </div>
               ))
             )
           )}
@@ -552,10 +547,8 @@ export default function Admin() {
               </div>
             ) : (
               offerLeads.map((lead) => (
-                <motion.div 
+                <div 
                   key={lead.id}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
                   className="bg-white p-6 md:p-8 rounded-3xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow"
                 >
                   <div className="flex flex-col md:flex-row justify-between gap-6">
@@ -623,7 +616,7 @@ export default function Admin() {
                       </button>
                     </div>
                   </div>
-                </motion.div>
+                </div>
               ))
             )
           )}
@@ -635,10 +628,8 @@ export default function Admin() {
               </div>
             ) : (
               contactLeads.map((lead) => (
-                <motion.div 
+                <div 
                   key={lead.id}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
                   className="bg-white p-6 md:p-8 rounded-3xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow"
                 >
                   <div className="flex flex-col md:flex-row justify-between gap-6">
@@ -696,7 +687,7 @@ export default function Admin() {
                       </button>
                     </div>
                   </div>
-                </motion.div>
+                </div>
               ))
             )
           )}

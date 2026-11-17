@@ -1,6 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
 import { cn } from '@/lib/utils';
-import { motion, AnimatePresence } from 'motion/react';
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { ChevronDown, Menu, X, Phone } from 'lucide-react';
 import Logo from '@/components/Logo';
@@ -259,16 +258,12 @@ export default function Header() {
                   )}
                 </div>
 
-                <AnimatePresence>
+                <>
                   {link.sublinks && activeDropdown === link.name && (
-                    <motion.div
+                    <div
                       id={`desktop-submenu-${index}`}
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      transition={{ duration: 0.12 }}
                       className={cn(
-                        'absolute top-full bg-white shadow-lifted border border-line overflow-hidden z-50',
+                        'absolute top-full bg-white shadow-lifted border border-line overflow-hidden z-50 animate-fade-in',
                         link.mega ? 'left-0 w-[600px]' : 'left-0 w-64'
                       )}
                     >
@@ -318,9 +313,9 @@ export default function Header() {
                           ))}
                         </div>
                       )}
-                    </motion.div>
+                    </div>
                   )}
-                </AnimatePresence>
+                </>
               </div>
             ))}
           </div>
@@ -365,29 +360,22 @@ export default function Header() {
       </div>
 
       {/* Mobile-Menü */}
-      <AnimatePresence>
+      <>
         {isMobileMenuOpen && (
           <>
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-navy/60 z-[60] lg:hidden"
+            <div
+              className="fixed inset-0 bg-navy/60 z-[60] lg:hidden animate-fade-in"
               onClick={closeMobileMenu}
               aria-hidden="true"
             />
-            <motion.div
+            <div
               ref={mobileDialogRef}
               id="mobile-navigation-dialog"
               role="dialog"
               aria-modal="true"
               aria-label="Hauptnavigation"
               tabIndex={-1}
-              initial={{ x: '100%' }}
-              animate={{ x: 0 }}
-              exit={{ x: '100%' }}
-              transition={{ duration: 0.2, ease: 'easeOut' }}
-              className="fixed inset-y-0 right-0 h-dvh w-[88%] max-w-sm bg-white z-[70] lg:hidden shadow-lifted flex flex-col"
+              className="fixed inset-y-0 right-0 h-dvh w-[88%] max-w-sm bg-white z-[70] lg:hidden shadow-lifted flex flex-col animate-slide-in-right"
             >
               <div className="flex items-center justify-between px-6 h-16 border-b border-line flex-shrink-0">
                 <Logo size={34} onClick={closeMobileMenuForNavigation} />
@@ -438,13 +426,10 @@ export default function Header() {
                         </Link>
                       )}
 
-                      <AnimatePresence>
+                      <>
                         {link.sublinks && mobileActiveDropdown === link.name && (
-                          <motion.div
+                          <div
                             id={`mobile-submenu-${i}`}
-                            initial={{ height: 0, opacity: 0 }}
-                            animate={{ height: 'auto', opacity: 1 }}
-                            exit={{ height: 0, opacity: 0 }}
                             className="overflow-hidden"
                           >
                             <div className="flex flex-col pb-3">
@@ -466,9 +451,9 @@ export default function Header() {
                                 </Link>
                               ))}
                             </div>
-                          </motion.div>
+                          </div>
                         )}
-                      </AnimatePresence>
+                      </>
                     </div>
                   ))}
                 </div>
@@ -484,10 +469,10 @@ export default function Header() {
                 </a>
                 <p className="text-center text-caption text-slate">{SITE.hours}</p>
               </div>
-            </motion.div>
+            </div>
           </>
         )}
-      </AnimatePresence>
+      </>
     </header>
   );
 }

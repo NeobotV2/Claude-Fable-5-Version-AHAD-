@@ -19,10 +19,23 @@ export const FALLBACK_IMAGE = `${import.meta.env.BASE_URL}images/fallback.jpg`;
 /** Responsives srcset für lokale AHAD-Fotos aus dem Varianten-Manifest. */
 import VARIANTS from './image-variants.json';
 
+type VariantEntry = { width: number; height?: number; variants: number[] };
+const VARIANT_MAP = VARIANTS as Record<string, VariantEntry>;
+
+/**
+ * Originalmaße eines lokalen AHAD-Fotos für width/height am <img>. Damit kennt
+ * der Browser das Seitenverhältnis schon vor dem Laden (kein Layoutsprung).
+ */
+export function intrinsicSizeFor(url: string): { width: number; height: number } | undefined {
+  const match = url.match(/images\/ahad\/([^/?]+\.webp)$/);
+  const entry = match ? VARIANT_MAP[match[1]] : undefined;
+  return entry?.height ? { width: entry.width, height: entry.height } : undefined;
+}
+
 export function srcSetFor(url: string): string | undefined {
   const match = url.match(/images\/ahad\/([^/?]+\.webp)$/);
   if (!match) return undefined;
-  const entry = (VARIANTS as Record<string, { width: number; variants: number[] }>)[match[1]];
+  const entry = VARIANT_MAP[match[1]];
   if (!entry || entry.variants.length === 0) return undefined;
   const stemUrl = url.replace(/\.webp$/, '');
   const parts = entry.variants.map((w) => `${stemUrl}-${w}.webp ${w}w`);
