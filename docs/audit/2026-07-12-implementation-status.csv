@@ -20,7 +20,7 @@
 "A-19";"Abgeschlossen";"Engineering + SEO";"2026-07-12";"Produktiven Schema-Validator erneut ausführen"
 "A-20";"CI-Budgets und lokale Baseline umgesetzt";"Engineering + Marketing Analytics";"2026-07-19";"CrUX/Search-Console-Feldwerte nach Release ergänzen"
 "A-21";"Vercel als Primärhost dokumentiert";"IT-Betrieb";"2026-07-15";"Projektsettings und DNS außerhalb des Repos bestätigen"
-"A-22";"Report-only-CSP und Headerparität umgesetzt";"Security + IT-Betrieb";"2026-07-26";"CSP-Reports beobachten und anschließend Enforcing-Freigabe"
+"A-22";"CSP scharf geschaltet (inkl. Freigaben für den Admin-Login), Headerparität und Wächter-Test umgesetzt";"Security + IT-Betrieb";"2026-07-26";"Admin-Login und Formulare einmal auf der Vercel-Vorschau gegenprüfen"
 "A-23";"Abgeschlossen";"Frontend Engineering + Accessibility QA";"2026-07-12";"Manueller Touch-/Screenreader-Smoke"
 "A-24";"Code umgesetzt";"UX + Frontend Engineering";"2026-07-16";"Visuelle Abnahme auf realen 360/390-px-Geräten"
 "A-25";"Metadaten-, Quellen- und Reviewer-Gate umgesetzt";"Fachredaktion";"2026-07-31";"Benannte Fachperson je Artikel prüfen und freigeben"
