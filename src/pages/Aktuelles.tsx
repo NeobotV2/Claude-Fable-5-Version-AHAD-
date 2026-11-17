@@ -51,30 +51,25 @@ export default function Aktuelles() {
 
       <section className="section-y bg-white">
         <div className="max-w-3xl mx-auto px-4 sm:px-8">
-          <ul className="space-y-6">
-            {NEWS_BY_DATE.map((item, index) => (
-              <li key={item.slug}>
-                <div>
-                  <article className="bg-paper rounded-3xl border border-line p-7 sm:p-9">
-                    <p className="text-caption font-bold uppercase tracking-wider text-accent mb-3">
-                      <time dateTime={item.datePublished}>{formatNewsDate(item.datePublished)}</time>
-                      {' · '}
-                      {item.topic}
-                    </p>
-                    <h2 className="font-headline text-xl sm:text-2xl font-bold text-navy leading-snug">
-                      <Link to={`/aktuelles/${item.slug}`} className="hover:text-brand transition-colors">
-                        {item.headline}
-                      </Link>
-                    </h2>
-                    <p className="mt-3 text-body-sm leading-relaxed text-slate">{item.summary}</p>
-                    <Link
-                      to={`/aktuelles/${item.slug}`}
-                      className="mt-5 inline-flex items-center gap-2 font-bold text-brand hover:underline"
-                    >
-                      Meldung lesen <ArrowRight size={16} aria-hidden="true" />
+          <ul className="border-t border-navy">
+            {NEWS_BY_DATE.map((item) => (
+              <li key={item.slug} className="border-b border-line py-8">
+                <article>
+                  <p className="text-sm font-semibold text-accent mb-2">
+                    <time dateTime={item.datePublished}>{formatNewsDate(item.datePublished)}</time>
+                    {' · '}
+                    {item.topic}
+                  </p>
+                  <h2 className="text-xl sm:text-2xl font-bold text-navy leading-snug">
+                    <Link to={`/aktuelles/${item.slug}`} className="hover:text-accent transition-colors">
+                      {item.headline}
                     </Link>
-                  </article>
-                </div>
+                  </h2>
+                  <p className="mt-3 leading-relaxed text-slate">{item.summary}</p>
+                  <Link to={`/aktuelles/${item.slug}`} className="text-link mt-4">
+                    Meldung lesen <ArrowRight size={16} aria-hidden="true" />
+                  </Link>
+                </article>
               </li>
             ))}
           </ul>

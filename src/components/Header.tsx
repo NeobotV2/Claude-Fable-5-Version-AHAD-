@@ -328,7 +328,7 @@ export default function Header() {
           <div className="flex items-center gap-3">
             <a
               href={SITE.phoneHref}
-              className="hidden xl:flex items-center gap-2 font-semibold text-nav text-navy hover:text-accent transition-colors mr-2"
+              className="hidden xl:flex items-center gap-2 flex-shrink-0 whitespace-nowrap font-semibold text-nav text-navy hover:text-accent transition-colors mr-2"
             >
               <Phone size={16} aria-hidden="true" />
               {SITE.phone}

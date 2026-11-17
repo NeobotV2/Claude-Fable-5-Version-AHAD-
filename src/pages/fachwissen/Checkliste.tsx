@@ -93,7 +93,7 @@ export default function FachwissenCheckliste() {
       </div>
 
       <div className="mx-auto hidden max-w-3xl px-4 pt-4 print:block print:px-0">
-        <p className="text-2xl font-black text-navy">AHAD Cleaning · Angebots-Checkliste Gebäudereinigung</p>
+        <p className="text-2xl font-bold text-navy">AHAD Cleaning · Angebots-Checkliste Gebäudereinigung</p>
         <p className="mt-1 text-sm text-slate">ahad-cleaning.de · +49 7721 944 79 15 · info@ahad-cleaning.de</p>
       </div>
 

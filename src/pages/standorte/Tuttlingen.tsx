@@ -1,8 +1,8 @@
-import { MapPin, CheckCircle2, Phone, Mail, ArrowRight, Building, Factory, ShieldCheck, FlaskConical, Users, ClipboardCheck } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import SEO from '@/components/SEO';
 import PageHero from '@/components/PageHero';
 import CTABand from '@/components/CTABand';
+import RuleColumns from '@/components/ui/RuleColumns';
 import Accordion, { faqSchemaFrom, type FAQItem } from '@/components/ui/Accordion';
 import { ORG_REF, SITE } from '@/lib/site';
 import { IMG } from '@/lib/images';
@@ -76,22 +76,18 @@ const LOCAL_BRANCHEN = [
 /** Typische Zonen in Medizintechnik-Objekten und wie wir dort arbeiten. */
 const ZONEN = [
   {
-    icon: Factory,
     title: 'Produktion und Montage',
     text: 'Fertigungs- und Montageflächen, Arbeitsplätze und Böden, mit freigegebenen Reinigungsmitteln und in dem Intervall, das Ihr Hygieneplan vorgibt.',
   },
   {
-    icon: ShieldCheck,
     title: 'Reinräume und Schleusen',
     text: 'Reihenfolge, Mittel, Einwirkzeiten und Bekleidungsregeln legen Sie in Ihrer SOP fest. Wir setzen sie mit eingewiesenem Personal um und dokumentieren jede Ausführung.',
   },
   {
-    icon: FlaskConical,
     title: 'Labore und Prüfbereiche',
     text: 'Labor- und Prüfflächen reinigen wir nach Absprache mit Ihrer Laborleitung. Welche Flächen, Abzüge und Geräteoberflächen dazugehören, legen wir vorher gemeinsam fest.',
   },
   {
-    icon: Users,
     title: 'Büro, Sozial- und Besucherbereiche',
     text: 'Verwaltung, Besprechungsräume, Kantine, Sanitär- und Umkleidebereiche sowie der Empfang, an dem Kunden und Auditoren ankommen.',
   },
@@ -176,11 +172,11 @@ export default function StandortTuttlingen() {
         secondaryCta={{ label: SITE.phone, href: SITE.phoneHref }}
       />
 
-      <section className="section-y bg-white">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-20">
-            <div>
-              <h2 className="text-3xl font-bold mb-8 text-navy">Reinigung im Umfeld der Medizintechnik</h2>
+      <section className="bg-white">
+        <div className="container-page">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-x-14 gap-y-10 section-y-sm">
+            <div className="lg:col-span-7">
+              <h2 className="display-md text-navy mb-6">Reinigung im Umfeld der Medizintechnik</h2>
               <p className="text-lg text-slate mb-6 leading-relaxed">
                 Tuttlingen gilt als Weltzentrum der Medizintechnik. Mehrere hundert Betriebe in der Stadt und im
                 Umland stellen chirurgische Instrumente, Endoskope und weitere Medizinprodukte her oder liefern Teile
@@ -191,7 +187,7 @@ export default function StandortTuttlingen() {
                 Hygienepläne, Zonenkonzepte oder Reinraumvorgaben gelten. Wir übernehmen diese Vorgaben in unsere
                 Checklisten, setzen dort feste, eingewiesene Mitarbeitende ein und dokumentieren jede Ausführung.
               </p>
-              <ul className="space-y-4">
+              <ul className="border-t border-navy">
                 {[
                   'Reinigung nach Ihren SOPs und Hygieneplänen',
                   'Feste, eingewiesene Teams für sensible Bereiche',
@@ -200,57 +196,44 @@ export default function StandortTuttlingen() {
                   'Büro-, Produktions- und Sonderbereiche aus einer Hand',
                   'Feste Objektleitung als Ansprechpartner',
                 ].map((item) => (
-                  <li key={item} className="flex items-center gap-3 text-slate font-medium">
-                    <CheckCircle2 className="text-accent w-5 h-5 flex-shrink-0" />
+                  <li key={item} className="py-3 border-b border-line font-medium text-navy">
                     {item}
                   </li>
                 ))}
               </ul>
             </div>
-            <div className="bg-paper p-12 rounded-3xl border border-line">
-              <h3 className="text-2xl font-bold mb-8 text-navy">Kontakt Region Tuttlingen</h3>
-              <div className="space-y-8">
-                <div className="flex gap-6">
-                  <div className="w-12 h-12 bg-white rounded-2xl shadow-sm flex items-center justify-center text-navy flex-shrink-0">
-                    <MapPin className="w-6 h-6" />
-                  </div>
-                  <div>
-                    <h4 className="font-bold text-navy mb-1">Einsatzgebiet</h4>
-                    <p className="text-slate">Tuttlingen und Landkreis Tuttlingen nach objektbezogener Abstimmung</p>
+            <div className="lg:col-span-5">
+              <h3 className="pb-4 border-b border-navy font-semibold text-navy">Kontakt Region Tuttlingen</h3>
+              <div>
+                <div className="grid grid-cols-[7.5rem_1fr] gap-x-4 py-3.5 border-b border-line">
+                  <p className="text-body-sm text-slate">Einsatzgebiet</p>
+                  <div className="font-medium">
+                    <p className="text-navy">Tuttlingen und Landkreis Tuttlingen nach objektbezogener Abstimmung</p>
                   </div>
                 </div>
-                <div className="flex gap-6">
-                  <div className="w-12 h-12 bg-white rounded-2xl shadow-sm flex items-center justify-center text-navy flex-shrink-0">
-                    <Building className="w-6 h-6" />
-                  </div>
-                  <div>
-                    <h4 className="font-bold text-navy mb-1">Betreut von</h4>
+                <div className="grid grid-cols-[7.5rem_1fr] gap-x-4 py-3.5 border-b border-line">
+                  <p className="text-body-sm text-slate">Betreut von</p>
+                  <div className="font-medium">
                     <Link
                       to="/standorte/villingen-schwenningen"
-                      className="text-slate hover:text-accent transition-colors"
+                      className="inline-block py-3 -my-3 text-navy hover:text-accent transition-colors"
                     >
                       Zentrale Villingen-Schwenningen
                     </Link>
                   </div>
                 </div>
-                <div className="flex gap-6">
-                  <div className="w-12 h-12 bg-white rounded-2xl shadow-sm flex items-center justify-center text-navy flex-shrink-0">
-                    <Phone className="w-6 h-6" />
-                  </div>
-                  <div>
-                    <h4 className="font-bold text-navy mb-1">Telefon</h4>
-                    <a href={SITE.phoneHref} className="text-slate hover:text-accent transition-colors">
+                <div className="grid grid-cols-[7.5rem_1fr] gap-x-4 py-3.5 border-b border-line">
+                  <p className="text-body-sm text-slate">Telefon</p>
+                  <div className="font-medium">
+                    <a href={SITE.phoneHref} className="inline-block py-3 -my-3 text-navy hover:text-accent transition-colors">
                       {SITE.phone}
                     </a>
                   </div>
                 </div>
-                <div className="flex gap-6">
-                  <div className="w-12 h-12 bg-white rounded-2xl shadow-sm flex items-center justify-center text-navy flex-shrink-0">
-                    <Mail className="w-6 h-6" />
-                  </div>
-                  <div>
-                    <h4 className="font-bold text-navy mb-1">E-Mail</h4>
-                    <a href={SITE.emailHref} className="text-slate hover:text-accent transition-colors">
+                <div className="grid grid-cols-[7.5rem_1fr] gap-x-4 py-3.5 border-b border-line">
+                  <p className="text-body-sm text-slate">E-Mail</p>
+                  <div className="font-medium">
+                    <a href={SITE.emailHref} className="inline-block py-3 -my-3 text-navy hover:text-accent transition-colors">
                       {SITE.email}
                     </a>
                   </div>
@@ -260,109 +243,54 @@ export default function StandortTuttlingen() {
           </div>
 
           {/* Zonen in Medizintechnik-Objekten */}
-          <div className="mb-20">
-            <h2 className="text-3xl font-bold mb-3 text-navy">Was wir in Medizintechnik-Betrieben reinigen</h2>
+          <div className="section-y-sm border-t border-line">
+            <h2 className="display-md text-navy mb-4">Was wir in Medizintechnik-Betrieben reinigen</h2>
             <p className="text-lg text-slate mb-10 max-w-3xl leading-relaxed">
               Ein Medizintechnik-Standort besteht selten nur aus einem Bereich. Für jede Zone legen wir mit Ihnen
               Verfahren, Mittel und Intervalle fest und halten sie im Reinigungsplan fest.
             </p>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-              {ZONEN.map(({ icon: Icon, title, text }) => (
-                <div key={title} className="bg-paper border border-line rounded-2xl p-6 flex gap-5">
-                  <div className="w-11 h-11 bg-white rounded-xl shadow-sm flex items-center justify-center text-navy flex-shrink-0">
-                    <Icon className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-lg text-navy mb-2">{title}</h3>
-                    <p className="text-sm text-slate leading-relaxed">{text}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
+            <RuleColumns cols={2} items={ZONEN.map(({ title, text }) => ({ title, text }))} />
 
-            <div className="mt-10 bg-white border border-line rounded-2xl p-8 flex flex-col md:flex-row gap-6">
-              <div className="w-12 h-12 bg-paper rounded-2xl flex items-center justify-center text-navy flex-shrink-0">
-                <ClipboardCheck className="w-6 h-6" />
-              </div>
-              <div>
-                <h3 className="font-bold text-lg text-navy mb-2">Nachweise für Ihr Qualitätsmanagement</h3>
-                <p className="text-sm text-slate leading-relaxed">
+            <div className="mt-12 border-l-2 border-accent pl-6 max-w-3xl">
+              <h3 className="text-xl font-bold text-navy mb-2.5">Nachweise für Ihr Qualitätsmanagement</h3>
+              <p className="text-slate leading-relaxed">
                   Wenn Ihr QM-System Nachweise über ausgelagerte Tätigkeiten verlangt, erhalten Sie von uns
                   Leistungsnachweise, Unterweisungs- und Schulungsprotokolle sowie Kontrollberichte. Änderungen an
                   Ihren SOPs übernehmen wir nach Freigabe in die Checklisten und weisen das Team erneut ein. Auf Wunsch
                   nimmt Ihre AHAD-Objektleitung an Audits teil.
                 </p>
-              </div>
             </div>
           </div>
 
           {/* Leistungen im Einsatzgebiet */}
-          <div className="mb-20">
-            <h2 className="text-3xl font-bold mb-3 text-navy">Unsere Leistungen in Tuttlingen</h2>
+          <div className="section-y-sm border-t border-line">
+            <h2 className="display-md text-navy mb-4">Unsere Leistungen in Tuttlingen</h2>
             <p className="text-lg text-slate mb-10 max-w-3xl leading-relaxed">
               Von der Reinraumreinigung bis zur Glasfront: Sie können einzelne Leistungen beauftragen oder alle Zonen
               eines Standorts in einem Vertrag mit einer Objektleitung zusammenfassen.
             </p>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-              {LOCAL_SERVICES.map((s) => (
-                <Link
-                  key={s.to}
-                  to={s.to}
-                  className="group block bg-paper hover:bg-white border border-line hover:border-accent/30 rounded-2xl p-6 transition-all hover:"
-                >
-                  <h3 className="font-bold text-lg text-navy mb-2 flex items-start justify-between gap-2">
-                    <span>{s.title}</span>
-                    <ArrowRight className="w-4 h-4 mt-1 text-accent flex-shrink-0 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
-                  </h3>
-                  <p className="text-sm text-slate leading-relaxed">{s.desc}</p>
-                </Link>
-              ))}
-            </div>
+            <RuleColumns cols={3} items={LOCAL_SERVICES.map((entry) => ({ title: entry.title, text: entry.desc, to: entry.to }))} />
           </div>
 
           {/* Branchen im Einsatzgebiet */}
-          <div className="mb-20">
-            <h2 className="text-3xl font-bold mb-3 text-navy">Branchen, für die wir in Tuttlingen reinigen</h2>
+          <div className="section-y-sm border-t border-line">
+            <h2 className="display-md text-navy mb-4">Branchen, für die wir in Tuttlingen reinigen</h2>
             <p className="text-lg text-slate mb-10 max-w-3xl leading-relaxed">
               Die Medizintechnik prägt den Standort, daneben gibt es Metallverarbeitung, Handel, Verwaltung und
               Gastgewerbe. Umfang und Zeitfenster richten wir nach Branche und Nutzung aus.
             </p>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-              {LOCAL_BRANCHEN.map((b) => (
-                <Link
-                  key={b.to}
-                  to={b.to}
-                  className="group block bg-paper hover:bg-white border border-line hover:border-accent/30 rounded-2xl p-6 transition-all hover:"
-                >
-                  <h3 className="font-bold text-lg text-navy mb-2 flex items-start justify-between gap-2">
-                    <span>{b.title}</span>
-                    <ArrowRight className="w-4 h-4 mt-1 text-accent flex-shrink-0 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
-                  </h3>
-                  <p className="text-sm text-slate leading-relaxed">{b.desc}</p>
-                </Link>
-              ))}
-            </div>
+            <RuleColumns cols={3} items={LOCAL_BRANCHEN.map((entry) => ({ title: entry.title, text: entry.desc, to: entry.to }))} />
           </div>
 
           {/* Einsatzgebiete */}
-          <div className="mb-20">
-            <h2 className="text-3xl font-bold mb-3 text-navy">Einsatzgebiete im Landkreis Tuttlingen</h2>
+          <div className="section-y-sm border-t border-line">
+            <h2 className="display-md text-navy mb-4">Einsatzgebiete im Landkreis Tuttlingen</h2>
             <p className="text-lg text-slate mb-8 max-w-3xl leading-relaxed">
               Tuttlingen ist Kreisstadt und umfasst neben der Kernstadt die Stadtteile Möhringen, Nendingen und
               Eßlingen. Im Gewerbegebiet Gänsäcker zwischen Möhringer Vorstadt und Möhringen haben sich mehrere
               Medizintechnik-Unternehmen angesiedelt. In diesen Orten können Sie Einsätze bei uns anfragen:
             </p>
-            <div className="flex flex-wrap gap-2.5">
-              {SERVICE_AREAS.map((area) => (
-                <span
-                  key={area}
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-paper border border-line text-slate text-sm font-medium"
-                >
-                  <MapPin className="w-3.5 h-3.5 text-accent" />
-                  {area}
-                </span>
-              ))}
-            </div>
+            <p className="text-lg font-medium text-navy leading-relaxed max-w-4xl">{SERVICE_AREAS.join(' · ')}</p>
             <p className="text-sm text-slate mt-6 max-w-3xl leading-relaxed">
               Von unserer Zentrale in Villingen-Schwenningen ist Tuttlingen über die B 523 erreichbar. Nach Angaben
               der IHK Schwarzwald-Baar-Heuberg arbeiten in der Region über 14.000 sozialversicherungspflichtig
@@ -373,34 +301,27 @@ export default function StandortTuttlingen() {
           </div>
 
           {/* Warum AHAD in Tuttlingen */}
-          <div className="bg-navy p-12 lg:p-16 text-white relative overflow-hidden mb-20">
-            <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -mr-32 -mt-32"></div>
-            <div className="relative z-10">
+          <div className="bg-navy text-white px-6 py-10 sm:p-12 lg:p-14 mb-14 lg:mb-16">
+            <div>
               <div className="max-w-3xl">
-                <h2 className="text-3xl font-bold mb-6">Warum AHAD Cleaning in Tuttlingen?</h2>
-                <p className="text-xl text-ondark mb-8 leading-relaxed">
+                <h2 className="display-md text-white mb-5">Warum AHAD Cleaning in Tuttlingen?</h2>
+                <p className="text-lg text-ondark mb-8 leading-relaxed">
                   In Medizintechnik-Betrieben muss jede Reinigung nachvollziehbar sein, und in sensiblen Bereichen
                   sollen dieselben Personen arbeiten. Wir setzen feste Teams ein, übernehmen Ihre SOPs in unsere
                   Checklisten und kündigen jeden Personalwechsel an. Koordiniert wird von unserer Zentrale in
                   Villingen-Schwenningen, Ihr Ansprechpartner ist die zuständige Objektleitung.
                 </p>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="flex items-start gap-3">
-                    <CheckCircle2 className="text-accent w-6 h-6 flex-shrink-0 mt-1" />
-                    <p className="font-medium">Feste, eingewiesene Teams</p>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <CheckCircle2 className="text-accent w-6 h-6 flex-shrink-0 mt-1" />
-                    <p className="font-medium">Nachweise für Ihre Audits</p>
-                  </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 border-t border-white/30">
+                  <p className="py-3.5 border-b border-white/15 font-medium">Feste, eingewiesene Teams</p>
+                  <p className="py-3.5 border-b border-white/15 font-medium">Nachweise für Ihre Audits</p>
                 </div>
               </div>
             </div>
           </div>
 
           {/* Lokale FAQ */}
-          <div className="max-w-3xl">
-            <h2 className="text-3xl font-bold mb-8 text-navy">Häufige Fragen zur Gebäudereinigung in Tuttlingen</h2>
+          <div className="section-y-sm border-t border-line max-w-4xl">
+            <h2 className="display-md text-navy mb-6">Häufige Fragen zur Gebäudereinigung in Tuttlingen</h2>
             <Accordion items={LOCAL_FAQS} />
           </div>
         </div>

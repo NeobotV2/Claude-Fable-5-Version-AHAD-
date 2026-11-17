@@ -1,8 +1,9 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight, BadgeCheck, CalendarDays, Phone, Users } from 'lucide-react';
+import { ArrowRight, Phone } from 'lucide-react';
 import SEO from '@/components/SEO';
 import PageHero from '@/components/PageHero';
 import CTABand from '@/components/CTABand';
+import RuleColumns from '@/components/ui/RuleColumns';
 import { SITE } from '@/lib/site';
 import { buildNewsSchema, formatNewsDate, requireNewsItem } from '@/data/news';
 
@@ -11,17 +12,14 @@ const ITEM = requireNewsItem('guentzel-objekt-service-fortfuehrung');
 /** Was sich für Kunden ändert — Wortlaut aus dem Kundenschreiben vom 31.08.2026. */
 const FUER_KUNDEN = [
   {
-    icon: Users,
     title: 'Ihre Teams bleiben',
     text: 'Sämtliche Mitarbeiterinnen und Mitarbeiter wurden übernommen. Die eingespielten Teams und Ihre gewohnten Ansprechpartner vor Ort bleiben.',
   },
   {
-    icon: BadgeCheck,
     title: 'Konditionen unverändert',
     text: 'Ihre Konditionen bleiben unverändert, ebenso der Name Güntzel. Ihre Leistungen laufen ohne Unterbrechung weiter.',
   },
   {
-    icon: CalendarDays,
     title: 'Winterdienst gesichert',
     text: 'Der Winterdienst für die Saison 2026/27 ist gesichert. Die Einsatzplanung läuft unverändert weiter.',
   },
@@ -103,19 +101,9 @@ export default function AktuellesGuentzelUebernahme() {
           <h2 className="font-headline text-2xl sm:text-3xl font-bold text-navy mt-14 mb-6">
             Was das für Kunden bedeutet
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 mb-12">
-            {FUER_KUNDEN.map((punkt, index) => (
-              <div key={punkt.title} className="h-full">
-                <div className="h-full bg-paper rounded-2xl border border-line p-6">
-                  <punkt.icon className="text-accent mb-3" size={22} aria-hidden="true" />
-                  <h3 className="font-bold text-navy text-body-sm mb-2">{punkt.title}</h3>
-                  <p className="text-sm leading-relaxed text-slate">{punkt.text}</p>
-                </div>
-              </div>
-            ))}
-          </div>
+          <RuleColumns cols={3} className="mb-12" items={FUER_KUNDEN.map(({ title, text }) => ({ title, text }))} />
 
-          <div className="bg-navy text-white rounded-3xl p-7 sm:p-9 mb-12">
+          <div className="bg-navy text-white p-6 sm:p-8 mb-12">
             <h2 className="font-headline text-xl font-bold mb-3">Zur Abrechnung</h2>
             <p className="text-body-sm leading-relaxed text-ondark">
               Leistungen bis einschließlich 31. August 2026 werden durch die Insolvenzverwaltung
@@ -184,7 +172,7 @@ export default function AktuellesGuentzelUebernahme() {
           </div>
 
           <div className="mt-12 pt-8 border-t border-line">
-            <h2 className="text-caption font-bold uppercase tracking-wider text-slate mb-3">Quellen</h2>
+            <h2 className="text-caption font-bold text-slate mb-3">Quellen</h2>
             <ul className="space-y-2 text-sm text-slate">
               {ITEM.sources.map((quelle) => (
                 <li key={quelle.title}>

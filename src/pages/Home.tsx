@@ -492,7 +492,7 @@ export default function Home() {
               Rufen Sie uns an. Sie landen nicht in einer Warteschleife.
               <a
                 href={SITE.phoneHref}
-                className="block mt-2 font-accent font-semibold text-2xl text-navy hover:text-accent transition-colors"
+                className="block mt-1 py-1.5 font-accent font-semibold text-2xl text-navy hover:text-accent transition-colors"
               >
                 {SITE.phone}
               </a>

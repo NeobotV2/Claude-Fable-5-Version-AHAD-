@@ -211,7 +211,7 @@ export default function FachwissenVDI2052() {
               ].map(([title, text], index) => (
                 <li key={title} className="rounded-2xl border border-line bg-paper p-5">
                   <div className="flex items-start gap-3">
-                    <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-brand text-sm font-black text-white">
+                    <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-brand text-sm font-bold text-white">
                       {index + 1}
                     </span>
                     <div>

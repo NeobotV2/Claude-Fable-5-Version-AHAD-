@@ -10,6 +10,8 @@ export interface RuleItem {
   kicker?: ReactNode;
   /** Macht die Spalte zum Link (mit Pfeil am Titel). */
   to?: string;
+  /** Weiterführender Textlink unter dem Text (statt die ganze Spalte zu verlinken). */
+  link?: { label: string; to: string };
 }
 
 interface RuleColumnsProps {
@@ -55,6 +57,12 @@ export default function RuleColumns({ items, cols = 3, ordered = false, as: Head
               {item.to && <ArrowRight size={18} className="mt-1.5 flex-shrink-0" aria-hidden="true" />}
             </Heading>
             <span className="block mt-2.5 text-slate leading-relaxed">{item.text}</span>
+            {item.link && (
+              <Link to={item.link.to} className="text-link mt-3 text-body-sm">
+                {item.link.label}
+                <ArrowRight size={15} aria-hidden="true" />
+              </Link>
+            )}
           </>
         );
         return (

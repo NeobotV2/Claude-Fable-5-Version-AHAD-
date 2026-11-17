@@ -1,9 +1,10 @@
-import { Link } from 'react-router-dom';
-import { ArrowRight, FileCheck2, Handshake } from 'lucide-react';
 import SEO from '@/components/SEO';
 import PageHero from '@/components/PageHero';
 import SectionHeading from '@/components/ui/SectionHeading';
 import CTABand from '@/components/CTABand';
+import ClientLogos from '@/components/ClientLogos';
+import LinkList from '@/components/ui/LinkList';
+import RuleColumns from '@/components/ui/RuleColumns';
 import Reviews from '@/components/Reviews';
 import FeaturedTestimonial from '@/components/FeaturedTestimonial';
 import { IMG } from '@/lib/images';
@@ -17,12 +18,10 @@ import { BRANCHEN } from '@/data/branchen';
  */
 const REFERENZ_PRINZIPIEN = [
   {
-    icon: Handshake,
     title: 'Referenzgespräch',
     text: 'Auf Anfrage stellen wir den Kontakt zu einem Bestandskunden mit vergleichbarem Objekt her: gleiche Branche, ähnliche Fläche, dieselbe Leistung.',
   },
   {
-    icon: FileCheck2,
     title: 'Nachweise aus dem laufenden Betrieb',
     text: 'Bei der Besichtigung zeigen wir Ihnen anonymisierte Leistungsverzeichnisse, Prüfprotokolle und Qualitätsdokumentation aus laufenden Objekten.',
   },
@@ -51,38 +50,18 @@ export default function Referenzen() {
         cta={{ label: 'Angebot anfordern', to: '/angebot' }}
       />
 
-      {/* Referenz-Wand — echte Kundenlogos, einheitlich normiert (nur mit Logo) */}
-      {CLIENT_REFERENCES.length > 0 && <section className="section-y bg-white">
-        <div className="container-page">
+      {/* Auftraggeber — echte Kundenlogos, einheitlich normiert (nur mit Logo) */}
+      {CLIENT_REFERENCES.length > 0 && (
+        <section className="section-y bg-white">
           <SectionHeading
             eyebrow="Auswahl betreuter Auftraggeber"
             title="Unternehmen, die wir betreuen."
             lead="Vom regionalen Mittelständler bis zum internationalen Konzern, jeweils mit einem eigenen Reinigungskonzept für das Objekt."
-            className="mb-14"
+            className="container-page mb-12"
           />
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
-            {CLIENT_REFERENCES.filter((ref) => ref.logo).map((ref, index) => (
-              <div key={ref.domain} className="h-full">
-                <div className="flex flex-col items-center justify-center gap-3 h-full min-h-[8rem] bg-paper rounded-3xl border border-line p-7">
-                  <img
-                    src={ref.logo}
-                    alt={ref.name}
-                    title={ref.name}
-                    loading="lazy"
-                    decoding="async"
-                    className="max-h-14 max-w-[78%] object-contain"
-                  />
-                  {ref.caption && (
-                    <span aria-hidden="true" className="font-headline font-bold text-sm text-navy text-center">
-                      {ref.caption}
-                    </span>
-                  )}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>}
+          <ClientLogos />
+        </section>
+      )}
 
       {/* Hervorgehobene, echte Kundenstimme (namentlich, mit Freigabe) */}
       <FeaturedTestimonial />
@@ -91,7 +70,7 @@ export default function Referenzen() {
       <Reviews />
 
       {/* Angebot für alle, denen Logos und Zitate nicht genügen */}
-      <section className="section-y bg-paper">
+      <section className="section-y bg-white border-t border-line">
         <div className="container-page">
           <SectionHeading
             eyebrow="Weiter prüfen"
@@ -99,24 +78,12 @@ export default function Referenzen() {
             lead="Auf Wunsch vermitteln wir Ihnen ein Gespräch mit einem Bestandskunden und zeigen Ihnen unsere Dokumentation."
             className="mb-12"
           />
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {REFERENZ_PRINZIPIEN.map((prinzip, index) => (
-              <div key={prinzip.title} className="h-full">
-                <div className="h-full bg-white rounded-3xl border border-line p-8">
-                  <span className="w-12 h-12 rounded-2xl bg-brand/8 text-brand grid place-items-center mb-5">
-                    <prinzip.icon size={22} aria-hidden />
-                  </span>
-                  <h3 className="font-headline text-xl font-bold text-navy mb-3">{prinzip.title}</h3>
-                  <p className="text-slate leading-relaxed">{prinzip.text}</p>
-                </div>
-              </div>
-            ))}
-          </div>
+          <RuleColumns cols={2} items={REFERENZ_PRINZIPIEN} />
         </div>
       </section>
 
       {/* Branchen, in denen wir arbeiten — belegbare Substanz statt Zahlen */}
-      <section className="section-y bg-white">
+      <section className="section-y bg-paper border-t border-line">
         <div className="container-page">
           <SectionHeading
             eyebrow="Einsatzfelder"
@@ -124,22 +91,15 @@ export default function Referenzen() {
             lead="Jede Branche hat eigene Anforderungen an Hygiene, Nachweise und Ablauf. Auf den Branchenseiten beschreiben wir, wie wir dort vorgehen."
             className="mb-10"
           />
-          <ul className="flex flex-wrap gap-3">
-            {BRANCHEN.map((branche) => (
-              <li key={branche.slug}>
-                <Link
-                  to={branche.path}
-                  className="group inline-flex items-center gap-2 rounded-md border border-line bg-paper px-5 py-3 text-sm font-bold text-navy transition-colors hover:border-brand hover:bg-brand/5 hover:text-brand"
-                >
-                  {branche.name}
-                  <ArrowRight size={15} className="transition-transform group-hover:translate-x-0.5" aria-hidden />
-                </Link>
-              </li>
-            ))}
-          </ul>
-          <p className="mt-8 text-sm text-slate">
+          <LinkList
+            cols={3}
+            items={BRANCHEN.map((branche) => ({ to: branche.path, title: branche.name, sub: branche.claim }))}
+          />
+          <p className="mt-8 text-slate">
             Sie möchten mit einem Bestandskunden sprechen? Rufen Sie uns an:{' '}
-            <a href={SITE.phoneHref} className="font-bold text-brand underline">{SITE.phone}</a>
+            <a href={SITE.phoneHref} className="font-semibold text-accent underline underline-offset-4">
+              {SITE.phone}
+            </a>
           </p>
         </div>
       </section>

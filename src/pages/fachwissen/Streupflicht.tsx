@@ -216,7 +216,7 @@ export default function FachwissenStreupflicht() {
                 'Weitere Fahr- und Stellflächen nach Bedarf und Vereinbarung',
               ].map((item, index) => (
                 <li key={item} className="flex items-start gap-3 rounded-xl border border-line bg-white p-4 text-sm text-slate">
-                  <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-brand/10 text-xs font-black text-brand">
+                  <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-brand/10 text-xs font-bold text-brand">
                     {index + 1}
                   </span>
                   <span>{item}</span>

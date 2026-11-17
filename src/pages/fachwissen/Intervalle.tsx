@@ -95,7 +95,7 @@ export default function FachwissenIntervalle() {
 
       <section className="border-b border-line bg-white section-y-sm">
         <div className="mx-auto max-w-7xl px-4 sm:px-8">
-          <h2 className="mb-8 text-center text-2xl font-black text-navy">Drei Bausteine der Intervallplanung</h2>
+          <h2 className="mb-8 text-center text-2xl font-bold text-navy">Drei Bausteine der Intervallplanung</h2>
           <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
             <div className="rounded-2xl border border-line bg-paper p-6">
               <Clock className="mb-4 h-8 w-8 text-brand" aria-hidden="true" />
@@ -131,7 +131,7 @@ export default function FachwissenIntervalle() {
       <section className="bg-white section-y">
         <div className="mx-auto max-w-3xl px-4 sm:px-8">
           <div className="prose prose-lg max-w-none leading-relaxed text-slate">
-            <h2 id="intervalllogik" className="scroll-mt-28 text-2xl font-black text-navy sm:text-3xl">Fixe und adaptive Leistungen kombinieren</h2>
+            <h2 id="intervalllogik" className="scroll-mt-28 text-2xl font-bold text-navy sm:text-3xl">Fixe und adaptive Leistungen kombinieren</h2>
             <p className="mb-8">
               In der <Link to="/leistungen/unterhaltsreinigung" className="font-bold text-brand hover:underline">Unterhaltsreinigung</Link>{' '}
               verbindet der Reinigungsplan definierte Basisleistungen mit objektbezogenen Bedarfskriterien. Feste
@@ -165,7 +165,7 @@ export default function FachwissenIntervalle() {
               </ul>
             </div>
 
-            <h2 id="orientierungswerte" className="scroll-mt-28 text-2xl font-black text-navy sm:text-3xl">Planungsansätze nach Bereich</h2>
+            <h2 id="orientierungswerte" className="scroll-mt-28 text-2xl font-bold text-navy sm:text-3xl">Planungsansätze nach Bereich</h2>
             <p className="mb-6">
               Allgemeingültige Kalenderfristen gibt es nicht. Für typische Raumgruppen sind die folgenden Fragen zu
               klären; außerdem lässt sich dort prüfen, ob eine feste oder eine adaptive Steuerung in Frage kommt. Maßgeblich bleiben Objekt, Hygieneplan, Nutzung und vereinbartes Qualitätsziel.
@@ -227,7 +227,7 @@ export default function FachwissenIntervalle() {
               mit festgelegter Leistungs-, Kontroll- und Anpassungslogik.
             </p>
 
-            <h2 className="text-2xl font-black text-navy sm:text-3xl">Faktoren für die Intervallplanung</h2>
+            <h2 className="text-2xl font-bold text-navy sm:text-3xl">Faktoren für die Intervallplanung</h2>
             <p className="mb-6">
               Ein Plan sollte nicht aus einer unveränderten Standardvorlage übernommen werden. Für die{' '}
               <Link to="/branchen/buero-verwaltung" className="font-bold text-brand hover:underline">Büroreinigung</Link>{' '}
@@ -248,7 +248,7 @@ export default function FachwissenIntervalle() {
               ))}
             </ul>
 
-            <h2 id="kostenwirkung" className="scroll-mt-28 text-2xl font-black text-navy sm:text-3xl">Wie Turnusse den Stundenbedarf verändern</h2>
+            <h2 id="kostenwirkung" className="scroll-mt-28 text-2xl font-bold text-navy sm:text-3xl">Wie Turnusse den Stundenbedarf verändern</h2>
             <p className="mb-6">
               Der Turnus beeinflusst unmittelbar die geplanten Ausführungsstunden einer Tätigkeit. Daraus folgt jedoch
               kein pauschaler Prozentsatz für den Gesamtpreis: feste Basisleistungen, Lohnneben- und Ausfallkosten,
@@ -283,7 +283,7 @@ export default function FachwissenIntervalle() {
               </p>
             </div>
 
-            <h2 id="reinigungsplan" className="scroll-mt-28 text-2xl font-black text-navy sm:text-3xl">Checkliste: Reinigungsplan und Leistungsverzeichnis erstellen</h2>
+            <h2 id="reinigungsplan" className="scroll-mt-28 text-2xl font-bold text-navy sm:text-3xl">Checkliste: Reinigungsplan und Leistungsverzeichnis erstellen</h2>
             <p className="mb-6">
               Das Leistungsverzeichnis (LV) ist die Grundlage für vergleichbare Angebote und eine nachvollziehbare Qualitätskontrolle. Bevor Sie ein Reinigungskonzept ausschreiben oder beauftragen, sollten diese Punkte erfasst sein:
             </p>
@@ -306,7 +306,7 @@ export default function FachwissenIntervalle() {
               ))}
             </ul>
 
-            <h2 className="text-2xl font-black text-navy sm:text-3xl">Saison und Nutzung als Anpassungssignale</h2>
+            <h2 className="text-2xl font-bold text-navy sm:text-3xl">Saison und Nutzung als Anpassungssignale</h2>
             <p className="mb-8">
               Nässe, Laub oder Streumittel können den Schmutzeintrag in Eingangs- und Verkehrsflächen zeitweise erhöhen;
               Belegungswechsel, Veranstaltungen oder Schichtpläne verändern die Nutzung. Ein anpassbares Konzept
@@ -314,7 +314,7 @@ export default function FachwissenIntervalle() {
               Taktung. So bleibt jede Änderung prüfbar.
             </p>
 
-            <h2 className="text-2xl font-black text-navy sm:text-3xl">Fazit</h2>
+            <h2 className="text-2xl font-bold text-navy sm:text-3xl">Fazit</h2>
             <p className="mb-8">
               Ein Reinigungsplan sichert die notwendigen Basisleistungen und lässt Flexibilität nur dort zu, wo
               Auslöser, Ergebnis, Kontrolle und Dokumentation vereinbart sind. Eine regelmäßige Auswertung zeigt, ob
@@ -328,8 +328,8 @@ export default function FachwissenIntervalle() {
       <section className="bg-paper section-y">
         <div className="mx-auto max-w-4xl px-4 sm:px-8">
           <div className="mb-12 text-center">
-            <span className="mb-4 block text-sm font-bold uppercase tracking-wider text-brand">Häufige Fragen</span>
-            <h2 className="text-2xl font-black tracking-tight text-navy sm:text-3xl lg:text-4xl">FAQs zu Reinigungsintervallen</h2>
+            <span className="mb-4 block text-sm font-bold text-brand">Häufige Fragen</span>
+            <h2 className="text-2xl font-bold tracking-tight text-navy sm:text-3xl lg:text-4xl">FAQs zu Reinigungsintervallen</h2>
           </div>
           <Accordion items={faqSchema.mainEntity.map((q) => ({ question: q.name, answer: q.acceptedAnswer.text }))} />
         </div>

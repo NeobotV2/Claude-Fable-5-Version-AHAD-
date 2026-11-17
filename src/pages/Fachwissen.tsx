@@ -1,16 +1,4 @@
-import type { LucideIcon } from 'lucide-react';
-import {
-  ArrowRight,
-  BookOpenCheck,
-  Building2,
-  Calculator,
-  ClipboardList,
-  Factory,
-  Scale,
-  ShieldCheck,
-  ShoppingCart,
-  UsersRound,
-} from 'lucide-react';
+import { ArrowRight, BookOpenCheck, Scale, ShieldCheck } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import SEO from '@/components/SEO';
 import PageHero from '@/components/PageHero';
@@ -23,26 +11,16 @@ import {
   EDITORIAL_CLUSTER_ORDER,
   getEditorialArticlePath,
   type EditorialArticleSlug,
-  type EditorialClusterKey,
 } from '@/data/editorial';
-
-const clusterIcons: Record<EditorialClusterKey, LucideIcon> = {
-  'planen-kalkulieren': Calculator,
-  'ausschreiben-vergleichen': ClipboardList,
-  'wechsel-betrieb': Factory,
-  'qualitaet-compliance': ShieldCheck,
-};
 
 const rolePaths: Array<{
   title: string;
   focus: string;
-  icon: LucideIcon;
   articles: readonly EditorialArticleSlug[];
 }> = [
   {
     title: 'Facility Management',
     focus: 'Bedarf, Intervalle und Qualität im Objekt steuern',
-    icon: Building2,
     articles: [
       'unterhaltsreinigung-unternehmen-reinigungsintervalle',
       'leistungsverzeichnis-gebaeudereinigung-erstellen',
@@ -51,13 +29,11 @@ const rolePaths: Array<{
   {
     title: 'Einkauf',
     focus: 'Leistungen einheitlich beschreiben und Angebote nachvollziehbar vergleichen',
-    icon: ShoppingCart,
     articles: ['checkliste-reinigungsangebot', 'was-kostet-gebaeudereinigung-stundensatz-preise'],
   },
   {
     title: 'Geschäftsführung',
     focus: 'Versorgungs-, Qualitäts- und Compliance-Risiken einordnen',
-    icon: UsersRound,
     articles: [
       'reinigungsfirma-wechseln-checkliste-tipps',
       'iso-9001-iso-14001-gebaeudereinigung-unternehmen',
@@ -115,7 +91,7 @@ export default function Fachwissen() {
 
       <div>
         <section aria-labelledby="aufgabe-waehlen" className="bg-white section-y-sm">
-          <div className="mx-auto max-w-7xl px-4 sm:px-8">
+          <div className="container-page">
             <div>
               <div className="max-w-3xl">
                 <p className="eyebrow mb-4 text-brand">
@@ -129,19 +105,15 @@ export default function Fachwissen() {
               </div>
             </div>
 
-            <nav aria-label="Themenpfade" className="mt-9 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-              {EDITORIAL_CLUSTER_ORDER.map((clusterKey, index) => {
+            <nav aria-label="Themenpfade" className="mt-9 grid gap-x-8 gap-y-6 sm:grid-cols-2 lg:grid-cols-4">
+              {EDITORIAL_CLUSTER_ORDER.map((clusterKey) => {
                 const cluster = EDITORIAL_CLUSTERS[clusterKey];
-                const Icon = clusterIcons[clusterKey];
                 return (
                   <div key={clusterKey}>
                     <a
                       href={`#${clusterKey}`}
-                      className="group flex h-full min-h-28 items-start gap-4 rounded-2xl border border-line bg-paper p-5 transition-all hover:border-brand/40 hover: focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+                      className="group flex h-full items-start border-t border-navy pt-4 pb-2 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
                     >
-                      <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-brand/8 text-brand">
-                        <Icon size={20} aria-hidden="true" />
-                      </span>
                       <span>
                         <span className="block font-headline font-bold leading-snug text-navy">{cluster.shortTitle}</span>
                         <span className="mt-2 inline-flex items-center gap-1.5 text-xs font-bold text-brand">
@@ -157,7 +129,7 @@ export default function Fachwissen() {
         </section>
 
         <section aria-labelledby="rollen-einstieg" className="border-y border-line bg-paper py-12">
-          <div className="mx-auto max-w-7xl px-4 sm:px-8">
+          <div className="container-page">
             <div className="grid gap-6 lg:grid-cols-[0.72fr_2.28fr] lg:items-start">
               <div>
                 <p className="eyebrow mb-3 text-brand">
@@ -172,27 +144,23 @@ export default function Fachwissen() {
                 </p>
               </div>
 
-              <div className="grid gap-4 md:grid-cols-3">
+              <div className="grid gap-x-8 gap-y-8 md:grid-cols-3">
                 {rolePaths.map((role, index) => {
-                  const Icon = role.icon;
                   return (
                     <div key={role.title} className="h-full">
-                      <section className="h-full rounded-2xl border border-line bg-white p-5" aria-labelledby={`rolle-${index}`}>
-                        <div className="flex items-center gap-3">
-                          <span className="grid h-9 w-9 place-items-center rounded-lg bg-navy text-mint">
-                            <Icon size={18} aria-hidden="true" />
-                          </span>
+                      <section className="h-full border-t border-navy pt-5" aria-labelledby={`rolle-${index}`}>
+                        <div>
                           <h3 id={`rolle-${index}`} className="font-headline font-bold text-navy">{role.title}</h3>
                         </div>
                         <p className="mt-3 text-sm leading-relaxed text-slate">{role.focus}</p>
-                        <ul className="mt-4 space-y-2 border-t border-line pt-4">
+                        <ul className="mt-4 border-t border-line pt-2">
                           {role.articles.map((slug) => {
                             const article = EDITORIAL_ARTICLES[slug];
                             return (
                               <li key={slug}>
                                 <Link
                                   to={getEditorialArticlePath(slug)}
-                                  className="group flex items-start gap-2 text-sm font-semibold leading-snug text-navy hover:text-brand focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+                                  className="group flex items-start gap-2 py-2.5 text-sm font-semibold leading-snug text-navy hover:text-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
                                 >
                                   <ArrowRight size={14} className="mt-0.5 shrink-0 text-brand transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
                                   {article.listingTitle}
@@ -211,7 +179,7 @@ export default function Fachwissen() {
         </section>
 
         <section aria-labelledby="alle-leitfaeden" className="bg-white section-y">
-          <div className="mx-auto max-w-7xl px-4 sm:px-8">
+          <div className="container-page">
             <div>
               <div className="max-w-3xl">
                 <p className="eyebrow mb-4 text-brand">
@@ -228,17 +196,13 @@ export default function Fachwissen() {
             <div className="mt-14 space-y-16">
               {EDITORIAL_CLUSTER_ORDER.map((clusterKey) => {
                 const cluster = EDITORIAL_CLUSTERS[clusterKey];
-                const Icon = clusterIcons[clusterKey];
                 const articles = EDITORIAL_ARTICLE_LIST.filter((article) => article.cluster === clusterKey);
 
                 return (
                   <section key={clusterKey} id={clusterKey} aria-labelledby={`${clusterKey}-titel`} className="scroll-mt-28">
                     <div>
                       <div className="grid gap-4 border-b border-line pb-6 md:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] md:items-end">
-                        <div className="flex items-start gap-4">
-                          <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-brand/8 text-brand">
-                            <Icon size={21} aria-hidden="true" />
-                          </span>
+                        <div>
                           <h3 id={`${clusterKey}-titel`} className="font-headline text-2xl font-bold leading-tight text-navy">
                             {cluster.title}
                           </h3>
@@ -247,12 +211,12 @@ export default function Fachwissen() {
                       </div>
                     </div>
 
-                    <div className="mt-6 grid gap-5 lg:grid-cols-2">
-                      {articles.map((article, index) => (
+                    <div className="mt-8 grid gap-x-10 gap-y-10 lg:grid-cols-2">
+                      {articles.map((article) => (
                         <div key={article.slug} className="h-full">
                           <Link
                             to={getEditorialArticlePath(article.slug)}
-                            className="group flex h-full flex-col rounded-2xl border border-line bg-paper p-6 transition-all hover:border-brand/40 hover: focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand sm:p-7"
+                            className="group flex h-full flex-col border-t border-navy pt-5 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand sm:p-7"
                           >
                             <div className="flex flex-wrap items-center justify-between gap-3 text-caption font-semibold text-brand">
                               <span>{article.format} · {article.topic}</span>

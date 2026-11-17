@@ -137,10 +137,10 @@ export default function KarriereFunnel() {
         <SEO title="Bewerbung: Sprache wählen | AHAD Cleaning" description="Wähle die Sprache für deine Bewerbung bei AHAD Cleaning. Choose your language for the application." noindex />
         <div className="max-w-xl w-full">
           <div className="text-center mb-12">
-            <div className="w-16 h-16 bg-accent text-white rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg">
+            <div className="w-16 h-16 bg-accent text-white rounded-2xl flex items-center justify-center mx-auto mb-6">
               <Globe size={32} />
             </div>
-            <h1 className="text-3xl font-black text-navy mb-4">Wähle deine Sprache</h1>
+            <h1 className="text-3xl font-bold text-navy mb-4">Wähle deine Sprache</h1>
             <p className="text-slate">Choose your language / اختر لغتك</p>
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
@@ -148,7 +148,7 @@ export default function KarriereFunnel() {
               <button
                 key={l.id}
                 onClick={() => setLang(l.id)}
-                className="p-4 bg-white rounded-2xl border-2 border-transparent hover:border-accent transition-all shadow-sm flex flex-col items-center gap-2 group"
+                className="p-4 bg-white rounded-2xl border-2 border-transparent hover:border-accent transition-all flex flex-col items-center gap-2 group"
               >
                 <span className="text-3xl group-hover:scale-110 transition-transform">{l.flag}</span>
                 <span className="font-bold text-navy">{l.label}</span>
@@ -164,15 +164,15 @@ export default function KarriereFunnel() {
     return (
       <div className="min-h-screen bg-paper flex items-center justify-center p-4 pt-32 pb-20 lg:pt-40 lg:pb-32" dir={isRtl ? 'rtl' : 'ltr'}>
         <div
-          className="bg-white p-8 rounded-3xl shadow-xl max-w-md w-full text-center"
+          className="bg-white p-8 rounded-3xl max-w-md w-full text-center"
           role="status"
         >
           <div className="w-20 h-20 bg-accent/10 text-accent rounded-full flex items-center justify-center mx-auto mb-6">
             <Check size={40} />
           </div>
-          <h1 ref={successRef} tabIndex={-1} className="text-2xl font-black text-navy mb-4 outline-none">{t.successTitle}</h1>
+          <h1 ref={successRef} tabIndex={-1} className="text-2xl font-bold text-navy mb-4 outline-none">{t.successTitle}</h1>
           <p className="text-slate mb-8">{t.successText}</p>
-          <Link to="/" className="block w-full bg-accent text-white py-4 rounded-xl font-bold uppercase tracking-wider hover:bg-accent-dark transition-all">
+          <Link to="/" className="block w-full bg-accent text-white py-4 rounded-xl font-bold hover:bg-accent-dark transition-all">
             {t.backHome}
           </Link>
         </div>
@@ -204,7 +204,7 @@ export default function KarriereFunnel() {
         {/* Progress Bar + jederzeit sichtbarer Sprachwechsel */}
         <div className="mb-6">
           <div className="flex justify-between items-center mb-2">
-            <span className="text-xs font-bold uppercase tracking-widest text-accent">
+            <span className="text-xs font-bold text-accent">
               {step === 4 ? t.fastDone : `${t.step} ${step} ${t.of} 4`}
             </span>
             <span className="flex items-center gap-3">
@@ -235,7 +235,7 @@ export default function KarriereFunnel() {
               className="space-y-4"
             >
               <div className="text-center mb-4">
-                <h1 className="text-2xl md:text-3xl font-black text-navy mb-2">{t.step1Title}</h1>
+                <h1 className="text-2xl md:text-3xl font-bold text-navy mb-2">{t.step1Title}</h1>
                 <p className="text-slate">{t.subtitle}</p>
               </div>
 
@@ -259,9 +259,9 @@ export default function KarriereFunnel() {
                       data.jobType === item.value
                         ? 'border-accent bg-accent/5'
                         : 'border-white bg-white hover:border-line'
-                    } shadow-sm ${isRtl ? 'text-right' : 'text-left'}`}
+                    } ${isRtl ? 'text-right' : 'text-left'}`}
                   >
-                    <div className="font-black text-lg text-navy">{item.title}</div>
+                    <div className="font-bold text-lg text-navy">{item.title}</div>
                     <div className="text-sm text-slate">{item.desc}</div>
                   </button>
                 ))}
@@ -278,7 +278,7 @@ export default function KarriereFunnel() {
               className="space-y-4"
             >
               <div className="text-center mb-4">
-                <h1 className="text-2xl md:text-3xl font-black text-navy mb-2">{t.step2Title}</h1>
+                <h1 className="text-2xl md:text-3xl font-bold text-navy mb-2">{t.step2Title}</h1>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -303,9 +303,9 @@ export default function KarriereFunnel() {
                       data.department === item.value
                         ? 'border-accent bg-accent/5' 
                         : 'border-white bg-white hover:border-line'
-                    } shadow-sm ${isRtl ? 'text-right' : 'text-left'}`}
+                    } ${isRtl ? 'text-right' : 'text-left'}`}
                   >
-                    <div className="font-black text-lg text-navy">{item.title}</div>
+                    <div className="font-bold text-lg text-navy">{item.title}</div>
                     <div className="text-sm text-slate">{item.desc}</div>
                   </button>
                 ))}
@@ -326,14 +326,14 @@ export default function KarriereFunnel() {
               className="space-y-4"
             >
               <div className="text-center mb-4">
-                <h1 className="text-2xl md:text-3xl font-black text-navy mb-2">{t.step3Title}</h1>
+                <h1 className="text-2xl md:text-3xl font-bold text-navy mb-2">{t.step3Title}</h1>
                 <p className="text-slate">{t.step3Subtitle}</p>
               </div>
 
               <div className="space-y-4">
                 {/* Erfahrung */}
                 <fieldset>
-                  <legend className="block text-xs font-bold uppercase tracking-widest text-accent mb-2">{t.experienceLabel}</legend>
+                  <legend className="block text-xs font-bold text-accent mb-2">{t.experienceLabel}</legend>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <button
                       aria-pressed={data.experience === 'Ja'}
@@ -358,7 +358,7 @@ export default function KarriereFunnel() {
 
                 {/* Starttermin */}
                 <fieldset>
-                  <legend className="block text-xs font-bold uppercase tracking-widest text-accent mb-2">{t.startLabel}</legend>
+                  <legend className="block text-xs font-bold text-accent mb-2">{t.startLabel}</legend>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <button
                       aria-pressed={data.startDate === 'Sofort'}
@@ -403,13 +403,13 @@ export default function KarriereFunnel() {
 
                 {/* Mobilität */}
                 <fieldset>
-                  <legend className="block text-xs font-bold uppercase tracking-widest text-accent mb-2">{t.mobilityLabel}</legend>
+                  <legend className="block text-xs font-bold text-accent mb-2">{t.mobilityLabel}</legend>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     {[
                       { id: 'auto', label: t.mobAuto, value: translations.de.mobAuto },
                       { id: 'oepnv', label: t.mobPublic, value: translations.de.mobPublic },
                     ].map((item) => (
-                      <label key={item.id} className="flex items-center gap-3 p-3 bg-white rounded-xl cursor-pointer shadow-sm border-2 border-transparent has-[:checked]:border-accent">
+                      <label key={item.id} className="flex items-center gap-3 p-3 bg-white rounded-xl cursor-pointer border-2 border-transparent has-[:checked]:border-accent">
                         <input
                           type="radio"
                           name="mobility"
@@ -421,7 +421,7 @@ export default function KarriereFunnel() {
                         <span className="font-bold text-navy">{item.label}</span>
                       </label>
                     ))}
-                    <div className="p-3 bg-white rounded-xl shadow-sm border-2 border-transparent has-[:focus-within]:border-accent sm:col-span-2">
+                    <div className="p-3 bg-white rounded-xl border-2 border-transparent has-[:focus-within]:border-accent sm:col-span-2">
                       <div className="flex items-center gap-3 mb-2">
                         <input
                           type="radio"
@@ -458,13 +458,13 @@ export default function KarriereFunnel() {
               </div>
 
               <div className="flex gap-3 pt-2">
-                <button onClick={prevStep} className="flex-1 py-3 font-bold text-slate bg-white rounded-xl shadow-sm hover:bg-paper transition-colors">
+                <button onClick={prevStep} className="flex-1 py-3 font-bold text-slate bg-white rounded-xl hover:bg-paper transition-colors">
                   {t.back}
                 </button>
                 <button 
                   onClick={nextStep} 
                   disabled={!data.experience || !data.startDate || !data.mobility}
-                  className="flex-[2] py-3 bg-accent text-white rounded-xl font-bold shadow-sm hover:shadow-md hover:-translate-y-[1px] disabled:opacity-50 hover:bg-accent-dark transition-all"
+                  className="flex-[2] py-3 bg-accent text-white rounded-xl font-bold disabled:opacity-50 hover:bg-accent-dark transition-all"
                 >
                   {t.next}
                 </button>
@@ -481,7 +481,7 @@ export default function KarriereFunnel() {
               className="space-y-4"
             >
               <div className="text-center mb-4">
-                <h1 className="text-2xl md:text-3xl font-black text-navy mb-2">{t.step4Title}</h1>
+                <h1 className="text-2xl md:text-3xl font-bold text-navy mb-2">{t.step4Title}</h1>
               </div>
 
               <form onSubmit={handleSubmit} className="space-y-4" aria-busy={isSubmitting}>
@@ -491,7 +491,7 @@ export default function KarriereFunnel() {
                 </div>
                 <div className="space-y-3">
                   <div>
-                    <label htmlFor="career-name" className="block text-xs font-bold uppercase tracking-widest text-accent mb-1">{t.nameLabel}</label>
+                    <label htmlFor="career-name" className="block text-xs font-bold text-accent mb-1">{t.nameLabel}</label>
                     <div className="relative">
                       <User className={`absolute ${isRtl ? 'right-4' : 'left-4'} top-1/2 -translate-y-1/2 text-slate`} size={18} />
                       <input
@@ -502,13 +502,13 @@ export default function KarriereFunnel() {
                         placeholder={t.namePlaceholder}
                         value={data.name}
                         onChange={(e) => updateData({ name: e.target.value })}
-                        className={`w-full p-3 ${isRtl ? 'pr-11' : 'pl-11'} bg-white rounded-xl border-2 border-field focus:border-accent outline-none shadow-sm`}
+                        className={`w-full p-3 ${isRtl ? 'pr-11' : 'pl-11'} bg-white rounded-xl border-2 border-field focus:border-accent outline-none`}
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label htmlFor="career-phone" className="block text-xs font-bold uppercase tracking-widest text-accent mb-1">{t.phoneLabel}</label>
+                    <label htmlFor="career-phone" className="block text-xs font-bold text-accent mb-1">{t.phoneLabel}</label>
                     <div className="relative">
                       <Smartphone className={`absolute ${isRtl ? 'right-4' : 'left-4'} top-1/2 -translate-y-1/2 text-slate`} size={18} />
                       <input
@@ -519,13 +519,13 @@ export default function KarriereFunnel() {
                         placeholder={t.phonePlaceholder}
                         value={data.phone}
                         onChange={(e) => updateData({ phone: e.target.value })}
-                        className={`w-full p-3 ${isRtl ? 'pr-11' : 'pl-11'} bg-white rounded-xl border-2 border-field focus:border-accent outline-none shadow-sm`}
+                        className={`w-full p-3 ${isRtl ? 'pr-11' : 'pl-11'} bg-white rounded-xl border-2 border-field focus:border-accent outline-none`}
                       />
                     </div>
                   </div>
                 </div>
 
-                <div className="bg-white p-4 rounded-xl shadow-sm border-2 border-field has-[:checked]:border-accent">
+                <div className="bg-white p-4 rounded-xl border-2 border-field has-[:checked]:border-accent">
                   <label htmlFor="career-whatsapp" className="flex gap-3 cursor-pointer">
                     <input
                       id="career-whatsapp"
@@ -562,13 +562,13 @@ export default function KarriereFunnel() {
                   )}
 
                   <div className="flex gap-3">
-                    <button type="button" onClick={prevStep} className="flex-1 py-3 font-bold text-slate bg-white rounded-xl shadow-sm hover:bg-paper transition-colors">
+                    <button type="button" onClick={prevStep} className="flex-1 py-3 font-bold text-slate bg-white rounded-xl hover:bg-paper transition-colors">
                       {t.back}
                     </button>
                     <button 
                       type="submit"
                       disabled={isSubmitting}
-                      className="flex-[2] py-3 bg-accent text-white rounded-xl font-black uppercase tracking-wider shadow-sm hover:shadow-md hover:-translate-y-[1px] disabled:opacity-50 hover:bg-accent-dark transition-all flex items-center justify-center gap-2"
+                      className="flex-[2] py-3 bg-accent text-white rounded-xl font-bold disabled:opacity-50 hover:bg-accent-dark transition-all flex items-center justify-center gap-2"
                     >
                       {isSubmitting ? <Loader2 className="animate-spin" /> : <Send size={18} />}
                       {t.submit}

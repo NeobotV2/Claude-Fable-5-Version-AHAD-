@@ -96,7 +96,7 @@ export default function FachwissenKosten() {
       {/* Auf einen Blick */}
       <section className="border-b border-line bg-white section-y-sm">
         <div className="mx-auto max-w-7xl px-4 sm:px-8">
-          <h2 className="mb-8 text-center text-2xl font-black text-navy">Drei Größen für die Kalkulation</h2>
+          <h2 className="mb-8 text-center text-2xl font-bold text-navy">Drei Größen für die Kalkulation</h2>
           <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
             <div className="rounded-2xl border border-line bg-paper p-6">
               <Euro className="mb-4 h-8 w-8 text-accent" aria-hidden="true" />
@@ -133,7 +133,7 @@ export default function FachwissenKosten() {
       <section className="bg-white section-y">
         <div className="mx-auto max-w-3xl px-4 sm:px-8">
           <div className="prose prose-lg max-w-none leading-relaxed text-slate">
-            <h2 id="kostenbestandteile" className="scroll-mt-28 text-2xl font-black text-navy sm:text-3xl">Der Stundensatz und seine Kostenbestandteile</h2>
+            <h2 id="kostenbestandteile" className="scroll-mt-28 text-2xl font-bold text-navy sm:text-3xl">Der Stundensatz und seine Kostenbestandteile</h2>
             <p className="mb-6">
               Für die folgenden Formeln verwenden wir <strong>34 € pro Reinigungsstunde als illustrative Annahme</strong>.
               Sie ist weder Marktspanne noch Preisversprechen. Entscheidend ist, welche Leistungen und Kostenbestandteile
@@ -182,7 +182,7 @@ export default function FachwissenKosten() {
               Kostenbestandteilen bewerten. Ein Preis allein belegt weder Qualität noch einen Verstoß.
             </p>
 
-            <h2 id="leistungswert" className="scroll-mt-28 text-2xl font-black text-navy sm:text-3xl">Vom Stundensatz zum m²-Preis: der Leistungswert</h2>
+            <h2 id="leistungswert" className="scroll-mt-28 text-2xl font-bold text-navy sm:text-3xl">Vom Stundensatz zum m²-Preis: der Leistungswert</h2>
             <p className="mb-6">
               Für die Kosten je m² ist neben dem Stundensatz der <strong>Leistungswert</strong> maßgeblich, also
               der für eine konkrete Tätigkeit und Fläche angesetzte Quadratmeterumfang
@@ -235,7 +235,7 @@ export default function FachwissenKosten() {
               entstehen erst aus dem konkreten Objekt und Leistungsziel.
             </p>
 
-            <h2 id="rechenbeispiel" className="scroll-mt-28 text-2xl font-black text-navy sm:text-3xl">Rechenbeispiel: Büroetage mit 500 m²</h2>
+            <h2 id="rechenbeispiel" className="scroll-mt-28 text-2xl font-bold text-navy sm:text-3xl">Rechenbeispiel: Büroetage mit 500 m²</h2>
             <div className="mb-12 rounded-3xl border border-line bg-paper p-6 sm:p-8">
               <p className="mb-4 text-sm">
                 Ausschließlich zur Illustration nehmen wir 420 m² Büro-/Verkehrsfläche mit 250 m²/h, 80 m²
@@ -271,7 +271,7 @@ export default function FachwissenKosten() {
               </p>
             </div>
 
-            <h2 id="preistreiber" className="scroll-mt-28 text-2xl font-black text-navy sm:text-3xl">Was den Preis nach oben oder unten bewegt</h2>
+            <h2 id="preistreiber" className="scroll-mt-28 text-2xl font-bold text-navy sm:text-3xl">Was den Preis nach oben oder unten bewegt</h2>
             <ul className="space-y-4 mb-12 list-none pl-0">
               {[
                 'Reinigungsintervall: Eine bedarfsorientierte Taktung kann gegenüber einem festen Turnus Stunden reduzieren, wenn Hygiene- und Qualitätsziele eingehalten werden.',
@@ -313,7 +313,7 @@ export default function FachwissenKosten() {
               </ul>
             </div>
 
-            <h2 className="text-2xl font-black text-navy sm:text-3xl">Warum Angebote trotz gleicher Lohnuntergrenze abweichen</h2>
+            <h2 className="text-2xl font-bold text-navy sm:text-3xl">Warum Angebote trotz gleicher Lohnuntergrenze abweichen</h2>
             <p className="mb-8">
               Die gesetzliche beziehungsweise tarifliche Lohnuntergrenze ist nur ein Baustein. Unterschiede entstehen
               unter anderem durch Flächenzuschnitt, Rüst- und Wegezeiten, Zutrittsregeln, Schicht- oder Randzeiten,
@@ -322,7 +322,7 @@ export default function FachwissenKosten() {
               Objektdaten, Leistungen, Turnusse und Qualitätsziele kalkulieren.
             </p>
 
-            <h2 className="text-2xl font-black text-navy sm:text-3xl">Fazit</h2>
+            <h2 className="text-2xl font-bold text-navy sm:text-3xl">Fazit</h2>
             <p className="mb-8">
               Eine nachvollziehbare Kalkulation verbindet Kostenbestandteile, Leistungswert und das passende{' '}
               <Link to="/fachwissen/unterhaltsreinigung-unternehmen-reinigungsintervalle" className="font-bold text-brand hover:underline">
@@ -339,8 +339,8 @@ export default function FachwissenKosten() {
       <section className="bg-paper section-y">
         <div className="mx-auto max-w-4xl px-4 sm:px-8">
           <div className="mb-12 text-center">
-            <span className="mb-4 block text-sm font-bold uppercase tracking-wider text-brand">Häufige Fragen</span>
-            <h2 className="text-2xl font-black tracking-tight text-navy sm:text-3xl lg:text-4xl">FAQs zu Reinigungskosten</h2>
+            <span className="mb-4 block text-sm font-bold text-brand">Häufige Fragen</span>
+            <h2 className="text-2xl font-bold tracking-tight text-navy sm:text-3xl lg:text-4xl">FAQs zu Reinigungskosten</h2>
           </div>
           <Accordion items={faqSchema.mainEntity.map((q) => ({ question: q.name, answer: q.acceptedAnswer.text }))} />
         </div>
