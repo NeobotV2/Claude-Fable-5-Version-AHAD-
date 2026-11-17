@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, Handshake, Target, ShieldCheck, Leaf, MapPin } from 'lucide-react';
 import SEO from '@/components/SEO';
 import PageHero from '@/components/PageHero';
-import Reveal from '@/components/ui/Reveal';
 import SectionHeading from '@/components/ui/SectionHeading';
 import ButtonLink from '@/components/ui/Button';
 import SmartImage from '@/components/ui/SmartImage';
@@ -72,18 +71,18 @@ export default function Unternehmen() {
 
       {/* Zahlen */}
       {STATS.length > 0 && <section className="bg-white border-b border-line">
-        <div className="max-w-7xl mx-auto px-4 sm:px-8 py-12 grid grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="container-page py-12 grid grid-cols-2 lg:grid-cols-4 gap-8">
           {STATS.map((stat, i) => (
-            <Reveal key={stat.label} delay={i * 0.08} y={16}>
+            <div key={stat.label}>
               <Stat value={stat.value} suffix={stat.suffix} label={stat.label} />
-            </Reveal>
+            </div>
           ))}
         </div>
       </section>}
 
       {/* Story */}
-      <section className="py-20 lg:py-32 bg-paper">
-        <div className="max-w-7xl mx-auto px-4 sm:px-8 grid grid-cols-1 lg:grid-cols-2 gap-14 lg:gap-20 items-center">
+      <section className="section-y bg-paper">
+        <div className="container-page grid grid-cols-1 lg:grid-cols-2 gap-14 lg:gap-20 items-center">
           <div>
             <SectionHeading
               eyebrow="Unsere Geschichte"
@@ -92,18 +91,18 @@ export default function Unternehmen() {
             />
             <div className="mt-10 space-y-6">
               {milestones.map((milestone, i) => (
-                <Reveal key={milestone.year} delay={i * 0.08}>
+                <div key={milestone.year}>
                   <div className="flex gap-5">
                     <div className="flex flex-col items-center">
                       <span className="w-3 h-3 rounded-full bg-accent flex-shrink-0 mt-1.5" />
                       {i < milestones.length - 1 && <span className="w-px flex-grow bg-line mt-1" />}
                     </div>
                     <div className="pb-2">
-                      <div className="text-[13px] font-semibold text-brand mb-1">{milestone.year}</div>
-                      <p className="text-slate text-[15px] leading-relaxed">{milestone.text}</p>
+                      <div className="text-caption font-semibold text-brand mb-1">{milestone.year}</div>
+                      <p className="text-slate text-body-sm leading-relaxed">{milestone.text}</p>
                     </div>
                   </div>
-                </Reveal>
+                </div>
               ))}
             </div>
             <p className="mt-8">
@@ -117,7 +116,7 @@ export default function Unternehmen() {
             </p>
           </div>
 
-          <Reveal delay={0.15}>
+          <div>
             <div className="relative">
               <SmartImage src={IMG.teamMeeting} alt="Das AHAD Team bei der Einsatzplanung" className="rounded-3xl shadow-lifted aspect-[4/5] lg:aspect-[4/4.5]" />
               <div className="absolute -bottom-6 -left-6 hidden sm:flex items-center gap-4 bg-white rounded-2xl p-5 shadow-lifted border border-line max-w-[18rem]">
@@ -129,13 +128,13 @@ export default function Unternehmen() {
                 </p>
               </div>
             </div>
-          </Reveal>
+          </div>
         </div>
       </section>
 
       {/* Werte */}
-      <section className="py-20 lg:py-32 bg-white border-t border-line">
-        <div className="max-w-7xl mx-auto px-4 sm:px-8">
+      <section className="section-y bg-white border-t border-line">
+        <div className="container-page">
           <SectionHeading
             eyebrow="Wofür wir stehen"
             title="Vier Werte, an denen Sie uns messen können."
@@ -144,15 +143,15 @@ export default function Unternehmen() {
           />
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {values.map((value, i) => (
-              <Reveal key={value.title} delay={i * 0.08} className="h-full">
-                <div className="h-full bg-paper rounded-3xl border border-line p-8 card-lift">
+              <div key={value.title} className="h-full">
+                <div className="h-full bg-paper rounded-3xl border border-line p-8">
                   <span className="inline-flex w-13 h-13 p-3.5 rounded-2xl bg-navy text-mint items-center justify-center mb-5">
                     {value.icon}
                   </span>
                   <h3 className="font-headline font-bold text-lg text-navy mb-2.5">{value.title}</h3>
                   <p className="text-sm text-slate leading-relaxed">{value.text}</p>
                 </div>
-              </Reveal>
+              </div>
             ))}
           </div>
         </div>
@@ -160,7 +159,7 @@ export default function Unternehmen() {
 
       {/* Referenzen-Band */}
       {CLIENT_REFERENCES.length > 0 && <section className="py-16 bg-paper border-t border-line">
-        <div className="max-w-7xl mx-auto px-4 sm:px-8 mb-8 flex items-center justify-between gap-4">
+        <div className="container-page mb-8 flex items-center justify-between gap-4">
           <p className="eyebrow text-slate">
             <span className="h-px w-8 bg-slate/30" />
             Unternehmen, die uns vertrauen
@@ -173,16 +172,15 @@ export default function Unternehmen() {
       </section>}
 
       {/* Karriere-Hinweis */}
-      <section className="py-20 lg:py-28 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-8">
-          <Reveal>
-            <div className="relative bg-navy text-white p-8 sm:p-12 lg:p-16 overflow-hidden grain">
-              <div className="absolute inset-0 blueprint-grid" />
+      <section className="section-y bg-white">
+        <div className="container-page">
+          <div>
+            <div className="relative bg-navy text-white p-8 sm:p-12 lg:p-16 overflow-hidden">
               <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
                 <div>
                   <span className="eyebrow text-mint mb-4">Karriere</span>
                   <h2 className="display-md text-white mb-4">Wir suchen Kolleginnen und Kollegen, die sorgfältig arbeiten.</h2>
-                  <p className="text-blue-100/85 font-medium">
+                  <p className="text-ondark/85 font-medium">
                     Wir stellen Reinigungskräfte, Vorarbeiter:innen und Objektleitungen ein.
                   </p>
                 </div>
@@ -196,7 +194,7 @@ export default function Unternehmen() {
                 </div>
               </div>
             </div>
-          </Reveal>
+          </div>
         </div>
       </section>
 

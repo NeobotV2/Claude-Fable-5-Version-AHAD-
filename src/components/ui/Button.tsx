@@ -35,9 +35,30 @@ const variants: Record<Variant, string> = {
 };
 
 const sizes: Record<Size, string> = {
-  md: 'px-5 py-3 text-[15px]',
+  md: 'px-5 py-3 text-body-sm',
   lg: 'px-6 py-3.5 text-base',
 };
+
+/** Klassen einer Schaltfläche — für Fälle ohne ButtonLink (z. B. externe Links). */
+export function buttonClasses(variant: Variant = 'primary', size: Size = 'md', className?: string) {
+  return cn(base, variants[variant], sizes[size], className);
+}
+
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  variant?: Variant;
+  size?: Size;
+}
+
+/** Echte Schaltfläche (Formulare, Schritte) im selben Stil wie ButtonLink. */
+export function Button({ variant = 'primary', size = 'md', className, type = 'button', ...props }: ButtonProps) {
+  return (
+    <button
+      type={type}
+      className={cn(buttonClasses(variant, size), 'disabled:opacity-60 disabled:cursor-not-allowed', className)}
+      {...props}
+    />
+  );
+}
 
 export default function ButtonLink({
   to,
@@ -49,7 +70,7 @@ export default function ButtonLink({
   children,
   onClick,
 }: ButtonLinkProps) {
-  const classes = cn(base, variants[variant], sizes[size], className);
+  const classes = buttonClasses(variant, size, className);
   const content = (
     <>
       <span className="min-w-0">{children}</span>

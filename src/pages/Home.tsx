@@ -5,6 +5,9 @@ import SEO from '@/components/SEO';
 import SectionHeading from '@/components/ui/SectionHeading';
 import ButtonLink from '@/components/ui/Button';
 import SmartImage from '@/components/ui/SmartImage';
+import FactRow from '@/components/ui/FactRow';
+import LinkList from '@/components/ui/LinkList';
+import RuleColumns from '@/components/ui/RuleColumns';
 import BeforeAfter from '@/components/ui/BeforeAfter';
 import Accordion, { faqSchemaFrom, type FAQItem } from '@/components/ui/Accordion';
 import ClientLogos from '@/components/ClientLogos';
@@ -196,7 +199,7 @@ export default function Home() {
                 <span className="whitespace-nowrap">Gebäudereinigung,</span> die Sie nicht mehr nachsteuern müssen.
               </h1>
 
-              <p className="mt-5 sm:mt-7 text-[17px] sm:text-xl text-slate leading-relaxed max-w-xl">
+              <p className="mt-5 sm:mt-7 text-lead sm:text-xl text-slate leading-relaxed max-w-xl">
                 Wir organisieren Ausführung, Qualitätskontrolle und Nachweise selbst. Sie müssen weder
                 Reklamationen verfolgen noch intern hinterherlaufen.
               </p>
@@ -212,7 +215,7 @@ export default function Home() {
               </div>
 
               {/* Belege in einer Zeile — bewusst ohne Zahlen, die die Zahlenleiste doppeln würden */}
-              <ul className="mt-9 sm:mt-12 pt-5 border-t border-line flex flex-wrap gap-x-7 gap-y-2 text-[15px] text-slate">
+              <ul className="mt-9 sm:mt-12 pt-5 border-t border-line flex flex-wrap gap-x-7 gap-y-2 text-body-sm text-slate">
                 {GOOGLE_RATING && (
                   <li className="w-full">
                     <a
@@ -247,7 +250,7 @@ export default function Home() {
               decoding="async"
               referrerPolicy="no-referrer"
             />
-            <figcaption className="absolute left-0 bottom-0 bg-navy text-white text-[13px] font-medium px-4 py-2">
+            <figcaption className="absolute left-0 bottom-0 bg-navy text-white text-caption font-medium px-4 py-2">
               Unsere Zentrale in Villingen-Schwenningen
             </figcaption>
           </figure>
@@ -257,17 +260,11 @@ export default function Home() {
       {/* ── ZAHLEN ──────────────────────────────────────────────────── */}
       {STATS.length > 0 && (
         <section className="bg-navy text-white" aria-label="AHAD in Zahlen">
-          <ul className="max-w-7xl mx-auto px-4 sm:px-8 grid grid-cols-2 lg:grid-cols-4 lg:divide-x divide-white/15">
-            {STATS.map((stat) => (
-              <li key={stat.label} className="py-7 lg:py-9 pr-4 lg:px-8 lg:first:pl-0">
-                <span className="block font-accent text-4xl lg:text-[2.75rem] leading-none font-semibold tracking-tight tabular-nums">
-                  {stat.value}
-                  {stat.suffix}
-                </span>
-                <span className="block mt-2.5 text-sm text-blue-100/80">{stat.label}</span>
-              </li>
-            ))}
-          </ul>
+          <FactRow
+            dark
+            className="container-page"
+            items={STATS.map((stat) => ({ value: `${stat.value}${stat.suffix}`, label: stat.label }))}
+          />
         </section>
       )}
 
@@ -276,10 +273,10 @@ export default function Home() {
 
       {/* ── AUFTRAGGEBER ─────────────────────────────────────────────── */}
       {CLIENT_REFERENCES.length > 0 && (
-        <section className="py-12 lg:py-14 bg-white border-b border-line" aria-label="Referenzen">
-          <div className="max-w-7xl mx-auto px-4 sm:px-8 mb-8 flex items-baseline justify-between gap-4">
+        <section className="section-y-sm bg-white border-b border-line" aria-label="Referenzen">
+          <div className="container-page mb-8 flex items-baseline justify-between gap-4">
             <p className="eyebrow text-slate">Einige unserer Auftraggeber</p>
-            <Link to="/referenzen" className="text-link text-[15px] flex-shrink-0">
+            <Link to="/referenzen" className="text-link text-body-sm flex-shrink-0">
               Alle Referenzen
               <ArrowRight size={15} aria-hidden="true" />
             </Link>
@@ -292,8 +289,8 @@ export default function Home() {
       <NewsTeaser />
 
       {/* ── LEISTUNGEN ───────────────────────────────────────────────── */}
-      <section className="py-20 lg:py-28 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-8">
+      <section className="section-y bg-white">
+        <div className="container-page">
           <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-12">
             <SectionHeading
               eyebrow="Leistungen"
@@ -321,8 +318,8 @@ export default function Home() {
                   {service.title}
                 </h3>
                 <p className="mt-2 text-slate leading-relaxed">{service.outcome}</p>
-                <p className="mt-3 text-[15px] text-slate">{service.benefits.join(' · ')}</p>
-                <span className="text-link mt-4 text-[15px]">
+                <p className="mt-3 text-body-sm text-slate">{service.benefits.join(' · ')}</p>
+                <span className="text-link mt-4 text-body-sm">
                   Mehr erfahren
                   <ArrowRight size={15} aria-hidden="true" />
                 </span>
@@ -331,26 +328,12 @@ export default function Home() {
           </div>
 
           {/* Alle weiteren Leistungen als Liste — nichts bleibt unsichtbar. */}
-          <h3 className="mt-16 pb-4 border-b border-navy font-semibold text-navy">Weitere Leistungen</h3>
-          <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8">
-            {moreServices.map((service) => (
-              <li key={service.slug} className="border-b border-line">
-                <Link to={service.path} className="group flex items-center justify-between gap-4 py-4">
-                  <span className="min-w-0">
-                    <span className="block font-semibold text-navy group-hover:text-accent transition-colors">
-                      {service.name}
-                    </span>
-                    <span className="block text-[15px] text-slate mt-0.5">{service.short}</span>
-                  </span>
-                  <ArrowRight
-                    size={17}
-                    className="flex-shrink-0 text-navy/40 group-hover:text-accent transition-colors"
-                    aria-hidden="true"
-                  />
-                </Link>
-              </li>
-            ))}
-          </ul>
+          <LinkList
+            heading="Weitere Leistungen"
+            cols={3}
+            className="mt-16"
+            items={moreServices.map((service) => ({ to: service.path, title: service.name, sub: service.short }))}
+          />
 
           {/* Strukturierte Anfrage für FM & Einkauf — führt in den Funnel */}
           <div className="mt-14 bg-paper border border-line p-6 sm:p-8 flex flex-col lg:flex-row lg:items-center gap-5 lg:gap-12">
@@ -369,8 +352,8 @@ export default function Home() {
       </section>
 
       {/* ── VORHER / NACHHER ─────────────────────────────────────────── */}
-      <section className="py-20 lg:py-28 bg-navy text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-8 grid grid-cols-1 lg:grid-cols-12 gap-x-14 gap-y-10 items-center">
+      <section className="section-y bg-navy text-white">
+        <div className="container-page grid grid-cols-1 lg:grid-cols-12 gap-x-14 gap-y-10 items-center">
           <div className="lg:col-span-5">
             <SectionHeading
               eyebrow="Vorher / Nachher"
@@ -390,7 +373,7 @@ export default function Home() {
           </div>
           <div className="lg:col-span-7">
             <BeforeAfter beforeSrc={IMG.vorher} afterSrc={IMG.nachher} beforeLabel="Vorher" afterLabel="Nachher" />
-            <p className="mt-3 text-[13px] text-blue-100/80">Aufnahmen aus einem von uns betreuten Objekt.</p>
+            <p className="mt-3 text-caption text-ondark/80">Aufnahmen aus einem von uns betreuten Objekt.</p>
           </div>
         </div>
       </section>
@@ -398,8 +381,8 @@ export default function Home() {
       {/* ── AHAD SYSTEM ──────────────────────────────────────────────────
           Die vier Buchstaben der Wortmarke tragen den Abschnitt selbst:
           vier Spalten mit Haarlinien, keine Karten, keine Icons. */}
-      <section className="py-20 lg:py-28 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-8">
+      <section className="section-y bg-white">
+        <div className="container-page">
           <SectionHeading
             eyebrow="Unser Vorgehen"
             title="Das AHAD System"
@@ -417,8 +400,8 @@ export default function Home() {
                   {step.letter}
                 </span>
                 <h3 className="mt-6 text-xl font-bold text-navy">{step.title}</h3>
-                <p className="mt-1 text-[15px] font-semibold text-accent">{step.subtitle}</p>
-                <p className="mt-3 text-[15px] text-slate leading-relaxed">{step.description}</p>
+                <p className="mt-1 text-body-sm font-semibold text-accent">{step.subtitle}</p>
+                <p className="mt-3 text-body-sm text-slate leading-relaxed">{step.description}</p>
               </li>
             ))}
           </ol>
@@ -432,8 +415,8 @@ export default function Home() {
 
       {/* ── BRANCHEN ─────────────────────────────────────────────────────
           Als Verzeichnis: links die Aussage, rechts die Liste mit Foto. */}
-      <section className="py-20 lg:py-28 bg-paper border-t border-line">
-        <div className="max-w-7xl mx-auto px-4 sm:px-8 grid grid-cols-1 lg:grid-cols-12 gap-x-14 gap-y-10">
+      <section className="section-y bg-paper border-t border-line">
+        <div className="container-page grid grid-cols-1 lg:grid-cols-12 gap-x-14 gap-y-10">
           <div className="lg:col-span-4">
             <SectionHeading
               eyebrow="Branchen"
@@ -446,31 +429,17 @@ export default function Home() {
             </Link>
           </div>
 
-          <ul className="lg:col-span-8 border-t border-navy">
-            {industries.map((industry) => (
-              <li key={industry.title} className="border-b border-line">
-                <Link to={industry.path} className="group flex items-center gap-5 sm:gap-7 py-4">
-                  <SmartImage
-                    src={industry.image}
-                    alt=""
-                    sizes="160px"
-                    className="w-24 sm:w-36 aspect-[3/2] flex-shrink-0"
-                  />
-                  <span className="min-w-0 flex-grow">
-                    <span className="block text-lg sm:text-xl font-bold text-navy group-hover:text-accent transition-colors">
-                      {industry.title}
-                    </span>
-                    <span className="block text-[15px] text-slate mt-0.5">{industry.claim}</span>
-                  </span>
-                  <ArrowRight
-                    size={18}
-                    className="flex-shrink-0 text-navy/40 group-hover:text-accent transition-colors"
-                    aria-hidden="true"
-                  />
-                </Link>
-              </li>
-            ))}
-            <li className="pt-6 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div className="lg:col-span-8">
+            <LinkList
+              large
+              items={industries.map((industry) => ({
+                to: industry.path,
+                title: industry.title,
+                sub: industry.claim,
+                image: industry.image,
+              }))}
+            />
+            <div className="pt-6 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
               <p className="text-slate">
                 <span className="font-semibold text-navy">Ihre Branche ist nicht dabei?</span> Wir sehen uns jedes
                 Objekt einzeln an.
@@ -479,8 +448,8 @@ export default function Home() {
                 Kontakt aufnehmen
                 <ArrowRight size={17} aria-hidden="true" />
               </Link>
-            </li>
-          </ul>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -494,31 +463,24 @@ export default function Home() {
       <Guarantee />
 
       {/* ── EINSATZGEBIET (Ortsbezug + Links auf die Standortseiten) ──── */}
-      <section className="py-20 lg:py-28 bg-paper border-t border-line" aria-label="Einsatzgebiet">
-        <div className="max-w-7xl mx-auto px-4 sm:px-8">
+      <section className="section-y bg-paper border-t border-line" aria-label="Einsatzgebiet">
+        <div className="container-page">
           <SectionHeading
             eyebrow="Einsatzgebiet"
             title="Reinigungsfirma in Villingen-Schwenningen und Umgebung"
             lead="Unsere Zentrale steht in der Max-Planck-Straße in Villingen-Schwenningen. Von hier aus betreuen wir Betriebe im Schwarzwald-Baar-Kreis und in den Nachbarkreisen, dazu Objekte in den Einsatzgebieten Konstanz und Stuttgart."
             className="max-w-3xl mb-12"
           />
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-x-10 gap-y-8">
-            {REGION_LINKS.map((region) => (
-              <Link key={region.to} to={region.to} className="group block border-t border-navy pt-5">
-                <span className="flex items-start justify-between gap-3 text-xl font-bold text-navy group-hover:text-accent transition-colors">
-                  {region.title}
-                  <ArrowRight size={18} className="mt-1.5 flex-shrink-0" aria-hidden="true" />
-                </span>
-                <span className="block mt-2 text-[15px] text-slate leading-relaxed">{region.places}</span>
-              </Link>
-            ))}
-          </div>
+          <RuleColumns
+            cols={3}
+            items={REGION_LINKS.map((region) => ({ title: region.title, text: region.places, to: region.to }))}
+          />
         </div>
       </section>
 
       {/* ── FAQ ──────────────────────────────────────────────────────── */}
-      <section className="py-20 lg:py-28 bg-white border-t border-line">
-        <div className="max-w-7xl mx-auto px-4 sm:px-8 grid grid-cols-1 lg:grid-cols-12 gap-x-14 gap-y-10">
+      <section className="section-y bg-white border-t border-line">
+        <div className="container-page grid grid-cols-1 lg:grid-cols-12 gap-x-14 gap-y-10">
           <div className="lg:col-span-4">
             <SectionHeading
               eyebrow="FAQ"

@@ -74,11 +74,11 @@ export default function PageHero({
       className={cn(
         'w-full px-4 sm:px-8',
         image ? 'lg:max-w-[calc(40rem+8.333vw)] lg:pr-14' : 'max-w-7xl mx-auto',
-        compact ? 'py-9 sm:py-12 lg:py-14' : 'py-10 sm:py-14 lg:py-20'
+        compact ? 'py-9 sm:section-y-sm' : 'py-10 sm:section-y-sm'
       )}
     >
       {crumbs && crumbs.length > 0 && (
-        <nav aria-label="Brotkrumen" className="flex flex-wrap items-center gap-x-2 text-[13px] text-slate mb-3">
+        <nav aria-label="Brotkrumen" className="flex flex-wrap items-center gap-x-2 text-caption text-slate mb-3">
           {/* py-3: Trefferfläche 44 px hoch, ohne die Zeile optisch zu vergrößern */}
           <Link to="/" className="py-3 hover:text-accent transition-colors">
             Start
@@ -105,7 +105,7 @@ export default function PageHero({
         <h1 className={cn(titleSize === 'lg' ? 'display-lg' : 'display-xl page-title', 'text-navy')}>
           {typeof title === 'string' ? <HeadlineText text={title} /> : title}
         </h1>
-        {lead && <p className="mt-5 sm:mt-6 text-[17px] sm:text-xl text-slate leading-relaxed max-w-2xl">{lead}</p>}
+        {lead && <p className="mt-5 sm:mt-6 text-lead sm:text-xl text-slate leading-relaxed max-w-2xl">{lead}</p>}
 
         {(cta || secondaryCta) && (
           <div className="flex flex-wrap items-center gap-x-4 gap-y-3 mt-8">

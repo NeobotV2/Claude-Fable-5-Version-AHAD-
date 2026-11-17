@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, Heart, TrendingUp, Users, Clock, Euro, GraduationCap, BadgeCheck, MapPin } from 'lucide-react';
 import SEO from '@/components/SEO';
 import PageHero from '@/components/PageHero';
-import Reveal from '@/components/ui/Reveal';
 import SectionHeading from '@/components/ui/SectionHeading';
 import ButtonLink from '@/components/ui/Button';
 import SmartImage from '@/components/ui/SmartImage';
@@ -82,8 +81,8 @@ export default function Karriere() {
       />
 
       {/* Benefits */}
-      <section className="py-20 lg:py-32 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-8">
+      <section className="section-y bg-white">
+        <div className="container-page">
           <SectionHeading
             eyebrow="Warum AHAD"
             title="Was wir unseren Mitarbeitenden bieten."
@@ -92,43 +91,43 @@ export default function Karriere() {
           />
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {benefits.map((benefit, i) => (
-              <Reveal key={benefit.title} delay={Math.min(i * 0.08, 0.3)} className="h-full">
-                <div className="h-full bg-paper rounded-3xl border border-line p-8 card-lift">
+              <div key={benefit.title} className="h-full">
+                <div className="h-full bg-paper rounded-3xl border border-line p-8">
                   <span className="inline-flex w-13 h-13 p-3.5 rounded-2xl bg-brand/8 text-brand items-center justify-center mb-5">
                     {benefit.icon}
                   </span>
                   <h3 className="font-headline font-bold text-lg text-navy mb-2.5">{benefit.title}</h3>
                   <p className="text-sm text-slate leading-relaxed">{benefit.text}</p>
                 </div>
-              </Reveal>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
       {/* Offene Stellen */}
-      <section id="offene-stellen" className="py-20 lg:py-32 bg-paper border-y border-line scroll-mt-28">
-        <div className="max-w-7xl mx-auto px-4 sm:px-8 grid grid-cols-1 lg:grid-cols-12 gap-12">
+      <section id="offene-stellen" className="section-y bg-paper border-y border-line scroll-mt-28">
+        <div className="container-page grid grid-cols-1 lg:grid-cols-12 gap-12">
           <div className="lg:col-span-5">
             <SectionHeading
               eyebrow="Einsatzprofile"
               title="In diesen Bereichen prüfen wir Bewerbungen."
               lead="Ob an Ihrem Wunschort und in Ihrem Arbeitsmodell gerade eine Stelle frei ist, klären wir persönlich mit Ihnen."
             />
-            <Reveal delay={0.2} className="mt-8">
-              <SmartImage src={IMG.team} alt="Das AHAD Team" className="rounded-3xl aspect-[4/3] shadow-soft" />
-            </Reveal>
+            <div className="mt-8">
+              <SmartImage src={IMG.team} alt="Das AHAD Team" className="rounded-3xl aspect-[4/3]" />
+            </div>
           </div>
           <div className="lg:col-span-7 flex flex-col gap-4">
             {JOB_PROFILES.map((job, i) => (
-              <Reveal key={job.title} delay={i * 0.08}>
+              <div key={job.title}>
                 <Link
                   to={`/karriere/bewerbung?profile=${job.id}`}
-                  className="group flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white rounded-2xl border border-line p-6 lg:p-7 card-lift"
+                  className="group flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white rounded-2xl border border-line p-6 lg:p-7"
                 >
                   <div>
                     <h3 className="font-headline font-bold text-lg text-navy mb-1.5">{job.title}</h3>
-                    <div className="flex flex-wrap gap-x-5 gap-y-1 text-[13px] font-semibold text-slate">
+                    <div className="flex flex-wrap gap-x-5 gap-y-1 text-caption font-semibold text-slate">
                       <span className="flex items-center gap-1.5">
                         <Clock size={13} className="text-accent" />
                         {job.employment}
@@ -146,15 +145,15 @@ export default function Karriere() {
                     </span>
                   </span>
                 </Link>
-              </Reveal>
+              </div>
             ))}
 
-            <Reveal delay={0.35}>
-              <div className="bg-navy text-white rounded-2xl p-7 grain relative overflow-hidden">
+            <div>
+              <div className="bg-navy text-white rounded-2xl p-7 relative overflow-hidden">
                 <div className="relative z-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5">
                   <div>
                     <h3 className="font-headline font-bold text-lg mb-1">Initiativbewerbung</h3>
-                    <p className="text-sm text-blue-100/80">
+                    <p className="text-sm text-ondark/80">
                       Kein passendes Profil dabei? Senden Sie uns Ihr Einsatzinteresse. Wir prüfen die Möglichkeiten, können aber keine konkrete Stelle zusagen.
                     </p>
                   </div>
@@ -163,9 +162,9 @@ export default function Karriere() {
                   </ButtonLink>
                 </div>
               </div>
-            </Reveal>
+            </div>
 
-            <Reveal delay={0.4}>
+            <div>
               <p className="text-sm text-slate leading-relaxed">
                 Konkrete, aktuell ausgeschriebene Stellen mit Einsatzort und Arbeitszeit veröffentlichen wir auch auf{' '}
                 <a
@@ -178,14 +177,14 @@ export default function Karriere() {
                 </a>
                 .
               </p>
-            </Reveal>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Aufstieg */}
-      <section className="py-20 lg:py-28 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-8">
+      <section className="section-y bg-white">
+        <div className="container-page">
           <SectionHeading
             eyebrow="Entwicklung"
             title="Vom Einstieg zur Objektleitung."
@@ -198,7 +197,7 @@ export default function Karriere() {
               { step: '02', title: 'Vorarbeiter:in', text: 'Verantwortung für Team und Qualität im Objekt, mit Schulungen und mehr Gehalt.' },
               { step: '03', title: 'Objektleitung', text: 'Eigene Objekte, Kundenkontakt und Führungsverantwortung.' },
             ].map((stage, i) => (
-              <Reveal key={stage.step} delay={i * 0.12}>
+              <div key={stage.step}>
                 <div className="relative bg-paper rounded-3xl border border-line p-8 h-full">
                   <div className="flex items-center gap-3 mb-4">
                     <span className="font-headline text-3xl font-bold text-accent">{stage.step}</span>
@@ -207,14 +206,14 @@ export default function Karriere() {
                   <h3 className="font-headline font-bold text-lg text-navy mb-2">{stage.title}</h3>
                   <p className="text-sm text-slate leading-relaxed">{stage.text}</p>
                 </div>
-              </Reveal>
+              </div>
             ))}
           </div>
-          <Reveal delay={0.3} className="text-center mt-12">
+          <div className="text-center mt-12">
             <ButtonLink to="/karriere/bewerbung" size="lg" arrow>
               Interesse in vier Schritten senden
             </ButtonLink>
-          </Reveal>
+          </div>
         </div>
       </section>
     </div>

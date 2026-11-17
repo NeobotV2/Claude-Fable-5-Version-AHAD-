@@ -11,13 +11,12 @@ const quickLinks = [
 
 export default function NotFound() {
   return (
-    <div className="relative min-h-[100svh] flex items-center bg-navy text-white overflow-hidden grain">
+    <div className="relative min-h-[100svh] flex items-center bg-navy text-white overflow-hidden">
       <SEO
         title="Seite nicht gefunden (404) | AHAD Cleaning"
         description="Diese Seite existiert nicht mehr oder wurde verschoben."
         noindex
       />
-      <div className="absolute inset-0 blueprint-grid" />
 
       <div className="relative z-10 max-w-3xl mx-auto px-4 sm:px-8 py-40 text-center">
         <span className="eyebrow text-mint justify-center mb-6">
@@ -27,7 +26,7 @@ export default function NotFound() {
         <h1 className="font-logo font-black text-[clamp(6rem,20vw,12rem)] leading-none tracking-tighter text-white/95">
           404
         </h1>
-        <p className="text-xl text-blue-100/85 font-medium mt-6 mb-10 max-w-xl mx-auto">
+        <p className="text-xl text-ondark/85 font-medium mt-6 mb-10 max-w-xl mx-auto">
           Diese Seite existiert nicht mehr oder wurde verschoben. Über die folgenden Links kommen Sie weiter.
         </p>
         <div className="flex flex-col sm:flex-row justify-center gap-4 mb-10">
@@ -46,7 +45,7 @@ export default function NotFound() {
             <Link
               key={link.href}
               to={link.href}
-              className="inline-flex items-center gap-1.5 text-[13px] font-semibold text-blue-100/75 hover:text-mint bg-white/5 hover:bg-white/10 border border-white/10 px-4 py-2 rounded-md transition-colors"
+              className="inline-flex items-center gap-1.5 text-caption font-semibold text-ondark/75 hover:text-mint bg-white/5 hover:bg-white/10 border border-white/10 px-4 py-2 rounded-md transition-colors"
             >
               {link.label}
               <ArrowRight size={13} />

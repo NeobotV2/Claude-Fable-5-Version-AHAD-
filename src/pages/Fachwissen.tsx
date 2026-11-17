@@ -14,7 +14,6 @@ import {
 import { Link } from 'react-router-dom';
 import SEO from '@/components/SEO';
 import PageHero from '@/components/PageHero';
-import Reveal from '@/components/ui/Reveal';
 import CTABand from '@/components/CTABand';
 import { SITE } from '@/lib/site';
 import {
@@ -115,9 +114,9 @@ export default function Fachwissen() {
       />
 
       <div>
-        <section aria-labelledby="aufgabe-waehlen" className="bg-white py-14 lg:py-20">
+        <section aria-labelledby="aufgabe-waehlen" className="bg-white section-y-sm">
           <div className="mx-auto max-w-7xl px-4 sm:px-8">
-            <Reveal>
+            <div>
               <div className="max-w-3xl">
                 <p className="eyebrow mb-4 text-brand">
                   <span className="h-px w-8 bg-brand/40" />
@@ -128,17 +127,17 @@ export default function Fachwissen() {
                   Wählen Sie den Themenpfad, der zu Ihrer nächsten Entscheidung passt.
                 </p>
               </div>
-            </Reveal>
+            </div>
 
             <nav aria-label="Themenpfade" className="mt-9 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
               {EDITORIAL_CLUSTER_ORDER.map((clusterKey, index) => {
                 const cluster = EDITORIAL_CLUSTERS[clusterKey];
                 const Icon = clusterIcons[clusterKey];
                 return (
-                  <Reveal key={clusterKey} delay={Math.min(index * 0.06, 0.18)}>
+                  <div key={clusterKey}>
                     <a
                       href={`#${clusterKey}`}
-                      className="group flex h-full min-h-28 items-start gap-4 rounded-2xl border border-line bg-paper p-5 transition-all hover:border-brand/40 hover:shadow-soft focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+                      className="group flex h-full min-h-28 items-start gap-4 rounded-2xl border border-line bg-paper p-5 transition-all hover:border-brand/40 hover: focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
                     >
                       <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-brand/8 text-brand">
                         <Icon size={20} aria-hidden="true" />
@@ -150,7 +149,7 @@ export default function Fachwissen() {
                         </span>
                       </span>
                     </a>
-                  </Reveal>
+                  </div>
                 );
               })}
             </nav>
@@ -160,7 +159,7 @@ export default function Fachwissen() {
         <section aria-labelledby="rollen-einstieg" className="border-y border-line bg-paper py-12">
           <div className="mx-auto max-w-7xl px-4 sm:px-8">
             <div className="grid gap-6 lg:grid-cols-[0.72fr_2.28fr] lg:items-start">
-              <Reveal>
+              <div>
                 <p className="eyebrow mb-3 text-brand">
                   <span className="h-px w-8 bg-brand/40" />
                   Nach Rolle
@@ -171,13 +170,13 @@ export default function Fachwissen() {
                 <p className="mt-3 text-sm leading-relaxed text-slate">
                   Je Rolle zwei Leitfäden für den Anfang. Die übrigen stehen in den Themenpfaden.
                 </p>
-              </Reveal>
+              </div>
 
               <div className="grid gap-4 md:grid-cols-3">
                 {rolePaths.map((role, index) => {
                   const Icon = role.icon;
                   return (
-                    <Reveal key={role.title} delay={Math.min(index * 0.07, 0.14)} className="h-full">
+                    <div key={role.title} className="h-full">
                       <section className="h-full rounded-2xl border border-line bg-white p-5" aria-labelledby={`rolle-${index}`}>
                         <div className="flex items-center gap-3">
                           <span className="grid h-9 w-9 place-items-center rounded-lg bg-navy text-mint">
@@ -203,7 +202,7 @@ export default function Fachwissen() {
                           })}
                         </ul>
                       </section>
-                    </Reveal>
+                    </div>
                   );
                 })}
               </div>
@@ -211,9 +210,9 @@ export default function Fachwissen() {
           </div>
         </section>
 
-        <section aria-labelledby="alle-leitfaeden" className="bg-white py-16 lg:py-24">
+        <section aria-labelledby="alle-leitfaeden" className="bg-white section-y">
           <div className="mx-auto max-w-7xl px-4 sm:px-8">
-            <Reveal>
+            <div>
               <div className="max-w-3xl">
                 <p className="eyebrow mb-4 text-brand">
                   <span className="h-px w-8 bg-brand/40" />
@@ -224,7 +223,7 @@ export default function Fachwissen() {
                   Jeder Beitrag behandelt eine Prüffrage und nennt am Ende zwei passende Folgethemen.
                 </p>
               </div>
-            </Reveal>
+            </div>
 
             <div className="mt-14 space-y-16">
               {EDITORIAL_CLUSTER_ORDER.map((clusterKey) => {
@@ -234,7 +233,7 @@ export default function Fachwissen() {
 
                 return (
                   <section key={clusterKey} id={clusterKey} aria-labelledby={`${clusterKey}-titel`} className="scroll-mt-28">
-                    <Reveal>
+                    <div>
                       <div className="grid gap-4 border-b border-line pb-6 md:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] md:items-end">
                         <div className="flex items-start gap-4">
                           <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-brand/8 text-brand">
@@ -246,16 +245,16 @@ export default function Fachwissen() {
                         </div>
                         <p className="text-sm leading-relaxed text-slate md:text-right">{cluster.description}</p>
                       </div>
-                    </Reveal>
+                    </div>
 
                     <div className="mt-6 grid gap-5 lg:grid-cols-2">
                       {articles.map((article, index) => (
-                        <Reveal key={article.slug} delay={Math.min(index * 0.07, 0.14)} className="h-full">
+                        <div key={article.slug} className="h-full">
                           <Link
                             to={getEditorialArticlePath(article.slug)}
-                            className="group flex h-full flex-col rounded-2xl border border-line bg-paper p-6 transition-all hover:border-brand/40 hover:shadow-soft focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand sm:p-7"
+                            className="group flex h-full flex-col rounded-2xl border border-line bg-paper p-6 transition-all hover:border-brand/40 hover: focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand sm:p-7"
                           >
-                            <div className="flex flex-wrap items-center justify-between gap-3 text-[13px] font-semibold text-brand">
+                            <div className="flex flex-wrap items-center justify-between gap-3 text-caption font-semibold text-brand">
                               <span>{article.format} · {article.topic}</span>
                               <span className="text-slate">{article.readingMinutes} Min.</span>
                             </div>
@@ -272,7 +271,7 @@ export default function Fachwissen() {
                               </span>
                             </div>
                           </Link>
-                        </Reveal>
+                        </div>
                       ))}
                     </div>
                   </section>
@@ -284,7 +283,7 @@ export default function Fachwissen() {
 
         <section aria-labelledby="redaktionsstandard" className="border-t border-line bg-paper py-14">
           <div className="mx-auto grid max-w-5xl gap-8 px-4 sm:px-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
-            <Reveal>
+            <div>
               <div>
                 <p className="eyebrow mb-3 text-brand">
                   <span className="h-px w-8 bg-brand/40" />
@@ -292,8 +291,8 @@ export default function Fachwissen() {
                 </p>
                 <h2 id="redaktionsstandard" className="font-headline text-2xl font-bold text-navy">Unser Redaktionsstandard</h2>
               </div>
-            </Reveal>
-            <Reveal delay={0.08}>
+            </div>
+            <div>
               <div className="grid gap-4 sm:grid-cols-2">
                 <div className="flex gap-3">
                   <BookOpenCheck size={20} className="mt-0.5 shrink-0 text-brand" aria-hidden="true" />
@@ -324,7 +323,7 @@ export default function Fachwissen() {
                   </p>
                 </div>
               </div>
-            </Reveal>
+            </div>
           </div>
         </section>
       </div>

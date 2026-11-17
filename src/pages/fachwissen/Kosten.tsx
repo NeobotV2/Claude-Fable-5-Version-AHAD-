@@ -94,7 +94,7 @@ export default function FachwissenKosten() {
       />
 
       {/* Auf einen Blick */}
-      <section className="border-b border-line bg-white py-12 lg:py-14">
+      <section className="border-b border-line bg-white section-y-sm">
         <div className="mx-auto max-w-7xl px-4 sm:px-8">
           <h2 className="mb-8 text-center text-2xl font-black text-navy">Drei Größen für die Kalkulation</h2>
           <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
@@ -130,7 +130,7 @@ export default function FachwissenKosten() {
       <ArticleMeta slug="was-kostet-gebaeudereinigung-stundensatz-preise" />
 
       {/* Content */}
-      <section className="bg-white py-16 lg:py-24">
+      <section className="bg-white section-y">
         <div className="mx-auto max-w-3xl px-4 sm:px-8">
           <div className="prose prose-lg max-w-none leading-relaxed text-slate">
             <h2 id="kostenbestandteile" className="scroll-mt-28 text-2xl font-black text-navy sm:text-3xl">Der Stundensatz und seine Kostenbestandteile</h2>
@@ -140,7 +140,7 @@ export default function FachwissenKosten() {
               ein konkret angebotenes Stundenentgelt abdeckt:
             </p>
             <div
-              className="mb-8 overflow-x-auto rounded-2xl border border-line shadow-soft"
+              className="mb-8 overflow-x-auto rounded-2xl border border-line"
               role="region"
               aria-label="Kostenbestandteile eines kalkulierten Stundensatzes"
               tabIndex={0}
@@ -191,7 +191,7 @@ export default function FachwissenKosten() {
               Rechenlogik zu zeigen:
             </p>
             <div
-              className="mb-8 overflow-x-auto rounded-2xl border border-line shadow-soft"
+              className="mb-8 overflow-x-auto rounded-2xl border border-line"
               role="region"
               aria-label="Hypothetische Leistungswerte und Rechenergebnisse"
               tabIndex={0}
@@ -236,7 +236,7 @@ export default function FachwissenKosten() {
             </p>
 
             <h2 id="rechenbeispiel" className="scroll-mt-28 text-2xl font-black text-navy sm:text-3xl">Rechenbeispiel: Büroetage mit 500 m²</h2>
-            <div className="mb-12 rounded-3xl border border-line bg-paper p-6 shadow-soft sm:p-8">
+            <div className="mb-12 rounded-3xl border border-line bg-paper p-6 sm:p-8">
               <p className="mb-4 text-sm">
                 Ausschließlich zur Illustration nehmen wir 420 m² Büro-/Verkehrsfläche mit 250 m²/h, 80 m²
                 Sanitär-/Küchenfläche mit 75 m²/h und einen kalkulierten Stundensatz von 34 € an. Diese Eingaben sind
@@ -288,7 +288,7 @@ export default function FachwissenKosten() {
               ))}
             </ul>
 
-            <div className="mb-12 rounded-3xl border border-line bg-paper p-6 shadow-soft sm:p-8">
+            <div className="mb-12 rounded-3xl border border-line bg-paper p-6 sm:p-8">
               <h3 className="mb-4 flex items-center gap-3 text-xl font-bold text-navy">
                 <AlertTriangle className="h-7 w-7 text-brand" aria-hidden="true" />
                 Prüffragen bei auffällig niedrigen Angeboten
@@ -336,7 +336,7 @@ export default function FachwissenKosten() {
       </section>
 
       {/* FAQ */}
-      <section className="bg-paper py-16 lg:py-24">
+      <section className="bg-paper section-y">
         <div className="mx-auto max-w-4xl px-4 sm:px-8">
           <div className="mb-12 text-center">
             <span className="mb-4 block text-sm font-bold uppercase tracking-wider text-brand">Häufige Fragen</span>

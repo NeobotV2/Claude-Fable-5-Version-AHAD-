@@ -78,7 +78,7 @@ export default function FachwissenVDI2052() {
 
       <ArticleMeta slug={SLUG} />
 
-      <section className="bg-white py-16 lg:py-24">
+      <section className="bg-white section-y">
         <div className="mx-auto max-w-4xl px-4 sm:px-8">
           <div className="prose prose-lg max-w-none leading-relaxed text-slate">
             <h2 id="vdi-einordnung" className="scroll-mt-28 font-headline text-2xl font-bold text-navy sm:text-3xl">
@@ -91,7 +91,7 @@ export default function FachwissenVDI2052() {
             </p>
 
             <div
-              className="not-prose my-10 overflow-x-auto rounded-2xl border border-line bg-white shadow-soft focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+              className="not-prose my-10 overflow-x-auto rounded-2xl border border-line bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
               role="region"
               aria-label="Einordnung der Richtlinienreihe VDI 2052"
               tabIndex={0}
@@ -151,7 +151,7 @@ export default function FachwissenVDI2052() {
             </p>
 
             <div
-              className="not-prose my-10 overflow-x-auto rounded-2xl border border-line bg-white shadow-soft focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+              className="not-prose my-10 overflow-x-auto rounded-2xl border border-line bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
               role="region"
               aria-label="Faktoren für das Prüf- und Reinigungsintervall"
               tabIndex={0}
@@ -233,7 +233,7 @@ export default function FachwissenVDI2052() {
             </p>
 
             <div
-              className="not-prose my-10 overflow-x-auto rounded-2xl border border-line bg-white shadow-soft focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+              className="not-prose my-10 overflow-x-auto rounded-2xl border border-line bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
               role="region"
               aria-label="Ablauf einer Küchenabluftreinigung"
               tabIndex={0}
@@ -284,7 +284,7 @@ export default function FachwissenVDI2052() {
                 <Wrench className="mt-0.5 h-8 w-8 shrink-0 text-mint" aria-hidden="true" />
                 <div>
                   <h3 className="font-headline text-xl font-bold">Keine stillschweigende technische Freigabe</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-blue-100 sm:text-base">
+                  <p className="mt-2 text-sm leading-relaxed text-ondark sm:text-base">
                     Ein sauberes Bauteil ist nicht automatisch technisch geprüft. Wer Montage, Dichtheit, Funktion und
                     Wiederinbetriebnahme bewertet, muss vorab im betrieblichen Freigabeprozess benannt sein.
                   </p>
@@ -303,7 +303,7 @@ export default function FachwissenVDI2052() {
             </p>
 
             <div
-              className="not-prose my-10 overflow-x-auto rounded-2xl border border-line bg-white shadow-soft focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+              className="not-prose my-10 overflow-x-auto rounded-2xl border border-line bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
               role="region"
               aria-label="Musterfelder für das Reinigungsprotokoll"
               tabIndex={0}
@@ -374,7 +374,7 @@ export default function FachwissenVDI2052() {
         </div>
       </section>
 
-      <section aria-labelledby="vdi-faq-heading" className="bg-paper py-16 lg:py-24">
+      <section aria-labelledby="vdi-faq-heading" className="bg-paper section-y">
         <div className="mx-auto max-w-4xl px-4 sm:px-8">
           <div className="mb-10 text-center">
             <span className="eyebrow justify-center text-brand">Häufige Fragen</span>

@@ -189,12 +189,12 @@ export default function StandortVS() {
       />
 
       {/* Content Section */}
-      <section className="py-20 lg:py-32 bg-white">
+      <section className="section-y bg-white">
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-20">
             <div>
-              <h2 className="text-3xl font-bold mb-8 text-gray-900">Vor Ort in Villingen-Schwenningen</h2>
-              <p className="text-lg text-gray-600 mb-8 leading-relaxed">
+              <h2 className="text-3xl font-bold mb-8 text-navy">Vor Ort in Villingen-Schwenningen</h2>
+              <p className="text-lg text-slate mb-8 leading-relaxed">
                 Wir sind ein Unternehmen aus der Region und kennen die Betriebe hier. Unsere Wege zu Ihnen sind kurz,
                 und unsere Objektleiter betreuen Sie persönlich vor Ort.
               </p>
@@ -207,23 +207,23 @@ export default function StandortVS() {
                   'Notfall-Service für Bestandskunden',
                   'Kenntnis der regionalen Wirtschaft',
                 ].map((item) => (
-                  <li key={item} className="flex items-center gap-3 text-gray-700 font-medium">
+                  <li key={item} className="flex items-center gap-3 text-slate font-medium">
                     <CheckCircle2 className="text-accent w-5 h-5 flex-shrink-0" />
                     {item}
                   </li>
                 ))}
               </ul>
             </div>
-            <div className="bg-gray-50 p-12 rounded-3xl border border-gray-100">
-              <h3 className="text-2xl font-bold mb-8 text-[#0B2341]">Kontaktdaten Zentrale</h3>
+            <div className="bg-paper p-12 rounded-3xl border border-line">
+              <h3 className="text-2xl font-bold mb-8 text-navy">Kontaktdaten Zentrale</h3>
               <div className="space-y-8">
                 <div className="flex gap-6">
-                  <div className="w-12 h-12 bg-white rounded-2xl shadow-sm flex items-center justify-center text-[#0B2341] flex-shrink-0">
+                  <div className="w-12 h-12 bg-white rounded-2xl shadow-sm flex items-center justify-center text-navy flex-shrink-0">
                     <MapPin className="w-6 h-6" />
                   </div>
                   <div>
-                    <h4 className="font-bold text-gray-900 mb-1">Adresse</h4>
-                    <p className="text-gray-600">
+                    <h4 className="font-bold text-navy mb-1">Adresse</h4>
+                    <p className="text-slate">
                       {SITE.address.street}
                       <br />
                       {SITE.address.zip} {SITE.address.city}
@@ -231,34 +231,34 @@ export default function StandortVS() {
                   </div>
                 </div>
                 <div className="flex gap-6">
-                  <div className="w-12 h-12 bg-white rounded-2xl shadow-sm flex items-center justify-center text-[#0B2341] flex-shrink-0">
+                  <div className="w-12 h-12 bg-white rounded-2xl shadow-sm flex items-center justify-center text-navy flex-shrink-0">
                     <Phone className="w-6 h-6" />
                   </div>
                   <div>
-                    <h4 className="font-bold text-gray-900 mb-1">Telefon</h4>
-                    <a href={SITE.phoneHref} className="text-gray-600 hover:text-accent transition-colors">
+                    <h4 className="font-bold text-navy mb-1">Telefon</h4>
+                    <a href={SITE.phoneHref} className="text-slate hover:text-accent transition-colors">
                       {SITE.phone}
                     </a>
                   </div>
                 </div>
                 <div className="flex gap-6">
-                  <div className="w-12 h-12 bg-white rounded-2xl shadow-sm flex items-center justify-center text-[#0B2341] flex-shrink-0">
+                  <div className="w-12 h-12 bg-white rounded-2xl shadow-sm flex items-center justify-center text-navy flex-shrink-0">
                     <Mail className="w-6 h-6" />
                   </div>
                   <div>
-                    <h4 className="font-bold text-gray-900 mb-1">E-Mail</h4>
-                    <a href={SITE.emailHref} className="text-gray-600 hover:text-accent transition-colors">
+                    <h4 className="font-bold text-navy mb-1">E-Mail</h4>
+                    <a href={SITE.emailHref} className="text-slate hover:text-accent transition-colors">
                       {SITE.email}
                     </a>
                   </div>
                 </div>
                 <div className="flex gap-6">
-                  <div className="w-12 h-12 bg-white rounded-2xl shadow-sm flex items-center justify-center text-[#0B2341] flex-shrink-0">
+                  <div className="w-12 h-12 bg-white rounded-2xl shadow-sm flex items-center justify-center text-navy flex-shrink-0">
                     <Clock className="w-6 h-6" />
                   </div>
                   <div>
-                    <h4 className="font-bold text-gray-900 mb-1">Bürozeiten</h4>
-                    <p className="text-gray-600">{SITE.hours}</p>
+                    <h4 className="font-bold text-navy mb-1">Bürozeiten</h4>
+                    <p className="text-slate">{SITE.hours}</p>
                   </div>
                 </div>
               </div>
@@ -267,8 +267,8 @@ export default function StandortVS() {
 
           {/* Leistungen vor Ort */}
           <div className="mb-20">
-            <h2 className="text-3xl font-bold mb-3 text-gray-900">Unsere Leistungen in Villingen-Schwenningen</h2>
-            <p className="text-lg text-gray-600 mb-10 max-w-3xl leading-relaxed">
+            <h2 className="text-3xl font-bold mb-3 text-navy">Unsere Leistungen in Villingen-Schwenningen</h2>
+            <p className="text-lg text-slate mb-10 max-w-3xl leading-relaxed">
               Alle Leistungen der Gebäudereinigung für Unternehmen in Villingen-Schwenningen und der Region, koordiniert
               von einer festen Objektleitung und mit dokumentierter Qualitätskontrolle.
             </p>
@@ -277,13 +277,13 @@ export default function StandortVS() {
                 <Link
                   key={s.to}
                   to={s.to}
-                  className="group block bg-gray-50 hover:bg-white border border-gray-100 hover:border-accent/30 rounded-2xl p-6 transition-all hover:shadow-soft"
+                  className="group block bg-paper hover:bg-white border border-line hover:border-accent/30 rounded-2xl p-6 transition-all hover:"
                 >
-                  <h3 className="font-bold text-lg text-[#0B2341] mb-2 flex items-start justify-between gap-2">
+                  <h3 className="font-bold text-lg text-navy mb-2 flex items-start justify-between gap-2">
                     <span>{s.title}</span>
                     <ArrowRight className="w-4 h-4 mt-1 text-accent flex-shrink-0 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
                   </h3>
-                  <p className="text-sm text-gray-600 leading-relaxed">{s.desc}</p>
+                  <p className="text-sm text-slate leading-relaxed">{s.desc}</p>
                 </Link>
               ))}
             </div>
@@ -291,8 +291,8 @@ export default function StandortVS() {
 
           {/* Branchen vor Ort */}
           <div className="mb-20">
-            <h2 className="text-3xl font-bold mb-3 text-gray-900">Branchen, die wir in Villingen-Schwenningen betreuen</h2>
-            <p className="text-lg text-gray-600 mb-10 max-w-3xl leading-relaxed">
+            <h2 className="text-3xl font-bold mb-3 text-navy">Branchen, die wir in Villingen-Schwenningen betreuen</h2>
+            <p className="text-lg text-slate mb-10 max-w-3xl leading-relaxed">
               Verwaltungsgebäude, Produktionshallen und Praxen haben unterschiedliche Anforderungen. Wir kennen die
               Branchen im Schwarzwald-Baar-Kreis und richten die Reinigung danach aus.
             </p>
@@ -301,13 +301,13 @@ export default function StandortVS() {
                 <Link
                   key={b.to}
                   to={b.to}
-                  className="group block bg-gray-50 hover:bg-white border border-gray-100 hover:border-accent/30 rounded-2xl p-6 transition-all hover:shadow-soft"
+                  className="group block bg-paper hover:bg-white border border-line hover:border-accent/30 rounded-2xl p-6 transition-all hover:"
                 >
-                  <h3 className="font-bold text-lg text-[#0B2341] mb-2 flex items-start justify-between gap-2">
+                  <h3 className="font-bold text-lg text-navy mb-2 flex items-start justify-between gap-2">
                     <span>{b.title}</span>
                     <ArrowRight className="w-4 h-4 mt-1 text-accent flex-shrink-0 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
                   </h3>
-                  <p className="text-sm text-gray-600 leading-relaxed">{b.desc}</p>
+                  <p className="text-sm text-slate leading-relaxed">{b.desc}</p>
                 </Link>
               ))}
             </div>
@@ -315,15 +315,15 @@ export default function StandortVS() {
 
           {/* Einsatzgebiete */}
           <div className="mb-20">
-            <h2 className="text-3xl font-bold mb-3 text-gray-900">Einsatzgebiete rund um Villingen-Schwenningen</h2>
-            <p className="text-lg text-gray-600 mb-8 max-w-3xl leading-relaxed">
+            <h2 className="text-3xl font-bold mb-3 text-navy">Einsatzgebiete rund um Villingen-Schwenningen</h2>
+            <p className="text-lg text-slate mb-8 max-w-3xl leading-relaxed">
               Von unserer Zentrale in Villingen-Schwenningen aus sind wir in diesen Orten im Einsatz:
             </p>
             <div className="flex flex-wrap gap-2.5">
               {SERVICE_AREAS.map((area) => (
                 <span
                   key={area}
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-gray-50 border border-gray-100 text-gray-700 text-sm font-medium"
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-paper border border-line text-slate text-sm font-medium"
                 >
                   <MapPin className="w-3.5 h-3.5 text-accent" />
                   {area}
@@ -333,11 +333,11 @@ export default function StandortVS() {
 
             <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-5">
               {UMLAND.map((area) => (
-                <div key={area.title} className="bg-white border border-gray-100 rounded-2xl p-6">
-                  <h3 className="font-bold text-lg text-[#0B2341] mb-2">Reinigungsservice in {area.title}</h3>
-                  <p className="text-sm text-gray-600 leading-relaxed">{area.text}</p>
+                <div key={area.title} className="bg-white border border-line rounded-2xl p-6">
+                  <h3 className="font-bold text-lg text-navy mb-2">Reinigungsservice in {area.title}</h3>
+                  <p className="text-sm text-slate leading-relaxed">{area.text}</p>
                   {area.link && (
-                    <Link to={area.link.to} className="inline-flex items-center gap-1.5 mt-3 text-sm font-semibold text-[#0B2341] hover:text-accent">
+                    <Link to={area.link.to} className="inline-flex items-center gap-1.5 mt-3 text-sm font-semibold text-navy hover:text-accent">
                       {area.link.label}
                       <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
                     </Link>
@@ -346,15 +346,15 @@ export default function StandortVS() {
               ))}
             </div>
 
-            <div className="mt-10 bg-gray-50 border border-gray-100 rounded-2xl p-8">
-              <h3 className="font-bold text-lg text-[#0B2341] mb-2">Industrie- &amp; Gewerbegebiete in Villingen-Schwenningen</h3>
-              <p className="text-sm text-gray-600 mb-5 leading-relaxed">
+            <div className="mt-10 bg-paper border border-line rounded-2xl p-8">
+              <h3 className="font-bold text-lg text-navy mb-2">Industrie- &amp; Gewerbegebiete in Villingen-Schwenningen</h3>
+              <p className="text-sm text-slate mb-5 leading-relaxed">
                 Besonders häufig arbeiten wir für Produktion, Logistik und Verwaltung in den Gewerbe- und
                 Industriegebieten von VS. Von unserer Zentrale aus sind wir dort schnell vor Ort:
               </p>
               <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-3">
                 {INDUSTRIE_GEBIETE.map((g) => (
-                  <li key={g} className="flex items-start gap-2.5 text-gray-700 text-sm font-medium">
+                  <li key={g} className="flex items-start gap-2.5 text-slate text-sm font-medium">
                     <CheckCircle2 className="text-accent w-4 h-4 flex-shrink-0 mt-0.5" />
                     {g}
                   </li>
@@ -364,23 +364,23 @@ export default function StandortVS() {
           </div>
 
           {/* Warum AHAD in VS */}
-          <div className="bg-[#0B2341] p-12 lg:p-16 text-white relative overflow-hidden mb-20">
+          <div className="bg-navy p-12 lg:p-16 text-white relative overflow-hidden mb-20">
             <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -mr-32 -mt-32"></div>
             <div className="relative z-10">
               <div className="max-w-3xl">
                 <h2 className="text-3xl font-bold mb-6">Warum AHAD Cleaning in Villingen-Schwenningen?</h2>
-                <p className="text-xl text-blue-100 mb-8 leading-relaxed">
+                <p className="text-xl text-ondark mb-8 leading-relaxed">
                   In Villingen-Schwenningen sitzt unsere Unternehmenszentrale. Von hier aus steuern wir die
                   Qualitätssicherung für den gesamten süddeutschen Raum. Wir sind in der Region Schwarzwald-Baar zu
                   Hause, und für jedes Objekt ist klar geregelt, wer zuständig ist.
                 </p>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="flex items-start gap-3">
-                    <CheckCircle2 className="text-[#0D6B38] w-6 h-6 flex-shrink-0 mt-1" />
+                    <CheckCircle2 className="text-accent w-6 h-6 flex-shrink-0 mt-1" />
                     <p className="font-medium">Unternehmenszentrale vor Ort</p>
                   </div>
                   <div className="flex items-start gap-3">
-                    <CheckCircle2 className="text-[#0D6B38] w-6 h-6 flex-shrink-0 mt-1" />
+                    <CheckCircle2 className="text-accent w-6 h-6 flex-shrink-0 mt-1" />
                     <p className="font-medium">Kurze Wege zu Ihrem Objekt</p>
                   </div>
                 </div>
@@ -390,7 +390,7 @@ export default function StandortVS() {
 
           {/* Lokale FAQ */}
           <div className="max-w-3xl">
-            <h2 className="text-3xl font-bold mb-8 text-gray-900">
+            <h2 className="text-3xl font-bold mb-8 text-navy">
               Häufige Fragen zur Gebäudereinigung in Villingen-Schwenningen
             </h2>
             <Accordion items={LOCAL_FAQS} />

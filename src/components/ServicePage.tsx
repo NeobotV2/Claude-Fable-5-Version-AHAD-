@@ -3,8 +3,10 @@ import { ArrowRight, Phone } from 'lucide-react';
 import SEO from '@/components/SEO';
 import PageHero from '@/components/PageHero';
 import SectionHeading from '@/components/ui/SectionHeading';
-import ButtonLink from '@/components/ui/Button';
+import ButtonLink, { buttonClasses } from '@/components/ui/Button';
 import SmartImage from '@/components/ui/SmartImage';
+import LinkList from '@/components/ui/LinkList';
+import RuleColumns from '@/components/ui/RuleColumns';
 import Accordion, { faqSchemaFrom } from '@/components/ui/Accordion';
 import CTABand from '@/components/CTABand';
 import { SERVICES, type ServiceData } from '@/data/services';
@@ -95,13 +97,13 @@ export default function ServicePage({ service }: { service: ServiceData }) {
       {/* Express-Banner: Telefon zuerst — für kurzfristige/dringende Einsätze */}
       {service.expressBanner && (
         <section className="bg-accent text-white">
-          <div className="max-w-7xl mx-auto px-4 sm:px-8 py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-            <p className="font-semibold text-[15px]">
+          <div className="container-page py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <p className="font-semibold text-body-sm">
               Kurzfristige oder dringende Einsätze: Rufen Sie direkt an, wir disponieren noch heute.
             </p>
             <a
               href={SITE.phoneHref}
-              className="inline-flex items-center justify-center gap-2 bg-white text-navy px-5 py-2.5 rounded-md font-semibold hover:bg-mint transition-colors flex-shrink-0"
+              className={buttonClasses('white', 'md', 'flex-shrink-0')}
             >
               <Phone size={16} aria-hidden="true" />
               {SITE.phone}
@@ -114,11 +116,11 @@ export default function ServicePage({ service }: { service: ServiceData }) {
           (sonst bliebe ein leerer weißer Streifen mit Trennlinie). */}
       {PROMISES.length > 0 && (
         <section className="bg-white border-b border-line">
-          <ul className="max-w-7xl mx-auto px-4 sm:px-8 grid grid-cols-1 sm:grid-cols-3 sm:divide-x divide-line">
+          <ul className="container-page grid grid-cols-1 sm:grid-cols-3 sm:divide-x divide-line">
             {PROMISES.map((promise) => (
               <li key={promise.label} className="py-5 sm:py-6 flex items-baseline gap-3 sm:px-8 sm:first:pl-0">
                 <span className="font-accent text-3xl font-semibold text-navy tabular-nums">{promise.value}</span>
-                <span className="text-[15px] text-slate leading-snug">{promise.label}</span>
+                <span className="text-body-sm text-slate leading-snug">{promise.label}</span>
               </li>
             ))}
           </ul>
@@ -126,23 +128,16 @@ export default function ServicePage({ service }: { service: ServiceData }) {
       )}
 
       {/* Schwerpunkte: drei Spalten mit Haarlinie, ohne Karten und Icons */}
-      <section className="py-20 lg:py-28 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-8">
+      <section className="section-y bg-white">
+        <div className="container-page">
           <SectionHeading eyebrow="Schwerpunkte" title={`${service.name} mit AHAD`} className="mb-12" />
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-x-10 gap-y-10">
-            {service.highlights.map((highlight) => (
-              <div key={highlight.title} className="border-t border-navy pt-5">
-                <h3 className="text-xl font-bold text-navy mb-2.5">{highlight.title}</h3>
-                <p className="text-slate leading-relaxed">{highlight.text}</p>
-              </div>
-            ))}
-          </div>
+          <RuleColumns items={service.highlights.map(({ title, text }) => ({ title, text }))} />
         </div>
       </section>
 
       {/* Leistungsumfang */}
-      <section className="py-20 lg:py-28 bg-paper border-y border-line">
-        <div className="max-w-7xl mx-auto px-4 sm:px-8 grid grid-cols-1 lg:grid-cols-2 gap-x-16 gap-y-12 items-start">
+      <section className="section-y bg-paper border-y border-line">
+        <div className="container-page grid grid-cols-1 lg:grid-cols-2 gap-x-16 gap-y-12 items-start">
           <div>
             <SectionHeading eyebrow="Leistungsumfang" title={service.scopeTitle} lead={service.scopeIntro} />
             <ul className="mt-9 border-t border-navy">
@@ -153,7 +148,7 @@ export default function ServicePage({ service }: { service: ServiceData }) {
               ))}
             </ul>
             {service.detailLinks && (
-              <p className="mt-6 text-[15px] text-slate">
+              <p className="mt-6 text-body-sm text-slate">
                 Mehr dazu:{' '}
                 {service.detailLinks.map((link, i) => (
                   <span key={link.to}>
@@ -182,7 +177,7 @@ export default function ServicePage({ service }: { service: ServiceData }) {
               sizes="(min-width:1024px) 50vw, 100vw"
               className="aspect-[4/3]"
             />
-            <figcaption className="mt-4 border-l-2 border-accent pl-4 text-[15px] text-slate leading-relaxed">
+            <figcaption className="mt-4 border-l-2 border-accent pl-4 text-body-sm text-slate leading-relaxed">
               <span className="font-semibold text-navy">Feste Objektleitung.</span> Eine feste Ansprechperson, die Ihr
               Objekt kennt und für die Ausführung verantwortlich ist.
             </figcaption>
@@ -191,8 +186,8 @@ export default function ServicePage({ service }: { service: ServiceData }) {
       </section>
 
       {/* FAQ */}
-      <section className="py-20 lg:py-28 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-8 grid grid-cols-1 lg:grid-cols-12 gap-x-14 gap-y-10">
+      <section className="section-y bg-white">
+        <div className="container-page grid grid-cols-1 lg:grid-cols-12 gap-x-14 gap-y-10">
           <div className="lg:col-span-4">
             <SectionHeading eyebrow="Häufige Fragen" title={`Fragen und Antworten: ${service.name}`} />
             <a href={SITE.phoneHref} className="text-link mt-7">
@@ -207,8 +202,8 @@ export default function ServicePage({ service }: { service: ServiceData }) {
       </section>
 
       {/* Verwandte Leistungen */}
-      <section className="py-20 lg:py-28 bg-white border-t border-line">
-        <div className="max-w-7xl mx-auto px-4 sm:px-8">
+      <section className="section-y bg-white border-t border-line">
+        <div className="container-page">
           <div className="flex items-end justify-between gap-6 mb-10">
             <h2 className="display-md text-navy">Verwandte Leistungen</h2>
             <Link to="/leistungen" className="text-link hidden sm:inline-flex flex-shrink-0">
@@ -231,25 +226,13 @@ export default function ServicePage({ service }: { service: ServiceData }) {
 
       {/* Passende Fachwissen-Artikel — interne Verlinkung Leistung -> Wissensbereich */}
       {articles.length > 0 && (
-        <section className="py-14 lg:py-16 bg-paper border-t border-line">
-          <div className="max-w-7xl mx-auto px-4 sm:px-8">
-            <h2 className="pb-4 border-b border-navy font-semibold text-navy">Fachbeiträge zum Thema</h2>
-            <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-10">
-              {articles.map((a) => (
-                <li key={a.to} className="border-b border-line">
-                  <Link to={a.to} className="group flex items-center justify-between gap-4 py-4">
-                    <span className="font-medium text-navy leading-snug group-hover:text-accent transition-colors">
-                      {a.title}
-                    </span>
-                    <ArrowRight
-                      size={16}
-                      className="flex-shrink-0 text-navy/40 group-hover:text-accent transition-colors"
-                      aria-hidden="true"
-                    />
-                  </Link>
-                </li>
-              ))}
-            </ul>
+        <section className="section-y-sm bg-paper border-t border-line">
+          <div className="container-page">
+            <LinkList
+              heading="Fachbeiträge zum Thema"
+              cols={2}
+              items={articles.map((article) => ({ to: article.to, title: article.title }))}
+            />
           </div>
         </section>
       )}

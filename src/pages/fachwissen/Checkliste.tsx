@@ -1,5 +1,6 @@
-import { Printer, ClipboardCheck, ArrowRight } from 'lucide-react';
+import { Printer, ClipboardCheck } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import ButtonLink, { Button } from '@/components/ui/Button';
 import SEO from '@/components/SEO';
 import PageHero from '@/components/PageHero';
 import CTABand from '@/components/CTABand';
@@ -98,7 +99,7 @@ export default function FachwissenCheckliste() {
 
       <ArticleMeta slug="checkliste-reinigungsangebot" className="print:mt-8" />
 
-      <section className="py-14 lg:py-20 bg-white">
+      <section className="section-y-sm bg-white">
         <div className="max-w-3xl mx-auto px-4">
           {/* Druck-Aktion */}
           <div className="print:hidden flex flex-col sm:flex-row items-center justify-between gap-4 bg-paper border border-line rounded-2xl p-5 mb-10">
@@ -106,14 +107,10 @@ export default function FachwissenCheckliste() {
               <strong className="text-navy">Tipp:</strong> Über „Drucken“ können Sie die Checkliste auch direkt{' '}
               <strong className="text-navy">als PDF speichern</strong>.
             </p>
-            <button
-              type="button"
-              onClick={() => window.print()}
-              className="inline-flex items-center gap-2 bg-navy text-white px-6 py-3 rounded-xl font-bold hover:bg-navy-800 transition-all shadow-soft flex-shrink-0"
-            >
-              <Printer size={17} />
+            <Button variant="dark" onClick={() => window.print()} className="flex-shrink-0">
+              <Printer size={17} aria-hidden="true" />
               Checkliste drucken
-            </button>
+            </Button>
           </div>
 
           <section aria-labelledby="checkliste-kopfdaten" className="mb-10 rounded-2xl border border-line bg-paper p-6 print:break-inside-avoid">
@@ -151,7 +148,7 @@ export default function FachwissenCheckliste() {
 
           <div className="space-y-8">
             {GRUPPEN.map((g) => (
-              <div key={g.titel} className="border border-line rounded-2xl p-6 print:border-gray-300 print:break-inside-avoid">
+              <div key={g.titel} className="border border-line rounded-2xl p-6 print:border-navy/30 print:break-inside-avoid">
                 <h2 id={g.id} className="scroll-mt-28 font-headline text-lg font-bold text-navy mb-4 flex items-center gap-2.5">
                   <ClipboardCheck size={19} className="text-accent print:hidden" aria-hidden="true" />
                   {g.titel}
@@ -160,7 +157,7 @@ export default function FachwissenCheckliste() {
                   {g.punkte.map((p, index) => {
                     const inputId = `check-${g.id}-${index}`;
                     return (
-                      <li key={p} className="text-[15px] leading-relaxed text-slate">
+                      <li key={p} className="text-body-sm leading-relaxed text-slate">
                         <label htmlFor={inputId} className="flex cursor-pointer items-start gap-3 print:cursor-default">
                           <input
                             id={inputId}
@@ -187,7 +184,7 @@ export default function FachwissenCheckliste() {
               Optionen und Ausschlüsse gehören in die Spalte „Offene Punkte“.
             </p>
             <div
-              className="overflow-x-auto rounded-2xl border border-line shadow-soft print:overflow-visible print:shadow-none"
+              className="overflow-x-auto rounded-2xl border border-line print:overflow-visible print:shadow-none"
               role="region"
               aria-label="Bietermatrix zum Angebotsvergleich"
               tabIndex={0}
@@ -259,7 +256,7 @@ export default function FachwissenCheckliste() {
 
           <div className="print:hidden mt-12 bg-navy rounded-3xl p-8 text-white">
             <h2 className="font-headline text-xl font-bold mb-2">Von der Checkliste zur Anfrage</h2>
-            <p className="text-blue-100/90 text-sm leading-relaxed mb-6">
+            <p className="text-ondark/90 text-sm leading-relaxed mb-6">
               Übertragen Sie die geprüften Objektdaten und Leistungsanforderungen in die Anfrage. Wie ein
               Leistungsverzeichnis aufgebaut wird, zeigt unser{' '}
               <Link to="/fachwissen/leistungsverzeichnis-gebaeudereinigung-erstellen" className="underline font-semibold hover:text-mint">
@@ -271,13 +268,9 @@ export default function FachwissenCheckliste() {
               </Link>
               .
             </p>
-            <Link
-              to="/angebot"
-              className="inline-flex items-center gap-2 bg-accent text-white px-6 py-3.5 rounded-xl font-bold hover:bg-accent-dark transition-all shadow-glow"
-            >
+            <ButtonLink to="/angebot" size="lg" arrow>
               Kostenlose Besichtigung anfragen
-              <ArrowRight size={17} />
-            </Link>
+            </ButtonLink>
           </div>
 
           {/* Print-Fuß */}

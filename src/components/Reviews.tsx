@@ -10,7 +10,7 @@ function Stars({ rating }: { rating: number }) {
   return (
     <div className="flex gap-0.5" role="img" aria-label={`${rating} von 5 Sternen`}>
       {[1, 2, 3, 4, 5].map((i) => (
-        <Star key={i} size={15} className={i <= rating ? 'fill-amber-500 text-amber-500' : 'text-gray-300'} />
+        <Star key={i} size={15} className={i <= rating ? 'fill-amber-500 text-amber-500' : 'text-navy/20'} />
       ))}
     </div>
   );
@@ -25,7 +25,7 @@ function ReviewItem({ review }: { review: Review }) {
       <Stars rating={review.rating} />
       <div className="mt-4 flex-grow">
         {/* Der volle Wortlaut steht immer im DOM; eingeklappt wird nur optisch. */}
-        <blockquote className={`text-[17px] text-ink leading-relaxed ${long && !open ? 'line-clamp-6' : ''}`}>
+        <blockquote className={`text-lead text-ink leading-relaxed ${long && !open ? 'line-clamp-6' : ''}`}>
           „{review.text}“
         </blockquote>
         {long && (
@@ -39,7 +39,7 @@ function ReviewItem({ review }: { review: Review }) {
           </button>
         )}
       </div>
-      <figcaption className="mt-6 text-[15px]">
+      <figcaption className="mt-6 text-body-sm">
         <span className="font-semibold text-navy">{review.author}</span>
         <span className="text-slate">
           {' · '}
@@ -70,8 +70,8 @@ export default function Reviews({ exclude = [], limit }: ReviewsProps) {
   const columns = shown.length <= 2 ? 'md:grid-cols-2' : 'md:grid-cols-2 lg:grid-cols-3';
 
   return (
-    <section className="py-20 lg:py-28 bg-paper border-t border-line">
-      <div className="max-w-7xl mx-auto px-4 sm:px-8">
+    <section className="section-y bg-paper border-t border-line">
+      <div className="container-page">
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-12">
           <SectionHeading
             eyebrow={REVIEWS_SOURCE_URL ? 'Google-Bewertungen' : 'Kundenstimmen'}

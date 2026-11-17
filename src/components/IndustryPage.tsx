@@ -1,9 +1,10 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight } from 'lucide-react';
 import SEO from '@/components/SEO';
 import PageHero from '@/components/PageHero';
 import SectionHeading from '@/components/ui/SectionHeading';
 import ButtonLink from '@/components/ui/Button';
+import LinkList from '@/components/ui/LinkList';
+import RuleColumns from '@/components/ui/RuleColumns';
 import Accordion, { faqSchemaFrom } from '@/components/ui/Accordion';
 import CTABand from '@/components/CTABand';
 import { BRANCHEN, type BrancheData } from '@/data/branchen';
@@ -49,30 +50,20 @@ export default function IndustryPage({ branche }: { branche: BrancheData }) {
       />
 
       {/* Ausgangslage: drei Probleme als nummerierte Spalten */}
-      <section className="py-20 lg:py-28 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-8">
+      <section className="section-y bg-white">
+        <div className="container-page">
           <SectionHeading
             eyebrow="Ausgangslage"
             title="Drei Probleme, die in dieser Branche häufig auftreten."
             className="mb-12 max-w-3xl"
           />
-          <ol className="grid grid-cols-1 md:grid-cols-3 gap-x-10 gap-y-10">
-            {branche.pains.map((pain, i) => (
-              <li key={pain.title} className="border-t border-navy pt-5">
-                <span className="block font-accent font-semibold text-accent mb-3" aria-hidden="true">
-                  {i + 1}
-                </span>
-                <h3 className="text-xl font-bold text-navy mb-2.5">{pain.title}</h3>
-                <p className="text-slate leading-relaxed">{pain.text}</p>
-              </li>
-            ))}
-          </ol>
+          <RuleColumns ordered items={branche.pains.map(({ title, text }) => ({ title, text }))} />
         </div>
       </section>
 
       {/* Unser Vorgehen */}
-      <section className="py-20 lg:py-28 bg-navy text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-8 grid grid-cols-1 lg:grid-cols-12 gap-x-14 gap-y-10">
+      <section className="section-y bg-navy text-white">
+        <div className="container-page grid grid-cols-1 lg:grid-cols-12 gap-x-14 gap-y-10">
           <div className="lg:col-span-5">
             <p className="eyebrow text-mint mb-3">Unser Vorgehen</p>
             <h2 className="display-lg text-white">So lösen wir das für {branche.name}</h2>
@@ -82,7 +73,7 @@ export default function IndustryPage({ branche }: { branche: BrancheData }) {
           </div>
           <ul className="lg:col-span-7 border-t border-white/30">
             {branche.solutions.map((solution) => (
-              <li key={solution} className="py-4 border-b border-white/15 text-lg font-medium text-blue-50">
+              <li key={solution} className="py-4 border-b border-white/15 text-lg font-medium text-ondark">
                 {solution}
               </li>
             ))}
@@ -91,35 +82,24 @@ export default function IndustryPage({ branche }: { branche: BrancheData }) {
       </section>
 
       {/* Passende Leistungen */}
-      <section className="py-20 lg:py-28 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-8">
+      <section className="section-y bg-white">
+        <div className="container-page">
           <SectionHeading
             eyebrow="Passende Leistungen"
             title={`Typische Leistungspakete für ${branche.name}`}
             className="mb-10"
           />
-          <ul className="grid grid-cols-1 sm:grid-cols-3 gap-x-10 border-t border-navy">
-            {branche.services.map((service) => (
-              <li key={service.path} className="border-b border-line">
-                <Link to={service.path} className="group flex items-center justify-between gap-4 py-5">
-                  <span className="text-lg font-bold text-navy group-hover:text-accent transition-colors">
-                    {service.name}
-                  </span>
-                  <ArrowRight
-                    size={17}
-                    className="flex-shrink-0 text-navy/40 group-hover:text-accent transition-colors"
-                    aria-hidden="true"
-                  />
-                </Link>
-              </li>
-            ))}
-          </ul>
+          <LinkList
+            large
+            cols={3}
+            items={branche.services.map((service) => ({ to: service.path, title: service.name }))}
+          />
         </div>
       </section>
 
       {/* FAQ */}
-      <section className="py-20 lg:py-28 bg-paper border-t border-line">
-        <div className="max-w-7xl mx-auto px-4 sm:px-8 grid grid-cols-1 lg:grid-cols-12 gap-x-14 gap-y-10">
+      <section className="section-y bg-paper border-t border-line">
+        <div className="container-page grid grid-cols-1 lg:grid-cols-12 gap-x-14 gap-y-10">
           <div className="lg:col-span-4">
             <SectionHeading eyebrow="Häufige Fragen" title="Was Entscheider uns fragen" />
           </div>
@@ -131,7 +111,7 @@ export default function IndustryPage({ branche }: { branche: BrancheData }) {
 
       {/* Weitere Branchen */}
       <section className="py-10 bg-white border-t border-line">
-        <p className="max-w-7xl mx-auto px-4 sm:px-8 flex flex-wrap items-baseline gap-x-6 gap-y-2 text-[15px]">
+        <p className="container-page flex flex-wrap items-baseline gap-x-6 gap-y-2 text-body-sm">
           <span className="font-semibold text-navy">Weitere Branchen:</span>
           {others.map((other) => (
             <Link key={other.slug} to={other.path} className="py-2.5 -my-2.5 text-accent font-medium hover:underline underline-offset-4">

@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, CheckCircle2 } from 'lucide-react';
 import SEO from '@/components/SEO';
 import PageHero from '@/components/PageHero';
-import Reveal from '@/components/ui/Reveal';
 import SectionHeading from '@/components/ui/SectionHeading';
 import SmartImage from '@/components/ui/SmartImage';
 import Accordion, { faqSchemaFrom, type FAQItem } from '@/components/ui/Accordion';
@@ -54,14 +53,14 @@ export default function Leistungen() {
       />
 
       {/* Leistungs-Liste: editorial, nummeriert */}
-      <section className="py-20 lg:py-32 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-8">
+      <section className="section-y bg-white">
+        <div className="container-page">
           <div className="space-y-5">
             {SERVICES.map((service, i) => (
-              <Reveal key={service.slug} delay={Math.min(i * 0.06, 0.2)}>
+              <div key={service.slug}>
                 <Link
                   to={service.path}
-                  className="group grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 items-center bg-paper hover:bg-white border border-line rounded-3xl p-6 lg:p-8 card-lift"
+                  className="group grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 items-center bg-paper hover:bg-white border border-line rounded-3xl p-6 lg:p-8"
                 >
                   <div className="lg:col-span-4 order-2 lg:order-1 flex items-start gap-5">
                     <span className="font-headline text-4xl font-bold text-navy/70 group-hover:text-accent transition-colors leading-none pt-1" aria-hidden>
@@ -74,10 +73,10 @@ export default function Leistungen() {
                   </div>
 
                   <div className="lg:col-span-4 order-3 lg:order-2">
-                    <p className="text-slate text-[15px] leading-relaxed">{service.heroLead.split('—')[0].split(':')[0]}.</p>
+                    <p className="text-slate text-body-sm leading-relaxed">{service.heroLead.split('—')[0].split(':')[0]}.</p>
                     <ul className="mt-4 space-y-1.5">
                       {service.scope.slice(0, 2).map((item) => (
-                        <li key={item} className="flex items-center gap-2 text-[13.5px] font-semibold text-navy">
+                        <li key={item} className="flex items-center gap-2 text-caption font-semibold text-navy">
                           <CheckCircle2 size={14} className="text-accent flex-shrink-0" />
                           {item}
                         </li>
@@ -100,14 +99,14 @@ export default function Leistungen() {
                     </span>
                   </div>
                 </Link>
-              </Reveal>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
       {/* FAQ */}
-      <section className="py-20 lg:py-28 bg-paper border-t border-line">
+      <section className="section-y bg-paper border-t border-line">
         <div className="max-w-4xl mx-auto px-4 sm:px-8">
           <SectionHeading eyebrow="FAQ" title="Häufige Fragen zu unseren Leistungen" align="center" className="mb-12" />
           <Accordion items={faqs} />

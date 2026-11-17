@@ -1,6 +1,7 @@
 import SEO from '@/components/SEO';
 import PageHero from '@/components/PageHero';
 import SectionHeading from '@/components/ui/SectionHeading';
+import FactRow from '@/components/ui/FactRow';
 import ButtonLink from '@/components/ui/Button';
 import CTABand from '@/components/CTABand';
 import { IMG } from '@/lib/images';
@@ -77,8 +78,8 @@ export default function AHADSystem() {
       />
 
       {/* Die 4 Schritte — je Buchstabe der Wortmarke eine Zeile */}
-      <section className="py-20 lg:py-28 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-8">
+      <section className="section-y bg-white">
+        <div className="container-page">
           <SectionHeading eyebrow="Der Kreislauf" title="Die vier Schritte im Einzelnen." className="mb-12" />
 
           <ol className="border-t-2 border-navy">
@@ -106,7 +107,7 @@ export default function AHADSystem() {
                   <p className="pb-2.5 border-b border-navy text-sm font-semibold text-navy">Das bekommen Sie</p>
                   <ul>
                     {step.deliverables.map((deliverable) => (
-                      <li key={deliverable} className="py-2.5 border-b border-line text-[15px] font-medium text-navy">
+                      <li key={deliverable} className="py-2.5 border-b border-line text-body-sm font-medium text-navy">
                         {deliverable}
                       </li>
                     ))}
@@ -119,22 +120,17 @@ export default function AHADSystem() {
       </section>
 
       {/* Ergebnis */}
-      <section className="py-20 lg:py-28 bg-paper border-t border-line">
-        <div className="max-w-7xl mx-auto px-4 sm:px-8">
+      <section className="section-y bg-paper border-t border-line">
+        <div className="container-page">
           <SectionHeading
             eyebrow="Im Alltag"
             title="Was sich für Sie ändert."
             className="mb-12"
           />
-          <ul className="grid grid-cols-1 md:grid-cols-3 border-y border-line md:divide-x divide-line">
-            {outcomes.map((outcome) => (
-              <li key={outcome.label} className="py-8 md:px-8 md:first:pl-0 border-b border-line md:border-b-0 last:border-b-0">
-                <span className="block font-accent text-5xl leading-none font-semibold text-navy">{outcome.value}</span>
-                <span className="block mt-3 text-[15px] font-semibold text-accent">{outcome.label}</span>
-                <p className="mt-2 text-[15px] text-slate leading-relaxed">{outcome.text}</p>
-              </li>
-            ))}
-          </ul>
+          <FactRow
+            framed
+            items={outcomes.map((outcome) => ({ value: outcome.value, label: outcome.label, sub: outcome.text }))}
+          />
           <ButtonLink to="/referenzen" variant="outline" arrow className="mt-10">
             Referenzen ansehen
           </ButtonLink>
@@ -142,8 +138,8 @@ export default function AHADSystem() {
       </section>
 
       {/* Systemvergleich */}
-      <section className="py-20 lg:py-28 bg-white border-t border-line">
-        <div className="max-w-7xl mx-auto px-4 sm:px-8">
+      <section className="section-y bg-white border-t border-line">
+        <div className="container-page">
           <SectionHeading
             eyebrow="Vergleich"
             title="Reinigung mit und ohne festes System."

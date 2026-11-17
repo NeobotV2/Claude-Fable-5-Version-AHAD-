@@ -3,7 +3,6 @@ import { ArrowRight, BadgeCheck, CalendarDays, Phone, Users } from 'lucide-react
 import SEO from '@/components/SEO';
 import PageHero from '@/components/PageHero';
 import CTABand from '@/components/CTABand';
-import Reveal from '@/components/ui/Reveal';
 import { SITE } from '@/lib/site';
 import { buildNewsSchema, formatNewsDate, requireNewsItem } from '@/data/news';
 
@@ -66,7 +65,7 @@ export default function AktuellesGuentzelUebernahme() {
         cta={{ label: 'Ansprechpartner kontaktieren', to: '/kontakt' }}
       />
 
-      <article className="py-16 lg:py-24 bg-white">
+      <article className="section-y bg-white">
         <div className="max-w-3xl mx-auto px-4 sm:px-8">
           <p className="text-sm font-semibold text-slate mb-8">
             <time dateTime={ITEM.datePublished}>{formatNewsDate(ITEM.datePublished)}</time>
@@ -80,7 +79,7 @@ export default function AktuellesGuentzelUebernahme() {
             erworben, die Übergabe erfolgte zum 1. September 2026.
           </p>
 
-          <p className="text-[17px] leading-relaxed text-slate mb-6">
+          <p className="text-lead leading-relaxed text-slate mb-6">
             Damit ist die Zukunft des Industrie- und Gebäudereinigungsspezialisten gesichert. Alle rund 25
             Arbeitsplätze bleiben erhalten. Güntzel Objekt-Service betreut seit über 20 Jahren Kunden in
             Villingen-Schwenningen, Bad Dürrheim, Donaueschingen, Rottweil, Tuttlingen, Tübingen, Albstadt,
@@ -106,19 +105,19 @@ export default function AktuellesGuentzelUebernahme() {
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 mb-12">
             {FUER_KUNDEN.map((punkt, index) => (
-              <Reveal key={punkt.title} delay={Math.min(index * 0.06, 0.2)} className="h-full">
+              <div key={punkt.title} className="h-full">
                 <div className="h-full bg-paper rounded-2xl border border-line p-6">
                   <punkt.icon className="text-accent mb-3" size={22} aria-hidden="true" />
-                  <h3 className="font-bold text-navy text-[15px] mb-2">{punkt.title}</h3>
+                  <h3 className="font-bold text-navy text-body-sm mb-2">{punkt.title}</h3>
                   <p className="text-sm leading-relaxed text-slate">{punkt.text}</p>
                 </div>
-              </Reveal>
+              </div>
             ))}
           </div>
 
           <div className="bg-navy text-white rounded-3xl p-7 sm:p-9 mb-12">
             <h2 className="font-headline text-xl font-bold mb-3">Zur Abrechnung</h2>
-            <p className="text-[15px] leading-relaxed text-blue-50">
+            <p className="text-body-sm leading-relaxed text-ondark">
               Leistungen bis einschließlich 31. August 2026 werden durch die Insolvenzverwaltung
               abgerechnet. Zahlungen für diesen Zeitraum richten Sie bitte weiterhin an die Ihnen bekannte
               Bankverbindung der Insolvenzverwaltung. Leistungen ab dem 1. September 2026 rechnet die AHAD
@@ -132,15 +131,15 @@ export default function AktuellesGuentzelUebernahme() {
               <li key={schritt.datum} className="flex gap-4">
                 <span className="flex-shrink-0 mt-1.5 w-2.5 h-2.5 rounded-full bg-accent" aria-hidden="true" />
                 <div>
-                  <p className="font-bold text-navy text-[15px]">{schritt.datum}</p>
-                  <p className="text-[15px] leading-relaxed text-slate mt-0.5">{schritt.text}</p>
+                  <p className="font-bold text-navy text-body-sm">{schritt.datum}</p>
+                  <p className="text-body-sm leading-relaxed text-slate mt-0.5">{schritt.text}</p>
                 </div>
               </li>
             ))}
           </ol>
 
           <figure className="my-10 border-l-4 border-line pl-6">
-            <blockquote className="text-[17px] leading-relaxed text-navy">
+            <blockquote className="text-lead leading-relaxed text-navy">
               „Ich freue mich sehr darüber, dass wir mit der AHAD Cleaning Company einen Übernehmer aus der
               Branche gefunden haben. Die Mitarbeitenden können nun nach einer herausfordernden Zeit wieder
               positiv in die Zukunft schauen.“
@@ -155,13 +154,13 @@ export default function AktuellesGuentzelUebernahme() {
             <h2 className="font-headline text-xl font-bold text-navy mb-2">
               Ihr Ansprechpartner für Güntzel-Objekte
             </h2>
-            <p className="text-[15px] text-slate leading-relaxed mb-5">
+            <p className="text-body-sm text-slate leading-relaxed mb-5">
               Fragen zur Fortführung, zur Vertragsübernahme oder zur Abrechnung beantwortet Ihnen
               persönlich:
             </p>
             <p className="font-bold text-navy">Muhammet Ali Yerlikaya</p>
             <p className="text-sm text-slate mb-4">Prokurist und Vertriebsleiter</p>
-            <ul className="space-y-2 text-[15px]">
+            <ul className="space-y-2 text-body-sm">
               <li className="flex items-center gap-2.5">
                 <Phone size={16} className="text-accent flex-shrink-0" aria-hidden="true" />
                 <a href="tel:+491743926183" className="font-bold text-brand hover:underline">
@@ -185,7 +184,7 @@ export default function AktuellesGuentzelUebernahme() {
           </div>
 
           <div className="mt-12 pt-8 border-t border-line">
-            <h2 className="text-[13px] font-bold uppercase tracking-wider text-slate mb-3">Quellen</h2>
+            <h2 className="text-caption font-bold uppercase tracking-wider text-slate mb-3">Quellen</h2>
             <ul className="space-y-2 text-sm text-slate">
               {ITEM.sources.map((quelle) => (
                 <li key={quelle.title}>

@@ -11,11 +11,11 @@ export default function TrustBand() {
 
   return (
     <section className="bg-white border-b border-line" aria-label="Zertifikate und Absicherung">
-      <ul className="max-w-7xl mx-auto px-4 sm:px-8 grid grid-cols-2 lg:grid-cols-4 lg:divide-x divide-line">
+      <ul className="container-page grid grid-cols-2 lg:grid-cols-4 lg:divide-x divide-line">
         {TRUST_BADGES.map((b) => (
           <li key={b.label} className="py-5 pr-4 lg:px-8 lg:first:pl-0">
-            <span className="block text-[15px] font-semibold text-navy leading-snug">{b.label}</span>
-            <span className="block text-[13px] text-slate mt-0.5">{b.sub}</span>
+            <span className="block text-body-sm font-semibold text-navy leading-snug">{b.label}</span>
+            <span className="block text-caption text-slate mt-0.5">{b.sub}</span>
           </li>
         ))}
       </ul>

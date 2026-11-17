@@ -30,7 +30,7 @@ export default function ArticleFooter({ slug, className = '' }: ArticleFooterPro
     <div className={`border-y border-line bg-paper py-14 print:border print:rounded-xl print:p-5 ${className}`}>
       <div className="mx-auto grid max-w-5xl gap-10 px-4 sm:px-8 lg:grid-cols-[minmax(0,1.05fr)_minmax(18rem,0.95fr)] print:px-0">
         <section aria-labelledby={`${slug}-quellen`} className="min-w-0">
-          <p className="mb-3 inline-flex items-center gap-2 text-[13px] font-semibold text-brand">
+          <p className="mb-3 inline-flex items-center gap-2 text-caption font-semibold text-brand">
             <BookOpenCheck size={16} aria-hidden="true" />
             Redaktionelle Grundlage
           </p>
@@ -66,7 +66,7 @@ export default function ArticleFooter({ slug, className = '' }: ArticleFooterPro
         </section>
 
         <nav aria-labelledby={`${slug}-weiterlesen`} className="min-w-0 print:hidden">
-          <p className="mb-2 text-[13px] font-semibold text-brand">Verwandte Themen</p>
+          <p className="mb-2 text-caption font-semibold text-brand">Verwandte Themen</p>
           <h2 id={`${slug}-weiterlesen`} className="font-headline text-xl font-bold text-navy">
             Weiterlesen
           </h2>
@@ -75,9 +75,9 @@ export default function ArticleFooter({ slug, className = '' }: ArticleFooterPro
               <Link
                 key={relatedArticle.slug}
                 to={getEditorialArticlePath(relatedArticle.slug)}
-                className="group block rounded-2xl border border-line bg-white p-5 transition-all hover:border-brand/40 hover:shadow-soft focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+                className="group block rounded-2xl border border-line bg-white p-5 transition-all hover:border-brand/40 hover: focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
               >
-                <span className="text-[13px] font-semibold text-brand">
+                <span className="text-caption font-semibold text-brand">
                   {relatedArticle.format} · {relatedArticle.topic}
                 </span>
                 <span className="mt-2 block font-headline font-bold leading-snug text-navy">

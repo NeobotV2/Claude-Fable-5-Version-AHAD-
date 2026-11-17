@@ -137,12 +137,12 @@ export default function StandortStuttgart() {
         secondaryCta={{ label: SITE.phone, href: SITE.phoneHref }}
       />
 
-      <section className="py-20 lg:py-32 bg-white">
+      <section className="section-y bg-white">
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-20">
             <div>
-              <h2 className="text-3xl font-bold mb-8 text-gray-900">Im Einsatzgebiet Stuttgart</h2>
-              <p className="text-lg text-gray-600 mb-8 leading-relaxed">
+              <h2 className="text-3xl font-bold mb-8 text-navy">Im Einsatzgebiet Stuttgart</h2>
+              <p className="text-lg text-slate mb-8 leading-relaxed">
                 Stuttgart ist ein Zentrum für Industrie und Verwaltung. Wir erstellen für jedes Objekt ein eigenes
                 Reinigungskonzept.
               </p>
@@ -155,43 +155,43 @@ export default function StandortStuttgart() {
                   'Objektbezogene Einsatz- und Terminplanung',
                   'Nachvollziehbare Qualitätskontrollen',
                 ].map((item) => (
-                  <li key={item} className="flex items-center gap-3 text-gray-700 font-medium">
+                  <li key={item} className="flex items-center gap-3 text-slate font-medium">
                     <CheckCircle2 className="text-accent w-5 h-5 flex-shrink-0" />
                     {item}
                   </li>
                 ))}
               </ul>
             </div>
-            <div className="bg-gray-50 p-12 rounded-3xl border border-gray-100">
-              <h3 className="text-2xl font-bold mb-8 text-[#0B2341]">Kontakt Region Stuttgart</h3>
+            <div className="bg-paper p-12 rounded-3xl border border-line">
+              <h3 className="text-2xl font-bold mb-8 text-navy">Kontakt Region Stuttgart</h3>
               <div className="space-y-8">
                 <div className="flex gap-6">
-                  <div className="w-12 h-12 bg-white rounded-2xl shadow-sm flex items-center justify-center text-[#0B2341] flex-shrink-0">
+                  <div className="w-12 h-12 bg-white rounded-2xl shadow-sm flex items-center justify-center text-navy flex-shrink-0">
                     <MapPin className="w-6 h-6" />
                   </div>
                   <div>
-                    <h4 className="font-bold text-gray-900 mb-1">Einsatzgebiet</h4>
-                    <p className="text-gray-600">Stuttgart und umliegende Städte nach objektbezogener Abstimmung</p>
+                    <h4 className="font-bold text-navy mb-1">Einsatzgebiet</h4>
+                    <p className="text-slate">Stuttgart und umliegende Städte nach objektbezogener Abstimmung</p>
                   </div>
                 </div>
                 <div className="flex gap-6">
-                  <div className="w-12 h-12 bg-white rounded-2xl shadow-sm flex items-center justify-center text-[#0B2341] flex-shrink-0">
+                  <div className="w-12 h-12 bg-white rounded-2xl shadow-sm flex items-center justify-center text-navy flex-shrink-0">
                     <Phone className="w-6 h-6" />
                   </div>
                   <div>
-                    <h4 className="font-bold text-gray-900 mb-1">Telefon</h4>
-                    <a href={SITE.phoneHref} className="text-gray-600 hover:text-accent transition-colors">
+                    <h4 className="font-bold text-navy mb-1">Telefon</h4>
+                    <a href={SITE.phoneHref} className="text-slate hover:text-accent transition-colors">
                       {SITE.phone}
                     </a>
                   </div>
                 </div>
                 <div className="flex gap-6">
-                  <div className="w-12 h-12 bg-white rounded-2xl shadow-sm flex items-center justify-center text-[#0B2341] flex-shrink-0">
+                  <div className="w-12 h-12 bg-white rounded-2xl shadow-sm flex items-center justify-center text-navy flex-shrink-0">
                     <Mail className="w-6 h-6" />
                   </div>
                   <div>
-                    <h4 className="font-bold text-gray-900 mb-1">E-Mail</h4>
-                    <a href={SITE.emailHref} className="text-gray-600 hover:text-accent transition-colors">
+                    <h4 className="font-bold text-navy mb-1">E-Mail</h4>
+                    <a href={SITE.emailHref} className="text-slate hover:text-accent transition-colors">
                       {SITE.email}
                     </a>
                   </div>
@@ -202,8 +202,8 @@ export default function StandortStuttgart() {
 
           {/* Leistungen vor Ort */}
           <div className="mb-20">
-            <h2 className="text-3xl font-bold mb-3 text-gray-900">Unsere Leistungen in Stuttgart</h2>
-            <p className="text-lg text-gray-600 mb-10 max-w-3xl leading-relaxed">
+            <h2 className="text-3xl font-bold mb-3 text-navy">Unsere Leistungen in Stuttgart</h2>
+            <p className="text-lg text-slate mb-10 max-w-3xl leading-relaxed">
               Alle Leistungen der Gebäudereinigung für Unternehmen im Großraum Stuttgart, koordiniert von einer festen
               Objektleitung und mit dokumentierter Qualitätskontrolle.
             </p>
@@ -212,13 +212,13 @@ export default function StandortStuttgart() {
                 <Link
                   key={s.to}
                   to={s.to}
-                  className="group block bg-gray-50 hover:bg-white border border-gray-100 hover:border-accent/30 rounded-2xl p-6 transition-all hover:shadow-soft"
+                  className="group block bg-paper hover:bg-white border border-line hover:border-accent/30 rounded-2xl p-6 transition-all hover:"
                 >
-                  <h3 className="font-bold text-lg text-[#0B2341] mb-2 flex items-start justify-between gap-2">
+                  <h3 className="font-bold text-lg text-navy mb-2 flex items-start justify-between gap-2">
                     <span>{s.title}</span>
                     <ArrowRight className="w-4 h-4 mt-1 text-accent flex-shrink-0 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
                   </h3>
-                  <p className="text-sm text-gray-600 leading-relaxed">{s.desc}</p>
+                  <p className="text-sm text-slate leading-relaxed">{s.desc}</p>
                 </Link>
               ))}
             </div>
@@ -226,20 +226,20 @@ export default function StandortStuttgart() {
 
           {/* Branchen vor Ort */}
           <div className="mb-20">
-            <h2 className="text-3xl font-bold mb-3 text-gray-900">Branchen, die wir in Stuttgart betreuen</h2>
-            <p className="text-lg text-gray-600 mb-10 max-w-3xl leading-relaxed">Verwaltungsgebäude, Produktionshallen und Autohäuser haben unterschiedliche Anforderungen. Wir kennen die Branchen im Wirtschaftsraum Stuttgart und richten die Reinigung danach aus.</p>
+            <h2 className="text-3xl font-bold mb-3 text-navy">Branchen, die wir in Stuttgart betreuen</h2>
+            <p className="text-lg text-slate mb-10 max-w-3xl leading-relaxed">Verwaltungsgebäude, Produktionshallen und Autohäuser haben unterschiedliche Anforderungen. Wir kennen die Branchen im Wirtschaftsraum Stuttgart und richten die Reinigung danach aus.</p>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
               {LOCAL_BRANCHEN.map((b) => (
                 <Link
                   key={b.to}
                   to={b.to}
-                  className="group block bg-gray-50 hover:bg-white border border-gray-100 hover:border-accent/30 rounded-2xl p-6 transition-all hover:shadow-soft"
+                  className="group block bg-paper hover:bg-white border border-line hover:border-accent/30 rounded-2xl p-6 transition-all hover:"
                 >
-                  <h3 className="font-bold text-lg text-[#0B2341] mb-2 flex items-start justify-between gap-2">
+                  <h3 className="font-bold text-lg text-navy mb-2 flex items-start justify-between gap-2">
                     <span>{b.title}</span>
                     <ArrowRight className="w-4 h-4 mt-1 text-accent flex-shrink-0 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
                   </h3>
-                  <p className="text-sm text-gray-600 leading-relaxed">{b.desc}</p>
+                  <p className="text-sm text-slate leading-relaxed">{b.desc}</p>
                 </Link>
               ))}
             </div>
@@ -247,15 +247,15 @@ export default function StandortStuttgart() {
 
           {/* Einsatzgebiete */}
           <div className="mb-20">
-            <h2 className="text-3xl font-bold mb-3 text-gray-900">Einsatzgebiete im Großraum Stuttgart</h2>
-            <p className="text-lg text-gray-600 mb-8 max-w-3xl leading-relaxed">
+            <h2 className="text-3xl font-bold mb-3 text-navy">Einsatzgebiete im Großraum Stuttgart</h2>
+            <p className="text-lg text-slate mb-8 max-w-3xl leading-relaxed">
               In diesen Städten und Teilregionen können Einsätze objektbezogen angefragt werden:
             </p>
             <div className="flex flex-wrap gap-2.5">
               {SERVICE_AREAS.map((area) => (
                 <span
                   key={area}
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-gray-50 border border-gray-100 text-gray-700 text-sm font-medium"
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-paper border border-line text-slate text-sm font-medium"
                 >
                   <MapPin className="w-3.5 h-3.5 text-accent" />
                   {area}
@@ -265,23 +265,23 @@ export default function StandortStuttgart() {
           </div>
 
           {/* Warum AHAD in Stuttgart */}
-          <div className="bg-[#0B2341] p-12 lg:p-16 text-white relative overflow-hidden mb-20">
+          <div className="bg-navy p-12 lg:p-16 text-white relative overflow-hidden mb-20">
             <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -mr-32 -mt-32"></div>
             <div className="relative z-10">
               <div className="max-w-3xl">
                 <h2 className="text-3xl font-bold mb-6">Warum AHAD Cleaning in Stuttgart?</h2>
-                <p className="text-xl text-blue-100 mb-8 leading-relaxed">
+                <p className="text-xl text-ondark mb-8 leading-relaxed">
                   In der Region Stuttgart sitzen viele Weltmarktführer und spezialisierte Mittelständler. Wir planen
                   jeden Einsatz nach Objekt, Nutzung und vereinbartem Zeitfenster, auch für Industrie- und
                   Gewerbeobjekte in Filderstadt, Sindelfingen und Ludwigsburg.
                 </p>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="flex items-start gap-3">
-                    <CheckCircle2 className="text-[#0D6B38] w-6 h-6 flex-shrink-0 mt-1" />
+                    <CheckCircle2 className="text-accent w-6 h-6 flex-shrink-0 mt-1" />
                     <p className="font-medium">Einsatzplanung für die Region</p>
                   </div>
                   <div className="flex items-start gap-3">
-                    <CheckCircle2 className="text-[#0D6B38] w-6 h-6 flex-shrink-0 mt-1" />
+                    <CheckCircle2 className="text-accent w-6 h-6 flex-shrink-0 mt-1" />
                     <p className="font-medium">Erfahrung mit Industrie-Standards</p>
                   </div>
                 </div>
@@ -291,7 +291,7 @@ export default function StandortStuttgart() {
 
           {/* Lokale FAQ */}
           <div className="max-w-3xl">
-            <h2 className="text-3xl font-bold mb-8 text-gray-900">Häufige Fragen zur Gebäudereinigung in Stuttgart</h2>
+            <h2 className="text-3xl font-bold mb-8 text-navy">Häufige Fragen zur Gebäudereinigung in Stuttgart</h2>
             <Accordion items={LOCAL_FAQS} />
           </div>
         </div>

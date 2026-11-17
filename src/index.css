@@ -59,6 +59,34 @@
   --color-ink: #1C2733;         /* Text-Anthrazit (CI-Fließtextfarbe) */
   --color-slate: #424751;       /* Fließtext gedämpft */
   --color-line: #dde3ea;        /* Hairlines — tragen die Struktur statt Karten und Schatten */
+  --color-ondark: #DCE6F1;      /* Fließtext auf Navy und Grün (heller Navy-Tint) */
+  --color-field: #738196;       /* Rahmen von Formularfeldern (3,9:1 auf Weiß) */
+  --color-placeholder: #596779; /* Platzhaltertext in Formularfeldern */
+  /* Zustandsfarben für Formulare und Hinweise */
+  --color-danger: #9F1D1D;
+  --color-danger-surface: #FEF2F2;
+  --color-danger-line: #FECACA;
+  --color-notice: #92400E;
+  --color-notice-surface: #FFFBEB;
+  --color-notice-line: #FDE68A;
+  --color-whatsapp: #187C3B;    /* WhatsApp-Knopf (abgedunkelt für AA-Kontrast) */
+
+  /* ── Schriftgrößen: nach Aufgabe benannt, nicht nach Pixeln ─────────
+     Ergänzen die Tailwind-Stufen (sm 14 · base 16 · lg 18 · xl 20). */
+  --text-caption: 0.8125rem;    /* 13 px — Meta-Angaben, Brotkrumen, Bildunterschriften */
+  --text-nav: 0.90625rem;       /* 14,5 px — Navigation und Kopfzeile */
+  --text-body-sm: 0.9375rem;    /* 15 px — Nebentexte, Listen, Formularfelder */
+  --text-lead: 1.0625rem;       /* 17 px — Einleitungen auf dem Handy */
+  --text-figure: 2.75rem;       /* große Kennzahlen */
+
+  /* ── Abstände: Abschnitte und Seitenrand ──────────────────────────── */
+  --spacing-section: 4rem;      /* Abschnitt oben/unten, Handy */
+  --spacing-section-lg: 7rem;   /* Abschnitt oben/unten, ab 1024 px */
+  --spacing-section-sm: 3rem;   /* kleiner Abschnitt, Handy */
+  --spacing-section-sm-lg: 4rem;/* kleiner Abschnitt, ab 1024 px */
+  --spacing-gutter: 1rem;       /* Seitenrand, Handy */
+  --spacing-gutter-sm: 2rem;    /* Seitenrand, ab 640 px */
+  --container-page: 80rem;      /* maximale Inhaltsbreite */
 
   /* ── Ecken: sachlich, fast eckig. Alle rounded-lg…3xl im Code laufen
      über diese Tokens und sind damit seitenweit einheitlich. ───────── */
@@ -89,6 +117,29 @@
   @keyframes pulse-soft {
     0%, 100% { opacity: 1; }
     50% { opacity: 0.55; }
+  }
+}
+
+/* ── Layout: eine Seitenbreite, zwei Abschnittsabstände ─────────────── */
+@utility container-page {
+  width: 100%;
+  max-width: var(--container-page);
+  margin-inline: auto;
+  padding-inline: var(--spacing-gutter);
+  @media (width >= 40rem) {
+    padding-inline: var(--spacing-gutter-sm);
+  }
+}
+@utility section-y {
+  padding-block: var(--spacing-section);
+  @media (width >= 64rem) {
+    padding-block: var(--spacing-section-lg);
+  }
+}
+@utility section-y-sm {
+  padding-block: var(--spacing-section-sm);
+  @media (width >= 64rem) {
+    padding-block: var(--spacing-section-sm-lg);
   }
 }
 
@@ -213,19 +264,6 @@
     @apply inline-flex items-center gap-2 py-2.5 -my-2.5 font-semibold text-white underline-offset-4 decoration-2 transition-colors hover:text-mint hover:underline;
   }
 
-  /* ── Oberflächen ──────────────────────────────────────────────── */
-  /* Bewusst ohne Glas-, Korn-, Raster- und Schwebeeffekte. Die Klassen
-     bleiben als neutrale Flächen erhalten, weil viele Seiten sie nutzen. */
-  .glass { background: #fff; }
-  .glass-dark { background: var(--color-navy-900); }
-  .grain::after { content: none; }
-  .blueprint-grid,
-  .blueprint-grid-light { background-image: none; }
-
-  /* Klickbare Flächen reagieren über die Rahmenfarbe, nicht über Bewegung. */
-  .card-lift { transition: border-color 0.15s ease; }
-  .card-lift:hover { border-color: rgb(11 35 65 / 0.5); }
-
   @media (min-width: 390px) {
     .display-lg {
       font-size: clamp(1.6rem, 3.4vw, 2.5rem);
@@ -246,7 +284,7 @@
 /* Form-Hinweise bleiben auch bei Tailwind-Placeholder-Utilities AA-lesbar. */
 input::placeholder,
 textarea::placeholder {
-  color: #5f6873;
+  color: var(--color-placeholder);
   opacity: 1;
 }
 

@@ -87,12 +87,12 @@ export default function FachwissenStreupflicht() {
 
       <ArticleMeta slug={SLUG} />
 
-      <section className="bg-white py-16 lg:py-24">
+      <section className="bg-white section-y">
         <div className="mx-auto max-w-4xl px-4 sm:px-8">
           <div className="prose prose-lg max-w-none leading-relaxed text-slate">
-            <div className="not-prose mb-12 rounded-2xl border border-amber-200 bg-amber-50 p-6">
+            <div className="not-prose mb-12 rounded-2xl border border-notice-line bg-notice-surface p-6">
               <div className="flex items-start gap-3">
-                <CircleAlert className="mt-0.5 h-6 w-6 shrink-0 text-amber-700" aria-hidden="true" />
+                <CircleAlert className="mt-0.5 h-6 w-6 shrink-0 text-notice" aria-hidden="true" />
                 <div>
                   <h2 className="font-headline text-lg font-bold text-navy">Hinweis: keine Rechtsberatung</h2>
                   <p className="mt-2 text-sm leading-relaxed text-slate">
@@ -291,9 +291,9 @@ export default function FachwissenStreupflicht() {
               Einsatzprotokolle und eine Reaktion auf gemeldete Mängel.
             </p>
 
-            <div className="not-prose my-10 rounded-2xl border border-amber-200 bg-amber-50 p-6">
+            <div className="not-prose my-10 rounded-2xl border border-notice-line bg-notice-surface p-6">
               <div className="flex items-start gap-3">
-                <CircleAlert className="mt-0.5 h-6 w-6 shrink-0 text-amber-700" aria-hidden="true" />
+                <CircleAlert className="mt-0.5 h-6 w-6 shrink-0 text-notice" aria-hidden="true" />
                 <div>
                   <h3 className="font-headline text-lg font-bold text-navy">Sonderfall Vermietung</h3>
                   <p className="mt-2 text-sm leading-relaxed text-slate">
@@ -405,7 +405,7 @@ export default function FachwissenStreupflicht() {
         </div>
       </section>
 
-      <section className="bg-paper py-16 lg:py-24" aria-labelledby="streupflicht-faq">
+      <section className="bg-paper section-y" aria-labelledby="streupflicht-faq">
         <div className="mx-auto max-w-4xl px-4 sm:px-8">
           <div className="mb-12 text-center">
             <span className="eyebrow justify-center text-brand">Häufige Fragen</span>

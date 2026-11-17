@@ -55,23 +55,23 @@ const columns = [
 ];
 
 // py-2 vergrößert die Trefferfläche je Link auf dem Handy (38 px Zeilenraster).
-const linkClass = 'inline-block py-2 lg:py-1.5 text-[15px] text-blue-100/75 hover:text-white transition-colors';
+const linkClass = 'inline-block py-2 lg:py-1.5 text-body-sm text-ondark/75 hover:text-white transition-colors';
 
 export default function Footer() {
   return (
     <footer className="bg-navy-900 text-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-8">
-        <div className="py-14 lg:py-16 grid grid-cols-2 lg:grid-cols-12 gap-x-8 gap-y-12">
+      <div className="container-page">
+        <div className="section-y-sm grid grid-cols-2 lg:grid-cols-12 gap-x-8 gap-y-12">
           {/* Marke und Anschrift */}
           <div className="col-span-2 lg:col-span-4">
             <Logo variant="dark" size={42} />
             {/* Marken-Claim als Signatur (Designbook: der eine Claim) */}
             <p className="mt-4 text-sm font-semibold text-mint">{CLAIM}</p>
-            <p className="mt-5 text-[15px] text-blue-100/75 leading-relaxed max-w-sm">
+            <p className="mt-5 text-body-sm text-ondark/75 leading-relaxed max-w-sm">
               Gebäudedienstleistungen für Industrie, Verwaltung und Mittelstand, mit festen Teams und
               dokumentierter Qualitätskontrolle.
             </p>
-            <address className="mt-6 not-italic text-[15px] leading-7 text-blue-100/75">
+            <address className="mt-6 not-italic text-body-sm leading-7 text-ondark/75">
               {SITE.address.street}
               <br />
               {SITE.address.zip} {SITE.address.city}
@@ -107,7 +107,7 @@ export default function Footer() {
 
         {/* Zweites Geschäftsfeld der GmbH — bewusst dezent, kein Ablenken vom
             Cleaning-Conversion-Ziel. Wechselseitige Verlinkung stärkt beide Marken. */}
-        <p className="py-5 border-t border-white/15 text-[15px] text-blue-100/75">
+        <p className="py-5 border-t border-white/15 text-body-sm text-ondark/75">
           Unser zweites Geschäftsfeld:{' '}
           <a
             href={SITE.careUrl}
@@ -122,7 +122,7 @@ export default function Footer() {
 
         {/* Abschlusszeile — extra Bodenabstand auf Mobile, damit die fixe
             Sticky-CTA-Leiste die Rechtslinks nicht überdeckt. */}
-        <div className="pt-3 pb-24 lg:pb-3 border-t border-white/15 flex flex-col md:flex-row md:items-center justify-between gap-x-4 gap-y-1 text-[13px] text-blue-100/75">
+        <div className="pt-3 pb-24 lg:pb-3 border-t border-white/15 flex flex-col md:flex-row md:items-center justify-between gap-x-4 gap-y-1 text-caption text-ondark/75">
           <p>
             © {new Date().getFullYear()} {SITE.legalName}. Alle Rechte vorbehalten.
           </p>

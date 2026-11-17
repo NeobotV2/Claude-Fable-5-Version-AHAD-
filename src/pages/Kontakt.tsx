@@ -2,7 +2,6 @@ import { Phone, Mail, MapPin, Clock, FileText, ChevronRight, MessageCircle } fro
 import { Link } from 'react-router-dom';
 import SEO from '@/components/SEO';
 import PageHero from '@/components/PageHero';
-import Reveal from '@/components/ui/Reveal';
 import ContactForm from '@/components/ContactForm';
 import { SITE, WHATSAPP_HREF } from '@/lib/site';
 
@@ -82,56 +81,55 @@ export default function Kontakt() {
               <span className="font-accent text-xl font-semibold text-accent" aria-hidden="true">
                 {promise.value}
               </span>
-              <span className="text-[15px] text-slate leading-snug">{promise.label}</span>
+              <span className="text-body-sm text-slate leading-snug">{promise.label}</span>
             </li>
           ))}
         </ol>
       </PageHero>
 
-      <section className="py-20 lg:py-28 bg-paper">
-        <div className="max-w-7xl mx-auto px-4 sm:px-8 grid grid-cols-1 lg:grid-cols-12 gap-12">
+      <section className="section-y bg-paper">
+        <div className="container-page grid grid-cols-1 lg:grid-cols-12 gap-12">
           {/* Formular */}
           <div className="lg:col-span-7">
-            <Reveal>
+            <div>
               <h2 className="display-md text-navy mb-3">Nachricht schreiben</h2>
               <p className="text-slate text-lg mb-8">
                 Füllen Sie das Formular aus. Wir melden uns persönlich bei Ihnen.
               </p>
-            </Reveal>
-            <Reveal delay={0.1}>
+            </div>
+            <div>
               <ContactForm />
-            </Reveal>
+            </div>
           </div>
 
           {/* Direktkanäle */}
           <div className="lg:col-span-5 space-y-6">
-            <Reveal delay={0.15}>
-              <div className="relative bg-navy text-white p-8 lg:p-10 rounded-3xl shadow-lifted overflow-hidden grain">
-                <div className="absolute inset-0 blueprint-grid" />
+            <div>
+              <div className="relative bg-navy text-white p-8 lg:p-10 rounded-3xl shadow-lifted overflow-hidden">
                 <div className="absolute top-0 right-0 p-6 opacity-10">
                   <FileText size={110} />
                 </div>
                 <div className="relative z-10">
                   <span className="eyebrow text-mint mb-4">Online-Anfrage</span>
                   <h3 className="font-headline text-2xl font-bold mb-3">Digitale Objektaufnahme</h3>
-                  <p className="text-blue-100/85 mb-7 leading-relaxed">
+                  <p className="text-ondark/85 mb-7 leading-relaxed">
                     In vier Schritten erfassen Sie die wichtigsten Daten zu Ihrem Objekt. Damit bereiten wir die
                     Besichtigung und das Angebot vor.
                   </p>
                   <Link
                     to="/angebot"
-                    className="inline-flex items-center gap-2 bg-accent text-white px-6 py-3.5 rounded-xl font-bold hover:bg-accent-dark transition-all shadow-glow"
+                    className="inline-flex items-center gap-2 bg-accent text-white px-6 py-3.5 rounded-xl font-bold hover:bg-accent-dark transition-all"
                   >
                     Besichtigung anfragen <ChevronRight size={18} />
                   </Link>
                 </div>
               </div>
-            </Reveal>
+            </div>
 
             <div className="space-y-4">
               {contactChannels.map((channel, i) => (
-                <Reveal key={channel.title} delay={0.2 + i * 0.07}>
-                  <div className="bg-white p-6 rounded-2xl flex items-start gap-4 border border-line shadow-soft">
+                <div key={channel.title}>
+                  <div className="bg-white p-6 rounded-2xl flex items-start gap-4 border border-line">
                     <div className="w-12 h-12 bg-brand/8 text-brand rounded-xl grid place-items-center shrink-0">
                       {channel.icon}
                     </div>
@@ -144,7 +142,7 @@ export default function Kontakt() {
                       </p>
                     </div>
                   </div>
-                </Reveal>
+                </div>
               ))}
             </div>
           </div>

@@ -20,6 +20,7 @@ import {
   Wind,
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { buttonClasses } from '@/components/ui/Button';
 import SEO from '@/components/SEO';
 import { cn } from '@/lib/utils';
 import HeadlineText from '@/components/ui/HeadlineText';
@@ -139,8 +140,8 @@ const DRAFT_KEY = 'ahad-angebot-entwurf-v2';
 const DRAFT_TTL_MS = 2 * 60 * 60 * 1000;
 
 const inputClasses =
-  'w-full px-4 py-3.5 rounded-xl border-2 border-[#738196] bg-white text-[15px] font-medium text-navy ' +
-  'placeholder:text-[#596779] focus:border-accent focus:ring-4 focus:ring-accent/15 transition-all outline-none';
+  'w-full px-4 py-3.5 rounded-xl border-2 border-field bg-white text-body-sm font-medium text-navy ' +
+  'placeholder:text-placeholder focus:border-accent focus:ring-4 focus:ring-accent/15 transition-all outline-none';
 
 const selectableCard = (active: boolean) =>
   cn(
@@ -337,13 +338,13 @@ export default function AngebotsFunnel() {
   };
 
   const shell = (content: ReactNode) => (
-    <div className="relative min-h-screen bg-navy overflow-hidden grain">
+    <div className="relative min-h-screen bg-navy overflow-hidden">
       <SEO
         title="Kostenlose Objektbesichtigung anfragen | AHAD Cleaning"
         description="In vier Schritten zur kostenlosen Vor-Ort-Besichtigung. Das Angebot erstellen wir, nachdem wir Ihr Objekt gemeinsam aufgenommen haben."
         noindex
       />
-      <div className="absolute inset-0 blueprint-grid" aria-hidden />
+      <div className="absolute inset-0" aria-hidden />
       <div className="relative z-10 max-w-3xl mx-auto px-4 pt-28 pb-16 lg:pt-36 lg:pb-24">{content}</div>
     </div>
   );
@@ -361,7 +362,7 @@ export default function AngebotsFunnel() {
           Vielen Dank. Wir prüfen Ihre Angaben und melden uns persönlich, um einen Termin für die Besichtigung abzustimmen.
         </p>
         <div className="flex flex-col sm:flex-row gap-3 justify-center mb-8">
-          <a href={SITE.phoneHref} className="inline-flex items-center justify-center gap-2 bg-accent text-white px-6 py-3.5 rounded-xl font-bold">
+          <a href={SITE.phoneHref} className={buttonClasses('primary', 'lg')}>
             <Phone size={17} /> Direkt anrufen
           </a>
           <a href={WHATSAPP_HREF} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 bg-[#25D366] text-white px-6 py-3.5 rounded-xl font-bold">
@@ -380,7 +381,7 @@ export default function AngebotsFunnel() {
         <h1 className="display-md text-white">
           <HeadlineText text="Kostenlose Vor-Ort-Besichtigung" />
         </h1>
-        <p className="mt-3 text-blue-100/85">Das Angebot erstellen wir nach der Besichtigung vor Ort.</p>
+        <p className="mt-3 text-ondark/85">Das Angebot erstellen wir nach der Besichtigung vor Ort.</p>
       </header>
 
       <div className="mb-8">
@@ -388,7 +389,7 @@ export default function AngebotsFunnel() {
             die Schrittliste (inkl. aria-current) aus dem Accessibility-Tree entfernen. */}
         <ol className="flex justify-between items-end mb-3">
           {STEP_LABELS.map((label, index) => (
-            <li key={label} aria-current={index + 1 === step ? 'step' : undefined} className={cn('text-[13px] font-semibold', index + 1 <= step ? 'text-mint' : 'text-white/70')}>
+            <li key={label} aria-current={index + 1 === step ? 'step' : undefined} className={cn('text-caption font-semibold', index + 1 <= step ? 'text-mint' : 'text-white/70')}>
               {index + 1}. {label}
             </li>
           ))}
@@ -409,7 +410,7 @@ export default function AngebotsFunnel() {
                 {OBJECT_TYPES.map((type) => (
                   <button key={type.id} type="button" aria-pressed={formData.objectType === type.title} onClick={() => { setFormData((current) => ({ ...current, objectType: type.title })); next(); }} className={cn('p-5 group', selectableCard(formData.objectType === type.title))}>
                     <type.icon size={20} className="text-accent mb-3" aria-hidden />
-                    <span className="block text-[15px] font-bold text-navy mb-1">{type.title}</span>
+                    <span className="block text-body-sm font-bold text-navy mb-1">{type.title}</span>
                     <span className="block text-xs text-slate">{type.desc}</span>
                   </button>
                 ))}
@@ -427,7 +428,7 @@ export default function AngebotsFunnel() {
                   return (
                     <button key={service.id} type="button" aria-pressed={active} onClick={() => toggleService(service.title)} className={cn('flex items-start gap-3 p-4', selectableCard(active))}>
                       <service.icon size={19} className="mt-0.5 text-accent shrink-0" aria-hidden />
-                      <span><span className="block text-[14px] font-bold text-navy">{service.title}</span><span className="block text-xs text-slate mt-0.5">{service.subtitle}</span></span>
+                      <span><span className="block text-sm font-bold text-navy">{service.title}</span><span className="block text-xs text-slate mt-0.5">{service.subtitle}</span></span>
                     </button>
                   );
                 })}
@@ -450,11 +451,11 @@ export default function AngebotsFunnel() {
               <TextField id="offer-start" label="Gewünschter Start" value={formData.serviceDetails.desiredStart} onChange={(value) => updateDetails('desiredStart', value)} placeholder="z. B. ab Oktober oder kurzfristig" />
 
               <fieldset>
-                <legend className="text-[15px] font-bold text-navy mb-3">Was ist Ihnen besonders wichtig? <span className="text-slate font-normal">(optional)</span></legend>
+                <legend className="text-body-sm font-bold text-navy mb-3">Was ist Ihnen besonders wichtig? <span className="text-slate font-normal">(optional)</span></legend>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                   {REQUIREMENTS.map((requirement) => {
                     const active = formData.anforderungen.includes(requirement);
-                    return <button key={requirement} type="button" aria-pressed={active} onClick={() => toggleRequirement(requirement)} className={cn('flex items-center gap-2 p-3 text-sm font-semibold', selectableCard(active))}><span className={cn('w-4 h-4 border rounded grid place-items-center', active ? 'bg-accent border-accent' : 'border-[#738196]')}>{active && <Check size={12} className="text-white" />}</span>{requirement}</button>;
+                    return <button key={requirement} type="button" aria-pressed={active} onClick={() => toggleRequirement(requirement)} className={cn('flex items-center gap-2 p-3 text-sm font-semibold', selectableCard(active))}><span className={cn('w-4 h-4 border rounded grid place-items-center', active ? 'bg-accent border-accent' : 'border-field')}>{active && <Check size={12} className="text-white" />}</span>{requirement}</button>;
                   })}
                 </div>
               </fieldset>
@@ -474,13 +475,13 @@ export default function AngebotsFunnel() {
                   <TextInput id="offer-email" label="E-Mail" type="email" autoComplete="email" value={formData.email} onChange={(email) => setFormData((current) => ({ ...current, email }))} describedBy="offer-contact-help" invalid={Boolean(contactError)} />
                   <TextInput id="offer-phone" label="Telefon" type="tel" autoComplete="tel" value={formData.phone} onChange={(phone) => setFormData((current) => ({ ...current, phone }))} describedBy="offer-contact-help" invalid={Boolean(contactError)} />
                 </div>
-                <p id="offer-contact-help" role={contactError ? 'alert' : undefined} className={cn('text-sm', contactError ? 'text-red-700 font-semibold' : 'text-slate')}>{contactError || 'Bitte mindestens einen Kontaktweg angeben.'}</p>
+                <p id="offer-contact-help" role={contactError ? 'alert' : undefined} className={cn('text-sm', contactError ? 'text-danger font-semibold' : 'text-slate')}>{contactError || 'Bitte mindestens einen Kontaktweg angeben.'}</p>
                 <TextInput id="offer-location" label="PLZ / Ort des Einsatzes (optional)" autoComplete="postal-code" value={formData.location} onChange={(location) => setFormData((current) => ({ ...current, location }))} />
                 <TextInput id="offer-preferred" label="Bevorzugtes Zeitfenster für die Besichtigung (optional)" value={formData.preferredTime} onChange={(preferredTime) => setFormData((current) => ({ ...current, preferredTime }))} />
                 <p className="text-sm text-slate leading-relaxed">Hinweise zur Verarbeitung Ihrer Angaben finden Sie in der <Link to="/datenschutz" target="_blank" rel="noopener noreferrer" className="font-bold text-brand underline">Datenschutzerklärung (öffnet neuen Tab)</Link>.</p>
-                {submitError && <div role="alert" className="bg-red-50 border border-red-200 text-red-800 rounded-xl p-4">{submitError} <a href={SITE.phoneHref} className="font-bold underline">{SITE.phone}</a>{submitErrorCode && <span className="block mt-1 text-xs">Fehlercode: {submitErrorCode}</span>}</div>}
+                {submitError && <div role="alert" className="bg-danger-surface border border-danger-line text-danger rounded-xl p-4">{submitError} <a href={SITE.phoneHref} className="font-bold underline">{SITE.phone}</a>{submitErrorCode && <span className="block mt-1 text-xs">Fehlercode: {submitErrorCode}</span>}</div>}
                 <div className="flex flex-col sm:flex-row gap-3 pt-2">
-                  <button type="button" onClick={back} className="flex-1 px-6 py-3.5 rounded-xl font-bold text-slate border-2 border-[#738196]"><ChevronLeft size={18} className="inline mr-2" />Zurück</button>
+                  <button type="button" onClick={back} className="flex-1 px-6 py-3.5 rounded-xl font-bold text-slate border-2 border-field"><ChevronLeft size={18} className="inline mr-2" />Zurück</button>
                   <button type="submit" disabled={isSubmitting} className="flex-[2] inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-bold text-white bg-accent hover:bg-accent-dark disabled:opacity-60 focus-visible:ring-4 focus-visible:ring-accent/40">
                     {isSubmitting ? <><Loader2 className="animate-spin" size={18} /> Wird übermittelt</> : <>Besichtigung anfragen <ArrowRight size={18} /></>}
                   </button>
@@ -495,17 +496,17 @@ export default function AngebotsFunnel() {
 }
 
 function Navigation({ back, next, nextDisabled }: { back: () => void; next: () => void; nextDisabled: boolean }) {
-  return <div className="flex flex-col sm:flex-row gap-3 pt-7"><button type="button" onClick={back} className="flex-1 px-6 py-3.5 rounded-xl font-bold text-slate border-2 border-[#738196]"><ChevronLeft size={18} className="inline mr-2" />Zurück</button><button type="button" onClick={next} disabled={nextDisabled} className="flex-[2] px-6 py-3.5 rounded-xl font-bold text-white bg-accent disabled:opacity-50">Weiter <ChevronRight size={18} className="inline ml-2" /></button></div>;
+  return <div className="flex flex-col sm:flex-row gap-3 pt-7"><button type="button" onClick={back} className="flex-1 px-6 py-3.5 rounded-xl font-bold text-slate border-2 border-field"><ChevronLeft size={18} className="inline mr-2" />Zurück</button><button type="button" onClick={next} disabled={nextDisabled} className="flex-[2] px-6 py-3.5 rounded-xl font-bold text-white bg-accent disabled:opacity-50">Weiter <ChevronRight size={18} className="inline ml-2" /></button></div>;
 }
 
 function ChoiceGroup({ legend, options, value, onChange }: { legend: string; options: string[]; value: string; onChange: (value: string) => void }) {
-  return <fieldset><legend className="text-[15px] font-bold text-navy mb-3">{legend}</legend><div className="grid grid-cols-1 sm:grid-cols-2 gap-3">{options.map((option) => <button key={option} type="button" aria-pressed={value === option} onClick={() => onChange(option)} className={cn('p-4 text-sm font-bold text-navy text-center', selectableCard(value === option))}>{option}</button>)}</div></fieldset>;
+  return <fieldset><legend className="text-body-sm font-bold text-navy mb-3">{legend}</legend><div className="grid grid-cols-1 sm:grid-cols-2 gap-3">{options.map((option) => <button key={option} type="button" aria-pressed={value === option} onClick={() => onChange(option)} className={cn('p-4 text-sm font-bold text-navy text-center', selectableCard(value === option))}>{option}</button>)}</div></fieldset>;
 }
 
 function TextField({ id, label, value, onChange, placeholder }: { id: string; label: string; value: string; onChange: (value: string) => void; placeholder: string }) {
-  return <div><label htmlFor={id} className="block text-[14px] font-bold text-navy mb-2">{label}</label><input id={id} value={value} onChange={(event) => onChange(event.target.value)} placeholder={placeholder} className={inputClasses} /></div>;
+  return <div><label htmlFor={id} className="block text-sm font-bold text-navy mb-2">{label}</label><input id={id} value={value} onChange={(event) => onChange(event.target.value)} placeholder={placeholder} className={inputClasses} /></div>;
 }
 
 function TextInput({ id, label, value, onChange, type = 'text', required = false, autoComplete, describedBy, invalid = false }: { id: string; label: string; value: string; onChange: (value: string) => void; type?: string; required?: boolean; autoComplete?: string; describedBy?: string; invalid?: boolean }) {
-  return <div><label htmlFor={id} className="block text-[13px] font-bold text-navy mb-2">{label}{required && ' *'}</label><input id={id} type={type} required={required} autoComplete={autoComplete} value={value} onChange={(event) => onChange(event.target.value)} aria-describedby={describedBy} aria-errormessage={invalid ? describedBy : undefined} aria-invalid={invalid || undefined} className={inputClasses} /></div>;
+  return <div><label htmlFor={id} className="block text-caption font-bold text-navy mb-2">{label}{required && ' *'}</label><input id={id} type={type} required={required} autoComplete={autoComplete} value={value} onChange={(event) => onChange(event.target.value)} aria-describedby={describedBy} aria-errormessage={invalid ? describedBy : undefined} aria-invalid={invalid || undefined} className={inputClasses} /></div>;
 }

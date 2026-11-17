@@ -26,8 +26,8 @@ export default function Branchen() {
         cta={{ label: 'Kostenlose Besichtigung anfragen', to: '/angebot' }}
       />
 
-      <section className="py-20 lg:py-28 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-8">
+      <section className="section-y bg-white">
+        <div className="container-page">
           <SectionHeading eyebrow="Fünf Branchen" title="In diesen Branchen arbeiten wir." className="mb-10" />
           <ul className="border-t border-navy">
             {BRANCHEN.map((branche) => (

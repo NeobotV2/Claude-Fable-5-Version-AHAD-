@@ -33,7 +33,7 @@ export default function SectionHeading({
           className={cn(
             'mt-5 text-lg leading-relaxed max-w-2xl',
             align === 'center' && 'mx-auto',
-            dark ? 'text-blue-100/85' : 'text-slate'
+            dark ? 'text-ondark/85' : 'text-slate'
           )}
         >
           {lead}

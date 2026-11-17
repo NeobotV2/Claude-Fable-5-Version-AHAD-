@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, FileCheck2, Handshake } from 'lucide-react';
 import SEO from '@/components/SEO';
 import PageHero from '@/components/PageHero';
-import Reveal from '@/components/ui/Reveal';
 import SectionHeading from '@/components/ui/SectionHeading';
 import CTABand from '@/components/CTABand';
 import Reviews from '@/components/Reviews';
@@ -53,8 +52,8 @@ export default function Referenzen() {
       />
 
       {/* Referenz-Wand — echte Kundenlogos, einheitlich normiert (nur mit Logo) */}
-      {CLIENT_REFERENCES.length > 0 && <section className="py-20 lg:py-32 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-8">
+      {CLIENT_REFERENCES.length > 0 && <section className="section-y bg-white">
+        <div className="container-page">
           <SectionHeading
             eyebrow="Auswahl betreuter Auftraggeber"
             title="Unternehmen, die wir betreuen."
@@ -63,8 +62,8 @@ export default function Referenzen() {
           />
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
             {CLIENT_REFERENCES.filter((ref) => ref.logo).map((ref, index) => (
-              <Reveal key={ref.domain} delay={Math.min(index * 0.05, 0.3)} className="h-full">
-                <div className="flex flex-col items-center justify-center gap-3 h-full min-h-[8rem] bg-paper rounded-3xl border border-line p-7 card-lift">
+              <div key={ref.domain} className="h-full">
+                <div className="flex flex-col items-center justify-center gap-3 h-full min-h-[8rem] bg-paper rounded-3xl border border-line p-7">
                   <img
                     src={ref.logo}
                     alt={ref.name}
@@ -79,7 +78,7 @@ export default function Referenzen() {
                     </span>
                   )}
                 </div>
-              </Reveal>
+              </div>
             ))}
           </div>
         </div>
@@ -92,8 +91,8 @@ export default function Referenzen() {
       <Reviews />
 
       {/* Angebot für alle, denen Logos und Zitate nicht genügen */}
-      <section className="py-20 lg:py-28 bg-paper">
-        <div className="max-w-7xl mx-auto px-4 sm:px-8">
+      <section className="section-y bg-paper">
+        <div className="container-page">
           <SectionHeading
             eyebrow="Weiter prüfen"
             title="Referenzen, die Sie selbst prüfen können."
@@ -102,23 +101,23 @@ export default function Referenzen() {
           />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {REFERENZ_PRINZIPIEN.map((prinzip, index) => (
-              <Reveal key={prinzip.title} delay={index * 0.08} className="h-full">
-                <div className="h-full bg-white rounded-3xl border border-line p-8 card-lift">
+              <div key={prinzip.title} className="h-full">
+                <div className="h-full bg-white rounded-3xl border border-line p-8">
                   <span className="w-12 h-12 rounded-2xl bg-brand/8 text-brand grid place-items-center mb-5">
                     <prinzip.icon size={22} aria-hidden />
                   </span>
                   <h3 className="font-headline text-xl font-bold text-navy mb-3">{prinzip.title}</h3>
                   <p className="text-slate leading-relaxed">{prinzip.text}</p>
                 </div>
-              </Reveal>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
       {/* Branchen, in denen wir arbeiten — belegbare Substanz statt Zahlen */}
-      <section className="py-20 lg:py-28 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-8">
+      <section className="section-y bg-white">
+        <div className="container-page">
           <SectionHeading
             eyebrow="Einsatzfelder"
             title="Branchen, in denen wir arbeiten."

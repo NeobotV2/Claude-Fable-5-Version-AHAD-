@@ -15,19 +15,19 @@ export default function NewsTeaser() {
 
   return (
     <section className="bg-paper border-b border-line" aria-label="Aktuelle Unternehmensmeldung">
-      <div className="max-w-7xl mx-auto px-4 sm:px-8 py-5">
+      <div className="container-page py-5">
         <Link
           to={`/aktuelles/${item.slug}`}
           className="group flex flex-col sm:flex-row sm:items-baseline gap-1.5 sm:gap-6"
         >
-          <span className="text-[13px] text-slate flex-shrink-0">
+          <span className="text-caption text-slate flex-shrink-0">
             {item.topic} ·{' '}
             <time dateTime={item.datePublished}>{formatNewsDate(item.datePublished)}</time>
           </span>
-          <p className="flex-grow font-semibold text-navy text-[17px] leading-snug group-hover:text-accent transition-colors">
+          <p className="flex-grow font-semibold text-navy text-lead leading-snug group-hover:text-accent transition-colors">
             {item.headline}
           </p>
-          <span className="text-link text-[15px] flex-shrink-0">
+          <span className="text-link text-body-sm flex-shrink-0">
             Mehr erfahren
             <ArrowRight size={15} aria-hidden="true" />
           </span>

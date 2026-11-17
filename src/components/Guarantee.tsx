@@ -1,4 +1,5 @@
 import SectionHeading from '@/components/ui/SectionHeading';
+import FactRow from '@/components/ui/FactRow';
 import { GUARANTEES, PROOF_POINTS, OBJEKTLEITUNG } from '@/lib/site';
 
 /**
@@ -16,8 +17,8 @@ export default function Guarantee() {
   if (GUARANTEES.length === 0) return null;
 
   return (
-    <section className="py-20 lg:py-28 bg-white border-t border-line">
-      <div className="max-w-7xl mx-auto px-4 sm:px-8">
+    <section className="section-y bg-white border-t border-line">
+      <div className="container-page">
         <SectionHeading
           eyebrow="Das AHAD-Versprechen"
           title="Vier Zusagen, auf die Sie sich berufen können."
@@ -26,19 +27,7 @@ export default function Guarantee() {
         />
 
         {/* Eckwerte (eigenständig gegated — nur rendern, wenn freigegeben) */}
-        {PROOF_POINTS.length > 0 && (
-          <ul className="grid grid-cols-2 lg:grid-cols-4 border-y border-line lg:divide-x divide-line mb-14">
-            {PROOF_POINTS.map((p) => (
-              <li key={p.label} className="py-7 pr-4 lg:px-8 lg:first:pl-0">
-                <span className="block font-accent text-4xl lg:text-[2.75rem] leading-none font-semibold tracking-tight text-navy">
-                  {p.value}
-                </span>
-                <span className="block text-[15px] font-semibold text-navy mt-3">{p.label}</span>
-                <span className="block text-[13px] text-slate mt-0.5">{p.sub}</span>
-              </li>
-            ))}
-          </ul>
-        )}
+        {PROOF_POINTS.length > 0 && <FactRow framed items={PROOF_POINTS} className="mb-14" />}
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-x-12 gap-y-12">
           {/* Die Zusagen im Wortlaut */}
@@ -63,7 +52,7 @@ export default function Guarantee() {
                   loading="lazy"
                 />
               )}
-              <span className="text-[15px]">
+              <span className="text-body-sm">
                 <span className="block font-semibold text-navy">{OBJEKTLEITUNG.name}</span>
                 <span className="block text-slate">{OBJEKTLEITUNG.role}</span>
               </span>

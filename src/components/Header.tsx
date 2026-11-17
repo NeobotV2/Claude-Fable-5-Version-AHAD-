@@ -2,8 +2,9 @@ import { Link, useLocation } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import { motion, AnimatePresence } from 'motion/react';
 import { useState, useEffect, useCallback, useRef } from 'react';
-import { ChevronDown, Menu, X, Phone, ArrowRight } from 'lucide-react';
+import { ChevronDown, Menu, X, Phone } from 'lucide-react';
 import Logo from '@/components/Logo';
+import ButtonLink, { buttonClasses } from '@/components/ui/Button';
 import { SITE } from '@/lib/site';
 
 interface SubLink {
@@ -213,7 +214,7 @@ export default function Header() {
               >
                 <div
                   className={cn(
-                    'flex items-stretch text-[14.5px] font-medium transition-colors',
+                    'flex items-stretch text-nav font-medium transition-colors',
                     (link.href !== '/' && location.pathname.startsWith(link.href)) ||
                       link.sublinks?.some((sub) => location.pathname.startsWith(sub.href))
                       ? 'text-accent'
@@ -281,25 +282,26 @@ export default function Header() {
                                 onClick={() => setActiveDropdown(null)}
                                 className="group/item flex items-baseline justify-between gap-4 px-3 py-2.5 hover:bg-paper transition-colors"
                               >
-                                <span className="text-[14.5px] font-semibold text-navy group-hover/item:text-accent transition-colors">
+                                <span className="text-nav font-semibold text-navy group-hover/item:text-accent transition-colors">
                                   {sub.name}
                                 </span>
-                                <span className="text-[13px] text-slate text-right">{sub.description}</span>
+                                <span className="text-caption text-slate text-right">{sub.description}</span>
                               </Link>
                             ))}
                           </div>
                           <div className="bg-navy text-white p-6 flex flex-col justify-end">
                             <span className="eyebrow text-mint mb-2">In drei Schritten</span>
-                            <p className="font-semibold text-[17px] leading-snug mb-5">
+                            <p className="font-semibold text-lead leading-snug mb-5">
                               Anforderungen klären, Besichtigung, Angebot.
                             </p>
-                            <Link
+                            <ButtonLink
                               to="/angebot"
+                              arrow
                               onClick={() => setActiveDropdown(null)}
-                              className="inline-flex items-center gap-2 self-start bg-accent hover:bg-accent-dark text-white text-sm font-semibold px-4 py-2.5 rounded-md transition-colors"
+                              className="self-start px-4 py-2.5 text-sm"
                             >
-                              Jetzt anfragen <ArrowRight size={15} />
-                            </Link>
+                              Jetzt anfragen
+                            </ButtonLink>
                           </div>
                         </div>
                       ) : (
@@ -309,7 +311,7 @@ export default function Header() {
                               key={sub.name}
                               to={sub.href}
                               onClick={() => setActiveDropdown(null)}
-                              className="block px-5 py-2.5 text-[14.5px] font-medium text-ink hover:bg-paper hover:text-accent transition-colors"
+                              className="block px-5 py-2.5 text-nav font-medium text-ink hover:bg-paper hover:text-accent transition-colors"
                             >
                               {sub.name}
                             </Link>
@@ -326,7 +328,7 @@ export default function Header() {
           <div className="flex items-center gap-3">
             <a
               href={SITE.phoneHref}
-              className="hidden xl:flex items-center gap-2 font-semibold text-[14.5px] text-navy hover:text-accent transition-colors mr-2"
+              className="hidden xl:flex items-center gap-2 font-semibold text-nav text-navy hover:text-accent transition-colors mr-2"
             >
               <Phone size={16} aria-hidden="true" />
               {SITE.phone}
@@ -341,13 +343,9 @@ export default function Header() {
               <Phone size={20} />
             </a>
 
-            <Link
-              to="/angebot"
-              className="hidden sm:inline-flex items-center gap-2 bg-accent text-white px-4 py-2.5 font-semibold text-[14.5px] hover:bg-accent-dark transition-colors rounded-md focus:outline-none focus-visible:ring-4 focus-visible:ring-accent/40"
-            >
+            <ButtonLink to="/angebot" arrow className="hidden sm:inline-flex flex-shrink-0 whitespace-nowrap px-4 py-2.5 text-nav">
               Besichtigung anfragen
-              <ArrowRight size={15} />
-            </Link>
+            </ButtonLink>
 
             <button
               ref={mobileMenuTriggerRef}
@@ -397,7 +395,7 @@ export default function Header() {
                   ref={mobileCloseRef}
                   type="button"
                   onClick={closeMobileMenu}
-                  className="p-2 text-slate hover:text-navy hover:bg-gray-100 rounded-lg transition-all"
+                  className="p-2 text-slate hover:text-navy hover:bg-paper rounded-lg transition-all"
                   aria-label="Menü schließen"
                 >
                   <X size={24} />
@@ -422,7 +420,7 @@ export default function Header() {
                           {link.name}
                           <ChevronDown
                             className={cn(
-                              'w-5 h-5 transition-transform duration-300 text-gray-400',
+                              'w-5 h-5 transition-transform duration-300 text-slate',
                               mobileActiveDropdown === link.name && 'rotate-180'
                             )}
                           />
@@ -461,7 +459,7 @@ export default function Header() {
                                 <Link
                                   key={sub.name}
                                   to={sub.href}
-                                  className="px-4 py-3 text-[15px] font-medium text-ink hover:text-accent transition-colors"
+                                  className="px-4 py-3 text-body-sm font-medium text-ink hover:text-accent transition-colors"
                                   onClick={closeMobileMenuForNavigation}
                                 >
                                   {sub.name}
@@ -477,21 +475,14 @@ export default function Header() {
               </div>
 
               <div className="p-6 border-t border-line flex-shrink-0 space-y-3">
-                <Link
-                  to="/angebot"
-                  className="flex items-center justify-center gap-2 w-full bg-accent text-white px-6 py-3.5 font-semibold hover:bg-accent-dark transition-colors rounded-md"
-                  onClick={closeMobileMenuForNavigation}
-                >
-                  Besichtigung anfragen <ArrowRight size={16} />
-                </Link>
-                <a
-                  href={SITE.phoneHref}
-                  className="flex items-center justify-center gap-2 w-full border border-navy/30 text-navy px-6 py-3.5 font-semibold rounded-md"
-                >
-                  <Phone size={16} className="text-accent" />
+                <ButtonLink to="/angebot" size="lg" arrow className="w-full" onClick={closeMobileMenuForNavigation}>
+                  Besichtigung anfragen
+                </ButtonLink>
+                <a href={SITE.phoneHref} className={buttonClasses('outline', 'lg', 'w-full')}>
+                  <Phone size={16} aria-hidden="true" />
                   {SITE.phone}
                 </a>
-                <p className="text-center text-[13px] text-slate">{SITE.hours}</p>
+                <p className="text-center text-caption text-slate">{SITE.hours}</p>
               </div>
             </motion.div>
           </>

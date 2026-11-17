@@ -82,7 +82,7 @@ export default function FachwissenMindestlohn() {
 
       <ArticleMeta slug={SLUG} />
 
-      <section className="bg-white py-16 lg:py-24">
+      <section className="bg-white section-y">
         <div className="mx-auto max-w-4xl px-4 sm:px-8">
           <div className="prose prose-lg max-w-none leading-relaxed text-slate">
             <h2 id="branchenmindestlohn-2026" className="scroll-mt-28 font-headline text-2xl font-bold text-navy sm:text-3xl">
@@ -246,7 +246,7 @@ export default function FachwissenMindestlohn() {
               </Link>
             </p>
 
-            <div className="not-prose my-10 rounded-3xl border border-line bg-paper p-6 shadow-soft sm:p-8">
+            <div className="not-prose my-10 rounded-3xl border border-line bg-paper p-6 sm:p-8">
               <h3 className="flex items-center gap-3 font-headline text-xl font-bold text-navy">
                 <Calculator className="h-6 w-6 shrink-0 text-brand" aria-hidden="true" />
                 Rechenlogik mit Annahmen
@@ -344,9 +344,9 @@ export default function FachwissenMindestlohn() {
               Unternehmerbegriff an.
             </p>
 
-            <div className="not-prose my-10 rounded-2xl border border-amber-200 bg-amber-50 p-6">
+            <div className="not-prose my-10 rounded-2xl border border-notice-line bg-notice-surface p-6">
               <div className="flex items-start gap-3">
-                <CircleAlert className="mt-0.5 h-6 w-6 shrink-0 text-amber-700" aria-hidden="true" />
+                <CircleAlert className="mt-0.5 h-6 w-6 shrink-0 text-notice" aria-hidden="true" />
                 <div>
                   <h3 className="font-headline text-lg font-bold text-navy">Prüfpunkte für den Vertrag</h3>
                   <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-relaxed text-slate">
@@ -382,7 +382,7 @@ export default function FachwissenMindestlohn() {
         </div>
       </section>
 
-      <section className="bg-paper py-16 lg:py-24" aria-labelledby="mindestlohn-faq">
+      <section className="bg-paper section-y" aria-labelledby="mindestlohn-faq">
         <div className="mx-auto max-w-4xl px-4 sm:px-8">
           <div className="mb-12 text-center">
             <span className="eyebrow justify-center text-brand">Häufige Fragen</span>

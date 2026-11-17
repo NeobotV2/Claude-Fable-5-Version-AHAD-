@@ -47,7 +47,7 @@ export default function StickyCTA() {
             <Link
               to="/angebot"
               aria-label="Besichtigung anfragen"
-              className="flex items-center justify-center gap-2 px-3 py-3.5 rounded-xl bg-accent text-white font-bold text-sm shadow-glow transition-transform text-center leading-snug"
+              className="flex items-center justify-center gap-2 px-3 py-3.5 rounded-xl bg-accent text-white font-bold text-sm transition-transform text-center leading-snug"
             >
               <FileText size={17} className="flex-shrink-0" />
               Besichtigung anfragen

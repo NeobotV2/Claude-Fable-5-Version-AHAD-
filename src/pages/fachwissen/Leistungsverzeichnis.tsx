@@ -86,7 +86,7 @@ export default function FachwissenLeistungsverzeichnis() {
       />
 
       {/* Auf einen Blick */}
-      <section className="border-b border-line bg-white py-12 lg:py-14">
+      <section className="border-b border-line bg-white section-y-sm">
         <div className="mx-auto max-w-7xl px-4 sm:px-8">
           <h2 className="mb-8 text-center text-2xl font-black text-navy">Drei Grundregeln für das Leistungsverzeichnis</h2>
           <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
@@ -121,7 +121,7 @@ export default function FachwissenLeistungsverzeichnis() {
       <ArticleMeta slug="leistungsverzeichnis-gebaeudereinigung-erstellen" />
 
       {/* Content */}
-      <section className="bg-white py-16 lg:py-24">
+      <section className="bg-white section-y">
         <div className="mx-auto max-w-3xl px-4 sm:px-8">
           <div className="prose prose-lg max-w-none leading-relaxed text-slate">
             <h2 id="lv-grundlagen" className="scroll-mt-28 text-2xl font-black text-navy sm:text-3xl">Welche Funktion ein Leistungsverzeichnis erfüllt</h2>
@@ -138,7 +138,7 @@ export default function FachwissenLeistungsverzeichnis() {
             </p>
 
             <div
-              className="mb-12 overflow-x-auto rounded-2xl border border-line shadow-soft"
+              className="mb-12 overflow-x-auto rounded-2xl border border-line"
               role="region"
               aria-label="Musterzeile für ein Leistungsverzeichnis"
               tabIndex={0}
@@ -178,7 +178,7 @@ export default function FachwissenLeistungsverzeichnis() {
               hat und wie Sie die Qualität messen.
             </p>
             <div
-              className="mb-12 overflow-x-auto rounded-2xl border border-line shadow-soft"
+              className="mb-12 overflow-x-auto rounded-2xl border border-line"
               role="region"
               aria-label="Vergleich von verrichtungs- und ergebnisorientiertem Leistungsmodell"
               tabIndex={0}
@@ -239,7 +239,7 @@ export default function FachwissenLeistungsverzeichnis() {
               Ausgangsbasis:
             </p>
             <div
-              className="mb-12 overflow-x-auto rounded-2xl border border-line shadow-soft"
+              className="mb-12 overflow-x-auto rounded-2xl border border-line"
               role="region"
               aria-label="Abgrenzung der Vertragsbausteine"
               tabIndex={0}
@@ -299,7 +299,7 @@ export default function FachwissenLeistungsverzeichnis() {
               ))}
             </ul>
 
-            <div className="mb-12 rounded-3xl border border-line bg-paper p-6 shadow-soft sm:p-8">
+            <div className="mb-12 rounded-3xl border border-line bg-paper p-6 sm:p-8">
               <h3 className="mb-4 flex items-center gap-3 text-xl font-bold text-navy">
                 <AlertTriangle className="h-7 w-7 text-brand" aria-hidden="true" />
                 Häufige Fehler im Leistungsverzeichnis
@@ -346,7 +346,7 @@ export default function FachwissenLeistungsverzeichnis() {
       </section>
 
       {/* FAQ */}
-      <section className="bg-paper py-16 lg:py-24">
+      <section className="bg-paper section-y">
         <div className="mx-auto max-w-4xl px-4 sm:px-8">
           <div className="mb-12 text-center">
             <span className="mb-4 block text-sm font-bold uppercase tracking-wider text-brand">Häufige Fragen</span>

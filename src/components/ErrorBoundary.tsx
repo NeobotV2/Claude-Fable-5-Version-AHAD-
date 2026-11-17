@@ -70,9 +70,9 @@ class ErrorBoundary extends Component<Props, State> {
       // Neutraler Übergang, während mit frischen Dateien neu geladen wird.
       if (this.state.recovering) {
         return (
-          <div className="min-h-screen flex items-center justify-center bg-gray-50 p-4">
-            <div className="flex items-center gap-3 text-gray-500 font-medium">
-              <span className="w-5 h-5 rounded-full border-2 border-gray-300 border-t-[#0B2341] animate-spin" />
+          <div className="min-h-screen flex items-center justify-center bg-paper p-4">
+            <div className="flex items-center gap-3 text-slate font-medium">
+              <span className="w-5 h-5 rounded-full border-2 border-navy/30 border-t-navy animate-spin" />
               Aktualisierung läuft …
             </div>
           </div>
@@ -80,18 +80,18 @@ class ErrorBoundary extends Component<Props, State> {
       }
 
       return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-50 p-4">
+        <div className="min-h-screen flex items-center justify-center bg-paper p-4">
           <div className="max-w-md w-full bg-white p-8 rounded-2xl shadow-xl border border-red-100">
-            <h1 className="text-2xl font-black text-red-600 mb-4">Etwas ist schiefgelaufen</h1>
-            <p className="text-gray-600 mb-6 font-medium">
+            <h1 className="text-2xl font-black text-danger mb-4">Etwas ist schiefgelaufen</h1>
+            <p className="text-slate mb-6 font-medium">
               Die Seite konnte nicht geladen werden. Bitte laden Sie sie neu. Wenn der Fehler bleibt, kontaktieren Sie uns.
             </p>
-            <div className="bg-red-50 p-4 rounded-lg mb-6 overflow-auto max-h-40">
-              <code className="text-xs text-red-800">{this.state.error?.message}</code>
+            <div className="bg-danger-surface p-4 rounded-lg mb-6 overflow-auto max-h-40">
+              <code className="text-xs text-danger">{this.state.error?.message}</code>
             </div>
             <button
               onClick={() => window.location.reload()}
-              className="w-full bg-[#0B2341] text-white py-3 rounded-xl font-bold hover:bg-[#1C4576] transition-all"
+              className="w-full bg-navy text-white py-3 rounded-xl font-bold hover:bg-brand-light transition-all"
             >
               Seite neu laden
             </button>

@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, MapPin, Phone, Clock } from 'lucide-react';
 import SEO from '@/components/SEO';
 import PageHero from '@/components/PageHero';
-import Reveal from '@/components/ui/Reveal';
 import SectionHeading from '@/components/ui/SectionHeading';
 import SmartImage from '@/components/ui/SmartImage';
 import CTABand from '@/components/CTABand';
@@ -73,14 +72,14 @@ export default function Standorte() {
       />
 
       {/* Regions-Karten */}
-      <section className="py-20 lg:py-32 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-8">
+      <section className="section-y bg-white">
+        <div className="container-page">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {regionen.map((standort, i) => (
-              <Reveal key={standort.name} delay={i * 0.1} className="h-full">
+              <div key={standort.name} className="h-full">
                 <Link
                   to={standort.path}
-                  className="group flex flex-col h-full bg-paper rounded-3xl border border-line overflow-hidden card-lift"
+                  className="group flex flex-col h-full bg-paper rounded-3xl border border-line overflow-hidden"
                 >
                   <div className="relative">
                     <SmartImage
@@ -89,12 +88,12 @@ export default function Standorte() {
                       className="aspect-[16/10]"
                       imgClassName=""
                     />
-                    <span className="absolute top-4 left-4 bg-navy/80 backdrop-blur text-mint text-[13px] font-semibold px-3 py-1.5 rounded-md">
+                    <span className="absolute top-4 left-4 bg-navy/80 backdrop-blur text-mint text-caption font-semibold px-3 py-1.5 rounded-md">
                       {standort.badge}
                     </span>
                   </div>
                   <div className="flex flex-col flex-grow p-7">
-                    <div className="flex items-center gap-2 text-[12px] font-bold text-brand uppercase tracking-wider mb-2">
+                    <div className="flex items-center gap-2 text-xs font-bold text-brand uppercase tracking-wider mb-2">
                       <MapPin size={13} />
                       {standort.region}
                     </div>
@@ -106,52 +105,51 @@ export default function Standorte() {
                     </span>
                   </div>
                 </Link>
-              </Reveal>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
       {/* Einzugsgebiet + Kontakt */}
-      <section className="py-20 lg:py-28 bg-paper border-t border-line">
-        <div className="max-w-7xl mx-auto px-4 sm:px-8 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+      <section className="section-y bg-paper border-t border-line">
+        <div className="container-page grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           <div>
             <SectionHeading
               eyebrow="Einzugsgebiet"
               title="Im Einsatz in Süddeutschland."
               lead="Auch außerhalb der genannten Gebiete prüfen wir Anfragen. Betreut wird jedes Objekt von unserem Sitz in Villingen-Schwenningen aus."
             />
-            <Reveal delay={0.15}>
+            <div>
               <div className="mt-8 flex flex-wrap gap-2.5">
                 {einzugsgebiete.map((stadt) =>
                   ORTSSEITEN[stadt] ? (
                     <Link
                       key={stadt}
                       to={ORTSSEITEN[stadt]}
-                      className="text-[13px] font-semibold bg-white border border-accent/40 px-4 py-2 rounded-md text-navy underline decoration-accent/50 underline-offset-2 hover:border-accent"
+                      className="text-caption font-semibold bg-white border border-accent/40 px-4 py-2 rounded-md text-navy underline decoration-accent/50 underline-offset-2 hover:border-accent"
                     >
                       {stadt}
                     </Link>
                   ) : (
                     <span
                       key={stadt}
-                      className="text-[13px] font-semibold bg-white border border-line px-4 py-2 rounded-md text-navy"
+                      className="text-caption font-semibold bg-white border border-line px-4 py-2 rounded-md text-navy"
                     >
                       {stadt}
                     </span>
                   ),
                 )}
-                <span className="text-[13px] font-bold bg-navy text-mint px-4 py-2 rounded-md">+ Umgebung</span>
+                <span className="text-caption font-bold bg-navy text-mint px-4 py-2 rounded-md">+ Umgebung</span>
               </div>
-            </Reveal>
+            </div>
           </div>
 
-          <Reveal delay={0.2}>
-            <div className="bg-navy text-white rounded-3xl p-8 lg:p-10 grain relative overflow-hidden shadow-lifted">
-              <div className="absolute inset-0 blueprint-grid" />
+          <div>
+            <div className="bg-navy text-white rounded-3xl p-8 lg:p-10 relative overflow-hidden shadow-lifted">
               <div className="relative z-10">
                 <h3 className="font-headline text-2xl font-bold mb-6">Zentrale Villingen-Schwenningen</h3>
-                <ul className="space-y-4 text-blue-100/85">
+                <ul className="space-y-4 text-ondark/85">
                   <li className="flex gap-3">
                     <MapPin className="w-5 h-5 text-mint flex-shrink-0 mt-0.5" />
                     <span>
@@ -173,7 +171,7 @@ export default function Standorte() {
                 </ul>
               </div>
             </div>
-          </Reveal>
+          </div>
         </div>
       </section>
 

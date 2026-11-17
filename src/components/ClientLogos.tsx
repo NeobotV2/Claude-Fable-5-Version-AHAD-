@@ -32,7 +32,7 @@ function ClientLogo({ item }: { item: ClientReference }) {
             className={`h-full object-contain object-left ${item.caption ? 'max-w-[3.25rem]' : 'max-w-[8.5rem]'}`}
           />
           {item.caption && (
-            <span aria-hidden="true" className="font-semibold text-[15px] text-navy leading-tight">
+            <span aria-hidden="true" className="font-semibold text-body-sm text-navy leading-tight">
               {item.caption}
             </span>
           )}
@@ -51,7 +51,7 @@ export default function ClientLogos() {
 
   return (
     <ul
-      className="max-w-7xl mx-auto px-4 sm:px-8 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-x-10 gap-y-8 items-center"
+      className="container-page grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-x-10 gap-y-8 items-center"
       aria-label="Referenzkunden von AHAD Cleaning"
     >
       {REFERENCES.map((ref) => (

@@ -93,7 +93,7 @@ export default function FachwissenIntervalle() {
         ]}
       />
 
-      <section className="border-b border-line bg-white py-12 lg:py-14">
+      <section className="border-b border-line bg-white section-y-sm">
         <div className="mx-auto max-w-7xl px-4 sm:px-8">
           <h2 className="mb-8 text-center text-2xl font-black text-navy">Drei Bausteine der Intervallplanung</h2>
           <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
@@ -128,7 +128,7 @@ export default function FachwissenIntervalle() {
       <ArticleMeta slug="unterhaltsreinigung-unternehmen-reinigungsintervalle" />
 
       {/* Content Section */}
-      <section className="bg-white py-16 lg:py-24">
+      <section className="bg-white section-y">
         <div className="mx-auto max-w-3xl px-4 sm:px-8">
           <div className="prose prose-lg max-w-none leading-relaxed text-slate">
             <h2 id="intervalllogik" className="scroll-mt-28 text-2xl font-black text-navy sm:text-3xl">Fixe und adaptive Leistungen kombinieren</h2>
@@ -140,7 +140,7 @@ export default function FachwissenIntervalle() {
               einschließlich Kontrolle und Vorgehen bei Abweichungen.
             </p>
 
-            <div className="mb-12 rounded-3xl border border-line bg-paper p-6 shadow-soft sm:p-8">
+            <div className="mb-12 rounded-3xl border border-line bg-paper p-6 sm:p-8">
               <h3 className="mb-6 flex items-center gap-3 text-2xl font-bold text-navy">
                 <Calendar className="h-8 w-8 text-brand" aria-hidden="true" />
                 Vier Entscheidungen pro Raumgruppe
@@ -171,7 +171,7 @@ export default function FachwissenIntervalle() {
               klären; außerdem lässt sich dort prüfen, ob eine feste oder eine adaptive Steuerung in Frage kommt. Maßgeblich bleiben Objekt, Hygieneplan, Nutzung und vereinbartes Qualitätsziel.
             </p>
             <div
-              className="mb-12 overflow-x-auto rounded-2xl border border-line shadow-soft"
+              className="mb-12 overflow-x-auto rounded-2xl border border-line"
               role="region"
               aria-label="Planungsansätze für Reinigungsintervalle nach Bereich"
               tabIndex={0}
@@ -255,7 +255,7 @@ export default function FachwissenIntervalle() {
               Objektleitung, Material, Maschinen und weitere Auftragsbedingungen bleiben separat zu kalkulieren. Das
               folgende Beispiel zeigt deshalb nur die Stundenlogik einer abgegrenzten Büroflächenleistung.
             </p>
-            <div className="mb-12 rounded-3xl border border-line bg-paper p-6 shadow-soft sm:p-8">
+            <div className="mb-12 rounded-3xl border border-line bg-paper p-6 sm:p-8">
               <h3 className="mb-4 text-xl font-bold text-navy">Hypothetisches Beispiel: abgegrenzte Büroflächenleistung</h3>
               <p className="mb-4 text-sm">
                 Angenommen, eine definierte Tätigkeit benötigt pro Auslösung 1,5 Stunden. Wird sie fünfmal pro Woche
@@ -325,7 +325,7 @@ export default function FachwissenIntervalle() {
       </section>
 
       {/* FAQ Section */}
-      <section className="bg-paper py-16 lg:py-24">
+      <section className="bg-paper section-y">
         <div className="mx-auto max-w-4xl px-4 sm:px-8">
           <div className="mb-12 text-center">
             <span className="mb-4 block text-sm font-bold uppercase tracking-wider text-brand">Häufige Fragen</span>

@@ -92,10 +92,10 @@ export default function BeforeAfter({
       </div>
 
       {/* Labels */}
-      <span className="absolute top-0 left-0 bg-navy text-white text-[13px] font-semibold px-3.5 py-2 pointer-events-none">
+      <span className="absolute top-0 left-0 bg-navy text-white text-caption font-semibold px-3.5 py-2 pointer-events-none">
         {beforeLabel}
       </span>
-      <span className="absolute top-0 right-0 bg-accent text-white text-[13px] font-semibold px-3.5 py-2 pointer-events-none">
+      <span className="absolute top-0 right-0 bg-accent text-white text-caption font-semibold px-3.5 py-2 pointer-events-none">
         {afterLabel}
       </span>
 
