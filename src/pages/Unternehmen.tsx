@@ -62,7 +62,7 @@ export default function Unternehmen() {
         lead="AHAD Cleaning ist ein inhabergeführtes Gebäudedienstleistungsunternehmen aus Villingen-Schwenningen. Wir organisieren die Reinigung Ihrer Gebäude so, dass Sie sich nicht selbst darum kümmern müssen."
         image={IMG.team}
         crumbs={[{ label: 'Unternehmen' }]}
-        cta={{ label: 'Mit uns arbeiten', to: '/angebot' }}
+        cta={{ label: 'Kostenlose Besichtigung anfragen', to: '/angebot' }}
         secondaryCta={{ label: 'Karriere bei AHAD', to: '/karriere' }}
       />
 

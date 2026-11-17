@@ -21,6 +21,12 @@ export const SITE = {
     country: 'DE',
   },
   hours: 'Mo–Fr · 08:00–17:00 Uhr',
+  /** Dieselben Zeiten maschinenlesbar (Unternehmenseintrag) — muss zu `hours` passen. */
+  openingHours: {
+    days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+    opens: '08:00',
+    closes: '17:00',
+  },
   social: {
     instagram: 'https://instagram.com/ahadcleaning',
     linkedin: 'https://linkedin.com/company/ahadcleaning',
@@ -112,8 +118,10 @@ const releasedVerification = (
 
 /**
  * Zentrales Claim-Register. Alle Aussagen unten sind von der Geschäftsführung
- * am 01.09.2026 bestätigt und freigegeben (Wiedervorlage 01.09.2028). Nur die
- * Standort-Einträge (Filialadressen/Geo) bleiben bewusst auf Servicegebiet.
+ * am 01.09.2026 bestätigt und freigegeben (Wiedervorlage 01.09.2028). Der
+ * Unternehmenseintrag für den Hauptsitz (Adresse, Öffnungszeiten, Koordinaten)
+ * ist seit dem 17.11.2026 freigegeben. Die Standorte Stuttgart und Konstanz
+ * bleiben bewusst auf Servicegebiet.
  */
 export const CLAIM_VERIFICATIONS = {
   serviceLevels: releasedVerification('Operations / Geschäftsführung', 'freigaben/servicelevel-2026-09-01'),
@@ -126,7 +134,12 @@ export const CLAIM_VERIFICATIONS = {
   clientReferences: releasedVerification('Vertrieb / Geschäftsführung', 'freigaben/kundenlogos-2026-09-01'),
   featuredTestimonial: releasedVerification('Marketing / Datenschutz', 'freigaben/kundenstimme-sma-2026-09-01'),
   customerReviews: releasedVerification('Marketing / Datenschutz', 'freigaben/google-rezensionen-2026-09-01'),
-  hqGeo: pendingVerification('Operations'),
+  hqGeo: releasedVerification(
+    'Geschäftsführung',
+    'freigaben/hauptsitz-unternehmenseintrag-2026-11-17',
+    '2026-11-17',
+    '2028-11-17',
+  ),
   stuttgartBranch: pendingVerification('Operations'),
   konstanzBranch: pendingVerification('Operations'),
 } satisfies Record<string, PublicationVerification>;
@@ -144,6 +157,14 @@ export interface LocationPublication {
 }
 
 /**
+ * Koordinaten des Hauptsitzes. Bewusst leer, bis ein geprüfter Wert vorliegt
+ * (z. B. aus dem Google-Unternehmensprofil) — geschätzte Koordinaten würden den
+ * Eintrag auf der Karte an die falsche Stelle setzen. Solange hier `null`
+ * steht, erscheint der Unternehmenseintrag ohne Koordinaten.
+ */
+export const HQ_GEO = null as { latitude: number; longitude: number } | null;
+
+/**
  * Rollen der Ortsseiten. Die HQ-Adresse darf als rechtliche
  * Organization-Adresse erscheinen. Filial- und Geo-Markup bleibt ohne
  * gesonderten Standortnachweis gesperrt.
@@ -156,7 +177,7 @@ export const LOCATION_PUBLICATIONS = {
     verification: CLAIM_VERIFICATIONS.hqGeo,
     publishLegalAddress: true,
     publishAsLocalBusiness: canPublishVerification(CLAIM_VERIFICATIONS.hqGeo),
-    publishGeo: canPublishVerification(CLAIM_VERIFICATIONS.hqGeo),
+    publishGeo: canPublishVerification(CLAIM_VERIFICATIONS.hqGeo) && HQ_GEO !== null,
   },
   stuttgart: {
     name: 'Stuttgart',
@@ -563,3 +584,40 @@ export const ORGANIZATION_SCHEMA = {
     })),
   },
 };
+
+const HQ = LOCATION_PUBLICATIONS.villingenSchwenningen;
+
+/**
+ * Unternehmenseintrag für den Hauptsitz: Adresse, Telefon und Öffnungszeiten in
+ * der Form, die Suchmaschinen für Karten- und Ortsergebnisse auswerten. Gehört
+ * als Standort zur Organization oben (parentOrganization) und erscheint nur
+ * mit gültiger Freigabe im Claim-Register. Koordinaten kommen erst dazu, wenn
+ * HQ_GEO einen geprüften Wert trägt. Bewertungssterne bleiben bewusst draußen.
+ */
+export const HQ_LOCAL_BUSINESS_SCHEMA = HQ.publishAsLocalBusiness
+  ? {
+      '@context': 'https://schema.org',
+      '@type': 'LocalBusiness',
+      '@id': `${SITE.url}/#hauptsitz`,
+      name: SITE.legalName,
+      url: `${SITE.url}${HQ.path}`,
+      image: `${SITE.url}/og-image.jpg`,
+      logo: `${SITE.url}/logo.png`,
+      telephone: SITE.phone,
+      email: SITE.email,
+      parentOrganization: { '@id': `${SITE.url}/#organization` },
+      address: ORGANIZATION_SCHEMA.address,
+      openingHoursSpecification: [
+        {
+          '@type': 'OpeningHoursSpecification',
+          dayOfWeek: SITE.openingHours.days,
+          opens: SITE.openingHours.opens,
+          closes: SITE.openingHours.closes,
+        },
+      ],
+      ...(HQ.publishGeo && HQ_GEO
+        ? { geo: { '@type': 'GeoCoordinates', latitude: HQ_GEO.latitude, longitude: HQ_GEO.longitude } }
+        : {}),
+      areaServed: AREA_SERVED,
+    }
+  : null;

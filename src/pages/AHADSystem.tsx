@@ -74,7 +74,7 @@ export default function AHADSystem() {
         lead="AHAD steht für Analyse, Handling, Audit und Dokumentation. Nach diesen vier Schritten planen, führen und prüfen wir die Reinigung Ihres Objekts."
         image={IMG.heroArchitecture}
         crumbs={[{ label: 'AHAD System' }]}
-        cta={{ label: 'Angebot anfordern', to: '/angebot' }}
+        cta={{ label: 'Kostenlose Besichtigung anfragen', to: '/angebot' }}
       />
 
       {/* Die 4 Schritte — je Buchstabe der Wortmarke eine Zeile */}

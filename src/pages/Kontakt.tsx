@@ -2,7 +2,7 @@ import SEO from '@/components/SEO';
 import PageHero from '@/components/PageHero';
 import ContactForm from '@/components/ContactForm';
 import ButtonLink from '@/components/ui/Button';
-import { SITE, WHATSAPP_HREF } from '@/lib/site';
+import { HQ_LOCAL_BUSINESS_SCHEMA, SITE, WHATSAPP_HREF } from '@/lib/site';
 
 const channelLink = 'inline-block py-2.5 -my-2.5 font-semibold text-accent hover:text-accent-dark hover:underline underline-offset-4';
 
@@ -54,6 +54,7 @@ export default function Kontakt() {
         title="Kontakt: Angebot & Beratung | AHAD Cleaning"
         description="Kontaktieren Sie AHAD Cleaning für eine unverbindliche Anfrage oder Objektbesichtigung. Wir klären Bedarf, Termin und Angebot persönlich."
         keywords="Kontakt Gebäudereinigung, Angebot anfordern Reinigung, AHAD Cleaning Kontakt"
+        schema={HQ_LOCAL_BUSINESS_SCHEMA ?? undefined}
       />
 
       <PageHero
@@ -111,7 +112,7 @@ export default function Kontakt() {
                 Besichtigung und das Angebot vor.
               </p>
               <ButtonLink to="/angebot" variant="white" arrow>
-                Besichtigung anfragen
+                Kostenlose Besichtigung anfragen
               </ButtonLink>
             </div>
           </div>

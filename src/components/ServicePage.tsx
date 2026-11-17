@@ -162,7 +162,7 @@ export default function ServicePage({ service }: { service: ServiceData }) {
             )}
             <div className="mt-9 flex flex-wrap items-center gap-x-4 gap-y-3">
               <ButtonLink to="/angebot" arrow>
-                Unverbindlich anfragen
+                Kostenlose Besichtigung anfragen
               </ButtonLink>
               <ButtonLink to="/ahad-system" variant="outline">
                 So sichern wir Qualität

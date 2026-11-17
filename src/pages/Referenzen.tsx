@@ -47,7 +47,7 @@ export default function Referenzen() {
         lead="Auftraggeber aus Industrie, Verwaltung und Mittelstand und was sie über die Zusammenarbeit mit uns sagen."
         image={IMG.handshake}
         crumbs={[{ label: 'Referenzen' }]}
-        cta={{ label: 'Angebot anfordern', to: '/angebot' }}
+        cta={{ label: 'Kostenlose Besichtigung anfragen', to: '/angebot' }}
       />
 
       {/* Auftraggeber — echte Kundenlogos, einheitlich normiert (nur mit Logo) */}

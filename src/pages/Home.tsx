@@ -11,7 +11,6 @@ import RuleColumns from '@/components/ui/RuleColumns';
 import BeforeAfter from '@/components/ui/BeforeAfter';
 import Accordion, { faqSchemaFrom, type FAQItem } from '@/components/ui/Accordion';
 import ClientLogos from '@/components/ClientLogos';
-import FeaturedTestimonial from '@/components/FeaturedTestimonial';
 import CTABand from '@/components/CTABand';
 import NewsTeaser from '@/components/NewsTeaser';
 import Guarantee from '@/components/Guarantee';
@@ -22,10 +21,10 @@ import {
   SITE,
   STATS,
   ORGANIZATION_SCHEMA,
+  HQ_LOCAL_BUSINESS_SCHEMA,
   WEBSITE_SCHEMA,
   GOOGLE_RATING,
   CLIENT_REFERENCES,
-  FEATURED_TESTIMONIAL_PUBLISHABLE,
 } from '@/lib/site';
 import { SERVICES } from '@/data/services';
 
@@ -171,7 +170,12 @@ export default function Home() {
         title="Gebäudereinigung Villingen-Schwenningen | AHAD Cleaning"
         description="Reinigungsfirma aus Villingen-Schwenningen: Büro-, Industrie- und Fensterreinigung, Winterdienst für Unternehmen. ISO 9001 & 14001, kostenlose Besichtigung."
         keywords="Gebäudereinigung Villingen-Schwenningen, Industriereinigung Stuttgart, Unterhaltsreinigung, Glasreinigung Konstanz, Gebäudedienstleistungen"
-        schema={[ORGANIZATION_SCHEMA, WEBSITE_SCHEMA, faqSchemaFrom(faqs)]}
+        schema={[
+          ORGANIZATION_SCHEMA,
+          WEBSITE_SCHEMA,
+          ...(HQ_LOCAL_BUSINESS_SCHEMA ? [HQ_LOCAL_BUSINESS_SCHEMA] : []),
+          faqSchemaFrom(faqs),
+        ]}
       />
       {/* LCP: Hero-Bild schon im <head> anstoßen, bevor der Parser das <img> erreicht. */}
       <Helmet>
@@ -346,7 +350,7 @@ export default function Home() {
               </p>
             </div>
             <ButtonLink to="/angebot" variant="dark" arrow className="flex-shrink-0 self-start lg:self-auto">
-              Besichtigung anfragen
+              Kostenlose Besichtigung anfragen
             </ButtonLink>
           </div>
         </div>
@@ -454,11 +458,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── KUNDENSTIMME (echtes, namentliches Testimonial) ──────────── */}
-      {FEATURED_TESTIMONIAL_PUBLISHABLE && <FeaturedTestimonial />}
-
-      {/* ── BEWERTUNGEN (echte Google-Reviews) ───────────────────────── */}
-      <Reviews limit={2} />
+      {/* ── KUNDENSTIMMEN: namentliches Testimonial und Google-Reviews in einem Abschnitt ── */}
+      <Reviews limit={2} withTestimonial />
 
       {/* ── AHAD-VERSPRECHEN (Zusagen + Eckwerte + Objektleitung) ─────── */}
       <Guarantee />

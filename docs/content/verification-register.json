@@ -17,7 +17,7 @@
     { "id": "customer-review-reproduction", "owner": "Marketing / Datenschutz", "evidence": { "url": null, "id": "freigaben/google-rezensionen-2026-09-01" }, "verifiedAt": "2026-09-01", "expiresAt": "2028-09-01", "publicState": "public" }
   ],
   "locations": [
-    { "id": "villingen-schwenningen-hq-geo", "mode": "legal-headquarters", "owner": "Operations", "legalAddressMayPublish": true, "localBusinessMayPublish": false, "geoMayPublish": false, "evidence": { "url": null, "id": null }, "verifiedAt": null, "expiresAt": null, "publicState": "service-area-only" },
+    { "id": "villingen-schwenningen-hq-geo", "mode": "legal-headquarters", "owner": "Geschaeftsfuehrung", "legalAddressMayPublish": true, "localBusinessMayPublish": true, "geoMayPublish": true, "evidence": { "url": null, "id": "freigaben/hauptsitz-unternehmenseintrag-2026-11-17" }, "verifiedAt": "2026-11-17", "expiresAt": "2028-11-17", "publicState": "local-business-without-geo", "note": "Koordinaten sind freigegeben, aber noch nicht eingetragen (HQ_GEO in src/lib/site.ts); bis dahin erscheint der Eintrag ohne Koordinaten." },
     { "id": "stuttgart", "mode": "service-area", "owner": "Operations", "legalAddressMayPublish": false, "localBusinessMayPublish": false, "geoMayPublish": false, "evidence": { "url": null, "id": null }, "verifiedAt": null, "expiresAt": null, "publicState": "service-area-only" },
     { "id": "konstanz", "mode": "service-area", "owner": "Operations", "legalAddressMayPublish": false, "localBusinessMayPublish": false, "geoMayPublish": false, "evidence": { "url": null, "id": null }, "verifiedAt": null, "expiresAt": null, "publicState": "service-area-only" }
   ],

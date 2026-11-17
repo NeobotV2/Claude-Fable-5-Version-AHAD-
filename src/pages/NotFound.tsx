@@ -5,7 +5,6 @@ import ButtonLink from '@/components/ui/Button';
 
 const quickLinks = [
   { label: 'Unsere Leistungen', href: '/leistungen' },
-  { label: 'Angebot anfordern', href: '/angebot' },
   { label: 'Kontakt', href: '/kontakt' },
 ];
 

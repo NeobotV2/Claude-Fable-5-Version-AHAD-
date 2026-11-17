@@ -119,10 +119,12 @@ export default function Datenschutz() {
               <strong>Lokaler Zwischenstand und Herkunftskontext:</strong> Der Angebotsfunnel speichert bis zu zwei
               Stunden ausschließlich sachliche Auswahlen der ersten drei Schritte im Sitzungsspeicher des Browsers.
               Freitext, Name, Unternehmen, E-Mail, Telefon und Einsatzort werden nicht als Entwurf gespeichert; nach
-              erfolgreicher Übermittlung wird der Zwischenstand sofort entfernt. Ebenfalls im Sitzungsspeicher
-              merken wir für die Zuordnung einer Anfrage die Landingpage, Leistung, Branche, Region, UTM-Kampagne
-              und ausschließlich den Hostnamen eines Referrers. URL-Abfragen und Kontaktinhalte werden nicht an die
-              Webanalyse übergeben. Der Sitzungsspeicher endet spätestens mit dem Schließen des Browser-Tabs.
+              erfolgreicher Übermittlung wird der Zwischenstand sofort entfernt. Für die Zuordnung einer Anfrage
+              merken wir uns die Landingpage, Leistung, Branche, Region, UTM-Kampagne und ausschließlich den
+              Hostnamen eines Referrers nur im Arbeitsspeicher der geöffneten Seite. Dazu wird nichts auf Ihrem
+              Gerät gespeichert; die Angaben entfallen beim Neuladen oder Schließen der Seite. URL-Abfragen und
+              Kontaktinhalte werden nicht an die Webanalyse übergeben. Der Sitzungsspeicher endet spätestens mit
+              dem Schließen des Browser-Tabs.
             </p>
           </section>
 

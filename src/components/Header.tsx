@@ -295,7 +295,7 @@ export default function Header() {
                               onClick={() => setActiveDropdown(null)}
                               className="self-start px-4 py-2.5 text-sm"
                             >
-                              Jetzt anfragen
+                              Besichtigung anfragen
                             </ButtonLink>
                           </div>
                         </div>

@@ -3,7 +3,7 @@ import PageHero from '@/components/PageHero';
 import CTABand from '@/components/CTABand';
 import RuleColumns from '@/components/ui/RuleColumns';
 import Accordion, { faqSchemaFrom, type FAQItem } from '@/components/ui/Accordion';
-import { ORG_REF, SITE } from '@/lib/site';
+import { HQ_LOCAL_BUSINESS_SCHEMA, ORG_REF, SITE } from '@/lib/site';
 import { IMG } from '@/lib/images';
 
 /** Lokale Leistungsblöcke — verknüpfen den Standort mit den Leistungsseiten
@@ -174,7 +174,12 @@ export default function StandortVS() {
         title="Reinigungsfirma VS & Schwarzwald-Baar-Kreis | AHAD Cleaning"
         description="Reinigungsfirma für Villingen-Schwenningen und Umgebung: Büro-, Fenster- und Industriereinigung sowie Winterdienst in St. Georgen, Bad Dürrheim und Königsfeld."
         keywords="Gebäudereinigung Villingen-Schwenningen, Reinigungsfirma Villingen-Schwenningen, Unterhaltsreinigung Villingen-Schwenningen, Industriereinigung Villingen-Schwenningen, Glasreinigung VS, Schwarzwald-Baar-Kreis"
-        schema={[regionalServiceSchema, faqSchemaFrom(LOCAL_FAQS)]}
+        schema={[
+          regionalServiceSchema,
+          // Hauptsitz: Adresse und Öffnungszeiten als Unternehmenseintrag (nur mit Freigabe).
+          ...(HQ_LOCAL_BUSINESS_SCHEMA ? [HQ_LOCAL_BUSINESS_SCHEMA] : []),
+          faqSchemaFrom(LOCAL_FAQS),
+        ]}
       />
       <PageHero
         eyebrow="Zentrale · Schwarzwald-Baar-Kreis"

@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import { Star, ArrowRight } from 'lucide-react';
 import SectionHeading from '@/components/ui/SectionHeading';
-import { REVIEWS, REVIEWS_SOURCE_URL, type Review } from '@/lib/site';
+import FeaturedTestimonial from '@/components/FeaturedTestimonial';
+import { FEATURED_TESTIMONIAL_PUBLISHABLE, REVIEWS, REVIEWS_SOURCE_URL, type Review } from '@/lib/site';
+import { cn } from '@/lib/utils';
 
 /** Ab dieser Länge wird eine Bewertung eingeklappt, damit die Spalten gleich hoch bleiben. */
 const COLLAPSE_AFTER = 220;
@@ -56,25 +58,33 @@ interface ReviewsProps {
   exclude?: readonly string[];
   /** Höchstzahl der Bewertungen; ohne Angabe alle freigegebenen. */
   limit?: number;
+  /**
+   * Stellt die namentliche Kundenstimme in dieselbe Sektion über die Bewertungen.
+   * So bleibt es auf der Startseite bei einem Abschnitt „Kundenstimmen“ statt zwei.
+   */
+  withTestimonial?: boolean;
 }
 
 /**
  * Echte Google-Bewertungen im Wortlaut. Rendert nichts, solange keine Reviews
- * in site.ts stehen. Die Startseite zeigt nur eine Auswahl, die
- * Referenzen-Seite führt alle.
+ * in site.ts stehen. Die Startseite zeigt nur eine Auswahl zusammen mit der
+ * namentlichen Kundenstimme, die Referenzen-Seite führt alle.
  */
-export default function Reviews({ exclude = [], limit }: ReviewsProps) {
+export default function Reviews({ exclude = [], limit, withTestimonial = false }: ReviewsProps) {
   const shown = REVIEWS.filter((review) => !exclude.includes(review.author)).slice(0, limit);
-  if (shown.length === 0) return null;
+  // Ohne freigegebene Bewertungen bleibt höchstens die Kundenstimme als eigene Sektion.
+  if (shown.length === 0) return withTestimonial ? <FeaturedTestimonial /> : null;
+
+  const lead = withTestimonial && FEATURED_TESTIMONIAL_PUBLISHABLE;
 
   const columns = shown.length <= 2 ? 'md:grid-cols-2' : 'md:grid-cols-2 lg:grid-cols-3';
 
   return (
-    <section className="section-y bg-paper border-t border-line">
+    <section className={cn('section-y border-t border-line', lead ? 'bg-white' : 'bg-paper')}>
       <div className="container-page">
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-12">
           <SectionHeading
-            eyebrow={REVIEWS_SOURCE_URL ? 'Google-Bewertungen' : 'Kundenstimmen'}
+            eyebrow={REVIEWS_SOURCE_URL && !lead ? 'Google-Bewertungen' : 'Kundenstimmen'}
             title="Was Kundinnen und Kunden über die Zusammenarbeit sagen"
             className="max-w-2xl"
           />
@@ -85,6 +95,7 @@ export default function Reviews({ exclude = [], limit }: ReviewsProps) {
             </a>
           )}
         </div>
+        {lead && <FeaturedTestimonial embedded className="border-t border-navy pt-8 lg:pt-10 mb-14 lg:mb-16" />}
         <div className={`grid grid-cols-1 gap-x-12 gap-y-12 ${columns}`}>
           {shown.map((review) => (
             <ReviewItem key={review.author} review={review} />
