@@ -327,7 +327,7 @@ textarea::placeholder {
   }
 }
 
-/* ── Vergleichsvariante Startseiten-Kopf: Foto über die ganze Breite ──────
+/* ── Startseiten-Kopf: Foto über die ganze Breite ─────────────────────────
    Nur ab 1024 px; auf dem Handy bleibt Text oben, Foto darunter. Links ein
    ruhiger dunkelblauer Verlauf für die Lesbarkeit, sonst keine Effekte. */
 @media (min-width: 1024px) {

@@ -1,9 +1,10 @@
-import { CalendarClock, CheckCircle2, CircleAlert, Calculator, Users } from 'lucide-react';
+import { CalendarClock, CheckCircle2, CircleAlert, Calculator } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import SEO from '@/components/SEO';
 import PageHero from '@/components/PageHero';
 import Accordion from '@/components/ui/Accordion';
 import CTABand from '@/components/CTABand';
+import ButtonLink from '@/components/ui/Button';
 import ArticleMeta from '@/components/ArticleMeta';
 import ArticleFooter from '@/components/ArticleFooter';
 import { buildArticleSchema, EDITORIAL_ARTICLES } from '@/data/editorial';
@@ -135,6 +136,19 @@ export default function FachwissenMindestlohn() {
               darüber.
             </p>
 
+            {/* Viele Leser dieses Beitrags arbeiten selbst in der Reinigung: Stellenhinweis direkt nach den Lohnwerten. */}
+            <aside className="not-prose my-10 bg-navy text-white p-6 sm:p-8 flex flex-col sm:flex-row sm:items-center gap-5 sm:gap-10" aria-label="Stellen bei AHAD">
+              <div className="flex-grow">
+                <p className="text-xl font-bold">Sie arbeiten in der Gebäudereinigung oder möchten einsteigen?</p>
+                <p className="mt-2 text-ondark leading-relaxed">
+                  AHAD stellt ein: fest angestellt und sozialversichert, in festen Teams.
+                </p>
+              </div>
+              <ButtonLink to="/karriere" variant="white" arrow className="flex-shrink-0 self-start sm:self-auto">
+                Offene Stellen ansehen
+              </ButtonLink>
+            </aside>
+
             <h2 id="tarifrunde-2027" className="scroll-mt-28 font-headline text-2xl font-bold text-navy sm:text-3xl">
               Tarifrunde für 2027: Stand der Verhandlungen
             </h2>
@@ -245,6 +259,18 @@ export default function FachwissenMindestlohn() {
                 Was kostet Gebäudereinigung?
               </Link>
             </p>
+
+            <aside className="not-prose my-8 border-l-2 border-accent pl-5 sm:pl-6" aria-label="Angebot für Auftraggeber">
+              <p className="text-lead font-semibold text-navy">
+                Sie möchten wissen, was die Lohnänderung für Ihr Objekt bedeutet?
+              </p>
+              <p className="mt-1.5 text-slate leading-relaxed">
+                Wir rechnen es bei einer kostenlosen Besichtigung für Ihre Flächen und Intervalle durch.
+              </p>
+              <ButtonLink to="/angebot" arrow className="mt-4">
+                Kostenlose Besichtigung anfragen
+              </ButtonLink>
+            </aside>
 
             <div className="not-prose my-10 rounded-3xl border border-line bg-paper p-6 sm:p-8">
               <h3 className="flex items-center gap-3 font-headline text-xl font-bold text-navy">
@@ -363,21 +389,6 @@ export default function FachwissenMindestlohn() {
               </div>
             </div>
 
-            <div className="not-prose mt-10 rounded-2xl border border-line bg-paper p-6">
-              <div className="flex items-start gap-3">
-                <Users className="mt-0.5 h-6 w-6 shrink-0 text-brand" aria-hidden="true" />
-                <div>
-                  <h3 className="font-headline text-lg font-bold text-navy">Arbeiten in der Gebäudereinigung</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-slate">
-                    Sie suchen eine Stelle? Auf der{' '}
-                    <Link to="/karriere" className="font-bold text-brand hover:underline">
-                      Karriereseite
-                    </Link>{' '}
-                    finden Sie Einsatzgebiete, Arbeitsmodelle und den Weg zur Bewerbung bei AHAD.
-                  </p>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </section>
