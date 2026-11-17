@@ -1,7 +1,7 @@
 import { Link, useLocation } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import { useState, useEffect, useCallback, useRef } from 'react';
-import { ChevronDown, Menu, X, Phone } from 'lucide-react';
+import { ArrowRight, ChevronDown, Menu, X, Phone } from 'lucide-react';
 import Logo from '@/components/Logo';
 import ButtonLink, { buttonClasses } from '@/components/ui/Button';
 import { SITE } from '@/lib/site';
@@ -264,36 +264,45 @@ export default function Header() {
                       id={`desktop-submenu-${index}`}
                       className={cn(
                         'absolute top-full bg-white shadow-lifted border border-line overflow-hidden z-50 animate-fade-in',
-                        link.mega ? 'left-0 w-[600px]' : 'left-0 w-64'
+                        link.mega ? 'left-0 w-[720px]' : 'left-0 w-64'
                       )}
                     >
                       {link.mega ? (
-                        <div className="grid grid-cols-[1fr_15rem]">
-                          <div className="p-3 grid content-start">
-                            {link.sublinks.map((sub) => (
-                              <Link
-                                key={sub.name}
-                                to={sub.href}
-                                onClick={() => setActiveDropdown(null)}
-                                className="group/item flex items-baseline justify-between gap-4 px-3 py-2.5 hover:bg-paper transition-colors"
-                              >
-                                <span className="text-nav font-semibold text-navy group-hover/item:text-accent transition-colors">
-                                  {sub.name}
-                                </span>
-                                <span className="text-caption text-slate text-right">{sub.description}</span>
+                        <div className="grid grid-cols-[1fr_16rem]">
+                          {/* Zwei gleich breite Spalten: Name oben, Erläuterung darunter. */}
+                          <div className="p-4">
+                            <div className="grid grid-cols-2 gap-x-2">
+                              {link.sublinks.map((sub) => (
+                                <Link
+                                  key={sub.name}
+                                  to={sub.href}
+                                  onClick={() => setActiveDropdown(null)}
+                                  className="group/item block px-3 py-3 hover:bg-paper transition-colors"
+                                >
+                                  <span className="block text-nav font-semibold text-navy whitespace-nowrap group-hover/item:text-accent transition-colors">
+                                    {sub.name}
+                                  </span>
+                                  <span className="block mt-0.5 text-caption text-slate">{sub.description}</span>
+                                </Link>
+                              ))}
+                            </div>
+                            <div className="mt-2 mx-3 pt-3 border-t border-line">
+                              <Link to={link.href} onClick={() => setActiveDropdown(null)} className="text-link text-nav">
+                                Alle Leistungen im Überblick
+                                <ArrowRight size={15} aria-hidden="true" />
                               </Link>
-                            ))}
+                            </div>
                           </div>
-                          <div className="bg-navy text-white p-6 flex flex-col justify-end">
+                          <div className="bg-navy text-white p-6 flex flex-col">
                             <span className="eyebrow text-mint mb-2">In drei Schritten</span>
-                            <p className="font-semibold text-lead leading-snug mb-5">
+                            <p className="font-semibold text-lead leading-snug">
                               Anforderungen klären, Besichtigung, Angebot.
                             </p>
                             <ButtonLink
                               to="/angebot"
                               arrow
                               onClick={() => setActiveDropdown(null)}
-                              className="self-start px-4 py-2.5 text-sm"
+                              className="mt-auto w-full whitespace-nowrap px-3 py-2.5 text-sm"
                             >
                               Besichtigung anfragen
                             </ButtonLink>
