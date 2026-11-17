@@ -287,7 +287,7 @@ export default function StandortKonstanz() {
               {SERVICE_AREAS.map((area) => (
                 <span
                   key={area}
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gray-50 border border-gray-100 text-gray-700 text-sm font-medium"
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-gray-50 border border-gray-100 text-gray-700 text-sm font-medium"
                 >
                   <MapPin className="w-3.5 h-3.5 text-accent" />
                   {area}
@@ -297,7 +297,7 @@ export default function StandortKonstanz() {
           </div>
 
           {/* Warum AHAD in Konstanz */}
-          <div className="bg-[#0B2341] rounded-[2rem] p-12 lg:p-16 text-white relative overflow-hidden mb-20">
+          <div className="bg-[#0B2341] p-12 lg:p-16 text-white relative overflow-hidden mb-20">
             <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -mr-32 -mt-32"></div>
             <div className="relative z-10">
               <div className="max-w-3xl">

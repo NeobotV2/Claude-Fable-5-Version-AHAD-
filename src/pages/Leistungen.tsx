@@ -69,7 +69,7 @@ export default function Leistungen() {
                     </span>
                     <div>
                       <span className="eyebrow text-brand mb-2">{service.tag}</span>
-                      <h2 className="font-headline text-2xl font-bold text-navy leading-tight">{service.name}</h2>
+                      <h2 className="font-headline text-xl sm:text-2xl font-bold text-navy leading-tight">{service.name}</h2>
                     </div>
                   </div>
 
@@ -90,7 +90,7 @@ export default function Leistungen() {
                       src={service.image}
                       alt={service.name}
                       className="rounded-2xl aspect-[16/9] lg:aspect-[4/3]"
-                      imgClassName="transition-transform duration-700 group-hover:scale-105"
+                      imgClassName=""
                     />
                   </div>
 

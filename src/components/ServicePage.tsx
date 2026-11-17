@@ -1,8 +1,7 @@
 import { Link } from 'react-router-dom';
-import { CheckCircle2, ArrowRight, Phone, BookOpen } from 'lucide-react';
+import { ArrowRight, Phone } from 'lucide-react';
 import SEO from '@/components/SEO';
 import PageHero from '@/components/PageHero';
-import Reveal from '@/components/ui/Reveal';
 import SectionHeading from '@/components/ui/SectionHeading';
 import ButtonLink from '@/components/ui/Button';
 import SmartImage from '@/components/ui/SmartImage';
@@ -52,7 +51,7 @@ const FACHWISSEN_BY_SLUG: Record<string, EditorialArticleSlug[]> = {
   ],
 };
 
-/** Gemeinsames Premium-Layout für alle Leistungs-Detailseiten. */
+/** Gemeinsames Layout für alle Leistungs-Detailseiten. */
 export default function ServicePage({ service }: { service: ServiceData }) {
   const related = SERVICES.filter((s) => s.slug !== service.slug).slice(0, 3);
   const articles = (FACHWISSEN_BY_SLUG[service.slug] ?? []).map((slug) => ({
@@ -96,15 +95,15 @@ export default function ServicePage({ service }: { service: ServiceData }) {
       {/* Express-Banner: Telefon zuerst — für kurzfristige/dringende Einsätze */}
       {service.expressBanner && (
         <section className="bg-accent text-white">
-          <div className="max-w-7xl mx-auto px-4 sm:px-8 py-4 flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-6 text-center">
-            <p className="font-bold text-[15px]">
+          <div className="max-w-7xl mx-auto px-4 sm:px-8 py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <p className="font-semibold text-[15px]">
               Kurzfristige oder dringende Einsätze: Rufen Sie direkt an, wir disponieren noch heute.
             </p>
             <a
               href={SITE.phoneHref}
-              className="inline-flex items-center gap-2 bg-white text-accent px-5 py-2.5 rounded-xl font-black hover:bg-mint/30 hover:text-white transition-colors flex-shrink-0"
+              className="inline-flex items-center justify-center gap-2 bg-white text-navy px-5 py-2.5 rounded-md font-semibold hover:bg-mint transition-colors flex-shrink-0"
             >
-              <Phone size={16} />
+              <Phone size={16} aria-hidden="true" />
               {SITE.phone}
             </a>
           </div>
@@ -115,120 +114,95 @@ export default function ServicePage({ service }: { service: ServiceData }) {
           (sonst bliebe ein leerer weißer Streifen mit Trennlinie). */}
       {PROMISES.length > 0 && (
         <section className="bg-white border-b border-line">
-          <div className="max-w-7xl mx-auto px-4 sm:px-8 py-8 grid grid-cols-1 sm:grid-cols-3 gap-6">
-            {PROMISES.map((promise, i) => (
-              <Reveal key={promise.label} delay={i * 0.08} y={16}>
-                <div className="flex items-center gap-4">
-                  <span className="font-accent text-3xl font-bold text-brand">{promise.value}</span>
-                  <span className="text-sm font-semibold text-slate leading-snug">{promise.label}</span>
-                </div>
-              </Reveal>
+          <ul className="max-w-7xl mx-auto px-4 sm:px-8 grid grid-cols-1 sm:grid-cols-3 sm:divide-x divide-line">
+            {PROMISES.map((promise) => (
+              <li key={promise.label} className="py-5 sm:py-6 flex items-baseline gap-3 sm:px-8 sm:first:pl-0">
+                <span className="font-accent text-3xl font-semibold text-navy tabular-nums">{promise.value}</span>
+                <span className="text-[15px] text-slate leading-snug">{promise.label}</span>
+              </li>
             ))}
-          </div>
+          </ul>
         </section>
       )}
 
-      {/* Auf einen Blick */}
-      <section className="py-20 lg:py-28 bg-paper">
+      {/* Schwerpunkte: drei Spalten mit Haarlinie, ohne Karten und Icons */}
+      <section className="py-20 lg:py-28 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-8">
-          <SectionHeading
-            eyebrow="Schwerpunkte"
-            title={`${service.name} mit AHAD`}
-            className="mb-12 lg:mb-16"
-          />
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {service.highlights.map((highlight, i) => (
-              <Reveal key={highlight.title} delay={i * 0.1} className="h-full">
-                <div className="bg-white h-full p-8 rounded-3xl border border-line shadow-soft card-lift">
-                  <span className="inline-flex w-14 h-14 rounded-2xl bg-paper items-center justify-center mb-6">
-                    {highlight.icon}
-                  </span>
-                  <h3 className="font-headline font-bold text-xl text-navy mb-3">{highlight.title}</h3>
-                  <p className="text-slate text-sm leading-relaxed">{highlight.text}</p>
-                </div>
-              </Reveal>
+          <SectionHeading eyebrow="Schwerpunkte" title={`${service.name} mit AHAD`} className="mb-12" />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-x-10 gap-y-10">
+            {service.highlights.map((highlight) => (
+              <div key={highlight.title} className="border-t border-navy pt-5">
+                <h3 className="text-xl font-bold text-navy mb-2.5">{highlight.title}</h3>
+                <p className="text-slate leading-relaxed">{highlight.text}</p>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
       {/* Leistungsumfang */}
-      <section className="py-20 lg:py-32 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-8 grid grid-cols-1 lg:grid-cols-2 gap-14 lg:gap-20 items-center">
+      <section className="py-20 lg:py-28 bg-paper border-y border-line">
+        <div className="max-w-7xl mx-auto px-4 sm:px-8 grid grid-cols-1 lg:grid-cols-2 gap-x-16 gap-y-12 items-start">
           <div>
             <SectionHeading eyebrow="Leistungsumfang" title={service.scopeTitle} lead={service.scopeIntro} />
-            <Reveal delay={0.15}>
-              <ul className="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-4">
-                {service.scope.map((item) => (
-                  <li key={item} className="flex items-start gap-3 text-[15px] font-medium text-navy">
-                    <CheckCircle2 className="text-accent w-5 h-5 flex-shrink-0 mt-0.5" />
-                    <span>{item}</span>
-                  </li>
+            <ul className="mt-9 border-t border-navy">
+              {service.scope.map((item) => (
+                <li key={item} className="py-3 border-b border-line text-navy font-medium">
+                  {item}
+                </li>
+              ))}
+            </ul>
+            {service.detailLinks && (
+              <p className="mt-6 text-[15px] text-slate">
+                Mehr dazu:{' '}
+                {service.detailLinks.map((link, i) => (
+                  <span key={link.to}>
+                    {i > 0 && ', '}
+                    <Link to={link.to} className="font-semibold text-accent underline underline-offset-4 hover:text-accent-dark">
+                      {link.label}
+                    </Link>
+                  </span>
                 ))}
-              </ul>
-              {service.detailLinks && (
-                <p className="mt-6 text-[15px] text-slate">
-                  Mehr dazu:{' '}
-                  {service.detailLinks.map((link, i) => (
-                    <span key={link.to}>
-                      {i > 0 && ', '}
-                      <Link to={link.to} className="font-semibold text-brand underline underline-offset-2 hover:text-brand-light">
-                        {link.label}
-                      </Link>
-                    </span>
-                  ))}
-                </p>
-              )}
-            </Reveal>
-            <Reveal delay={0.25} className="mt-10">
-              <div className="flex flex-col sm:flex-row gap-4">
-                <ButtonLink to="/angebot" arrow>
-                  Unverbindlich anfragen
-                </ButtonLink>
-                <ButtonLink to="/ahad-system" variant="outline">
-                  So sichern wir Qualität
-                </ButtonLink>
-              </div>
-            </Reveal>
+              </p>
+            )}
+            <div className="mt-9 flex flex-wrap items-center gap-x-4 gap-y-3">
+              <ButtonLink to="/angebot" arrow>
+                Unverbindlich anfragen
+              </ButtonLink>
+              <ButtonLink to="/ahad-system" variant="outline">
+                So sichern wir Qualität
+              </ButtonLink>
+            </div>
           </div>
 
-          <Reveal delay={0.15}>
-            <div className="relative">
-              <SmartImage
-                src={service.detailImage}
-                alt={`${service.name}: Ausführung durch AHAD Cleaning`}
-                className="rounded-3xl shadow-lifted aspect-[4/3]"
-              />
-              <div className="absolute -bottom-6 -left-6 hidden sm:block bg-navy text-white rounded-2xl p-6 shadow-lifted max-w-[16rem] grain overflow-hidden">
-                <p className="relative z-10 font-headline font-bold text-lg leading-snug mb-1.5">Feste Objektleitung</p>
-                <p className="relative z-10 text-blue-100/80 text-[13px] leading-relaxed">
-                  Eine feste Ansprechperson, die Ihr Objekt kennt und für die Ausführung verantwortlich ist.
-                </p>
-              </div>
-            </div>
-          </Reveal>
+          <figure>
+            <SmartImage
+              src={service.detailImage}
+              alt={`${service.name}: Ausführung durch AHAD Cleaning`}
+              sizes="(min-width:1024px) 50vw, 100vw"
+              className="aspect-[4/3]"
+            />
+            <figcaption className="mt-4 border-l-2 border-accent pl-4 text-[15px] text-slate leading-relaxed">
+              <span className="font-semibold text-navy">Feste Objektleitung.</span> Eine feste Ansprechperson, die Ihr
+              Objekt kennt und für die Ausführung verantwortlich ist.
+            </figcaption>
+          </figure>
         </div>
       </section>
 
       {/* FAQ */}
-      <section className="py-20 lg:py-28 bg-paper">
-        <div className="max-w-4xl mx-auto px-4 sm:px-8">
-          <SectionHeading
-            eyebrow="Häufige Fragen"
-            title={`Fragen und Antworten: ${service.name}`}
-            align="center"
-            className="mb-12"
-          />
-          <Accordion items={service.faqs} />
-          <Reveal delay={0.2} className="mt-8 text-center">
-            <a
-              href={SITE.phoneHref}
-              className="inline-flex items-center gap-2 text-brand font-bold hover:text-brand-light transition-colors"
-            >
-              <Phone size={17} />
+      <section className="py-20 lg:py-28 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-8 grid grid-cols-1 lg:grid-cols-12 gap-x-14 gap-y-10">
+          <div className="lg:col-span-4">
+            <SectionHeading eyebrow="Häufige Fragen" title={`Fragen und Antworten: ${service.name}`} />
+            <a href={SITE.phoneHref} className="text-link mt-7">
+              <Phone size={17} aria-hidden="true" />
               Direkt fragen: {SITE.phone}
             </a>
-          </Reveal>
+          </div>
+          <div className="lg:col-span-8">
+            <Accordion items={service.faqs} />
+          </div>
         </div>
       </section>
 
@@ -237,32 +211,19 @@ export default function ServicePage({ service }: { service: ServiceData }) {
         <div className="max-w-7xl mx-auto px-4 sm:px-8">
           <div className="flex items-end justify-between gap-6 mb-10">
             <h2 className="display-md text-navy">Verwandte Leistungen</h2>
-            <Link to="/leistungen" className="hidden sm:inline-flex items-center gap-1.5 text-sm font-bold text-brand hover:text-brand-light transition-colors flex-shrink-0">
-              Alle Leistungen <ArrowRight size={15} />
+            <Link to="/leistungen" className="text-link hidden sm:inline-flex flex-shrink-0">
+              Alle Leistungen <ArrowRight size={16} aria-hidden="true" />
             </Link>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
-            {related.map((rel, i) => (
-              <Reveal key={rel.slug} delay={i * 0.08}>
-                <Link
-                  to={rel.path}
-                  className="group relative flex min-h-[13rem] rounded-3xl overflow-hidden bg-navy shadow-soft card-lift"
-                >
-                  <SmartImage
-                    src={rel.image}
-                    alt=""
-                    className="absolute inset-0"
-                    imgClassName="opacity-60 transition-transform duration-700 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-navy/95 via-navy/40 to-transparent" />
-                  <div className="relative z-10 mt-auto p-6 text-white flex items-center justify-between gap-3 w-full">
-                    <h3 className="font-headline font-bold text-lg leading-snug">{rel.name}</h3>
-                    <span className="w-8 h-8 rounded-full bg-white/15 backdrop-blur grid place-items-center flex-shrink-0 transition-colors group-hover:bg-accent">
-                      <ArrowRight size={15} />
-                    </span>
-                  </div>
-                </Link>
-              </Reveal>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-x-8 gap-y-10">
+            {related.map((rel) => (
+              <Link key={rel.slug} to={rel.path} className="group block">
+                <SmartImage src={rel.image} alt="" sizes="(min-width:640px) 33vw, 100vw" className="aspect-[3/2]" />
+                <h3 className="mt-4 flex items-center justify-between gap-3 text-lg font-bold text-navy group-hover:text-accent transition-colors">
+                  {rel.name}
+                  <ArrowRight size={17} className="flex-shrink-0" aria-hidden="true" />
+                </h3>
+              </Link>
             ))}
           </div>
         </div>
@@ -270,24 +231,25 @@ export default function ServicePage({ service }: { service: ServiceData }) {
 
       {/* Passende Fachwissen-Artikel — interne Verlinkung Leistung -> Wissensbereich */}
       {articles.length > 0 && (
-        <section className="py-14 bg-paper border-t border-line">
+        <section className="py-14 lg:py-16 bg-paper border-t border-line">
           <div className="max-w-7xl mx-auto px-4 sm:px-8">
-            <h2 className="font-headline text-xl font-bold text-navy mb-6 flex items-center gap-2.5">
-              <BookOpen size={20} className="text-accent" />
-              Fachbeiträge zum Thema
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <h2 className="pb-4 border-b border-navy font-semibold text-navy">Fachbeiträge zum Thema</h2>
+            <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-10">
               {articles.map((a) => (
-                <Link
-                  key={a.to}
-                  to={a.to}
-                  className="group flex items-center justify-between gap-4 bg-white border border-line rounded-2xl px-6 py-5 hover:border-accent/40 hover:shadow-soft transition-all"
-                >
-                  <span className="font-semibold text-navy leading-snug">{a.title}</span>
-                  <ArrowRight size={16} className="text-accent flex-shrink-0 transition-transform group-hover:translate-x-1" />
-                </Link>
+                <li key={a.to} className="border-b border-line">
+                  <Link to={a.to} className="group flex items-center justify-between gap-4 py-4">
+                    <span className="font-medium text-navy leading-snug group-hover:text-accent transition-colors">
+                      {a.title}
+                    </span>
+                    <ArrowRight
+                      size={16}
+                      className="flex-shrink-0 text-navy/40 group-hover:text-accent transition-colors"
+                      aria-hidden="true"
+                    />
+                  </Link>
+                </li>
               ))}
-            </div>
+            </ul>
           </div>
         </section>
       )}

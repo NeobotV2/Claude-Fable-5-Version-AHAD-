@@ -138,7 +138,7 @@ export default function Fachwissen() {
                   <Reveal key={clusterKey} delay={Math.min(index * 0.06, 0.18)}>
                     <a
                       href={`#${clusterKey}`}
-                      className="group flex h-full min-h-28 items-start gap-4 rounded-2xl border border-line bg-paper p-5 transition-all hover:-translate-y-0.5 hover:border-brand/40 hover:shadow-soft focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+                      className="group flex h-full min-h-28 items-start gap-4 rounded-2xl border border-line bg-paper p-5 transition-all hover:border-brand/40 hover:shadow-soft focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
                     >
                       <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-brand/8 text-brand">
                         <Icon size={20} aria-hidden="true" />
@@ -253,9 +253,9 @@ export default function Fachwissen() {
                         <Reveal key={article.slug} delay={Math.min(index * 0.07, 0.14)} className="h-full">
                           <Link
                             to={getEditorialArticlePath(article.slug)}
-                            className="group flex h-full flex-col rounded-2xl border border-line bg-paper p-6 transition-all hover:-translate-y-0.5 hover:border-brand/40 hover:shadow-soft focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand sm:p-7"
+                            className="group flex h-full flex-col rounded-2xl border border-line bg-paper p-6 transition-all hover:border-brand/40 hover:shadow-soft focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand sm:p-7"
                           >
-                            <div className="flex flex-wrap items-center justify-between gap-3 text-[11px] font-black uppercase tracking-[0.14em] text-brand">
+                            <div className="flex flex-wrap items-center justify-between gap-3 text-[13px] font-semibold text-brand">
                               <span>{article.format} · {article.topic}</span>
                               <span className="text-slate">{article.readingMinutes} Min.</span>
                             </div>

@@ -87,9 +87,9 @@ export default function Standorte() {
                       src={standort.image}
                       alt={`AHAD Cleaning Einsatzgebiet ${standort.name}`}
                       className="aspect-[16/10]"
-                      imgClassName="transition-transform duration-700 group-hover:scale-105"
+                      imgClassName=""
                     />
-                    <span className="absolute top-4 left-4 bg-navy/80 backdrop-blur text-mint text-[10px] font-black uppercase tracking-[0.18em] px-3 py-1.5 rounded-full">
+                    <span className="absolute top-4 left-4 bg-navy/80 backdrop-blur text-mint text-[13px] font-semibold px-3 py-1.5 rounded-md">
                       {standort.badge}
                     </span>
                   </div>
@@ -128,20 +128,20 @@ export default function Standorte() {
                     <Link
                       key={stadt}
                       to={ORTSSEITEN[stadt]}
-                      className="text-[13px] font-semibold bg-white border border-accent/40 px-4 py-2 rounded-full text-navy underline decoration-accent/50 underline-offset-2 hover:border-accent"
+                      className="text-[13px] font-semibold bg-white border border-accent/40 px-4 py-2 rounded-md text-navy underline decoration-accent/50 underline-offset-2 hover:border-accent"
                     >
                       {stadt}
                     </Link>
                   ) : (
                     <span
                       key={stadt}
-                      className="text-[13px] font-semibold bg-white border border-line px-4 py-2 rounded-full text-navy"
+                      className="text-[13px] font-semibold bg-white border border-line px-4 py-2 rounded-md text-navy"
                     >
                       {stadt}
                     </span>
                   ),
                 )}
-                <span className="text-[13px] font-bold bg-navy text-mint px-4 py-2 rounded-full">+ Umgebung</span>
+                <span className="text-[13px] font-bold bg-navy text-mint px-4 py-2 rounded-md">+ Umgebung</span>
               </div>
             </Reveal>
           </div>

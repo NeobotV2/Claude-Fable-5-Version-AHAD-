@@ -35,7 +35,7 @@ export default function ArticleMeta({ slug, className = '' }: ArticleMetaProps) 
     >
       <div className="mx-auto grid max-w-5xl gap-8 px-4 sm:px-8 lg:grid-cols-[minmax(0,1.05fr)_minmax(19rem,0.95fr)] print:px-0">
         <div>
-          <p className="mb-3 inline-flex items-center gap-2 text-xs font-black uppercase tracking-[0.16em] text-brand">
+          <p className="mb-3 inline-flex items-center gap-2 text-[13px] font-semibold text-brand">
             <ShieldCheck size={16} aria-hidden="true" />
             Einordnung &amp; Aktualität
           </p>

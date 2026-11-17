@@ -72,18 +72,20 @@ export default function Kontakt() {
         lead="Ob unverbindliche Anfrage, Objektbesichtigung oder eine kurze Fachfrage: Wir klären den Bedarf persönlich und vereinbaren die nächsten Schritte."
         crumbs={[{ label: 'Kontakt' }]}
       >
-        <div className="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-3xl">
+        <ol className="mt-10 pt-6 border-t border-line grid grid-cols-1 sm:grid-cols-3 gap-x-8 gap-y-3 max-w-3xl">
           {[
             { value: '1', label: 'Anfrage per Formular, Telefon oder E-Mail' },
             { value: '2', label: 'Besichtigung in der Regel binnen 48 h' },
             { value: '3', label: 'Angebot im Anschluss' },
           ].map((promise) => (
-            <div key={promise.label} className="flex items-center gap-3">
-              <span className="font-accent text-3xl font-bold text-mint">{promise.value}</span>
-              <span className="text-[13px] font-semibold text-blue-100/80 leading-snug">{promise.label}</span>
-            </div>
+            <li key={promise.label} className="flex items-baseline gap-3">
+              <span className="font-accent text-xl font-semibold text-accent" aria-hidden="true">
+                {promise.value}
+              </span>
+              <span className="text-[15px] text-slate leading-snug">{promise.label}</span>
+            </li>
           ))}
-        </div>
+        </ol>
       </PageHero>
 
       <section className="py-20 lg:py-28 bg-paper">
@@ -118,7 +120,7 @@ export default function Kontakt() {
                   </p>
                   <Link
                     to="/angebot"
-                    className="inline-flex items-center gap-2 bg-accent text-white px-6 py-3.5 rounded-xl font-bold hover:bg-accent-dark transition-all shadow-glow hover:-translate-y-0.5"
+                    className="inline-flex items-center gap-2 bg-accent text-white px-6 py-3.5 rounded-xl font-bold hover:bg-accent-dark transition-all shadow-glow"
                   >
                     Besichtigung anfragen <ChevronRight size={18} />
                   </Link>

@@ -130,7 +130,7 @@ export default function Referenzen() {
               <li key={branche.slug}>
                 <Link
                   to={branche.path}
-                  className="group inline-flex items-center gap-2 rounded-full border border-line bg-paper px-5 py-3 text-sm font-bold text-navy transition-colors hover:border-brand hover:bg-brand/5 hover:text-brand"
+                  className="group inline-flex items-center gap-2 rounded-md border border-line bg-paper px-5 py-3 text-sm font-bold text-navy transition-colors hover:border-brand hover:bg-brand/5 hover:text-brand"
                 >
                   {branche.name}
                   <ArrowRight size={15} className="transition-transform group-hover:translate-x-0.5" aria-hidden />

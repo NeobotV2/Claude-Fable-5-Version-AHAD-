@@ -350,7 +350,7 @@ export default function AngebotsFunnel() {
 
   if (isSuccess) {
     return shell(
-      <div className="bg-white rounded-[2rem] shadow-lifted p-8 md:p-14 text-center" role="status">
+      <div className="bg-white shadow-lifted p-8 md:p-14 text-center" role="status">
         <div className="w-20 h-20 bg-accent/10 rounded-full grid place-items-center mx-auto mb-6" aria-hidden>
           <Check className="w-10 h-10 text-accent" />
         </div>
@@ -388,7 +388,7 @@ export default function AngebotsFunnel() {
             die Schrittliste (inkl. aria-current) aus dem Accessibility-Tree entfernen. */}
         <ol className="flex justify-between items-end mb-3">
           {STEP_LABELS.map((label, index) => (
-            <li key={label} aria-current={index + 1 === step ? 'step' : undefined} className={cn('text-[11px] font-black uppercase tracking-[0.12em]', index + 1 <= step ? 'text-mint' : 'text-white/70')}>
+            <li key={label} aria-current={index + 1 === step ? 'step' : undefined} className={cn('text-[13px] font-semibold', index + 1 <= step ? 'text-mint' : 'text-white/70')}>
               {index + 1}. {label}
             </li>
           ))}
@@ -399,7 +399,7 @@ export default function AngebotsFunnel() {
       </div>
 
       <p className="sr-only" role="status">Schritt {step} von 4: {STEP_LABELS[step - 1]}</p>
-      <div ref={cardRef} tabIndex={-1} className="bg-white rounded-[2rem] shadow-lifted p-6 sm:p-10 outline-none focus-visible:ring-4 focus-visible:ring-mint/60">
+      <div ref={cardRef} tabIndex={-1} className="bg-white shadow-lifted p-6 sm:p-10 outline-none focus-visible:ring-4 focus-visible:ring-mint/60">
         <AnimatePresence mode="wait" initial={false}>
           {step === 1 && (
             <motion.section key="step-1" initial={false} animate={{ opacity: 1 }} exit={{ opacity: 0 }} aria-labelledby="offer-step-1">

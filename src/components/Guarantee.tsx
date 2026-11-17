@@ -1,19 +1,12 @@
-import { ShieldCheck, BadgeCheck, FileCheck2, Scale, Quote, UserRound } from 'lucide-react';
-import Reveal from '@/components/ui/Reveal';
 import SectionHeading from '@/components/ui/SectionHeading';
 import { GUARANTEES, PROOF_POINTS, OBJEKTLEITUNG } from '@/lib/site';
 
-const GUARANTEE_ICON = [
-  <ShieldCheck className="w-6 h-6" key="1" />,
-  <BadgeCheck className="w-6 h-6" key="2" />,
-  <FileCheck2 className="w-6 h-6" key="3" />,
-  <Scale className="w-6 h-6" key="4" />,
-];
-
 /**
  * Das AHAD-Versprechen: benannte Risikoumkehr (Nachbesserung, Festpreis,
- * faire Laufzeit) + operative Eckwerte + die Objektleitung mit Gesicht.
- * Stärkster Vertrauensblock der Seite.
+ * faire Laufzeit) + operative Eckwerte + die Objektleitung.
+ *
+ * Gesetzt wie eine Vertragsübersicht: Eckwerte als Zahlenzeile, Zusagen als
+ * Tabelle mit Haarlinien. Keine Karten, keine Icons.
  */
 export default function Guarantee() {
   // Fail-closed konsistent zu Ende gedacht: Solange die Zusagen im
@@ -23,78 +16,59 @@ export default function Guarantee() {
   if (GUARANTEES.length === 0) return null;
 
   return (
-    <section className="py-24 lg:py-32 bg-white border-y border-line">
+    <section className="py-20 lg:py-28 bg-white border-t border-line">
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
         <SectionHeading
           eyebrow="Das AHAD-Versprechen"
-          align="center"
           title="Vier Zusagen, auf die Sie sich berufen können."
           lead="Wenn etwas nicht stimmt, bessern wir kostenfrei nach."
-          className="mb-14 max-w-3xl mx-auto"
+          className="max-w-3xl mb-12"
         />
 
-        {/* Proof-Eckwerte (eigenständig gegated — nur rendern, wenn freigegeben) */}
+        {/* Eckwerte (eigenständig gegated — nur rendern, wenn freigegeben) */}
         {PROOF_POINTS.length > 0 && (
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-14">
-            {PROOF_POINTS.map((p, i) => (
-              <Reveal key={p.label} delay={i * 0.08}>
-                <div className="bg-paper rounded-2xl border border-line p-6 text-center h-full">
-                  <div className="font-accent text-3xl lg:text-4xl font-bold text-brand">{p.value}</div>
-                  <div className="text-sm font-bold text-navy mt-1.5">{p.label}</div>
-                  <div className="text-[12px] text-slate mt-0.5">{p.sub}</div>
-                </div>
-              </Reveal>
+          <ul className="grid grid-cols-2 lg:grid-cols-4 border-y border-line lg:divide-x divide-line mb-14">
+            {PROOF_POINTS.map((p) => (
+              <li key={p.label} className="py-7 pr-4 lg:px-8 lg:first:pl-0">
+                <span className="block font-accent text-4xl lg:text-[2.75rem] leading-none font-semibold tracking-tight text-navy">
+                  {p.value}
+                </span>
+                <span className="block text-[15px] font-semibold text-navy mt-3">{p.label}</span>
+                <span className="block text-[13px] text-slate mt-0.5">{p.sub}</span>
+              </li>
             ))}
-          </div>
+          </ul>
         )}
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
-          {/* Garantie-Karten */}
-          <div className="lg:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-5">
-            {GUARANTEES.map((g, i) => (
-              <Reveal key={g.title} delay={i * 0.08} className="h-full">
-                <div className="h-full bg-paper rounded-3xl border border-line p-7 card-lift">
-                  <span className="inline-flex w-12 h-12 rounded-2xl bg-accent/10 text-accent items-center justify-center mb-5">
-                    {GUARANTEE_ICON[i]}
-                  </span>
-                  <h3 className="font-headline font-bold text-lg text-navy mb-2">{g.title}</h3>
-                  <p className="text-sm text-slate leading-relaxed">{g.promise}</p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-
-          {/* Objektleitung mit Gesicht */}
-          <Reveal delay={0.15} className="lg:col-span-4">
-            <figure className="h-full relative bg-navy text-white rounded-3xl overflow-hidden grain shadow-lifted flex flex-col">
-              <div className="absolute inset-0 blueprint-grid" />
-              <div className="absolute -bottom-24 -left-16 w-64 h-64 rounded-full bg-accent/25 blur-[90px]" />
-              <div className="relative z-10 p-7 flex flex-col h-full">
-                <div className="flex items-center gap-4 mb-5">
-                  {OBJEKTLEITUNG.photo ? (
-                    <img
-                      src={OBJEKTLEITUNG.photo}
-                      alt={OBJEKTLEITUNG.name}
-                      className="w-16 h-16 rounded-2xl object-cover border-2 border-white/15"
-                      loading="lazy"
-                    />
-                  ) : (
-                    <span className="w-16 h-16 rounded-2xl bg-white/10 border-2 border-white/15 grid place-items-center text-mint flex-shrink-0">
-                      <UserRound size={28} />
-                    </span>
-                  )}
-                  <div className="min-w-0">
-                    <div className="font-bold text-white leading-snug">{OBJEKTLEITUNG.name}</div>
-                    <div className="text-[13px] text-blue-100/70">{OBJEKTLEITUNG.role}</div>
-                  </div>
-                </div>
-                <Quote className="w-7 h-7 text-mint/40 mb-3" aria-hidden />
-                <blockquote className="text-blue-50 font-medium leading-relaxed flex-grow">
-                  „{OBJEKTLEITUNG.quote}“
-                </blockquote>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-x-12 gap-y-12">
+          {/* Die Zusagen im Wortlaut */}
+          <dl className="lg:col-span-8 border-t border-navy">
+            {GUARANTEES.map((g) => (
+              <div key={g.title} className="grid sm:grid-cols-[13rem_1fr] gap-x-8 gap-y-1 py-5 border-b border-line">
+                <dt className="font-semibold text-lg text-navy">{g.title}</dt>
+                <dd className="text-slate leading-relaxed">{g.promise}</dd>
               </div>
-            </figure>
-          </Reveal>
+            ))}
+          </dl>
+
+          {/* Objektleitung */}
+          <figure className="lg:col-span-4 self-start border-l-2 border-accent pl-6">
+            <blockquote className="text-lg font-medium text-navy leading-relaxed">„{OBJEKTLEITUNG.quote}“</blockquote>
+            <figcaption className="mt-5 flex items-center gap-4">
+              {OBJEKTLEITUNG.photo && (
+                <img
+                  src={OBJEKTLEITUNG.photo}
+                  alt={OBJEKTLEITUNG.name}
+                  className="w-14 h-14 object-cover"
+                  loading="lazy"
+                />
+              )}
+              <span className="text-[15px]">
+                <span className="block font-semibold text-navy">{OBJEKTLEITUNG.name}</span>
+                <span className="block text-slate">{OBJEKTLEITUNG.role}</span>
+              </span>
+            </figcaption>
+          </figure>
         </div>
       </div>
     </section>

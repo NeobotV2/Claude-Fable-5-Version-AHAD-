@@ -58,22 +58,30 @@
   --color-paper: #f7f9fb;       /* Heller Seitenhintergrund */
   --color-ink: #1C2733;         /* Text-Anthrazit (CI-Fließtextfarbe) */
   --color-slate: #424751;       /* Fließtext gedämpft */
-  --color-line: #e6eaef;        /* Hairlines */
+  --color-line: #dde3ea;        /* Hairlines — tragen die Struktur statt Karten und Schatten */
+
+  /* ── Ecken: sachlich, fast eckig. Alle rounded-lg…3xl im Code laufen
+     über diese Tokens und sind damit seitenweit einheitlich. ───────── */
+  --radius-xs: 2px;
+  --radius-sm: 2px;
+  --radius-md: 3px;
+  --radius-lg: 3px;
+  --radius-xl: 3px;
+  --radius-2xl: 4px;
+  --radius-3xl: 4px;
+  --radius-4xl: 4px;
 
   /* ── Schatten ──────────────────────────────────────────────────── */
-  --shadow-soft: 0 2px 8px -2px rgb(11 35 65 / 0.08), 0 8px 24px -8px rgb(11 35 65 / 0.10);
-  --shadow-lifted: 0 4px 12px -2px rgb(11 35 65 / 0.10), 0 20px 48px -12px rgb(11 35 65 / 0.18);
-  --shadow-glow: 0 0 0 1px rgb(156 221 183 / 0.25), 0 8px 32px -8px rgb(13 107 56 / 0.45);
+  /* Flaches Design: Flächen liegen plan. Nur schwebende Ebenen (Menüs,
+     Dialoge) bekommen einen dezenten Schatten zur Abgrenzung. */
+  --shadow-soft: 0 0 #0000;
+  --shadow-lifted: 0 1px 2px rgb(11 35 65 / 0.06), 0 14px 32px -18px rgb(11 35 65 / 0.28);
+  --shadow-glow: 0 0 #0000;
 
   /* ── Animationen ───────────────────────────────────────────────── */
-  --animate-marquee: marquee 42s linear infinite;
   --animate-float: float 7s ease-in-out infinite;
   --animate-pulse-soft: pulse-soft 3s ease-in-out infinite;
 
-  @keyframes marquee {
-    0% { transform: translateX(0%); }
-    100% { transform: translateX(-100%); }
-  }
   @keyframes float {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-12px); }
@@ -149,10 +157,24 @@
     word-break: normal;
     hyphens: none;
     /* leading 1.1 schützt Unterlängen wie das „g" in mehrzeiligen Titeln. */
-    font-size: clamp(1.35rem, 6.5vw, 5rem);
+    font-size: clamp(1.35rem, 6.5vw, 3.5rem);
+  }
+  /* Startseiten-H1: einspaltig bis lg, ab lg in der linken Hälfte des
+     zweispaltigen Heros. „Gebäudereinigung," muss als ein Wort in die Spalte
+     passen (≈ 11,2 px Breite je px Schriftgröße). */
+  .hero-title { font-size: clamp(1.35rem, 7.75vw, 3.5rem); }
+  @media (min-width: 1024px) {
+    .hero-title { font-size: min(3.5vw, 3rem); }
+  }
+  /* H1 der Unterseiten: Textspalte neben dem Foto (ab lg rund 58 % der
+     Seitenbreite). Untergrenze und Steigung wie display-xl, damit lange
+     Wörter („Küchenabluftreinigung") auch bei 360 px in eine Zeile passen. */
+  .page-title { font-size: clamp(1.35rem, 6.5vw, 2.75rem); }
+  @media (min-width: 1024px) {
+    .page-title { font-size: min(3.4vw, 2.75rem); }
   }
   .display-lg {
-    @apply font-logo font-black tracking-[-0.02em] leading-[1.1];
+    @apply font-logo font-extrabold tracking-[-0.02em] leading-[1.12];
     overflow-wrap: normal;
     word-break: normal;
     hyphens: none;
@@ -163,85 +185,51 @@
     overflow-wrap: normal;
     word-break: normal;
     hyphens: none;
-    font-size: clamp(1.55rem, 3vw, 2.3rem);
+    font-size: clamp(1.4rem, 2.4vw, 1.9rem);
   }
-  /* Digitaler Akzent in Space Grotesk (Designbook: Website-Akzente). */
+  /* Rubrikzeile über Überschriften: normale Schreibweise, keine Sperrung,
+     kein Zierstrich. Auf Hell in AHAD Grün, auf Dunkel in Mint. */
   .eyebrow {
-    @apply font-accent inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.22em];
+    @apply font-sans inline-flex items-center gap-2 text-sm font-semibold normal-case tracking-normal;
+  }
+  .eyebrow .h-px { display: none; }
+  .eyebrow.text-brand { color: var(--color-accent); }
+
+  /* Überschriften stehen in EINER Farbe. Hervorgehobene Einzelwörter
+     (früher Mint/Hellblau) erben die Farbe der Überschrift. */
+  h1 .text-mint:not(.eyebrow),
+  h1 .text-brand-light:not(.eyebrow),
+  h2 .text-mint:not(.eyebrow),
+  h2 .text-brand-light:not(.eyebrow),
+  h2 .text-accent:not(.eyebrow) {
+    color: inherit;
   }
 
-  /* ── Oberflächen & Effekte ────────────────────────────────────── */
-  .glass {
-    background: rgb(255 255 255 / 0.72);
-    backdrop-filter: blur(16px) saturate(1.4);
-    -webkit-backdrop-filter: blur(16px) saturate(1.4);
+  /* Textlink mit Pfeil — die zweite Aktionsebene neben dem Button. */
+  .text-link {
+    @apply inline-flex items-center gap-2 font-semibold text-accent underline-offset-4 decoration-2 transition-colors hover:text-accent-dark hover:underline;
   }
-  .glass-dark {
-    background: rgb(2 18 42 / 0.55);
-    backdrop-filter: blur(16px) saturate(1.2);
-    -webkit-backdrop-filter: blur(16px) saturate(1.2);
+  .text-link-light {
+    @apply inline-flex items-center gap-2 font-semibold text-white underline-offset-4 decoration-2 transition-colors hover:text-mint hover:underline;
   }
 
-  /* Feines Filmkorn für große Flächen — verhindert Banding, wirkt hochwertig */
-  .grain::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    opacity: 0.5;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncA type='linear' slope='0.06'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  }
+  /* ── Oberflächen ──────────────────────────────────────────────── */
+  /* Bewusst ohne Glas-, Korn-, Raster- und Schwebeeffekte. Die Klassen
+     bleiben als neutrale Flächen erhalten, weil viele Seiten sie nutzen. */
+  .glass { background: #fff; }
+  .glass-dark { background: var(--color-navy-900); }
+  .grain::after { content: none; }
+  .blueprint-grid,
+  .blueprint-grid-light { background-image: none; }
 
-  .blueprint-grid {
-    background-image:
-      linear-gradient(rgb(255 255 255 / 0.045) 1px, transparent 1px),
-      linear-gradient(90deg, rgb(255 255 255 / 0.045) 1px, transparent 1px);
-    background-size: 48px 48px;
-  }
-  .blueprint-grid-light {
-    background-image:
-      linear-gradient(rgb(11 35 65 / 0.05) 1px, transparent 1px),
-      linear-gradient(90deg, rgb(11 35 65 / 0.05) 1px, transparent 1px);
-    background-size: 48px 48px;
-  }
-
-  /* Karten-Mikrointeraktion */
-  .card-lift {
-    transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
-  }
-  .card-lift:hover {
-    transform: translateY(-6px);
-    box-shadow: var(--shadow-lifted);
-  }
-
-  /* ── Marquee ──────────────────────────────────────────────────── */
-  .marquee-container:hover .animate-marquee,
-  .marquee-shell:focus-within .animate-marquee,
-  .marquee-container[data-paused="true"] .animate-marquee {
-    animation-play-state: paused;
-  }
+  /* Klickbare Flächen reagieren über die Rahmenfarbe, nicht über Bewegung. */
+  .card-lift { transition: border-color 0.15s ease; }
+  .card-lift:hover { border-color: rgb(11 35 65 / 0.5); }
 
   @media (min-width: 390px) {
     .display-lg {
-      font-size: clamp(1.6rem, 4.8vw, 3.3rem);
+      font-size: clamp(1.6rem, 3.4vw, 2.5rem);
     }
-  }
-
-  .reference-logo {
-    filter: grayscale(100%);
-    opacity: 0.6;
-    transition: filter 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
-  }
-  .reference-logo:hover {
-    filter: grayscale(0%);
-    opacity: 1;
-    transform: scale(1.08);
-  }
-
-  /* Sanfte Maske für Marquee-Ränder */
-  .mask-fade-x {
-    mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
-    -webkit-mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
   }
 
   /* Unterstreich-Animation für Inline-Links */
@@ -253,23 +241,6 @@
     transition: background-size 0.3s ease;
   }
   .link-underline:hover { background-size: 100% 2px; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .marquee-container {
-    overflow-x: auto;
-    mask-image: none;
-    -webkit-mask-image: none;
-  }
-  .marquee-container .animate-marquee {
-    animation: none !important;
-  }
-  .marquee-container .animate-marquee[aria-hidden="true"] {
-    display: none;
-  }
-  .marquee-control {
-    display: none;
-  }
 }
 
 /* Form-Hinweise bleiben auch bei Tailwind-Placeholder-Utilities AA-lesbar. */

@@ -7,7 +7,7 @@ import SectionHeading from '@/components/ui/SectionHeading';
 import ButtonLink from '@/components/ui/Button';
 import SmartImage from '@/components/ui/SmartImage';
 import Stat from '@/components/ui/Stat';
-import LogoMarquee from '@/components/LogoMarquee';
+import ClientLogos from '@/components/ClientLogos';
 import CTABand from '@/components/CTABand';
 import { IMG } from '@/lib/images';
 import { CLIENT_REFERENCES, STATS } from '@/lib/site';
@@ -99,7 +99,7 @@ export default function Unternehmen() {
                       {i < milestones.length - 1 && <span className="w-px flex-grow bg-line mt-1" />}
                     </div>
                     <div className="pb-2">
-                      <div className="text-[11px] font-black uppercase tracking-[0.2em] text-brand mb-1">{milestone.year}</div>
+                      <div className="text-[13px] font-semibold text-brand mb-1">{milestone.year}</div>
                       <p className="text-slate text-[15px] leading-relaxed">{milestone.text}</p>
                     </div>
                   </div>
@@ -169,14 +169,14 @@ export default function Unternehmen() {
             Alle Referenzen <ArrowRight size={15} />
           </Link>
         </div>
-        <LogoMarquee />
+        <ClientLogos />
       </section>}
 
       {/* Karriere-Hinweis */}
       <section className="py-20 lg:py-28 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-8">
           <Reveal>
-            <div className="relative bg-gradient-to-br from-brand to-navy text-white rounded-[2rem] p-8 sm:p-12 lg:p-16 overflow-hidden grain">
+            <div className="relative bg-navy text-white p-8 sm:p-12 lg:p-16 overflow-hidden grain">
               <div className="absolute inset-0 blueprint-grid" />
               <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
                 <div>

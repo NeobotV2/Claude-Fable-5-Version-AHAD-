@@ -50,7 +50,7 @@ export default function BeforeAfter({
     <div
       ref={containerRef}
       className={cn(
-        'relative w-full aspect-[16/10] sm:aspect-[16/9] rounded-3xl overflow-hidden select-none shadow-lifted border border-white/10',
+        'relative w-full aspect-[16/10] sm:aspect-[16/9] overflow-hidden select-none',
         dragging ? 'cursor-grabbing' : 'cursor-grab',
         className
       )}
@@ -92,10 +92,10 @@ export default function BeforeAfter({
       </div>
 
       {/* Labels */}
-      <span className="absolute top-4 left-4 glass-dark text-white text-[11px] font-black uppercase tracking-[0.18em] px-3.5 py-2 rounded-full pointer-events-none">
+      <span className="absolute top-0 left-0 bg-navy text-white text-[13px] font-semibold px-3.5 py-2 pointer-events-none">
         {beforeLabel}
       </span>
-      <span className="absolute top-4 right-4 bg-accent text-white text-[11px] font-black uppercase tracking-[0.18em] px-3.5 py-2 rounded-full pointer-events-none shadow-glow">
+      <span className="absolute top-0 right-0 bg-accent text-white text-[13px] font-semibold px-3.5 py-2 pointer-events-none">
         {afterLabel}
       </span>
 
@@ -120,14 +120,14 @@ export default function BeforeAfter({
 
       {/* Trennlinie + Griff */}
       <div className="absolute inset-y-0 pointer-events-none" style={{ left: `${position}%` }} aria-hidden>
-        <div className="absolute inset-y-0 -translate-x-1/2 w-[3px] bg-white shadow-[0_0_24px_rgb(0_0_0/0.45)]" />
+        <div className="absolute inset-y-0 -translate-x-1/2 w-0.5 bg-white" />
         <div
           className={cn(
-            'absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-14 h-14 rounded-full bg-white shadow-lifted grid place-items-center text-navy',
+            'absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-11 h-11 rounded-full bg-white grid place-items-center text-navy',
             rangeFocused && 'ring-4 ring-mint ring-offset-4 ring-offset-navy'
           )}
         >
-          <ChevronsLeftRight size={24} />
+          <ChevronsLeftRight size={20} />
         </div>
       </div>
     </div>

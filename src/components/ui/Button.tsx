@@ -17,27 +17,26 @@ interface ButtonLinkProps {
   onClick?: (e: React.MouseEvent) => void;
 }
 
+// Rechteckige, flache Schaltflächen: Farbe wechselt beim Überfahren, sonst
+// bewegt sich nichts (kein Schatten, kein Anheben, kein Skalieren).
 const base =
-  'group/btn relative inline-flex items-center justify-center gap-2 font-bold rounded-xl transition-all duration-300 ' +
-  'focus:outline-none focus-visible:ring-4 active:scale-[0.98] text-center';
+  'group/btn inline-flex items-center justify-center gap-2.5 font-semibold rounded-md transition-colors duration-150 ' +
+  'focus:outline-none focus-visible:ring-4 text-center';
 
 const variants: Record<Variant, string> = {
-  primary:
-    'bg-accent text-white hover:bg-accent-dark shadow-[0_8px_24px_-8px_rgb(13_107_56/0.55)] hover:shadow-[0_12px_32px_-8px_rgb(13_107_56/0.65)] hover:-translate-y-0.5 focus-visible:ring-accent/40',
-  dark:
-    'bg-navy text-white hover:bg-navy-800 shadow-soft hover:shadow-lifted hover:-translate-y-0.5 focus-visible:ring-navy/30',
-  white:
-    'bg-white text-navy hover:bg-paper shadow-soft hover:shadow-lifted hover:-translate-y-0.5 focus-visible:ring-white/40',
+  primary: 'bg-accent text-white hover:bg-accent-dark focus-visible:ring-accent/40',
+  dark: 'bg-navy text-white hover:bg-navy-800 focus-visible:ring-navy/30',
+  white: 'bg-white text-navy hover:bg-mint focus-visible:ring-white/40',
   outline:
-    'bg-white/60 backdrop-blur border-2 border-line text-brand hover:border-brand hover:bg-white focus-visible:ring-brand/25',
+    'border border-navy/30 text-navy hover:border-navy hover:bg-navy hover:text-white focus-visible:ring-brand/25',
   'outline-light':
-    'border-2 border-white/25 text-white hover:bg-white/10 hover:border-white/50 focus-visible:ring-white/30',
-  ghost: 'text-brand hover:bg-brand/5 focus-visible:ring-brand/20',
+    'border border-white/45 text-white hover:bg-white hover:text-navy focus-visible:ring-white/30',
+  ghost: 'text-accent hover:text-accent-dark underline-offset-4 decoration-2 hover:underline focus-visible:ring-brand/20',
 };
 
 const sizes: Record<Size, string> = {
-  md: 'px-6 py-3.5 text-sm',
-  lg: 'px-8 py-4 text-[15px]',
+  md: 'px-5 py-3 text-[15px]',
+  lg: 'px-6 py-3.5 text-base',
 };
 
 export default function ButtonLink({
@@ -57,7 +56,7 @@ export default function ButtonLink({
       {arrow && (
         <ArrowRight
           size={18}
-          className="flex-shrink-0 transition-transform duration-300 group-hover/btn:translate-x-1"
+          className="flex-shrink-0 transition-transform duration-150 group-hover/btn:translate-x-0.5"
         />
       )}
     </>

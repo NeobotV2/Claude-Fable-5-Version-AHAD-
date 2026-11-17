@@ -79,16 +79,20 @@ test('unverified aggregate ratings, references and featured testimonial are gate
   const home = read('src/pages/Home.tsx');
   const reviews = read('src/components/Reviews.tsx');
   const testimonial = read('src/components/FeaturedTestimonial.tsx');
-  const marquee = read('src/components/LogoMarquee.tsx');
+  const clientLogos = read('src/components/ClientLogos.tsx');
 
   assert.match(site, /export const GOOGLE_RATING =[\s\S]*\? GOOGLE_RATING_CANDIDATE[\s\S]*: null/);
   assert.match(site, /export const REVIEWS: Review\[\] = canPublishVerification\(CLAIM_VERIFICATIONS\.customerReviews\)/);
   assert.match(home, /\{GOOGLE_RATING && \(/);
-  assert.match(home, /\{featuredReview && <motion\.aside/);
+  // Die Startseite zitiert Bewertungen nicht mehr selbst, sondern nur über die
+  // Reviews-Komponente, die ohne freigegebene Bewertungen nichts rendert.
+  assert.equal(home.includes('REVIEWS['), false);
+  assert.match(home, /<Reviews limit=\{2\} \/>/);
+  assert.match(reviews, /if \(shown\.length === 0\) return null/);
   assert.match(home, /CLIENT_REFERENCES\.length > 0/);
   assert.equal(reviews.includes('GOOGLE_RATING.count'), false);
   assert.match(testimonial, /if \(!FEATURED_TESTIMONIAL_PUBLISHABLE \|\| !T\) return null/);
-  assert.match(marquee, /if \(REFERENCES\.length === 0\) return null/);
+  assert.match(clientLogos, /if \(REFERENCES\.length === 0\) return null/);
 });
 
 test('ISO article is informational and uses a local responsive image', () => {
@@ -98,7 +102,8 @@ test('ISO article is informational and uses a local responsive image', () => {
   assert.equal(article.includes('images.unsplash.com'), false);
   assert.match(article, /image=\{IMG\.medizintechnik\}/);
   assert.match(pageHero, /srcSet=\{srcSetFor\(image\)\}/);
-  assert.match(pageHero, /initial=\{false\}/);
+  // Der Seitenkopf blendet nichts ein: kein Motion-Wrapper, Inhalt steht sofort.
+  assert.equal(pageHero.includes('motion/react'), false);
   assert.equal(article.includes('zertifizierten Dienstleister wie dem'), false);
   assert.equal(article.includes('Wir setzen auf zertifizierte Prozesse'), false);
 });

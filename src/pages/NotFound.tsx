@@ -18,8 +18,6 @@ export default function NotFound() {
         noindex
       />
       <div className="absolute inset-0 blueprint-grid" />
-      <div className="absolute -top-40 -right-40 w-[34rem] h-[34rem] rounded-full bg-brand/30 blur-[140px]" />
-      <div className="absolute -bottom-40 -left-40 w-[30rem] h-[30rem] rounded-full bg-accent/20 blur-[140px]" />
 
       <div className="relative z-10 max-w-3xl mx-auto px-4 sm:px-8 py-40 text-center">
         <span className="eyebrow text-mint justify-center mb-6">
@@ -48,7 +46,7 @@ export default function NotFound() {
             <Link
               key={link.href}
               to={link.href}
-              className="inline-flex items-center gap-1.5 text-[13px] font-semibold text-blue-100/75 hover:text-mint bg-white/5 hover:bg-white/10 border border-white/10 px-4 py-2 rounded-full transition-colors"
+              className="inline-flex items-center gap-1.5 text-[13px] font-semibold text-blue-100/75 hover:text-mint bg-white/5 hover:bg-white/10 border border-white/10 px-4 py-2 rounded-md transition-colors"
             >
               {link.label}
               <ArrowRight size={13} />
