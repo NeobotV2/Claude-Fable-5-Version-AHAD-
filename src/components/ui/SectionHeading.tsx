@@ -9,6 +9,11 @@ interface SectionHeadingProps {
   dark?: boolean;
   className?: string;
   index?: string;
+  /**
+   * Für Titel in der schmalen linken Spalte, die einen freien Namen enthalten:
+   * Die Schrift richtet sich dort nach der Spaltenbreite (siehe .display-col).
+   */
+  narrowColumn?: boolean;
 }
 
 /** Einheitlicher Sektionskopf: Rubrikzeile → Titel → Lead. */
@@ -19,6 +24,7 @@ export default function SectionHeading({
   align = 'left',
   dark = false,
   className,
+  narrowColumn = false,
 }: SectionHeadingProps) {
   return (
     <div className={cn(align === 'center' && 'text-center', className)}>
@@ -27,7 +33,7 @@ export default function SectionHeading({
           {eyebrow}
         </p>
       )}
-      <h2 className={cn('display-lg', dark ? 'text-white' : 'text-navy')}>{title}</h2>
+      <h2 className={cn('display-lg', narrowColumn && 'display-col', dark ? 'text-white' : 'text-navy')}>{title}</h2>
       {lead && (
         <p
           className={cn(

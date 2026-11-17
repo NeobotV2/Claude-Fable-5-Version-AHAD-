@@ -281,6 +281,21 @@
       font-size: clamp(1.6rem, 3.4vw, 2.5rem);
     }
   }
+  /* Sektionstitel in der schmalen linken Spalte (4 von 12, ab 1024 px), wenn
+     der Titel einen frei wählbaren Namen enthält (z. B. den Leistungsnamen).
+     Die Größe folgt der Spaltenbreite, damit auch das längste Wort
+     („Küchenabluftreinigung“) in die Spalte passt und nicht in die
+     Nachbarspalte ragt. Darunter gilt die normale Größe. */
+  @media (min-width: 1024px) {
+    /* Ab hier stehen Sektionstitel oft in einer 4-von-12-Spalte: eine Spur
+       kleiner, damit „Anforderungen.“ bei 1024 px nicht 3 px übersteht. */
+    .display-lg {
+      font-size: clamp(1.6rem, 3.3vw, 2.5rem);
+    }
+    .display-lg.display-col {
+      font-size: min(2.25vw, 1.8rem);
+    }
+  }
 
   /* Unterstreich-Animation für Inline-Links */
   .link-underline {

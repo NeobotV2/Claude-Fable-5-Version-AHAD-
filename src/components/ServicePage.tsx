@@ -189,10 +189,13 @@ export default function ServicePage({ service }: { service: ServiceData }) {
       <section className="section-y bg-white">
         <div className="container-page grid grid-cols-1 lg:grid-cols-12 gap-x-14 gap-y-10">
           <div className="lg:col-span-4">
-            <SectionHeading eyebrow="Häufige Fragen" title={`Fragen und Antworten: ${service.name}`} />
+            <SectionHeading eyebrow="Häufige Fragen" title={`Fragen und Antworten: ${service.name}`} narrowColumn />
             <a href={SITE.phoneHref} className="text-link mt-7">
-              <Phone size={17} aria-hidden="true" />
-              Direkt fragen: {SITE.phone}
+              <Phone size={17} className="flex-shrink-0" aria-hidden="true" />
+              {/* Die Nummer bleibt zusammen; umbrochen wird höchstens davor. */}
+              <span>
+                Direkt fragen: <span className="whitespace-nowrap">{SITE.phone}</span>
+              </span>
             </a>
           </div>
           <div className="lg:col-span-8">

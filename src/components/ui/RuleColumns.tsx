@@ -24,9 +24,11 @@ interface RuleColumnsProps {
   className?: string;
 }
 
+// Drei Spalten erst ab 1024 px: Auf Tablets sind sie für lange deutsche
+// Titel („Industrie- & Produktionsreinigung“) zu schmal.
 const COLS = {
   2: 'md:grid-cols-2',
-  3: 'md:grid-cols-3',
+  3: 'md:grid-cols-2 lg:grid-cols-3',
   4: 'sm:grid-cols-2 lg:grid-cols-4',
 } as const;
 
