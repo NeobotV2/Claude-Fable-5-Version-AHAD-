@@ -1,5 +1,6 @@
 import { FEATURED_TESTIMONIAL as T, FEATURED_TESTIMONIAL_PUBLISHABLE } from '@/lib/site';
 import { cn } from '@/lib/utils';
+import { intrinsicSizeFor } from '@/lib/images';
 
 interface FeaturedTestimonialProps {
   /**
@@ -29,6 +30,7 @@ export default function FeaturedTestimonial({ embedded = false, className }: Fea
         <img
           src={T.logo}
           alt={`Logo ${T.shortName}`}
+          {...intrinsicSizeFor(T.logo)}
           title={T.company}
           loading="lazy"
           decoding="async"

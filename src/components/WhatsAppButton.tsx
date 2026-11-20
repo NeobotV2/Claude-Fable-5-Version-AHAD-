@@ -36,7 +36,7 @@ export default function WhatsAppButton() {
           target="_blank"
           rel="noopener noreferrer"
           aria-label="AHAD Cleaning per WhatsApp kontaktieren"
-          className="fixed right-4 z-40 w-12 h-12 rounded-full bg-whatsapp text-white hidden lg:grid place-items-center shadow-lifted bottom-6 animate-fade-in"
+          className="fixed right-4 z-40 w-12 h-12 rounded-full bg-whatsapp text-white transition-[filter] hover:brightness-95 hidden lg:grid place-items-center shadow-lifted bottom-6 animate-fade-in"
         >
           <WhatsAppGlyph size={22} />
         </a>

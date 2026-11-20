@@ -1,8 +1,11 @@
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Instagram, Linkedin } from 'lucide-react';
 import Logo from '@/components/Logo';
 import { SITE } from '@/lib/site';
 import { CLAIM } from '@/lib/messaging';
+
+const BUILD_YEAR = typeof __BUILD_YEAR__ === 'number' ? __BUILD_YEAR__ : new Date().getFullYear();
 
 const columns = [
   {
@@ -58,6 +61,11 @@ const columns = [
 const linkClass = 'inline-block py-2.5 lg:py-1.5 text-body-sm text-ondark/75 hover:text-white transition-colors';
 
 export default function Footer() {
+  // Vorgerendert wird mit dem Build-Jahr; im Browser nach dem Laden das aktuelle
+  // Jahr setzen. So weicht das HTML nach einem Jahreswechsel nicht vom Skript ab.
+  const [year, setYear] = useState(BUILD_YEAR);
+  useEffect(() => setYear(new Date().getFullYear()), []);
+
   return (
     <footer className="bg-navy-900 text-white">
       <div className="container-page">
@@ -124,7 +132,7 @@ export default function Footer() {
             Sticky-CTA-Leiste die Rechtslinks nicht überdeckt. */}
         <div className="pt-3 pb-24 lg:pb-3 border-t border-white/15 flex flex-col md:flex-row md:items-center justify-between gap-x-4 gap-y-1 text-caption text-ondark/75">
           <p>
-            © {new Date().getFullYear()} {SITE.legalName}. Alle Rechte vorbehalten.
+            © {year} {SITE.legalName}. Alle Rechte vorbehalten.
           </p>
           {/* Trefferflächen mindestens 44 px hoch (py-3) bzw. 44 × 44 px (Icons). */}
           <div className="flex flex-wrap items-center gap-x-5">

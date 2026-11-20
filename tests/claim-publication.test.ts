@@ -68,7 +68,7 @@ test('the headquarters entry is gated by the claim register and never guesses co
   assert.match(site, /publishGeo: canPublishVerification\(CLAIM_VERIFICATIONS\.hqGeo\) && HQ_GEO !== null/);
   assert.match(entry, /HQ\.publishGeo && HQ_GEO\s*\? \{ geo: \{ '@type': 'GeoCoordinates'/);
   // Öffnungszeiten kommen aus derselben Quelle wie die sichtbare Angabe.
-  assert.match(site, /hours: 'Mo–Fr · 08:00–17:00 Uhr'/);
+  assert.match(site, /hours: 'Mo–Fr · 08:00–17:00[ \u00A0]Uhr'/);
   assert.match(site, /days: \['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'\],\s*opens: '08:00',\s*closes: '17:00'/);
   // Keine Bewertungssterne und keine Zertifikate im Eintrag.
   assert.equal(entry.includes('AggregateRating'), false);

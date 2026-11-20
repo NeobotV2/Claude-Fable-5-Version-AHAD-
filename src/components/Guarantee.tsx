@@ -48,6 +48,8 @@ export default function Guarantee() {
                 <img
                   src={OBJEKTLEITUNG.photo}
                   alt={OBJEKTLEITUNG.name}
+                  width={56}
+                  height={56}
                   className="w-14 h-14 object-cover"
                   loading="lazy"
                 />

@@ -24,6 +24,8 @@ function lowPriorityHydration(): Plugin {
 }
 
 export default defineConfig({
+  // Jahr im Copyright: im Prerender und im Browser derselbe Wert (Build-Jahr).
+  define: { __BUILD_YEAR__: JSON.stringify(new Date().getFullYear()) },
   plugins: [react(), tailwindcss(), lowPriorityHydration()],
   // Für Deployments in Unterverzeichnissen (z.B. GitHub Pages) per ENV setzbar.
   base: process.env.BASE_PATH || '/',

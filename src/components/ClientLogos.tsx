@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { CLIENT_REFERENCES, type ClientReference } from '@/lib/site';
+import { intrinsicSizeFor } from '@/lib/images';
 
 /**
  * Logos der Referenzkunden als ruhiges, statisches Raster (kein Laufband).
@@ -24,12 +25,13 @@ function ClientLogo({ item }: { item: ClientReference }) {
           <img
             src={item.logo}
             alt={item.name}
+            {...intrinsicSizeFor(item.logo)}
             title={item.name}
             loading="lazy"
             decoding="async"
             referrerPolicy="no-referrer"
             onError={() => setFailed(true)}
-            className={`h-full object-contain object-left ${item.caption ? 'max-w-[3.25rem]' : 'max-w-[8.5rem]'}`}
+            className={`h-full w-auto object-contain object-left ${item.caption ? 'max-w-[3.25rem]' : 'max-w-[8.5rem]'}`}
           />
           {item.caption && (
             <span aria-hidden="true" className="font-semibold text-body-sm text-navy leading-tight">

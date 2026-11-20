@@ -281,8 +281,7 @@ export default function StandortKonstanz() {
                       <Star
                         key={i}
                         size={15}
-                        className={i <= r.rating ? 'fill-amber-500 text-amber-500' : 'text-navy/20'}
-                      />
+                        className={i <= r.rating ? 'fill-amber-500 text-amber-500' : 'text-navy/20'} aria-hidden="true" />
                     ))}
                   </div>
                   <blockquote className="text-lead text-ink leading-relaxed flex-grow">„{r.text}“</blockquote>

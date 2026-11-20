@@ -23,7 +23,7 @@ const faqItems = [
   {
     question: 'Bis wann müssen Gehwege in Villingen-Schwenningen geräumt und gestreut sein?',
     answer:
-      'Nach der Streupflichtsatzung der Stadt in der Fassung vom 4. Dezember 2002 werktags bis 7.00 Uhr und an Sonn- und Feiertagen bis 8.30 Uhr. Die Pflicht endet um 20.00 Uhr. Prüfen Sie vor jeder Saison, ob die Satzung inzwischen geändert wurde. Für Objekte in anderen Gemeinden gelten deren eigene Zeiten.',
+      'Nach der Streupflichtsatzung der Stadt in der Fassung vom 4. Dezember 2002 werktags bis 7.00 Uhr und an Sonn- und Feiertagen bis 8.30 Uhr. Die Pflicht endet um 20.00 Uhr. Prüfen Sie vor jeder Saison, ob die Satzung inzwischen geändert wurde. Für Objekte in anderen Gemeinden gelten deren eigene Zeiten.',
   },
   {
     question: 'Kann ich die Räum- und Streupflicht vollständig an einen Winterdienst abgeben?',
@@ -249,13 +249,13 @@ export default function FachwissenStreupflicht() {
                 <tbody className="divide-y divide-line text-slate">
                   <tr>
                     <th scope="row" className="bg-paper px-4 py-4 font-bold text-navy">Werktags</th>
-                    <td className="px-4 py-4">7.00 Uhr</td>
-                    <td className="px-4 py-4">20.00 Uhr</td>
+                    <td className="px-4 py-4">7.00 Uhr</td>
+                    <td className="px-4 py-4">20.00 Uhr</td>
                   </tr>
                   <tr>
                     <th scope="row" className="bg-paper px-4 py-4 font-bold text-navy">Sonn- und Feiertage</th>
-                    <td className="px-4 py-4">8.30 Uhr</td>
-                    <td className="px-4 py-4">20.00 Uhr</td>
+                    <td className="px-4 py-4">8.30 Uhr</td>
+                    <td className="px-4 py-4">20.00 Uhr</td>
                   </tr>
                 </tbody>
               </table>
@@ -394,7 +394,7 @@ export default function FachwissenStreupflicht() {
                       Winterdienst und Hausmeisterservice
                     </Link>{' '}
                     übernehmen wir die Räum- und Streupflicht für die vereinbarten Flächen vertraglich. Wir beobachten die
-                    Wetterlage, beginnen bei Bedarf ab 4 Uhr und protokollieren jeden Einsatz mit Zeit, Fläche und
+                    Wetterlage, beginnen bei Bedarf ab 4 Uhr und protokollieren jeden Einsatz mit Zeit, Fläche und
                     Maßnahme. Die Kontroll- und Überwachungspflicht bleibt beim Eigentümer oder Betreiber; die
                     Protokolle unterstützen ihn dabei.
                   </p>

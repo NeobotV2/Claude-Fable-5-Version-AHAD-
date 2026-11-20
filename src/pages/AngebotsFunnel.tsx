@@ -19,6 +19,7 @@ import {
   Wind,
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useHistoryStep } from '@/lib/funnel-step';
 import { buttonClasses } from '@/components/ui/Button';
 import SEO from '@/components/SEO';
 import { cn } from '@/lib/utils';
@@ -140,7 +141,7 @@ const DRAFT_TTL_MS = 2 * 60 * 60 * 1000;
 
 const inputClasses =
   'w-full px-4 py-3.5 rounded-xl border-2 border-field bg-white text-body-sm font-medium text-navy ' +
-  'placeholder:text-placeholder focus:border-accent focus:ring-4 focus:ring-accent/15 transition-all outline-none';
+  'placeholder:text-placeholder focus:border-accent focus:ring-4 focus:ring-accent/15 transition-[border-color,box-shadow] outline-none';
 
 const selectableCard = (active: boolean) =>
   cn(
@@ -200,7 +201,6 @@ function safeDraft(form: FormData) {
 }
 
 export default function AngebotsFunnel() {
-  const [step, setStep] = useState<Step>(1);
   const [formData, setFormData] = useState<FormData>(EMPTY_FORM);
   const [isReady, setIsReady] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -213,6 +213,15 @@ export default function AngebotsFunnel() {
   const successRef = useRef<HTMLHeadingElement>(null);
   const idempotencyRef = useRef('');
   const formStartedAtRef = useRef(Date.now());
+
+  // Höchster Schritt, für den die Angaben vorliegen: Ein Sprung per Verlauf oder
+  // Neuladen landet nie auf einem Schritt, dem die Grundlage fehlt.
+  const reachable: Step = !formData.objectType ? 1 : formData.services.length === 0 ? 2 : !formData.areaSize || !formData.frequency ? 3 : 4;
+  const { step: currentStep, next, back, goTo, hasStoredStep } = useHistoryStep(4, isReady ? reachable : 1);
+  const step = currentStep as Step;
+  // Nur für die einmalige Wiederherstellung des Entwurfs beim Laden.
+  const restoreStepRef = useRef({ goTo, hasStoredStep });
+  restoreStepRef.current = { goTo, hasStoredStep };
 
   useFunnelAbandonment('Offer Funnel', step, isSuccess, {
     entryService: formData.attribution.entryService,
@@ -232,7 +241,9 @@ export default function AngebotsFunnel() {
       services: draft?.form.services?.length ? draft.form.services : selectedService ? [selectedService] : [],
       attribution,
     });
-    if (draft?.step) setStep(draft.step);
+    if (draft?.step && draft.step > 1 && !restoreStepRef.current.hasStoredStep) {
+      restoreStepRef.current.goTo(draft.step, { replace: true });
+    }
     setIsReady(true);
     trackEvent('Offer Funnel Start', {
       entryPath: attribution.entryPath,
@@ -281,8 +292,6 @@ export default function AngebotsFunnel() {
     }));
 
   const has = (needle: string) => formData.services.some((service) => service.includes(needle));
-  const next = () => setStep((current) => Math.min(4, current + 1) as Step);
-  const back = () => setStep((current) => Math.max(1, current - 1) as Step);
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
@@ -352,7 +361,7 @@ export default function AngebotsFunnel() {
     return shell(
       <div className="bg-white shadow-lifted p-8 md:p-14 text-center" role="status">
         <div className="w-20 h-20 bg-accent/10 rounded-full grid place-items-center mx-auto mb-6" aria-hidden>
-          <Check className="w-10 h-10 text-accent" />
+          <Check className="w-10 h-10 text-accent" aria-hidden="true" />
         </div>
         <h1 ref={successRef} tabIndex={-1} className="font-headline text-3xl font-bold text-navy mb-4 outline-none">
           Anfrage übermittelt
@@ -362,10 +371,10 @@ export default function AngebotsFunnel() {
         </p>
         <div className="flex flex-col sm:flex-row gap-3 justify-center mb-8">
           <a href={SITE.phoneHref} className={buttonClasses('primary', 'lg')}>
-            <Phone size={17} /> Direkt anrufen
+            <Phone size={17} aria-hidden="true" /> Direkt anrufen
           </a>
-          <a href={WHATSAPP_HREF} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 bg-[#25D366] text-white px-6 py-3.5 rounded-xl font-bold">
-            <MessageCircle size={17} /> Per WhatsApp schreiben
+          <a href={WHATSAPP_HREF} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 bg-whatsapp text-white px-6 py-3.5 rounded-xl font-bold transition-[filter] hover:brightness-95">
+            <MessageCircle size={17} aria-hidden="true" /> Per WhatsApp schreiben
           </a>
         </div>
         <Link to="/" className="text-brand font-bold hover:underline">Zurück zur Startseite</Link>
@@ -376,7 +385,7 @@ export default function AngebotsFunnel() {
   return shell(
     <>
       <header className="text-center mb-8">
-        <span className="eyebrow text-mint justify-center mb-4"><Clock size={13} /> Vier Schritte</span>
+        <span className="eyebrow text-mint justify-center mb-4"><Clock size={13} aria-hidden="true" /> Vier Schritte</span>
         <h1 className="display-md text-white">
           <HeadlineText text="Kostenlose Vor-Ort-Besichtigung" />
         </h1>
@@ -442,19 +451,19 @@ export default function AngebotsFunnel() {
               <ChoiceGroup legend="Ungefähre Fläche" options={AREA_SIZES} value={formData.areaSize} onChange={(areaSize) => setFormData((current) => ({ ...current, areaSize }))} />
               <ChoiceGroup legend="Gewünschter Turnus" options={FREQUENCIES} value={formData.frequency} onChange={(frequency) => setFormData((current) => ({ ...current, frequency }))} />
 
-              {has('Glas-') && <TextField id="offer-glass" label="Zugänglichkeit der Glasflächen" value={formData.serviceDetails.glassAccess} onChange={(value) => updateDetails('glassAccess', value)} placeholder="z. B. ebenerdig, Hubsteiger, Innenhof" />}
-              {has('Industrie') && <TextField id="offer-production" label="Produktions- und Schichtbetrieb" value={formData.serviceDetails.productionMode} onChange={(value) => updateDetails('productionMode', value)} placeholder="z. B. 2-Schicht-Betrieb, Anlagenreinigung im Stillstand" />}
-              {has('Baureinigung') && <TextField id="offer-construction" label="Bauphase und geplanter Übergabetermin" value={formData.serviceDetails.constructionPhase} onChange={(value) => updateDetails('constructionPhase', value)} placeholder="z. B. Baufeinreinigung vor Abnahme" />}
-              {has('Winterdienst') && <TextField id="offer-winter" label="Flächentyp und Bereitschaftszeitraum" value={formData.serviceDetails.winterAreaType} onChange={(value) => updateDetails('winterAreaType', value)} placeholder="z. B. Parkplatz und Gehwege, November bis März" />}
-              {(has('Medizintechnik') || has('Küchenabluft')) && <TextField id="offer-special" label="Hygiene-, Dokumentations- oder Anlagenanforderungen" value={formData.serviceDetails.specialRequirements} onChange={(value) => updateDetails('specialRequirements', value)} placeholder="z. B. Hygieneplan, SOP, Kanalumfang" />}
-              <TextField id="offer-start" label="Gewünschter Start" value={formData.serviceDetails.desiredStart} onChange={(value) => updateDetails('desiredStart', value)} placeholder="z. B. ab Oktober oder kurzfristig" />
+              {has('Glas-') && <TextField id="offer-glass" label="Zugänglichkeit der Glasflächen" value={formData.serviceDetails.glassAccess} onChange={(value) => updateDetails('glassAccess', value)} placeholder="z. B. ebenerdig, Hubsteiger, Innenhof …" />}
+              {has('Industrie') && <TextField id="offer-production" label="Produktions- und Schichtbetrieb" value={formData.serviceDetails.productionMode} onChange={(value) => updateDetails('productionMode', value)} placeholder="z. B. 2-Schicht-Betrieb, Anlagenreinigung im Stillstand …" />}
+              {has('Baureinigung') && <TextField id="offer-construction" label="Bauphase und geplanter Übergabetermin" value={formData.serviceDetails.constructionPhase} onChange={(value) => updateDetails('constructionPhase', value)} placeholder="z. B. Baufeinreinigung vor Abnahme …" />}
+              {has('Winterdienst') && <TextField id="offer-winter" label="Flächentyp und Bereitschaftszeitraum" value={formData.serviceDetails.winterAreaType} onChange={(value) => updateDetails('winterAreaType', value)} placeholder="z. B. Parkplatz und Gehwege, November bis März …" />}
+              {(has('Medizintechnik') || has('Küchenabluft')) && <TextField id="offer-special" label="Hygiene-, Dokumentations- oder Anlagenanforderungen" value={formData.serviceDetails.specialRequirements} onChange={(value) => updateDetails('specialRequirements', value)} placeholder="z. B. Hygieneplan, SOP, Kanalumfang …" />}
+              <TextField id="offer-start" label="Gewünschter Start" value={formData.serviceDetails.desiredStart} onChange={(value) => updateDetails('desiredStart', value)} placeholder="z. B. ab Oktober oder kurzfristig …" />
 
               <fieldset>
                 <legend className="text-body-sm font-bold text-navy mb-3">Was ist Ihnen besonders wichtig? <span className="text-slate font-normal">(optional)</span></legend>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                   {REQUIREMENTS.map((requirement) => {
                     const active = formData.anforderungen.includes(requirement);
-                    return <button key={requirement} type="button" aria-pressed={active} onClick={() => toggleRequirement(requirement)} className={cn('flex items-center gap-2 p-3 text-sm font-semibold', selectableCard(active))}><span className={cn('w-4 h-4 border rounded grid place-items-center', active ? 'bg-accent border-accent' : 'border-field')}>{active && <Check size={12} className="text-white" />}</span>{requirement}</button>;
+                    return <button key={requirement} type="button" aria-pressed={active} onClick={() => toggleRequirement(requirement)} className={cn('flex items-center gap-2 p-3 text-sm font-semibold', selectableCard(active))}><span className={cn('w-4 h-4 border rounded grid place-items-center', active ? 'bg-accent border-accent' : 'border-field')}>{active && <Check size={12} className="text-white" aria-hidden="true" />}</span>{requirement}</button>;
                   })}
                 </div>
               </fieldset>
@@ -480,9 +489,9 @@ export default function AngebotsFunnel() {
                 <p className="text-sm text-slate leading-relaxed">Hinweise zur Verarbeitung Ihrer Angaben finden Sie in der <Link to="/datenschutz" target="_blank" rel="noopener noreferrer" className="font-bold text-brand underline">Datenschutzerklärung (öffnet neuen Tab)</Link>.</p>
                 {submitError && <div role="alert" className="bg-danger-surface border border-danger-line text-danger rounded-xl p-4">{submitError} <a href={SITE.phoneHref} className="font-bold underline">{SITE.phone}</a>{submitErrorCode && <span className="block mt-1 text-xs">Fehlercode: {submitErrorCode}</span>}</div>}
                 <div className="flex flex-col sm:flex-row gap-3 pt-2">
-                  <button type="button" onClick={back} className="flex-1 px-6 py-3.5 rounded-xl font-bold text-slate border-2 border-field"><ChevronLeft size={18} className="inline mr-2" />Zurück</button>
+                  <button type="button" onClick={back} className="flex-1 px-6 py-3.5 rounded-xl font-bold text-slate border-2 border-field hover:border-navy hover:text-navy transition-colors"><ChevronLeft size={18} className="inline mr-2" aria-hidden="true" />Zurück</button>
                   <button type="submit" disabled={isSubmitting} className="flex-[2] inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-bold text-white bg-accent hover:bg-accent-dark disabled:opacity-60 focus-visible:ring-4 focus-visible:ring-accent/40">
-                    {isSubmitting ? <><Loader2 className="animate-spin" size={18} /> Wird übermittelt</> : <>Besichtigung anfragen <ArrowRight size={18} /></>}
+                    {isSubmitting ? <><Loader2 className="animate-spin" size={18} aria-hidden="true" /> Wird übermittelt…</> : <>Besichtigung anfragen <ArrowRight size={18} aria-hidden="true" /></>}
                   </button>
                 </div>
               </form>
@@ -495,7 +504,7 @@ export default function AngebotsFunnel() {
 }
 
 function Navigation({ back, next, nextDisabled }: { back: () => void; next: () => void; nextDisabled: boolean }) {
-  return <div className="flex flex-col sm:flex-row gap-3 pt-7"><button type="button" onClick={back} className="flex-1 px-6 py-3.5 rounded-xl font-bold text-slate border-2 border-field"><ChevronLeft size={18} className="inline mr-2" />Zurück</button><button type="button" onClick={next} disabled={nextDisabled} className="flex-[2] px-6 py-3.5 rounded-xl font-bold text-white bg-accent disabled:opacity-50">Weiter <ChevronRight size={18} className="inline ml-2" /></button></div>;
+  return <div className="flex flex-col sm:flex-row gap-3 pt-7"><button type="button" onClick={back} className="flex-1 px-6 py-3.5 rounded-xl font-bold text-slate border-2 border-field hover:border-navy hover:text-navy transition-colors"><ChevronLeft size={18} className="inline mr-2" aria-hidden="true" />Zurück</button><button type="button" onClick={next} disabled={nextDisabled} className="flex-[2] px-6 py-3.5 rounded-xl font-bold text-white bg-accent hover:bg-accent-dark disabled:opacity-50 disabled:hover:bg-accent transition-colors">Weiter <ChevronRight size={18} className="inline ml-2" aria-hidden="true" /></button></div>;
 }
 
 function ChoiceGroup({ legend, options, value, onChange }: { legend: string; options: string[]; value: string; onChange: (value: string) => void }) {
@@ -503,9 +512,9 @@ function ChoiceGroup({ legend, options, value, onChange }: { legend: string; opt
 }
 
 function TextField({ id, label, value, onChange, placeholder }: { id: string; label: string; value: string; onChange: (value: string) => void; placeholder: string }) {
-  return <div><label htmlFor={id} className="block text-sm font-bold text-navy mb-2">{label}</label><input id={id} value={value} onChange={(event) => onChange(event.target.value)} placeholder={placeholder} className={inputClasses} /></div>;
+  return <div><label htmlFor={id} className="block text-sm font-bold text-navy mb-2">{label}</label><input id={id} name={id} autoComplete="off" value={value} onChange={(event) => onChange(event.target.value)} placeholder={placeholder} className={inputClasses} /></div>;
 }
 
 function TextInput({ id, label, value, onChange, type = 'text', required = false, autoComplete, describedBy, invalid = false }: { id: string; label: string; value: string; onChange: (value: string) => void; type?: string; required?: boolean; autoComplete?: string; describedBy?: string; invalid?: boolean }) {
-  return <div><label htmlFor={id} className="block text-caption font-bold text-navy mb-2">{label}{required && ' *'}</label><input id={id} type={type} required={required} autoComplete={autoComplete} value={value} onChange={(event) => onChange(event.target.value)} aria-describedby={describedBy} aria-errormessage={invalid ? describedBy : undefined} aria-invalid={invalid || undefined} className={inputClasses} /></div>;
+  return <div><label htmlFor={id} className="block text-caption font-bold text-navy mb-2">{label}{required && ' *'}</label><input id={id} name={id} type={type} required={required} autoComplete={autoComplete ?? 'off'} spellCheck={type === 'email' ? false : undefined} value={value} onChange={(event) => onChange(event.target.value)} aria-describedby={describedBy} aria-errormessage={invalid ? describedBy : undefined} aria-invalid={invalid || undefined} className={inputClasses} /></div>;
 }

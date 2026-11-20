@@ -75,7 +75,7 @@ export default function ArticleFooter({ slug, className = '' }: ArticleFooterPro
               <Link
                 key={relatedArticle.slug}
                 to={getEditorialArticlePath(relatedArticle.slug)}
-                className="group block rounded-2xl border border-line bg-white p-5 transition-all hover:border-brand/40 hover: focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+                className="group block rounded-2xl border border-line bg-white p-5 transition-colors hover:border-brand/40 hover: focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
               >
                 <span className="text-caption font-semibold text-brand">
                   {relatedArticle.format} · {relatedArticle.topic}

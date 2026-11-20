@@ -30,3 +30,10 @@ test('the privacy notice describes the storage behaviour the code actually has',
   assert.match(notice, /nur im Arbeitsspeicher der geöffneten Seite/);
   assert.equal(/Ebenfalls im Sitzungsspeicher\s+merken wir/.test(notice), false);
 });
+
+test('offer funnel choices match the values the server accepts', () => {
+  // Typografische Anpassungen (z. B. geschützte Leerzeichen) dürfen die
+  // übermittelten Werte nicht verändern, sonst lehnt der Server die Anfrage ab.
+  const values = (source: string) => source.match(/const AREA_SIZES = \[([^\]]+)\]/)?.[1].trim();
+  assert.equal(values(read('src/pages/AngebotsFunnel.tsx')), values(read('api/_lib/lead-validation.ts')));
+});

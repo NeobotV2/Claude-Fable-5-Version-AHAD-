@@ -37,7 +37,7 @@ export default function StickyCTA() {
               aria-label={`AHAD Cleaning anrufen: ${SITE.phone}`}
               className={buttonClasses('dark', 'md', 'px-5 py-3.5 text-sm')}
             >
-              <Phone size={17} className="flex-shrink-0" />
+              <Phone size={17} className="flex-shrink-0" aria-hidden="true" />
               Anrufen
             </a>
             <Link
@@ -45,7 +45,7 @@ export default function StickyCTA() {
               aria-label="Besichtigung anfragen"
               className={buttonClasses('primary', 'md', 'px-3 py-3.5 text-sm leading-snug')}
             >
-              <FileText size={17} className="flex-shrink-0" />
+              <FileText size={17} className="flex-shrink-0" aria-hidden="true" />
               Besichtigung anfragen
             </Link>
           </div>

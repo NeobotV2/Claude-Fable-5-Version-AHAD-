@@ -344,7 +344,7 @@ export default function Header() {
               className="xl:hidden p-2.5 text-navy hover:text-accent transition-colors"
               aria-label="Anrufen"
             >
-              <Phone size={20} />
+              <Phone size={20} aria-hidden="true" />
             </a>
 
             <ButtonLink to="/angebot" arrow className="hidden sm:inline-flex flex-shrink-0 whitespace-nowrap px-4 py-2.5 text-nav">
@@ -354,14 +354,14 @@ export default function Header() {
             <button
               ref={mobileMenuTriggerRef}
               type="button"
-              className="lg:hidden p-2.5 text-navy"
+              className="lg:hidden p-2.5 text-navy hover:text-accent transition-colors"
               onClick={isMobileMenuOpen ? closeMobileMenu : openMobileMenu}
               aria-label={isMobileMenuOpen ? 'Menü schließen' : 'Menü öffnen'}
               aria-haspopup="dialog"
               aria-expanded={isMobileMenuOpen}
               aria-controls="mobile-navigation-dialog"
             >
-              {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              {isMobileMenuOpen ? <X size={24} aria-hidden="true" /> : <Menu size={24} aria-hidden="true" />}
             </button>
           </div>
         </nav>
@@ -392,14 +392,14 @@ export default function Header() {
                   ref={mobileCloseRef}
                   type="button"
                   onClick={closeMobileMenu}
-                  className="p-2 text-slate hover:text-navy hover:bg-paper rounded-lg transition-all"
+                  className="p-2 text-slate hover:text-navy hover:bg-paper rounded-lg transition-colors"
                   aria-label="Menü schließen"
                 >
-                  <X size={24} />
+                  <X size={24} aria-hidden="true" />
                 </button>
               </div>
 
-              <div className="flex-grow overflow-y-auto px-6 py-4">
+              <div className="flex-grow overflow-y-auto overscroll-contain px-6 py-4">
                 <div className="flex flex-col">
                   {navLinks.map((link, i) => (
                     <div key={link.name} className="flex flex-col border-b border-line last:border-0">
@@ -419,8 +419,7 @@ export default function Header() {
                             className={cn(
                               'w-5 h-5 transition-transform duration-300 text-slate',
                               mobileActiveDropdown === link.name && 'rotate-180'
-                            )}
-                          />
+                            )} aria-hidden="true" />
                         </button>
                       ) : (
                         <Link
@@ -468,7 +467,7 @@ export default function Header() {
                 </div>
               </div>
 
-              <div className="p-6 border-t border-line flex-shrink-0 space-y-3">
+              <div className="p-6 pb-[max(1.5rem,env(safe-area-inset-bottom))] border-t border-line flex-shrink-0 space-y-3">
                 <ButtonLink to="/angebot" size="lg" arrow className="w-full" onClick={closeMobileMenuForNavigation}>
                   Besichtigung anfragen
                 </ButtonLink>

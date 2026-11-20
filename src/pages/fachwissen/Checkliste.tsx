@@ -129,8 +129,9 @@ export default function FachwissenCheckliste() {
                   <input
                     id={`checkliste-${field.id}`}
                     name={field.id}
+                    autoComplete="off"
                     type={field.type}
-                    className="mt-2 min-h-11 w-full rounded-lg border border-line bg-white px-3 py-2 font-normal text-ink outline-none transition-colors focus:border-brand print:min-h-8 print:rounded-none print:border-0 print:border-b print:border-slate/50 print:bg-transparent print:px-0"
+                    className="mt-2 min-h-11 w-full rounded-lg border border-line bg-white px-3 py-2 font-normal text-ink outline-none transition-[border-color,box-shadow] focus:border-brand focus:ring-4 focus:ring-brand/15 print:min-h-8 print:rounded-none print:border-0 print:border-b print:border-slate/50 print:bg-transparent print:px-0"
                   />
                 </label>
               ))}
@@ -140,8 +141,9 @@ export default function FachwissenCheckliste() {
               <textarea
                 id="checkliste-notizen"
                 name="notizen"
+                autoComplete="off"
                 rows={3}
-                className="mt-2 w-full resize-y rounded-lg border border-line bg-white px-3 py-2 font-normal text-ink outline-none transition-colors focus:border-brand print:resize-none print:rounded-none print:border-0 print:border-b print:border-slate/50 print:bg-transparent print:px-0"
+                className="mt-2 w-full resize-y rounded-lg border border-line bg-white px-3 py-2 font-normal text-ink outline-none transition-[border-color,box-shadow] focus:border-brand focus:ring-4 focus:ring-brand/15 print:resize-none print:rounded-none print:border-0 print:border-b print:border-slate/50 print:bg-transparent print:px-0"
               />
             </label>
           </section>
@@ -209,18 +211,20 @@ export default function FachwissenCheckliste() {
                           <input
                             id={`bieter-${bidder}`}
                             name={`bieter-${bidder}`}
+                            autoComplete="off"
                             type="text"
                             aria-label={`Name von Bieter ${bidder}`}
-                            className="min-h-9 w-full rounded-md border border-line px-2 py-1 font-normal text-ink outline-none focus:border-brand print:min-h-6 print:rounded-none print:border-0 print:border-b print:border-slate/50 print:px-0"
+                            className="min-h-9 w-full rounded-md border border-line px-2 py-1 font-normal text-ink outline-none transition-[border-color,box-shadow] focus:border-brand focus:ring-4 focus:ring-brand/15 print:min-h-6 print:rounded-none print:border-0 print:border-b print:border-slate/50 print:px-0"
                           />
                         </label>
                       </th>
                       <td className="min-w-44 px-3 py-3 align-top print:min-w-0">
                         <input
                           name={`preis-${bidder}`}
+                          autoComplete="off"
                           type="text"
                           aria-label={`Preis und Abrechnungsmodell von Bieter ${bidder}`}
-                          className="min-h-9 w-full rounded-md border border-line px-2 py-1 text-ink outline-none focus:border-brand print:min-h-6 print:rounded-none print:border-0 print:border-b print:border-slate/50 print:px-0"
+                          className="min-h-9 w-full rounded-md border border-line px-2 py-1 text-ink outline-none transition-[border-color,box-shadow] focus:border-brand focus:ring-4 focus:ring-brand/15 print:min-h-6 print:rounded-none print:border-0 print:border-b print:border-slate/50 print:px-0"
                         />
                       </td>
                       <td className="min-w-32 px-3 py-3 align-top print:min-w-0">
@@ -234,17 +238,19 @@ export default function FachwissenCheckliste() {
                       <td className="min-w-48 px-3 py-3 align-top print:min-w-0">
                         <textarea
                           name={`service-${bidder}`}
+                          autoComplete="off"
                           rows={2}
                           aria-label={`Objektleitung und Service-Level von Bieter ${bidder}`}
-                          className="w-full resize-y rounded-md border border-line px-2 py-1 text-ink outline-none focus:border-brand print:resize-none print:rounded-none print:border-0 print:border-b print:border-slate/50 print:px-0"
+                          className="w-full resize-y rounded-md border border-line px-2 py-1 text-ink outline-none transition-[border-color,box-shadow] focus:border-brand focus:ring-4 focus:ring-brand/15 print:resize-none print:rounded-none print:border-0 print:border-b print:border-slate/50 print:px-0"
                         />
                       </td>
                       <td className="min-w-48 px-3 py-3 align-top print:min-w-0">
                         <textarea
                           name={`offen-${bidder}`}
+                          autoComplete="off"
                           rows={2}
                           aria-label={`Offene Punkte bei Bieter ${bidder}`}
-                          className="w-full resize-y rounded-md border border-line px-2 py-1 text-ink outline-none focus:border-brand print:resize-none print:rounded-none print:border-0 print:border-b print:border-slate/50 print:px-0"
+                          className="w-full resize-y rounded-md border border-line px-2 py-1 text-ink outline-none transition-[border-color,box-shadow] focus:border-brand focus:ring-4 focus:ring-brand/15 print:resize-none print:rounded-none print:border-0 print:border-b print:border-slate/50 print:px-0"
                         />
                       </td>
                     </tr>

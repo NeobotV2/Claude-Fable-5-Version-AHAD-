@@ -12,7 +12,7 @@ function Stars({ rating }: { rating: number }) {
   return (
     <div className="flex gap-0.5" role="img" aria-label={`${rating} von 5 Sternen`}>
       {[1, 2, 3, 4, 5].map((i) => (
-        <Star key={i} size={15} className={i <= rating ? 'fill-amber-500 text-amber-500' : 'text-navy/20'} />
+        <Star key={i} size={15} className={i <= rating ? 'fill-amber-500 text-amber-500' : 'text-navy/20'} aria-hidden="true" />
       ))}
     </div>
   );

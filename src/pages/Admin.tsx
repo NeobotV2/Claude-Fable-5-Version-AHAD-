@@ -95,7 +95,7 @@ function EmailFailedBadge({ emailSent }: { emailSent?: boolean }) {
   if (emailSent !== false) return null;
   return (
     <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-amber-100 text-amber-700 text-xs font-bold rounded-full uppercase">
-      <AlertCircle size={12} />
+      <AlertCircle size={12} aria-hidden="true" />
       E-Mail fehlgeschlagen
     </span>
   );
@@ -325,7 +325,7 @@ export default function Admin() {
           className="bg-white p-8 rounded-3xl shadow-xl max-w-md w-full text-center"
         >
           <div className="w-20 h-20 bg-blue-50 text-[#0B2341] rounded-full flex items-center justify-center mx-auto mb-6">
-            <LayoutDashboard size={40} />
+            <LayoutDashboard size={40} aria-hidden="true" />
           </div>
           <h1 className="text-2xl font-black text-[#0B2341] mb-4">Admin Dashboard</h1>
           <p className="text-[#424751] mb-8">
@@ -333,9 +333,9 @@ export default function Admin() {
           </p>
           <button 
             onClick={handleLogin}
-            className="flex items-center justify-center gap-3 w-full bg-white border-2 border-gray-200 text-gray-700 py-4 rounded-xl font-bold hover:bg-gray-50 transition-all"
+            className="flex items-center justify-center gap-3 w-full bg-white border-2 border-gray-200 text-gray-700 py-4 rounded-xl font-bold hover:bg-gray-50 transition-colors"
           >
-            <LogIn size={20} /> Mit Google anmelden
+            <LogIn size={20} aria-hidden="true" /> Mit Google anmelden
           </button>
         </div>
       </div>
@@ -372,15 +372,15 @@ export default function Admin() {
                   contactLeads.map((item) => [item.id, item.contactPerson, item.company, item.email, item.phone, item.serviceType, item.message, item.status, item.emailSent === true ? 'Ja' : 'Nein', formatTimestamp(item.createdAt)]),
                 );
               }}
-              className="flex items-center gap-2 bg-white text-[#0D6B38] px-6 py-3 rounded-xl font-bold hover:bg-green-50 transition-all shadow-sm border border-green-100"
+              className="flex items-center gap-2 bg-white text-[#0D6B38] px-6 py-3 rounded-xl font-bold hover:bg-green-50 transition-colors shadow-sm border border-green-100"
             >
-              <FileText size={20} /> CSV exportieren
+              <FileText size={20} aria-hidden="true" /> CSV exportieren
             </button>
             <button 
               onClick={handleLogout}
-              className="flex items-center gap-2 bg-white text-red-600 px-6 py-3 rounded-xl font-bold hover:bg-red-50 transition-all shadow-sm border border-red-100"
+              className="flex items-center gap-2 bg-white text-red-600 px-6 py-3 rounded-xl font-bold hover:bg-red-50 transition-colors shadow-sm border border-red-100"
             >
-              <LogOut size={20} /> Abmelden
+              <LogOut size={20} aria-hidden="true" /> Abmelden
             </button>
           </div>
         </div>
@@ -398,7 +398,7 @@ export default function Admin() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
           <div className="bg-white p-8 rounded-3xl shadow-sm border border-gray-100 flex items-center gap-6">
             <div className="w-16 h-16 bg-green-50 text-[#0D6B38] rounded-2xl flex items-center justify-center">
-              <Users size={32} />
+              <Users size={32} aria-hidden="true" />
             </div>
             <div>
               <div className="text-3xl font-black text-[#0B2341]">{jobApplications.length}</div>
@@ -407,7 +407,7 @@ export default function Admin() {
           </div>
           <div className="bg-white p-8 rounded-3xl shadow-sm border border-gray-100 flex items-center gap-6">
             <div className="w-16 h-16 bg-blue-50 text-[#0B2341] rounded-2xl flex items-center justify-center">
-              <FileText size={32} />
+              <FileText size={32} aria-hidden="true" />
             </div>
             <div>
               <div className="text-3xl font-black text-[#0B2341]">{offerLeads.length}</div>
@@ -416,7 +416,7 @@ export default function Admin() {
           </div>
           <div className="bg-white p-8 rounded-3xl shadow-sm border border-gray-100 flex items-center gap-6">
             <div className="w-16 h-16 bg-purple-50 text-purple-600 rounded-2xl flex items-center justify-center">
-              <Mail size={32} />
+              <Mail size={32} aria-hidden="true" />
             </div>
             <div>
               <div className="text-3xl font-black text-[#0B2341]">{contactLeads.length}</div>
@@ -429,7 +429,7 @@ export default function Admin() {
         <div className="flex flex-wrap gap-4 mb-8">
           <button 
             onClick={() => setActiveTab('jobs')}
-            className={`px-8 py-4 rounded-xl font-bold transition-all ${
+            className={`px-8 py-4 rounded-xl font-bold transition-colors ${
               activeTab === 'jobs' 
                 ? 'bg-[#0D6B38] text-white shadow-lg' 
                 : 'bg-white text-[#424751] hover:bg-gray-50'
@@ -439,7 +439,7 @@ export default function Admin() {
           </button>
           <button 
             onClick={() => setActiveTab('offers')}
-            className={`px-8 py-4 rounded-xl font-bold transition-all ${
+            className={`px-8 py-4 rounded-xl font-bold transition-colors ${
               activeTab === 'offers' 
                 ? 'bg-[#0B2341] text-white shadow-lg' 
                 : 'bg-white text-[#424751] hover:bg-gray-50'
@@ -449,7 +449,7 @@ export default function Admin() {
           </button>
           <button 
             onClick={() => setActiveTab('contacts')}
-            className={`px-8 py-4 rounded-xl font-bold transition-all ${
+            className={`px-8 py-4 rounded-xl font-bold transition-colors ${
               activeTab === 'contacts' 
                 ? 'bg-purple-600 text-white shadow-lg' 
                 : 'bg-white text-[#424751] hover:bg-gray-50'
@@ -483,19 +483,19 @@ export default function Admin() {
                       </div>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-3">
                         <div className="flex items-center gap-2 text-[#424751]">
-                          <Phone size={18} className="text-gray-400" />
+                          <Phone size={18} className="text-gray-400" aria-hidden="true" />
                           <span className="font-medium">{app.phone}</span>
                         </div>
                         <div className="flex items-center gap-2 text-[#424751]">
-                          <Building size={18} className="text-gray-400" />
+                          <Building size={18} className="text-gray-400" aria-hidden="true" />
                           <span className="font-medium">{app.department}</span>
                         </div>
                         <div className="flex items-center gap-2 text-[#424751]">
-                          <MapPin size={18} className="text-gray-400" />
+                          <MapPin size={18} className="text-gray-400" aria-hidden="true" />
                           <span className="font-medium">{app.location}</span>
                         </div>
                         <div className="flex items-center gap-2 text-[#424751]">
-                          <Calendar size={18} className="text-gray-400" />
+                          <Calendar size={18} className="text-gray-400" aria-hidden="true" />
                           <span className="font-medium">Start: {app.startDate}</span>
                         </div>
                       </div>
@@ -513,7 +513,7 @@ export default function Admin() {
                         value={app.status}
                         aria-label={`Status von ${app.name}`}
                         onChange={(e) => updateStatus('job_applications', app.id, e.target.value)}
-                        className={`px-4 py-2 rounded-lg font-bold text-sm border-2 outline-none transition-all ${
+                        className={`px-4 py-2 rounded-lg font-bold text-sm border-2 outline-none focus-visible:ring-4 focus-visible:ring-[#0D6B38]/30 transition-colors ${
                           app.status === 'new' ? 'border-green-200 bg-green-50 text-[#0D6B38]' :
                           app.status === 'rejected' ? 'border-red-200 bg-red-50 text-red-600' :
                           'border-blue-200 bg-blue-50 text-[#0B2341]'
@@ -531,7 +531,7 @@ export default function Admin() {
                         disabled={deletingKey === `job_applications/${app.id}`}
                         className="inline-flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-bold text-red-600 hover:bg-red-50 disabled:opacity-50"
                       >
-                        <Trash2 size={16} /> {deletingKey === `job_applications/${app.id}` ? 'Löscht …' : 'Löschen'}
+                        <Trash2 size={16} aria-hidden="true" /> {deletingKey === `job_applications/${app.id}` ? 'Löscht…' : 'Löschen'}
                       </button>
                     </div>
                   </div>
@@ -562,19 +562,19 @@ export default function Admin() {
                       </div>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-3">
                         <div className="flex items-center gap-2 text-[#424751]">
-                          <Users size={18} className="text-gray-400" />
+                          <Users size={18} className="text-gray-400" aria-hidden="true" />
                           <span className="font-medium">{lead.contactPerson}</span>
                         </div>
                         <div className="flex items-center gap-2 text-[#424751]">
-                          <Mail size={18} className="text-gray-400" />
+                          <Mail size={18} className="text-gray-400" aria-hidden="true" />
                           <span className="font-medium">{lead.email}</span>
                         </div>
                         <div className="flex items-center gap-2 text-[#424751]">
-                          <Phone size={18} className="text-gray-400" />
+                          <Phone size={18} className="text-gray-400" aria-hidden="true" />
                           <span className="font-medium">{lead.phone}</span>
                         </div>
                         <div className="flex items-center gap-2 text-[#424751]">
-                          <MapPin size={18} className="text-gray-400" />
+                          <MapPin size={18} className="text-gray-400" aria-hidden="true" />
                           <span className="font-medium">{lead.location}</span>
                         </div>
                       </div>
@@ -594,7 +594,7 @@ export default function Admin() {
                         value={lead.status}
                         aria-label={`Status von ${lead.companyName || lead.contactPerson}`}
                         onChange={(e) => updateStatus('offer_leads', lead.id, e.target.value)}
-                        className={`px-4 py-2 rounded-lg font-bold text-sm border-2 outline-none transition-all ${
+                        className={`px-4 py-2 rounded-lg font-bold text-sm border-2 outline-none focus-visible:ring-4 focus-visible:ring-[#0D6B38]/30 transition-colors ${
                           lead.status === 'new' ? 'border-blue-200 bg-blue-50 text-[#0B2341]' :
                           lead.status === 'closed' ? 'border-gray-200 bg-gray-50 text-gray-600' :
                           'border-green-200 bg-green-50 text-[#0D6B38]'
@@ -612,7 +612,7 @@ export default function Admin() {
                         disabled={deletingKey === `offer_leads/${lead.id}`}
                         className="inline-flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-bold text-red-600 hover:bg-red-50 disabled:opacity-50"
                       >
-                        <Trash2 size={16} /> {deletingKey === `offer_leads/${lead.id}` ? 'Löscht …' : 'Löschen'}
+                        <Trash2 size={16} aria-hidden="true" /> {deletingKey === `offer_leads/${lead.id}` ? 'Löscht…' : 'Löschen'}
                       </button>
                     </div>
                   </div>
@@ -643,15 +643,15 @@ export default function Admin() {
                       </div>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-3">
                         <div className="flex items-center gap-2 text-[#424751]">
-                          <Building size={18} className="text-gray-400" />
+                          <Building size={18} className="text-gray-400" aria-hidden="true" />
                           <span className="font-medium">{lead.company || 'Privat'}</span>
                         </div>
                         <div className="flex items-center gap-2 text-[#424751]">
-                          <Mail size={18} className="text-gray-400" />
+                          <Mail size={18} className="text-gray-400" aria-hidden="true" />
                           <span className="font-medium">{lead.email}</span>
                         </div>
                         <div className="flex items-center gap-2 text-[#424751]">
-                          <Phone size={18} className="text-gray-400" />
+                          <Phone size={18} className="text-gray-400" aria-hidden="true" />
                           <span className="font-medium">{lead.phone || 'Keine Angabe'}</span>
                         </div>
                       </div>
@@ -667,7 +667,7 @@ export default function Admin() {
                         value={lead.status}
                         aria-label={`Status von ${lead.contactPerson}`}
                         onChange={(e) => updateStatus('leads', lead.id, e.target.value)}
-                        className={`px-4 py-2 rounded-lg font-bold text-sm border-2 outline-none transition-all ${
+                        className={`px-4 py-2 rounded-lg font-bold text-sm border-2 outline-none focus-visible:ring-4 focus-visible:ring-[#0D6B38]/30 transition-colors ${
                           lead.status === 'new' ? 'border-purple-200 bg-purple-50 text-purple-600' :
                           lead.status === 'closed' ? 'border-gray-200 bg-gray-50 text-gray-600' :
                           'border-green-200 bg-green-50 text-[#0D6B38]'
@@ -683,7 +683,7 @@ export default function Admin() {
                         disabled={deletingKey === `leads/${lead.id}`}
                         className="inline-flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-bold text-red-600 hover:bg-red-50 disabled:opacity-50"
                       >
-                        <Trash2 size={16} /> {deletingKey === `leads/${lead.id}` ? 'Löscht …' : 'Löschen'}
+                        <Trash2 size={16} aria-hidden="true" /> {deletingKey === `leads/${lead.id}` ? 'Löscht…' : 'Löschen'}
                       </button>
                     </div>
                   </div>

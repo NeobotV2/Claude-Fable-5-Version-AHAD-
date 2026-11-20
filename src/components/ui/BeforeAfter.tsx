@@ -129,7 +129,7 @@ export default function BeforeAfter({
             rangeFocused && 'ring-4 ring-mint ring-offset-4 ring-offset-navy'
           )}
         >
-          <ChevronsLeftRight size={20} />
+          <ChevronsLeftRight size={20} aria-hidden="true" />
         </div>
       </div>
     </div>

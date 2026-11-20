@@ -20,7 +20,7 @@ export const SITE = {
     city: 'Villingen-Schwenningen',
     country: 'DE',
   },
-  hours: 'Mo–Fr · 08:00–17:00 Uhr',
+  hours: 'Mo–Fr · 08:00–17:00 Uhr',
   /** Dieselben Zeiten maschinenlesbar (Unternehmenseintrag) — muss zu `hours` passen. */
   openingHours: {
     days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
@@ -343,10 +343,10 @@ export const GUARANTEES = canPublishVerification(CLAIM_VERIFICATIONS.serviceLeve
  * ergänzen — bis dahin nur, wofür AHAD vertraglich einsteht.
  */
 const PROOF_POINT_CANDIDATES = [
-  { value: '24 h', label: 'Reaktionszeit', sub: 'vertraglich zugesichert' },
-  { value: '48 h', label: 'bis Objektbesichtigung', sub: 'in der Regel vor Ort' },
+  { value: '24 h', label: 'Reaktionszeit', sub: 'vertraglich zugesichert' },
+  { value: '48 h', label: 'bis Objektbesichtigung', sub: 'in der Regel vor Ort' },
   { value: '1', label: 'feste Objektleitung', sub: 'pro Objekt' },
-  { value: '100 %', label: 'dokumentierte Leistung', sub: 'für Audits nachweisbar' },
+  { value: '100 %', label: 'dokumentierte Leistung', sub: 'für Audits nachweisbar' },
 ] as const;
 
 export const PROOF_POINTS = canPublishVerification(CLAIM_VERIFICATIONS.serviceLevels)

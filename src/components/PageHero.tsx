@@ -13,7 +13,7 @@ export interface Crumb {
   href?: string;
 }
 
-/** Sichtbare Bildbreite: ab lg rund 42 % der Seite, darunter volle Breite. */
+/** Sichtbare Bildbreite: ab lg rund 42 % der Seite, darunter volle Breite. */
 const HERO_SIZES = '(min-width: 1024px) 42vw, 100vw';
 
 interface PageHeroProps {

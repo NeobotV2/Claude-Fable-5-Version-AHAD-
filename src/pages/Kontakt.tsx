@@ -67,7 +67,7 @@ export default function Kontakt() {
         <ol className="mt-10 pt-6 border-t border-line grid grid-cols-1 sm:grid-cols-3 gap-x-8 gap-y-3 max-w-3xl">
           {[
             { value: '1', label: 'Anfrage per Formular, Telefon oder E-Mail' },
-            { value: '2', label: 'Besichtigung in der Regel binnen 48 h' },
+            { value: '2', label: 'Besichtigung in der Regel binnen 48 h' },
             { value: '3', label: 'Angebot im Anschluss' },
           ].map((promise) => (
             <li key={promise.label} className="flex items-baseline gap-3">

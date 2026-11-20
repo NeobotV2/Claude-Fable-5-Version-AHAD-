@@ -158,7 +158,7 @@ export default function FachwissenLeistungsverzeichnis() {
                 <tbody>
                   <tr>
                     <th scope="row" className="px-4 py-3 align-top font-semibold text-navy">
-                      Büro 1. OG · 420 m² Teppich
+                      Büro 1. OG · 420 m² Teppich
                     </th>
                     <td className="px-4 py-3 align-top">Freie Bodenflächen saugen; erreichbare Randzonen einbeziehen</td>
                     <td className="px-4 py-3 align-top">Mo., Mi. und Fr.; Zusatzleistung nach dokumentiertem Ereignis</td>

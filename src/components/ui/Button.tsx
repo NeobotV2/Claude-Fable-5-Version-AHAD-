@@ -77,8 +77,7 @@ export default function ButtonLink({
       {arrow && (
         <ArrowRight
           size={18}
-          className="flex-shrink-0 transition-transform duration-150 group-hover/btn:translate-x-0.5"
-        />
+          className="flex-shrink-0 transition-transform duration-150 group-hover/btn:translate-x-0.5" aria-hidden="true" />
       )}
     </>
   );

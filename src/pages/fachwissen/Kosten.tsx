@@ -23,7 +23,7 @@ export default function FachwissenKosten() {
         name: 'Was kostet Gebäudereinigung pro Stunde?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: 'Einen allgemein gültigen Stundensatz gibt es nicht. Er hängt unter anderem von Leistungsumfang, Arbeitsbedingungen, Zeiten, Material, Maschinen und Betreuung ab. Die 34 € in diesem Artikel sind eine reine Rechenannahme, weder Marktangabe noch Preisversprechen.',
+          text: 'Einen allgemein gültigen Stundensatz gibt es nicht. Er hängt unter anderem von Leistungsumfang, Arbeitsbedingungen, Zeiten, Material, Maschinen und Betreuung ab. Die 34 € in diesem Artikel sind eine reine Rechenannahme, weder Marktangabe noch Preisversprechen.',
         },
       },
       {
@@ -31,7 +31,7 @@ export default function FachwissenKosten() {
         name: 'Was kostet Büroreinigung pro Quadratmeter?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: 'Der m²-Preis lässt sich als Stundensatz geteilt durch den objektbezogenen Leistungswert modellieren. Die Zahlen im Artikel sind illustrative Rechenwerte mit einer angenommenen Stunde zu 34 € und ersetzen keine Kalkulation für ein konkretes Objekt.',
+          text: 'Der m²-Preis lässt sich als Stundensatz geteilt durch den objektbezogenen Leistungswert modellieren. Die Zahlen im Artikel sind illustrative Rechenwerte mit einer angenommenen Stunde zu 34 € und ersetzen keine Kalkulation für ein konkretes Objekt.',
         },
       },
       {
@@ -102,7 +102,7 @@ export default function FachwissenKosten() {
               <Euro className="mb-4 h-8 w-8 text-accent" aria-hidden="true" />
               <h3 className="mb-2 text-lg font-bold text-navy">Stundensatz</h3>
               <p className="text-sm text-slate">
-                Im Artikel als <strong>Rechenannahme 34 € je Stunde</strong>. Das ist kein Preisversprechen; ein
+                Im Artikel als <strong>Rechenannahme 34 € je Stunde</strong>. Das ist kein Preisversprechen; ein
                 Angebot benötigt den konkreten Leistungsumfang.
               </p>
             </div>
@@ -135,7 +135,7 @@ export default function FachwissenKosten() {
           <div className="prose prose-lg max-w-none leading-relaxed text-slate">
             <h2 id="kostenbestandteile" className="scroll-mt-28 text-2xl font-bold text-navy sm:text-3xl">Der Stundensatz und seine Kostenbestandteile</h2>
             <p className="mb-6">
-              Für die folgenden Formeln verwenden wir <strong>34 € pro Reinigungsstunde als illustrative Annahme</strong>.
+              Für die folgenden Formeln verwenden wir <strong>34 € pro Reinigungsstunde als illustrative Annahme</strong>.
               Sie ist weder Marktspanne noch Preisversprechen. Entscheidend ist, welche Leistungen und Kostenbestandteile
               ein konkret angebotenes Stundenentgelt abdeckt:
             </p>
@@ -202,29 +202,29 @@ export default function FachwissenKosten() {
                   <tr className="bg-navy text-white">
                     <th scope="col" className="px-4 py-3 font-bold text-white">Rechenszenario</th>
                     <th scope="col" className="px-4 py-3 font-bold text-white">Hypothetischer Leistungswert</th>
-                    <th scope="col" className="px-4 py-3 font-bold text-white">Ergebnis bei 34 €/h*</th>
+                    <th scope="col" className="px-4 py-3 font-bold text-white">Ergebnis bei 34 €/h*</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-line">
                   <tr>
                     <th scope="row" className="px-4 py-3 font-semibold text-navy align-top">Beispiel A</th>
-                    <td className="px-4 py-3 align-top">250 m²/h</td>
-                    <td className="px-4 py-3 align-top">0,136 €/m², gerundet 0,14 €/m²</td>
+                    <td className="px-4 py-3 align-top">250 m²/h</td>
+                    <td className="px-4 py-3 align-top">0,136 €/m², gerundet 0,14 €/m²</td>
                   </tr>
                   <tr className="bg-paper">
                     <th scope="row" className="px-4 py-3 font-semibold text-navy align-top">Beispiel B</th>
-                    <td className="px-4 py-3 align-top">350 m²/h</td>
-                    <td className="px-4 py-3 align-top">0,097 €/m², gerundet 0,10 €/m²</td>
+                    <td className="px-4 py-3 align-top">350 m²/h</td>
+                    <td className="px-4 py-3 align-top">0,097 €/m², gerundet 0,10 €/m²</td>
                   </tr>
                   <tr>
                     <th scope="row" className="px-4 py-3 font-semibold text-navy align-top">Beispiel C</th>
-                    <td className="px-4 py-3 align-top">75 m²/h</td>
-                    <td className="px-4 py-3 align-top">0,453 €/m², gerundet 0,45 €/m²</td>
+                    <td className="px-4 py-3 align-top">75 m²/h</td>
+                    <td className="px-4 py-3 align-top">0,453 €/m², gerundet 0,45 €/m²</td>
                   </tr>
                   <tr className="bg-paper">
                     <th scope="row" className="px-4 py-3 font-semibold text-navy align-top">Beispiel D</th>
-                    <td className="px-4 py-3 align-top">140 m²/h</td>
-                    <td className="px-4 py-3 align-top">0,243 €/m², gerundet 0,24 €/m²</td>
+                    <td className="px-4 py-3 align-top">140 m²/h</td>
+                    <td className="px-4 py-3 align-top">0,243 €/m², gerundet 0,24 €/m²</td>
                   </tr>
                 </tbody>
               </table>
@@ -235,11 +235,11 @@ export default function FachwissenKosten() {
               entstehen erst aus dem konkreten Objekt und Leistungsziel.
             </p>
 
-            <h2 id="rechenbeispiel" className="scroll-mt-28 text-2xl font-bold text-navy sm:text-3xl">Rechenbeispiel: Büroetage mit 500 m²</h2>
+            <h2 id="rechenbeispiel" className="scroll-mt-28 text-2xl font-bold text-navy sm:text-3xl">Rechenbeispiel: Büroetage mit 500 m²</h2>
             <div className="mb-12 rounded-3xl border border-line bg-paper p-6 sm:p-8">
               <p className="mb-4 text-sm">
-                Ausschließlich zur Illustration nehmen wir 420 m² Büro-/Verkehrsfläche mit 250 m²/h, 80 m²
-                Sanitär-/Küchenfläche mit 75 m²/h und einen kalkulierten Stundensatz von 34 € an. Diese Eingaben sind
+                Ausschließlich zur Illustration nehmen wir 420 m² Büro-/Verkehrsfläche mit 250 m²/h, 80 m²
+                Sanitär-/Küchenfläche mit 75 m²/h und einen kalkulierten Stundensatz von 34 € an. Diese Eingaben sind
                 keine Empfehlung für ein reales Objekt.
               </p>
               <ul className="list-none space-y-2 pl-0 text-sm">
@@ -256,8 +256,8 @@ export default function FachwissenKosten() {
                   <span className="font-bold text-navy">2,75 Std.</span>
                 </li>
                 <li className="flex flex-col justify-between gap-1 pt-1 sm:flex-row">
-                  <span><strong>Rechenergebnis pro vollständigem Durchgang</strong>: 2,75 × 34 €</span>
-                  <span className="font-bold text-accent">93,50 €</span>
+                  <span><strong>Rechenergebnis pro vollständigem Durchgang</strong>: 2,75 × 34 €</span>
+                  <span className="font-bold text-accent">93,50 €</span>
                 </li>
               </ul>
               <p className="mt-4 text-xs text-slate">

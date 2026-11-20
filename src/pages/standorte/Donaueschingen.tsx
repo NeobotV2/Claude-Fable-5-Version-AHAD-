@@ -77,7 +77,7 @@ const LOCAL_BRANCHEN = [
 const BAAR_FAKTOREN = [
   {
     title: 'Frühe Frostperiode',
-    text: 'Die Baar gilt als einer der Kältepole Deutschlands. Frost setzt im Mittel früher ein als im umliegenden Schwarzwald. Den Winterdienst planen wir so, dass Zufahrten, Gehwege und Parkflächen vor Betriebsbeginn geräumt und gestreut sind, bei Bedarf ab 4 Uhr.',
+    text: 'Die Baar gilt als einer der Kältepole Deutschlands. Frost setzt im Mittel früher ein als im umliegenden Schwarzwald. Den Winterdienst planen wir so, dass Zufahrten, Gehwege und Parkflächen vor Betriebsbeginn geräumt und gestreut sind, bei Bedarf ab 4 Uhr.',
   },
   {
     title: 'Streusalz im Eingangsbereich',
@@ -125,7 +125,7 @@ const LOCAL_FAQS: FAQItem[] = [
   {
     question: 'Bieten Sie Winterdienst in Donaueschingen an?',
     answer:
-      'Ja. Donaueschingen gehört zu unserem Einsatzgebiet im Winterdienst. Wir räumen und streuen die vereinbarten Flächen, bei Bedarf ab 4 Uhr, und protokollieren jeden Einsatz mit Zeit, Fläche und Maßnahme. Weil der Frost auf der Baar früh einsetzt, sollten Sie den Winterdienst möglichst vor Saisonbeginn vereinbaren.',
+      'Ja. Donaueschingen gehört zu unserem Einsatzgebiet im Winterdienst. Wir räumen und streuen die vereinbarten Flächen, bei Bedarf ab 4 Uhr, und protokollieren jeden Einsatz mit Zeit, Fläche und Maßnahme. Weil der Frost auf der Baar früh einsetzt, sollten Sie den Winterdienst möglichst vor Saisonbeginn vereinbaren.',
   },
   {
     question: 'Haben Sie eine Niederlassung in Donaueschingen?',

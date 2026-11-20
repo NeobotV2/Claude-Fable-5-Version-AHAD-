@@ -65,7 +65,7 @@ export default function FachwissenMindestlohn() {
       <SEO
         ogType="article"
         title="Mindestlohn Gebäudereinigung 2026 & 2027 | AHAD"
-        description="Mindestlohn Gebäudereinigung: 15,00 € in Lohngruppe 1 und 18,40 € in Lohngruppe 6 seit 2026, Stand der Tarifrunde 2027, Preisanpassung und Auftraggeberhaftung."
+        description="Mindestlohn Gebäudereinigung: 15,00 € in Lohngruppe 1 und 18,40 € in Lohngruppe 6 seit 2026, Stand der Tarifrunde 2027, Preisanpassung und Auftraggeberhaftung."
         keywords="Mindestlohn Gebäudereinigung 2026, Mindestlohn Gebäudereinigung 2027, Tariflohn Gebäudereinigung, Lohngruppe 1 Gebäudereinigung, Tarifrunde Gebäudereinigung, Auftraggeberhaftung Mindestlohn"
         schema={[articleSchema, faqSchema]}
       />
@@ -116,14 +116,14 @@ export default function FachwissenMindestlohn() {
                   <tr>
                     <th scope="row" className="bg-paper px-4 py-4 font-bold text-navy">Lohngruppe 1</th>
                     <td className="px-4 py-4">Innen- und Unterhaltsreinigung</td>
-                    <td className="px-4 py-4">14,25 €</td>
-                    <td className="px-4 py-4 font-bold text-navy">15,00 €</td>
+                    <td className="px-4 py-4">14,25 €</td>
+                    <td className="px-4 py-4 font-bold text-navy">15,00 €</td>
                   </tr>
                   <tr>
                     <th scope="row" className="bg-paper px-4 py-4 font-bold text-navy">Lohngruppe 6</th>
                     <td className="px-4 py-4">Glas- und Fassadenreinigung</td>
-                    <td className="px-4 py-4">17,65 €</td>
-                    <td className="px-4 py-4 font-bold text-navy">18,40 €</td>
+                    <td className="px-4 py-4">17,65 €</td>
+                    <td className="px-4 py-4 font-bold text-navy">18,40 €</td>
                   </tr>
                 </tbody>
               </table>
@@ -230,18 +230,18 @@ export default function FachwissenMindestlohn() {
                 <tbody className="divide-y divide-line text-slate">
                   <tr>
                     <th scope="row" className="bg-paper px-4 py-4 font-bold text-navy">Gesetzlicher Mindestlohn</th>
-                    <td className="px-4 py-4">13,90 €</td>
-                    <td className="px-4 py-4">14,60 € (beschlossen)</td>
+                    <td className="px-4 py-4">13,90 €</td>
+                    <td className="px-4 py-4">14,60 € (beschlossen)</td>
                   </tr>
                   <tr>
                     <th scope="row" className="bg-paper px-4 py-4 font-bold text-navy">Gebäudereinigung Lohngruppe 1</th>
-                    <td className="px-4 py-4">15,00 €</td>
-                    <td className="px-4 py-4">offen, Forderung IG BAU: 17,00 €</td>
+                    <td className="px-4 py-4">15,00 €</td>
+                    <td className="px-4 py-4">offen, Forderung IG BAU: 17,00 €</td>
                   </tr>
                   <tr>
                     <th scope="row" className="bg-paper px-4 py-4 font-bold text-navy">Gebäudereinigung Lohngruppe 6</th>
-                    <td className="px-4 py-4">18,40 €</td>
-                    <td className="px-4 py-4">offen, Forderung IG BAU: 20,40 €</td>
+                    <td className="px-4 py-4">18,40 €</td>
+                    <td className="px-4 py-4">offen, Forderung IG BAU: 20,40 €</td>
                   </tr>
                 </tbody>
               </table>
@@ -280,7 +280,7 @@ export default function FachwissenMindestlohn() {
               <p className="mt-3 text-sm leading-relaxed text-slate">
                 Ausschließlich zur Veranschaulichung: Angenommen, der Lohn steigt um 4 Prozent und die lohngebundenen
                 Kosten machen 75 Prozent des Stundenverrechnungssatzes aus. Dann ändert sich der Preis um rund
-                4 % × 0,75 = 3 Prozent. Beide Werte sind Rechenannahmen, weder Prognose für 2027 noch Branchenwert.
+                4 % × 0,75 = 3 Prozent. Beide Werte sind Rechenannahmen, weder Prognose für 2027 noch Branchenwert.
                 Den tatsächlichen Lohnanteil kennt nur die Kalkulation des jeweiligen Angebots.
               </p>
             </div>

@@ -153,6 +153,15 @@
   html {
     scroll-behavior: smooth;
     -webkit-tap-highlight-color: transparent;
+    /* Kein Verzögern von Taps durch Doppeltipp-Zoom. */
+    touch-action: manipulation;
+    /* Die feste Kopfzeile (4rem) verdeckt kein per Tab oder Sprungmarke
+       angesteuertes Element. */
+    scroll-padding-top: 5rem;
+  }
+  /* Auf dem Handy liegt unten die feste Anfrage-Leiste. */
+  @media (max-width: 1023px) {
+    html { scroll-padding-bottom: 6rem; }
   }
   body {
     @apply bg-paper text-ink font-sans;
@@ -165,6 +174,10 @@
   }
   p {
     text-wrap: pretty;
+  }
+  /* Zahlen in Tabellen gleich breit, damit Beträge und Werte untereinander stehen. */
+  td {
+    font-variant-numeric: tabular-nums;
   }
   /* Fließtext: Ausgeschriebene Internetadressen und sehr lange Wörter dürfen
      umbrechen, statt die Seite auf schmalen Handys breiter als den Bildschirm
@@ -297,15 +310,6 @@
     }
   }
 
-  /* Unterstreich-Animation für Inline-Links */
-  .link-underline {
-    background-image: linear-gradient(currentColor, currentColor);
-    background-size: 0% 2px;
-    background-position: 0 100%;
-    background-repeat: no-repeat;
-    transition: background-size 0.3s ease;
-  }
-  .link-underline:hover { background-size: 100% 2px; }
 }
 
 /* Form-Hinweise bleiben auch bei Tailwind-Placeholder-Utilities AA-lesbar. */

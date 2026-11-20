@@ -19,7 +19,7 @@ export default function NotFound() {
 
       <div className="relative z-10 max-w-3xl mx-auto px-4 sm:px-8 py-40 text-center">
         <span className="eyebrow text-mint justify-center mb-6">
-          <Sparkles size={14} />
+          <Sparkles size={14} aria-hidden="true" />
           Seite nicht gefunden
         </span>
         <h1 className="font-logo font-black text-[clamp(6rem,20vw,12rem)] leading-none tracking-tighter text-white/95">
@@ -31,7 +31,7 @@ export default function NotFound() {
         <div className="flex flex-col sm:flex-row justify-center gap-4 mb-10">
           <ButtonLink to="/" size="lg" arrow>
             <span className="inline-flex items-center gap-2">
-              <Home size={17} />
+              <Home size={17} aria-hidden="true" />
               Zur Startseite
             </span>
           </ButtonLink>
@@ -47,7 +47,7 @@ export default function NotFound() {
               className="inline-flex items-center gap-1.5 text-caption font-semibold text-ondark/75 hover:text-mint bg-white/5 hover:bg-white/10 border border-white/10 px-4 py-2 rounded-md transition-colors"
             >
               {link.label}
-              <ArrowRight size={13} />
+              <ArrowRight size={13} aria-hidden="true" />
             </Link>
           ))}
         </div>

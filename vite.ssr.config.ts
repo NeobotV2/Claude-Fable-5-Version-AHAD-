@@ -10,6 +10,8 @@ import path from 'node:path';
  * (Client-SPA) bleibt davon unberührt.
  */
 export default defineConfig({
+  // Jahr im Copyright: im Prerender und im Browser derselbe Wert (Build-Jahr).
+  define: { __BUILD_YEAR__: JSON.stringify(new Date().getFullYear()) },
   plugins: [react(), tailwindcss()],
   // Konsistent mit dem Client-Build (z. B. GitHub-Pages-Unterpfad),
   // damit import.meta.env.BASE_URL im Prerender stimmt.

@@ -31,13 +31,13 @@ export function AccordionItem({ item, defaultOpen = false }: { item: FAQItem; de
           {item.question}
         </span>
         <span className="flex-shrink-0 mt-1 text-navy group-hover:text-accent transition-colors" aria-hidden>
-          {open ? <Minus size={20} /> : <Plus size={20} />}
+          {open ? <Minus size={20} aria-hidden="true" /> : <Plus size={20} aria-hidden="true" />}
         </span>
       </button>
       <div
         id={panelId}
         className={cn(
-          'grid transition-[grid-template-rows,opacity] duration-200 ease-out motion-reduce:transition-none',
+          'grid transition-opacity duration-200 ease-out motion-reduce:transition-none',
           open ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
         )}
         aria-hidden={!open}

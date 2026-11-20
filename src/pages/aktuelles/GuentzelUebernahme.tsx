@@ -161,7 +161,7 @@ export default function AktuellesGuentzelUebernahme() {
                 <a href={SITE.phoneHref} className="inline-block py-2.5 font-bold text-brand hover:underline">
                   {SITE.phone}
                 </a>
-                <span className="text-slate text-sm">Büro, werktags 7 bis 17 Uhr</span>
+                <span className="text-slate text-sm">Büro, werktags 7 bis 17 Uhr</span>
               </li>
               <li>
                 <a href={`mailto:${SITE.email}`} className="inline-block py-2.5 font-bold text-brand hover:underline">
