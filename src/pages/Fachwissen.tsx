@@ -1,21 +1,9 @@
-import type { LucideIcon } from 'lucide-react';
-import {
-  ArrowRight,
-  BookOpenCheck,
-  Building2,
-  Calculator,
-  ClipboardList,
-  Factory,
-  Scale,
-  ShieldCheck,
-  ShoppingCart,
-  UsersRound,
-} from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import SEO from '@/components/SEO';
 import PageHero from '@/components/PageHero';
-import Reveal from '@/components/ui/Reveal';
 import CTABand from '@/components/CTABand';
+import RuleColumns from '@/components/ui/RuleColumns';
 import { SITE } from '@/lib/site';
 import {
   EDITORIAL_ARTICLE_LIST,
@@ -24,26 +12,16 @@ import {
   EDITORIAL_CLUSTER_ORDER,
   getEditorialArticlePath,
   type EditorialArticleSlug,
-  type EditorialClusterKey,
 } from '@/data/editorial';
-
-const clusterIcons: Record<EditorialClusterKey, LucideIcon> = {
-  'planen-kalkulieren': Calculator,
-  'ausschreiben-vergleichen': ClipboardList,
-  'wechsel-betrieb': Factory,
-  'qualitaet-compliance': ShieldCheck,
-};
 
 const rolePaths: Array<{
   title: string;
   focus: string;
-  icon: LucideIcon;
   articles: readonly EditorialArticleSlug[];
 }> = [
   {
     title: 'Facility Management',
     focus: 'Bedarf, Intervalle und Qualität im Objekt steuern',
-    icon: Building2,
     articles: [
       'unterhaltsreinigung-unternehmen-reinigungsintervalle',
       'leistungsverzeichnis-gebaeudereinigung-erstellen',
@@ -52,13 +30,11 @@ const rolePaths: Array<{
   {
     title: 'Einkauf',
     focus: 'Leistungen einheitlich beschreiben und Angebote nachvollziehbar vergleichen',
-    icon: ShoppingCart,
     articles: ['checkliste-reinigungsangebot', 'was-kostet-gebaeudereinigung-stundensatz-preise'],
   },
   {
     title: 'Geschäftsführung',
     focus: 'Versorgungs-, Qualitäts- und Compliance-Risiken einordnen',
-    icon: UsersRound,
     articles: [
       'reinigungsfirma-wechseln-checkliste-tipps',
       'iso-9001-iso-14001-gebaeudereinigung-unternehmen',
@@ -114,220 +90,134 @@ export default function Fachwissen() {
         crumbs={[{ label: 'Fachwissen' }]}
       />
 
-      <div>
-        <section aria-labelledby="aufgabe-waehlen" className="bg-white py-14 lg:py-20">
-          <div className="mx-auto max-w-7xl px-4 sm:px-8">
-            <Reveal>
-              <div className="max-w-3xl">
-                <p className="eyebrow mb-4 text-brand">
-                  <span className="h-px w-8 bg-brand/40" />
-                  Nach Aufgabe einsteigen
-                </p>
-                <h2 id="aufgabe-waehlen" className="display-md text-navy">Welche Entscheidung steht an?</h2>
-                <p className="mt-4 text-base leading-relaxed text-slate sm:text-lg">
-                  Wählen Sie den Themenpfad, der zu Ihrer nächsten Entscheidung passt.
-                </p>
-              </div>
-            </Reveal>
-
-            <nav aria-label="Themenpfade" className="mt-9 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-              {EDITORIAL_CLUSTER_ORDER.map((clusterKey, index) => {
-                const cluster = EDITORIAL_CLUSTERS[clusterKey];
-                const Icon = clusterIcons[clusterKey];
-                return (
-                  <Reveal key={clusterKey} delay={Math.min(index * 0.06, 0.18)}>
-                    <a
-                      href={`#${clusterKey}`}
-                      className="group flex h-full min-h-28 items-start gap-4 rounded-2xl border border-line bg-paper p-5 transition-all hover:-translate-y-0.5 hover:border-brand/40 hover:shadow-soft focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
-                    >
-                      <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-brand/8 text-brand">
-                        <Icon size={20} aria-hidden="true" />
-                      </span>
-                      <span>
-                        <span className="block font-headline font-bold leading-snug text-navy">{cluster.shortTitle}</span>
-                        <span className="mt-2 inline-flex items-center gap-1.5 text-xs font-bold text-brand">
-                          Beiträge ansehen <ArrowRight size={13} aria-hidden="true" />
-                        </span>
-                      </span>
-                    </a>
-                  </Reveal>
-                );
-              })}
-            </nav>
+      {/* Alle Leitfäden, nach Thema gegliedert: links das Thema, rechts die Beiträge als Liste. */}
+      <section aria-labelledby="alle-leitfaeden" className="bg-white section-y">
+        <div className="container-page">
+          <div className="max-w-3xl">
+            <p className="eyebrow mb-3 text-accent">Alle Entscheidungshilfen</p>
+            <h2 id="alle-leitfaeden" className="display-lg text-navy">Leitfäden nach Thema</h2>
+            <p className="mt-4 text-lg leading-relaxed text-slate">
+              Jeder Beitrag behandelt eine Prüffrage und nennt am Ende zwei passende Folgethemen.
+            </p>
           </div>
-        </section>
 
-        <section aria-labelledby="rollen-einstieg" className="border-y border-line bg-paper py-12">
-          <div className="mx-auto max-w-7xl px-4 sm:px-8">
-            <div className="grid gap-6 lg:grid-cols-[0.72fr_2.28fr] lg:items-start">
-              <Reveal>
-                <p className="eyebrow mb-3 text-brand">
-                  <span className="h-px w-8 bg-brand/40" />
-                  Nach Rolle
-                </p>
-                <h2 id="rollen-einstieg" className="font-headline text-2xl font-bold text-navy">
-                  Empfohlene Einstiege für Ihre Rolle
-                </h2>
-                <p className="mt-3 text-sm leading-relaxed text-slate">
-                  Je Rolle zwei Leitfäden für den Anfang. Die übrigen stehen in den Themenpfaden.
-                </p>
-              </Reveal>
+          <nav aria-label="Themenpfade" className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-1 border-y border-line py-2">
+            <span className="text-caption font-semibold text-slate">Direkt zum Thema</span>
+            {EDITORIAL_CLUSTER_ORDER.map((clusterKey) => (
+              <a key={clusterKey} href={`#${clusterKey}`} className="text-link text-body-sm my-0">
+                {EDITORIAL_CLUSTERS[clusterKey].shortTitle}
+              </a>
+            ))}
+          </nav>
 
-              <div className="grid gap-4 md:grid-cols-3">
-                {rolePaths.map((role, index) => {
-                  const Icon = role.icon;
-                  return (
-                    <Reveal key={role.title} delay={Math.min(index * 0.07, 0.14)} className="h-full">
-                      <section className="h-full rounded-2xl border border-line bg-white p-5" aria-labelledby={`rolle-${index}`}>
-                        <div className="flex items-center gap-3">
-                          <span className="grid h-9 w-9 place-items-center rounded-lg bg-navy text-mint">
-                            <Icon size={18} aria-hidden="true" />
-                          </span>
-                          <h3 id={`rolle-${index}`} className="font-headline font-bold text-navy">{role.title}</h3>
-                        </div>
-                        <p className="mt-3 text-sm leading-relaxed text-slate">{role.focus}</p>
-                        <ul className="mt-4 space-y-2 border-t border-line pt-4">
-                          {role.articles.map((slug) => {
-                            const article = EDITORIAL_ARTICLES[slug];
-                            return (
-                              <li key={slug}>
-                                <Link
-                                  to={getEditorialArticlePath(slug)}
-                                  className="group flex items-start gap-2 text-sm font-semibold leading-snug text-navy hover:text-brand focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
-                                >
-                                  <ArrowRight size={14} className="mt-0.5 shrink-0 text-brand transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
-                                  {article.listingTitle}
-                                </Link>
-                              </li>
-                            );
-                          })}
-                        </ul>
-                      </section>
-                    </Reveal>
-                  );
-                })}
-              </div>
-            </div>
-          </div>
-        </section>
+          <div>
+            {EDITORIAL_CLUSTER_ORDER.map((clusterKey) => {
+              const cluster = EDITORIAL_CLUSTERS[clusterKey];
+              const articles = EDITORIAL_ARTICLE_LIST.filter((article) => article.cluster === clusterKey);
 
-        <section aria-labelledby="alle-leitfaeden" className="bg-white py-16 lg:py-24">
-          <div className="mx-auto max-w-7xl px-4 sm:px-8">
-            <Reveal>
-              <div className="max-w-3xl">
-                <p className="eyebrow mb-4 text-brand">
-                  <span className="h-px w-8 bg-brand/40" />
-                  Alle Entscheidungshilfen
-                </p>
-                <h2 id="alle-leitfaeden" className="display-md text-navy">Leitfäden nach Thema</h2>
-                <p className="mt-4 text-base leading-relaxed text-slate sm:text-lg">
-                  Jeder Beitrag behandelt eine Prüffrage und nennt am Ende zwei passende Folgethemen.
-                </p>
-              </div>
-            </Reveal>
+              return (
+                <section
+                  key={clusterKey}
+                  id={clusterKey}
+                  aria-labelledby={`${clusterKey}-titel`}
+                  className="scroll-mt-24 grid grid-cols-1 lg:grid-cols-12 gap-x-14 gap-y-6 pt-14 lg:pt-16"
+                >
+                  <div className="lg:col-span-4">
+                    <h3 id={`${clusterKey}-titel`} className="text-2xl font-bold leading-tight text-navy">
+                      {cluster.title}
+                    </h3>
+                    <p className="mt-3 text-slate leading-relaxed">{cluster.description}</p>
+                  </div>
 
-            <div className="mt-14 space-y-16">
-              {EDITORIAL_CLUSTER_ORDER.map((clusterKey) => {
-                const cluster = EDITORIAL_CLUSTERS[clusterKey];
-                const Icon = clusterIcons[clusterKey];
-                const articles = EDITORIAL_ARTICLE_LIST.filter((article) => article.cluster === clusterKey);
-
-                return (
-                  <section key={clusterKey} id={clusterKey} aria-labelledby={`${clusterKey}-titel`} className="scroll-mt-28">
-                    <Reveal>
-                      <div className="grid gap-4 border-b border-line pb-6 md:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] md:items-end">
-                        <div className="flex items-start gap-4">
-                          <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-brand/8 text-brand">
-                            <Icon size={21} aria-hidden="true" />
-                          </span>
-                          <h3 id={`${clusterKey}-titel`} className="font-headline text-2xl font-bold leading-tight text-navy">
-                            {cluster.title}
-                          </h3>
-                        </div>
-                        <p className="text-sm leading-relaxed text-slate md:text-right">{cluster.description}</p>
-                      </div>
-                    </Reveal>
-
-                    <div className="mt-6 grid gap-5 lg:grid-cols-2">
-                      {articles.map((article, index) => (
-                        <Reveal key={article.slug} delay={Math.min(index * 0.07, 0.14)} className="h-full">
-                          <Link
-                            to={getEditorialArticlePath(article.slug)}
-                            className="group flex h-full flex-col rounded-2xl border border-line bg-paper p-6 transition-all hover:-translate-y-0.5 hover:border-brand/40 hover:shadow-soft focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand sm:p-7"
-                          >
-                            <div className="flex flex-wrap items-center justify-between gap-3 text-[11px] font-black uppercase tracking-[0.14em] text-brand">
-                              <span>{article.format} · {article.topic}</span>
-                              <span className="text-slate">{article.readingMinutes} Min.</span>
-                            </div>
-                            <h4 className="mt-4 font-headline text-xl font-bold leading-snug text-navy transition-colors group-hover:text-brand sm:text-2xl">
+                  <ul className="lg:col-span-8 border-t border-navy">
+                    {articles.map((article) => (
+                      <li key={article.slug} className="border-b border-line">
+                        <Link
+                          to={getEditorialArticlePath(article.slug)}
+                          className="group flex items-start justify-between gap-6 py-5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+                        >
+                          <span>
+                            <span className="block text-caption text-slate">
+                              {article.topic} · {article.readingMinutes} Min. Lesezeit · aktualisiert {formatDate(article.dateModified)}
+                            </span>
+                            <h4 className="mt-1.5 text-xl font-bold leading-snug text-navy transition-colors group-hover:text-accent">
                               {article.listingTitle}
                             </h4>
-                            <p className="mt-3 text-sm font-semibold leading-relaxed text-navy">{article.decisionQuestion}</p>
-                            <p className="mt-3 flex-grow text-sm leading-relaxed text-slate">{article.listingDescription}</p>
-                            <div className="mt-6 flex flex-wrap items-center justify-between gap-3 border-t border-line pt-4 text-xs font-semibold text-slate">
-                              <span>Aktualisiert {formatDate(article.dateModified)}</span>
-                              <span className="inline-flex items-center gap-2 font-bold text-brand">
-                                Leitfaden öffnen
-                                <ArrowRight size={15} className="transition-transform group-hover:translate-x-1" aria-hidden="true" />
-                              </span>
-                            </div>
-                          </Link>
-                        </Reveal>
-                      ))}
-                    </div>
-                  </section>
-                );
-              })}
-            </div>
+                            <span className="mt-1.5 block text-slate leading-relaxed">{article.decisionQuestion}</span>
+                          </span>
+                          <ArrowRight
+                            size={20}
+                            className="mt-7 shrink-0 text-accent transition-transform group-hover:translate-x-1"
+                            aria-hidden="true"
+                          />
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </section>
+              );
+            })}
           </div>
-        </section>
+        </div>
+      </section>
 
-        <section aria-labelledby="redaktionsstandard" className="border-t border-line bg-paper py-14">
-          <div className="mx-auto grid max-w-5xl gap-8 px-4 sm:px-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
-            <Reveal>
-              <div>
-                <p className="eyebrow mb-3 text-brand">
-                  <span className="h-px w-8 bg-brand/40" />
-                  Quellen und Prüfung
-                </p>
-                <h2 id="redaktionsstandard" className="font-headline text-2xl font-bold text-navy">Unser Redaktionsstandard</h2>
-              </div>
-            </Reveal>
-            <Reveal delay={0.08}>
-              <div className="grid gap-4 sm:grid-cols-2">
-                <div className="flex gap-3">
-                  <BookOpenCheck size={20} className="mt-0.5 shrink-0 text-brand" aria-hidden="true" />
-                  <p className="text-sm leading-relaxed text-slate">
-                    <strong className="block text-navy">Quellen am Beitrag</strong>
-                    Jeder Beitrag nennt Quellen, Herausgeber und Prüfdatum.
-                  </p>
-                </div>
-                <div className="flex gap-3">
-                  <Scale size={20} className="mt-0.5 shrink-0 text-brand" aria-hidden="true" />
-                  <p className="text-sm leading-relaxed text-slate">
-                    <strong className="block text-navy">Annahmen gekennzeichnet</strong>
-                    Preise, Intervalle und Fristen sind Orientierungswerte und müssen für das Objekt geprüft werden.
-                  </p>
-                </div>
-                <div className="flex gap-3">
-                  <ShieldCheck size={20} className="mt-0.5 shrink-0 text-brand" aria-hidden="true" />
-                  <p className="text-sm leading-relaxed text-slate">
-                    <strong className="block text-navy">Fachprüfung nur mit Nachweis</strong>
-                    Eine namentliche Fachprüfung nennen wir nur, wenn ein aktueller Nachweis dokumentiert ist.
-                  </p>
-                </div>
-                <div className="flex gap-3">
-                  <ArrowRight size={20} className="mt-0.5 shrink-0 text-brand" aria-hidden="true" />
-                  <p className="text-sm leading-relaxed text-slate">
-                    <strong className="block text-navy">Ihr Thema fehlt?</strong>
-                    <Link to="/kontakt" className="font-bold text-brand hover:underline">Praxisfrage an die Redaktion senden</Link>
-                  </p>
-                </div>
-              </div>
-            </Reveal>
+      {/* Einstieg nach Rolle */}
+      <section aria-labelledby="rollen-einstieg" className="section-y bg-paper border-t border-line">
+        <div className="container-page">
+          <div className="max-w-3xl mb-10">
+            <p className="eyebrow mb-3 text-accent">Nach Rolle</p>
+            <h2 id="rollen-einstieg" className="display-lg text-navy">Empfohlene Einstiege für Ihre Rolle</h2>
+            <p className="mt-4 text-lg leading-relaxed text-slate">
+              Je Rolle zwei Leitfäden für den Anfang. Die übrigen stehen oben nach Thema.
+            </p>
           </div>
-        </section>
-      </div>
+
+          <div className="grid gap-x-10 gap-y-10 md:grid-cols-3">
+            {rolePaths.map((role, index) => (
+              <section key={role.title} className="border-t border-navy pt-5" aria-labelledby={`rolle-${index}`}>
+                <h3 id={`rolle-${index}`} className="text-xl font-bold text-navy">{role.title}</h3>
+                <p className="mt-2 text-slate leading-relaxed">{role.focus}</p>
+                <ul className="mt-4">
+                  {role.articles.map((slug) => (
+                    <li key={slug} className="border-t border-line">
+                      <Link
+                        to={getEditorialArticlePath(slug)}
+                        className="group flex items-start justify-between gap-3 py-3 font-semibold leading-snug text-navy hover:text-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+                      >
+                        {EDITORIAL_ARTICLES[slug].listingTitle}
+                        <ArrowRight size={16} className="mt-1 shrink-0 text-accent" aria-hidden="true" />
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Redaktionsstandard */}
+      <section aria-labelledby="redaktionsstandard" className="section-y-sm bg-white border-t border-line">
+        <div className="container-page">
+          <p className="eyebrow mb-3 text-accent">Quellen und Prüfung</p>
+          <h2 id="redaktionsstandard" className="display-md text-navy mb-8">Unser Redaktionsstandard</h2>
+          <RuleColumns
+            cols={4}
+            items={[
+              { title: 'Quellen am Beitrag', text: 'Jeder Beitrag nennt Quellen, Herausgeber und Prüfdatum.' },
+              {
+                title: 'Annahmen gekennzeichnet',
+                text: 'Preise, Intervalle und Fristen sind Orientierungswerte und müssen für das Objekt geprüft werden.',
+              },
+              {
+                title: 'Fachprüfung nur mit Nachweis',
+                text: 'Eine namentliche Fachprüfung nennen wir nur, wenn ein aktueller Nachweis dokumentiert ist.',
+              },
+              { title: 'Ihr Thema fehlt?', text: '', link: { label: 'Praxisfrage an die Redaktion senden', to: '/kontakt' } },
+            ]}
+          />
+        </div>
+      </section>
 
       <CTABand
         title="Beratung für Ihr Objekt"

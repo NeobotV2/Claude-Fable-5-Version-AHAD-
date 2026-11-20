@@ -58,29 +58,94 @@
   --color-paper: #f7f9fb;       /* Heller Seitenhintergrund */
   --color-ink: #1C2733;         /* Text-Anthrazit (CI-Fließtextfarbe) */
   --color-slate: #424751;       /* Fließtext gedämpft */
-  --color-line: #e6eaef;        /* Hairlines */
+  --color-line: #dde3ea;        /* Hairlines — tragen die Struktur statt Karten und Schatten */
+  --color-ondark: #DCE6F1;      /* Fließtext auf Navy und Grün (heller Navy-Tint) */
+  --color-field: #738196;       /* Rahmen von Formularfeldern (3,9:1 auf Weiß) */
+  --color-placeholder: #596779; /* Platzhaltertext in Formularfeldern */
+  /* Zustandsfarben für Formulare und Hinweise */
+  --color-danger: #9F1D1D;
+  --color-danger-surface: #FEF2F2;
+  --color-danger-line: #FECACA;
+  --color-notice: #92400E;
+  --color-notice-surface: #FFFBEB;
+  --color-notice-line: #FDE68A;
+  --color-whatsapp: #187C3B;    /* WhatsApp-Knopf (abgedunkelt für AA-Kontrast) */
+
+  /* ── Schriftgrößen: nach Aufgabe benannt, nicht nach Pixeln ─────────
+     Ergänzen die Tailwind-Stufen (sm 14 · base 16 · lg 18 · xl 20). */
+  --text-caption: 0.8125rem;    /* 13 px — Meta-Angaben, Brotkrumen, Bildunterschriften */
+  --text-nav: 0.90625rem;       /* 14,5 px — Navigation und Kopfzeile */
+  --text-body-sm: 0.9375rem;    /* 15 px — Nebentexte, Listen, Formularfelder */
+  --text-lead: 1.0625rem;       /* 17 px — Einleitungen auf dem Handy */
+  --text-figure: 2.75rem;       /* große Kennzahlen */
+
+  /* ── Abstände: Abschnitte und Seitenrand ──────────────────────────── */
+  --spacing-section: 4rem;      /* Abschnitt oben/unten, Handy */
+  --spacing-section-lg: 7rem;   /* Abschnitt oben/unten, ab 1024 px */
+  --spacing-section-sm: 3rem;   /* kleiner Abschnitt, Handy */
+  --spacing-section-sm-lg: 4rem;/* kleiner Abschnitt, ab 1024 px */
+  --spacing-gutter: 1rem;       /* Seitenrand, Handy */
+  --spacing-gutter-sm: 2rem;    /* Seitenrand, ab 640 px */
+  --container-page: 80rem;      /* maximale Inhaltsbreite */
+
+  /* ── Ecken: sachlich, fast eckig. Alle rounded-lg…3xl im Code laufen
+     über diese Tokens und sind damit seitenweit einheitlich. ───────── */
+  --radius-xs: 2px;
+  --radius-sm: 2px;
+  --radius-md: 3px;
+  --radius-lg: 3px;
+  --radius-xl: 3px;
+  --radius-2xl: 4px;
+  --radius-3xl: 4px;
+  --radius-4xl: 4px;
 
   /* ── Schatten ──────────────────────────────────────────────────── */
-  --shadow-soft: 0 2px 8px -2px rgb(11 35 65 / 0.08), 0 8px 24px -8px rgb(11 35 65 / 0.10);
-  --shadow-lifted: 0 4px 12px -2px rgb(11 35 65 / 0.10), 0 20px 48px -12px rgb(11 35 65 / 0.18);
-  --shadow-glow: 0 0 0 1px rgb(156 221 183 / 0.25), 0 8px 32px -8px rgb(13 107 56 / 0.45);
+  /* Flaches Design: Flächen liegen plan. Nur schwebende Ebenen (Menüs,
+     Dialoge) bekommen einen dezenten Schatten zur Abgrenzung. */
+  --shadow-soft: 0 0 #0000;
+  --shadow-lifted: 0 1px 2px rgb(11 35 65 / 0.06), 0 14px 32px -18px rgb(11 35 65 / 0.28);
+  --shadow-glow: 0 0 #0000;
 
   /* ── Animationen ───────────────────────────────────────────────── */
-  --animate-marquee: marquee 42s linear infinite;
-  --animate-float: float 7s ease-in-out infinite;
-  --animate-pulse-soft: pulse-soft 3s ease-in-out infinite;
+  /* Kurze Einblendungen für schwebende Ebenen (Menü, feste Leiste). */
+  --animate-fade-in: fade-in 0.15s ease-out both;
+  --animate-slide-in-right: slide-in-right 0.2s ease-out both;
+  --animate-slide-up: slide-up 0.25s ease-out both;
 
-  @keyframes marquee {
-    0% { transform: translateX(0%); }
-    100% { transform: translateX(-100%); }
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
   }
-  @keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-12px); }
+  @keyframes slide-in-right {
+    from { transform: translateX(100%); }
+    to { transform: none; }
   }
-  @keyframes pulse-soft {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.55; }
+  @keyframes slide-up {
+    from { transform: translateY(100%); }
+    to { transform: none; }
+  }
+}
+
+/* ── Layout: eine Seitenbreite, zwei Abschnittsabstände ─────────────── */
+@utility container-page {
+  width: 100%;
+  max-width: var(--container-page);
+  margin-inline: auto;
+  padding-inline: var(--spacing-gutter);
+  @media (width >= 40rem) {
+    padding-inline: var(--spacing-gutter-sm);
+  }
+}
+@utility section-y {
+  padding-block: var(--spacing-section);
+  @media (width >= 64rem) {
+    padding-block: var(--spacing-section-lg);
+  }
+}
+@utility section-y-sm {
+  padding-block: var(--spacing-section-sm);
+  @media (width >= 64rem) {
+    padding-block: var(--spacing-section-sm-lg);
   }
 }
 
@@ -88,6 +153,15 @@
   html {
     scroll-behavior: smooth;
     -webkit-tap-highlight-color: transparent;
+    /* Kein Verzögern von Taps durch Doppeltipp-Zoom. */
+    touch-action: manipulation;
+    /* Die feste Kopfzeile (4rem) verdeckt kein per Tab oder Sprungmarke
+       angesteuertes Element. */
+    scroll-padding-top: 5rem;
+  }
+  /* Auf dem Handy liegt unten die feste Anfrage-Leiste. */
+  @media (max-width: 1023px) {
+    html { scroll-padding-bottom: 6rem; }
   }
   body {
     @apply bg-paper text-ink font-sans;
@@ -100,6 +174,16 @@
   }
   p {
     text-wrap: pretty;
+  }
+  /* Zahlen in Tabellen gleich breit, damit Beträge und Werte untereinander stehen. */
+  td {
+    font-variant-numeric: tabular-nums;
+  }
+  /* Fließtext: Ausgeschriebene Internetadressen und sehr lange Wörter dürfen
+     umbrechen, statt die Seite auf schmalen Handys breiter als den Bildschirm
+     zu machen. Greift nur, wenn ein Wort allein nicht in die Zeile passt. */
+  p, li, dd, td, blockquote, address {
+    overflow-wrap: break-word;
   }
   ::selection {
     @apply bg-brand text-white;
@@ -149,10 +233,24 @@
     word-break: normal;
     hyphens: none;
     /* leading 1.1 schützt Unterlängen wie das „g" in mehrzeiligen Titeln. */
-    font-size: clamp(1.35rem, 6.5vw, 5rem);
+    font-size: clamp(1.35rem, 6.5vw, 3.5rem);
+  }
+  /* Startseiten-H1: einspaltig bis lg, ab lg in der linken Hälfte des
+     zweispaltigen Heros. „Gebäudereinigung," muss als ein Wort in die Spalte
+     passen (≈ 11,2 px Breite je px Schriftgröße). */
+  .hero-title { font-size: clamp(1.35rem, 7.75vw, 3.5rem); }
+  @media (min-width: 1024px) {
+    .hero-title { font-size: min(3.5vw, 3rem); }
+  }
+  /* H1 der Unterseiten: Textspalte neben dem Foto (ab lg rund 58 % der
+     Seitenbreite). Untergrenze und Steigung wie display-xl, damit lange
+     Wörter („Küchenabluftreinigung") auch bei 360 px in eine Zeile passen. */
+  .page-title { font-size: clamp(1.35rem, 6.5vw, 2.75rem); }
+  @media (min-width: 1024px) {
+    .page-title { font-size: min(3.4vw, 2.75rem); }
   }
   .display-lg {
-    @apply font-logo font-black tracking-[-0.02em] leading-[1.1];
+    @apply font-logo font-extrabold tracking-[-0.02em] leading-[1.12];
     overflow-wrap: normal;
     word-break: normal;
     hyphens: none;
@@ -163,119 +261,61 @@
     overflow-wrap: normal;
     word-break: normal;
     hyphens: none;
-    font-size: clamp(1.55rem, 3vw, 2.3rem);
+    font-size: clamp(1.4rem, 2.4vw, 1.9rem);
   }
-  /* Digitaler Akzent in Space Grotesk (Designbook: Website-Akzente). */
+  /* Rubrikzeile über Überschriften: normale Schreibweise, keine Sperrung,
+     kein Zierstrich. Auf Hell in AHAD Grün, auf Dunkel in Mint. */
   .eyebrow {
-    @apply font-accent inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.22em];
+    @apply font-sans inline-flex items-center gap-2 text-sm font-semibold normal-case tracking-normal;
+  }
+  .eyebrow .h-px { display: none; }
+  .eyebrow.text-brand { color: var(--color-accent); }
+
+  /* Überschriften stehen in EINER Farbe. Hervorgehobene Einzelwörter
+     (früher Mint/Hellblau) erben die Farbe der Überschrift. */
+  h1 .text-mint:not(.eyebrow),
+  h1 .text-brand-light:not(.eyebrow),
+  h2 .text-mint:not(.eyebrow),
+  h2 .text-brand-light:not(.eyebrow),
+  h2 .text-accent:not(.eyebrow) {
+    color: inherit;
   }
 
-  /* ── Oberflächen & Effekte ────────────────────────────────────── */
-  .glass {
-    background: rgb(255 255 255 / 0.72);
-    backdrop-filter: blur(16px) saturate(1.4);
-    -webkit-backdrop-filter: blur(16px) saturate(1.4);
+  /* Textlink mit Pfeil — die zweite Aktionsebene neben dem Button. */
+  .text-link {
+    @apply inline-flex items-center gap-2 py-2.5 -my-2.5 font-semibold text-accent underline-offset-4 decoration-2 transition-colors hover:text-accent-dark hover:underline;
   }
-  .glass-dark {
-    background: rgb(2 18 42 / 0.55);
-    backdrop-filter: blur(16px) saturate(1.2);
-    -webkit-backdrop-filter: blur(16px) saturate(1.2);
-  }
-
-  /* Feines Filmkorn für große Flächen — verhindert Banding, wirkt hochwertig */
-  .grain::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    opacity: 0.5;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncA type='linear' slope='0.06'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  }
-
-  .blueprint-grid {
-    background-image:
-      linear-gradient(rgb(255 255 255 / 0.045) 1px, transparent 1px),
-      linear-gradient(90deg, rgb(255 255 255 / 0.045) 1px, transparent 1px);
-    background-size: 48px 48px;
-  }
-  .blueprint-grid-light {
-    background-image:
-      linear-gradient(rgb(11 35 65 / 0.05) 1px, transparent 1px),
-      linear-gradient(90deg, rgb(11 35 65 / 0.05) 1px, transparent 1px);
-    background-size: 48px 48px;
-  }
-
-  /* Karten-Mikrointeraktion */
-  .card-lift {
-    transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
-  }
-  .card-lift:hover {
-    transform: translateY(-6px);
-    box-shadow: var(--shadow-lifted);
-  }
-
-  /* ── Marquee ──────────────────────────────────────────────────── */
-  .marquee-container:hover .animate-marquee,
-  .marquee-shell:focus-within .animate-marquee,
-  .marquee-container[data-paused="true"] .animate-marquee {
-    animation-play-state: paused;
+  .text-link-light {
+    @apply inline-flex items-center gap-2 py-2.5 -my-2.5 font-semibold text-white underline-offset-4 decoration-2 transition-colors hover:text-mint hover:underline;
   }
 
   @media (min-width: 390px) {
     .display-lg {
-      font-size: clamp(1.6rem, 4.8vw, 3.3rem);
+      font-size: clamp(1.6rem, 3.4vw, 2.5rem);
+    }
+  }
+  /* Sektionstitel in der schmalen linken Spalte (4 von 12, ab 1024 px), wenn
+     der Titel einen frei wählbaren Namen enthält (z. B. den Leistungsnamen).
+     Die Größe folgt der Spaltenbreite, damit auch das längste Wort
+     („Küchenabluftreinigung“) in die Spalte passt und nicht in die
+     Nachbarspalte ragt. Darunter gilt die normale Größe. */
+  @media (min-width: 1024px) {
+    /* Ab hier stehen Sektionstitel oft in einer 4-von-12-Spalte: eine Spur
+       kleiner, damit „Anforderungen.“ bei 1024 px nicht 3 px übersteht. */
+    .display-lg {
+      font-size: clamp(1.6rem, 3.3vw, 2.5rem);
+    }
+    .display-lg.display-col {
+      font-size: min(2.25vw, 1.8rem);
     }
   }
 
-  .reference-logo {
-    filter: grayscale(100%);
-    opacity: 0.6;
-    transition: filter 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
-  }
-  .reference-logo:hover {
-    filter: grayscale(0%);
-    opacity: 1;
-    transform: scale(1.08);
-  }
-
-  /* Sanfte Maske für Marquee-Ränder */
-  .mask-fade-x {
-    mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
-    -webkit-mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
-  }
-
-  /* Unterstreich-Animation für Inline-Links */
-  .link-underline {
-    background-image: linear-gradient(currentColor, currentColor);
-    background-size: 0% 2px;
-    background-position: 0 100%;
-    background-repeat: no-repeat;
-    transition: background-size 0.3s ease;
-  }
-  .link-underline:hover { background-size: 100% 2px; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .marquee-container {
-    overflow-x: auto;
-    mask-image: none;
-    -webkit-mask-image: none;
-  }
-  .marquee-container .animate-marquee {
-    animation: none !important;
-  }
-  .marquee-container .animate-marquee[aria-hidden="true"] {
-    display: none;
-  }
-  .marquee-control {
-    display: none;
-  }
 }
 
 /* Form-Hinweise bleiben auch bei Tailwind-Placeholder-Utilities AA-lesbar. */
 input::placeholder,
 textarea::placeholder {
-  color: #5f6873;
+  color: var(--color-placeholder);
   opacity: 1;
 }
 
@@ -289,4 +329,28 @@ textarea::placeholder {
   main, body {
     background: #fff !important;
   }
+}
+
+/* ── Startseiten-Kopf: Foto über die ganze Breite ─────────────────────────
+   Nur ab 1024 px; auf dem Handy bleibt Text oben, Foto darunter. Links ein
+   ruhiger dunkelblauer Verlauf für die Lesbarkeit, sonst keine Effekte. */
+@media (min-width: 1024px) {
+  .hero--photo { position: relative; background: var(--color-navy); }
+  .hero--photo .hero-media { position: absolute; inset: 4rem 0 0 0; }
+  .hero--photo .hero-media::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, rgb(11 35 65 / 0.96) 0%, rgb(11 35 65 / 0.9) 34%, rgb(11 35 65 / 0.45) 58%, rgb(11 35 65 / 0) 78%);
+  }
+  .hero--photo .hero-media figcaption { left: auto; right: 0; z-index: 1; }
+  .hero--photo .hero-copy { position: relative; z-index: 1; }
+  .hero--photo .hero-copy h1,
+  .hero--photo .hero-copy .text-link,
+  .hero--photo .hero-copy li a span { color: #fff; }
+  .hero--photo .hero-copy h1 .eyebrow { color: var(--color-mint); }
+  .hero--photo .hero-copy p,
+  .hero--photo .hero-copy ul,
+  .hero--photo .hero-copy li a { color: var(--color-ondark); }
+  .hero--photo .hero-copy ul { border-color: rgb(255 255 255 / 0.25); }
 }

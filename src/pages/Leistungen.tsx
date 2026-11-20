@@ -1,8 +1,7 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight, CheckCircle2 } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import SEO from '@/components/SEO';
 import PageHero from '@/components/PageHero';
-import Reveal from '@/components/ui/Reveal';
 import SectionHeading from '@/components/ui/SectionHeading';
 import SmartImage from '@/components/ui/SmartImage';
 import Accordion, { faqSchemaFrom, type FAQItem } from '@/components/ui/Accordion';
@@ -53,64 +52,53 @@ export default function Leistungen() {
         secondaryCta={{ label: 'Das AHAD System', to: '/ahad-system' }}
       />
 
-      {/* Leistungs-Liste: editorial, nummeriert */}
-      <section className="py-20 lg:py-32 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-8">
-          <div className="space-y-5">
-            {SERVICES.map((service, i) => (
-              <Reveal key={service.slug} delay={Math.min(i * 0.06, 0.2)}>
+      {/* Verzeichnis aller Leistungen: Foto, Name, Kurzbeschreibung */}
+      <section className="section-y bg-white">
+        <div className="container-page">
+          <ul className="border-t border-navy">
+            {SERVICES.map((service) => (
+              <li key={service.slug} className="border-b border-line">
                 <Link
                   to={service.path}
-                  className="group grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 items-center bg-paper hover:bg-white border border-line rounded-3xl p-6 lg:p-8 card-lift"
+                  className="group grid grid-cols-1 sm:grid-cols-[15rem_1fr_auto] items-center gap-x-10 gap-y-4 py-6"
                 >
-                  <div className="lg:col-span-4 order-2 lg:order-1 flex items-start gap-5">
-                    <span className="font-headline text-4xl font-bold text-navy/45 group-hover:text-accent transition-colors leading-none pt-1" aria-hidden>
-                      {String(i + 1).padStart(2, '0')}
-                    </span>
-                    <div>
-                      <span className="eyebrow text-brand mb-2">{service.tag}</span>
-                      <h2 className="font-headline text-2xl font-bold text-navy leading-tight">{service.name}</h2>
-                    </div>
+                  <SmartImage
+                    src={service.image}
+                    alt={service.name}
+                    sizes="(min-width:640px) 240px, 100vw"
+                    className="aspect-[3/2]"
+                  />
+                  <div className="min-w-0">
+                    <p className="text-sm font-semibold text-accent mb-1">{service.tag}</p>
+                    <h2 className="text-xl sm:text-2xl font-bold text-navy leading-tight group-hover:text-accent transition-colors">
+                      {service.name}
+                    </h2>
+                    <p className="mt-2 text-slate leading-relaxed max-w-2xl">
+                      {service.heroLead.split('—')[0].split(':')[0]}.
+                    </p>
+                    <p className="mt-2 text-body-sm text-slate">{service.scope.slice(0, 2).join(' · ')}</p>
                   </div>
-
-                  <div className="lg:col-span-4 order-3 lg:order-2">
-                    <p className="text-slate text-[15px] leading-relaxed">{service.heroLead.split('—')[0].split(':')[0]}.</p>
-                    <ul className="mt-4 space-y-1.5">
-                      {service.scope.slice(0, 2).map((item) => (
-                        <li key={item} className="flex items-center gap-2 text-[13.5px] font-semibold text-navy">
-                          <CheckCircle2 size={14} className="text-accent flex-shrink-0" />
-                          {item}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  <div className="lg:col-span-3 order-1 lg:order-3">
-                    <SmartImage
-                      src={service.image}
-                      alt={service.name}
-                      className="rounded-2xl aspect-[16/9] lg:aspect-[4/3]"
-                      imgClassName="transition-transform duration-700 group-hover:scale-105"
-                    />
-                  </div>
-
-                  <div className="lg:col-span-1 order-4 hidden lg:flex justify-end">
-                    <span className="w-11 h-11 rounded-full bg-white border border-line grid place-items-center text-brand transition-all duration-300 group-hover:bg-accent group-hover:border-accent group-hover:text-white group-hover:translate-x-1">
-                      <ArrowRight size={18} />
-                    </span>
-                  </div>
+                  <ArrowRight
+                    size={20}
+                    className="hidden sm:block flex-shrink-0 text-navy/40 group-hover:text-accent transition-colors"
+                    aria-hidden="true"
+                  />
                 </Link>
-              </Reveal>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
       </section>
 
       {/* FAQ */}
-      <section className="py-20 lg:py-28 bg-paper border-t border-line">
-        <div className="max-w-4xl mx-auto px-4 sm:px-8">
-          <SectionHeading eyebrow="FAQ" title="Häufige Fragen zu unseren Leistungen" align="center" className="mb-12" />
-          <Accordion items={faqs} />
+      <section className="section-y bg-paper border-t border-line">
+        <div className="container-page grid grid-cols-1 lg:grid-cols-12 gap-x-14 gap-y-10">
+          <div className="lg:col-span-4">
+            <SectionHeading eyebrow="FAQ" title="Häufige Fragen zu unseren Leistungen" />
+          </div>
+          <div className="lg:col-span-8">
+            <Accordion items={faqs} />
+          </div>
         </div>
       </section>
 

@@ -1,5 +1,6 @@
-import { Printer, ClipboardCheck, ArrowRight } from 'lucide-react';
+import { Printer, ClipboardCheck } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import ButtonLink, { Button } from '@/components/ui/Button';
 import SEO from '@/components/SEO';
 import PageHero from '@/components/PageHero';
 import CTABand from '@/components/CTABand';
@@ -92,13 +93,13 @@ export default function FachwissenCheckliste() {
       </div>
 
       <div className="mx-auto hidden max-w-3xl px-4 pt-4 print:block print:px-0">
-        <p className="text-2xl font-black text-navy">AHAD Cleaning · Angebots-Checkliste Gebäudereinigung</p>
+        <p className="text-2xl font-bold text-navy">AHAD Cleaning · Angebots-Checkliste Gebäudereinigung</p>
         <p className="mt-1 text-sm text-slate">ahad-cleaning.de · +49 7721 944 79 15 · info@ahad-cleaning.de</p>
       </div>
 
       <ArticleMeta slug="checkliste-reinigungsangebot" className="print:mt-8" />
 
-      <section className="py-14 lg:py-20 bg-white">
+      <section className="section-y-sm bg-white">
         <div className="max-w-3xl mx-auto px-4">
           {/* Druck-Aktion */}
           <div className="print:hidden flex flex-col sm:flex-row items-center justify-between gap-4 bg-paper border border-line rounded-2xl p-5 mb-10">
@@ -106,14 +107,10 @@ export default function FachwissenCheckliste() {
               <strong className="text-navy">Tipp:</strong> Über „Drucken“ können Sie die Checkliste auch direkt{' '}
               <strong className="text-navy">als PDF speichern</strong>.
             </p>
-            <button
-              type="button"
-              onClick={() => window.print()}
-              className="inline-flex items-center gap-2 bg-navy text-white px-6 py-3 rounded-xl font-bold hover:bg-navy-800 transition-all shadow-soft flex-shrink-0"
-            >
-              <Printer size={17} />
+            <Button variant="dark" onClick={() => window.print()} className="flex-shrink-0">
+              <Printer size={17} aria-hidden="true" />
               Checkliste drucken
-            </button>
+            </Button>
           </div>
 
           <section aria-labelledby="checkliste-kopfdaten" className="mb-10 rounded-2xl border border-line bg-paper p-6 print:break-inside-avoid">
@@ -132,8 +129,9 @@ export default function FachwissenCheckliste() {
                   <input
                     id={`checkliste-${field.id}`}
                     name={field.id}
+                    autoComplete="off"
                     type={field.type}
-                    className="mt-2 min-h-11 w-full rounded-lg border border-line bg-white px-3 py-2 font-normal text-ink outline-none transition-colors focus:border-brand print:min-h-8 print:rounded-none print:border-0 print:border-b print:border-slate/50 print:bg-transparent print:px-0"
+                    className="mt-2 min-h-11 w-full rounded-lg border border-line bg-white px-3 py-2 font-normal text-ink outline-none transition-[border-color,box-shadow] focus:border-brand focus:ring-4 focus:ring-brand/15 print:min-h-8 print:rounded-none print:border-0 print:border-b print:border-slate/50 print:bg-transparent print:px-0"
                   />
                 </label>
               ))}
@@ -143,15 +141,16 @@ export default function FachwissenCheckliste() {
               <textarea
                 id="checkliste-notizen"
                 name="notizen"
+                autoComplete="off"
                 rows={3}
-                className="mt-2 w-full resize-y rounded-lg border border-line bg-white px-3 py-2 font-normal text-ink outline-none transition-colors focus:border-brand print:resize-none print:rounded-none print:border-0 print:border-b print:border-slate/50 print:bg-transparent print:px-0"
+                className="mt-2 w-full resize-y rounded-lg border border-line bg-white px-3 py-2 font-normal text-ink outline-none transition-[border-color,box-shadow] focus:border-brand focus:ring-4 focus:ring-brand/15 print:resize-none print:rounded-none print:border-0 print:border-b print:border-slate/50 print:bg-transparent print:px-0"
               />
             </label>
           </section>
 
           <div className="space-y-8">
             {GRUPPEN.map((g) => (
-              <div key={g.titel} className="border border-line rounded-2xl p-6 print:border-gray-300 print:break-inside-avoid">
+              <div key={g.titel} className="border border-line rounded-2xl p-6 print:border-navy/30 print:break-inside-avoid">
                 <h2 id={g.id} className="scroll-mt-28 font-headline text-lg font-bold text-navy mb-4 flex items-center gap-2.5">
                   <ClipboardCheck size={19} className="text-accent print:hidden" aria-hidden="true" />
                   {g.titel}
@@ -160,7 +159,7 @@ export default function FachwissenCheckliste() {
                   {g.punkte.map((p, index) => {
                     const inputId = `check-${g.id}-${index}`;
                     return (
-                      <li key={p} className="text-[15px] leading-relaxed text-slate">
+                      <li key={p} className="text-body-sm leading-relaxed text-slate">
                         <label htmlFor={inputId} className="flex cursor-pointer items-start gap-3 print:cursor-default">
                           <input
                             id={inputId}
@@ -187,7 +186,7 @@ export default function FachwissenCheckliste() {
               Optionen und Ausschlüsse gehören in die Spalte „Offene Punkte“.
             </p>
             <div
-              className="overflow-x-auto rounded-2xl border border-line shadow-soft print:overflow-visible print:shadow-none"
+              className="overflow-x-auto rounded-2xl border border-line print:overflow-visible print:shadow-none"
               role="region"
               aria-label="Bietermatrix zum Angebotsvergleich"
               tabIndex={0}
@@ -212,18 +211,20 @@ export default function FachwissenCheckliste() {
                           <input
                             id={`bieter-${bidder}`}
                             name={`bieter-${bidder}`}
+                            autoComplete="off"
                             type="text"
                             aria-label={`Name von Bieter ${bidder}`}
-                            className="min-h-9 w-full rounded-md border border-line px-2 py-1 font-normal text-ink outline-none focus:border-brand print:min-h-6 print:rounded-none print:border-0 print:border-b print:border-slate/50 print:px-0"
+                            className="min-h-9 w-full rounded-md border border-line px-2 py-1 font-normal text-ink outline-none transition-[border-color,box-shadow] focus:border-brand focus:ring-4 focus:ring-brand/15 print:min-h-6 print:rounded-none print:border-0 print:border-b print:border-slate/50 print:px-0"
                           />
                         </label>
                       </th>
                       <td className="min-w-44 px-3 py-3 align-top print:min-w-0">
                         <input
                           name={`preis-${bidder}`}
+                          autoComplete="off"
                           type="text"
                           aria-label={`Preis und Abrechnungsmodell von Bieter ${bidder}`}
-                          className="min-h-9 w-full rounded-md border border-line px-2 py-1 text-ink outline-none focus:border-brand print:min-h-6 print:rounded-none print:border-0 print:border-b print:border-slate/50 print:px-0"
+                          className="min-h-9 w-full rounded-md border border-line px-2 py-1 text-ink outline-none transition-[border-color,box-shadow] focus:border-brand focus:ring-4 focus:ring-brand/15 print:min-h-6 print:rounded-none print:border-0 print:border-b print:border-slate/50 print:px-0"
                         />
                       </td>
                       <td className="min-w-32 px-3 py-3 align-top print:min-w-0">
@@ -237,17 +238,19 @@ export default function FachwissenCheckliste() {
                       <td className="min-w-48 px-3 py-3 align-top print:min-w-0">
                         <textarea
                           name={`service-${bidder}`}
+                          autoComplete="off"
                           rows={2}
                           aria-label={`Objektleitung und Service-Level von Bieter ${bidder}`}
-                          className="w-full resize-y rounded-md border border-line px-2 py-1 text-ink outline-none focus:border-brand print:resize-none print:rounded-none print:border-0 print:border-b print:border-slate/50 print:px-0"
+                          className="w-full resize-y rounded-md border border-line px-2 py-1 text-ink outline-none transition-[border-color,box-shadow] focus:border-brand focus:ring-4 focus:ring-brand/15 print:resize-none print:rounded-none print:border-0 print:border-b print:border-slate/50 print:px-0"
                         />
                       </td>
                       <td className="min-w-48 px-3 py-3 align-top print:min-w-0">
                         <textarea
                           name={`offen-${bidder}`}
+                          autoComplete="off"
                           rows={2}
                           aria-label={`Offene Punkte bei Bieter ${bidder}`}
-                          className="w-full resize-y rounded-md border border-line px-2 py-1 text-ink outline-none focus:border-brand print:resize-none print:rounded-none print:border-0 print:border-b print:border-slate/50 print:px-0"
+                          className="w-full resize-y rounded-md border border-line px-2 py-1 text-ink outline-none transition-[border-color,box-shadow] focus:border-brand focus:ring-4 focus:ring-brand/15 print:resize-none print:rounded-none print:border-0 print:border-b print:border-slate/50 print:px-0"
                         />
                       </td>
                     </tr>
@@ -259,7 +262,7 @@ export default function FachwissenCheckliste() {
 
           <div className="print:hidden mt-12 bg-navy rounded-3xl p-8 text-white">
             <h2 className="font-headline text-xl font-bold mb-2">Von der Checkliste zur Anfrage</h2>
-            <p className="text-blue-100/90 text-sm leading-relaxed mb-6">
+            <p className="text-ondark/90 text-sm leading-relaxed mb-6">
               Übertragen Sie die geprüften Objektdaten und Leistungsanforderungen in die Anfrage. Wie ein
               Leistungsverzeichnis aufgebaut wird, zeigt unser{' '}
               <Link to="/fachwissen/leistungsverzeichnis-gebaeudereinigung-erstellen" className="underline font-semibold hover:text-mint">
@@ -271,13 +274,9 @@ export default function FachwissenCheckliste() {
               </Link>
               .
             </p>
-            <Link
-              to="/angebot"
-              className="inline-flex items-center gap-2 bg-accent text-white px-6 py-3.5 rounded-xl font-bold hover:bg-accent-dark transition-all shadow-glow"
-            >
+            <ButtonLink to="/angebot" size="lg" arrow>
               Kostenlose Besichtigung anfragen
-              <ArrowRight size={17} />
-            </Link>
+            </ButtonLink>
           </div>
 
           {/* Print-Fuß */}

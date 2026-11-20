@@ -10,6 +10,8 @@ import path from 'node:path';
  * Bilder & Fonts laden aus dem Internet; Navigation läuft über den HashRouter.
  */
 export default defineConfig({
+  // Jahr im Copyright: im Prerender und im Browser derselbe Wert (Build-Jahr).
+  define: { __BUILD_YEAR__: JSON.stringify(new Date().getFullYear()) },
   plugins: [react(), tailwindcss(), viteSingleFile()],
   resolve: {
     alias: {

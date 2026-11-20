@@ -32,7 +32,8 @@ for (const file of bases) {
     await sharp(full).resize(w).webp({ quality: 72 }).toFile(out);
     widths.push(w);
   }
-  manifest[file] = { width: meta.width ?? 0, variants: widths };
+  // Breite und Höhe des Originals: daraus setzt die Seite width/height am <img>.
+  manifest[file] = { width: meta.width ?? 0, height: meta.height ?? 0, variants: widths };
 }
 
 writeFileSync('src/lib/image-variants.json', JSON.stringify(manifest, null, 2) + '\n');

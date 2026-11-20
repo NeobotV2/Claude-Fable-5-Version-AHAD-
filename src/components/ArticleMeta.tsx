@@ -35,7 +35,7 @@ export default function ArticleMeta({ slug, className = '' }: ArticleMetaProps) 
     >
       <div className="mx-auto grid max-w-5xl gap-8 px-4 sm:px-8 lg:grid-cols-[minmax(0,1.05fr)_minmax(19rem,0.95fr)] print:px-0">
         <div>
-          <p className="mb-3 inline-flex items-center gap-2 text-xs font-black uppercase tracking-[0.16em] text-brand">
+          <p className="mb-3 inline-flex items-center gap-2 text-caption font-semibold text-brand">
             <ShieldCheck size={16} aria-hidden="true" />
             Einordnung &amp; Aktualität
           </p>
@@ -85,7 +85,7 @@ export default function ArticleMeta({ slug, className = '' }: ArticleMetaProps) 
                   href={`#${section.id}`}
                   className="group flex min-h-10 items-center gap-3 rounded-lg px-2 py-1.5 text-sm font-semibold text-slate transition-colors hover:bg-paper hover:text-brand focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
                 >
-                  <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-brand/8 text-[11px] font-black text-brand">
+                  <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-brand/8 text-xs font-bold text-brand">
                     {index + 1}
                   </span>
                   {section.label}

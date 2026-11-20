@@ -1,5 +1,5 @@
 import { useId, useState } from 'react';
-import { Plus } from 'lucide-react';
+import { Plus, Minus } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 export interface FAQItem {
@@ -12,40 +12,38 @@ export interface FAQItem {
  * DOM und wird nur ein-/ausgeblendet: So deckt sich das FAQPage-Markup mit dem
  * sichtbaren Seiteninhalt, Screenreader finden über aria-controls ein Ziel und
  * die Seite bleibt ohne JavaScript vollständig lesbar.
+ *
+ * Gestaltung: eine Liste mit Haarlinien statt einzelner Karten.
  */
 export function AccordionItem({ item, defaultOpen = false }: { item: FAQItem; defaultOpen?: boolean }) {
   const [open, setOpen] = useState(defaultOpen);
   const panelId = useId();
   return (
-    <div className="bg-white rounded-2xl border border-line shadow-soft overflow-hidden">
+    <div className="border-b border-line">
       <button
         type="button"
         onClick={() => setOpen(!open)}
         aria-expanded={open}
         aria-controls={panelId}
-        className="w-full flex justify-between items-center gap-6 p-6 text-left cursor-pointer hover:bg-paper/70 transition-colors"
+        className="group w-full flex justify-between items-start gap-6 py-5 text-left cursor-pointer"
       >
-        <span className="font-headline font-bold text-lg text-navy">{item.question}</span>
-        <span
-          className={cn(
-            'flex-shrink-0 w-9 h-9 rounded-full grid place-items-center transition-all duration-300',
-            open ? 'bg-accent text-white rotate-45' : 'bg-paper text-brand'
-          )}
-          aria-hidden
-        >
-          <Plus size={18} />
+        <span className="font-headline font-semibold text-lg text-navy group-hover:text-accent transition-colors">
+          {item.question}
+        </span>
+        <span className="flex-shrink-0 mt-1 text-navy group-hover:text-accent transition-colors" aria-hidden>
+          {open ? <Minus size={20} aria-hidden="true" /> : <Plus size={20} aria-hidden="true" />}
         </span>
       </button>
       <div
         id={panelId}
         className={cn(
-          'grid transition-[grid-template-rows,opacity] duration-300 ease-out motion-reduce:transition-none',
+          'grid transition-opacity duration-200 ease-out motion-reduce:transition-none',
           open ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
         )}
         aria-hidden={!open}
       >
         <div className="overflow-hidden">
-          <p className="px-6 pb-6 text-slate leading-relaxed">{item.answer}</p>
+          <p className="pb-6 pr-10 text-slate leading-relaxed max-w-3xl">{item.answer}</p>
         </div>
       </div>
     </div>
@@ -54,7 +52,7 @@ export function AccordionItem({ item, defaultOpen = false }: { item: FAQItem; de
 
 export default function Accordion({ items }: { items: FAQItem[] }) {
   return (
-    <div className="space-y-4">
+    <div className="border-t border-navy">
       {items.map((item, i) => (
         <AccordionItem key={i} item={item} defaultOpen={i === 0} />
       ))}

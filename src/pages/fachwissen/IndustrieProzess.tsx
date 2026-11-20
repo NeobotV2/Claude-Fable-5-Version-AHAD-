@@ -91,7 +91,7 @@ export default function FachwissenIndustrieProzess() {
 
       <ArticleMeta slug={ARTICLE_SLUG} />
 
-      <section className="bg-white py-16 lg:py-24">
+      <section className="bg-white section-y">
         <div className="mx-auto max-w-4xl px-4 sm:px-8">
           <div className="prose prose-lg max-w-none leading-relaxed text-slate">
             <h2 id="prozessabstimmung" className="scroll-mt-28 font-headline text-2xl font-bold text-navy sm:text-3xl">
@@ -108,9 +108,9 @@ export default function FachwissenIndustrieProzess() {
               müssen diese Entscheidung vor der Ausführung treffen.
             </p>
 
-            <div className="not-prose my-10 rounded-2xl border border-amber-200 bg-amber-50 p-6">
+            <div className="not-prose my-10 rounded-2xl border border-notice-line bg-notice-surface p-6">
               <div className="flex items-start gap-3">
-                <CircleAlert className="mt-0.5 h-6 w-6 shrink-0 text-amber-700" aria-hidden="true" />
+                <CircleAlert className="mt-0.5 h-6 w-6 shrink-0 text-notice" aria-hidden="true" />
                 <div>
                   <h3 className="font-headline text-lg font-bold text-navy">Wann die Anlage stehen muss</h3>
                   <p className="mt-2 text-sm leading-relaxed text-slate">
@@ -252,7 +252,7 @@ export default function FachwissenIndustrieProzess() {
                 </p>
               </div>
               <div className="rounded-2xl border border-line bg-paper p-6">
-                <CircleAlert className="h-7 w-7 text-amber-700" aria-hidden="true" />
+                <CircleAlert className="h-7 w-7 text-notice" aria-hidden="true" />
                 <h3 className="mt-4 font-headline text-xl font-bold text-navy">Arbeit unterbrechen</h3>
                 <p className="mt-2 text-sm leading-relaxed text-slate">
                   Bei geändertem Anlagenzustand, beschädigter Abschottung, unklarer Freigabe, unerwarteten Stoffen
@@ -413,7 +413,7 @@ export default function FachwissenIndustrieProzess() {
         </div>
       </section>
 
-      <section className="bg-paper py-16 lg:py-24" aria-labelledby="industriereinigung-faq">
+      <section className="bg-paper section-y" aria-labelledby="industriereinigung-faq">
         <div className="mx-auto max-w-4xl px-4 sm:px-8">
           <div className="mb-12 text-center">
             <span className="eyebrow justify-center text-brand">Häufige Fragen</span>

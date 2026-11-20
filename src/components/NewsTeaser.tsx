@@ -3,7 +3,7 @@ import { ArrowRight } from 'lucide-react';
 import { NEWS_BY_DATE, formatNewsDate } from '@/data/news';
 
 /**
- * Schmale Leiste mit der jüngsten Unternehmensmeldung. Bewusst kompakt: Sie
+ * Schmale Zeile mit der jüngsten Unternehmensmeldung. Bewusst kompakt: Sie
  * sitzt zwischen Vertrauenssignalen und Leistungen und soll den Lesefluss zur
  * Anfrage nicht unterbrechen, sondern nur den Weg zur Meldung öffnen.
  *
@@ -14,26 +14,22 @@ export default function NewsTeaser() {
   if (!item) return null;
 
   return (
-    <section className="bg-paper border-y border-line" aria-label="Aktuelle Unternehmensmeldung">
-      <div className="max-w-7xl mx-auto px-4 sm:px-8 py-6 sm:py-7">
+    <section className="bg-paper border-b border-line" aria-label="Aktuelle Unternehmensmeldung">
+      <div className="container-page py-5">
         <Link
           to={`/aktuelles/${item.slug}`}
-          className="group flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-6"
+          className="group flex flex-col sm:flex-row sm:items-baseline gap-1.5 sm:gap-6"
         >
-          <span className="inline-flex items-center gap-2 flex-shrink-0">
-            <span className="text-[11px] font-black uppercase tracking-[0.2em] text-accent">
-              {item.topic}
-            </span>
-            <time dateTime={item.datePublished} className="text-[13px] text-slate">
-              {formatNewsDate(item.datePublished)}
-            </time>
+          <span className="text-caption text-slate flex-shrink-0">
+            {item.topic} ·{' '}
+            <time dateTime={item.datePublished}>{formatNewsDate(item.datePublished)}</time>
           </span>
-          <p className="flex-grow font-headline font-bold text-navy text-[17px] sm:text-lg leading-snug group-hover:text-brand transition-colors">
+          <p className="flex-grow font-semibold text-navy text-lead leading-snug group-hover:text-accent transition-colors">
             {item.headline}
           </p>
-          <span className="inline-flex items-center gap-1.5 text-[14px] font-bold text-brand flex-shrink-0">
+          <span className="text-link text-body-sm flex-shrink-0">
             Mehr erfahren
-            <ArrowRight size={15} className="transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
+            <ArrowRight size={15} aria-hidden="true" />
           </span>
         </Link>
       </div>

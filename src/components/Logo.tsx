@@ -83,7 +83,8 @@ export default function Logo({ variant = 'light', size = 36, className, asLink =
       to="/"
       onClick={onClick}
       aria-label="AHAD Cleaning, zur Startseite"
-      className={cn('inline-flex items-center transition-opacity hover:opacity-90', className)}
+      // min-h-11: Trefferfläche von 44 px, auch wenn das Zeichen selbst kleiner gesetzt ist.
+      className={cn('inline-flex items-center min-h-11 transition-opacity hover:opacity-90', className)}
     >
       {mark}
     </Link>

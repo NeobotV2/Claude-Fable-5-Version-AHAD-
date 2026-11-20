@@ -15,11 +15,27 @@ export interface AttributionContext {
   referrerHost: string;
 }
 
-const ATTRIBUTION_KEY = 'ahad-attribution';
-const ATTRIBUTION_FIELDS = [
-  'landingPath', 'entryPath', 'entryService', 'entryIndustry', 'entryRegion',
-  'utmSource', 'utmMedium', 'utmCampaign', 'referrerHost',
-] as const satisfies readonly (keyof AttributionContext)[];
+/**
+ * Herkunftskontext der laufenden Sitzung. Lebt ausschließlich im Arbeitsspeicher
+ * der geöffneten Seite: Er übersteht Seitenwechsel innerhalb der Website, wird
+ * aber nicht auf dem Gerät abgelegt und entfällt beim Neuladen oder Schließen.
+ * So braucht die Zuordnung einer Anfrage keine Einwilligung für Gerätespeicher.
+ */
+let sessionAttribution: AttributionContext | null = null;
+
+/** Schlüssel früherer Versionen, die den Kontext im Sitzungsspeicher abgelegt haben. */
+const LEGACY_STORAGE_KEY = 'ahad-attribution';
+let legacyStorageCleared = false;
+
+function clearLegacyStorage() {
+  if (legacyStorageCleared) return;
+  legacyStorageCleared = true;
+  try {
+    sessionStorage.removeItem(LEGACY_STORAGE_KEY);
+  } catch {
+    // Kein Zugriff auf den Sitzungsspeicher: dann liegt dort auch nichts von uns.
+  }
+}
 
 const clean = (value: string | null | undefined, max = 120) =>
   String(value ?? '')
@@ -56,6 +72,7 @@ export function trackEvent(name: string, properties: Record<string, Property> = 
 }
 
 export function rememberAttribution(entryUrl = window.location.href): AttributionContext {
+  clearLegacyStorage();
   const entryPath = pathOnly(entryUrl);
   const previous = readAttribution();
   const query = new URL(entryUrl, window.location.origin).searchParams;
@@ -75,29 +92,13 @@ export function rememberAttribution(entryUrl = window.location.href): Attributio
     utmCampaign: clean(query.get('utm_campaign') || previous?.utmCampaign),
     referrerHost: previous?.referrerHost || referrerHost,
   };
-  try {
-    sessionStorage.setItem(ATTRIBUTION_KEY, JSON.stringify(context));
-  } catch {
-    // Attribution is optional; form submission must never depend on storage.
-  }
+  sessionAttribution = context;
   return context;
 }
 
 export function readAttribution(): AttributionContext | null {
   if (typeof window === 'undefined') return null;
-  try {
-    const parsed: unknown = JSON.parse(sessionStorage.getItem(ATTRIBUTION_KEY) || 'null');
-    if (!parsed || typeof parsed !== 'object') return null;
-    // Nur ein vollständiger, sauberer Datensatz zählt – ein veralteter oder fremder
-    // Wert unter demselben Schlüssel darf keine Lead-Übermittlung blockieren.
-    const record = parsed as Record<string, unknown>;
-    if (!ATTRIBUTION_FIELDS.every((field) => typeof record[field] === 'string')) return null;
-    return Object.fromEntries(
-      ATTRIBUTION_FIELDS.map((field) => [field, clean(record[field] as string, 180)]),
-    ) as unknown as AttributionContext;
-  } catch {
-    return null;
-  }
+  return sessionAttribution;
 }
 
 export function stripAnalyticsQuery(url: string): string {

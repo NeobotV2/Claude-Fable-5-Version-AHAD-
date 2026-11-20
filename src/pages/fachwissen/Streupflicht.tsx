@@ -23,7 +23,7 @@ const faqItems = [
   {
     question: 'Bis wann müssen Gehwege in Villingen-Schwenningen geräumt und gestreut sein?',
     answer:
-      'Nach der Streupflichtsatzung der Stadt in der Fassung vom 4. Dezember 2002 werktags bis 7.00 Uhr und an Sonn- und Feiertagen bis 8.30 Uhr. Die Pflicht endet um 20.00 Uhr. Prüfen Sie vor jeder Saison, ob die Satzung inzwischen geändert wurde. Für Objekte in anderen Gemeinden gelten deren eigene Zeiten.',
+      'Nach der Streupflichtsatzung der Stadt in der Fassung vom 4. Dezember 2002 werktags bis 7.00 Uhr und an Sonn- und Feiertagen bis 8.30 Uhr. Die Pflicht endet um 20.00 Uhr. Prüfen Sie vor jeder Saison, ob die Satzung inzwischen geändert wurde. Für Objekte in anderen Gemeinden gelten deren eigene Zeiten.',
   },
   {
     question: 'Kann ich die Räum- und Streupflicht vollständig an einen Winterdienst abgeben?',
@@ -87,12 +87,12 @@ export default function FachwissenStreupflicht() {
 
       <ArticleMeta slug={SLUG} />
 
-      <section className="bg-white py-16 lg:py-24">
+      <section className="bg-white section-y">
         <div className="mx-auto max-w-4xl px-4 sm:px-8">
           <div className="prose prose-lg max-w-none leading-relaxed text-slate">
-            <div className="not-prose mb-12 rounded-2xl border border-amber-200 bg-amber-50 p-6">
+            <div className="not-prose mb-12 rounded-2xl border border-notice-line bg-notice-surface p-6">
               <div className="flex items-start gap-3">
-                <CircleAlert className="mt-0.5 h-6 w-6 shrink-0 text-amber-700" aria-hidden="true" />
+                <CircleAlert className="mt-0.5 h-6 w-6 shrink-0 text-notice" aria-hidden="true" />
                 <div>
                   <h2 className="font-headline text-lg font-bold text-navy">Hinweis: keine Rechtsberatung</h2>
                   <p className="mt-2 text-sm leading-relaxed text-slate">
@@ -216,7 +216,7 @@ export default function FachwissenStreupflicht() {
                 'Weitere Fahr- und Stellflächen nach Bedarf und Vereinbarung',
               ].map((item, index) => (
                 <li key={item} className="flex items-start gap-3 rounded-xl border border-line bg-white p-4 text-sm text-slate">
-                  <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-brand/10 text-xs font-black text-brand">
+                  <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-brand/10 text-xs font-bold text-brand">
                     {index + 1}
                   </span>
                   <span>{item}</span>
@@ -249,13 +249,13 @@ export default function FachwissenStreupflicht() {
                 <tbody className="divide-y divide-line text-slate">
                   <tr>
                     <th scope="row" className="bg-paper px-4 py-4 font-bold text-navy">Werktags</th>
-                    <td className="px-4 py-4">7.00 Uhr</td>
-                    <td className="px-4 py-4">20.00 Uhr</td>
+                    <td className="px-4 py-4">7.00 Uhr</td>
+                    <td className="px-4 py-4">20.00 Uhr</td>
                   </tr>
                   <tr>
                     <th scope="row" className="bg-paper px-4 py-4 font-bold text-navy">Sonn- und Feiertage</th>
-                    <td className="px-4 py-4">8.30 Uhr</td>
-                    <td className="px-4 py-4">20.00 Uhr</td>
+                    <td className="px-4 py-4">8.30 Uhr</td>
+                    <td className="px-4 py-4">20.00 Uhr</td>
                   </tr>
                 </tbody>
               </table>
@@ -291,9 +291,9 @@ export default function FachwissenStreupflicht() {
               Einsatzprotokolle und eine Reaktion auf gemeldete Mängel.
             </p>
 
-            <div className="not-prose my-10 rounded-2xl border border-amber-200 bg-amber-50 p-6">
+            <div className="not-prose my-10 rounded-2xl border border-notice-line bg-notice-surface p-6">
               <div className="flex items-start gap-3">
-                <CircleAlert className="mt-0.5 h-6 w-6 shrink-0 text-amber-700" aria-hidden="true" />
+                <CircleAlert className="mt-0.5 h-6 w-6 shrink-0 text-notice" aria-hidden="true" />
                 <div>
                   <h3 className="font-headline text-lg font-bold text-navy">Sonderfall Vermietung</h3>
                   <p className="mt-2 text-sm leading-relaxed text-slate">
@@ -394,7 +394,7 @@ export default function FachwissenStreupflicht() {
                       Winterdienst und Hausmeisterservice
                     </Link>{' '}
                     übernehmen wir die Räum- und Streupflicht für die vereinbarten Flächen vertraglich. Wir beobachten die
-                    Wetterlage, beginnen bei Bedarf ab 4 Uhr und protokollieren jeden Einsatz mit Zeit, Fläche und
+                    Wetterlage, beginnen bei Bedarf ab 4 Uhr und protokollieren jeden Einsatz mit Zeit, Fläche und
                     Maßnahme. Die Kontroll- und Überwachungspflicht bleibt beim Eigentümer oder Betreiber; die
                     Protokolle unterstützen ihn dabei.
                   </p>
@@ -405,7 +405,7 @@ export default function FachwissenStreupflicht() {
         </div>
       </section>
 
-      <section className="bg-paper py-16 lg:py-24" aria-labelledby="streupflicht-faq">
+      <section className="bg-paper section-y" aria-labelledby="streupflicht-faq">
         <div className="mx-auto max-w-4xl px-4 sm:px-8">
           <div className="mb-12 text-center">
             <span className="eyebrow justify-center text-brand">Häufige Fragen</span>

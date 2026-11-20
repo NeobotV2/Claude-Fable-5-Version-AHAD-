@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import SEO from '@/components/SEO';
 import PageHero from '@/components/PageHero';
-import Reveal from '@/components/ui/Reveal';
 import SectionHeading from '@/components/ui/SectionHeading';
 import SmartImage from '@/components/ui/SmartImage';
 import CTABand from '@/components/CTABand';
@@ -27,47 +26,38 @@ export default function Branchen() {
         cta={{ label: 'Kostenlose Besichtigung anfragen', to: '/angebot' }}
       />
 
-      <section className="py-20 lg:py-32 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-8">
-          <SectionHeading
-            eyebrow="Fünf Branchen"
-            title="In diesen Branchen arbeiten wir."
-            className="mb-14"
-          />
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {BRANCHEN.map((branche, i) => (
-              <Reveal key={branche.slug} delay={Math.min(i * 0.08, 0.25)} className={i === 0 ? 'md:col-span-2' : ''}>
+      <section className="section-y bg-white">
+        <div className="container-page">
+          <SectionHeading eyebrow="Fünf Branchen" title="In diesen Branchen arbeiten wir." className="mb-10" />
+          <ul className="border-t border-navy">
+            {BRANCHEN.map((branche) => (
+              <li key={branche.slug} className="border-b border-line">
                 <Link
                   to={branche.path}
-                  className={`group relative flex rounded-3xl overflow-hidden bg-navy shadow-soft card-lift ${
-                    i === 0 ? 'min-h-[22rem]' : 'min-h-[17rem]'
-                  }`}
+                  className="group grid grid-cols-1 sm:grid-cols-[15rem_1fr_auto] items-center gap-x-10 gap-y-4 py-6"
                 >
                   <SmartImage
                     src={branche.image}
                     alt={branche.name}
-                    className="absolute inset-0"
-                    imgClassName="opacity-70 transition-transform duration-700 group-hover:scale-105"
+                    sizes="(min-width:640px) 240px, 100vw"
+                    className="aspect-[3/2]"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-navy/95 via-navy/40 to-navy/10" />
-                  <div className="relative z-10 mt-auto p-8 text-white w-full">
-                    <p className="text-[11px] font-black uppercase tracking-[0.2em] text-mint mb-2">{branche.claim}</p>
-                    <div className="flex items-end justify-between gap-6">
-                      <div className="min-w-0">
-                        <h2 className="font-headline text-2xl lg:text-3xl font-bold mb-2">{branche.name}</h2>
-                        <p className="text-blue-100/80 text-sm font-medium leading-relaxed max-w-xl hidden sm:block">
-                          {branche.heroLead.split(':')[0]}.
-                        </p>
-                      </div>
-                      <span className="w-11 h-11 rounded-full bg-white/15 backdrop-blur grid place-items-center flex-shrink-0 transition-all duration-300 group-hover:bg-accent group-hover:translate-x-1">
-                        <ArrowRight size={18} />
-                      </span>
-                    </div>
+                  <div className="min-w-0">
+                    <p className="text-sm font-semibold text-accent mb-1">{branche.claim}</p>
+                    <h2 className="text-2xl font-bold text-navy group-hover:text-accent transition-colors">
+                      {branche.name}
+                    </h2>
+                    <p className="mt-2 text-slate leading-relaxed max-w-2xl">{branche.heroLead.split(':')[0]}.</p>
                   </div>
+                  <ArrowRight
+                    size={20}
+                    className="hidden sm:block flex-shrink-0 text-navy/40 group-hover:text-accent transition-colors"
+                    aria-hidden="true"
+                  />
                 </Link>
-              </Reveal>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
       </section>
 

@@ -23,7 +23,7 @@ export default function FachwissenKosten() {
         name: 'Was kostet Gebäudereinigung pro Stunde?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: 'Einen allgemein gültigen Stundensatz gibt es nicht. Er hängt unter anderem von Leistungsumfang, Arbeitsbedingungen, Zeiten, Material, Maschinen und Betreuung ab. Die 34 € in diesem Artikel sind eine reine Rechenannahme, weder Marktangabe noch Preisversprechen.',
+          text: 'Einen allgemein gültigen Stundensatz gibt es nicht. Er hängt unter anderem von Leistungsumfang, Arbeitsbedingungen, Zeiten, Material, Maschinen und Betreuung ab. Die 34 € in diesem Artikel sind eine reine Rechenannahme, weder Marktangabe noch Preisversprechen.',
         },
       },
       {
@@ -31,7 +31,7 @@ export default function FachwissenKosten() {
         name: 'Was kostet Büroreinigung pro Quadratmeter?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: 'Der m²-Preis lässt sich als Stundensatz geteilt durch den objektbezogenen Leistungswert modellieren. Die Zahlen im Artikel sind illustrative Rechenwerte mit einer angenommenen Stunde zu 34 € und ersetzen keine Kalkulation für ein konkretes Objekt.',
+          text: 'Der m²-Preis lässt sich als Stundensatz geteilt durch den objektbezogenen Leistungswert modellieren. Die Zahlen im Artikel sind illustrative Rechenwerte mit einer angenommenen Stunde zu 34 € und ersetzen keine Kalkulation für ein konkretes Objekt.',
         },
       },
       {
@@ -94,15 +94,15 @@ export default function FachwissenKosten() {
       />
 
       {/* Auf einen Blick */}
-      <section className="border-b border-line bg-white py-12 lg:py-14">
+      <section className="border-b border-line bg-white section-y-sm">
         <div className="mx-auto max-w-7xl px-4 sm:px-8">
-          <h2 className="mb-8 text-center text-2xl font-black text-navy">Drei Größen für die Kalkulation</h2>
+          <h2 className="mb-8 text-center text-2xl font-bold text-navy">Drei Größen für die Kalkulation</h2>
           <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
             <div className="rounded-2xl border border-line bg-paper p-6">
               <Euro className="mb-4 h-8 w-8 text-accent" aria-hidden="true" />
               <h3 className="mb-2 text-lg font-bold text-navy">Stundensatz</h3>
               <p className="text-sm text-slate">
-                Im Artikel als <strong>Rechenannahme 34 € je Stunde</strong>. Das ist kein Preisversprechen; ein
+                Im Artikel als <strong>Rechenannahme 34 € je Stunde</strong>. Das ist kein Preisversprechen; ein
                 Angebot benötigt den konkreten Leistungsumfang.
               </p>
             </div>
@@ -130,17 +130,17 @@ export default function FachwissenKosten() {
       <ArticleMeta slug="was-kostet-gebaeudereinigung-stundensatz-preise" />
 
       {/* Content */}
-      <section className="bg-white py-16 lg:py-24">
+      <section className="bg-white section-y">
         <div className="mx-auto max-w-3xl px-4 sm:px-8">
           <div className="prose prose-lg max-w-none leading-relaxed text-slate">
-            <h2 id="kostenbestandteile" className="scroll-mt-28 text-2xl font-black text-navy sm:text-3xl">Der Stundensatz und seine Kostenbestandteile</h2>
+            <h2 id="kostenbestandteile" className="scroll-mt-28 text-2xl font-bold text-navy sm:text-3xl">Der Stundensatz und seine Kostenbestandteile</h2>
             <p className="mb-6">
-              Für die folgenden Formeln verwenden wir <strong>34 € pro Reinigungsstunde als illustrative Annahme</strong>.
+              Für die folgenden Formeln verwenden wir <strong>34 € pro Reinigungsstunde als illustrative Annahme</strong>.
               Sie ist weder Marktspanne noch Preisversprechen. Entscheidend ist, welche Leistungen und Kostenbestandteile
               ein konkret angebotenes Stundenentgelt abdeckt:
             </p>
             <div
-              className="mb-8 overflow-x-auto rounded-2xl border border-line shadow-soft"
+              className="mb-8 overflow-x-auto rounded-2xl border border-line"
               role="region"
               aria-label="Kostenbestandteile eines kalkulierten Stundensatzes"
               tabIndex={0}
@@ -182,7 +182,7 @@ export default function FachwissenKosten() {
               Kostenbestandteilen bewerten. Ein Preis allein belegt weder Qualität noch einen Verstoß.
             </p>
 
-            <h2 id="leistungswert" className="scroll-mt-28 text-2xl font-black text-navy sm:text-3xl">Vom Stundensatz zum m²-Preis: der Leistungswert</h2>
+            <h2 id="leistungswert" className="scroll-mt-28 text-2xl font-bold text-navy sm:text-3xl">Vom Stundensatz zum m²-Preis: der Leistungswert</h2>
             <p className="mb-6">
               Für die Kosten je m² ist neben dem Stundensatz der <strong>Leistungswert</strong> maßgeblich, also
               der für eine konkrete Tätigkeit und Fläche angesetzte Quadratmeterumfang
@@ -191,7 +191,7 @@ export default function FachwissenKosten() {
               Rechenlogik zu zeigen:
             </p>
             <div
-              className="mb-8 overflow-x-auto rounded-2xl border border-line shadow-soft"
+              className="mb-8 overflow-x-auto rounded-2xl border border-line"
               role="region"
               aria-label="Hypothetische Leistungswerte und Rechenergebnisse"
               tabIndex={0}
@@ -202,29 +202,29 @@ export default function FachwissenKosten() {
                   <tr className="bg-navy text-white">
                     <th scope="col" className="px-4 py-3 font-bold text-white">Rechenszenario</th>
                     <th scope="col" className="px-4 py-3 font-bold text-white">Hypothetischer Leistungswert</th>
-                    <th scope="col" className="px-4 py-3 font-bold text-white">Ergebnis bei 34 €/h*</th>
+                    <th scope="col" className="px-4 py-3 font-bold text-white">Ergebnis bei 34 €/h*</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-line">
                   <tr>
                     <th scope="row" className="px-4 py-3 font-semibold text-navy align-top">Beispiel A</th>
-                    <td className="px-4 py-3 align-top">250 m²/h</td>
-                    <td className="px-4 py-3 align-top">0,136 €/m², gerundet 0,14 €/m²</td>
+                    <td className="px-4 py-3 align-top">250 m²/h</td>
+                    <td className="px-4 py-3 align-top">0,136 €/m², gerundet 0,14 €/m²</td>
                   </tr>
                   <tr className="bg-paper">
                     <th scope="row" className="px-4 py-3 font-semibold text-navy align-top">Beispiel B</th>
-                    <td className="px-4 py-3 align-top">350 m²/h</td>
-                    <td className="px-4 py-3 align-top">0,097 €/m², gerundet 0,10 €/m²</td>
+                    <td className="px-4 py-3 align-top">350 m²/h</td>
+                    <td className="px-4 py-3 align-top">0,097 €/m², gerundet 0,10 €/m²</td>
                   </tr>
                   <tr>
                     <th scope="row" className="px-4 py-3 font-semibold text-navy align-top">Beispiel C</th>
-                    <td className="px-4 py-3 align-top">75 m²/h</td>
-                    <td className="px-4 py-3 align-top">0,453 €/m², gerundet 0,45 €/m²</td>
+                    <td className="px-4 py-3 align-top">75 m²/h</td>
+                    <td className="px-4 py-3 align-top">0,453 €/m², gerundet 0,45 €/m²</td>
                   </tr>
                   <tr className="bg-paper">
                     <th scope="row" className="px-4 py-3 font-semibold text-navy align-top">Beispiel D</th>
-                    <td className="px-4 py-3 align-top">140 m²/h</td>
-                    <td className="px-4 py-3 align-top">0,243 €/m², gerundet 0,24 €/m²</td>
+                    <td className="px-4 py-3 align-top">140 m²/h</td>
+                    <td className="px-4 py-3 align-top">0,243 €/m², gerundet 0,24 €/m²</td>
                   </tr>
                 </tbody>
               </table>
@@ -235,11 +235,11 @@ export default function FachwissenKosten() {
               entstehen erst aus dem konkreten Objekt und Leistungsziel.
             </p>
 
-            <h2 id="rechenbeispiel" className="scroll-mt-28 text-2xl font-black text-navy sm:text-3xl">Rechenbeispiel: Büroetage mit 500 m²</h2>
-            <div className="mb-12 rounded-3xl border border-line bg-paper p-6 shadow-soft sm:p-8">
+            <h2 id="rechenbeispiel" className="scroll-mt-28 text-2xl font-bold text-navy sm:text-3xl">Rechenbeispiel: Büroetage mit 500 m²</h2>
+            <div className="mb-12 rounded-3xl border border-line bg-paper p-6 sm:p-8">
               <p className="mb-4 text-sm">
-                Ausschließlich zur Illustration nehmen wir 420 m² Büro-/Verkehrsfläche mit 250 m²/h, 80 m²
-                Sanitär-/Küchenfläche mit 75 m²/h und einen kalkulierten Stundensatz von 34 € an. Diese Eingaben sind
+                Ausschließlich zur Illustration nehmen wir 420 m² Büro-/Verkehrsfläche mit 250 m²/h, 80 m²
+                Sanitär-/Küchenfläche mit 75 m²/h und einen kalkulierten Stundensatz von 34 € an. Diese Eingaben sind
                 keine Empfehlung für ein reales Objekt.
               </p>
               <ul className="list-none space-y-2 pl-0 text-sm">
@@ -256,8 +256,8 @@ export default function FachwissenKosten() {
                   <span className="font-bold text-navy">2,75 Std.</span>
                 </li>
                 <li className="flex flex-col justify-between gap-1 pt-1 sm:flex-row">
-                  <span><strong>Rechenergebnis pro vollständigem Durchgang</strong>: 2,75 × 34 €</span>
-                  <span className="font-bold text-accent">93,50 €</span>
+                  <span><strong>Rechenergebnis pro vollständigem Durchgang</strong>: 2,75 × 34 €</span>
+                  <span className="font-bold text-accent">93,50 €</span>
                 </li>
               </ul>
               <p className="mt-4 text-xs text-slate">
@@ -271,7 +271,7 @@ export default function FachwissenKosten() {
               </p>
             </div>
 
-            <h2 id="preistreiber" className="scroll-mt-28 text-2xl font-black text-navy sm:text-3xl">Was den Preis nach oben oder unten bewegt</h2>
+            <h2 id="preistreiber" className="scroll-mt-28 text-2xl font-bold text-navy sm:text-3xl">Was den Preis nach oben oder unten bewegt</h2>
             <ul className="space-y-4 mb-12 list-none pl-0">
               {[
                 'Reinigungsintervall: Eine bedarfsorientierte Taktung kann gegenüber einem festen Turnus Stunden reduzieren, wenn Hygiene- und Qualitätsziele eingehalten werden.',
@@ -288,7 +288,7 @@ export default function FachwissenKosten() {
               ))}
             </ul>
 
-            <div className="mb-12 rounded-3xl border border-line bg-paper p-6 shadow-soft sm:p-8">
+            <div className="mb-12 rounded-3xl border border-line bg-paper p-6 sm:p-8">
               <h3 className="mb-4 flex items-center gap-3 text-xl font-bold text-navy">
                 <AlertTriangle className="h-7 w-7 text-brand" aria-hidden="true" />
                 Prüffragen bei auffällig niedrigen Angeboten
@@ -313,7 +313,7 @@ export default function FachwissenKosten() {
               </ul>
             </div>
 
-            <h2 className="text-2xl font-black text-navy sm:text-3xl">Warum Angebote trotz gleicher Lohnuntergrenze abweichen</h2>
+            <h2 className="text-2xl font-bold text-navy sm:text-3xl">Warum Angebote trotz gleicher Lohnuntergrenze abweichen</h2>
             <p className="mb-8">
               Die gesetzliche beziehungsweise tarifliche Lohnuntergrenze ist nur ein Baustein. Unterschiede entstehen
               unter anderem durch Flächenzuschnitt, Rüst- und Wegezeiten, Zutrittsregeln, Schicht- oder Randzeiten,
@@ -322,7 +322,7 @@ export default function FachwissenKosten() {
               Objektdaten, Leistungen, Turnusse und Qualitätsziele kalkulieren.
             </p>
 
-            <h2 className="text-2xl font-black text-navy sm:text-3xl">Fazit</h2>
+            <h2 className="text-2xl font-bold text-navy sm:text-3xl">Fazit</h2>
             <p className="mb-8">
               Eine nachvollziehbare Kalkulation verbindet Kostenbestandteile, Leistungswert und das passende{' '}
               <Link to="/fachwissen/unterhaltsreinigung-unternehmen-reinigungsintervalle" className="font-bold text-brand hover:underline">
@@ -336,11 +336,11 @@ export default function FachwissenKosten() {
       </section>
 
       {/* FAQ */}
-      <section className="bg-paper py-16 lg:py-24">
+      <section className="bg-paper section-y">
         <div className="mx-auto max-w-4xl px-4 sm:px-8">
           <div className="mb-12 text-center">
-            <span className="mb-4 block text-sm font-bold uppercase tracking-wider text-brand">Häufige Fragen</span>
-            <h2 className="text-2xl font-black tracking-tight text-navy sm:text-3xl lg:text-4xl">FAQs zu Reinigungskosten</h2>
+            <span className="mb-4 block text-sm font-bold text-brand">Häufige Fragen</span>
+            <h2 className="text-2xl font-bold tracking-tight text-navy sm:text-3xl lg:text-4xl">FAQs zu Reinigungskosten</h2>
           </div>
           <Accordion items={faqSchema.mainEntity.map((q) => ({ question: q.name, answer: q.acceptedAnswer.text }))} />
         </div>
