@@ -4,6 +4,7 @@ import { ArrowRight } from 'lucide-react';
 import SEO from '@/components/SEO';
 import SectionHeading from '@/components/ui/SectionHeading';
 import ButtonLink from '@/components/ui/Button';
+import { cn } from '@/lib/utils';
 import SmartImage from '@/components/ui/SmartImage';
 import FactRow from '@/components/ui/FactRow';
 import LinkList from '@/components/ui/LinkList';
@@ -183,11 +184,10 @@ export default function Home() {
       </Helmet>
 
       {/* ── HERO ────────────────────────────────────────────────────────
-          Ab 1024 px liegt das Foto der Zentrale über die ganze Breite, links
-          mit dunkelblauem Verlauf, darauf die Aussage in Weiß (.hero--photo
-          in index.css). Auf dem Handy: Text auf Weiß, Foto darunter. Keine
-          weiteren Effekte. pt-16 = Höhe der festen Kopfzeile. */}
-      <section className="hero--photo bg-white pt-16">
+          Das Foto der Zentrale liegt hinter der Aussage, abgedunkelt durch
+          einen dunkelblauen Verlauf (.hero--photo in index.css), am Handy wie
+          am Desktop. pt-16 = Höhe der festen Kopfzeile. */}
+      <section className="hero--photo pt-16">
         <div className="grid grid-cols-1 lg:grid-cols-2">
           <div className="hero-copy flex lg:justify-end">
             <div className="w-full lg:max-w-[40rem] px-4 sm:px-8 lg:pr-14 py-10 sm:py-14 lg:py-24">
@@ -201,7 +201,7 @@ export default function Home() {
                     Reinigungsfirma in <span className="whitespace-nowrap">Villingen-Schwenningen</span>
                   </span>
                 </span>{' '}
-                <span className="whitespace-nowrap">Gebäudereinigung,</span> die Sie nicht mehr nachsteuern müssen.
+                <span className="whitespace-nowrap">Gebäudereinigung,</span> die Sie nicht mehr <span className="hero-accent">nachsteuern</span> müssen.
               </h1>
 
               <p className="mt-5 sm:mt-7 text-lead sm:text-xl text-slate leading-relaxed max-w-xl">
@@ -287,7 +287,7 @@ export default function Home() {
               <ArrowRight size={15} aria-hidden="true" />
             </Link>
           </div>
-          <ClientLogos />
+          <ClientLogos layout="marquee" />
         </section>
       )}
 
@@ -309,26 +309,42 @@ export default function Home() {
             </Link>
           </div>
 
-          {/* Drei Schwerpunkte: Foto in voller Farbe, Text darunter. */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-x-8 gap-y-12">
+          {/* Drei Schwerpunkte als Foto-Karten: Bild über die ganze Karte, unten ein
+              dunkler Verlauf, darauf der Text in Weiß. */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 lg:gap-6">
             {featuredServices.map((service) => (
-              <Link key={service.title} to={service.path} className="group block">
+              <Link
+                key={service.title}
+                to={service.path}
+                className="group relative block overflow-hidden bg-navy aspect-[4/5] sm:aspect-[16/11] md:aspect-[4/5]"
+              >
                 <SmartImage
                   src={service.image}
-                  alt={service.title}
+                  alt=""
                   sizes="(min-width:768px) 33vw, 100vw"
-                  className="aspect-[4/3]"
-                  imgClassName={'imagePosition' in service ? service.imagePosition : ''}
+                  className="absolute inset-0 h-full"
+                  imgClassName={cn(
+                    'transition-transform duration-500 ease-out group-hover:scale-[1.04]',
+                    'imagePosition' in service ? service.imagePosition : '',
+                  )}
                 />
-                <h3 className="mt-5 text-xl font-bold text-navy group-hover:text-accent transition-colors">
-                  {service.title}
-                </h3>
-                <p className="mt-2 text-slate leading-relaxed">{service.outcome}</p>
-                <p className="mt-3 text-body-sm text-slate">{service.benefits.join(' · ')}</p>
-                <span className="text-link mt-4 text-body-sm">
-                  Mehr erfahren
-                  <ArrowRight size={15} aria-hidden="true" />
-                </span>
+                <div
+                  className="absolute inset-0 bg-linear-to-t from-navy from-25% via-navy/60 via-50% to-navy/0"
+                  aria-hidden="true"
+                />
+                <div className="absolute inset-x-0 bottom-0 p-6 lg:p-7 text-white">
+                  <h3 className="text-xl lg:text-2xl font-bold leading-snug">{service.title}</h3>
+                  <p className="mt-2 text-ondark leading-relaxed">{service.outcome}</p>
+                  <p className="mt-3 text-body-sm text-mint">{service.benefits.join(' · ')}</p>
+                  <span className="mt-5 inline-flex items-center gap-2 text-body-sm font-semibold">
+                    Mehr erfahren
+                    <ArrowRight
+                      size={16}
+                      className="transition-transform group-hover:translate-x-1"
+                      aria-hidden="true"
+                    />
+                  </span>
+                </div>
               </Link>
             ))}
           </div>
