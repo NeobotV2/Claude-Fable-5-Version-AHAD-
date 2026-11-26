@@ -20,7 +20,9 @@
  *   farbe-flat              2 Farben ohne Verlauf     → Siebdruck, Flex/Flock, Stick
  *   farbe-kern-weiss        wie farbe, Innenfeld weiß → farbige helle Shirts
  *   farbe-flat-kern-weiss   wie farbe-flat, Kern weiß → Siebdruck auf farbig hell
- *   weiss                   Negativ komplett weiß     → dunkle Shirts
+ *   weiss                   Negativ komplett weiß     → dunkle Shirts (1 Farbe)
+ *   weiss-mint              Weiß + Mint (Negativ wie im Designbook) → dunkle Shirts, 2 Farben
+ *   weiss-gruen             Weiß + Markengrün         → dunkle Shirts, 2 Farben (Grün kontrastarm)
  *   navy                    einfarbig #0B2341         → 1-Farb-Druck auf hell
  *   gruen                   einfarbig #0D6B38         → 1-Farb-Druck auf hell
  *   schwarz                 einfarbig #000000         → 1-Farb-Druck, Gravur
@@ -46,6 +48,8 @@ const A = JSON.parse(await readFile(path.join(root, 'src/components/logo-art.jso
 
 const NAVY = '#0B2341';
 const GREEN = '#0D6B38';
+/** Heller Tint des AHAD-Grün — Negativversion auf dunklem Grund (Designbook). */
+const MINT = '#9CDDB7';
 
 /**
  * Enge Bounding-Box der Wortmarke innerhalb des Lockup-Koordinatensystems.
@@ -70,6 +74,12 @@ const VARIANTS = {
   'farbe-kern-weiss': { navy: NAVY, green: GREEN, falzG: 'grad', falzN: 'grad', word: NAVY, claim: GREEN, kern: '#ffffff' },
   'farbe-flat-kern-weiss': { navy: NAVY, green: GREEN, falzG: GREEN, falzN: NAVY, word: NAVY, claim: GREEN, kern: '#ffffff' },
   weiss: { navy: '#ffffff', green: '#ffffff', falzG: '#ffffff', falzN: '#ffffff', word: '#ffffff', claim: '#ffffff' },
+  // Zweifarbig für dunkle Textilien (Navy/Marine, Schwarz): Navy-Teile werden
+  // weiß, Grün-Teile Mint — so liest sich das Logo wie die Negativversion im
+  // Designbook. `weiss-gruen` nutzt das dunkle Markengrün; auf Marine ist es
+  // deutlich kontrastärmer (Stickgarn/Druck vorher bemustern lassen).
+  'weiss-mint': { navy: '#ffffff', green: MINT, falzG: MINT, falzN: '#ffffff', word: '#ffffff', claim: MINT },
+  'weiss-gruen': { navy: '#ffffff', green: GREEN, falzG: GREEN, falzN: '#ffffff', word: '#ffffff', claim: GREEN },
   navy: { navy: NAVY, green: NAVY, falzG: NAVY, falzN: NAVY, word: NAVY, claim: NAVY },
   gruen: { navy: GREEN, green: GREEN, falzG: GREEN, falzN: GREEN, word: GREEN, claim: GREEN },
   schwarz: { navy: '#000000', green: '#000000', falzG: '#000000', falzN: '#000000', word: '#000000', claim: '#000000' },
@@ -81,6 +91,8 @@ const VARIANTS = {
  */
 const PREVIEW_BG = {
   weiss: { bg: NAVY, dark: true, note: 'auf dunklem Grund' },
+  'weiss-mint': { bg: NAVY, dark: true, note: 'auf dunklem Grund, 2 Farben' },
+  'weiss-gruen': { bg: NAVY, dark: true, note: 'auf dunklem Grund, Grün kontrastarm' },
   'farbe-kern-weiss': { bg: '#A9AEB6', dark: false, note: 'auf farbigem Grund, z. B. grey melange' },
   'farbe-flat-kern-weiss': { bg: '#A9AEB6', dark: false, note: 'auf farbigem Grund, z. B. grey melange' },
 };

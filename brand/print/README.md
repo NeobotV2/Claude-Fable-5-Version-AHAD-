@@ -54,7 +54,9 @@ zweimal auf demselben Shirt.
 | `farbe-flat` | Zweifarbig Navy + Grün, ohne Verlauf. Siebdruck, Flex/Flock, Stickerei — auf **weißem** Grund. |
 | `farbe-kern-weiss` | Wie `farbe`, aber das Innenfeld der Raute wird weiß mitgedruckt. Für **farbige helle** Shirts (grey melange, Sand, Hellgrau). |
 | `farbe-flat-kern-weiss` | Wie `farbe-flat` mit weißem Innenfeld. Siebdruck/Flex auf farbigen hellen Shirts. |
-| `weiss` | Negativ, komplett weiß. Für **dunkle** Shirts (Navy, Schwarz, Anthrazit, Dunkelgrün). |
+| `weiss` | Negativ, komplett weiß. Für **dunkle** Shirts (Navy, Schwarz, Anthrazit, Dunkelgrün). Einfarbig, am günstigsten. |
+| `weiss-mint` | Zweifarbig Weiß + Mint `#9CDDB7`, wie die Negativversion im Designbook. Für **dunkle** Shirts, wenn das Logo farbig wirken soll. |
+| `weiss-gruen` | Zweifarbig Weiß + Markengrün `#0D6B38`. Auf dunklem Stoff kontrastarm — das Grün ist kaum zu sehen. Nur nach Bemusterung. |
 | `navy` | Einfarbig `#0B2341`. Ein-Farb-Druck auf hellen Shirts. |
 | `gruen` | Einfarbig `#0D6B38`. Ein-Farb-Druck auf hellen Shirts. |
 | `schwarz` | Einfarbig Schwarz. Ein-Farb-Druck, Gravur, Prägung, Vorlagen. |
@@ -63,7 +65,7 @@ zweimal auf demselben Shirt.
 
 - **Weiß** → `farbe` (bzw. `farbe-flat`)
 - **Farbig hell** (grey melange, Sand, Hellgrau) → `farbe-kern-weiss`
-- **Dunkel** (Navy, Schwarz, Anthrazit, Dunkelgrün) → `weiss`
+- **Dunkel** (Navy, Schwarz, Anthrazit, Dunkelgrün) → `weiss` (1 Farbe) oder `weiss-mint` (2 Farben)
 
 Auf dunklen Shirts funktioniert die Farbversion **nicht**: Navy `#0B2341` ist
 die dominante Logofarbe und geht im dunklen Stoff unter. Auf Dunkelgrün
@@ -122,3 +124,22 @@ Die PNGs bitte **nicht vergrößern**, sonst werden die Kanten unscharf.
 
 `uebersicht.png` zeigt alle Versionen auf einem Blatt — das reicht der
 Druckerei als Abstimmungsvorlage.
+
+## Marineblaue Arbeitskleidung (z. B. FHB „marine“)
+
+Vorschau: `vorschau-marine.png` (Stofffarbe am Bildschirm angenähert).
+
+| Fläche | Motiv | Größe | Datei (Stick/Sieb/Flex: SVG oder PDF) |
+| --- | --- | --- | --- |
+| Brust links | Bildzeichen oder Lockup | Bildzeichen 6–7 cm hoch, Lockup 9–10 cm breit | `ahad-bildzeichen-weiss-mint` / `ahad-lockup-weiss-mint` |
+| Rücken | Wortmarke | 26–30 cm breit | `ahad-wortmarke-weiss-mint` |
+| Ärmel / Cap | Bildzeichen | 4–5 cm | `ahad-bildzeichen-weiss-mint` |
+
+- **Empfehlung:** `weiss-mint` (zweifarbig, wirkt wie das Logo) oder `weiss`
+  (einfarbig, günstiger, bei sehr kleinen Stickgrößen sauberer).
+- **Nicht** die Farbversion (`farbe`) verwenden: Navy-Logo auf Navy-Stoff verschwindet.
+- **Stickerei:** Garnfarben anhand der HEX-Werte von der Stickerei bestimmen lassen
+  (Weiß + ein helles Grün nahe `#9CDDB7`). Unter ca. 1,5 cm Höhe wird „CLEANING“
+  im Stick unleserlich — dann nur Bildzeichen oder nur „AHAD“-Wortmarke ohne Unterzeile
+  erfragen.
+- **Druck (DTF/Transfer):** PNG oder PDF der gewünschten Größe; Hintergrund ist transparent.
