@@ -116,7 +116,7 @@ export default function ServicePage({ service }: { service: ServiceData }) {
           (sonst bliebe ein leerer weißer Streifen mit Trennlinie). */}
       {PROMISES.length > 0 && (
         <section className="bg-white border-b border-line">
-          <ul className="container-page grid grid-cols-1 sm:grid-cols-3 sm:divide-x divide-line">
+          <ul className={`container-page grid grid-cols-1 sm:divide-x divide-line ${PROMISES.length === 2 ? 'sm:grid-cols-2' : 'sm:grid-cols-3'}`}>
             {PROMISES.map((promise) => (
               <li key={promise.label} className="py-5 sm:py-6 flex items-baseline gap-3 sm:px-8 sm:first:pl-0">
                 <span className="font-accent text-3xl font-semibold text-navy tabular-nums">{promise.value}</span>

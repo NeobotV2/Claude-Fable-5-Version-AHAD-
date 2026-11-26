@@ -12,7 +12,7 @@ import { GUARANTEES, PROOF_POINTS, OBJEKTLEITUNG } from '@/lib/site';
 export default function Guarantee() {
   // Fail-closed konsistent zu Ende gedacht: Solange die Zusagen im
   // Claim-Register nicht freigegeben sind (GUARANTEES leer), darf auch die
-  // Überschrift „Vier Zusagen …" nicht stehen — sonst verspricht die Sektion
+  // Überschrift „Drei Zusagen …" nicht stehen — sonst verspricht die Sektion
   // Inhalte, die darunter fehlen (leeres Loch im Layout).
   if (GUARANTEES.length === 0) return null;
 
@@ -21,7 +21,7 @@ export default function Guarantee() {
       <div className="container-page">
         <SectionHeading
           eyebrow="Das AHAD-Versprechen"
-          title="Vier Zusagen, auf die Sie sich berufen können."
+          title="Drei Zusagen, auf die Sie sich berufen können."
           lead="Wenn etwas nicht stimmt, bessern wir kostenfrei nach."
           className="max-w-3xl mb-12"
         />

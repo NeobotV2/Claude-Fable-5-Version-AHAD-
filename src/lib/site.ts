@@ -206,7 +206,6 @@ export const LOCATION_PUBLICATIONS = {
  * Angebotsdurchlaufzeit), sonst kippt das Vertrauensargument.
  */
 const PROMISE_CANDIDATES = [
-  { value: '24h', label: 'Reaktionszeit garantiert' },
   { value: '48h', label: 'bis zur Objektbesichtigung' },
   { value: '100%', label: 'dokumentierte Qualität' },
 ] as const;
@@ -312,13 +311,10 @@ export const CLIENT_REFERENCES = CLIENT_REFERENCE_CANDIDATES.filter((reference) 
 /**
  * Das AHAD-Versprechen — benannte Risikoumkehr mit „Zähnen".
  * Bewusst nur Zusagen, die operativ haltbar sind (Nachbesserung,
- * Festpreis, faire Laufzeit, Reaktionszeit). Keine erfundenen Werte.
+ * Festpreis, faire Laufzeit). Keine erfundenen Werte. Eine feste
+ * Reaktionszeit wird bewusst nicht zugesagt.
  */
 const GUARANTEE_CANDIDATES = [
-  {
-    title: 'Reaktionszeit',
-    promise: 'Wir antworten auf jede Meldung innerhalb von 24 Stunden und dokumentieren das.',
-  },
   {
     title: 'Nachbesserung',
     promise: 'Zu Recht beanstandete Leistungen bessern wir kostenfrei nach.',
@@ -343,7 +339,6 @@ export const GUARANTEES = canPublishVerification(CLAIM_VERIFICATIONS.serviceLeve
  * ergänzen — bis dahin nur, wofür AHAD vertraglich einsteht.
  */
 const PROOF_POINT_CANDIDATES = [
-  { value: '24 h', label: 'Reaktionszeit', sub: 'vertraglich zugesichert' },
   { value: '48 h', label: 'bis Objektbesichtigung', sub: 'in der Regel vor Ort' },
   { value: '1', label: 'feste Objektleitung', sub: 'pro Objekt' },
   { value: '100 %', label: 'dokumentierte Leistung', sub: 'für Audits nachweisbar' },
