@@ -13,7 +13,6 @@ import BeforeAfter from '@/components/ui/BeforeAfter';
 import Accordion, { faqSchemaFrom, type FAQItem } from '@/components/ui/Accordion';
 import ClientLogos from '@/components/ClientLogos';
 import CTABand from '@/components/CTABand';
-import NewsTeaser from '@/components/NewsTeaser';
 import Guarantee from '@/components/Guarantee';
 import Reviews from '@/components/Reviews';
 import TrustBand from '@/components/TrustBand';
@@ -65,32 +64,6 @@ const featuredServices = [
   },
 ];
 
-const systemSteps = [
-  {
-    letter: 'A',
-    title: 'Analyse',
-    subtitle: 'Das Objekt erfassen',
-    description: 'Wir erfassen Flächen, Nutzung, Risiken und Reinigungsbedarf. Darauf bauen Planung und Ausführung auf.',
-  },
-  {
-    letter: 'H',
-    title: 'Handling',
-    subtitle: 'Feste Teams, klare Zuständigkeit',
-    description: 'Eingespielte Teams arbeiten nach festgelegten Abläufen. Eine feste Objektleitung ist für Ihr Objekt zuständig.',
-  },
-  {
-    letter: 'A',
-    title: 'Audit',
-    subtitle: 'Qualität regelmäßig prüfen',
-    description: 'Regelmäßige Kontrollen zeigen Abweichungen, bevor es zu Reklamationen kommt.',
-  },
-  {
-    letter: 'D',
-    title: 'Dokumentation',
-    subtitle: 'Nachweise zum Abrufen',
-    description: 'Wir dokumentieren Checklisten, erbrachte Leistungen und Kontrollen. Diese Nachweise können Sie bei Audits vorlegen.',
-  },
-];
 
 const industries = [
   { title: 'Industrie & Produktion', path: '/branchen/industrie-produktion', image: IMG.industrieDetail, claim: 'Im Schichtbetrieb' },
@@ -263,19 +236,19 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── ZAHLEN ──────────────────────────────────────────────────── */}
-      {STATS.length > 0 && (
+      {/* ── ZAHLEN UND BELEGE in einer dunklen Fläche ───────────────────── */}
+      {STATS.length > 0 ? (
         <section className="bg-navy text-white" aria-label="AHAD in Zahlen">
           <FactRow
             dark
             className="container-page"
             items={STATS.map((stat) => ({ value: `${stat.value}${stat.suffix}`, label: stat.label }))}
           />
+          <TrustBand embedded />
         </section>
+      ) : (
+        <TrustBand />
       )}
-
-      {/* ── BELEGBARE SIGNALE (Zertifikate, Absicherung) ─────────────── */}
-      <TrustBand />
 
       {/* ── AUFTRAGGEBER ─────────────────────────────────────────────── */}
       {CLIENT_REFERENCES.length > 0 && (
@@ -291,8 +264,6 @@ export default function Home() {
         </section>
       )}
 
-      {/* ── AKTUELLE MELDUNG ─────────────────────────────────────────── */}
-      <NewsTeaser />
 
       {/* ── LEISTUNGEN ───────────────────────────────────────────────── */}
       <section className="section-y bg-white">
@@ -356,20 +327,6 @@ export default function Home() {
             className="mt-16"
             items={moreServices.map((service) => ({ to: service.path, title: service.name, sub: service.short }))}
           />
-
-          {/* Strukturierte Anfrage für FM & Einkauf — führt in den Funnel */}
-          <div className="mt-14 bg-paper border border-line p-6 sm:p-8 flex flex-col lg:flex-row lg:items-center gap-5 lg:gap-12">
-            <div className="flex-grow">
-              <h3 className="text-xl font-bold text-navy mb-1.5">Strukturierte Anfrage für FM &amp; Einkauf</h3>
-              <p className="text-slate leading-relaxed max-w-3xl">
-                Erfassen Sie Objekt, Leistungen und Anforderungen. Daraus erstellen wir Angebot und
-                Leistungsverzeichnis und melden uns zur Terminabstimmung.
-              </p>
-            </div>
-            <ButtonLink to="/angebot" variant="dark" arrow className="flex-shrink-0 self-start lg:self-auto">
-              Kostenlose Besichtigung anfragen
-            </ButtonLink>
-          </div>
         </div>
       </section>
 
@@ -397,41 +354,6 @@ export default function Home() {
             <BeforeAfter beforeSrc={IMG.vorher} afterSrc={IMG.nachher} beforeLabel="Vorher" afterLabel="Nachher" />
             <p className="mt-3 text-caption text-ondark/80">Aufnahmen aus einem von uns betreuten Objekt.</p>
           </div>
-        </div>
-      </section>
-
-      {/* ── AHAD SYSTEM ──────────────────────────────────────────────────
-          Die vier Buchstaben der Wortmarke tragen den Abschnitt selbst:
-          vier Spalten mit Haarlinien, keine Karten, keine Icons. */}
-      <section className="section-y bg-white">
-        <div className="container-page">
-          <SectionHeading
-            eyebrow="Unser Vorgehen"
-            title="Das AHAD System"
-            lead="Die vier Buchstaben stehen für vier Schritte: Analyse, Handling, Audit, Dokumentation. So bleibt die Reinigung planbar und die Qualität überprüfbar."
-            className="max-w-3xl mb-12"
-          />
-
-          <ol className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 border-t-2 border-navy lg:divide-x divide-line">
-            {systemSteps.map((step, index) => (
-              <li
-                key={index}
-                className="py-8 border-b border-line sm:pr-8 lg:border-b-0 lg:pr-7 lg:pl-7 lg:first:pl-0"
-              >
-                <span className="block font-logo font-black text-6xl leading-none text-navy" aria-hidden>
-                  {step.letter}
-                </span>
-                <h3 className="mt-6 text-xl font-bold text-navy">{step.title}</h3>
-                <p className="mt-1 text-body-sm font-semibold text-accent">{step.subtitle}</p>
-                <p className="mt-3 text-body-sm text-slate leading-relaxed">{step.description}</p>
-              </li>
-            ))}
-          </ol>
-
-          <Link to="/ahad-system" className="text-link mt-8">
-            Das System im Detail
-            <ArrowRight size={17} aria-hidden="true" />
-          </Link>
         </div>
       </section>
 
