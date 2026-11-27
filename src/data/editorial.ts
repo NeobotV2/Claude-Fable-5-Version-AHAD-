@@ -473,7 +473,7 @@ export const EDITORIAL_ARTICLES = {
     related: ['was-kostet-gebaeudereinigung-stundensatz-preise', 'checkliste-reinigungsangebot'],
     image: '/images/ahad/karriere.webp',
     datePublished: '2026-10-18',
-    dateModified: '2026-10-18',
+    dateModified: '2026-11-27',
     sources: [
       official(
         'Zehnte Verordnung über zwingende Arbeitsbedingungen in der Gebäudereinigung (10. GebäudeArbbV)',
@@ -535,9 +535,27 @@ export const EDITORIAL_ARTICLES = {
         'https://www.deutsche-handwerks-zeitung.de/gebaeudereiniger-arbeitgeber-lehnen-13-prozent-forderung-ab-383375/',
         CHECKED_2026_10,
       ),
+      guidance(
+        'IG BAU lehnt erstes Arbeitgeberangebot in der Gebäudereinigung ab (2. Runde, 22. Oktober 2026)',
+        'IG Bauen-Agrar-Umwelt',
+        'https://igbau.de/IG-BAU-lehnt-erstes-Arbeitgeberangebot-in-der-Gebaeudereinigung-ab.html',
+        '2026-11-27',
+      ),
+      guidance(
+        'Presseinformation zur dritten Tarifrunde im Gebäudereiniger-Handwerk (3. November 2026)',
+        'Bundesinnungsverband des Gebäudereiniger-Handwerks',
+        'https://www.die-gebaeudedienstleister.de/wp-content/uploads/2026/11/261104_PM_Dritte-Tarifrunde-im-Gebaeudereiniger_Handwerk-1.pdf',
+        '2026-11-27',
+      ),
+      guidance(
+        'Gebäudereiniger: Dritte Tarifverhandlung endet ergebnislos',
+        'Deutsches Handwerksblatt',
+        'https://www.handwerksblatt.de/betriebsfuehrung/gebaeudereiniger-dritte-tarifverhandlung-endet-ergebnislos',
+        '2026-11-27',
+      ),
     ],
     orientationNote:
-      'Redaktionsstand 18. Oktober 2026: Die Werte für 2026 beruhen auf der Zehnten Verordnung über zwingende Arbeitsbedingungen in der Gebäudereinigung, die am 31. Dezember 2026 ausläuft. Ein Tarifergebnis für 2027 lag zu diesem Zeitpunkt nicht vor. Vertrags- und Haftungsfragen sind im Einzelfall rechtlich zu prüfen; der Beitrag ist keine Rechtsberatung.',
+      'Redaktionsstand 27. November 2026: Die Werte für 2026 beruhen auf der Zehnten Verordnung über zwingende Arbeitsbedingungen in der Gebäudereinigung, die am 31. Dezember 2026 ausläuft. Ein Tarifabschluss für 2027 lag zu diesem Zeitpunkt nicht vor; auch die dritte Verhandlungsrunde am 3. November 2026 endete ohne Einigung. Vertrags- und Haftungsfragen sind im Einzelfall rechtlich zu prüfen; der Beitrag ist keine Rechtsberatung.',
     reviewer: noReviewer,
   },
 } as const satisfies Record<EditorialArticleSlug, EditorialArticle>;
