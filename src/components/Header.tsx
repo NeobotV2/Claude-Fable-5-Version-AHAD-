@@ -300,6 +300,7 @@ export default function Header() {
                             </p>
                             <ButtonLink
                               to="/angebot"
+                              variant="mint"
                               arrow
                               onClick={() => setActiveDropdown(null)}
                               className="mt-auto w-full whitespace-nowrap px-3 py-2.5 text-sm"

@@ -144,3 +144,29 @@ test('Person schema is emitted only for an active reviewer', async () => {
   const expiredSchema = buildArticleSchema(expired, new Date('2026-07-13T12:00:00Z'));
   assert.equal('reviewedBy' in expiredSchema, false);
 });
+
+test('a change log starts with the article\'s modification date and runs newest first', async () => {
+  const { EDITORIAL_ARTICLES, EDITORIAL_SECTIONS } = await editorialModule;
+  const articles = Object.values(EDITORIAL_ARTICLES) as Array<{
+    slug: string;
+    datePublished: string;
+    dateModified: string;
+    changeLog?: Array<{ date: string; text: string; sectionId?: string }>;
+  }>;
+  const withLog = articles.filter((article) => article.changeLog);
+  assert.ok(withLog.some((article) => article.slug === 'mindestlohn-gebaeudereinigung'));
+
+  for (const article of withLog) {
+    const log = article.changeLog ?? [];
+    // Wer den Stand ändert, muss auch den Kasten „Letzte Änderungen“ ergänzen.
+    assert.equal(log[0].date, article.dateModified, article.slug);
+    assert.equal(log[log.length - 1].date, article.datePublished, article.slug);
+    assert.deepEqual(log.map((entry) => entry.date), [...log.map((entry) => entry.date)].sort().reverse(), article.slug);
+    assert.equal(new Set(log.map((entry) => entry.date)).size, log.length, article.slug);
+    const sectionIds = (EDITORIAL_SECTIONS[article.slug] as Array<{ id: string }>).map((section) => section.id);
+    for (const entry of log) {
+      assert.ok(entry.text.length >= 30, article.slug);
+      if (entry.sectionId) assert.ok(sectionIds.includes(entry.sectionId), `${article.slug}: ${entry.sectionId}`);
+    }
+  }
+});

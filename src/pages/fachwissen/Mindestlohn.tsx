@@ -7,6 +7,8 @@ import CTABand from '@/components/CTABand';
 import ButtonLink from '@/components/ui/Button';
 import ArticleMeta from '@/components/ArticleMeta';
 import ArticleFooter from '@/components/ArticleFooter';
+import ArticleChangeLog from '@/components/ArticleChangeLog';
+import { languages } from '@/constants/funnelLanguages';
 import { buildArticleSchema, EDITORIAL_ARTICLES } from '@/data/editorial';
 import { IMG } from '@/lib/images';
 
@@ -86,6 +88,8 @@ export default function FachwissenMindestlohn() {
       <section className="bg-white section-y">
         <div className="mx-auto max-w-4xl px-4 sm:px-8">
           <div className="prose prose-lg max-w-none leading-relaxed text-slate">
+            <ArticleChangeLog slug={SLUG} />
+
             <h2 id="branchenmindestlohn-2026" className="scroll-mt-28 font-headline text-2xl font-bold text-navy sm:text-3xl">
               Branchenmindestlohn 2026: Lohngruppe 1 und 6
             </h2>
@@ -137,11 +141,32 @@ export default function FachwissenMindestlohn() {
             </p>
 
             {/* Viele Leser dieses Beitrags arbeiten selbst in der Reinigung: Stellenhinweis direkt nach den Lohnwerten. */}
-            <aside className="not-prose my-10 bg-navy text-white p-6 sm:p-8 flex flex-col sm:flex-row sm:items-center gap-5 sm:gap-10" aria-label="Stellen bei AHAD">
+            <aside
+              className="not-prose my-10 bg-navy text-white p-6 sm:p-8 flex flex-col sm:flex-row sm:items-center gap-5 sm:gap-10"
+              aria-label="Stellen bei AHAD"
+              data-cta="article-jobs"
+            >
               <div className="flex-grow">
                 <p className="text-xl font-bold">Sie arbeiten in der Gebäudereinigung oder möchten einsteigen?</p>
                 <p className="mt-2 text-ondark leading-relaxed">
                   AHAD stellt ein: fest angestellt und sozialversichert, in festen Teams.
+                </p>
+                {/* Viele Leser lesen Deutsch nicht als erste Sprache: Sprachnamen in eigener Schrift, damit sie den Weg erkennen. */}
+                <p className="mt-4 text-body-sm leading-relaxed text-ondark">
+                  <Link
+                    to="/karriere/bewerbung"
+                    className="inline-block py-1.5 font-semibold text-mint underline decoration-2 underline-offset-4 hover:text-white"
+                  >
+                    Direkt bewerben in {languages.length} Sprachen, ohne Lebenslauf
+                  </Link>
+                  <span className="block">
+                    {languages.map((language, index) => (
+                      <span key={language.id}>
+                        {index > 0 && ' · '}
+                        <bdi lang={language.id}>{language.label}</bdi>
+                      </span>
+                    ))}
+                  </span>
                 </p>
               </div>
               <ButtonLink to="/karriere" variant="white" arrow className="flex-shrink-0 self-start sm:self-auto">
@@ -263,7 +288,7 @@ export default function FachwissenMindestlohn() {
               </Link>
             </p>
 
-            <aside className="not-prose my-8 border-l-2 border-accent pl-5 sm:pl-6" aria-label="Angebot für Auftraggeber">
+            <aside className="not-prose my-8 border-l-2 border-accent pl-5 sm:pl-6" aria-label="Angebot für Auftraggeber" data-cta="article-offer">
               <p className="text-lead font-semibold text-navy">
                 Sie möchten wissen, was die Lohnänderung für Ihr Objekt bedeutet?
               </p>

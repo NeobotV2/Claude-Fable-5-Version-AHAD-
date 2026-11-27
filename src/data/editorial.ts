@@ -58,6 +58,18 @@ export interface EditorialArticle {
   /** Redaktionelle Einordnung für veränderliche Werte und Einzelfallfragen. */
   orientationNote: string;
   reviewer: EditorialReviewer | null;
+  /**
+   * Datierte Änderungen, neueste zuerst. Nur für Beiträge mit laufendem Stand
+   * (z. B. Tarifrunde): Der erste Eintrag trägt immer das Datum von `dateModified`.
+   */
+  changeLog?: readonly EditorialChange[];
+}
+
+export interface EditorialChange {
+  date: string;
+  text: string;
+  /** Abschnitt im Beitrag, in dem die Änderung steht. */
+  sectionId?: string;
 }
 
 const official = (
@@ -474,6 +486,17 @@ export const EDITORIAL_ARTICLES = {
     image: '/images/ahad/karriere.webp',
     datePublished: '2026-10-18',
     dateModified: '2026-11-27',
+    changeLog: [
+      {
+        date: '2026-11-27',
+        text: 'Zweite und dritte Verhandlungsrunde ergänzt (22.\u00a0Oktober und 3.\u00a0November 2026, beide ohne Einigung). Neu ist das Angebot der Arbeitgeber: 15,30\u00a0Euro in Lohngruppe\u00a01 ab Mai 2027.',
+        sectionId: 'tarifrunde-2027',
+      },
+      {
+        date: '2026-10-18',
+        text: 'Beitrag veröffentlicht, mit dem Stand nach der ersten Verhandlungsrunde vom 9.\u00a0September 2026.',
+      },
+    ],
     sources: [
       official(
         'Zehnte Verordnung über zwingende Arbeitsbedingungen in der Gebäudereinigung (10. GebäudeArbbV)',

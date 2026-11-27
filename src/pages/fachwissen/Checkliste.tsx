@@ -274,7 +274,7 @@ export default function FachwissenCheckliste() {
               </Link>
               .
             </p>
-            <ButtonLink to="/angebot" size="lg" arrow>
+            <ButtonLink to="/angebot" variant="mint" size="lg" arrow>
               Kostenlose Besichtigung anfragen
             </ButtonLink>
           </div>

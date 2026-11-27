@@ -3,7 +3,7 @@ import { ArrowRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import type { ReactNode } from 'react';
 
-type Variant = 'primary' | 'dark' | 'white' | 'outline' | 'outline-light' | 'ghost';
+type Variant = 'primary' | 'mint' | 'dark' | 'white' | 'outline' | 'outline-light' | 'ghost';
 type Size = 'md' | 'lg';
 
 interface ButtonLinkProps {
@@ -25,6 +25,8 @@ const base =
 
 const variants: Record<Variant, string> = {
   primary: 'bg-accent text-white hover:bg-accent-dark focus-visible:ring-accent/40',
+  // Auf dunklem Grund (Navy, Foto): Mint statt dunklem Grün, damit dort nur ein Grünton steht.
+  mint: 'bg-mint text-navy hover:bg-white focus-visible:ring-mint/50',
   dark: 'bg-navy text-white hover:bg-navy-800 focus-visible:ring-navy/30',
   white: 'bg-white text-navy hover:bg-mint focus-visible:ring-white/40',
   outline:

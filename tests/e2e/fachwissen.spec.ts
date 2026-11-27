@@ -75,3 +75,37 @@ test('Fachwissen and every guide have no page-level overflow at 320px', async ({
     expect(overflow, path).toBeLessThanOrEqual(1);
   }
 });
+
+test('the wage article shows dated changes and counts clicks on its job and offer notices', async ({ page }) => {
+  const path = '/fachwissen/mindestlohn-gebaeudereinigung';
+  await page.goto(path, { waitUntil: 'networkidle' });
+
+  const changes = page.locator('section[aria-labelledby$="-aenderungen"]');
+  await expect(changes.getByRole('heading', { level: 2, name: 'Letzte Änderungen' })).toBeVisible();
+  const dates = await changes.locator('time').evaluateAll((nodes) => nodes.map((node) => node.getAttribute('datetime')));
+  expect(dates.length).toBeGreaterThanOrEqual(2);
+  expect(dates).toEqual([...dates].sort().reverse());
+  // Der neueste Eintrag trägt das Änderungsdatum, das auch Suchmaschinen sehen.
+  const schema = await page.locator('script[type="application/ld+json"]').allTextContents();
+  expect(schema.join('')).toContain(`"dateModified":"${dates[0]}`);
+
+  const jobs = page.locator('aside[data-cta="article-jobs"]');
+  await expect(jobs.locator('a[href="/karriere/bewerbung"]')).toContainText('11 Sprachen');
+  await expect(jobs.locator('bdi[lang="tr"]')).toHaveText('Türkçe');
+
+  const clicks = () =>
+    page.evaluate(() =>
+      ((window as unknown as { vaq?: [string, { name: string; data: Record<string, string> }][] }).vaq ?? [])
+        .filter((entry) => entry[0] === 'event' && entry[1].name.endsWith('CTA Click'))
+        .map((entry) => `${entry[1].name}|${entry[1].data.placement}`),
+    );
+  for (const [selector, expected] of [
+    ['aside[data-cta="article-jobs"] a[href="/karriere"]', 'Career CTA Click|article-jobs'],
+    ['aside[data-cta="article-jobs"] a[href="/karriere/bewerbung"]', 'Application CTA Click|article-jobs'],
+    ['aside[data-cta="article-offer"] a[href="/angebot"]', 'Offer CTA Click|article-offer'],
+  ] as const) {
+    await page.goto(path, { waitUntil: 'networkidle' });
+    await page.locator(selector).click();
+    await expect.poll(clicks).toContain(expected);
+  }
+});
