@@ -183,7 +183,7 @@ export default function Home() {
               </p>
 
               <div className="mt-7 sm:mt-9 flex flex-wrap items-center gap-x-8 gap-y-4">
-                <ButtonLink to="/angebot" size="lg" arrow className="w-full sm:w-auto sm:whitespace-nowrap">
+                <ButtonLink to="/angebot" variant="mint" size="lg" arrow className="w-full sm:w-auto sm:whitespace-nowrap">
                   Kostenlose Besichtigung anfragen
                 </ButtonLink>
                 <Link to="/ahad-system" className="text-link">
