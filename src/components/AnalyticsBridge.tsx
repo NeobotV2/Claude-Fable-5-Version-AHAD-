@@ -41,6 +41,10 @@ export default function AnalyticsBridge() {
       if (!(anchor instanceof HTMLAnchorElement)) return;
       const href = anchor.getAttribute('href') || '';
       const path = destinationPath(anchor);
+      // Benannte Stelle (data-cta am Link oder einem umgebenden Element): zeigt,
+      // welcher Hinweis auf einer Seite geklickt wurde, nicht nur dass geklickt wurde.
+      const placement = anchor.closest<HTMLElement>('[data-cta]')?.dataset.cta;
+      const where = { path: location.pathname, ...(placement ? { placement } : {}) };
 
       if (href.startsWith('tel:')) {
         trackEvent('Phone Click', { path: location.pathname });
@@ -50,9 +54,12 @@ export default function AnalyticsBridge() {
         trackEvent('WhatsApp Click', { path: location.pathname });
       } else if (path === '/angebot') {
         rememberAttribution(window.location.href);
-        trackEvent('Offer CTA Click', { path: location.pathname });
+        trackEvent('Offer CTA Click', where);
       } else if (path === '/karriere/bewerbung') {
-        trackEvent('Application CTA Click', { path: location.pathname });
+        trackEvent('Application CTA Click', where);
+      } else if (path === '/karriere' && placement) {
+        // Nur benannte Hinweise zählen, nicht jeder Klick auf „Karriere“ im Menü.
+        trackEvent('Career CTA Click', where);
       }
     };
     document.addEventListener('click', onClick, true);
