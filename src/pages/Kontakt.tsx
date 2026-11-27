@@ -1,49 +1,40 @@
-import { Phone, Mail, MapPin, Clock, FileText, ChevronRight, MessageCircle } from 'lucide-react';
-import { Link } from 'react-router-dom';
 import SEO from '@/components/SEO';
 import PageHero from '@/components/PageHero';
-import Reveal from '@/components/ui/Reveal';
 import ContactForm from '@/components/ContactForm';
-import { SITE, WHATSAPP_HREF } from '@/lib/site';
+import ButtonLink from '@/components/ui/Button';
+import { HQ_LOCAL_BUSINESS_SCHEMA, SITE, WHATSAPP_HREF } from '@/lib/site';
+
+const channelLink = 'inline-block py-2.5 -my-2.5 font-semibold text-accent hover:text-accent-dark hover:underline underline-offset-4';
 
 const contactChannels = [
   {
-    icon: <Phone size={22} />,
     title: 'Telefon',
     content: (
-      <a href={SITE.phoneHref} className="text-brand hover:text-brand-light font-bold text-lg transition-colors">
+      <a href={SITE.phoneHref} className={`${channelLink} font-accent text-xl`}>
         {SITE.phone}
       </a>
     ),
     hint: SITE.hours,
   },
   {
-    icon: <MessageCircle size={22} />,
     title: 'WhatsApp',
     content: (
-      <a
-        href={WHATSAPP_HREF}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="text-brand hover:text-brand-light font-bold transition-colors"
-      >
+      <a href={WHATSAPP_HREF} target="_blank" rel="noopener noreferrer" className={channelLink}>
         Direkt schreiben
       </a>
     ),
     hint: 'Schnelle Rückfrage ohne Formular',
   },
   {
-    icon: <Mail size={22} />,
     title: 'E-Mail',
     content: (
-      <a href={SITE.emailHref} className="text-brand hover:text-brand-light font-bold break-all transition-colors">
+      <a href={SITE.emailHref} className={`${channelLink} break-all`}>
         {SITE.email}
       </a>
     ),
     hint: 'Wir antworten persönlich, ohne Ticketsystem',
   },
   {
-    icon: <MapPin size={22} />,
     title: 'Zentrale',
     content: (
       <span className="text-navy font-semibold">
@@ -63,6 +54,7 @@ export default function Kontakt() {
         title="Kontakt: Angebot & Beratung | AHAD Cleaning"
         description="Kontaktieren Sie AHAD Cleaning für eine unverbindliche Anfrage oder Objektbesichtigung. Wir klären Bedarf, Termin und Angebot persönlich."
         keywords="Kontakt Gebäudereinigung, Angebot anfordern Reinigung, AHAD Cleaning Kontakt"
+        schema={HQ_LOCAL_BUSINESS_SCHEMA ?? undefined}
       />
 
       <PageHero
@@ -72,78 +64,56 @@ export default function Kontakt() {
         lead="Ob unverbindliche Anfrage, Objektbesichtigung oder eine kurze Fachfrage: Wir klären den Bedarf persönlich und vereinbaren die nächsten Schritte."
         crumbs={[{ label: 'Kontakt' }]}
       >
-        <div className="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-3xl">
+        <ol className="mt-10 pt-6 border-t border-line grid grid-cols-1 sm:grid-cols-3 gap-x-8 gap-y-3 max-w-3xl">
           {[
             { value: '1', label: 'Anfrage per Formular, Telefon oder E-Mail' },
-            { value: '2', label: 'Besichtigung in der Regel binnen 48 h' },
+            { value: '2', label: 'Besichtigung in der Regel binnen 48 h' },
             { value: '3', label: 'Angebot im Anschluss' },
           ].map((promise) => (
-            <div key={promise.label} className="flex items-center gap-3">
-              <span className="font-accent text-3xl font-bold text-mint">{promise.value}</span>
-              <span className="text-[13px] font-semibold text-blue-100/80 leading-snug">{promise.label}</span>
-            </div>
+            <li key={promise.label} className="flex items-baseline gap-3">
+              <span className="font-accent text-xl font-semibold text-accent" aria-hidden="true">
+                {promise.value}
+              </span>
+              <span className="text-body-sm text-slate leading-snug">{promise.label}</span>
+            </li>
           ))}
-        </div>
+        </ol>
       </PageHero>
 
-      <section className="py-20 lg:py-28 bg-paper">
-        <div className="max-w-7xl mx-auto px-4 sm:px-8 grid grid-cols-1 lg:grid-cols-12 gap-12">
+      <section className="section-y bg-white">
+        <div className="container-page grid grid-cols-1 lg:grid-cols-12 gap-x-14 gap-y-12">
           {/* Formular */}
           <div className="lg:col-span-7">
-            <Reveal>
-              <h2 className="display-md text-navy mb-3">Nachricht schreiben</h2>
-              <p className="text-slate text-lg mb-8">
-                Füllen Sie das Formular aus. Wir melden uns persönlich bei Ihnen.
-              </p>
-            </Reveal>
-            <Reveal delay={0.1}>
-              <ContactForm />
-            </Reveal>
+            <h2 className="display-md text-navy mb-3">Nachricht schreiben</h2>
+            <p className="text-slate text-lg mb-8">Füllen Sie das Formular aus. Wir melden uns persönlich bei Ihnen.</p>
+            <ContactForm />
           </div>
 
-          {/* Direktkanäle */}
-          <div className="lg:col-span-5 space-y-6">
-            <Reveal delay={0.15}>
-              <div className="relative bg-navy text-white p-8 lg:p-10 rounded-3xl shadow-lifted overflow-hidden grain">
-                <div className="absolute inset-0 blueprint-grid" />
-                <div className="absolute top-0 right-0 p-6 opacity-10">
-                  <FileText size={110} />
+          {/* Direkte Wege */}
+          <div className="lg:col-span-5">
+            <h2 className="pb-4 border-b border-navy font-semibold text-navy">Direkt erreichen</h2>
+            <dl>
+              {contactChannels.map((channel) => (
+                <div key={channel.title} className="grid grid-cols-[6.5rem_1fr] gap-x-4 py-4 border-b border-line">
+                  <dt className="text-body-sm text-slate pt-0.5">{channel.title}</dt>
+                  <dd className="min-w-0">
+                    {channel.content}
+                    <p className="text-caption text-slate mt-1">{channel.hint}</p>
+                  </dd>
                 </div>
-                <div className="relative z-10">
-                  <span className="eyebrow text-mint mb-4">Online-Anfrage</span>
-                  <h3 className="font-headline text-2xl font-bold mb-3">Digitale Objektaufnahme</h3>
-                  <p className="text-blue-100/85 mb-7 leading-relaxed">
-                    In vier Schritten erfassen Sie die wichtigsten Daten zu Ihrem Objekt. Damit bereiten wir die
-                    Besichtigung und das Angebot vor.
-                  </p>
-                  <Link
-                    to="/angebot"
-                    className="inline-flex items-center gap-2 bg-accent text-white px-6 py-3.5 rounded-xl font-bold hover:bg-accent-dark transition-all shadow-glow hover:-translate-y-0.5"
-                  >
-                    Besichtigung anfragen <ChevronRight size={18} />
-                  </Link>
-                </div>
-              </div>
-            </Reveal>
-
-            <div className="space-y-4">
-              {contactChannels.map((channel, i) => (
-                <Reveal key={channel.title} delay={0.2 + i * 0.07}>
-                  <div className="bg-white p-6 rounded-2xl flex items-start gap-4 border border-line shadow-soft">
-                    <div className="w-12 h-12 bg-brand/8 text-brand rounded-xl grid place-items-center shrink-0">
-                      {channel.icon}
-                    </div>
-                    <div className="min-w-0">
-                      <h4 className="font-bold text-navy text-sm mb-1">{channel.title}</h4>
-                      {channel.content}
-                      <p className="text-xs text-slate/80 mt-1 flex items-center gap-1.5">
-                        <Clock size={11} />
-                        {channel.hint}
-                      </p>
-                    </div>
-                  </div>
-                </Reveal>
               ))}
+            </dl>
+
+            <div className="mt-10 bg-navy text-white p-6 sm:p-8">
+              <p className="eyebrow text-mint mb-2">Online-Anfrage</p>
+              <h3 className="text-xl font-bold mb-2.5">Digitale Objektaufnahme</h3>
+              <p className="text-ondark mb-6 leading-relaxed">
+                In vier Schritten erfassen Sie die wichtigsten Daten zu Ihrem Objekt. Damit bereiten wir die
+                Besichtigung und das Angebot vor.
+              </p>
+              <ButtonLink to="/angebot" variant="white" arrow>
+                Kostenlose Besichtigung anfragen
+              </ButtonLink>
             </div>
           </div>
         </div>

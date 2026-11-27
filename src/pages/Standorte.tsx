@@ -1,8 +1,7 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight, MapPin, Phone, Clock } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import SEO from '@/components/SEO';
 import PageHero from '@/components/PageHero';
-import Reveal from '@/components/ui/Reveal';
 import SectionHeading from '@/components/ui/SectionHeading';
 import SmartImage from '@/components/ui/SmartImage';
 import CTABand from '@/components/CTABand';
@@ -72,108 +71,88 @@ export default function Standorte() {
         secondaryCta={{ label: SITE.phone, href: SITE.phoneHref }}
       />
 
-      {/* Regions-Karten */}
-      <section className="py-20 lg:py-32 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {regionen.map((standort, i) => (
-              <Reveal key={standort.name} delay={i * 0.1} className="h-full">
-                <Link
-                  to={standort.path}
-                  className="group flex flex-col h-full bg-paper rounded-3xl border border-line overflow-hidden card-lift"
-                >
-                  <div className="relative">
-                    <SmartImage
-                      src={standort.image}
-                      alt={`AHAD Cleaning Einsatzgebiet ${standort.name}`}
-                      className="aspect-[16/10]"
-                      imgClassName="transition-transform duration-700 group-hover:scale-105"
-                    />
-                    <span className="absolute top-4 left-4 bg-navy/80 backdrop-blur text-mint text-[10px] font-black uppercase tracking-[0.18em] px-3 py-1.5 rounded-full">
-                      {standort.badge}
-                    </span>
-                  </div>
-                  <div className="flex flex-col flex-grow p-7">
-                    <div className="flex items-center gap-2 text-[12px] font-bold text-brand uppercase tracking-wider mb-2">
-                      <MapPin size={13} />
-                      {standort.region}
-                    </div>
-                    <h2 className="font-headline text-2xl font-bold text-navy mb-3">{standort.name}</h2>
-                    <p className="text-sm text-slate leading-relaxed flex-grow">{standort.description}</p>
-                    <span className="mt-6 inline-flex items-center gap-2 text-sm font-bold text-brand group-hover:text-brand-light transition-colors">
-                      Einsatzgebiet ansehen
-                      <ArrowRight size={15} className="transition-transform group-hover:translate-x-1" />
-                    </span>
-                  </div>
-                </Link>
-              </Reveal>
-            ))}
-          </div>
+      {/* Regionen: Foto, Name, Kurzbeschreibung */}
+      <section className="section-y bg-white">
+        <div className="container-page grid grid-cols-1 md:grid-cols-3 gap-x-8 gap-y-12">
+          {regionen.map((standort) => (
+            <Link key={standort.name} to={standort.path} className="group block">
+              <figure className="relative">
+                <SmartImage
+                  src={standort.image}
+                  alt={`AHAD Cleaning Einsatzgebiet ${standort.name}`}
+                  sizes="(min-width:768px) 33vw, 100vw"
+                  className="aspect-[3/2]"
+                />
+                <figcaption className="absolute left-0 bottom-0 bg-navy text-white text-caption font-medium px-3 py-1.5">
+                  {standort.badge}
+                </figcaption>
+              </figure>
+              <p className="mt-5 text-sm font-semibold text-accent">{standort.region}</p>
+              <h2 className="mt-1 text-2xl font-bold text-navy group-hover:text-accent transition-colors">
+                {standort.name}
+              </h2>
+              <p className="mt-2 text-slate leading-relaxed">{standort.description}</p>
+              <span className="text-link mt-4 text-body-sm">
+                Einsatzgebiet ansehen
+                <ArrowRight size={15} aria-hidden="true" />
+              </span>
+            </Link>
+          ))}
         </div>
       </section>
 
       {/* Einzugsgebiet + Kontakt */}
-      <section className="py-20 lg:py-28 bg-paper border-t border-line">
-        <div className="max-w-7xl mx-auto px-4 sm:px-8 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-          <div>
+      <section className="section-y bg-paper border-t border-line">
+        <div className="container-page grid grid-cols-1 lg:grid-cols-12 gap-x-14 gap-y-12">
+          <div className="lg:col-span-7">
             <SectionHeading
               eyebrow="Einzugsgebiet"
               title="Im Einsatz in Süddeutschland."
               lead="Auch außerhalb der genannten Gebiete prüfen wir Anfragen. Betreut wird jedes Objekt von unserem Sitz in Villingen-Schwenningen aus."
             />
-            <Reveal delay={0.15}>
-              <div className="mt-8 flex flex-wrap gap-2.5">
-                {einzugsgebiete.map((stadt) =>
-                  ORTSSEITEN[stadt] ? (
-                    <Link
-                      key={stadt}
-                      to={ORTSSEITEN[stadt]}
-                      className="text-[13px] font-semibold bg-white border border-accent/40 px-4 py-2 rounded-full text-navy underline decoration-accent/50 underline-offset-2 hover:border-accent"
-                    >
+            {/* Orte mit eigener Seite sind verlinkt, die übrigen stehen als Text. */}
+            <p className="mt-8 text-lg font-medium text-navy leading-loose">
+              {einzugsgebiete.map((stadt, i) => (
+                <span key={stadt}>
+                  {i > 0 && ' · '}
+                  {ORTSSEITEN[stadt] ? (
+                    <Link to={ORTSSEITEN[stadt]} className="text-accent underline underline-offset-4 hover:text-accent-dark">
                       {stadt}
                     </Link>
                   ) : (
-                    <span
-                      key={stadt}
-                      className="text-[13px] font-semibold bg-white border border-line px-4 py-2 rounded-full text-navy"
-                    >
-                      {stadt}
-                    </span>
-                  ),
-                )}
-                <span className="text-[13px] font-bold bg-navy text-mint px-4 py-2 rounded-full">+ Umgebung</span>
-              </div>
-            </Reveal>
+                    stadt
+                  )}
+                </span>
+              ))}{' '}
+              und Umgebung
+            </p>
           </div>
 
-          <Reveal delay={0.2}>
-            <div className="bg-navy text-white rounded-3xl p-8 lg:p-10 grain relative overflow-hidden shadow-lifted">
-              <div className="absolute inset-0 blueprint-grid" />
-              <div className="relative z-10">
-                <h3 className="font-headline text-2xl font-bold mb-6">Zentrale Villingen-Schwenningen</h3>
-                <ul className="space-y-4 text-blue-100/85">
-                  <li className="flex gap-3">
-                    <MapPin className="w-5 h-5 text-mint flex-shrink-0 mt-0.5" />
-                    <span>
-                      {SITE.address.street}
-                      <br />
-                      {SITE.address.zip} {SITE.address.city}
-                    </span>
-                  </li>
-                  <li className="flex gap-3 items-center">
-                    <Phone className="w-5 h-5 text-mint flex-shrink-0" />
-                    <a href={SITE.phoneHref} className="font-bold text-white hover:text-mint transition-colors">
-                      {SITE.phone}
-                    </a>
-                  </li>
-                  <li className="flex gap-3 items-center">
-                    <Clock className="w-5 h-5 text-mint flex-shrink-0" />
-                    {SITE.hours}
-                  </li>
-                </ul>
+          <div className="lg:col-span-5">
+            <h3 className="pb-4 border-b border-navy font-semibold text-navy">Zentrale Villingen-Schwenningen</h3>
+            <dl>
+              <div className="grid grid-cols-[6.5rem_1fr] gap-x-4 py-3.5 border-b border-line">
+                <dt className="text-body-sm text-slate">Adresse</dt>
+                <dd className="font-medium text-navy">
+                  {SITE.address.street}
+                  <br />
+                  {SITE.address.zip} {SITE.address.city}
+                </dd>
               </div>
-            </div>
-          </Reveal>
+              <div className="grid grid-cols-[6.5rem_1fr] gap-x-4 py-3.5 border-b border-line">
+                <dt className="text-body-sm text-slate">Telefon</dt>
+                <dd>
+                  <a href={SITE.phoneHref} className="inline-block py-2.5 -my-2.5 font-semibold text-accent hover:underline underline-offset-4">
+                    {SITE.phone}
+                  </a>
+                </dd>
+              </div>
+              <div className="grid grid-cols-[6.5rem_1fr] gap-x-4 py-3.5 border-b border-line">
+                <dt className="text-body-sm text-slate">Bürozeiten</dt>
+                <dd className="font-medium text-navy">{SITE.hours}</dd>
+              </div>
+            </dl>
+          </div>
         </div>
       </section>
 

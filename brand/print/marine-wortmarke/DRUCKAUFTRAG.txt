@@ -1,0 +1,17 @@
+AHAD Cleaning – Druck-/Stickauftrag Arbeitskleidung (Marine)
+
+Motiv:      AHAD Wortmarke, zweifarbig
+Farben:     „AHAD“ Weiß #FFFFFF  ·  „CLEANING“ Mint #9CDDB7
+            (Garn-/Druckfarbe bitte anhand des HEX-Werts bestimmen und bemustern)
+Untergrund: marineblaue Kleidung, Hintergrund der Dateien ist transparent
+
+Vorne – Brust links:  10 cm breit (2,9 cm hoch)
+  ahad-wortmarke-weiss-mint-brust-10cm.pdf  (Vektor, exakt 100 × 29 mm)
+  ahad-wortmarke-weiss-mint-brust-10cm.png  (300 dpi)
+
+Hinten – Rücken:      28 cm breit (8,1 cm hoch), mittig, ca. 8–10 cm unter dem Kragen
+  ahad-wortmarke-weiss-mint-ruecken-28cm.pdf  (Vektor, exakt 280 × 81 mm)
+  ahad-wortmarke-weiss-mint-ruecken-28cm.png  (300 dpi)
+
+Für Stick, Siebdruck und Flex bitte die PDF- oder SVG-Datei verwenden
+(ahad-wortmarke-weiss-mint.svg, frei skalierbar).

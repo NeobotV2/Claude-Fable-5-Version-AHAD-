@@ -86,9 +86,9 @@ export default function FachwissenLeistungsverzeichnis() {
       />
 
       {/* Auf einen Blick */}
-      <section className="border-b border-line bg-white py-12 lg:py-14">
+      <section className="border-b border-line bg-white section-y-sm">
         <div className="mx-auto max-w-7xl px-4 sm:px-8">
-          <h2 className="mb-8 text-center text-2xl font-black text-navy">Drei Grundregeln für das Leistungsverzeichnis</h2>
+          <h2 className="mb-8 text-center text-2xl font-bold text-navy">Drei Grundregeln für das Leistungsverzeichnis</h2>
           <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
             <div className="rounded-2xl border border-line bg-paper p-6">
               <FileText className="mb-4 h-8 w-8 text-brand" aria-hidden="true" />
@@ -121,10 +121,10 @@ export default function FachwissenLeistungsverzeichnis() {
       <ArticleMeta slug="leistungsverzeichnis-gebaeudereinigung-erstellen" />
 
       {/* Content */}
-      <section className="bg-white py-16 lg:py-24">
+      <section className="bg-white section-y">
         <div className="mx-auto max-w-3xl px-4 sm:px-8">
           <div className="prose prose-lg max-w-none leading-relaxed text-slate">
-            <h2 id="lv-grundlagen" className="scroll-mt-28 text-2xl font-black text-navy sm:text-3xl">Welche Funktion ein Leistungsverzeichnis erfüllt</h2>
+            <h2 id="lv-grundlagen" className="scroll-mt-28 text-2xl font-bold text-navy sm:text-3xl">Welche Funktion ein Leistungsverzeichnis erfüllt</h2>
             <p className="mb-8">
               Konflikte entstehen häufig durch <strong>unklare Erwartungen</strong>. Das Leistungsverzeichnis übersetzt
               den Bedarf in konkrete Raumgruppen, Flächen, Tätigkeiten, Turnusse oder Auslöser und Qualitätsziele. Als
@@ -138,7 +138,7 @@ export default function FachwissenLeistungsverzeichnis() {
             </p>
 
             <div
-              className="mb-12 overflow-x-auto rounded-2xl border border-line shadow-soft"
+              className="mb-12 overflow-x-auto rounded-2xl border border-line"
               role="region"
               aria-label="Musterzeile für ein Leistungsverzeichnis"
               tabIndex={0}
@@ -158,7 +158,7 @@ export default function FachwissenLeistungsverzeichnis() {
                 <tbody>
                   <tr>
                     <th scope="row" className="px-4 py-3 align-top font-semibold text-navy">
-                      Büro 1. OG · 420 m² Teppich
+                      Büro 1. OG · 420 m² Teppich
                     </th>
                     <td className="px-4 py-3 align-top">Freie Bodenflächen saugen; erreichbare Randzonen einbeziehen</td>
                     <td className="px-4 py-3 align-top">Mo., Mi. und Fr.; Zusatzleistung nach dokumentiertem Ereignis</td>
@@ -172,13 +172,13 @@ export default function FachwissenLeistungsverzeichnis() {
               Objekt; Zugänglichkeit, Ausschlüsse und Messverfahren sind bei Bedarf zu ergänzen.
             </p>
 
-            <h2 id="leistungsmodelle" className="scroll-mt-28 text-2xl font-black text-navy sm:text-3xl">Verrichtungs- oder ergebnisorientiert?</h2>
+            <h2 id="leistungsmodelle" className="scroll-mt-28 text-2xl font-bold text-navy sm:text-3xl">Verrichtungs- oder ergebnisorientiert?</h2>
             <p className="mb-6">
               Ein LV lässt sich nach zwei Logiken aufbauen. Die Wahl bestimmt, wie viel Spielraum der Dienstleister
               hat und wie Sie die Qualität messen.
             </p>
             <div
-              className="mb-12 overflow-x-auto rounded-2xl border border-line shadow-soft"
+              className="mb-12 overflow-x-auto rounded-2xl border border-line"
               role="region"
               aria-label="Vergleich von verrichtungs- und ergebnisorientiertem Leistungsmodell"
               tabIndex={0}
@@ -231,7 +231,7 @@ export default function FachwissenLeistungsverzeichnis() {
               im konkreten Objekt.
             </p>
 
-            <h2 id="lv-bestandteile" className="scroll-mt-28 text-2xl font-black text-navy sm:text-3xl">LV, Service-Level, Konditionen und Nachweise trennen</h2>
+            <h2 id="lv-bestandteile" className="scroll-mt-28 text-2xl font-bold text-navy sm:text-3xl">LV, Service-Level, Konditionen und Nachweise trennen</h2>
             <p className="mb-6">
               Nicht jede Vertragsanforderung gehört in dieselbe Tabelle. Die Trennung verhindert, dass eine
               fachliche Leistungsänderung unbemerkt kaufmännische oder organisatorische Folgen auslöst. Die konkrete
@@ -239,7 +239,7 @@ export default function FachwissenLeistungsverzeichnis() {
               Ausgangsbasis:
             </p>
             <div
-              className="mb-12 overflow-x-auto rounded-2xl border border-line shadow-soft"
+              className="mb-12 overflow-x-auto rounded-2xl border border-line"
               role="region"
               aria-label="Abgrenzung der Vertragsbausteine"
               tabIndex={0}
@@ -278,7 +278,7 @@ export default function FachwissenLeistungsverzeichnis() {
               </table>
             </div>
 
-            <h2 id="lv-erstellen" className="scroll-mt-28 text-2xl font-black text-navy sm:text-3xl">Schritt für Schritt zum eigenen Leistungsverzeichnis</h2>
+            <h2 id="lv-erstellen" className="scroll-mt-28 text-2xl font-bold text-navy sm:text-3xl">Schritt für Schritt zum eigenen Leistungsverzeichnis</h2>
             <ul className="space-y-4 mb-12 list-none pl-0">
               {[
                 'Objekt begehen und Flächen aufmessen: Räume nach Nutzungsart gliedern und in m² erfassen.',
@@ -299,7 +299,7 @@ export default function FachwissenLeistungsverzeichnis() {
               ))}
             </ul>
 
-            <div className="mb-12 rounded-3xl border border-line bg-paper p-6 shadow-soft sm:p-8">
+            <div className="mb-12 rounded-3xl border border-line bg-paper p-6 sm:p-8">
               <h3 className="mb-4 flex items-center gap-3 text-xl font-bold text-navy">
                 <AlertTriangle className="h-7 w-7 text-brand" aria-hidden="true" />
                 Häufige Fehler im Leistungsverzeichnis
@@ -326,7 +326,7 @@ export default function FachwissenLeistungsverzeichnis() {
               </ul>
             </div>
 
-            <h2 className="text-2xl font-black text-navy sm:text-3xl">Ausschreibungsstand und Änderungen dokumentieren</h2>
+            <h2 className="text-2xl font-bold text-navy sm:text-3xl">Ausschreibungsstand und Änderungen dokumentieren</h2>
             <p className="mb-8">
               Versehen Sie Unterlagen mit Version und Datum, führen Sie Bieterfragen zentral und geben Sie Klarstellungen
               allen Beteiligten in gleicher Form weiter. Änderungen an Fläche, Turnus oder Qualitätsziel sollten mit der
@@ -334,7 +334,7 @@ export default function FachwissenLeistungsverzeichnis() {
               Dadurch bleibt erkennbar, auf welchem Stand ein Angebot beruht.
             </p>
 
-            <h2 className="text-2xl font-black text-navy sm:text-3xl">Fazit</h2>
+            <h2 className="text-2xl font-bold text-navy sm:text-3xl">Fazit</h2>
             <p className="mb-8">
               Ein objektbezogenes LV verbessert die fachliche Vergleichbarkeit, wenn Fläche, Tätigkeit, Auslösung und
               Qualitätsziel eindeutig verbunden sind. Service-Level, kaufmännische Regeln und Nachweise bleiben als
@@ -346,11 +346,11 @@ export default function FachwissenLeistungsverzeichnis() {
       </section>
 
       {/* FAQ */}
-      <section className="bg-paper py-16 lg:py-24">
+      <section className="bg-paper section-y">
         <div className="mx-auto max-w-4xl px-4 sm:px-8">
           <div className="mb-12 text-center">
-            <span className="mb-4 block text-sm font-bold uppercase tracking-wider text-brand">Häufige Fragen</span>
-            <h2 className="text-2xl font-black tracking-tight text-navy sm:text-3xl lg:text-4xl">FAQs zum Leistungsverzeichnis</h2>
+            <span className="mb-4 block text-sm font-bold text-brand">Häufige Fragen</span>
+            <h2 className="text-2xl font-bold tracking-tight text-navy sm:text-3xl lg:text-4xl">FAQs zum Leistungsverzeichnis</h2>
           </div>
           <Accordion items={faqSchema.mainEntity.map((q) => ({ question: q.name, answer: q.acceptedAnswer.text }))} />
         </div>

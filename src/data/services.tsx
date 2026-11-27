@@ -458,7 +458,7 @@ export const SERVICES: ServiceData[] = [
       'Wir räumen und streuen Ihre Flächen und dokumentieren jeden Einsatz: So erfüllen Sie Ihre Verkehrssicherungspflicht. Das ganze Jahr über übernimmt unser Hausmeisterservice die technische Objektbetreuung.',
     seoTitle: 'Winterdienst Villingen-Schwenningen für Gewerbe | AHAD',
     seoDescription:
-      'Winterdienst für Gewerbe in Villingen-Schwenningen, Bad Dürrheim, Donaueschingen und Umgebung: Räumen und Streuen ab 4 Uhr, jeder Einsatz protokolliert.',
+      'Winterdienst für Gewerbe in Villingen-Schwenningen, Bad Dürrheim, Donaueschingen und Umgebung: Räumen und Streuen ab 4 Uhr, jeder Einsatz protokolliert.',
     keywords: 'Winterdienst Gewerbe, Hausmeisterservice, Verkehrssicherungspflicht, Räumdienst, Objektbetreuung',
     icon: <Snowflake className="w-6 h-6" />,
     image: IMG.winterdienst,
@@ -471,7 +471,7 @@ export const SERVICES: ServiceData[] = [
       },
       {
         icon: <AlarmClockCheck className="w-7 h-7 text-accent" />,
-        title: 'Einsatzbereit ab 4 Uhr',
+        title: 'Einsatzbereit ab 4 Uhr',
         text: 'Wetterüberwachung und frühe Räumzeiten: Ihre Flächen sind geräumt und gestreut, bevor der Betrieb startet.',
       },
       {
@@ -500,7 +500,7 @@ export const SERVICES: ServiceData[] = [
       {
         question: 'Ab wann sind die Flächen geräumt?',
         answer:
-          'Wir überwachen die Wetterlage und beginnen bei Bedarf ab 4 Uhr morgens. Verkehrswege, Zufahrten und Parkflächen sind sicher begehbar, bevor Ihre Mitarbeitenden und Kunden eintreffen.',
+          'Wir überwachen die Wetterlage und beginnen bei Bedarf ab 4 Uhr morgens. Verkehrswege, Zufahrten und Parkflächen sind sicher begehbar, bevor Ihre Mitarbeitenden und Kunden eintreffen.',
       },
       {
         question: 'In welchen Orten bieten Sie Winterdienst an?',

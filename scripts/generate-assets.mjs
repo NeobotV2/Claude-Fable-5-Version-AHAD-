@@ -122,9 +122,9 @@ function ogImageSvg() {
   <text x="96" y="438" font-family="DejaVu Sans, Arial, sans-serif" font-weight="bold" font-size="74" letter-spacing="-2.5" fill="${TINT}">Sicherheit.</text>
   <text x="96" y="502" font-family="DejaVu Sans, Arial, sans-serif" font-size="27" fill="rgba(226,237,247,0.85)">Systematische Gebäudereinigung für Industrie, Verwaltung &amp; Mittelstand</text>
   <g>
-    <rect x="96" y="540" width="252" height="44" rx="22" fill="${GREEN}"/>
-    <text x="222" y="569" text-anchor="middle" font-family="DejaVu Sans, Arial, sans-serif" font-weight="bold" font-size="20" fill="#ffffff">Angebot in 24h</text>
-    <text x="380" y="569" font-family="DejaVu Sans, Arial, sans-serif" font-size="21" fill="rgba(226,237,247,0.7)">ahad-cleaning.de</text>
+    <rect x="96" y="540" width="320" height="44" rx="22" fill="${GREEN}"/>
+    <text x="256" y="569" text-anchor="middle" font-family="DejaVu Sans, Arial, sans-serif" font-weight="bold" font-size="20" fill="#ffffff">Kostenlose Besichtigung</text>
+    <text x="448" y="569" font-family="DejaVu Sans, Arial, sans-serif" font-size="21" fill="rgba(226,237,247,0.7)">ahad-cleaning.de</text>
   </g>
 </svg>`;
 }

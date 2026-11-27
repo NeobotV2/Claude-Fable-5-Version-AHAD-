@@ -1,47 +1,30 @@
-import { motion, useScroll, useTransform, useReducedMotion } from 'motion/react';
-import { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import {
-  ArrowRight,
-  CheckCircle2,
-  Star,
-  Building2,
-  Factory,
-  Microscope,
-  LayoutDashboard,
-  Search,
-  Settings2,
-  ClipboardCheck,
-  Shield,
-  ClipboardList,
-} from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import SEO from '@/components/SEO';
-import Reveal from '@/components/ui/Reveal';
 import SectionHeading from '@/components/ui/SectionHeading';
 import ButtonLink from '@/components/ui/Button';
-import Stat from '@/components/ui/Stat';
+import { cn } from '@/lib/utils';
 import SmartImage from '@/components/ui/SmartImage';
+import FactRow from '@/components/ui/FactRow';
+import LinkList from '@/components/ui/LinkList';
+import RuleColumns from '@/components/ui/RuleColumns';
 import BeforeAfter from '@/components/ui/BeforeAfter';
 import Accordion, { faqSchemaFrom, type FAQItem } from '@/components/ui/Accordion';
-import LogoMarquee from '@/components/LogoMarquee';
-import FeaturedTestimonial from '@/components/FeaturedTestimonial';
+import ClientLogos from '@/components/ClientLogos';
 import CTABand from '@/components/CTABand';
-import NewsTeaser from '@/components/NewsTeaser';
 import Guarantee from '@/components/Guarantee';
 import Reviews from '@/components/Reviews';
 import TrustBand from '@/components/TrustBand';
-import { IMG, srcSetFor } from '@/lib/images';
+import { IMG, intrinsicSizeFor, srcSetFor } from '@/lib/images';
 import {
   SITE,
   STATS,
-  REVIEWS,
   ORGANIZATION_SCHEMA,
+  HQ_LOCAL_BUSINESS_SCHEMA,
   WEBSITE_SCHEMA,
   GOOGLE_RATING,
-  REVIEWS_SOURCE_URL,
   CLIENT_REFERENCES,
-  FEATURED_TESTIMONIAL_PUBLISHABLE,
 } from '@/lib/site';
 import { SERVICES } from '@/data/services';
 
@@ -59,8 +42,6 @@ const featuredServices = [
     title: 'Unterhaltsreinigung',
     outcome: 'Saubere Flächen nach festem Plan. Die Steuerung übernehmen wir.',
     benefits: ['Feste Teams & Objektleitung', 'Digitale Qualitätskontrolle'],
-    tag: 'Nach festem Plan',
-    icon: <LayoutDashboard className="w-6 h-6" />,
     path: '/leistungen/unterhaltsreinigung',
     image: IMG.unterhaltsreinigung,
   },
@@ -68,8 +49,6 @@ const featuredServices = [
     title: 'Industrie- & Produktionsreinigung',
     outcome: 'Wir reinigen im laufenden Betrieb, ohne die Produktion zu stören.',
     benefits: ['Schichtintegrierte Ausführung', 'UVV-konform & auditfähig'],
-    tag: 'Im Schichtbetrieb',
-    icon: <Factory className="w-6 h-6" />,
     path: '/leistungen/industrie-produktionsreinigung',
     image: IMG.industrie,
     // Die Webadresse auf der Weste sitzt links im Bild; mittig beschnitten
@@ -80,44 +59,11 @@ const featuredServices = [
     title: 'Glas- & Fassadenreinigung',
     outcome: 'Gepflegte Glasflächen und Fassaden erhalten den Wert des Gebäudes.',
     benefits: ['Osmose-Verfahren', 'Geplante Höhenzugänge'],
-    tag: 'Gebäudehülle',
-    icon: <Building2 className="w-6 h-6" />,
     path: '/leistungen/glas-fassadenreinigung',
     image: IMG.glasfassade,
   },
 ];
 
-const systemSteps = [
-  {
-    letter: 'A',
-    title: 'Analyse',
-    subtitle: 'Das Objekt erfassen',
-    description: 'Wir erfassen Flächen, Nutzung, Risiken und Reinigungsbedarf. Darauf bauen Planung und Ausführung auf.',
-    icon: <Search className="w-7 h-7" />,
-  },
-  {
-    letter: 'H',
-    title: 'Handling',
-    subtitle: 'Feste Teams, klare Zuständigkeit',
-    description: 'Eingespielte Teams arbeiten nach festgelegten Abläufen. Eine feste Objektleitung ist für Ihr Objekt zuständig.',
-    icon: <Settings2 className="w-7 h-7" />,
-  },
-  {
-    letter: 'A',
-    title: 'Audit',
-    subtitle: 'Qualität regelmäßig prüfen',
-    description: 'Regelmäßige Kontrollen zeigen Abweichungen, bevor es zu Reklamationen kommt.',
-    icon: <ClipboardCheck className="w-7 h-7" />,
-  },
-  {
-    letter: 'D',
-    title: 'Dokumentation',
-    subtitle: 'Nachweise zum Abrufen',
-    description: 'Wir dokumentieren Checklisten, erbrachte Leistungen und Kontrollen. Diese Nachweise können Sie bei Audits vorlegen.',
-    icon: <Shield className="w-7 h-7" />,
-    highlight: true,
-  },
-];
 
 const industries = [
   { title: 'Industrie & Produktion', path: '/branchen/industrie-produktion', image: IMG.industrieDetail, claim: 'Im Schichtbetrieb' },
@@ -188,558 +134,310 @@ const faqs: FAQItem[] = [
   },
 ];
 
-export default function Home() {
-  const heroRef = useRef<HTMLElement>(null);
-  const reduce = useReducedMotion();
-  const { scrollYProgress } = useScroll({ target: heroRef, offset: ['start start', 'end start'] });
-  const heroImageY = useTransform(scrollYProgress, [0, 1], ['0%', reduce ? '0%' : '18%']);
-  const heroFade = useTransform(scrollYProgress, [0, 0.8], [1, reduce ? 1 : 0]);
-  const featuredReview = REVIEWS[1] ?? REVIEWS[0];
+/** Das Hero-Bild läuft in jeder Breite über die ganze Seite. */
+const HERO_SIZES = '100vw';
 
+export default function Home() {
   return (
-    <div className="overflow-hidden">
+    <div>
       <SEO
         title="Gebäudereinigung Villingen-Schwenningen | AHAD Cleaning"
         description="Reinigungsfirma aus Villingen-Schwenningen: Büro-, Industrie- und Fensterreinigung, Winterdienst für Unternehmen. ISO 9001 & 14001, kostenlose Besichtigung."
         keywords="Gebäudereinigung Villingen-Schwenningen, Industriereinigung Stuttgart, Unterhaltsreinigung, Glasreinigung Konstanz, Gebäudedienstleistungen"
-        schema={[ORGANIZATION_SCHEMA, WEBSITE_SCHEMA, faqSchemaFrom(faqs)]}
+        schema={[
+          ORGANIZATION_SCHEMA,
+          WEBSITE_SCHEMA,
+          ...(HQ_LOCAL_BUSINESS_SCHEMA ? [HQ_LOCAL_BUSINESS_SCHEMA] : []),
+          faqSchemaFrom(faqs),
+        ]}
       />
       {/* LCP: Hero-Bild schon im <head> anstoßen, bevor der Parser das <img> erreicht. */}
       <Helmet>
-        <link rel="preload" as="image" href={IMG.heroMain} imageSrcSet={srcSetFor(IMG.heroMain)} imageSizes="100vw" />
+        <link rel="preload" as="image" href={IMG.heroMain} imageSrcSet={srcSetFor(IMG.heroMain)} imageSizes={HERO_SIZES} />
       </Helmet>
 
-      {/* ── HERO ──────────────────────────────────────────────────────── */}
-      <section ref={heroRef} className="relative min-h-[92svh] flex flex-col bg-navy text-white overflow-hidden grain">
-        {/* Parallax-Bild mit Navy-Duotone — rechts bewusst heller,
-            damit die Bildhälfte trägt statt schwarz abzusaufen */}
-        <motion.div className="absolute inset-0" style={{ y: heroImageY }}>
-          <img
-            src={IMG.heroMain}
-            srcSet={srcSetFor(IMG.heroMain)}
-            sizes="100vw"
-            alt="AHAD-Fuhrpark vor der Zentrale in Villingen-Schwenningen"
-            className="w-full h-[115%] object-cover opacity-65"
-            loading="eager"
-            // React 18 reicht nur lowercase `fetchpriority` an das DOM durch
-            {...{ fetchpriority: 'high' }}
-            decoding="async"
-            referrerPolicy="no-referrer"
-          />
-        </motion.div>
-        <div className="absolute inset-0 bg-gradient-to-r from-navy via-navy/85 to-navy/20" />
-        <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/10 to-navy/60" />
-        <div className="absolute inset-0 blueprint-grid opacity-40" />
+      {/* ── HERO ────────────────────────────────────────────────────────
+          Das Foto der Zentrale liegt hinter der Aussage, abgedunkelt durch
+          einen dunkelblauen Verlauf (.hero--photo in index.css), am Handy wie
+          am Desktop. pt-16 = Höhe der festen Kopfzeile. */}
+      <section className="hero--photo pt-16">
+        <div className="grid grid-cols-1 lg:grid-cols-2">
+          <div className="hero-copy flex lg:justify-end">
+            <div className="w-full lg:max-w-[40rem] px-4 sm:px-8 lg:pr-14 py-10 sm:py-14 lg:py-24">
+              {/* Keyword im H1 (SEO) + Schmerzpunkt der Zielgruppe (Conversion).
+                  Statisch gerendert: steht im vorgerenderten HTML → schneller LCP. */}
+              <h1 className="display-xl hero-title text-navy" lang="de">
+                {/* Ortsbezug im H1: Die Startseite rankt für die VS-Suchanfragen
+                    (Search Console). Optisch die Rubrikzeile. */}
+                <span className="eyebrow text-accent flex mb-3 sm:mb-5">
+                  <span>
+                    Reinigungsfirma in <span className="whitespace-nowrap">Villingen-Schwenningen</span>
+                  </span>
+                </span>{' '}
+                <span className="whitespace-nowrap">Gebäudereinigung,</span> die Sie nicht mehr <span className="hero-accent">nachsteuern</span> müssen.
+              </h1>
 
-        <motion.div
-          style={{ opacity: heroFade }}
-          className="relative z-10 flex-grow flex items-center max-w-7xl mx-auto px-4 sm:px-8 w-full pt-20 sm:pt-32 pb-8 sm:pb-14 gap-12"
-        >
-          <div className="max-w-4xl min-w-0 flex-1">
-            {/* Keyword im H1 (SEO) + Schmerzpunkt der Zielgruppe (Conversion).
-                Bewusst statisch (kein Reveal-/Slide-Effekt): so steht die Headline
-                bereits im vorgerenderten HTML sichtbar → schneller LCP, valides ARIA. */}
-            {/* Obergrenze 4.5rem: ab xl steht rechts die Bewertungs-Karte (20rem),
-                die Headline-Spalte ist dann 848px breit – „Gebäudereinigung," (≈806px
-                bei 72px) muss als ein Wort hineinpassen, sonst läuft die H1 über. */}
-            <h1
-              className="display-xl text-white mb-4 sm:mb-8"
-              lang="de"
-              style={{ fontSize: 'clamp(1.35rem, 7.75vw, 4.5rem)' }}
-            >
-              {/* Ortsbezug im H1: Die Startseite rankt für die VS-Suchanfragen
-                  (Search Console). Optisch die frühere Eyebrow-Zeile. */}
-              <span className="eyebrow text-mint mb-3 sm:mb-7 flex" style={{ letterSpacing: '0.22em' }}>
-                <span className="h-px w-8 bg-mint/50" aria-hidden="true" />
-                <span>
-                  Reinigungsfirma in <span className="whitespace-nowrap">Villingen-Schwenningen</span>
-                </span>
-              </span>{' '}
-              <span className="whitespace-nowrap">Gebäudereinigung,</span>{' '}
-              die Sie nicht mehr{' '}
-              <span className="whitespace-nowrap">
-                <span className="text-mint">nachsteuern</span> müssen.
-              </span>
-            </h1>
+              <p className="mt-5 sm:mt-7 text-lead sm:text-xl text-slate leading-relaxed max-w-xl">
+                Wir organisieren Ausführung, Qualitätskontrolle und Nachweise selbst. Sie müssen weder
+                Reklamationen verfolgen noch intern hinterherlaufen.
+              </p>
 
-            {/* LCP-Element: statisch gerendert, damit es sofort sichtbar ist
-                (keine opacity-0-Einblendung, die den LCP verzögert). */}
-            <p className="text-[15px] sm:text-xl text-blue-50 max-w-2xl font-medium leading-relaxed mb-5 sm:mb-10">
-              Wir organisieren Ausführung, Qualitätskontrolle und Nachweise selbst. Sie müssen weder
-              Reklamationen verfolgen noch intern hinterherlaufen.
-            </p>
-
-            <motion.div
-              initial={false}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.05, duration: 0.7 }}
-              className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-6 sm:mb-12"
-            >
-              <ButtonLink to="/angebot" size="lg" arrow>
-                Kostenlose Besichtigung anfragen
-              </ButtonLink>
-              <ButtonLink to="/ahad-system" variant="outline-light" size="lg">
-                Wie das AHAD System arbeitet
-              </ButtonLink>
-            </motion.div>
-
-            {/* Trust-Chips — bewusst ohne Zahlen, die die Stats-Leiste doppeln würden */}
-            <motion.div
-              initial={false}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 1.25, duration: 0.8 }}
-              className="flex flex-wrap items-center gap-x-6 gap-y-3 text-[13px] font-semibold text-blue-100/80"
-            >
-              <span className="flex items-center gap-2">
-                <CheckCircle2 size={15} className="text-mint" />
-                Feste Objektleitung je Objekt
-              </span>
-              <span className="flex items-center gap-2">
-                <CheckCircle2 size={15} className="text-mint" />
-                Feste, geschulte Teams
-              </span>
-              {GOOGLE_RATING && (
-                <a
-                  href={GOOGLE_RATING.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 hover:text-white transition-colors"
-                >
-                  <Star size={15} className="fill-amber-400 text-amber-400" />
-                  {GOOGLE_RATING.value.toFixed(1).replace('.', ',')} von 5 · {GOOGLE_RATING.count} Google-Bewertungen
-                </a>
-              )}
-            </motion.div>
-          </div>
-
-          {/* Proof-Karte: verankert die rechte Bildhälfte mit neuem Inhalt
-              (Social Proof) statt einer CTA-Dopplung — nur auf großen Screens */}
-          {featuredReview && <motion.aside
-            initial={false}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 1.15, duration: 0.8, ease: [0.2, 0.65, 0.3, 1] }}
-            className="hidden xl:block w-[20rem] flex-shrink-0 self-center"
-          >
-            <figure className="glass-dark border border-white/15 rounded-3xl p-7 shadow-lifted">
-              <div className="flex gap-0.5 mb-4" aria-hidden>
-                {[1, 2, 3, 4, 5].map((s) => (
-                  <Star key={s} size={16} className="fill-amber-400 text-amber-400" />
-                ))}
+              <div className="mt-7 sm:mt-9 flex flex-wrap items-center gap-x-8 gap-y-4">
+                <ButtonLink to="/angebot" size="lg" arrow className="w-full sm:w-auto sm:whitespace-nowrap">
+                  Kostenlose Besichtigung anfragen
+                </ButtonLink>
+                <Link to="/ahad-system" className="text-link">
+                  Wie das AHAD System arbeitet
+                  <ArrowRight size={17} aria-hidden="true" />
+                </Link>
               </div>
-              <blockquote className="text-[15px] leading-relaxed text-blue-50 font-medium">
-                „{featuredReview.text}“
-              </blockquote>
-              <figcaption className="mt-5 pt-5 border-t border-white/10">
-                <div className="font-bold text-white text-sm">{featuredReview.author}</div>
-                <div className="text-[13px] text-blue-100/70 mt-0.5">
-                  {REVIEWS_SOURCE_URL ? 'Google-Bewertung' : 'Kundenstimme'}
-                </div>
-              </figcaption>
-              {REVIEWS_SOURCE_URL && (
-                <a
-                  href={REVIEWS_SOURCE_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-5 inline-flex items-center gap-1.5 text-[13px] font-bold text-mint hover:text-white transition-colors"
-                >
-                  Quelle ansehen <ArrowRight size={14} />
-                </a>
-              )}
-            </figure>
-          </motion.aside>}
-        </motion.div>
 
-        {/* Statistik-Leiste */}
-        {STATS.length > 0 && <div className="relative z-10 border-t border-white/10 glass-dark">
-          <div className="max-w-7xl mx-auto px-4 sm:px-8 py-7 grid grid-cols-2 lg:grid-cols-4 gap-6">
-            {STATS.map((stat, i) => (
-              <motion.div
-                key={stat.label}
-                initial={false}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 1.2 + i * 0.1 }}
-              >
-                <Stat value={stat.value} suffix={stat.suffix} label={stat.label} dark />
-              </motion.div>
-            ))}
+              {/* Belege in einer Zeile — bewusst ohne Zahlen, die die Zahlenleiste doppeln würden */}
+              <ul className="mt-9 sm:mt-12 pt-5 border-t border-line flex flex-wrap gap-x-7 gap-y-2 text-body-sm text-slate">
+                {GOOGLE_RATING && (
+                  <li className="w-full">
+                    <a
+                      href={GOOGLE_RATING.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:text-accent transition-colors"
+                    >
+                      <span className="font-semibold text-navy">
+                        {GOOGLE_RATING.value.toFixed(1).replace('.', ',')} von 5
+                      </span>{' '}
+                      bei {GOOGLE_RATING.count} Google-Bewertungen
+                    </a>
+                  </li>
+                )}
+                <li>Feste Objektleitung je Objekt</li>
+                <li>Feste, geschulte Teams</li>
+              </ul>
+            </div>
           </div>
-        </div>}
 
+          <figure className="hero-media relative aspect-[3/2] lg:aspect-auto bg-navy/5">
+            <img
+              src={IMG.heroMain}
+              srcSet={srcSetFor(IMG.heroMain)}
+              sizes={HERO_SIZES}
+              alt="AHAD-Fuhrpark vor der Zentrale in Villingen-Schwenningen"
+              {...intrinsicSizeFor(IMG.heroMain)}
+              className="absolute inset-0 w-full h-full object-cover"
+              loading="eager"
+              // React 18 reicht nur lowercase `fetchpriority` an das DOM durch
+              {...{ fetchpriority: 'high' }}
+              decoding="async"
+              referrerPolicy="no-referrer"
+            />
+            <figcaption className="absolute left-0 bottom-0 bg-navy text-white text-caption font-medium px-4 py-2">
+              Unsere Zentrale in Villingen-Schwenningen
+            </figcaption>
+          </figure>
+        </div>
       </section>
 
-      {/* ── TRUST-BAND (Google-Bewertung + belegbare Signale) ────────── */}
-      <TrustBand />
+      {/* ── ZAHLEN UND BELEGE in einer dunklen Fläche ───────────────────── */}
+      {STATS.length > 0 ? (
+        <section className="bg-navy text-white" aria-label="AHAD in Zahlen">
+          <FactRow
+            dark
+            className="container-page"
+            items={STATS.map((stat) => ({ value: `${stat.value}${stat.suffix}`, label: stat.label }))}
+          />
+          <TrustBand embedded />
+        </section>
+      ) : (
+        <TrustBand />
+      )}
 
-      {/* ── REFERENZEN-MARQUEE ───────────────────────────────────────── */}
-      {CLIENT_REFERENCES.length > 0 && <section className="py-14 bg-white border-b border-line" aria-label="Referenzen">
-        <div className="max-w-7xl mx-auto px-4 sm:px-8 mb-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-          <p className="eyebrow text-slate">
-            <span className="h-px w-8 bg-slate/30" />
-            Einige unserer Auftraggeber
-          </p>
-          <Link to="/referenzen" className="text-sm font-bold text-brand hover:text-brand-light transition-colors inline-flex items-center gap-1.5">
-            Alle Referenzen <ArrowRight size={15} />
-          </Link>
-        </div>
-        <LogoMarquee />
-      </section>}
+      {/* ── AUFTRAGGEBER ─────────────────────────────────────────────── */}
+      {CLIENT_REFERENCES.length > 0 && (
+        <section className="section-y-sm bg-white border-b border-line" aria-label="Referenzen">
+          <div className="container-page mb-8 flex items-baseline justify-between gap-4">
+            <p className="eyebrow text-slate">Einige unserer Auftraggeber</p>
+            <Link to="/referenzen" className="text-link text-body-sm flex-shrink-0">
+              Alle Referenzen
+              <ArrowRight size={15} aria-hidden="true" />
+            </Link>
+          </div>
+          <ClientLogos layout="marquee" />
+        </section>
+      )}
 
-      {/* ── AKTUELLE MELDUNG ─────────────────────────────────────────── */}
-      <NewsTeaser />
 
-      {/* ── LEISTUNGEN (01) ──────────────────────────────────────────── */}
-      <section className="py-24 lg:py-36 bg-paper">
-        <div className="max-w-7xl mx-auto px-4 sm:px-8">
-          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-16 lg:mb-20">
+      {/* ── LEISTUNGEN ───────────────────────────────────────────────── */}
+      <section className="section-y bg-white">
+        <div className="container-page">
+          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-12">
             <SectionHeading
               eyebrow="Leistungen"
-              title={
-                <>
-                  Reinigung für Büro, <span className="text-brand-light">Produktion und Fassade.</span>
-                </>
-              }
+              title="Reinigung für Büro, Produktion und Fassade."
               className="max-w-2xl"
             />
-            <Reveal delay={0.15}>
-              <ButtonLink to="/leistungen" variant="outline" arrow>
-                Alle 8 Leistungen
-              </ButtonLink>
-            </Reveal>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {featuredServices.map((service, index) => (
-              <Reveal key={service.title} delay={index * 0.12} className="h-full">
-                <Link
-                  to={service.path}
-                  className="group relative flex flex-col h-full min-h-[30rem] rounded-3xl overflow-hidden shadow-soft card-lift bg-navy"
-                >
-                  <SmartImage
-                    src={service.image}
-                    alt={service.title}
-                    sizes="(min-width:1024px) 33vw, (min-width:768px) 50vw, 100vw"
-                    className="absolute inset-0"
-                    imgClassName={`opacity-75 transition-transform duration-700 group-hover:scale-105 ${
-                      'imagePosition' in service ? service.imagePosition : ''
-                    }`}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/55 to-navy/10 transition-opacity" />
-
-                  <div className="relative z-10 mt-auto p-8 text-white">
-                    <span className="inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-mint bg-navy/60 backdrop-blur px-3 py-1.5 rounded-full mb-5 border border-mint/20">
-                      {service.tag}
-                    </span>
-                    <div className="flex items-center gap-3 mb-3">
-                      <span className="w-11 h-11 rounded-xl bg-white/10 backdrop-blur grid place-items-center text-mint">
-                        {service.icon}
-                      </span>
-                      <h3 className="font-headline text-2xl font-bold leading-tight">{service.title}</h3>
-                    </div>
-                    <p className="text-blue-100/85 text-[15px] font-medium leading-relaxed mb-5">{service.outcome}</p>
-                    <ul className="space-y-2 mb-6">
-                      {service.benefits.map((benefit) => (
-                        <li key={benefit} className="flex items-center gap-2.5 text-sm font-semibold text-blue-50">
-                          <CheckCircle2 size={15} className="text-mint flex-shrink-0" />
-                          {benefit}
-                        </li>
-                      ))}
-                    </ul>
-                    <span className="inline-flex items-center gap-2 text-sm font-bold text-white">
-                      Mehr erfahren
-                      <span className="w-8 h-8 rounded-full bg-accent grid place-items-center transition-transform duration-300 group-hover:translate-x-1.5">
-                        <ArrowRight size={15} />
-                      </span>
-                    </span>
-                  </div>
-                </Link>
-              </Reveal>
-            ))}
-          </div>
-
-          {/* Zweite Reihe: alle weiteren Leistungen kompakt — nichts bleibt unsichtbar.
-              Drei Spalten: Bei fünf passten lange Namen wie „Küchenabluftreinigung"
-              nicht in die Kachel und liefen in den Pfeil. */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-5">
-            {moreServices.map((service, i) => (
-              <Reveal key={service.slug} delay={0.1 + i * 0.06}>
-                <Link
-                  to={service.path}
-                  className="group flex items-center gap-4 bg-white rounded-2xl border border-line p-5 card-lift h-full"
-                >
-                  <span className="w-11 h-11 rounded-xl bg-brand/8 text-brand grid place-items-center flex-shrink-0 group-hover:bg-accent group-hover:text-white transition-colors">
-                    {service.icon}
-                  </span>
-                  <span className="min-w-0 flex-grow">
-                    <span className="block font-headline font-bold text-[15px] text-navy leading-snug">
-                      {service.name}
-                    </span>
-                    <span className="block text-xs text-slate mt-0.5">{service.short}</span>
-                  </span>
-                  <ArrowRight
-                    size={16}
-                    className="flex-shrink-0 text-brand/40 transition-all duration-300 group-hover:text-accent group-hover:translate-x-1"
-                  />
-                </Link>
-              </Reveal>
-            ))}
-          </div>
-
-          {/* Anfrage-Teaser — strukturierte Anfrage für FM & Einkauf, führt in den Funnel */}
-          <Reveal delay={0.15} className="mt-8">
-            <Link
-              to="/angebot"
-              className="group flex flex-col sm:flex-row sm:items-center gap-5 bg-navy text-white rounded-3xl p-7 sm:p-8 overflow-hidden relative grain card-lift"
-            >
-              <div className="absolute -top-20 -right-10 w-64 h-64 rounded-full bg-accent/20 blur-[90px]" />
-              <span className="relative z-10 w-14 h-14 rounded-2xl bg-white/10 grid place-items-center text-mint flex-shrink-0">
-                <ClipboardList className="w-7 h-7" />
-              </span>
-              <div className="relative z-10 flex-grow">
-                <h3 className="font-headline font-bold text-xl mb-1">Strukturierte Anfrage für FM &amp; Einkauf</h3>
-                <p className="text-blue-100/80 text-sm font-medium">
-                  Erfassen Sie Objekt, Leistungen und Anforderungen. Daraus erstellen wir Angebot und
-                  Leistungsverzeichnis und melden uns zur Terminabstimmung.
-                </p>
-              </div>
-              <span className="relative z-10 inline-flex items-center gap-2 text-sm font-bold text-mint flex-shrink-0">
-                Besichtigung anfragen
-                <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
-              </span>
+            <Link to="/leistungen" className="text-link flex-shrink-0">
+              Alle {SERVICES.length} Leistungen
+              <ArrowRight size={17} aria-hidden="true" />
             </Link>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* ── VORHER / NACHHER (02) ────────────────────────────────────── */}
-      <section className="relative py-24 lg:py-36 bg-navy text-white overflow-hidden grain">
-        <div className="absolute inset-0 blueprint-grid" />
-        <div className="absolute -top-40 -left-40 w-[30rem] h-[30rem] rounded-full bg-brand/30 blur-[140px]" />
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-            <div className="lg:col-span-5">
-              <SectionHeading
-                eyebrow="Vorher / Nachher"
-                dark
-                title={
-                  <>
-                    Eine Fläche nach unserer <span className="text-mint">Bauendreinigung</span>.
-                  </>
-                }
-                lead="Ziehen Sie den Regler: links die Fläche nach dem Ausbau, rechts nach der Reinigung, übergabefertig und dokumentiert."
-              />
-              <Reveal delay={0.2} className="mt-10">
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <ButtonLink to="/referenzen" variant="white" arrow>
-                    Referenzen ansehen
-                  </ButtonLink>
-                  <ButtonLink to="/angebot" variant="outline-light">
-                    Kostenlose Besichtigung anfragen
-                  </ButtonLink>
-                </div>
-              </Reveal>
-            </div>
-            <Reveal delay={0.15} className="lg:col-span-7">
-              <BeforeAfter
-                beforeSrc={IMG.vorher}
-                afterSrc={IMG.nachher}
-                beforeLabel="Vorher"
-                afterLabel="Nachher"
-              />
-              <p className="mt-4 text-[13px] text-blue-100/80 font-medium">
-                Aufnahmen aus einem von uns betreuten Objekt.
-              </p>
-            </Reveal>
           </div>
-        </div>
-      </section>
 
-      {/* ── AHAD SYSTEM (03) ─────────────────────────────────────────── */}
-      <section className="py-24 lg:py-36 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-8">
-          <SectionHeading
-            eyebrow="Unser Vorgehen"
-            align="center"
-            title={
-              <>
-                Das <span className="font-logo text-brand-light">AHAD</span> System
-              </>
-            }
-            lead="Die vier Buchstaben stehen für vier Schritte: Analyse, Handling, Audit, Dokumentation. So bleibt die Reinigung planbar und die Qualität überprüfbar."
-            className="mb-16 lg:mb-24 max-w-3xl mx-auto"
-          />
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
-            {systemSteps.map((step, index) => (
-              <Reveal key={index} delay={index * 0.1} className="h-full">
+          {/* Drei Schwerpunkte als Foto-Karten: Bild über die ganze Karte, unten ein
+              dunkler Verlauf, darauf der Text in Weiß. */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 lg:gap-6">
+            {featuredServices.map((service) => (
+              <Link
+                key={service.title}
+                to={service.path}
+                className="group relative block overflow-hidden bg-navy aspect-[4/5] sm:aspect-[16/11] md:aspect-[4/5]"
+              >
+                <SmartImage
+                  src={service.image}
+                  alt=""
+                  sizes="(min-width:768px) 33vw, 100vw"
+                  className="absolute inset-0 h-full"
+                  imgClassName={cn(
+                    'transition-transform duration-500 ease-out group-hover:scale-[1.04]',
+                    'imagePosition' in service ? service.imagePosition : '',
+                  )}
+                />
                 <div
-                  className={`relative h-full rounded-3xl p-8 overflow-hidden card-lift border ${
-                    step.highlight
-                      ? 'bg-navy text-white border-navy shadow-lifted'
-                      : 'bg-paper border-line'
-                  }`}
-                >
-                  <span
-                    className={`absolute -top-7 -right-3 font-logo font-black text-[9rem] leading-none select-none pointer-events-none ${
-                      step.highlight ? 'text-white/5' : 'text-navy/5'
-                    }`}
-                    aria-hidden
-                  >
-                    {step.letter}
+                  className="absolute inset-0 bg-linear-to-t from-navy from-25% via-navy/60 via-50% to-navy/0"
+                  aria-hidden="true"
+                />
+                <div className="absolute inset-x-0 bottom-0 p-6 lg:p-7 text-white">
+                  <h3 className="text-xl lg:text-2xl font-bold leading-snug">{service.title}</h3>
+                  <p className="mt-2 text-ondark leading-relaxed">{service.outcome}</p>
+                  <p className="mt-3 text-body-sm text-mint">{service.benefits.join(' · ')}</p>
+                  <span className="mt-5 inline-flex items-center gap-2 text-body-sm font-semibold">
+                    Mehr erfahren
+                    <ArrowRight
+                      size={16}
+                      className="transition-transform group-hover:translate-x-1"
+                      aria-hidden="true"
+                    />
                   </span>
-
-                  <div className="relative z-10">
-                    <span
-                      className={`inline-flex w-14 h-14 rounded-2xl items-center justify-center mb-6 ${
-                        step.highlight ? 'bg-accent text-white shadow-glow' : 'bg-brand/8 text-brand'
-                      }`}
-                    >
-                      {step.icon}
-                    </span>
-                    <div className={`text-[11px] font-black uppercase tracking-[0.2em] mb-2 ${step.highlight ? 'text-mint' : 'text-brand'}`}>
-                      Schritt {index + 1}
-                    </div>
-                    <h3 className={`font-headline text-2xl font-bold mb-2 ${step.highlight ? 'text-white' : 'text-navy'}`}>
-                      {step.title}
-                    </h3>
-                    <p className={`text-sm font-bold mb-4 ${step.highlight ? 'text-mint' : 'text-accent'}`}>{step.subtitle}</p>
-                    <p className={`text-sm leading-relaxed ${step.highlight ? 'text-blue-100/85' : 'text-slate'}`}>
-                      {step.description}
-                    </p>
-                  </div>
                 </div>
-              </Reveal>
+              </Link>
             ))}
           </div>
 
-          <Reveal delay={0.3} className="text-center mt-12">
-            <ButtonLink to="/ahad-system" variant="ghost" arrow>
-              Das System im Detail
-            </ButtonLink>
-          </Reveal>
+          {/* Alle weiteren Leistungen als Liste — nichts bleibt unsichtbar. */}
+          <LinkList
+            heading="Weitere Leistungen"
+            cols={3}
+            className="mt-16"
+            items={moreServices.map((service) => ({ to: service.path, title: service.name, sub: service.short }))}
+          />
         </div>
       </section>
 
-      {/* ── BRANCHEN (04) ────────────────────────────────────────────── */}
-      <section className="py-24 lg:py-36 bg-paper">
-        <div className="max-w-7xl mx-auto px-4 sm:px-8">
-          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-16">
+      {/* ── VORHER / NACHHER ─────────────────────────────────────────── */}
+      <section className="section-y bg-navy text-white">
+        <div className="container-page grid grid-cols-1 lg:grid-cols-12 gap-x-14 gap-y-10 items-center">
+          <div className="lg:col-span-5">
+            <SectionHeading
+              eyebrow="Vorher / Nachher"
+              dark
+              title="Eine Fläche nach unserer Bauendreinigung."
+              lead="Ziehen Sie den Regler: links die Fläche nach dem Ausbau, rechts nach der Reinigung, übergabefertig und dokumentiert."
+            />
+            <div className="mt-9 flex flex-wrap items-center gap-x-8 gap-y-4">
+              <ButtonLink to="/angebot" variant="white" arrow className="w-full sm:w-auto sm:whitespace-nowrap">
+                Kostenlose Besichtigung anfragen
+              </ButtonLink>
+              <Link to="/referenzen" className="text-link-light">
+                Referenzen ansehen
+                <ArrowRight size={17} aria-hidden="true" />
+              </Link>
+            </div>
+          </div>
+          <div className="lg:col-span-7">
+            <BeforeAfter beforeSrc={IMG.vorher} afterSrc={IMG.nachher} beforeLabel="Vorher" afterLabel="Nachher" />
+            <p className="mt-3 text-caption text-ondark/80">Aufnahmen aus einem von uns betreuten Objekt.</p>
+          </div>
+        </div>
+      </section>
+
+      {/* ── BRANCHEN ─────────────────────────────────────────────────────
+          Als Verzeichnis: links die Aussage, rechts die Liste mit Foto. */}
+      <section className="section-y bg-paper border-t border-line">
+        <div className="container-page grid grid-cols-1 lg:grid-cols-12 gap-x-14 gap-y-10">
+          <div className="lg:col-span-4">
             <SectionHeading
               eyebrow="Branchen"
               title="Für Betriebe mit hohen Anforderungen."
               lead="In diesen Branchen werden Ausfälle, Reklamationen und fehlende Nachweise schnell teuer. Wir reinigen dort im laufenden Betrieb."
-              className="max-w-2xl"
             />
-            <Reveal delay={0.15}>
-              <ButtonLink to="/branchen" variant="outline" arrow>
-                Alle Branchen
-              </ButtonLink>
-            </Reveal>
+            <Link to="/branchen" className="text-link mt-7">
+              Alle Branchen
+              <ArrowRight size={17} aria-hidden="true" />
+            </Link>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {industries.map((industry, i) => (
-              <Reveal key={industry.title} delay={i * 0.08} className={i === 0 ? 'sm:col-span-2 lg:col-span-1 lg:row-span-2' : ''}>
-                <Link
-                  to={industry.path}
-                  className={`group relative flex rounded-3xl overflow-hidden shadow-soft card-lift bg-navy ${
-                    i === 0 ? 'min-h-[24rem] lg:min-h-full lg:h-full' : 'min-h-[15rem]'
-                  }`}
-                >
-                  <SmartImage
-                    src={industry.image}
-                    alt={industry.title}
-                    sizes="(min-width:1024px) 33vw, (min-width:640px) 50vw, 100vw"
-                    className="absolute inset-0"
-                    imgClassName="opacity-70 transition-transform duration-700 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-navy/95 via-navy/35 to-transparent" />
-                  <div className="relative z-10 mt-auto p-7 text-white w-full">
-                    <p className="text-[11px] font-black uppercase tracking-[0.2em] text-mint mb-2">{industry.claim}</p>
-                    <div className="flex items-center justify-between gap-4">
-                      <h3 className="font-headline text-xl lg:text-2xl font-bold">{industry.title}</h3>
-                      <span className="w-9 h-9 rounded-full bg-white/15 backdrop-blur grid place-items-center flex-shrink-0 transition-all duration-300 group-hover:bg-accent group-hover:translate-x-1">
-                        <ArrowRight size={16} />
-                      </span>
-                    </div>
-                  </div>
-                </Link>
-              </Reveal>
-            ))}
-
-            {/* CTA-Kachel im Raster */}
-            <Reveal delay={0.4}>
-              <div className="relative flex flex-col justify-between min-h-[15rem] rounded-3xl bg-brand text-white p-7 overflow-hidden grain shadow-soft">
-                <div className="absolute -bottom-16 -right-16 w-48 h-48 rounded-full bg-mint/20 blur-3xl" />
-                <Microscope className="w-9 h-9 text-mint relative z-10" />
-                <div className="relative z-10">
-                  <h3 className="font-headline text-xl font-bold mb-3">Ihre Branche nicht dabei?</h3>
-                  <p className="text-sm text-blue-100/85 font-medium mb-5">
-                    Wir sehen uns jedes Objekt einzeln an. Sagen Sie uns, was Sie brauchen.
-                  </p>
-                  <ButtonLink to="/kontakt" variant="white" arrow className="!px-5 !py-2.5">
-                    Kontakt aufnehmen
-                  </ButtonLink>
-                </div>
-              </div>
-            </Reveal>
+          <div className="lg:col-span-8">
+            <LinkList
+              large
+              items={industries.map((industry) => ({
+                to: industry.path,
+                title: industry.title,
+                sub: industry.claim,
+                image: industry.image,
+              }))}
+            />
+            <div className="pt-6 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <p className="text-slate">
+                <span className="font-semibold text-navy">Ihre Branche ist nicht dabei?</span> Wir sehen uns jedes
+                Objekt einzeln an.
+              </p>
+              <Link to="/kontakt" className="text-link flex-shrink-0">
+                Kontakt aufnehmen
+                <ArrowRight size={17} aria-hidden="true" />
+              </Link>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* ── KUNDENSTIMME (echtes, namentliches Testimonial) ──────────── */}
-      {FEATURED_TESTIMONIAL_PUBLISHABLE && <FeaturedTestimonial />}
+      {/* ── KUNDENSTIMMEN: namentliches Testimonial und Google-Reviews in einem Abschnitt ── */}
+      <Reviews limit={2} withTestimonial />
 
-      {/* ── BEWERTUNGEN (echte Google-Reviews) ───────────────────────── */}
-      <Reviews exclude={featuredReview ? [featuredReview.author] : []} limit={2} />
-
-      {/* ── AHAD-VERSPRECHEN (Garantie + Proof + Objektleitung) ──────── */}
+      {/* ── AHAD-VERSPRECHEN (Zusagen + Eckwerte + Objektleitung) ─────── */}
       <Guarantee />
 
       {/* ── EINSATZGEBIET (Ortsbezug + Links auf die Standortseiten) ──── */}
-      <section className="py-20 lg:py-28 bg-paper border-t border-line" aria-label="Einsatzgebiet">
-        <div className="max-w-7xl mx-auto px-4 sm:px-8">
+      <section className="section-y bg-paper border-t border-line" aria-label="Einsatzgebiet">
+        <div className="container-page">
           <SectionHeading
             eyebrow="Einsatzgebiet"
             title="Reinigungsfirma in Villingen-Schwenningen und Umgebung"
             lead="Unsere Zentrale steht in der Max-Planck-Straße in Villingen-Schwenningen. Von hier aus betreuen wir Betriebe im Schwarzwald-Baar-Kreis und in den Nachbarkreisen, dazu Objekte in den Einsatzgebieten Konstanz und Stuttgart."
             className="max-w-3xl mb-12"
           />
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-            {REGION_LINKS.map((region) => (
-              <Link
-                key={region.to}
-                to={region.to}
-                className="group block bg-white border border-line rounded-2xl p-6 hover:border-accent/40 hover:shadow-soft transition-all"
-              >
-                <span className="flex items-start justify-between gap-3 font-headline font-bold text-lg text-navy">
-                  {region.title}
-                  <ArrowRight size={18} className="mt-1 text-accent flex-shrink-0 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
-                </span>
-                <span className="block mt-2 text-sm text-slate leading-relaxed">{region.places}</span>
-              </Link>
-            ))}
-          </div>
+          <RuleColumns
+            cols={3}
+            items={REGION_LINKS.map((region) => ({ title: region.title, text: region.places, to: region.to }))}
+          />
         </div>
       </section>
 
       {/* ── FAQ ──────────────────────────────────────────────────────── */}
-      <section className="py-24 lg:py-32 bg-white border-t border-line">
-        <div className="max-w-7xl mx-auto px-4 sm:px-8 grid grid-cols-1 lg:grid-cols-12 gap-12">
+      <section className="section-y bg-white border-t border-line">
+        <div className="container-page grid grid-cols-1 lg:grid-cols-12 gap-x-14 gap-y-10">
           <div className="lg:col-span-4">
             <SectionHeading
               eyebrow="FAQ"
               title="Häufige Fragen."
               lead="Was Entscheider vor einem Anbieterwechsel klären wollen."
             />
-            <Reveal delay={0.2} className="mt-8">
-              <div className="bg-paper rounded-2xl border border-line p-6">
-                <p className="text-sm font-bold text-navy mb-1">Ihre Frage ist nicht dabei?</p>
-                <p className="text-sm text-slate mb-4">Rufen Sie uns an. Sie landen nicht in einer Warteschleife.</p>
-                <a href={SITE.phoneHref} className="font-headline font-bold text-brand text-lg hover:text-brand-light transition-colors">
-                  {SITE.phone}
-                </a>
-              </div>
-            </Reveal>
+            <p className="mt-8 pt-6 border-t border-line text-slate leading-relaxed">
+              <span className="block font-semibold text-navy">Ihre Frage ist nicht dabei?</span>
+              Rufen Sie uns an. Sie landen nicht in einer Warteschleife.
+              <a
+                href={SITE.phoneHref}
+                className="block mt-1 py-1.5 font-accent font-semibold text-2xl text-navy hover:text-accent transition-colors"
+              >
+                {SITE.phone}
+              </a>
+            </p>
           </div>
           <div className="lg:col-span-8">
             <Accordion items={faqs} />

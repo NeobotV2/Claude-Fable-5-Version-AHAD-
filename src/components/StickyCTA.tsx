@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { AnimatePresence, motion } from 'motion/react';
 import { Phone, FileText } from 'lucide-react';
-import { CONVERSION_HIDDEN_PATHS as HIDDEN_PATHS, SITE } from '@/lib/site';
+import { STICKY_CTA_HIDDEN_PATHS as HIDDEN_PATHS, SITE } from '@/lib/site';
+import { buttonClasses } from '@/components/ui/Button';
 
 /**
  * Mobile Conversion-Leiste: Anruf + Angebot immer einen Daumen entfernt.
@@ -21,40 +21,36 @@ export default function StickyCTA() {
   }, []);
 
   return (
-    <AnimatePresence>
+    <>
       {visible && !hidden && (
-        <motion.div
+        <div
           data-page-action="mobile-sticky-cta"
-          initial={{ y: 90 }}
-          animate={{ y: 0 }}
-          exit={{ y: 90 }}
-          transition={{ type: 'spring', damping: 26, stiffness: 300 }}
-          className="fixed bottom-0 inset-x-0 z-40 lg:hidden pb-[env(safe-area-inset-bottom)]"
+          className="fixed bottom-0 inset-x-0 z-40 lg:hidden pb-[env(safe-area-inset-bottom)] animate-slide-up"
         >
           {/* auto+1fr statt 50/50: „Anrufen" kompakt, der längere Besichtigungs-CTA
               bekommt die Restbreite und bleibt so auf gängigen Handys einzeilig.
               Falls er auf sehr schmalen Geräten doch umbricht: zentriert statt
               linksbündig hängend (text-center + leading-snug). */}
-          <div className="glass border-t border-line shadow-[0_-8px_32px_rgb(11_35_65/0.12)] px-4 py-3 grid grid-cols-[auto_1fr] gap-3">
+          <div className="bg-white border-t border-line px-4 py-3 grid grid-cols-[auto_1fr] gap-3">
             <a
               href={SITE.phoneHref}
               aria-label={`AHAD Cleaning anrufen: ${SITE.phone}`}
-              className="flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl bg-navy text-white font-bold text-sm active:scale-[0.98] transition-transform"
+              className={buttonClasses('dark', 'md', 'px-5 py-3.5 text-sm')}
             >
-              <Phone size={17} className="flex-shrink-0" />
+              <Phone size={17} className="flex-shrink-0" aria-hidden="true" />
               Anrufen
             </a>
             <Link
               to="/angebot"
               aria-label="Besichtigung anfragen"
-              className="flex items-center justify-center gap-2 px-3 py-3.5 rounded-xl bg-accent text-white font-bold text-sm shadow-glow active:scale-[0.98] transition-transform text-center leading-snug"
+              className={buttonClasses('primary', 'md', 'px-3 py-3.5 text-sm leading-snug')}
             >
-              <FileText size={17} className="flex-shrink-0" />
+              <FileText size={17} className="flex-shrink-0" aria-hidden="true" />
               Besichtigung anfragen
             </Link>
           </div>
-        </motion.div>
+        </div>
       )}
-    </AnimatePresence>
+    </>
   );
 }

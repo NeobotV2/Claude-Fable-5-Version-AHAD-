@@ -45,6 +45,21 @@ test('offer funnel completes with one contact channel and preserves PII-free att
   expect((payload?.data?.attribution as Record<string, unknown>)?.utmSource).toBe('e2e');
 });
 
+test('browser back button returns to the previous funnel step instead of leaving', async ({ page }) => {
+  await page.goto('/angebot');
+  await page.getByRole('button', { name: /Büro & Verwaltung/ }).click();
+  await expect(page.getByRole('heading', { name: 'Welche Leistungen benötigen Sie?' })).toBeVisible();
+
+  await page.goBack();
+  await expect(page).toHaveURL(/\/angebot$/);
+  await expect(page.getByRole('heading', { name: 'Um welches Objekt geht es?' })).toBeVisible();
+
+  await page.goForward();
+  await expect(page.getByRole('heading', { name: 'Welche Leistungen benötigen Sie?' })).toBeVisible();
+  await page.getByRole('button', { name: 'Zurück' }).click();
+  await expect(page.getByRole('heading', { name: 'Um welches Objekt geht es?' })).toBeVisible();
+});
+
 test('contact form accepts email without phone through the server endpoint', async ({ page }) => {
   const captured = await captureLeadEndpoint(page);
   await page.goto('/kontakt');

@@ -24,6 +24,8 @@ function lowPriorityHydration(): Plugin {
 }
 
 export default defineConfig({
+  // Jahr im Copyright: im Prerender und im Browser derselbe Wert (Build-Jahr).
+  define: { __BUILD_YEAR__: JSON.stringify(new Date().getFullYear()) },
   plugins: [react(), tailwindcss(), lowPriorityHydration()],
   // Für Deployments in Unterverzeichnissen (z.B. GitHub Pages) per ENV setzbar.
   base: process.env.BASE_PATH || '/',
@@ -38,7 +40,6 @@ export default defineConfig({
       output: {
         manualChunks: {
           react: ['react', 'react-dom', 'react-router-dom'],
-          motion: ['motion'],
           firebase: ['firebase/app', 'firebase/auth', 'firebase/firestore'],
         },
       },

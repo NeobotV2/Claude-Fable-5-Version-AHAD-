@@ -20,7 +20,13 @@ export const SITE = {
     city: 'Villingen-Schwenningen',
     country: 'DE',
   },
-  hours: 'Mo–Fr · 08:00–17:00 Uhr',
+  hours: 'Mo–Fr · 08:00–17:00 Uhr',
+  /** Dieselben Zeiten maschinenlesbar (Unternehmenseintrag) — muss zu `hours` passen. */
+  openingHours: {
+    days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+    opens: '08:00',
+    closes: '17:00',
+  },
   social: {
     instagram: 'https://instagram.com/ahadcleaning',
     linkedin: 'https://linkedin.com/company/ahadcleaning',
@@ -38,6 +44,8 @@ export const WHATSAPP_HREF = `https://wa.me/${SITE.whatsapp}?text=${encodeURICom
 
 /** Pfade, auf denen schwebende Conversion-Elemente (Sticky-Leiste, WhatsApp) verborgen bleiben. */
 export const CONVERSION_HIDDEN_PATHS = ['/angebot', '/karriere/bewerbung', '/admin'] as const;
+/** Die feste Handy-Leiste entfällt zusätzlich dort, wo ein Formular den eigenen Absende-Knopf hat. */
+export const STICKY_CTA_HIDDEN_PATHS = [...CONVERSION_HIDDEN_PATHS, '/kontakt'] as const;
 
 /**
  * Pruefmetadaten fuer oeffentliche Tatsachenbehauptungen. Ein Eintrag wird nur
@@ -110,8 +118,10 @@ const releasedVerification = (
 
 /**
  * Zentrales Claim-Register. Alle Aussagen unten sind von der Geschäftsführung
- * am 01.09.2026 bestätigt und freigegeben (Wiedervorlage 01.09.2028). Nur die
- * Standort-Einträge (Filialadressen/Geo) bleiben bewusst auf Servicegebiet.
+ * am 01.09.2026 bestätigt und freigegeben (Wiedervorlage 01.09.2028). Der
+ * Unternehmenseintrag für den Hauptsitz (Adresse, Öffnungszeiten, Koordinaten)
+ * ist seit dem 17.11.2026 freigegeben. Die Standorte Stuttgart und Konstanz
+ * bleiben bewusst auf Servicegebiet.
  */
 export const CLAIM_VERIFICATIONS = {
   serviceLevels: releasedVerification('Operations / Geschäftsführung', 'freigaben/servicelevel-2026-09-01'),
@@ -124,7 +134,12 @@ export const CLAIM_VERIFICATIONS = {
   clientReferences: releasedVerification('Vertrieb / Geschäftsführung', 'freigaben/kundenlogos-2026-09-01'),
   featuredTestimonial: releasedVerification('Marketing / Datenschutz', 'freigaben/kundenstimme-sma-2026-09-01'),
   customerReviews: releasedVerification('Marketing / Datenschutz', 'freigaben/google-rezensionen-2026-09-01'),
-  hqGeo: pendingVerification('Operations'),
+  hqGeo: releasedVerification(
+    'Geschäftsführung',
+    'freigaben/hauptsitz-unternehmenseintrag-2026-11-17',
+    '2026-11-17',
+    '2028-11-17',
+  ),
   stuttgartBranch: pendingVerification('Operations'),
   konstanzBranch: pendingVerification('Operations'),
 } satisfies Record<string, PublicationVerification>;
@@ -142,6 +157,14 @@ export interface LocationPublication {
 }
 
 /**
+ * Koordinaten des Hauptsitzes. Bewusst leer, bis ein geprüfter Wert vorliegt
+ * (z. B. aus dem Google-Unternehmensprofil) — geschätzte Koordinaten würden den
+ * Eintrag auf der Karte an die falsche Stelle setzen. Solange hier `null`
+ * steht, erscheint der Unternehmenseintrag ohne Koordinaten.
+ */
+export const HQ_GEO = null as { latitude: number; longitude: number } | null;
+
+/**
  * Rollen der Ortsseiten. Die HQ-Adresse darf als rechtliche
  * Organization-Adresse erscheinen. Filial- und Geo-Markup bleibt ohne
  * gesonderten Standortnachweis gesperrt.
@@ -154,7 +177,7 @@ export const LOCATION_PUBLICATIONS = {
     verification: CLAIM_VERIFICATIONS.hqGeo,
     publishLegalAddress: true,
     publishAsLocalBusiness: canPublishVerification(CLAIM_VERIFICATIONS.hqGeo),
-    publishGeo: canPublishVerification(CLAIM_VERIFICATIONS.hqGeo),
+    publishGeo: canPublishVerification(CLAIM_VERIFICATIONS.hqGeo) && HQ_GEO !== null,
   },
   stuttgart: {
     name: 'Stuttgart',
@@ -183,7 +206,6 @@ export const LOCATION_PUBLICATIONS = {
  * Angebotsdurchlaufzeit), sonst kippt das Vertrauensargument.
  */
 const PROMISE_CANDIDATES = [
-  { value: '24h', label: 'Reaktionszeit garantiert' },
   { value: '48h', label: 'bis zur Objektbesichtigung' },
   { value: '100%', label: 'dokumentierte Qualität' },
 ] as const;
@@ -289,13 +311,10 @@ export const CLIENT_REFERENCES = CLIENT_REFERENCE_CANDIDATES.filter((reference) 
 /**
  * Das AHAD-Versprechen — benannte Risikoumkehr mit „Zähnen".
  * Bewusst nur Zusagen, die operativ haltbar sind (Nachbesserung,
- * Festpreis, faire Laufzeit, Reaktionszeit). Keine erfundenen Werte.
+ * Festpreis, faire Laufzeit). Keine erfundenen Werte. Eine feste
+ * Reaktionszeit wird bewusst nicht zugesagt.
  */
 const GUARANTEE_CANDIDATES = [
-  {
-    title: 'Reaktionszeit',
-    promise: 'Wir antworten auf jede Meldung innerhalb von 24 Stunden und dokumentieren das.',
-  },
   {
     title: 'Nachbesserung',
     promise: 'Zu Recht beanstandete Leistungen bessern wir kostenfrei nach.',
@@ -320,10 +339,9 @@ export const GUARANTEES = canPublishVerification(CLAIM_VERIFICATIONS.serviceLeve
  * ergänzen — bis dahin nur, wofür AHAD vertraglich einsteht.
  */
 const PROOF_POINT_CANDIDATES = [
-  { value: '24 h', label: 'Reaktionszeit', sub: 'vertraglich zugesichert' },
-  { value: '48 h', label: 'bis Objektbesichtigung', sub: 'in der Regel vor Ort' },
+  { value: '48 h', label: 'bis Objektbesichtigung', sub: 'in der Regel vor Ort' },
   { value: '1', label: 'feste Objektleitung', sub: 'pro Objekt' },
-  { value: '100 %', label: 'dokumentierte Leistung', sub: 'für Audits nachweisbar' },
+  { value: '100 %', label: 'dokumentierte Leistung', sub: 'für Audits nachweisbar' },
 ] as const;
 
 export const PROOF_POINTS = canPublishVerification(CLAIM_VERIFICATIONS.serviceLevels)
@@ -487,6 +505,25 @@ export const AREA_SERVED = [
   { '@type': 'State', name: 'Baden-Württemberg' },
 ] as const;
 
+/**
+ * Leistungen für das Organization-Schema (knowsAbout / hasOfferCatalog).
+ * Statisch statt aus data/services.tsx, um keinen Import-Zyklus zu erzeugen;
+ * ein Test prüft, dass jeder Pfad eine indexierbare Seite im Route-Manifest ist.
+ */
+export const ORG_SERVICES = [
+  { name: 'Gebäudereinigung', path: '/leistungen' },
+  { name: 'Unterhaltsreinigung und Büroreinigung', path: '/leistungen/unterhaltsreinigung' },
+  { name: 'Industrie- und Produktionsreinigung', path: '/leistungen/industrie-produktionsreinigung' },
+  { name: 'Maschinenreinigung', path: '/leistungen/maschinenreinigung' },
+  { name: 'Fensterreinigung und Glasreinigung', path: '/leistungen/glas-fassadenreinigung' },
+  { name: 'Baureinigung und Bauendreinigung', path: '/leistungen/baureinigung' },
+  { name: 'Reinraumreinigung und Medizintechnik-Reinigung', path: '/leistungen/medizintechnik-reinigung' },
+  { name: 'Sonderreinigung und Stillstandsservice', path: '/leistungen/sonderreinigung-stillstandsservice' },
+  { name: 'Teppichreinigung', path: '/leistungen/teppichreinigung' },
+  { name: 'Winterdienst und Hausmeisterservice', path: '/leistungen/winterdienst-hausmeisterservice' },
+  { name: 'Küchenabluftreinigung nach VDI 2052', path: '/leistungen/kuechenabluftreinigung-vdi-2052' },
+] as const;
+
 export const ORG_REF = {
   '@type': 'Organization',
   '@id': `${SITE.url}/#organization`,
@@ -530,4 +567,52 @@ export const ORGANIZATION_SCHEMA = {
   },
   // ahad-care.de gehört zur selben GmbH (zweites Geschäftsfeld) -> selbe Entität.
   sameAs: [SITE.social.instagram, SITE.social.linkedin, SITE.careUrl],
+  // Verknüpft die Firma mit ihren Leistungsthemen und den Leistungsseiten, damit
+  // Suchmaschinen und KI-Systeme die Entität eindeutig den Suchbegriffen zuordnen.
+  knowsAbout: ORG_SERVICES.map((s) => s.name),
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'Leistungen der AHAD Cleaning Company GmbH',
+    itemListElement: ORG_SERVICES.map((s) => ({
+      '@type': 'Offer',
+      itemOffered: { '@type': 'Service', name: s.name, url: `${SITE.url}${s.path}` },
+    })),
+  },
 };
+
+const HQ = LOCATION_PUBLICATIONS.villingenSchwenningen;
+
+/**
+ * Unternehmenseintrag für den Hauptsitz: Adresse, Telefon und Öffnungszeiten in
+ * der Form, die Suchmaschinen für Karten- und Ortsergebnisse auswerten. Gehört
+ * als Standort zur Organization oben (parentOrganization) und erscheint nur
+ * mit gültiger Freigabe im Claim-Register. Koordinaten kommen erst dazu, wenn
+ * HQ_GEO einen geprüften Wert trägt. Bewertungssterne bleiben bewusst draußen.
+ */
+export const HQ_LOCAL_BUSINESS_SCHEMA = HQ.publishAsLocalBusiness
+  ? {
+      '@context': 'https://schema.org',
+      '@type': 'LocalBusiness',
+      '@id': `${SITE.url}/#hauptsitz`,
+      name: SITE.legalName,
+      url: `${SITE.url}${HQ.path}`,
+      image: `${SITE.url}/og-image.jpg`,
+      logo: `${SITE.url}/logo.png`,
+      telephone: SITE.phone,
+      email: SITE.email,
+      parentOrganization: { '@id': `${SITE.url}/#organization` },
+      address: ORGANIZATION_SCHEMA.address,
+      openingHoursSpecification: [
+        {
+          '@type': 'OpeningHoursSpecification',
+          dayOfWeek: SITE.openingHours.days,
+          opens: SITE.openingHours.opens,
+          closes: SITE.openingHours.closes,
+        },
+      ],
+      ...(HQ.publishGeo && HQ_GEO
+        ? { geo: { '@type': 'GeoCoordinates', latitude: HQ_GEO.latitude, longitude: HQ_GEO.longitude } }
+        : {}),
+      areaServed: AREA_SERVED,
+    }
+  : null;

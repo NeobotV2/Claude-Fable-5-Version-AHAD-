@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, type FormEvent } from 'react';
 import { CheckCircle2, Loader2, Phone, Send } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { Button } from '@/components/ui/Button';
 import { SITE } from '@/lib/site';
 import { trackEvent } from '@/lib/analytics';
 import { currentAttribution, describeFieldErrors, submitLead } from '@/lib/submit-lead';
@@ -18,8 +19,8 @@ const SERVICES = [
 ];
 
 const inputClasses =
-  'w-full bg-white border-2 border-[#738196] rounded-xl px-4 py-3.5 text-[15px] text-navy font-medium ' +
-  'placeholder:text-[#596779] focus:outline-none focus:border-brand focus:ring-4 focus:ring-brand/15 transition-colors';
+  'w-full bg-white border-2 border-field rounded-xl px-4 py-3.5 text-body-sm text-navy font-medium ' +
+  'placeholder:text-placeholder focus:outline-none focus:border-brand focus:ring-4 focus:ring-brand/15 transition-colors';
 
 const INITIAL_FORM = {
   contactPerson: '',
@@ -130,20 +131,20 @@ export default function ContactForm() {
     return (
       <div className="bg-white p-10 lg:p-14 rounded-3xl shadow-lifted text-center border border-line" role="status">
         <div className="w-20 h-20 bg-accent/10 text-accent rounded-full grid place-items-center mx-auto mb-6" aria-hidden>
-          <CheckCircle2 size={40} />
+          <CheckCircle2 size={40} aria-hidden="true" />
         </div>
         <h3 ref={successRef} tabIndex={-1} className="font-headline text-2xl font-bold text-navy mb-3 outline-none">
           Nachricht übermittelt
         </h3>
         <p className="text-slate mb-4 max-w-md mx-auto">Vielen Dank. Wir prüfen Ihre Anfrage und melden uns persönlich bei Ihnen.</p>
         <p className="text-sm text-slate mb-8">Eilig? <a href={SITE.phoneHref} className="font-bold text-brand underline">{SITE.phone}</a></p>
-        <button onClick={resetForm} className="text-brand font-bold hover:underline">Weitere Nachricht senden</button>
+        <button type="button" onClick={resetForm} className="text-brand font-bold hover:underline">Weitere Nachricht senden</button>
       </div>
     );
   }
 
   return (
-    <form ref={formRef} onSubmit={handleSubmit} aria-busy={isSubmitting} className="relative bg-white p-7 sm:p-10 rounded-3xl shadow-soft border border-line space-y-5">
+    <form ref={formRef} onSubmit={handleSubmit} aria-busy={isSubmitting} className="relative bg-white p-7 sm:p-10 rounded-3xl border border-line space-y-5">
       <div className="absolute -left-[10000px]" aria-hidden>
         <label htmlFor="cf-website">Firma Webseite</label>
         <input id="cf-website" type="text" tabIndex={-1} autoComplete="off" value={honeypot} onChange={(event) => setHoneypot(event.target.value)} />
@@ -155,38 +156,38 @@ export default function ContactForm() {
         <Field id="cf-email" label="E-Mail" type="email" autoComplete="email" value={formData.email} onChange={(email) => setFormData((current) => ({ ...current, email }))} describedBy="cf-contact-help" invalid={Boolean(contactError)} />
         <Field id="cf-phone" label="Telefon" type="tel" autoComplete="tel" value={formData.phone} onChange={(phone) => setFormData((current) => ({ ...current, phone }))} describedBy="cf-contact-help" invalid={Boolean(contactError)} />
       </div>
-      <p id="cf-contact-help" role={contactError ? 'alert' : undefined} className={contactError ? 'text-sm text-red-700 font-semibold' : 'text-sm text-slate'}>
+      <p id="cf-contact-help" role={contactError ? 'alert' : undefined} className={contactError ? 'text-sm text-danger font-semibold' : 'text-sm text-slate'}>
         {contactError || 'Bitte mindestens einen Kontaktweg angeben.'}
       </p>
 
       <div>
-        <label htmlFor="cf-service" className="block text-[13px] font-bold text-navy mb-2">Gewünschte Leistung</label>
-        <select id="cf-service" className={inputClasses} value={formData.serviceType} onChange={(event) => setFormData((current) => ({ ...current, serviceType: event.target.value }))}>
+        <label htmlFor="cf-service" className="block text-caption font-bold text-navy mb-2">Gewünschte Leistung</label>
+        <select id="cf-service" name="service" className={inputClasses} value={formData.serviceType} onChange={(event) => setFormData((current) => ({ ...current, serviceType: event.target.value }))}>
           {SERVICES.map((service) => <option key={service}>{service}</option>)}
         </select>
       </div>
 
       <div>
-        <label htmlFor="cf-message" className="block text-[13px] font-bold text-navy mb-2">Ihre Nachricht *</label>
-        <textarea id="cf-message" required rows={5} className={`${inputClasses} resize-y min-h-32`} value={formData.message} onChange={(event) => setFormData((current) => ({ ...current, message: event.target.value }))} />
+        <label htmlFor="cf-message" className="block text-caption font-bold text-navy mb-2">Ihre Nachricht *</label>
+        <textarea id="cf-message" name="message" required rows={5} className={`${inputClasses} resize-y min-h-32`} value={formData.message} onChange={(event) => setFormData((current) => ({ ...current, message: event.target.value }))} />
       </div>
 
-      <p className="text-[13px] text-slate leading-relaxed">
+      <p className="text-caption text-slate leading-relaxed">
         Wir verwenden Ihre Angaben ausschließlich zur Bearbeitung der Anfrage. Details finden Sie in der{' '}
         <Link to="/datenschutz" target="_blank" rel="noopener noreferrer" className="text-brand font-semibold underline">
           Datenschutzerklärung (öffnet neuen Tab)
         </Link>.
       </p>
 
-      {submitError && <div role="alert" className="flex items-start gap-3 bg-red-50 border border-red-200 text-red-800 text-sm font-medium rounded-xl p-4"><Phone size={16} className="shrink-0 mt-0.5" /><span>{submitError} <a href={SITE.phoneHref} className="font-bold underline">{SITE.phone}</a>{submitErrorCode && <span className="block mt-1 text-xs">Fehlercode: {submitErrorCode}</span>}</span></div>}
+      {submitError && <div role="alert" className="flex items-start gap-3 bg-danger-surface border border-danger-line text-danger text-sm font-medium rounded-xl p-4"><Phone size={16} className="shrink-0 mt-0.5" aria-hidden="true" /><span>{submitError} <a href={SITE.phoneHref} className="font-bold underline">{SITE.phone}</a>{submitErrorCode && <span className="block mt-1 text-xs">Fehlercode: {submitErrorCode}</span>}</span></div>}
 
-      <button type="submit" disabled={isSubmitting} className="group w-full inline-flex items-center justify-center gap-2 bg-accent text-white px-8 py-4 rounded-xl font-bold text-[15px] hover:bg-accent-dark focus-visible:ring-4 focus-visible:ring-accent/40 disabled:opacity-60">
-        {isSubmitting ? <><Loader2 size={18} className="animate-spin" /> Wird übermittelt</> : <>Nachricht senden <Send size={17} /></>}
-      </button>
+      <Button type="submit" size="lg" disabled={isSubmitting} className="w-full">
+        {isSubmitting ? <><Loader2 size={18} className="animate-spin" aria-hidden="true" /> Wird übermittelt…</> : <>Nachricht senden <Send size={17} aria-hidden="true" /></>}
+      </Button>
     </form>
   );
 }
 
 function Field({ id, label, value, onChange, type = 'text', required = false, autoComplete, describedBy, invalid = false }: { id: string; label: string; value: string; onChange: (value: string) => void; type?: string; required?: boolean; autoComplete?: string; describedBy?: string; invalid?: boolean }) {
-  return <div><label htmlFor={id} className="block text-[13px] font-bold text-navy mb-2">{label}{required && ' *'}</label><input id={id} type={type} required={required} autoComplete={autoComplete} className={inputClasses} value={value} onChange={(event) => onChange(event.target.value)} aria-describedby={describedBy} aria-errormessage={invalid ? describedBy : undefined} aria-invalid={invalid || undefined} /></div>;
+  return <div><label htmlFor={id} className="block text-caption font-bold text-navy mb-2">{label}{required && ' *'}</label><input id={id} name={autoComplete ?? id} type={type} required={required} autoComplete={autoComplete} spellCheck={type === 'email' ? false : undefined} className={inputClasses} value={value} onChange={(event) => onChange(event.target.value)} aria-describedby={describedBy} aria-errormessage={invalid ? describedBy : undefined} aria-invalid={invalid || undefined} /></div>;
 }

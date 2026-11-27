@@ -1,9 +1,10 @@
-import { CalendarClock, CheckCircle2, CircleAlert, Calculator, Users } from 'lucide-react';
+import { CalendarClock, CheckCircle2, CircleAlert, Calculator } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import SEO from '@/components/SEO';
 import PageHero from '@/components/PageHero';
 import Accordion from '@/components/ui/Accordion';
 import CTABand from '@/components/CTABand';
+import ButtonLink from '@/components/ui/Button';
 import ArticleMeta from '@/components/ArticleMeta';
 import ArticleFooter from '@/components/ArticleFooter';
 import { buildArticleSchema, EDITORIAL_ARTICLES } from '@/data/editorial';
@@ -64,7 +65,7 @@ export default function FachwissenMindestlohn() {
       <SEO
         ogType="article"
         title="Mindestlohn Gebäudereinigung 2026 & 2027 | AHAD"
-        description="Mindestlohn Gebäudereinigung: 15,00 € in Lohngruppe 1 und 18,40 € in Lohngruppe 6 seit 2026, Stand der Tarifrunde 2027, Preisanpassung und Auftraggeberhaftung."
+        description="Mindestlohn Gebäudereinigung: 15,00 € in Lohngruppe 1 und 18,40 € in Lohngruppe 6 seit 2026, Stand der Tarifrunde 2027, Preisanpassung und Auftraggeberhaftung."
         keywords="Mindestlohn Gebäudereinigung 2026, Mindestlohn Gebäudereinigung 2027, Tariflohn Gebäudereinigung, Lohngruppe 1 Gebäudereinigung, Tarifrunde Gebäudereinigung, Auftraggeberhaftung Mindestlohn"
         schema={[articleSchema, faqSchema]}
       />
@@ -82,7 +83,7 @@ export default function FachwissenMindestlohn() {
 
       <ArticleMeta slug={SLUG} />
 
-      <section className="bg-white py-16 lg:py-24">
+      <section className="bg-white section-y">
         <div className="mx-auto max-w-4xl px-4 sm:px-8">
           <div className="prose prose-lg max-w-none leading-relaxed text-slate">
             <h2 id="branchenmindestlohn-2026" className="scroll-mt-28 font-headline text-2xl font-bold text-navy sm:text-3xl">
@@ -115,14 +116,14 @@ export default function FachwissenMindestlohn() {
                   <tr>
                     <th scope="row" className="bg-paper px-4 py-4 font-bold text-navy">Lohngruppe 1</th>
                     <td className="px-4 py-4">Innen- und Unterhaltsreinigung</td>
-                    <td className="px-4 py-4">14,25 €</td>
-                    <td className="px-4 py-4 font-bold text-navy">15,00 €</td>
+                    <td className="px-4 py-4">14,25 €</td>
+                    <td className="px-4 py-4 font-bold text-navy">15,00 €</td>
                   </tr>
                   <tr>
                     <th scope="row" className="bg-paper px-4 py-4 font-bold text-navy">Lohngruppe 6</th>
                     <td className="px-4 py-4">Glas- und Fassadenreinigung</td>
-                    <td className="px-4 py-4">17,65 €</td>
-                    <td className="px-4 py-4 font-bold text-navy">18,40 €</td>
+                    <td className="px-4 py-4">17,65 €</td>
+                    <td className="px-4 py-4 font-bold text-navy">18,40 €</td>
                   </tr>
                 </tbody>
               </table>
@@ -134,6 +135,19 @@ export default function FachwissenMindestlohn() {
               Vergleich: Der allgemeine gesetzliche Mindestlohn liegt 2026 bei 13,90 Euro, Lohngruppe 1 also 1,10 Euro
               darüber.
             </p>
+
+            {/* Viele Leser dieses Beitrags arbeiten selbst in der Reinigung: Stellenhinweis direkt nach den Lohnwerten. */}
+            <aside className="not-prose my-10 bg-navy text-white p-6 sm:p-8 flex flex-col sm:flex-row sm:items-center gap-5 sm:gap-10" aria-label="Stellen bei AHAD">
+              <div className="flex-grow">
+                <p className="text-xl font-bold">Sie arbeiten in der Gebäudereinigung oder möchten einsteigen?</p>
+                <p className="mt-2 text-ondark leading-relaxed">
+                  AHAD stellt ein: fest angestellt und sozialversichert, in festen Teams.
+                </p>
+              </div>
+              <ButtonLink to="/karriere" variant="white" arrow className="flex-shrink-0 self-start sm:self-auto">
+                Offene Stellen ansehen
+              </ButtonLink>
+            </aside>
 
             <h2 id="tarifrunde-2027" className="scroll-mt-28 font-headline text-2xl font-bold text-navy sm:text-3xl">
               Tarifrunde für 2027: Stand der Verhandlungen
@@ -216,18 +230,18 @@ export default function FachwissenMindestlohn() {
                 <tbody className="divide-y divide-line text-slate">
                   <tr>
                     <th scope="row" className="bg-paper px-4 py-4 font-bold text-navy">Gesetzlicher Mindestlohn</th>
-                    <td className="px-4 py-4">13,90 €</td>
-                    <td className="px-4 py-4">14,60 € (beschlossen)</td>
+                    <td className="px-4 py-4">13,90 €</td>
+                    <td className="px-4 py-4">14,60 € (beschlossen)</td>
                   </tr>
                   <tr>
                     <th scope="row" className="bg-paper px-4 py-4 font-bold text-navy">Gebäudereinigung Lohngruppe 1</th>
-                    <td className="px-4 py-4">15,00 €</td>
-                    <td className="px-4 py-4">offen, Forderung IG BAU: 17,00 €</td>
+                    <td className="px-4 py-4">15,00 €</td>
+                    <td className="px-4 py-4">offen, Forderung IG BAU: 17,00 €</td>
                   </tr>
                   <tr>
                     <th scope="row" className="bg-paper px-4 py-4 font-bold text-navy">Gebäudereinigung Lohngruppe 6</th>
-                    <td className="px-4 py-4">18,40 €</td>
-                    <td className="px-4 py-4">offen, Forderung IG BAU: 20,40 €</td>
+                    <td className="px-4 py-4">18,40 €</td>
+                    <td className="px-4 py-4">offen, Forderung IG BAU: 20,40 €</td>
                   </tr>
                 </tbody>
               </table>
@@ -246,7 +260,19 @@ export default function FachwissenMindestlohn() {
               </Link>
             </p>
 
-            <div className="not-prose my-10 rounded-3xl border border-line bg-paper p-6 shadow-soft sm:p-8">
+            <aside className="not-prose my-8 border-l-2 border-accent pl-5 sm:pl-6" aria-label="Angebot für Auftraggeber">
+              <p className="text-lead font-semibold text-navy">
+                Sie möchten wissen, was die Lohnänderung für Ihr Objekt bedeutet?
+              </p>
+              <p className="mt-1.5 text-slate leading-relaxed">
+                Wir rechnen es bei einer kostenlosen Besichtigung für Ihre Flächen und Intervalle durch.
+              </p>
+              <ButtonLink to="/angebot" arrow className="mt-4">
+                Kostenlose Besichtigung anfragen
+              </ButtonLink>
+            </aside>
+
+            <div className="not-prose my-10 rounded-3xl border border-line bg-paper p-6 sm:p-8">
               <h3 className="flex items-center gap-3 font-headline text-xl font-bold text-navy">
                 <Calculator className="h-6 w-6 shrink-0 text-brand" aria-hidden="true" />
                 Rechenlogik mit Annahmen
@@ -254,7 +280,7 @@ export default function FachwissenMindestlohn() {
               <p className="mt-3 text-sm leading-relaxed text-slate">
                 Ausschließlich zur Veranschaulichung: Angenommen, der Lohn steigt um 4 Prozent und die lohngebundenen
                 Kosten machen 75 Prozent des Stundenverrechnungssatzes aus. Dann ändert sich der Preis um rund
-                4 % × 0,75 = 3 Prozent. Beide Werte sind Rechenannahmen, weder Prognose für 2027 noch Branchenwert.
+                4 % × 0,75 = 3 Prozent. Beide Werte sind Rechenannahmen, weder Prognose für 2027 noch Branchenwert.
                 Den tatsächlichen Lohnanteil kennt nur die Kalkulation des jeweiligen Angebots.
               </p>
             </div>
@@ -344,9 +370,9 @@ export default function FachwissenMindestlohn() {
               Unternehmerbegriff an.
             </p>
 
-            <div className="not-prose my-10 rounded-2xl border border-amber-200 bg-amber-50 p-6">
+            <div className="not-prose my-10 rounded-2xl border border-notice-line bg-notice-surface p-6">
               <div className="flex items-start gap-3">
-                <CircleAlert className="mt-0.5 h-6 w-6 shrink-0 text-amber-700" aria-hidden="true" />
+                <CircleAlert className="mt-0.5 h-6 w-6 shrink-0 text-notice" aria-hidden="true" />
                 <div>
                   <h3 className="font-headline text-lg font-bold text-navy">Prüfpunkte für den Vertrag</h3>
                   <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-relaxed text-slate">
@@ -363,26 +389,11 @@ export default function FachwissenMindestlohn() {
               </div>
             </div>
 
-            <div className="not-prose mt-10 rounded-2xl border border-line bg-paper p-6">
-              <div className="flex items-start gap-3">
-                <Users className="mt-0.5 h-6 w-6 shrink-0 text-brand" aria-hidden="true" />
-                <div>
-                  <h3 className="font-headline text-lg font-bold text-navy">Arbeiten in der Gebäudereinigung</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-slate">
-                    Sie suchen eine Stelle? Auf der{' '}
-                    <Link to="/karriere" className="font-bold text-brand hover:underline">
-                      Karriereseite
-                    </Link>{' '}
-                    finden Sie Einsatzgebiete, Arbeitsmodelle und den Weg zur Bewerbung bei AHAD.
-                  </p>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </section>
 
-      <section className="bg-paper py-16 lg:py-24" aria-labelledby="mindestlohn-faq">
+      <section className="bg-paper section-y" aria-labelledby="mindestlohn-faq">
         <div className="mx-auto max-w-4xl px-4 sm:px-8">
           <div className="mb-12 text-center">
             <span className="eyebrow justify-center text-brand">Häufige Fragen</span>

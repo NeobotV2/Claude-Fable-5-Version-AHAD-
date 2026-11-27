@@ -19,10 +19,43 @@ export const FALLBACK_IMAGE = `${import.meta.env.BASE_URL}images/fallback.jpg`;
 /** Responsives srcset für lokale AHAD-Fotos aus dem Varianten-Manifest. */
 import VARIANTS from './image-variants.json';
 
+type VariantEntry = { width: number; height?: number; variants: number[] };
+const VARIANT_MAP = VARIANTS as Record<string, VariantEntry>;
+
+/**
+ * Originalmaße eines lokalen AHAD-Fotos für width/height am <img>. Damit kennt
+ * der Browser das Seitenverhältnis schon vor dem Laden (kein Layoutsprung).
+ */
+/**
+ * Eigenmaße der Kundenlogos (Pixel bzw. SVG-viewBox). Damit reserviert der
+ * Browser den Platz, bevor das Logo geladen ist. Bei neuen Logos ergänzen.
+ */
+const CLIENT_LOGO_SIZES: Record<string, { width: number; height: number }> = {
+  'aesthetify.svg': { width: 64, height: 64 },
+  'allianz.svg': { width: 300, height: 134 },
+  'bareiss.png': { width: 180, height: 180 },
+  'bdt.svg': { width: 709, height: 298 },
+  'bundesagentur-fuer-arbeit.png': { width: 200, height: 200 },
+  'goldbeck.svg': { width: 283, height: 51 },
+  'kaeppelehof.png': { width: 629, height: 200 },
+  'koester.png': { width: 200, height: 200 },
+  'kur-baeder-bad-duerrheim.png': { width: 184, height: 70 },
+  'naturenergie-netze.svg': { width: 298, height: 58 },
+  'sma-suedwest-messe.png': { width: 420, height: 98 },
+};
+
+export function intrinsicSizeFor(url: string): { width: number; height: number } | undefined {
+  const logo = url.match(/images\/clients\/([^/?]+)$/);
+  if (logo) return CLIENT_LOGO_SIZES[logo[1]];
+  const match = url.match(/images\/ahad\/([^/?]+\.webp)$/);
+  const entry = match ? VARIANT_MAP[match[1]] : undefined;
+  return entry?.height ? { width: entry.width, height: entry.height } : undefined;
+}
+
 export function srcSetFor(url: string): string | undefined {
   const match = url.match(/images\/ahad\/([^/?]+\.webp)$/);
   if (!match) return undefined;
-  const entry = (VARIANTS as Record<string, { width: number; variants: number[] }>)[match[1]];
+  const entry = VARIANT_MAP[match[1]];
   if (!entry || entry.variants.length === 0) return undefined;
   const stemUrl = url.replace(/\.webp$/, '');
   const parts = entry.variants.map((w) => `${stemUrl}-${w}.webp ${w}w`);

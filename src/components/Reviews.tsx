@@ -1,32 +1,33 @@
 import { useState } from 'react';
-import { Star } from 'lucide-react';
-import Reveal from '@/components/ui/Reveal';
+import { Star, ArrowRight } from 'lucide-react';
 import SectionHeading from '@/components/ui/SectionHeading';
-import { REVIEWS, REVIEWS_SOURCE_URL, type Review } from '@/lib/site';
+import FeaturedTestimonial from '@/components/FeaturedTestimonial';
+import { FEATURED_TESTIMONIAL_PUBLISHABLE, REVIEWS, REVIEWS_SOURCE_URL, type Review } from '@/lib/site';
+import { cn } from '@/lib/utils';
 
-/** Ab dieser Länge wird eine Bewertung eingeklappt, damit die Karten gleich hoch bleiben. */
+/** Ab dieser Länge wird eine Bewertung eingeklappt, damit die Spalten gleich hoch bleiben. */
 const COLLAPSE_AFTER = 220;
 
 function Stars({ rating }: { rating: number }) {
   return (
     <div className="flex gap-0.5" role="img" aria-label={`${rating} von 5 Sternen`}>
       {[1, 2, 3, 4, 5].map((i) => (
-        <Star key={i} size={16} className={i <= rating ? 'fill-amber-400 text-amber-400' : 'text-gray-300'} />
+        <Star key={i} size={15} className={i <= rating ? 'fill-amber-500 text-amber-500' : 'text-navy/20'} aria-hidden="true" />
       ))}
     </div>
   );
 }
 
-function ReviewCard({ review }: { review: Review }) {
+function ReviewItem({ review }: { review: Review }) {
   const [open, setOpen] = useState(false);
   const long = review.text.length > COLLAPSE_AFTER;
 
   return (
-    <figure className="h-full bg-white rounded-3xl border border-line p-7 card-lift flex flex-col">
+    <figure className="h-full flex flex-col border-t border-navy pt-6">
       <Stars rating={review.rating} />
       <div className="mt-4 flex-grow">
         {/* Der volle Wortlaut steht immer im DOM; eingeklappt wird nur optisch. */}
-        <blockquote className={`text-navy font-medium leading-relaxed ${long && !open ? 'line-clamp-6' : ''}`}>
+        <blockquote className={`text-lead text-ink leading-relaxed ${long && !open ? 'line-clamp-6' : ''}`}>
           „{review.text}“
         </blockquote>
         {long && (
@@ -34,17 +35,19 @@ function ReviewCard({ review }: { review: Review }) {
             type="button"
             onClick={() => setOpen((value) => !value)}
             aria-expanded={open}
-            className="mt-3 text-sm font-bold text-brand hover:underline"
+            className="mt-3 py-2.5 -mb-2.5 text-sm font-semibold text-accent hover:underline underline-offset-4"
           >
             {open ? 'Weniger anzeigen' : 'Ganze Bewertung lesen'}
           </button>
         )}
       </div>
-      <figcaption className="mt-6 pt-5 border-t border-line">
-        <div className="font-bold text-navy text-sm">{review.author}</div>
-        <div className="text-[13px] text-slate mt-0.5">
-          {review.role ? `${review.role} · ` : ''}{REVIEWS_SOURCE_URL ? 'Google-Bewertung' : 'Kundenstimme'}
-        </div>
+      <figcaption className="mt-6 text-body-sm">
+        <span className="font-semibold text-navy">{review.author}</span>
+        <span className="text-slate">
+          {' · '}
+          {review.role ? `${review.role} · ` : ''}
+          {REVIEWS_SOURCE_URL ? 'Google-Bewertung' : 'Kundenstimme'}
+        </span>
       </figcaption>
     </figure>
   );
@@ -53,49 +56,51 @@ function ReviewCard({ review }: { review: Review }) {
 interface ReviewsProps {
   /** Autorinnen und Autoren, die schon an anderer Stelle der Seite zitiert sind. */
   exclude?: readonly string[];
-  /** Höchstzahl der Karten; ohne Angabe alle freigegebenen Bewertungen. */
+  /** Höchstzahl der Bewertungen; ohne Angabe alle freigegebenen. */
   limit?: number;
+  /**
+   * Stellt die namentliche Kundenstimme in dieselbe Sektion über die Bewertungen.
+   * So bleibt es auf der Startseite bei einem Abschnitt „Kundenstimmen“ statt zwei.
+   */
+  withTestimonial?: boolean;
 }
 
 /**
  * Echte Google-Bewertungen im Wortlaut. Rendert nichts, solange keine Reviews
- * in site.ts stehen. Die Startseite zeigt nur eine Auswahl, die
- * Referenzen-Seite führt alle.
+ * in site.ts stehen. Die Startseite zeigt nur eine Auswahl zusammen mit der
+ * namentlichen Kundenstimme, die Referenzen-Seite führt alle.
  */
-export default function Reviews({ exclude = [], limit }: ReviewsProps) {
+export default function Reviews({ exclude = [], limit, withTestimonial = false }: ReviewsProps) {
   const shown = REVIEWS.filter((review) => !exclude.includes(review.author)).slice(0, limit);
-  if (shown.length === 0) return null;
+  // Ohne freigegebene Bewertungen bleibt höchstens die Kundenstimme als eigene Sektion.
+  if (shown.length === 0) return withTestimonial ? <FeaturedTestimonial /> : null;
 
-  const columns = shown.length <= 2 ? 'md:grid-cols-2 max-w-4xl mx-auto' : 'md:grid-cols-2 lg:grid-cols-3';
+  const lead = withTestimonial && FEATURED_TESTIMONIAL_PUBLISHABLE;
+
+  const columns = shown.length <= 2 ? 'md:grid-cols-2' : 'md:grid-cols-2 lg:grid-cols-3';
 
   return (
-    <section className="py-24 lg:py-32 bg-paper border-y border-line">
-      <div className="max-w-7xl mx-auto px-4 sm:px-8">
-        <SectionHeading
-          eyebrow="Kundenstimmen"
-          align="center"
-          title="Was Kundinnen und Kunden über die Zusammenarbeit sagen"
-          className="mb-14 max-w-2xl mx-auto"
-        />
-        <div className={`grid grid-cols-1 gap-6 ${columns}`}>
-          {shown.map((review, i) => (
-            <Reveal key={review.author} delay={i * 0.08} className="h-full">
-              <ReviewCard review={review} />
-            </Reveal>
+    <section className={cn('section-y border-t border-line', lead ? 'bg-white' : 'bg-paper')}>
+      <div className="container-page">
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-12">
+          <SectionHeading
+            eyebrow={REVIEWS_SOURCE_URL && !lead ? 'Google-Bewertungen' : 'Kundenstimmen'}
+            title="Was Kundinnen und Kunden über die Zusammenarbeit sagen"
+            className="max-w-2xl"
+          />
+          {REVIEWS_SOURCE_URL && (
+            <a href={REVIEWS_SOURCE_URL} target="_blank" rel="noopener noreferrer" className="text-link flex-shrink-0">
+              Alle Bewertungen auf Google ansehen
+              <ArrowRight size={16} aria-hidden="true" />
+            </a>
+          )}
+        </div>
+        {lead && <FeaturedTestimonial embedded className="border-t border-navy pt-8 lg:pt-10 mb-14 lg:mb-16" />}
+        <div className={`grid grid-cols-1 gap-x-12 gap-y-12 ${columns}`}>
+          {shown.map((review) => (
+            <ReviewItem key={review.author} review={review} />
           ))}
         </div>
-        {REVIEWS_SOURCE_URL && (
-          <div className="text-center mt-10">
-            <a
-              href={REVIEWS_SOURCE_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-brand font-bold hover:text-brand-light transition-colors"
-            >
-              Alle Bewertungen auf Google ansehen
-            </a>
-          </div>
-        )}
       </div>
     </section>
   );

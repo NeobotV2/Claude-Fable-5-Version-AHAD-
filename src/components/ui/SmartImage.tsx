@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
-import { FALLBACK_IMAGE, srcSetFor } from '@/lib/images';
+import { FALLBACK_IMAGE, intrinsicSizeFor, srcSetFor } from '@/lib/images';
 
 interface SmartImageProps {
   src: string;
@@ -26,6 +26,7 @@ export default function SmartImage({ src, alt, className, imgClassName, eager = 
         srcSet={failed ? undefined : srcSetFor(src)}
         sizes={failed ? undefined : sizes}
         alt={alt}
+        {...(failed ? undefined : intrinsicSizeFor(src))}
         loading={eager ? 'eager' : 'lazy'}
         decoding="async"
         referrerPolicy="no-referrer"
