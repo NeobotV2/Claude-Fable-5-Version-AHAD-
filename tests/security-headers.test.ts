@@ -33,6 +33,15 @@ test('the content security policy is enforced, not only reported', () => {
   assert.deepEqual(directives['default-src'], ["'self'"]);
   assert.deepEqual(directives['object-src'], ["'none'"]);
   assert.deepEqual(directives['frame-ancestors'], ["'none'"]);
+  // Keine Inline-Skripte erlaubt: Die vorgerenderten Seiten enthalten nur
+  // JSON-LD-Daten (werden nicht ausgeführt) und Skripte mit src.
+  assert.equal(directives['script-src'].includes("'unsafe-inline'"), false);
+});
+
+test('HSTS is ready for the preload list and HTML is not shared cross-origin', () => {
+  const header = (key: string) => siteWide?.headers.find((h) => h.key === key)?.value ?? '';
+  assert.match(header('Strict-Transport-Security'), /max-age=63072000; includeSubDomains; preload/);
+  assert.equal(header('Access-Control-Allow-Origin'), 'https://www.ahad-cleaning.de');
 });
 
 test('the policy still lets the admin sign in with Google', () => {
