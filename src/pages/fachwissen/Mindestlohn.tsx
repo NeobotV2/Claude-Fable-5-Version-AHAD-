@@ -29,7 +29,7 @@ const faqItems = [
   {
     question: 'Wie hoch ist der Mindestlohn in der Gebäudereinigung 2027?',
     answer:
-      'Stand 18. Oktober 2026 steht er noch nicht fest. Die IG BAU fordert 2,00 Euro mehr pro Stunde für alle Lohngruppen bei zwölf Monaten Laufzeit, also 17,00 Euro in Lohngruppe 1 und 20,40 Euro in Lohngruppe 6. Der Bundesinnungsverband lehnt die Forderung ab. Die erste Verhandlungsrunde am 9. September 2026 endete ohne Ergebnis, die zweite ist für den 22. Oktober 2026 in Köln angesetzt.',
+      'Stand 27. November 2026 steht er noch nicht fest. Auch die dritte Verhandlungsrunde am 3. November 2026 in Köln endete ohne Einigung, ein weiterer Termin ist nicht bekannt. Die IG BAU fordert 2,00 Euro mehr pro Stunde für alle Lohngruppen bei zwölf Monaten Laufzeit, also 17,00 Euro in Lohngruppe 1 und 20,40 Euro in Lohngruppe 6. Der Bundesinnungsverband bot zuletzt 24 Monate Laufzeit ab Januar 2027 an: Lohngruppe 1 bis Ende April 2027 unverändert 15,00 Euro, ab 1. Mai 2027 15,30 Euro (plus 2 Prozent) und ab 1. Januar 2028 15,58 Euro (plus 1,8 Prozent).',
   },
   {
     question: 'Wie hoch ist der gesetzliche Mindestlohn 2027?',
@@ -158,11 +158,13 @@ export default function FachwissenMindestlohn() {
                 <CalendarClock className="mt-0.5 h-6 w-6 shrink-0 text-brand" aria-hidden="true" />
                 <div>
                   <p className="font-headline text-lg font-bold text-navy">
-                    Stand: <time dateTime="2026-10-18">18. Oktober 2026</time>
+                    Stand: <time dateTime="2026-11-27">27. November 2026</time>
                   </p>
                   <p className="mt-2 text-sm leading-relaxed text-slate">
-                    Ein Tarifergebnis für 2027 liegt nicht vor. Bis zu einem Abschluss und einer neuen Verordnung
-                    gelten die Werte für 2026 und der gesetzliche Mindestlohn.
+                    Ein Tarifabschluss für 2027 liegt nicht vor; auch die dritte Runde am 3. November 2026 blieb
+                    ohne Einigung. Die Branchenmindestlöhne von 15,00 und 18,40 Euro gelten nach der bestehenden
+                    Verordnung bis zum 31. Dezember 2026. Gibt es bis dahin keinen Abschluss mit neuer Verordnung,
+                    gilt für nicht tarifgebundene Arbeitgeber ab Januar 2027 nur der gesetzliche Mindestlohn.
                   </p>
                 </div>
               </div>
@@ -176,14 +178,15 @@ export default function FachwissenMindestlohn() {
                   '2,00 Euro mehr pro Stunde für alle Lohngruppen bei zwölf Monaten Laufzeit. Das ergäbe 17,00 Euro in Lohngruppe 1 und 20,40 Euro in Lohngruppe 6; in Lohngruppe 1 entspricht das gut 13 Prozent.',
                 ],
                 [
-                  'Position der Arbeitgeber',
-                  'Der Bundesinnungsverband des Gebäudereiniger-Handwerks lehnt die Forderung ab und verweist auf die wirtschaftliche Lage der Branche.',
+                  'Angebot der Arbeitgeber',
+                  'Der Bundesinnungsverband bot zuletzt 24 Monate Laufzeit ab Januar 2027 an: Lohngruppe 1 bis Ende April 2027 unverändert 15,00 Euro, ab 1. Mai 2027 15,30 Euro (plus 2 Prozent) und ab 1. Januar 2028 15,58 Euro (plus 1,8 Prozent). Die Forderung der IG BAU lehnt der Verband ab.',
                 ],
                 [
                   '1. Verhandlungsrunde',
                   '9. September 2026 in Düsseldorf, ohne Ergebnis. Nach Angaben der IG BAU legten die Arbeitgeber kein Angebot vor.',
                 ],
-                ['2. Verhandlungsrunde', 'Angesetzt für den 22. Oktober 2026 in Köln.'],
+                ['2. Verhandlungsrunde', '22. Oktober 2026 in Köln, ohne Einigung. Die Arbeitgeber legten ein erstes Angebot vor.'],
+                ['3. Verhandlungsrunde', '3. November 2026 in Köln, nach rund zwölf Stunden ohne Einigung. Ein weiterer Termin ist nicht bekannt.'],
               ].map(([label, text]) => (
                 <li key={label} className="flex items-start gap-3 rounded-xl border border-line bg-white p-4 text-sm text-slate">
                   <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-brand" aria-hidden="true" />
@@ -218,7 +221,7 @@ export default function FachwissenMindestlohn() {
             <div className={tableWrapperClass} role="region" aria-label="Lohnuntergrenzen 2026 und 2027 im Überblick" tabIndex={0}>
               <table className="w-full min-w-[640px] border-collapse text-left text-sm">
                 <caption className="caption-top bg-paper px-4 py-3 text-left font-headline font-bold text-navy">
-                  Lohnuntergrenzen im Überblick (brutto je Stunde, Stand 18. Oktober 2026)
+                  Lohnuntergrenzen im Überblick (brutto je Stunde, Stand 27. November 2026)
                 </caption>
                 <thead className="bg-navy text-white">
                   <tr>
@@ -236,12 +239,12 @@ export default function FachwissenMindestlohn() {
                   <tr>
                     <th scope="row" className="bg-paper px-4 py-4 font-bold text-navy">Gebäudereinigung Lohngruppe 1</th>
                     <td className="px-4 py-4">15,00 €</td>
-                    <td className="px-4 py-4">offen, Forderung IG BAU: 17,00 €</td>
+                    <td className="px-4 py-4">offen; IG BAU fordert 17,00 €, Arbeitgeber bieten 15,30 € ab Mai 2027</td>
                   </tr>
                   <tr>
                     <th scope="row" className="bg-paper px-4 py-4 font-bold text-navy">Gebäudereinigung Lohngruppe 6</th>
                     <td className="px-4 py-4">18,40 €</td>
-                    <td className="px-4 py-4">offen, Forderung IG BAU: 20,40 €</td>
+                    <td className="px-4 py-4">offen; IG BAU fordert 20,40 €</td>
                   </tr>
                 </tbody>
               </table>
